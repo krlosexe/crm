@@ -76,7 +76,6 @@ class RolesController extends Controller
             }else{
                 $rol = Roles::create($request->all());
 
-
                 if($request->permisos){
                     foreach ($request->permisos as $key => $value) {
                         $rol_operaciones = new RolOperaciones;

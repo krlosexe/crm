@@ -11,11 +11,9 @@
 			    box-shadow: none;
 			    text-align: center;
 			}
-
 			.kv-avatar {
 			    display: inline-block;
 			}
-
 			.kv-avatar .file-input {
 			    display: table-cell;
 			    width: 213px;
@@ -50,7 +48,7 @@
 			        <div class="container-fluid">
 
 			          <!-- Page Heading -->
-			          <h1 class="h3 mb-2 text-gray-800">Citas de Revision</h1>
+			          <h1 class="h3 mb-2 text-gray-800">Cirugias</h1>
 
 			          <div id="alertas"></div>
 			          <input type="hidden" class="id_user">
@@ -59,7 +57,7 @@
 			          <!-- DataTales Example -->
 			          <div class="card shadow mb-4" id="cuadro1">
 			            <div class="card-header py-3">
-			              <h6 class="m-0 font-weight-bold text-primary">Gestion Citas de Revision</h6>
+			              <h6 class="m-0 font-weight-bold text-primary">Gestion de Cirugias</h6>
 
 			              <button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 		                    <span class="icon text-white-50">
@@ -74,7 +72,11 @@
 			                  <thead>
 			                    <tr>
 								  <th>Acciones</th>
-								  <th>Paciente</th>
+								  <th>Nombres</th>
+								  <th>Fecha</th>
+								  <th>Hora</th>
+								  <th>Cirujano</th>
+								  <th>Quirofano</th>
 								  <th>Clinica</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
@@ -87,9 +89,9 @@
 			          </div>
 
 
-			          @include('citas.revision.store')
-					  @include('citas.revision.view')
-					  @include('citas.revision.edit')
+			          @include('citas.surgeries.store')
+					  @include('citas.surgeries.view')
+					  @include('citas.surgeries.edit')
 
 
 			        </div>
@@ -128,25 +130,19 @@
 				update();
 
 				$("#collapse_Citas").addClass("show");
-				$("#nav_revision-appointment, #modulo_Citas").addClass("active");
+				$("#nav_surgeries, #modulo_Citas").addClass("active");
 
-				verifyPersmisos(id_user, tokens, "revision-appointment");
+				verifyPersmisos(id_user, tokens, "citys");
 			});
 
 
+			function update(){
+				enviarFormularioPut("#form-update", 'api/surgeries', '#cuadro4', false, "#avatar-edit");
+			}
 
 			function store(){
-				enviarFormulario("#store", 'api/revision/appointment', '#cuadro2');
+				enviarFormulario("#store", 'api/surgeries', '#cuadro2');
 			}
-
-
-			function update(){
-				enviarFormularioPut("#form-update", 'api/revision/appointment', '#cuadro4', false, "#avatar-edit");
-			}
-
-
-			
-
 
 
 			function list(cuadro) {
@@ -154,6 +150,9 @@
 					"id_user": id_user,
 					"token"  : tokens,
 				};
+
+
+				$("#div-input-edit").css("display", "none")
 				$('#table tbody').off('click');
 				var url=document.getElementById('ruta').value; 
 				cuadros(cuadro, "#cuadro1");
@@ -165,7 +164,7 @@
 					"serverSide":false,
 					"ajax":{
 						"method":"GET",
-						 "url":''+url+'/api/revision/appointment',
+						 "url":''+url+'/api/surgeries',
 						 "data": {
 							"id_user": id_user,
 							"token"  : tokens,
@@ -189,11 +188,15 @@
 								return botones;
 							}
 						},
-						{"data":"name_client", 
-							render: function(data, type, row){
-								return row.name_client+" "+row.last_name_client
+						{"data":"nombres", 
+							render : function(data, type, row) {
+								return data+" "+row.apellidos;
 							}
 						},
+						{"data": "fecha"},
+						{"data": "time"},
+						{"data": "surgeon"},
+						{"data": "operating_room"},
 						{"data": "name_clinic"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
@@ -223,72 +226,13 @@
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
 
-				$("#tableRegistrar tbody tr").remove()
+				GetClinic("#clinic-store")
+
+				SelectClinic("#paciente-store", "#clinic-store")
+
 				getPacientes("#paciente-store")
-				GetClinic("#clinica-store")
-				GetAsesoras("#asesora-store")
 				cuadros("#cuadro1", "#cuadro2");
-
-				SelectClinic("#paciente-store", "#clinica-store")
-				SelectAsesora("#paciente-store", "#asesora-store")
-
 			}
-			
-			function SelectClinic(select_cliente, select_clinica) {  
-
-				$(select_cliente).change(function (e) { 
-
-					var id_client = $(this).val()
-					var url       = document.getElementById('ruta').value;
-					$.ajax({
-						url:''+url+'/api/clients/'+id_client,
-						type:'get',
-						data: {
-							"id_user": id_user,
-							"token"  : tokens,
-						},
-						dataType:'JSON',
-						async: false,
-						success: function(data){
-							$(select_clinica).val(data.clinic)
-							$(select_clinica  ).select2({
-								width: '100%'
-							});
-						}
-					});
-				});
-			}
-
-
-
-
-			function SelectAsesora(select_cliente, select_asesora) {  
-				$(select_cliente).change(function (e) { 
-
-					var id_client = $(this).val()
-					var url       = document.getElementById('ruta').value;
-					$.ajax({
-						url:''+url+'/api/clients/'+id_client,
-						type:'get',
-						data: {
-							"id_user": id_user,
-							"token"  : tokens,
-						},
-						dataType:'JSON',
-						async: false,
-						success: function(data){
-							$(select_asesora).val(data.id_user_asesora)
-							$(select_asesora).select2({
-								width: '100%',
-								disabled: true
-							});
-						}
-					});
-				});
-			}
-
-
-
 
 			/* ------------------------------------------------------------------------------- */
 			/* 
@@ -300,21 +244,16 @@
 					var data = table.row( $(this).parents("tr") ).data();
 
 					getPacientes("#paciente-view")
-					GetClinic("#clinica-view")
-					GetAsesoras("#asesora-view")
+					GetClinic("#clinic-view")
+					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
+					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
+					$("#time-view").val(data.time).attr("disabled", "disabled")
+					$("#surgeon-view").val(data.surgeon).attr("disabled", "disabled")
+					$("#operating_room-view").val(data.operating_room).attr("disabled", "disabled")
+					$("#clinic-view").val(data.clinic).attr("disabled", "disabled")
+					$("#observaciones-view").val(data.observaciones).attr("disabled", "disabled")
+					$("#status-view").val(data.status_surgeries).attr("disabled", "disabled")
 
-					SelectClinic("#paciente-view", "#clinica-view")
-					SelectAsesora("#paciente-view", "#asesora-view")
-
-					$("#paciente-view").val(data.id_paciente).attr("disabled", "disabled")
-					$("#paciente-view").trigger("change");
-					$("#clinica-view").attr("disabled", "disabled")
-
-					$("#numero_contrato-view").val(data.numero_contrato).attr("disabled", "disabled")
-					$("#cirugia-view").val(data.cirugia).attr("disabled", "disabled")
-					
-
-					showSchedule(data.agenda, "#tableView", "view")
 					cuadros('#cuadro1', '#cuadro3');
 				});
 			}
@@ -325,52 +264,54 @@
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
+			
 			function edit(tbody, table){
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
 					getPacientes("#paciente-edit")
-					GetClinic("#clinica-edit")
-					GetAsesoras("#asesora-edit")
-
-					SelectClinic("#paciente-edit", "#clinica-edit")
-					SelectAsesora("#paciente-edit", "#asesora-edit")
-
-					$("#paciente-edit").val(data.id_paciente).attr("disabled", "disabled")
-					$("#paciente-edit").trigger("change");
-					$("#clinica-edit").attr("disabled", "disabled")
-
-					$("#numero_contrato-edit").val(data.numero_contrato)
-					$("#cirugia-edit").val(data.cirugia)
-					
-					showSchedule(data.agenda, "#tableEdit", "edit")
-
-
-					$("#id_edit").val(data.id_revision)
+					GetClinic("#clinic-edit")
+					SelectClinic("#paciente-edit", "#clinic-edit")
+					$("#paciente-edit").val(data.id_cliente)
+					$("#fecha-edit").val(data.fecha)
+					$("#time-edit").val(data.time)
+					$("#surgeon-edit").val(data.surgeon)
+					$("#operating_room-edit").val(data.operating_room)
+					$("#clinic-edit").val(data.clinic)
+					$("#observaciones-edit").val(data.observaciones)
+					$("#status-edit").val(data.status_surgeries)
+					cuadros('#cuadro1', '#cuadro4');
+					$("#id_edit").val(data.id_surgeries)
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
 
 
-			function showSchedule(schedule, table, option){
 
-				var html = "";
-				$.each(schedule, function (key, item) { 
+			function SelectClinic(select_pacient, select_clinic){
+				$(select_pacient).change(function (e) { 
 
-					var btn = option == "view" ? '' : "<button type='button' class='btn btn-danger waves-effect' onclick='eliminarTr(\"" + "#tr2_" + item.id_appointments_agenda + "\")'>Eliminar</button>"
+					var id_client = $(this).val()
+					var url       = document.getElementById('ruta').value;
 
-					html += "<tr id='tr2_"+item.id_appointments_agenda+"'>"
-						html += "<td>"+item.fecha+"<input type='hidden' name='fecha[]' class='fecha' value='"+item.fecha+"'></td>"
-						html += "<td>"+item.descripcion+"<input type='hidden' name='descripcion[]' value='"+item.descripcion+"'></td>"
-						html += "<td>"+item.cirujano+"<input type='hidden' name='cirujano[]' value='"+item.cirujano+"'></td>"
-						html += "<td>"+item.enfermera+"<input type='hidden' name='enfermera[]' value='"+item.enfermera+"'></td>"
-						html += "<td>"+btn+"</td>";
-					html += "</tr>"
+					$.ajax({
+						url:''+url+'/api/clients/'+id_client,
+						type:'get',
+						data: {
+							"id_user": id_user,
+							"token"  : tokens,
+						},
+						dataType:'JSON',
+						async: false,
+						success: function(data){
+							$(select_clinic).val(data.clinic)
+							$(select_clinic).select2({
+								width: '100%'
+							});
+						}
+					});					
 				});
-
-				$(table+" tbody").html(html)
-
 			}
 
 					
@@ -381,7 +322,7 @@
 			function desactivar(tbody, table){
 				$(tbody).on("click", "span.desactivar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/revision/appointment/status/'+data.id_revision+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
+					statusConfirmacion('api/surgeries/status/'+data.id_surgeries+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
@@ -393,7 +334,7 @@
 			function activar(tbody, table){
 				$(tbody).on("click", "span.activar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/revision/appointment/status/'+data.id_revision+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
+					statusConfirmacion('api/surgeries/status/'+data.id_surgeries+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
@@ -403,45 +344,8 @@
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/revision/appointment/status/'+data.id_revision+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
+					statusConfirmacion('api/surgeries/status/'+data.id_surgeries+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
-			}
-
-
-
-
-
-			function addAppointment(tabla, option){
-
-				var fecha       = $("#fecha-"+option).val()
-				var cirujano    = $("#cirujano-"+option).val()
-				var enfermera   = $("#enfermera-"+option).val()
-				var descripcion = $("#descripcion-"+option).val()
-
-				var valid = true
-
-				$(tabla+" tbody tr").each(function(){
-					
-					if($(this).find('.fecha').val() == fecha){
-						valid =  false;
-					}
-				})
-
-				if(valid){
-
-					var html = "";
-					html += "<tr id='tr"+fecha+"'>"
-						html += "<td>"+fecha+"<input type='hidden' name='fecha[]' class='fecha' value='"+fecha+"'></td>"
-						html += "<td>"+descripcion+"<input type='hidden' name='descripcion[]' value='"+descripcion+"'></td>"
-						html += "<td>"+cirujano+"<input type='hidden' name='cirujano[]' value='"+cirujano+"'></td>"
-						html += "<td>"+enfermera+"<input type='hidden' name='enfermera[]' value='"+enfermera+"'></td>"
-						html += "<td><button type='button' class='btn btn-danger waves-effect' onclick='eliminarTr(\"" + "#tr" + fecha + "\")'>Eliminar</button></td></tr>";
-					html += "</tr>"
-					
-					$(tabla+" tbody").append(html)
-				}else{
-					warning("La fecha ya esta registrada")
-				}
 			}
 
 		</script>

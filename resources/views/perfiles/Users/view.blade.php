@@ -44,12 +44,21 @@
 
 			            <div class="form-group row">
 			              <div class="col-sm-6 mb-3 mb-sm-0 valid-required">
-
-			                <select class="form-control" name="rol" id="rol-view" required>
+						  	<label for=""><b>Rol</b></label>
+			                <select class="form-control select2" name="rol" id="rol-view" required>
 			                	<option value="">Seleccione un Rol</option>
 			                	<option value="1">op1</option>
 			                </select>
 			              </div>
+
+						  <div class="col-sm-6 mb-3 mb-sm-0 valid-required">
+						 		<label for=""><b>Linea de Negocio</b></label>
+								<select name="id_line" id="linea-negocio-view" class="form-control select2" required>
+									<option value="">Seleccione</option>
+								</select>
+			              </div>
+
+
 			            </div>
 
 

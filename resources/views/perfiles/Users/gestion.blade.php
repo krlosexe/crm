@@ -214,6 +214,10 @@
 			function nuevo() {
 				$("#alertas").css("display", "none");
 
+
+				GetBusinessLine("#linea-negocio");
+
+
 				$("#store")[0].reset();
 
 				$('.tab_content0').removeClass("active in");$('#tab0').removeClass("active");
@@ -315,6 +319,10 @@
 
 					$("#store")[0].reset();
 
+
+					
+
+
 					$('.tab_content0-0').removeClass("active in");$('#tab0-0').removeClass("active");
 					$('.tab_content1-1').removeClass("active in");$('#tab1-1').removeClass("active");
 					$('.tab_content2-2').removeClass("active in");$('#tab2-2').removeClass("active");
@@ -367,9 +375,10 @@
 					});
 
 					GetRoles("#rol-view")
-
+					GetBusinessLine("#linea-negocio-view");
 					$("#email-view").val(data.email).attr("disabled", "disabled")
 					$("#rol-view").val(data.id_rol).attr("disabled", "disabled")
+					$("#linea-negocio-view").val(data.id_line).attr("disabled", "disabled")
 					$("#avatar-view").attr("disabled", "disabled")
 
 					$("#nombres-view").val(data.nombres).attr("disabled", "disabled")
@@ -451,9 +460,11 @@
 					});
 
 					GetRoles("#rol-edit")
-
+					GetBusinessLine("#linea-negocio-edit");
+					
 					$("#email-edit").val(data.email)
 					$("#rol-edit").val(data.id_rol)
+					$("#linea-negocio-edit").val(data.id_line)
 
 					$("#nombres-edit").val(data.nombres)
 					$("#apellidos_p-edit").val(data.apellido_p)

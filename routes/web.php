@@ -74,6 +74,17 @@ Route::get('business-lines', function () {
 });
 
 
+Route::get('valuations', function () {
+    return view('citas.valuations.gestion');
+});
+
+
+Route::get('surgeries', function () {
+    return view('citas.surgeries.gestion');
+});
+
+
+
 
 
 

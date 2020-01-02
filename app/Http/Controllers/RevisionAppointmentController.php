@@ -18,7 +18,12 @@ class RevisionAppointmentController extends Controller
     public function index(Request $request)
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $queries = RevisionAppointment::select("revision_appointment.*", "auditoria.*", "users.email as email_regis")
+            $queries = RevisionAppointment::select("revision_appointment.*", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clinic.nombre as name_clinic","auditoria.*", "users.email as email_regis")
+
+                                            ->join("clientes", "clientes.id_cliente", "revision_appointment.id_paciente")
+                                            ->join("clinic", "clinic.id_clinic", "revision_appointment.clinica")
+
+
                                             ->join("auditoria", "auditoria.cod_reg", "=", "revision_appointment.id_revision")
                                             ->join("users", "users.id", "=", "auditoria.usr_regins")
                                             ->with('agenda')
@@ -84,7 +89,6 @@ class RevisionAppointmentController extends Controller
                     }    
                 }
 
-
                 $auditoria              = new Auditoria;
                 $auditoria->tabla       = "revision_appointment";
                 $auditoria->cod_reg     = $store["id_revision"];
@@ -134,10 +138,64 @@ class RevisionAppointmentController extends Controller
      * @param  \App\RevisionAppointment  $revisionAppointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RevisionAppointment $revisionAppointment)
+    public function update(Request $request, $revisionAppointment)
     {
-        //
+        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+
+            $update = RevisionAppointment::find($revisionAppointment)->update($request->all());
+
+            AppointmentsAgenda::where('id_revision', $revisionAppointment)->delete();
+
+
+          
+
+            if($request->fecha){
+                foreach ($request->fecha as $key => $value) {
+                    $AppointmentsAgenda = new AppointmentsAgenda;
+                    $AppointmentsAgenda->id_revision  = $revisionAppointment;
+                    $AppointmentsAgenda->fecha        = $value;
+                    $AppointmentsAgenda->cirujano     = $request->cirujano[$key];
+                    $AppointmentsAgenda->enfermera    = $request->enfermera[$key];
+                    $AppointmentsAgenda->descripcion  = $request->descripcion[$key];
+                    
+                    $AppointmentsAgenda->save();
+                }    
+            }
+            
+            if ($update) {
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                return response()->json($data)->setStatusCode(200);
+            }else{
+                return response()->json("A ocurrido un error")->setStatusCode(400);
+            }
+
+        }else{
+            return response()->json("No esta autorizado")->setStatusCode(400);
+        }
     }
+
+
+
+    public function status($id, $status, Request $request)
+    {
+        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+            $auditoria =  Auditoria::where("cod_reg", $id)
+                                     ->where("tabla", "revision_appointment")->first();
+            $auditoria->status = $status;
+
+            if($status == 0){
+                $auditoria->usr_regmod = $request["id_user"];
+                $auditoria->fec_regmod = date("Y-m-d");
+            }
+            $auditoria->save();
+
+            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("No esta autorizado")->setStatusCode(400);
+        }
+    }
+
 
     /**
      * Remove the specified resource from storage.

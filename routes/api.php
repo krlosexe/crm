@@ -25,6 +25,8 @@ Route::post('verify-token', 'Login@VerifyToken');
 Route::resource('user', 'UsuariosController');
 Route::post('status-user/{id}/{status}', 'UsuariosController@statusUser');
 Route::get('get-asesoras', 'UsuariosController@GetAsesoras');
+Route::get('get-asesoras-business-line/{id}', 'UsuariosController@GetAsesorasByBusinessLine');
+
 
 Route::resource('modulos', 'ModulosController');
 Route::post('status-modulo/{id}/{status}', 'ModulosController@status');
@@ -63,4 +65,17 @@ Route::post('status-queries/{id}/{status}', 'QueriesController@status');
 
 Route::resource('revision/appointment', 'RevisionAppointmentController');
 Route::post('revision/appointment/status/{id}/{status}', 'RevisionAppointmentController@status');
+
+
+Route::resource('valuations', 'ValuationsController');
+Route::post('valuations/status/{id}/{status}', 'ValuationsController@status');
+
+
+
+
+
+Route::resource('surgeries', 'SurgeriesController');
+Route::post('surgeries/status/{id}/{status}', 'SurgeriesController@status');
+
+
 

@@ -224,7 +224,7 @@
 
 				GetCity("#city");
 				GetClinic("#city", "#clinic")
-				GetAsesoras("#asesora");
+				GetAsesorasbyBusisnessLine("#linea-negocio", "#asesora");
 				GetBusinessLine("#linea-negocio");
 				Children("#children", "#number_children")
 				Surgery("#surgery", "#previous_surgery")
@@ -252,8 +252,9 @@
 
 					GetCity("#city_view");
 					GetClinic("#city_view", "#clinic_view")
-					GetAsesoras("#asesora-view");
 					GetBusinessLine("#linea-negocio-view");
+					GetAsesorasbyBusisnessLine("#linea-negocio-view", "#asesora-view");
+					
 
 					$("#nombre_view").val(data.nombres).attr("disabled", "disabled")
 					$("#apellido_view").val(data.apellidos).attr("disabled", "disabled")
@@ -306,8 +307,10 @@
 					$("#properties_view").prop("checked", data.properties ? true : false)
 					$("#vehicle_view").prop("checked", data.vehicle ? true : false)
 					
-					$("#asesora-view").val(data.id_user_asesora).attr("disabled", "disabled")
+					
 					$("#linea-negocio-view").val(data.id_line).attr("disabled", "disabled")
+					$("#linea-negocio-view").trigger("change");
+					$("#asesora-view").val(data.id_user_asesora).attr("disabled", "disabled")
 					cuadros('#cuadro1', '#cuadro3');
 				});
 			}
@@ -325,7 +328,7 @@
 
 					GetCity("#city_edit");
 					GetClinic("#city_edit", "#clinic_edit")
-					GetAsesoras("#asesora-edit");
+					GetAsesorasbyBusisnessLine("#linea-negocio-edit", "#asesora-edit");
 					GetBusinessLine("#linea-negocio-edit");
 
 
@@ -388,9 +391,13 @@
 					$("#properties_edit").prop("checked", data.properties ? true : false)
 					$("#vehicle_edit").prop("checked", data.vehicle ? true : false)
 					
-					$("#asesora-edit").val(data.id_user_asesora)
-					$("#linea-negocio-edit").val(data.id_line)
 					
+					$("#linea-negocio-edit").val(data.id_line)
+					$("#linea-negocio-edit").trigger("change");
+
+					$("#asesora-edit").val(data.id_user_asesora)
+
+
 					cuadros('#cuadro1', '#cuadro4');
 
 					$("#id_edit").val(data.id_cliente)

@@ -98,7 +98,7 @@
 
 
           <div class="col-md-12" style="padding-top: 25px;">
-            <button type="button" class="btn btn-primary waves-effect pull-left" onclick="addAppointment('#tableRegistrar')">Agregar</button>
+            <button type="button" class="btn btn-primary waves-effect pull-left" onclick="addAppointment('#tableRegistrar', 'store')">Agregar</button>
           </div>
 
         </div>
