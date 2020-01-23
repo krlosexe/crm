@@ -5,6 +5,13 @@
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="store" enctype="multipart/form-data">
         @csrf
+
+
+
+
+        
+
+
         <div class="row">
            <div class="col-md-6">
               
@@ -28,12 +35,61 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-3">
                   <div class="form-group">
-                        <label for=""><b>Hora</b></label>
+                        <label for=""><b>Hora desde</b></label>
                         <input type="time" name="time" id="time-store" class="form-control select2" required>
                     </div>
                 </div>
+
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                        <label for=""><b>Hora Hasta</b></label>
+                        <input type="time" name="time_end" id="time-end-store" class="form-control select2" required>
+                    </div>
+                </div>
+
+
+
+              </div>
+
+
+              <div class="row">
+
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="identificacion_verify"><b>La Fecha es Tentativa ?</b></label>
+                          <label class='container-check'>
+                              <input type='checkbox' name='attempt' class='checkitem chk-col-blue' id='attempt' value='1'>
+                              <span class='checkmark'></span>
+                              <label for=''></label>
+                          </label>
+                      </div>
+                  </div>
+
+
+                  <div class="col-md-3">
+                      <div class="form-group">
+                          <div class="form-group">
+                            <label for=""><b>Tipo</b></label>
+                            <select name="type" id="type-store" class="form-control select2" required>
+                                <option value="Al Contado">Al Contado</option>
+                                <option value="Financiado">Financiado </option>
+                            </select>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-3">
+                      <div class="form-group">
+                          <div class="form-group">
+                            <label for=""><b>Monto de la Cirugia</b></label>
+                            <input type="text" name="amount" id="amount-store" class="monto_formato_decimales form-control" required>
+                        </div>
+                      </div>
+                  </div>
+
               </div>
 
 

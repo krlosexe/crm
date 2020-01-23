@@ -65,11 +65,19 @@ class ClientsController extends Controller
                 'unique'   => 'El Campo :attribute ya se encuentra en uso.'
             ];
 
+            if($request["identificacion"] != null){
+               $valid = Clients::where("identificacion", $request["identificacion"])->get();
+
+               if(sizeof($valid) > 0){
+                    return response()->json("Numero de Identificacion se encuentra registrado en la base de datos")->setStatusCode(400);
+               }
+            }
+
+            $request["identificacion_verify"] == 1 ? $request["identificacion_verify"] = 1 : $request["identificacion_verify"] = 0;
             $validator = Validator::make($request->all(), [
                 'nombres'         => 'required',
                 'apellidos'       => 'required',
-                'identificacion'  => 'required|unique:clientes',
-                'telefono'        => 'required',
+                'telefono'        => 'required|unique:clientes',
                 'email'           => 'required|unique:clientes',
                 'direccion'       => 'required'
 

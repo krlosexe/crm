@@ -21,9 +21,6 @@
 
 
 
-
-
-
   <link href="vendor/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
   <link href="vendor/bootstrap-fileinput/themes/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
 
@@ -48,7 +45,10 @@
       $(document).ready(function(){
 
         var url = $(location).attr('href').split("/").splice(-1);
-         validAuth(false, url[0]);
+        validAuth(false, url[0]);
+
+        GetNotifications();
+
       });
     </script>
 

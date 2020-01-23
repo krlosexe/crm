@@ -72,10 +72,38 @@ Route::post('valuations/status/{id}/{status}', 'ValuationsController@status');
 
 
 
-
+Route::resource('preanesthesia', 'PreanesthesiaController');
+Route::post('preanesthesia/status/{id}/{status}', 'PreanesthesiaController@status');
 
 Route::resource('surgeries', 'SurgeriesController');
 Route::post('surgeries/status/{id}/{status}', 'SurgeriesController@status');
 
 
 
+Route::resource('tasks', 'TasksController');
+Route::post('tasks/status/{id}/{status}', 'TasksController@status');
+
+
+Route::get('calendar/tasks', 'CalendarController@getTask');
+Route::get('calendar/queries', 'CalendarController@getQueries');
+Route::get('calendar/valuations', 'CalendarController@getValuations');
+Route::get('calendar/surgeries', 'CalendarController@Surgeries');
+Route::get('calendar/revision', 'CalendarController@Revision');
+
+Route::get('calendar/preanesthesia', 'CalendarController@Preanesthesia');
+
+
+Route::post('tasks/today', 'CalendarController@Today');
+
+
+
+Route::get('notifications/tasks', 'NotificationsController@Tasks');
+Route::get('notifications/queries', 'NotificationsController@Queries');
+Route::get('notifications/valuations', 'NotificationsController@Valuations');
+Route::get('notifications/preanestesia', 'NotificationsController@PreAnestisia');
+Route::get('notifications/surgeries', 'NotificationsController@Surgeries');
+Route::get('notifications/revision', 'NotificationsController@Revision');
+
+Route::get('notifications/get', 'NotificationsController@Get');
+Route::post('notifications/read', 'NotificationsController@Read');
+Route::get('notifications/generate', 'NotificationsController@Generate');

@@ -8,7 +8,9 @@ class Clients extends Model
 {   
 
     protected $fillable = [
-        'nombres', 'apellidos', 'identificacion', 'telefono', 'email', 'direccion', 'fecha_nacimiento', 'identificacion_verify', 'city', 'clinic', 'id_line', 'id_user_asesora'
+        'nombres', 'apellidos', 'identificacion', 'telefono', 'email', 'direccion',
+        'fecha_nacimiento', 'identificacion_verify', 'city', 'clinic', 'id_line', 
+        'id_user_asesora', 'state'
     ];
 
 

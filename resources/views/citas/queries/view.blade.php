@@ -9,22 +9,37 @@
 
         <div class="row">
            <div class="col-md-6">
-              <div class="col-md-12">
-                <div class="form-group">
-                      <label for=""><b>Paciente</b></label>
-                      <select name="id_cliente" id="paciente-view" class="form-control select2" required>
-                          <option value="">Seleccione</option>
-                      </select>
-                  </div>
+              
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Paciente</b></label>
+                        <select name="id_cliente" id="paciente-view" class="form-control select2" required>
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                </div>
               </div>
 
 
-              <div class="col-md-12">
-                <div class="form-group">
-                      <label for=""><b>Fecha</b></label>
-                      <input type="date" name="fecha" id="fecha-view" class="form-control select2" required min="<?= date("Y-m-d")?>">
-                  </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                        <label for=""><b>Fecha</b></label>
+                        <input type="date" name="fecha" id="fecha-view" class="form-control select2" required min="<?= date("Y-m-d")?>">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                        <label for=""><b>Hora</b></label>
+                        <input type="time" name="time" id="time-view" class="form-control select2" required>
+                    </div>
+                </div>
+
               </div>
+
+
            </div>
 
 
@@ -41,15 +56,17 @@
 
 
            <div class="col-md-6">
-              <div class="col-md-12">
-                  <div class="form-group">
-                      <label for=""><b>Estatus</b></label>
-                      <select name="status" id="status-view" class="form-control select2" required>
-                          <option value="0">Pendiente</option>
-                          <option value="1">Procesado</option>
-                          <option value="2">Cancelado</option>
-                      </select>
-                  </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for=""><b>Estatus</b></label>
+                        <select name="status" id="status-view" class="form-control select2" required>
+                            <option value="0">Pendiente</option>
+                            <option value="1">Procesado</option>
+                            <option value="2">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
               </div>
            </div>
 

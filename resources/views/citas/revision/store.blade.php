@@ -70,7 +70,24 @@
                   <label for=""><b>Fecha</b></label>
                   <input type="date" name="fecha" id="fecha-store" class="form-control  form-control-user" required min="<?= date('Y-m-d')?>">
               </div>
-           </div>
+            </div>
+
+
+            <div class="col-md-3">
+              <div class="form-group">
+                  <label for=""><b>Hora desde</b></label>
+                  <input type="time" name="time" id="time-store" class="form-control  form-control-user" required>
+              </div>
+            </div>
+
+
+            <div class="col-md-3">
+              <div class="form-group">
+                  <label for=""><b>Hora hasta</b></label>
+                  <input type="time" name="time_end" id="time-end-store" class="form-control  form-control-user" required>
+              </div>
+            </div>
+
 
 
            <div class="col-md-3">
@@ -111,6 +128,8 @@
               <thead>
                 <tr>
                   <th>Fecha</th>
+                  <th>Hora desde</th>
+                  <th>Hora hasta</th>
                   <th>Descripcion</th>
                   <th>Cirujano</th>
                   <th>Enfermera</th>

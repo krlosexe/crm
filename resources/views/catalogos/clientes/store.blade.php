@@ -22,8 +22,6 @@
             <li  class="nav-item">
                 <a id="tab3-0" class="nav-link" id="info_credit_patient" data-toggle="tab" href="#info-credit-patient" role="tab" aria-controls="info-add" aria-selected="false">INFORMACIÓN CREDITICIA PACIENTE</a>
             </li>
-
-
         </ul>
         <br><br>
 
@@ -34,6 +32,28 @@
                 <div class="row">
         
                     <div class="col-md-6">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for=""><b>Estado</b></label>
+                                    <select name="state" id="state" class="form-control select2" required>
+                                        <option value="">Seleccione</option>
+                                        <option value="No Contactada">No Contactada</option>
+                                        <option value="Agendada">Agendada</option>
+                                        <option value="Progamada">Progamada</option>
+                                        <option value="Descartada">Descartada</option>
+                                        <option value="Asesorada No Agendada"> Asesorada No Agendada</option>
+                                        <option value="Llamada no Asesorada">Llamada no Asesorada</option>
+                                        <option value="Aprobada">Aprobada</option>
+                                        <option value="Opearada">Opearada</option>
+                                        <option value="Valorada">Valorada</option>
+                                        <option value="Asesorado por FB esperando contacto Telefonico">Asesorado por FB esperando contacto Telefonico</option>
+                                        <option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row">
 
@@ -56,7 +76,7 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for=""><b>Numero de identificacion</b></label>
-                                    <input type="number" name="identificacion" class="form-control form-control-user" id="identificacion" placeholder="PJ. 23559081154" required>
+                                    <input type="number" name="identificacion" class="form-control form-control-user" id="identificacion" placeholder="PJ. 23559081154">
                                 </div>
                             </div>
 

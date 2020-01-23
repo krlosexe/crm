@@ -74,7 +74,8 @@
 								  <th>Acciones</th>
 								  <th>Nombres</th>
 								  <th>Fecha</th>
-								  <th>Hora</th>
+								  <th>Hora Desde</th>
+								  <th>Hora Hasta</th>
 								  <th>Cirujano</th>
 								  <th>Quirofano</th>
 								  <th>Clinica</th>
@@ -176,15 +177,15 @@
 							render : function(data, type, row) {
 								var botones = "";
 								if(consultar == 1)
-									botones += "<span class='consultar btn btn-xs btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
 								if(actualizar == 1)
-									botones += "<span class='editar btn btn-xs btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
 								if(data.status == 1 && actualizar == 1)
-									botones += "<span class='desactivar btn btn-xs btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
 								else if(data.status == 2 && actualizar == 1)
-									botones += "<span class='activar btn btn-xs btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
 								if(borrar == 1)
-									botones += "<span class='eliminar btn btn-xs btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+									botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 								return botones;
 							}
 						},
@@ -195,6 +196,7 @@
 						},
 						{"data": "fecha"},
 						{"data": "time"},
+						{"data": "time_end"},
 						{"data": "surgeon"},
 						{"data": "operating_room"},
 						{"data": "name_clinic"},
@@ -248,11 +250,21 @@
 					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
 					$("#time-view").val(data.time).attr("disabled", "disabled")
+					$("#time-end-view").val(data.time_end).attr("disabled", "disabled")
 					$("#surgeon-view").val(data.surgeon).attr("disabled", "disabled")
 					$("#operating_room-view").val(data.operating_room).attr("disabled", "disabled")
 					$("#clinic-view").val(data.clinic).attr("disabled", "disabled")
 					$("#observaciones-view").val(data.observaciones).attr("disabled", "disabled")
 					$("#status-view").val(data.status_surgeries).attr("disabled", "disabled")
+					$("#type-view").val(data.type).attr("disabled", "disabled")
+					$("#amount-view").val(data.amount).trigger("change").attr("disabled", "disabled")
+
+
+					$("#attempt-view").prop("checked", data.attempt ? true : false)
+
+
+					ShowPayments("#tableView",data.payments, "view")
+
 
 					cuadros('#cuadro1', '#cuadro3');
 				});
@@ -276,11 +288,18 @@
 					$("#paciente-edit").val(data.id_cliente)
 					$("#fecha-edit").val(data.fecha)
 					$("#time-edit").val(data.time)
+					$("#time-end-edit").val(data.time_end)
 					$("#surgeon-edit").val(data.surgeon)
 					$("#operating_room-edit").val(data.operating_room)
 					$("#clinic-edit").val(data.clinic)
 					$("#observaciones-edit").val(data.observaciones)
 					$("#status-edit").val(data.status_surgeries)
+					$("#type-edit").val(data.type)
+					$("#amount-edit").val(data.amount).trigger("change")
+					$("#attempt-edit").prop("checked", data.attempt ? true : false)
+
+					ShowPayments("#tableRegistrar",data.payments, "edit")
+
 					cuadros('#cuadro1', '#cuadro4');
 					$("#id_edit").val(data.id_surgeries)
 					cuadros('#cuadro1', '#cuadro4');
@@ -313,6 +332,57 @@
 					});					
 				});
 			}
+
+
+
+
+
+
+
+
+
+			function addPayment(tabla, option){
+
+				var fecha       = $("#date-pay-"+option).val()
+				var way_to_pay  = $("#way-to-pay-"+option).val()
+				var amount      = $("#amount-payment-"+option).val()
+
+
+				var html = "";
+				html += "<tr id='tr"+fecha+"'>"
+					html += "<td>"+fecha+"<input type='hidden' name='dates[]' class='fecha' value='"+fecha+"'></td>"
+					html += "<td>"+way_to_pay+"<input type='hidden' name='way_to_pays[]' class='time' value='"+way_to_pay+"'></td>"
+					html += "<td>"+amount+"<input type='hidden' name='amounts[]' class='amount' value='"+amount+"'></td>"
+					html += "<td><button type='button' class='btn btn-danger waves-effect' onclick='eliminarTr(\"" + "#tr" + fecha + "\")'>Eliminar</button></td></tr>";
+				html += "</tr>"
+				
+				$(tabla+" tbody").append(html)
+				
+			}
+
+			function ShowPayments(table, data, option){
+
+				var html = "";
+				$.each(data, function (key, item) { 
+
+					html += "<tr id='tr"+item.date+"'>"
+						html += "<td>"+item.date+"<input type='hidden' name='dates[]' class='fecha' value='"+item.date+"'></td>"
+						html += "<td>"+item.way_to_pay+"<input type='hidden' name='way_to_pays[]' class='time' value='"+item.way_to_pay+"'></td>"
+						html += "<td>"+number_format(item.amount, 2)+"<input type='hidden' name='amounts[]' class='amount' value='"+item.amount+"'></td>"
+						if(option == "edit"){
+							html += "<td><button type='button' class='btn btn-danger waves-effect' onclick='eliminarTr(\"" + "#tr" + item.date + "\")'>Eliminar</button></td>";
+						}else{
+							html += "<td></tr>";
+						}
+						
+					html += "</tr>"
+
+				});
+
+				$(table+" tbody").html(html)
+				
+			}
+
 
 					
 		/* ------------------------------------------------------------------------------- */

@@ -16,12 +16,23 @@ class ValuationsController extends Controller
     public function index(Request $request)
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
+
+            $rol     = $request["rol"];
+            $id_user = $request["id_user"];
+
             $valuations = Valuations::select("valuations.*", "valuations.status as status_valuations*", "auditoria.*", "users.email as email_regis", "clientes.*", "valuations.status as status_valuations")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                                 ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.tabla", "valuations")
                                 ->where("auditoria.status", "!=", "0")
+                                
+                                ->where(function ($query) use ($rol, $id_user) {
+                                    if($rol == "Asesor"){
+                                        $query->where("clientes.id_user_asesora", $id_user);
+                                    }
+                                })
+
                                 ->orderBy("valuations.id_valuations", "DESC")
                                 ->get();
             echo json_encode($valuations);
@@ -51,6 +62,26 @@ class ValuationsController extends Controller
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
+                    
+            $hora_init = strtotime( $request["time"] );
+            $hora_end  = strtotime( $request["time_end"] );
+
+
+            $valid = Valuations::where("fecha", $request["fecha"])
+                                ->where("time_end", ">=", $request["time"])
+                                ->where("time",     "<=", $request["time"])
+                                ->get();
+
+            if(sizeof($valid) > 0){
+                $data = array('mensagge' => "Ya existen valoraciones en ese Horario");    
+                return response()->json($data)->setStatusCode(400); 
+            }
+
+            if($hora_init >= $hora_end){
+                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
+                return response()->json($data)->setStatusCode(400); 
+            }
+           
             $store = Valuations::create($request->all());
 
             $auditoria              = new Auditoria;
@@ -104,7 +135,36 @@ class ValuationsController extends Controller
     public function update(Request $request, $valuations)
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            
+
+            if($file = $request->file('file')){
+                $destinationPath = 'img/valuations/cotizaciones';
+                $file->move($destinationPath,$file->getClientOriginalName());
+                $request["cotizacion"] = $file->getClientOriginalName();
+            }
+
+            $valid = Valuations::where("fecha", $request["fecha"])
+                                ->where("time_end", ">=", $request["time"])
+                                ->where("time",     "<=", $request["time"])
+                                ->where("id_valuations", "!=", $valuations)
+                                ->get();
+
+            if(sizeof($valid) > 0){
+                $data = array('mensagge' => "Ya existen valoraciones en ese Horario");    
+                return response()->json($data)->setStatusCode(400); 
+            }
+
+
+
+            $hora_init = strtotime( $request["time"] );
+            $hora_end  = strtotime( $request["time_end"] );
+
+            if($hora_init >= $hora_end){
+
+                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
+                return response()->json($data)->setStatusCode(400); 
+            }
+
+
             $queries = Valuations::find($valuations)->update($request->all());
 
             if ($queries) {

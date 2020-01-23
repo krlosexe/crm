@@ -21,6 +21,7 @@
 
 
               <div class="row">
+
                 <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Fecha</b></label>
@@ -28,12 +29,38 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-3">
                   <div class="form-group">
-                        <label for=""><b>Hora</b></label>
+                        <label for=""><b>Hora desde</b></label>
                         <input type="time" name="time" id="time-store" class="form-control select2" required>
                     </div>
                 </div>
+
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                        <label for=""><b>Hora hasta</b></label>
+                        <input type="time" name="time_end" id="time-end-store" class="form-control select2" required>
+                    </div>
+                </div>
+
+              </div>
+
+
+              <div class="row">
+
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <div class="form-group">
+                            <label for=""><b>Tipo</b></label>
+                            <select name="type" id="type-store" class="form-control select2" required>
+                                <option value="Al Contado">Al Contado</option>
+                                <option value="Financiado">Financiado </option>
+                            </select>
+                        </div>
+                      </div>
+                  </div>
+                  
               </div>
 
            </div>

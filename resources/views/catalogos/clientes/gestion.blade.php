@@ -76,6 +76,7 @@
 			                      <th>Apellidos</th>
 								  <th>Identificacion</th>
 			                      <th>Telefono</th>
+								  <th>Estado</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -178,15 +179,15 @@
 							render : function(data, type, row) {
 								var botones = "";
 								if(consultar == 1)
-									botones += "<span class='consultar btn btn-xs btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
 								if(actualizar == 1)
-									botones += "<span class='editar btn btn-xs btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
 								if(data.status == 1 && actualizar == 1)
-									botones += "<span class='desactivar btn btn-xs btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
 								else if(data.status == 2 && actualizar == 1)
-									botones += "<span class='activar btn btn-xs btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
 								if(borrar == 1)
-									botones += "<span class='eliminar btn btn-xs btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+									botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 								return botones;
 							}
 						},
@@ -194,6 +195,7 @@
 						{"data":"apellidos"},
 						{"data":"identificacion"},
 						{"data":"telefono"},
+						{"data":"state"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
 						
@@ -255,7 +257,9 @@
 					GetBusinessLine("#linea-negocio-view");
 					GetAsesorasbyBusisnessLine("#linea-negocio-view", "#asesora-view");
 					
-
+					$("#state_view").val(data.state)
+					$("#state_view").trigger("change");
+					$("#state_view").attr("disabled", "disabled")
 					$("#nombre_view").val(data.nombres).attr("disabled", "disabled")
 					$("#apellido_view").val(data.apellidos).attr("disabled", "disabled")
 					$("#identificacion_view").val(data.identificacion).attr("disabled", "disabled")
@@ -339,6 +343,7 @@
 					Allergic("#allergic_edit ", "#allergic_medication_edit")
 
 
+					$("#state_edit").val(data.state).trigger("change")
 
 					$("#nombre_edit").val(data.nombres)
 					$("#apellido_edit").val(data.apellidos)

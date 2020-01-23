@@ -79,14 +79,25 @@ Route::get('valuations', function () {
 });
 
 
+Route::get('preanesthesia', function () {
+    return view('citas.preanesthesia.gestion');
+});
+
+
+
 Route::get('surgeries', function () {
     return view('citas.surgeries.gestion');
 });
 
 
+Route::get('tasks', function () {
+    return view('tasks.gestion');
+});
 
 
-
+Route::get('calendar', function () {
+    return view('calendar.general.gestion');
+});
 
 
 

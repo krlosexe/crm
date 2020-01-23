@@ -130,6 +130,7 @@ class QueriesController extends Controller
                 $request["file_cotizacion"] = $file->getClientOriginalName();
             }
             
+       
 
             $queries = Queries::find($id_queries)->update($request->all());
 

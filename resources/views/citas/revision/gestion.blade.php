@@ -177,15 +177,15 @@
 							render : function(data, type, row) {
 								var botones = "";
 								if(consultar == 1)
-									botones += "<span class='consultar btn btn-xs btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
 								if(actualizar == 1)
-									botones += "<span class='editar btn btn-xs btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
 								if(data.status == 1 && actualizar == 1)
-									botones += "<span class='desactivar btn btn-xs btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
 								else if(data.status == 2 && actualizar == 1)
-									botones += "<span class='activar btn btn-xs btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
 								if(borrar == 1)
-									botones += "<span class='eliminar btn btn-xs btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+									botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 								return botones;
 							}
 						},
@@ -362,6 +362,8 @@
 
 					html += "<tr id='tr2_"+item.id_appointments_agenda+"'>"
 						html += "<td>"+item.fecha+"<input type='hidden' name='fecha[]' class='fecha' value='"+item.fecha+"'></td>"
+						html += "<td>"+item.time+"<input type='hidden' name='time[]' class='time' value='"+item.time+"'></td>"
+						html += "<td>"+item.time_end+"<input type='hidden' name='time_end[]' class='time_end' value='"+item.time_end+"'></td>"
 						html += "<td>"+item.descripcion+"<input type='hidden' name='descripcion[]' value='"+item.descripcion+"'></td>"
 						html += "<td>"+item.cirujano+"<input type='hidden' name='cirujano[]' value='"+item.cirujano+"'></td>"
 						html += "<td>"+item.enfermera+"<input type='hidden' name='enfermera[]' value='"+item.enfermera+"'></td>"
@@ -414,6 +416,8 @@
 			function addAppointment(tabla, option){
 
 				var fecha       = $("#fecha-"+option).val()
+				var time        = $("#time-"+option).val()
+				var time_end    = $("#time-end-"+option).val()
 				var cirujano    = $("#cirujano-"+option).val()
 				var enfermera   = $("#enfermera-"+option).val()
 				var descripcion = $("#descripcion-"+option).val()
@@ -432,6 +436,8 @@
 					var html = "";
 					html += "<tr id='tr"+fecha+"'>"
 						html += "<td>"+fecha+"<input type='hidden' name='fecha[]' class='fecha' value='"+fecha+"'></td>"
+						html += "<td>"+time+"<input type='hidden' name='time[]' class='time' value='"+time+"'></td>"
+						html += "<td>"+time_end+"<input type='hidden' name='time_end[]' class='time_end' value='"+time_end+"'></td>"
 						html += "<td>"+descripcion+"<input type='hidden' name='descripcion[]' value='"+descripcion+"'></td>"
 						html += "<td>"+cirujano+"<input type='hidden' name='cirujano[]' value='"+cirujano+"'></td>"
 						html += "<td>"+enfermera+"<input type='hidden' name='enfermera[]' value='"+enfermera+"'></td>"

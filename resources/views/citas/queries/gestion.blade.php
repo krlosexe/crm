@@ -74,6 +74,8 @@
 								  <th>Acciones</th>
 								  <th>Nombres</th>
 								  <th>Fecha</th>
+								  <th>Hora</th>
+								  <th>Estatus</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -172,15 +174,15 @@
 							render : function(data, type, row) {
 								var botones = "";
 								if(consultar == 1)
-									botones += "<span class='consultar btn btn-xs btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
 								if(actualizar == 1)
-									botones += "<span class='editar btn btn-xs btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
 								if(data.status == 1 && actualizar == 1)
-									botones += "<span class='desactivar btn btn-xs btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
 								else if(data.status == 2 && actualizar == 1)
-									botones += "<span class='activar btn btn-xs btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
 								if(borrar == 1)
-									botones += "<span class='eliminar btn btn-xs btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+									botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 								return botones;
 							}
 						},
@@ -190,6 +192,22 @@
 							}
 						},
 						{"data": "fecha"},
+						{"data": "time"},
+						{"data": "status_queries",
+							render : function(data, type, row) {
+
+								if(data == 0){
+									return "Pendiente"
+								}
+
+								if(data == 1){
+									return "Procesado"
+								}
+								if(data == 2){
+									return "Cancelado"
+								}
+							}
+						},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
 						
@@ -235,6 +253,7 @@
 
 					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
+					$("#time-view").val(data.time).attr("disabled", "disabled")
 					$("#observaciones-view").val(data.observaciones).attr("disabled", "disabled")
 					$("#status-view").val(data.status_queries).attr("disabled", "disabled")
 
@@ -259,14 +278,21 @@
 					$("#file-input-edit").fileinput('destroy');
 					getPacientes("#paciente-edit")
 
-					file_name = data.file_cotizacion
+					if(data.status_queries == 1){
+						file_name = data.file_cotizacion
+					}else{
+						file_name = 0;
+					}
+					
 
 					$("#paciente-edit").val(data.id_cliente)
 					$("#fecha-edit").val(data.fecha)
+					$("#time-edit").val(data.time)
 					$("#observaciones-edit").val(data.observaciones)
+
 					$("#status-edit").val(data.status_queries)
 					$("#status-edit").trigger("change");
-					cuadros('#cuadro1', '#cuadro4');
+				
 					$("#id_edit").val(data.id_queries)
 					cuadros('#cuadro1', '#cuadro4');
 				});
@@ -286,9 +312,7 @@
 
 				
 				if(file_name != ""){
-
 					var ext = file_name.split('.');
-
 					if (ext[1] == "pdf") {
 						img = '<embed class="kv-preview-data file-preview-pdf" src="'+url_imagen+file_name+'" type="application/pdf" style="width:213px;height:160px;" internalinstanceid="174">'
 					}else{

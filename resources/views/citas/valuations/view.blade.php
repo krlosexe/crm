@@ -3,7 +3,7 @@
     <h6 class="m-0 font-weight-bold text-primary">Consulta de Valoracion</h6>
   </div>
   <div class="card-body">
-      <form class="user" autocomplete="off" method="post" id="store" enctype="multipart/form-data">
+      <form class="user" autocomplete="off" method="post" id="form-view" enctype="multipart/form-data">
       
         @csrf
 
@@ -30,30 +30,41 @@
                 </div>
 
 
-                <div class="col-md-6">
+                <div class="col-md-3">
                   <div class="form-group">
-                        <label for=""><b>Hora</b></label>
+                        <label for=""><b>Hora desde</b></label>
                         <input type="time" name="time" id="time-view" class="form-control select2" required>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                        <label for=""><b>Hora hasta</b></label>
+                        <input type="time" name="time_end" id="time-end-view" class="form-control select2" required>
                     </div>
                 </div>
               </div>
               
-           </div>
 
 
-           <div class="col-md-6">
+              <div class="row">
 
-              <div class="col-md-12">
-                  <div class="form-group">
-                      <label for=""><b>Obervaciones</b></label>
-                      <textarea name="observaciones" id="observaciones-view" class="form-control" cols="30" rows="5"></textarea>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <div class="form-group">
+                            <label for=""><b>Tipo</b></label>
+                            <select name="type" id="type-view" class="form-control select2" required>
+                                <option value="Al Contado">Al Contado</option>
+                                <option value="Financiado">Financiado </option>
+                            </select>
+                        </div>
+                      </div>
                   </div>
+                  
               </div>
 
-           </div>
 
-
-           <div class="col-md-6">
               <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -66,6 +77,43 @@
                     </div>
                 </div>
               </div>
+
+              
+
+
+
+           </div>
+
+
+           <div class="col-md-6">
+
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label for=""><b>Obervaciones</b></label>
+                      <textarea name="observaciones" id="observaciones-view" class="form-control" cols="30" rows="5"></textarea>
+                  </div>
+              </div>
+
+
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-sm-12 text-center"> 
+                         <label for=""><b>Adjuntar Cotizacion</b></label>
+                        <div>
+                            <div class="file-loading">
+                                <input id="file-input-view" name="file" type="file" disabled>
+                            </div>
+                        </div>
+                        <div class="kv-avatar-hintss">
+                            <small>Seleccione una foto</small>
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+
+
+
            </div>
 
         </div>

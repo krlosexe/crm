@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Queries extends Model
 {
     protected $fillable = [
-        'id_cliente', 'fecha', 'observaciones', 'status', 'file_cotizacion'
+        'id_cliente', 'fecha', 'time', 'observaciones', 'status', 'file_cotizacion'
     ];
 
     protected $table         = 'queries';

@@ -81,6 +81,8 @@ class RevisionAppointmentController extends Controller
                         $AppointmentsAgenda = new AppointmentsAgenda;
                         $AppointmentsAgenda->id_revision  = $store->id_revision;
                         $AppointmentsAgenda->fecha        = $value;
+                        $AppointmentsAgenda->time         = $request->time[$key];
+                        $AppointmentsAgenda->time_end     = $request->time_end[$key];
                         $AppointmentsAgenda->cirujano     = $request->cirujano[$key];
                         $AppointmentsAgenda->enfermera    = $request->enfermera[$key];
                         $AppointmentsAgenda->descripcion  = $request->descripcion[$key];
@@ -154,6 +156,8 @@ class RevisionAppointmentController extends Controller
                     $AppointmentsAgenda = new AppointmentsAgenda;
                     $AppointmentsAgenda->id_revision  = $revisionAppointment;
                     $AppointmentsAgenda->fecha        = $value;
+                    $AppointmentsAgenda->time         = $request->time[$key];
+                    $AppointmentsAgenda->time_end     = $request->time_end[$key];
                     $AppointmentsAgenda->cirujano     = $request->cirujano[$key];
                     $AppointmentsAgenda->enfermera    = $request->enfermera[$key];
                     $AppointmentsAgenda->descripcion  = $request->descripcion[$key];

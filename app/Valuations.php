@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Valuations extends Model
 {
     protected $fillable = [
-        'id_cliente', 'fecha', 'time','observaciones', 'status'
+        'id_cliente', 'fecha', 'time', 'time_end', 'type','observaciones', 'cotizacion', 'status'
     ];
 
     protected $table         = 'valuations';

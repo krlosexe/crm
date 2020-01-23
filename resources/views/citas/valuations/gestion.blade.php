@@ -74,7 +74,10 @@
 								  <th>Acciones</th>
 								  <th>Nombres</th>
 								  <th>Fecha</th>
-								  <th>Hora</th>
+								  <th>Hora Desde</th>
+								  <th>Hora Hasta</th>
+								  <th>Tipo</th>
+								  <th>Estatus</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -143,9 +146,10 @@
 
 
 			function list(cuadro) {
+
 				var data = {
-					"id_user": id_user,
-					"token"  : tokens,
+					"id_user" : id_user,
+					"token"   : tokens,
 				};
 
 
@@ -163,8 +167,10 @@
 						"method":"GET",
 						 "url":''+url+'/api/valuations',
 						 "data": {
+							"rol"    : name_rol,
 							"id_user": id_user,
-							"token"  : tokens,
+							"token"  : tokens
+							
 						},
 						"dataSrc":""
 					},
@@ -173,15 +179,15 @@
 							render : function(data, type, row) {
 								var botones = "";
 								if(consultar == 1)
-									botones += "<span class='consultar btn btn-xs btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
 								if(actualizar == 1)
-									botones += "<span class='editar btn btn-xs btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
 								if(data.status == 1 && actualizar == 1)
-									botones += "<span class='desactivar btn btn-xs btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
 								else if(data.status == 2 && actualizar == 1)
-									botones += "<span class='activar btn btn-xs btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
+									botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
 								if(borrar == 1)
-									botones += "<span class='eliminar btn btn-xs btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+									botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 								return botones;
 							}
 						},
@@ -192,6 +198,26 @@
 						},
 						{"data": "fecha"},
 						{"data": "time"},
+						{"data": "time_end"},
+						{"data": "type"},
+						{"data": "status_valuations",
+							render : function(data, type, row){
+								if(data == 1){
+									return "Procesado"
+								}
+
+								if(data == 0){
+									return "Pendiente"
+								}
+
+								if(data == 2){
+									return "Cancelado"
+								}
+
+
+
+							}
+						},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
 						
@@ -238,8 +264,56 @@
 					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
 					$("#time-view").val(data.time).attr("disabled", "disabled")
+					$("#time-end-view").val(data.time_end).attr("disabled", "disabled")
+					$("#type-view").val(data.type).attr("disabled", "disabled")
 					$("#observaciones-view").val(data.observaciones).attr("disabled", "disabled")
 					$("#status-view").val(data.status_valuations).attr("disabled", "disabled")
+
+
+
+					var url_imagen = '/img/valuations/cotizaciones/'
+					var url        = document.getElementById('ruta').value; 
+					
+					if((data.cotizacion != "" ) &&  (data.cotizacion != null)){
+						var ext = data.cotizacion.split('.');
+						if (ext[1] == "pdf") {
+							img = '<embed class="kv-preview-data file-preview-pdf" src="'+url_imagen+data.cotizacion+'" type="application/pdf" style="width:213px;height:160px;" internalinstanceid="174">'
+						}else{
+							img = '<img src="'+url_imagen+data.cotizacion+'" class="file-preview-image kv-preview-data">'
+						}
+							
+					}else{img = ""}
+
+
+					$("#file-input-view").fileinput('destroy');
+					$("#file-input-view").fileinput({
+						theme: "fas",
+						overwriteInitial: true,
+						maxFileSize: 1500,
+						showClose: false,
+						showCaption: false,
+						browseLabel: '',
+						removeLabel: '',
+						browseIcon: '<i class="fa fa-folder-open"></i>',
+						removeIcon: '<i class="fas fa-trash-alt"></i>',
+						previewFileIcon: '<i class="fas fa-file"></i>',
+						removeTitle: 'Cancel or reset changes',
+						elErrorContainer: '#kv-avatar-errors-1',
+						msgErrorClass: 'alert alert-block alert-danger',
+						
+						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+						allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
+						initialPreview: [ 
+							img
+						],
+
+						initialPreviewConfig: [
+							{caption: data.cotizacion , downloadUrl: url_imagen+data.cotizacion  ,url: url+"uploads/delete", key: data.cotizacion}
+						],
+					});
+
+
+
 
 					cuadros('#cuadro1', '#cuadro3');
 				});
@@ -262,8 +336,57 @@
 					$("#paciente-edit").val(data.id_cliente)
 					$("#fecha-edit").val(data.fecha)
 					$("#time-edit").val(data.time)
+					$("#time-end-edit").val(data.time_end)
+					$("#type-edit").val(data.type)
 					$("#observaciones-edit").val(data.observaciones)
 					$("#status-edit").val(data.status_valuations)
+
+
+					var url_imagen = '/img/valuations/cotizaciones/'
+					var url        = document.getElementById('ruta').value; 
+					
+					if((data.cotizacion != "" ) &&  (data.cotizacion != null)){
+						var ext = data.cotizacion.split('.');
+						if (ext[1] == "pdf") {
+							img = '<embed class="kv-preview-data file-preview-pdf" src="'+url_imagen+data.cotizacion+'" type="application/pdf" style="width:213px;height:160px;" internalinstanceid="174">'
+						}else{
+							img = '<img src="'+url_imagen+data.cotizacion+'" class="file-preview-image kv-preview-data">'
+						}
+							
+					}else{img = ""}
+
+
+					$("#file-input-edit").fileinput('destroy');
+					$("#file-input-edit").fileinput({
+						theme: "fas",
+						overwriteInitial: true,
+						maxFileSize: 1500,
+						showClose: false,
+						showCaption: false,
+						browseLabel: '',
+						removeLabel: '',
+						browseIcon: '<i class="fa fa-folder-open"></i>',
+						removeIcon: '<i class="fas fa-trash-alt"></i>',
+						previewFileIcon: '<i class="fas fa-file"></i>',
+						removeTitle: 'Cancel or reset changes',
+						elErrorContainer: '#kv-avatar-errors-1',
+						msgErrorClass: 'alert alert-block alert-danger',
+						
+						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+						allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
+						initialPreview: [ 
+							img
+						],
+
+						initialPreviewConfig: [
+							{caption: data.cotizacion , downloadUrl: url_imagen+data.cotizacion  ,url: url+"uploads/delete", key: data.cotizacion}
+						],
+					});
+
+
+
+
+
 					cuadros('#cuadro1', '#cuadro4');
 					$("#id_edit").val(data.id_valuations)
 					cuadros('#cuadro1', '#cuadro4');

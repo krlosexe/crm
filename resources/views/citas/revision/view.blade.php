@@ -113,6 +113,8 @@
               <thead>
                 <tr>
                   <th>Fecha</th>
+                  <th>Hora desde</th>
+                  <th>Hora Hasta</th>
                   <th>Descripcion</th>
                   <th>Cirujano</th>
                   <th>Enfermera</th>

@@ -79,6 +79,24 @@
 
            <div class="col-md-3">
               <div class="form-group">
+                  <label for=""><b>Hora desde</b></label>
+                  <input type="time" name="time" id="time-edit" class="form-control  form-control-user">
+              </div>
+           </div>
+
+
+           <div class="col-md-3">
+              <div class="form-group">
+                  <label for=""><b>Hora hasta</b></label>
+                  <input type="time" name="time_end" id="time-end-edit" class="form-control  form-control-user">
+              </div>
+           </div>
+
+
+
+
+           <div class="col-md-3">
+              <div class="form-group">
                   <label for=""><b>Cirujano</b></label>
                   <input type="text" name="cirujano" id="cirujano-edit" class="form-control  form-control-user" >
               </div>
@@ -115,6 +133,8 @@
               <thead>
                 <tr>
                   <th>Fecha</th>
+                  <th>Hora desde</th>
+                  <th>Hora hasta</th>
                   <th>Descripcion</th>
                   <th>Cirujano</th>
                   <th>Enfermera</th>

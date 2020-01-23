@@ -16,10 +16,9 @@ class RevisionAppointment extends Model
 
 
 
-    public function agenda()
-   {
+    public function agenda(){
       return $this->hasMany('App\AppointmentsAgenda', 'id_revision', 'id_revision');
-   }
+    }
 
 
 

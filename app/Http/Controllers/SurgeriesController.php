@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Surgeries;
 use App\Auditoria;
+use App\SurgeriesPayments;
 use Illuminate\Http\Request;
 
 class SurgeriesController extends Controller
@@ -21,6 +22,9 @@ class SurgeriesController extends Controller
                                 ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
                                 ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
+
+                                ->with("payments")
+
                                 ->where("auditoria.tabla", "surgeries")
                                 ->where("auditoria.status", "!=", "0")
                                 ->orderBy("surgeries.id_surgeries", "DESC")
@@ -52,6 +56,31 @@ class SurgeriesController extends Controller
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
+
+            $hora_init = strtotime( $request["time"] );
+            $hora_end  = strtotime( $request["time_end"] );
+
+
+            $valid = Surgeries::where("fecha", $request["fecha"])
+                                ->where("time_end", ">=", $request["time"])
+                                ->where("time",     "<=", $request["time"])
+                                ->get();
+
+            if(sizeof($valid) > 0){
+                $data = array('mensagge' => "Ya existen cirugias en ese Horario");    
+                return response()->json($data)->setStatusCode(400); 
+            }
+
+            if($hora_init >= $hora_end){
+                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
+                return response()->json($data)->setStatusCode(400); 
+            }
+
+
+            $request["amount"]          = str_replace('.', '', $request["amount"]);
+            $request["amount"]          = str_replace(',', '.', $request["amount"]);
+
+            $request["attempt"] == 1 ? $request["attempt"] = 1 : $request["attempt"] = 0;
             $store = Surgeries::create($request->all());
 
             $auditoria              = new Auditoria;
@@ -105,7 +134,52 @@ class SurgeriesController extends Controller
     public function update(Request $request, $surgeries)
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
+            $request["attempt"] == 1 ? $request["attempt"] = 1 : $request["attempt"] = 0;
+
+
+            $hora_init = strtotime( $request["time"] );
+            $hora_end  = strtotime( $request["time_end"] );
+
+
+            $valid = Surgeries::where("fecha", $request["fecha"])
+                                ->where("time_end", ">=", $request["time"])
+                                ->where("time",     "<=", $request["time"])
+                                ->where("id_surgeries", "!=", $surgeries)
+                                ->get();
             
+            SurgeriesPayments::where('id_surgerie', $surgeries)->delete();
+
+            if($request->dates){
+                foreach ($request->dates as $key => $value) {
+                    $SurgeriesPayments = new SurgeriesPayments;
+                    $SurgeriesPayments->id_surgerie  = $surgeries;
+                    $SurgeriesPayments->date         = $value;
+
+                    $amount          = str_replace('.', '', $request->amounts[$key]);
+                    $amount          = str_replace(',', '.', $amount);
+
+                    $SurgeriesPayments->way_to_pay   = $request->way_to_pays[$key];
+                    $SurgeriesPayments->amount     = $amount;
+                    
+                    $SurgeriesPayments->save();
+                }    
+            }
+
+
+            if(sizeof($valid) > 0){
+                $data = array('mensagge' => "Ya existen cirugias en ese Horario");    
+                return response()->json($data)->setStatusCode(400); 
+            }
+
+            if($hora_init >= $hora_end){
+                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
+                return response()->json($data)->setStatusCode(400); 
+            }
+
+
+            $request["amount"]          = str_replace('.', '', $request["amount"]);
+            $request["amount"]          = str_replace(',', '.', $request["amount"]);
+
             $update = Surgeries::find($surgeries)->update($request->all());
 
             if ($update) {
