@@ -17,6 +17,11 @@ class RevisionAppointmentController extends Controller
      */
     public function index(Request $request)
     {
+
+        $rol     = $request["rol"];
+        $id_user = $request["id_user"];
+
+
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $queries = RevisionAppointment::select("revision_appointment.*", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clinic.nombre as name_clinic","auditoria.*", "users.email as email_regis")
 
@@ -27,6 +32,14 @@ class RevisionAppointmentController extends Controller
                                             ->join("auditoria", "auditoria.cod_reg", "=", "revision_appointment.id_revision")
                                             ->join("users", "users.id", "=", "auditoria.usr_regins")
                                             ->with('agenda')
+
+                                            
+                                            ->where(function ($query) use ($rol, $id_user) {
+                                                if($rol == "Asesor"){
+                                                    $query->where("clientes.id_user_asesora", $id_user);
+                                                }
+                                            })
+
                                             ->where("auditoria.tabla", "revision_appointment")
                                             ->where("auditoria.status", "!=", "0")
                                             ->orderBy("revision_appointment.id_revision", "DESC")

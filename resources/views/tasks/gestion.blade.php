@@ -167,6 +167,7 @@
 						"method":"GET",
 						 "url":''+url+'/api/tasks',
 						 "data": {
+							"rol"    : name_rol,
 							"id_user": id_user,
 							"token"  : tokens,
 						},

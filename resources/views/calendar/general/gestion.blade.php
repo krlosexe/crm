@@ -16,119 +16,6 @@
 		<script src='vendor/fullcalendar/packages/list/main.js'></script>
 
 
-		<script>
-
-			document.addEventListener('DOMContentLoaded', function() {
-				var initialLocaleCode = 'es';
-				var localeSelectorEl = document.getElementById('locale-selector');
-				var calendarEl = document.getElementById('calendar');
-
-				var calendar = new FullCalendar.Calendar(calendarEl, {
-
-					plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-					header: {
-						right: 'today prev,next',
-						center: 'title',
-						left: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-					},
-
-					height: 800,
-					
-				//	defaultDate: '2020-08-12',
-					locale: initialLocaleCode,
-					buttonIcons: false,
-					navLinks: true, 
-					editable: true,
-					eventLimit: true, 
-					eventSources: [
-						{
-							url: 'api/calendar/tasks', 
-							color: '#4e73df',    
-							textColor: 'white'  
-						},
-						// {
-						// 	url: 'api/calendar/queries', 
-						// 	color: '#E5F4FD',   
-						// 	textColor: '#31B5F4' 
-						// },
-						{
-							url: 'api/calendar/valuations', 
-							color: '#FFAAD4',   
-							textColor: 'white' 
-						},
-						{
-							url: 'api/calendar/surgeries', 
-							color: '#7F55FF',   
-							textColor: 'white' 
-						},
-						{
-							url: 'api/calendar/revision', 
-							color: '#FF7F7F',   
-							textColor: 'white' 
-						},
-
-
-						{
-							url: 'api/calendar/preanesthesia', 
-							color: '#FF7F00',   
-							textColor: 'white' 
-						}
-
-
-
-					],
-					eventClick: function(calEvent, jsEvent, view) {
-
-						 $("#issue-view").val(calEvent.event.title).attr("disabled", "disabled");
-						 $("#fecha-view").val(calEvent.event.extendedProps.fecha).attr("disabled", "disabled");
-						 $("#time-view").val(calEvent.event.extendedProps.time).attr("disabled", "disabled");
-						 $("#time-end-view").val(calEvent.event.extendedProps.time_end).attr("disabled", "disabled");
-						
-						 $("#observaciones-view").val(calEvent.event.extendedProps.observaciones).attr("disabled", "disabled");
-
-						 var img = "<img class='rounded' style='height: 8rem; width: 8rem; margin: 1%; border-radius: 50%!important;' src='/img/usuarios/profile/"+calEvent.event.extendedProps.img_profile+"'>"
-					
-						 $("#img_profile_responsable").html(img)
-						 
-						 var name_responsable = '<br><span><b>'+calEvent.event.extendedProps.nombres+" "+calEvent.event.extendedProps.apellido_p+'</b></span>'
-						 $("#name_responsable").html(name_responsable)
-
-						 var html = "";
-						 $.each(calEvent.event.extendedProps.followers, function (key, item) { 
-							 html += '<li class="list-group-item"><img class="rounded" src="/img/usuarios/profile/'+item.img_profile+'" style="height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;" title="'+item.name_follower+''+item.last_name_follower+'"><b>'+item.name_follower+' '+item.last_name_follower+'</b></li>'
-						 });
-
-						 $("#list_followers").html(html)
-
-						 $("#exampleModalCenter").modal('show');
-					}
-
-				});
-
-				calendar.render();
-
-				// build the locale selector's options
-				calendar.getAvailableLocaleCodes().forEach(function(localeCode) {
-					var optionEl = document.createElement('option');
-					optionEl.value = localeCode;
-					optionEl.selected = localeCode == initialLocaleCode;
-					optionEl.innerText = localeCode;
-					localeSelectorEl.appendChild(optionEl);
-				});
-
-				// when the selected option changes, dynamically change the calendar option
-				localeSelectorEl.addEventListener('change', function() {
-					if (this.value) {
-					calendar.setOption('locale', this.value);
-					}
-				});
-
-			});
-
-
-			
-		</script>
-
 		<style>
 			.kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {
 			    margin: 0;
@@ -407,6 +294,8 @@
 
 		  </div>
 		  <input type="hidden" id="ruta" value="<?= url('/') ?>">
+		  <input type="hidden" id="rol_calendar">
+		  <input type="hidden" id="user_calendar">
 	@endsection
 
 
@@ -416,9 +305,10 @@
 	@section('CustomJs')
 
 		<script>
+		  
 			$(document).ready(function(){
+				
 				store();
-
 				$(".fc-next-button").html('<i class="fas fa-angle-right"></i>')
 				$(".fc-prev-button").html('<i class="fas fa-angle-left"></i>')
 				
@@ -426,11 +316,129 @@
 				$("#nav_calendar, #modulo_Calendarios").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "citys");
+
 				ListTasksToday("#tasks-today")
+
+				initCalendar()
+
+
 			});
+			
+			function initCalendar() {
+				var initialLocaleCode = 'es';
+					var localeSelectorEl = document.getElementById('locale-selector');
+					var calendarEl = document.getElementById('calendar');
+
+					var calendar = new FullCalendar.Calendar(calendarEl, {
+
+						loading: function (bool) {
+							console.log('events are being rendered'); // Add your script to show loading
+						},
+
+						plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+						header: {
+							right: 'today prev,next',
+							center: 'title',
+							left: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+						},
+
+						height: 800,
+						
+					//	defaultDate: '2020-08-12',
+						locale: initialLocaleCode,
+						buttonIcons: false,
+						navLinks: true, 
+						editable: true,
+						eventLimit: true, 
+						eventSources: [
+							{
+								url: 'api/calendar/tasks', 
+								color: '#4e73df',    
+								textColor: 'white'  ,
+								extraParams: {
+									rol: name_rol,
+									id_user: id_user
+								},
+							},
+							// {
+							// 	url: 'api/calendar/queries', 
+							// 	color: '#E5F4FD',   
+							// 	textColor: '#31B5F4' 
+							// },
+							{
+								url: 'api/calendar/valuations', 
+								color: '#FFAAD4',   
+								textColor: 'white' 
+							},
+							{
+								url: 'api/calendar/surgeries', 
+								color: '#7F55FF',   
+								textColor: 'white' 
+							},
+							{
+								url: 'api/calendar/revision', 
+								color: '#FF7F7F',   
+								textColor: 'white' 
+							},
+
+
+							{
+								url: 'api/calendar/preanesthesia', 
+								color: '#FF7F00',   
+								textColor: 'white' 
+							}
 
 
 
+						],
+						eventClick: function(calEvent, jsEvent, view) {
+
+							$("#issue-view").val(calEvent.event.title).attr("disabled", "disabled");
+							$("#fecha-view").val(calEvent.event.extendedProps.fecha).attr("disabled", "disabled");
+							$("#time-view").val(calEvent.event.extendedProps.time).attr("disabled", "disabled");
+							$("#time-end-view").val(calEvent.event.extendedProps.time_end).attr("disabled", "disabled");
+							
+							$("#observaciones-view").val(calEvent.event.extendedProps.observaciones).attr("disabled", "disabled");
+
+							var img = "<img class='rounded' style='height: 8rem; width: 8rem; margin: 1%; border-radius: 50%!important;' src='/img/usuarios/profile/"+calEvent.event.extendedProps.img_profile+"'>"
+						
+							$("#img_profile_responsable").html(img)
+							
+							var name_responsable = '<br><span><b>'+calEvent.event.extendedProps.nombres+" "+calEvent.event.extendedProps.apellido_p+'</b></span>'
+							$("#name_responsable").html(name_responsable)
+
+							var html = "";
+							$.each(calEvent.event.extendedProps.followers, function (key, item) { 
+								html += '<li class="list-group-item"><img class="rounded" src="/img/usuarios/profile/'+item.img_profile+'" style="height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;" title="'+item.name_follower+''+item.last_name_follower+'"><b>'+item.name_follower+' '+item.last_name_follower+'</b></li>'
+							});
+
+							$("#list_followers").html(html)
+
+							$("#exampleModalCenter").modal('show');
+						}
+
+					});
+
+					calendar.render();
+
+					// build the locale selector's options
+					calendar.getAvailableLocaleCodes().forEach(function(localeCode) {
+						var optionEl = document.createElement('option');
+						optionEl.value = localeCode;
+						optionEl.selected = localeCode == initialLocaleCode;
+						optionEl.innerText = localeCode;
+						localeSelectorEl.appendChild(optionEl);
+					});
+
+					// when the selected option changes, dynamically change the calendar option
+					localeSelectorEl.addEventListener('change', function() {
+						if (this.value) {
+						calendar.setOption('locale', this.value);
+						}
+					});
+			}
+			
+	
 			function ListTasksToday(list){
 
 				var url=document.getElementById('ruta').value;
@@ -486,7 +494,7 @@
 
 			}
 
-
+			
 
 			function showEvent(data){
 				var data = JSON.parse($(data).attr("data-event"));
@@ -562,6 +570,25 @@
 			}
 
 		</script>
+
+
+
+
+
+
+
+
+
+		<script>
+			
+
+			
+
+			
+
+		</script>
+
+
 		
 
 

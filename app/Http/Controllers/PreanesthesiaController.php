@@ -15,12 +15,24 @@ class PreanesthesiaController extends Controller
      */
     public function index(request $request)
     {
+
+        $rol     = $request["rol"];
+        $id_user = $request["id_user"];
+
+
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $valuations = Preanesthesia::select("preanesthesias.*", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
                                 ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "preanesthesias.id_preanesthesias")
                                 ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
+
+                                ->where(function ($query) use ($rol, $id_user) {
+                                    if($rol == "Asesor"){
+                                        $query->where("clientes.id_user_asesora", $id_user);
+                                    }
+                                })
+                                
                                 ->where("auditoria.tabla", "preanesthesias")
                                 ->where("auditoria.status", "!=", "0")
                                 ->orderBy("preanesthesias.id_preanesthesias", "DESC")

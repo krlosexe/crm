@@ -18,6 +18,9 @@ class TasksController extends Controller
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
+            $rol     = $request["rol"];
+            $id_user = $request["id_user"];
+
             $tasks = Tasks::select("tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
                                    "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis")
 
@@ -29,10 +32,49 @@ class TasksController extends Controller
 
                                 ->with("followers")
 
+
+                                ->where(function ($query) use ($rol, $id_user) {
+                                    if($rol == "Asesor"){
+                                        $query->where("tasks.responsable", $id_user);
+                                    }
+                                })
+
+
                                 ->where("auditoria.tabla", "tasks")
                                 ->where("auditoria.status", "!=", "0")
                                 ->orderBy("tasks.id_tasks", "DESC")
                                 ->get();
+
+
+
+            if($rol == "Asesor"){
+
+                $tasks_follow = Tasks::select("tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
+                                "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis")
+
+                                ->join("auditoria", "auditoria.cod_reg", "=", "tasks.id_tasks")
+                                ->join("users", "users.id", "=", "auditoria.usr_regins")
+
+                                ->join("users as responsable", "responsable.id", "=", "tasks.responsable")
+                                ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
+
+                                ->join("tasks_followers", "tasks_followers.id_task", "=", "tasks.id_tasks")
+
+                                ->with("followers")
+                                
+                                ->where("tasks_followers.id_follower", $id_user)
+                                ->where("auditoria.tabla", "tasks")
+                                ->where("auditoria.status", "!=", "0")
+                                ->orderBy("tasks.id_tasks", "DESC")
+                                ->get();
+
+
+                foreach($tasks_follow as $key => $value){
+                  $tasks[] = $value;
+                }
+            }
+            
+                             
             echo json_encode($tasks);
 
         }else{

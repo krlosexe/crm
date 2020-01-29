@@ -16,6 +16,11 @@ class SurgeriesController extends Controller
      */
     public function index(Request $request)
     {
+
+        $rol     = $request["rol"];
+        $id_user = $request["id_user"];
+
+
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $valuations = Surgeries::select("surgeries.*", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
                                 ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic")
@@ -24,6 +29,12 @@ class SurgeriesController extends Controller
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
 
                                 ->with("payments")
+
+                                ->where(function ($query) use ($rol, $id_user) {
+                                    if($rol == "Asesor"){
+                                        $query->where("clientes.id_user_asesora", $id_user);
+                                    }
+                                })
 
                                 ->where("auditoria.tabla", "surgeries")
                                 ->where("auditoria.status", "!=", "0")
