@@ -340,7 +340,7 @@
 
 					
 
-					url_imagen = '/img/usuarios/profile/'
+					url_imagen = './img/usuarios/profile/'
 
 					if(data.img_profile != ""){
 						img = '<img src="'+url_imagen+data.img_profile+'" class="file-preview-image kv-preview-data">'
@@ -425,7 +425,7 @@
 
 					
 
-					url_imagen = '/img/usuarios/profile/'
+					url_imagen = './img/usuarios/profile/'
 
 					if(data.img_profile != ""){
 						img = '<img src="'+url_imagen+data.img_profile+'" class="file-preview-image kv-preview-data">'
