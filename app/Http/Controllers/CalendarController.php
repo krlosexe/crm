@@ -94,7 +94,7 @@ class CalendarController extends Controller
         
         $data = Queries::select("queries.id_queries","queries.fecha as start", "queries.time as time",
                                 "queries.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
-                                "datos_personales.nombres", "datos_personales.apellido_p", )
+                                "datos_personales.nombres", "datos_personales.apellido_p")
                             
                             ->join("clientes", "clientes.id_cliente", "=", "queries.id_cliente")
                             ->join("users", "users.id", "=", "clientes.id_user_asesora")
