@@ -134,7 +134,7 @@ class CalendarController extends Controller
 
         $data = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
                                    "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
-                                   "datos_personales.nombres", "datos_personales.apellido_p", )
+                                   "datos_personales.nombres", "datos_personales.apellido_p")
                             
                                 ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
                                 ->join("users", "users.id", "=", "clientes.id_user_asesora")
@@ -186,7 +186,7 @@ class CalendarController extends Controller
 
         $data = Preanesthesia::select("preanesthesias.id_preanesthesias","preanesthesias.fecha as start", "preanesthesias.time as time",  "preanesthesias.time_end as time_end",
                                    "preanesthesias.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
-                                   "datos_personales.nombres", "datos_personales.apellido_p", )
+                                   "datos_personales.nombres", "datos_personales.apellido_p")
                             
                                     ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente")
                                     ->join("users", "users.id", "=", "clientes.id_user_asesora")
@@ -232,7 +232,7 @@ class CalendarController extends Controller
 
         $data = Surgeries::select("surgeries.id_surgeries","surgeries.fecha as start", "surgeries.time as time", "surgeries.time_end as time_end",
                                    "surgeries.observaciones", "surgeries.attempt", "surgeries.type", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
-                                   "datos_personales.nombres", "datos_personales.apellido_p", )
+                                   "datos_personales.nombres", "datos_personales.apellido_p")
                             
                                 ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente")
                                 ->join("users", "users.id", "=", "clientes.id_user_asesora")
