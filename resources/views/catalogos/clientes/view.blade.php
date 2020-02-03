@@ -41,12 +41,12 @@
                                         <option value="">Seleccione</option>
                                         <option value="No Contactada">No Contactada</option>
                                         <option value="Agendada">Agendada</option>
-                                        <option value="Progamada">Progamada</option>
+                                        <option value="Programada">Programada</option>
                                         <option value="Descartada">Descartada</option>
                                         <option value="Asesorada No Agendada"> Asesorada No Agendada</option>
                                         <option value="Llamada no Asesorada">Llamada no Asesorada</option>
                                         <option value="Aprobada">Aprobada</option>
-                                        <option value="Opearada">Opearada</option>
+                                        <option value="Operada">Operada</option>
                                         <option value="Valorada">Valorada</option>
                                         <option value="Asesorado por FB esperando contacto Telefonico">Asesorado por FB esperando contacto Telefonico</option>
                                         <option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
@@ -190,8 +190,16 @@
 
 
             <div class="tab-pane fade tab_content1" id="info-add-view" role="tabpanel" aria-labelledby="patient_record">
+                    
+
 
                     <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""><b>Nombre Cirugia</b></label>
+                                <input type="text" name="name_surgery" class="form-control form-control-user" id="name_surgery_view" placeholder="PJ. Mastopexia">
+                            </div>
+                        </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""><b>Talla Actual</b></label>

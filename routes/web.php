@@ -102,12 +102,13 @@ Route::get('calendar', function () {
 
 
 
+Route::get('import', 'ImportController@clients');
 
 
+Route::get('import_tasks', 'ImportController@ImportTasks');
 
 
-
-
+Route::get('import/calendar', 'ImportController@Calendar');
 
 
 

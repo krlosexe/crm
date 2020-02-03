@@ -21,7 +21,9 @@ class ClientsController extends Controller
     public function index(Request $request)
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $modulos = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", "clientc_credit_information.*",  "auditoria.*", "user_registro.email as email_regis")
+            
+            $modulos = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", "clientc_credit_information.*",                                          "auditoria.*", "user_registro.email as email_regis")
+
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
 
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")

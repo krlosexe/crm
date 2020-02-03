@@ -251,7 +251,7 @@
 					var data = table.row( $(this).parents("tr") ).data();
 
 
-
+					console.log(data)
 					GetCity("#city_view");
 					GetClinic("#city_view", "#clinic_view")
 					GetBusinessLine("#linea-negocio-view");
@@ -277,6 +277,7 @@
 
 					$("#identificacion_verify_view").prop("checked", data.identificacion_verify ? true : false)
 
+					$("#name_surgery_view").val(data.name_surgery).attr("disabled", "disabled")
 					$("#current_size_view").val(data.current_size).attr("disabled", "disabled")
 					$("#desired_size_view").val(data.desired_size).attr("disabled", "disabled")
 					$("#implant_volumem_view").val(data.implant_volumem).attr("disabled", "disabled")
@@ -329,7 +330,7 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-
+					
 					GetCity("#city_edit");
 					GetClinic("#city_edit", "#clinic_edit")
 					GetAsesorasbyBusisnessLine("#linea-negocio-edit", "#asesora-edit");
@@ -362,6 +363,7 @@
 
 					$("#identificacion_verify_edit").prop("checked", data.identificacion_verify ? true : false)
 
+					$("#name_surgery_edit").val(data.name_surgery)
 					$("#current_size_edit").val(data.current_size)
 					$("#desired_size_edit").val(data.desired_size)
 					$("#implant_volumem_edit").val(data.implant_volumem)

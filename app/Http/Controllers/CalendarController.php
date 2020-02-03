@@ -13,8 +13,13 @@ use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
-    function getTask($today = false){
+    function getTask(Request $request, $today = false){
         
+
+        $rol     = $request["rol"];
+        $id_user = $request["id_user"];
+
+
         $data = Tasks::select("tasks.id_tasks", "tasks.issue as title", "tasks.fecha as start", "tasks.time as time", "tasks.observaciones", "datos_personales.nombres", "datos_personales.apellido_p", "user_responsable.img_profile")
                            
                             ->join("datos_personales", "datos_personales.id_usuario", "=", "tasks.responsable")
@@ -27,13 +32,53 @@ class CalendarController extends Controller
                                     $query->where("tasks.fecha", $today);
                                 }
                             })
-                            
+
+                            ->where(function ($query) use ($rol, $id_user) {
+                                if($rol == "Asesor"){
+                                    $query->where("tasks.responsable", $id_user);
+                                }
+                            })
 
                             ->join("auditoria", "auditoria.cod_reg", "=", "tasks.id_tasks")
                             ->where("auditoria.tabla", "tasks")
                             ->where("auditoria.status", "!=", 0)
                             
                             ->get();
+
+
+            if($rol == "Asesor"){
+
+
+                $tasks_follow =  Tasks::select("tasks.id_tasks", "tasks.issue as title", "tasks.fecha as start", "tasks.time as time", "tasks.observaciones", "datos_personales.nombres", "datos_personales.apellido_p", "user_responsable.img_profile")
+                           
+                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "tasks.responsable")
+                                    ->join("users as user_responsable", "user_responsable.id", "=", "tasks.responsable")
+                                    ->join("tasks_followers", "tasks_followers.id_task", "=", "tasks.id_tasks")
+
+                                    ->with("followers")
+
+                                    ->where(function ($query) use ($today) {
+                                        if($today != false){
+                                            $query->where("tasks.fecha", $today);
+                                        }
+                                    })
+
+                                    ->where("tasks_followers.id_follower", $id_user)
+
+                                    ->join("auditoria", "auditoria.cod_reg", "=", "tasks.id_tasks")
+                                    ->where("auditoria.tabla", "tasks")
+                                    ->where("auditoria.status", "!=", 0)
+                                    
+                                    ->get();
+
+         
+
+
+                foreach($tasks_follow as $key => $value){
+                    $data[] = $value;
+                }
+            }
+
 
         foreach($data as $key => $value){
             $value["fecha"] = $value["start"];
@@ -81,8 +126,12 @@ class CalendarController extends Controller
 
 
 
-    function getValuations($today = false){
+    function getValuations(Request $request, $today = false){
         
+        $rol     = $request["rol"];
+        $id_user = $request["id_user"];
+
+
         $data = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
                                    "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p", )
@@ -98,6 +147,13 @@ class CalendarController extends Controller
                                         $query->where("valuations.fecha", $today);
                                     }
                                 })
+
+                                ->where(function ($query) use ($rol, $id_user) {
+                                    if($rol == "Asesor"){
+                                        $query->where("clientes.id_user_asesora", $id_user);
+                                    }
+                                })
+
 
                                 ->where("auditoria.tabla", "valuations")
                                 ->where("auditoria.status", "!=", 0)
@@ -123,8 +179,11 @@ class CalendarController extends Controller
 
 
 
-    function Preanesthesia($today = false){
-        
+    function Preanesthesia(Request $request, $today = false){
+       
+        $rol     = $request["rol"];
+        $id_user = $request["id_user"];
+
         $data = Preanesthesia::select("preanesthesias.id_preanesthesias","preanesthesias.fecha as start", "preanesthesias.time as time",  "preanesthesias.time_end as time_end",
                                    "preanesthesias.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p", )
@@ -138,6 +197,12 @@ class CalendarController extends Controller
                                     ->where(function ($query) use ($today) {
                                         if($today != false){
                                             $query->where("preanesthesias.fecha", $today);
+                                        }
+                                    })
+
+                                    ->where(function ($query) use ($rol, $id_user) {
+                                        if($rol == "Asesor"){
+                                            $query->where("clientes.id_user_asesora", $id_user);
                                         }
                                     })
 
@@ -160,8 +225,11 @@ class CalendarController extends Controller
 
 
 
-    function Surgeries($today = false){
+    function Surgeries(Request $request, $today = false){
         
+        $rol     = $request["rol"];
+        $id_user = $request["id_user"];
+
         $data = Surgeries::select("surgeries.id_surgeries","surgeries.fecha as start", "surgeries.time as time", "surgeries.time_end as time_end",
                                    "surgeries.observaciones", "surgeries.attempt", "surgeries.type", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p", )
@@ -175,6 +243,13 @@ class CalendarController extends Controller
                                 ->where(function ($query) use ($today) {
                                     if($today != false){
                                         $query->where("surgeries.fecha", $today);
+                                    }
+                                })
+
+
+                                ->where(function ($query) use ($rol, $id_user) {
+                                    if($rol == "Asesor"){
+                                        $query->where("clientes.id_user_asesora", $id_user);
                                     }
                                 })
 
@@ -204,7 +279,11 @@ class CalendarController extends Controller
         return response()->json($data)->setStatusCode(200);
     }
 
-    function Revision($today = false){
+    function Revision(Request $request, $today = false){
+
+        $rol     = $request["rol"];
+        $id_user = $request["id_user"];
+
 
         $data = RevisionAppointment::select("revision_appointment.id_revision", "appointments_agenda.fecha as start", "appointments_agenda.time as time","appointments_agenda.time_end as time_end",
                                             "appointments_agenda.descripcion as observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
@@ -223,13 +302,19 @@ class CalendarController extends Controller
                                         }
                                     })
 
+                                    ->where(function ($query) use ($rol, $id_user) {
+                                        if($rol == "Asesor"){
+                                            $query->where("clientes.id_user_asesora", $id_user);
+                                        }
+                                    })
+
 
                                     ->where("auditoria.tabla", "revision_appointment")
                                     ->where("auditoria.status", "!=", 0)
                                     ->get();
 
 
-
+     
         foreach($data as $key => $value){
 
             $value["fecha"] = $value["start"];
@@ -247,16 +332,16 @@ class CalendarController extends Controller
 
     public function Today(Request $request)
     {
+      
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
-            $data["tasks"]          = $this->getTask(date("Y-m-d"))->original;
-            $data["queries"]        = $this->getQueries(date("Y-m-d"))->original;
-            $data["valuations"]     = $this->getValuations(date("Y-m-d"))->original;
-            $data["surgeries"]      = $this->Surgeries(date("Y-m-d"))->original;
-            $data["revision"]       = $this->Revision(date("Y-m-d"))->original;
-            $data["preanestesia"]   = $this->Preanesthesia(date("Y-m-d"))->original;
+            $data["tasks"]          = $this->getTask($request, date("Y-m-d"))->original;
+            $data["queries"]        = $this->getQueries($request, date("Y-m-d"))->original;
+            $data["valuations"]     = $this->getValuations($request, date("Y-m-d"))->original;
+            $data["surgeries"]      = $this->Surgeries($request, date("Y-m-d"))->original;
+            $data["revision"]       = $this->Revision($request, date("Y-m-d"))->original;
+            $data["preanestesia"]   = $this->Preanesthesia($request, date("Y-m-d"))->original;
             
-
             return response()->json($data)->setStatusCode(200);
 
         }else{

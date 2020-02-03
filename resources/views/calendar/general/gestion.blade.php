@@ -368,24 +368,40 @@
 							{
 								url: 'api/calendar/valuations', 
 								color: '#FFAAD4',   
-								textColor: 'white' 
+								textColor: 'white',
+								extraParams: {
+									rol: name_rol,
+									id_user: id_user
+								},
 							},
 							{
 								url: 'api/calendar/surgeries', 
 								color: '#7F55FF',   
-								textColor: 'white' 
+								textColor: 'white',
+								extraParams: {
+									rol: name_rol,
+									id_user: id_user
+								}
 							},
 							{
 								url: 'api/calendar/revision', 
 								color: '#FF7F7F',   
-								textColor: 'white' 
+								textColor: 'white',
+								extraParams: {
+									rol: name_rol,
+									id_user: id_user
+								}
 							},
 
 
 							{
 								url: 'api/calendar/preanesthesia', 
 								color: '#FF7F00',   
-								textColor: 'white' 
+								textColor: 'white',
+								extraParams: {
+									rol: name_rol,
+									id_user: id_user
+								}
 							}
 
 
