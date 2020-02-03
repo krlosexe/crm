@@ -171,6 +171,7 @@
 						 "data": {
 							"id_user": id_user,
 							"token"  : tokens,
+							"rol"    : name_rol,
 						},
 						"dataSrc":""
 					},

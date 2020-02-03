@@ -20,6 +20,11 @@ class ClientsController extends Controller
      */
     public function index(Request $request)
     {
+
+        $rol     = $request["rol"];
+        $id_user = $request["id_user"];
+
+
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             
             $modulos = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", "clientc_credit_information.*",                                          "auditoria.*", "user_registro.email as email_regis")
@@ -29,6 +34,17 @@ class ClientsController extends Controller
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
+
+
+                                ->where(function ($query) use ($rol, $id_user) {
+                                    if($rol == "Asesor"){
+                                        $query->where("clientes.id_user_asesora", $id_user);
+                                    }
+                                })
+
+
+
+                                
 
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
