@@ -102,7 +102,7 @@
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <label for=""><b>Fecha de Nacimiento</b></label>
-                                    <input type="date" name="fecha_nacimiento" class="form-control" id="fecha_nacimiento_edit" placeholder="PJ. Cardenas" required>
+                                    <input type="date" name="fecha_nacimiento" class="form-control" id="fecha_nacimiento_edit" placeholder="PJ. Cardenas" >
                                 </div>
                             </div>
 

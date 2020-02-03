@@ -43,9 +43,6 @@ class ClientsController extends Controller
                                 })
 
 
-
-                                
-
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.status", "!=", "0")
@@ -97,7 +94,7 @@ class ClientsController extends Controller
                 'apellidos'       => 'required',
                 'telefono'        => 'required|unique:clientes',
                 'email'           => 'required|unique:clientes',
-                'direccion'       => 'required'
+               // 'direccion'       => 'required'
 
             ], $messages);  
 
