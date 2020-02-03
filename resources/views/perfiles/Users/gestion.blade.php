@@ -247,7 +247,7 @@
 					msgErrorClass: 'alert alert-block alert-danger',
 					defaultPreviewContent: '<img src="img/default-user.png" width="150" alt="Your Avatar">',
 					layoutTemplates: {main2: '{preview}  {remove} {browse}'},
-					allowedFileExtensions: ["jpg", "png", "gif"],
+					allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
 
 				});
 
@@ -362,7 +362,7 @@
 						msgErrorClass: 'alert alert-block alert-danger',
 						defaultPreviewContent: '<img src="img/default-user.png" width="150" alt="Your Avatar">',
 						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
-						allowedFileExtensions: ["jpg", "png", "gif"],
+						allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
 						initialPreview: [ 
 							img
 						],
@@ -447,7 +447,7 @@
 						msgErrorClass: 'alert alert-block alert-danger',
 						defaultPreviewContent: '<img src="img/default-user.png" width="150" alt="Your Avatar">',
 						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
-						allowedFileExtensions: ["jpg", "png", "gif"],
+						allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
 						initialPreview: [ 
 							img
 						],
