@@ -271,7 +271,7 @@
 
 
 
-					var url_imagen = '/img/valuations/cotizaciones/'
+					var url_imagen = 'img/valuations/cotizaciones/'
 					var url        = document.getElementById('ruta').value; 
 					
 					if((data.cotizacion != "" ) &&  (data.cotizacion != null)){
@@ -342,7 +342,7 @@
 					$("#status-edit").val(data.status_valuations)
 
 
-					var url_imagen = '/img/valuations/cotizaciones/'
+					var url_imagen = 'img/valuations/cotizaciones/'
 					var url        = document.getElementById('ruta').value; 
 					
 					if((data.cotizacion != "" ) &&  (data.cotizacion != null)){
