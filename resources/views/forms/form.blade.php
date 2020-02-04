@@ -36,7 +36,8 @@
 </head>
 
 
-<body class="{{ Request::path() != '/' ? 'dasboard-body' : ''}} bg-gradient-primary">
+<body class="{{ Request::path() != '/' ? 'dasboard-body' : ''}} bg-gradient-primary" style="overflow: hidden;
+">
 
 
 <div class="card shadow mb-4 " id="cuadro2">
