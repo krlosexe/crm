@@ -169,6 +169,21 @@
                                 </div>
 
 
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Origen</b></label>
+                                        <input type="text" name="origen" class="form-control form-control-user" id="origen_view">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Forma de pago (Contado/Financiación)</b></label>
+                                        <input type="text" name="forma_pago" class="form-control form-control-user" id="forma_pago_view">
+                                    </div>
+                                </div>
+
+
+
+
 
                             </div>
                         </div>

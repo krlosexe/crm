@@ -49,14 +49,15 @@
         @csrf
 
         <div class="row">
-
+			
+			
            <div class="col-md-12">
               
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Nombres:*</b></label>
-                        <input type="text" name="names" id="names-store" class="form-control" required >
+                        <input type="text" name="nombres" id="names-store" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -66,7 +67,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Apellidos:*</b></label>
-                        <input type="text" name="last_names" id="last_names-store" class="form-control" required >
+                        <input type="text" name="apellidos" id="last_names-store" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -77,7 +78,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Numero de Cedula:*</b></label>
-                        <input type="text" name="identification" id="identification-store" class="form-control" required >
+                        <input type="text" name="identificacion" id="identification-store" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -87,7 +88,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Fecha de Nacimiento:*</b></label>
-                        <input type="date" name="date" id="date-store" class="form-control" required >
+                        <input type="date" name="fecha_nacimiento" id="date-store" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -97,7 +98,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Ciudad *</b></label>
-                        <input type="text" name="city" id="city-store" class="form-control" required >
+                        <input type="text" name="direccion" id="city-store" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -107,7 +108,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Telefono *</b></label>
-                        <input type="number" name="phone" id="phone-store" class="form-control" required >
+                        <input type="number" name="telefono" id="phone-store" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -127,7 +128,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>¿Que cirugía se quiere realizar? *</b></label>
-                        <input type="text" name="surgerie" id="surgerie-store" class="form-control" required >
+                        <input type="text" name="name_surgery" id="surgerie-store" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -145,13 +146,15 @@
 
         </div>
 
-        <input type="hidden" name="id_user" class="id_user">
-        <input type="hidden" name="token" class="token">
+       		<input type="hidden" name="state" value="No Contactada">
+			<input type="hidden" name="id_user" value="69">
+			<input type="hidden" name="id_line" value="8">
+			<input type="hidden" name="id_user_asesora" value="69">
           <br>
           <br>
         </div>
           <center>
-            <button id="send_usuario" class="btn btn-primary btn-user">
+            <button class="btn btn-primary btn-user">
                 Enviar
             </button>
 
@@ -162,7 +165,9 @@
       
     </div>
 
-
+	
+		  
+	<input type="hidden" id="ruta" value="<?= url('/') ?>">
 
 
   <!-- Bootstrap core JavaScript-->
@@ -220,7 +225,20 @@
 
   <script>
     var user_id = localStorage.getItem('user_id');
-    $("#logout").attr("href", "logout/"+user_id)
+	$("#logout").attr("href", "logout/"+user_id)
+	
+
+	$(document).ready(function(){
+		store();
+	});
+
+
+	function store(){
+		id_user = 69;
+		enviarFormulario("#store", 'api/clients', '#cuadro2');
+	}
+
+
   </script>
 
   

@@ -157,12 +157,24 @@
                                     </select>
                                 </div>
 
-
                                 <div class="form-group">
                                     <label for=""><b>Asesora</b></label>
                                     <select name="id_user_asesora" id="asesora" class="form-control select2" required>
                                         <option value="">Seleccione</option>
                                     </select>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Origen</b></label>
+                                        <input type="text" name="origen" class="form-control form-control-user" id="origen">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Forma de pago (Contado/Financiación)</b></label>
+                                        <input type="text" name="forma_pago" class="form-control form-control-user" id="forma_pago">
+                                    </div>
                                 </div>
 
 

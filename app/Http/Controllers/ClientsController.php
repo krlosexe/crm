@@ -73,7 +73,7 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+        //if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
             $messages = [
                 'required' => 'El Campo :attribute es requirdo.',
@@ -126,9 +126,9 @@ class ClientsController extends Controller
                 }
             }
 
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
-        }
+        // }else{
+        //     return response()->json("No esta autorizado")->setStatusCode(400);
+        // }
 
         
     }

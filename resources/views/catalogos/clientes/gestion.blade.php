@@ -268,6 +268,8 @@
 					$("#email_view").val(data.email).attr("disabled", "disabled")
 					$("#direccion_view").val(data.direccion).attr("disabled", "disabled")
 					$("#fecha_nacimiento_view").val(data.fecha_nacimiento).attr("disabled", "disabled")
+					$("#origen_view").val(data.origen).attr("disabled", "disabled")
+					$("#forma_pago_view").val(data.forma_pago).attr("disabled", "disabled")
 					
 					$("#city_view").val(data.city).attr("disabled", "disabled")
 					$("#city_view").trigger("change")
@@ -355,6 +357,10 @@
 					$("#direccion_edit").val(data.direccion)
 					$("#fecha_nacimiento_edit").val(data.fecha_nacimiento)
 					
+					$("#origen_edit").val(data.origen)
+					$("#forma_pago_edit").val(data.forma_pago)
+
+
 					$("#city_edit").val(data.city)
 					$("#city_edit").trigger("change")
 
