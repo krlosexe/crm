@@ -82,9 +82,63 @@
               </div>
 
 
+			  <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Fecha de Nacimiento:*</b></label>
+                        <input type="date" name="date" id="date-store" class="form-control" required >
+                    </div>
+                </div>
+              </div>
 
 
+			  <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Ciudad *</b></label>
+                        <input type="text" name="city" id="city-store" class="form-control" required >
+                    </div>
+                </div>
+              </div>
 
+
+			  <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Telefono *</b></label>
+                        <input type="number" name="phone" id="phone-store" class="form-control" required >
+                    </div>
+                </div>
+              </div>
+
+
+			  <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Email *</b></label>
+                        <input type="email" name="email" id="email-store" class="form-control" required >
+                    </div>
+                </div>
+              </div>
+
+
+			  <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>¿Que cirugía se quiere realizar? *</b></label>
+                        <input type="text" name="surgerie" id="surgerie-store" class="form-control" required >
+                    </div>
+                </div>
+              </div>
+
+			  <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Forma de pago (Contado/Financiación): *</b></label>
+                        <input type="text" name="way_to_pay" id="way_to_pay-store" class="form-control" required >
+                    </div>
+                </div>
+              </div>
               
            </div>
 
@@ -96,12 +150,8 @@
           <br>
         </div>
           <center>
-
-            <button type="button"  class="btn btn-danger btn-user" onclick="prev('#cuadro2')">
-                Cancelar
-            </button>
             <button id="send_usuario" class="btn btn-primary btn-user">
-                Registrar
+                Enviar
             </button>
 
           </center>
