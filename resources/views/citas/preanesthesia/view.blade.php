@@ -22,7 +22,7 @@
 
 
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Fecha</b></label>
                         <input type="date" name="fecha" id="fecha-view" class="form-control select2" required min="<?= date("Y-m-d")?>">
@@ -30,14 +30,14 @@
                 </div>
 
 
-                <div class="col-md-3">
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora desde</b></label>
                         <input type="time" name="time" id="time-view" class="form-control select2" required>
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora hasta</b></label>
                         <input type="time" name="time_end" id="time-end-view" class="form-control select2" required>
@@ -48,7 +48,7 @@
               </div>
 
 
-
+<!-- 
               <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -63,7 +63,7 @@
                           <input type="text" name="operating_room" id="operating_room-view" class="form-control" required >
                       </div>
                   </div>
-              </div>
+              </div> -->
 
 
               
