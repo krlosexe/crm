@@ -106,19 +106,19 @@
 
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                       <div class="form-group">
                             <label for=""><b>Cirujano</b></label>
                             <input type="text" name="surgeon" id="surgeon-view" class="form-control" required >
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                       <div class="form-group">
                             <label for=""><b>Quirofano</b></label>
                             <input type="text" name="operating_room" id="operating_room-view" class="form-control" required >
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
 
