@@ -28,14 +28,14 @@
 
 
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Fecha</b></label>
                         <input type="date" name="fecha" id="fecha-store" class="form-control select2" required min="<?= date("Y-m-d")?>">
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora desde</b></label>
                         <input type="time" name="time" id="time-store" class="form-control select2" required>
@@ -43,7 +43,7 @@
                 </div>
 
 
-                <div class="col-md-3">
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora Hasta</b></label>
                         <input type="time" name="time_end" id="time-end-store" class="form-control select2" required>
