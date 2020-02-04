@@ -12,25 +12,25 @@
   <title>App</title>
 
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
-  <link href="css/custom.css" rel="stylesheet">
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="/css/custom.css" rel="stylesheet">
 
 
 
-  <link href="vendor/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
-  <link href="vendor/bootstrap-fileinput/themes/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="/vendor/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="/vendor/bootstrap-fileinput/themes/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
 
-  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
     <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <link href="vendor/sweetalert/sweetalert.css" rel="stylesheet">
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="/vendor/sweetalert/sweetalert.css" rel="stylesheet">
 
 
-  <link href="vendor/select2-4.0.11/dist/css/select2.min.css" rel="stylesheet" />
+  <link href="/vendor/select2-4.0.11/dist/css/select2.min.css" rel="stylesheet" />
 
 
 </head>
@@ -137,7 +137,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Forma de pago (Contado/Financiación): *</b></label>
-                        <input type="text" name="way_to_pay" id="way_to_pay-store" class="form-control" required >
+                        <input type="text" name="forma_pago" id="forma_pago-store" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -147,9 +147,10 @@
         </div>
 
        		<input type="hidden" name="state" value="No Contactada">
-			<input type="hidden" name="id_user" value="69">
+			   <input type="hidden" name="origen" value="Formulario Web">
+			<input type="hidden" name="id_user" value="{{$id_user}}">
 			<input type="hidden" name="id_line" value="8">
-			<input type="hidden" name="id_user_asesora" value="69">
+			<input type="hidden" name="id_user_asesora" value="{{$id_user}}">
           <br>
           <br>
         </div>
@@ -172,55 +173,55 @@
 
   <!-- Bootstrap core JavaScript-->
 
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="/js/sb-admin-2.min.js"></script>
   
 
 
    <!-- Page level plugins -->
-  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="/vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
+  <script src="/js/demo/chart-area-demo.js"></script>
+  <script src="/js/demo/chart-pie-demo.js"></script>
 
   
 
 
  <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src="/js/demo/datatables-demo.js"></script>
 
   
 
 
-    <script src="vendor/bootstrap-fileinput/js/plugins/piexif.js" type="text/javascript"></script>
-    <script src="vendor/bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
-    <script src="vendor/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
-    <script src="vendor/bootstrap-fileinput/js/locales/fr.js" type="text/javascript"></script>
-    <script src="vendor/bootstrap-fileinput/js/locales/es.js" type="text/javascript"></script>
-    <script src="vendor/bootstrap-fileinput/themes/fas/theme.js" type="text/javascript"></script>
-    <script src="vendor/bootstrap-fileinput/themes/explorer-fas/theme.js" type="text/javascript"></script>
+    <script src="/vendor/bootstrap-fileinput/js/plugins/piexif.js" type="text/javascript"></script>
+    <script src="/vendor/bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
+    <script src="/vendor/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
+    <script src="/vendor/bootstrap-fileinput/js/locales/fr.js" type="text/javascript"></script>
+    <script src="/vendor/bootstrap-fileinput/js/locales/es.js" type="text/javascript"></script>
+    <script src="/vendor/bootstrap-fileinput/themes/fas/theme.js" type="text/javascript"></script>
+    <script src="/vendor/bootstrap-fileinput/themes/explorer-fas/theme.js" type="text/javascript"></script>
 
 
 
 
 
-    <script src="vendor/sweetalert/sweetalert.min.js" type="text/javascript"></script>
-    <script src="vendor/sweetalert/sweetalert-dev.js" type="text/javascript"></script>
+    <script src="/vendor/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+    <script src="/vendor/sweetalert/sweetalert-dev.js" type="text/javascript"></script>
 
-    <script src="vendor/select2-4.0.11/dist/js/select2.min.js"></script>
+    <script src="/vendor/select2-4.0.11/dist/js/select2.min.js"></script>
 
 
-  <script src="js/funciones.js"></script>
+  <script src="/js/funciones.js"></script>
   
 
   <script>
@@ -235,8 +236,54 @@
 
 	function store(){
 		id_user = 69;
-		enviarFormulario("#store", 'api/clients', '#cuadro2');
+		enviarFormularioForm("#store", 'api/clients', '#cuadro2');
 	}
+
+
+
+	function enviarFormularioForm(form, controlador, cuadro, auth = false){
+        $(form).submit(function(e){
+            e.preventDefault(); //previene el comportamiento por defecto del formulario al darle click al input submit
+            var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable
+            var formData=new FormData($(form)[0]); //obtiene todos los datos de los inputs del formulario pasado por parametros
+            var method = $(this).attr('method'); //obtiene el method del formulario
+            $('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
+            $.ajax({
+                url:''+url+'/'+controlador+'',
+                type:method,
+                dataType:'JSON',
+                data:formData,
+                cache:false,
+                contentType:false,
+                processData:false,
+                beforeSend: function(){
+                    mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+                },
+                error: function (repuesta) {
+                    $('input[type="submit"]').removeAttr('disabled'); //activa el input submit
+                    var errores=repuesta.responseText;
+                    if(errores!=""){
+						mensajes('danger', errores);
+						warning(respuesta.errores)
+                    }else{
+
+					
+						mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
+						warning("Ha ocurrido un error, por favor intentelo de nuevo.")
+					}
+					   
+                },
+                 success: function(respuesta){
+					 warning(respuesta.mensagge)
+					 $("#store")[0].reset();
+                }	
+
+            });
+        });
+    }
+
+
+
 
 
   </script>
