@@ -22,12 +22,12 @@
 
 
         <div class="row">
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
               <div class="form-group">
                   <label for=""><b>N° de contrato</b></label>
                   <input type="text" name="numero_contrato" id="numero_contrato-edit" class="form-control  form-control-user" required>
               </div>
-           </div>
+           </div> -->
 
 
           <div class="col-md-3">
