@@ -24,7 +24,7 @@
 
 
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Fecha</b></label>
                         <input type="date" name="fecha" id="fecha-edit" class="form-control select2" required min="<?= date("Y-m-d")?>">
@@ -32,14 +32,14 @@
                 </div>
 
 
-                <div class="col-md-3">
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora desde</b></label>
                         <input type="time" name="time" id="time-edit" class="form-control select2" required>
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora hasta</b></label>
                         <input type="time" name="time_end" id="time-end-edit" class="form-control select2" required>
@@ -49,7 +49,7 @@
 
               </div>
 
-              <div class="row">
+              <!-- <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                           <label for=""><b>Cirujano</b></label>
@@ -63,7 +63,7 @@
                           <input type="text" name="operating_room" id="operating_room-edit" class="form-control" required >
                       </div>
                   </div>
-              </div>
+              </div> -->
 
 
 

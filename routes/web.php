@@ -111,5 +111,6 @@ Route::get('import_tasks', 'ImportController@ImportTasks');
 Route::get('import/calendar', 'ImportController@Calendar');
 
 
-
-
+Route::get('forms', function () {
+    return view('forms.form');
+});
