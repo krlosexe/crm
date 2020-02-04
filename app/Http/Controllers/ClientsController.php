@@ -217,7 +217,7 @@ class ClientsController extends Controller
 
     public function status($id_cliente, $status, Request $request)
     {
-        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+        //if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $auditoria =  Auditoria::where("cod_reg", $id_cliente)
                                      ->where("tabla", "clientes")->first();
 
@@ -231,9 +231,9 @@ class ClientsController extends Controller
 
             $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
             return response()->json($data)->setStatusCode(200);
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
-        }
+      //  }else{
+           //return response()->json("No esta autorizado")->setStatusCode(400);
+        //}
     }
 
 
