@@ -225,7 +225,7 @@
   
 
   <script>
-    var user_id = localStorage.getItem('user_id');
+    //var user_id = localStorage.getItem('user_id');
 	
 
 	$(document).ready(function(){
