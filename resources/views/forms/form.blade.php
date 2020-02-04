@@ -36,13 +36,13 @@
 </head>
 
 
-<body class="{{ Request::path() != '/' ? 'dasboard-body' : ''}} bg-gradient-primary" style="overflow: hidden;
+<body class="{{ Request::path() != '/' ? 'dasboard-body' : ''}} bg-gradient-primary" style="overflow: hidden;background: #fff !important;
 ">
 
 
 <div class="card shadow mb-4 " id="cuadro2">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Registro de Tareas</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Registre su Cita de Valoración</h6>
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="store" enctype="multipart/form-data">
