@@ -53,7 +53,7 @@
 
 						  <div class="col-sm-6 mb-3 mb-sm-0 valid-required">
 						 		<label for=""><b>Linea de Negocio</b></label>
-								<select name="id_line" id="linea-negocio-view" class="form-control select2" required>
+								<select name="id_lines[]" id="linea-negocio-view" class="form-control select2" required multiple>
 									<option value="">Seleccione</option>
 								</select>
 			              </div>

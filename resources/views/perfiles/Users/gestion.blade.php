@@ -378,7 +378,6 @@
 					GetBusinessLine("#linea-negocio-view");
 					$("#email-view").val(data.email).attr("disabled", "disabled")
 					$("#rol-view").val(data.id_rol).attr("disabled", "disabled")
-					$("#linea-negocio-view").val(data.id_line).attr("disabled", "disabled")
 					$("#avatar-view").attr("disabled", "disabled")
 
 					$("#nombres-view").val(data.nombres).attr("disabled", "disabled")
@@ -390,6 +389,13 @@
 					$("#direccion-view").val(data.direccion).attr("disabled", "disabled")
 
 					
+					var lines = []
+					$.each(data.lines, function (key, item) { 
+						lines.push(item.id_line)
+					});
+
+					$("#linea-negocio-view").val(lines).attr("disabled", "disabled")
+
 
 					cuadros('#cuadro1', '#cuadro3');
 				});
@@ -476,7 +482,13 @@
 
 					$("#id_edit").val(data.id)
 
-					
+					var lines = []
+					$.each(data.lines, function (key, item) { 
+						lines.push(item.id_line)
+					});
+
+					$("#linea-negocio-edit").val(lines)
+
 
 					cuadros('#cuadro1', '#cuadro4');
 				});
