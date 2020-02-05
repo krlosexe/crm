@@ -416,8 +416,9 @@
 
 					$("#id_edit").val(data.id_cliente)
 
+				
 
-					var url = "/valuations/client/"+data.id_cliente+"/1"
+					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
 					$('#iframeValuationsView').attr('src', url);
 
 
