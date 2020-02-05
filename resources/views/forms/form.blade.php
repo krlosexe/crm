@@ -149,7 +149,7 @@
        		<input type="hidden" name="state" value="No Contactada">
 			   <input type="hidden" name="origen" value="Formulario Web">
 			<input type="hidden" name="id_user" value="{{$id_user}}">
-			<input type="hidden" name="id_line" value="8">
+			<input type="hidden" name="id_line" value="{{$id_line}}">
 			<input type="hidden" name="id_user_asesora" value="{{$id_user}}">
           <br>
           <br>
