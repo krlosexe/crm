@@ -36,9 +36,8 @@
 </head>
 
 
-<body class="{{ Request::path() != '/' ? 'dasboard-body' : ''}} bg-gradient-primary" style="overflow: hidden;background: #fff !important;
-">
-
+  <body class="{{ Request::path() != '/' ? 'dasboard-body' : ''}} bg-gradient-primary" style="{{ $id_line != 17 ? 'overflow: hidden;' : ''}} background: #fff !important;
+  ">
 
 <div class="card shadow mb-4 " id="cuadro2">
   <div class="card-header py-3">
