@@ -114,3 +114,8 @@ Route::get('import/calendar', 'ImportController@Calendar');
 Route::get('forms/{id_user}/{id_line}', function ($id_user, $id_line) {
     return view('forms.form', ["id_user" => $id_user, "id_line" => $id_line]);
 });
+
+
+Route::get('forms/cirufacil/{id_user}/{id_line}', function ($id_user, $id_line) {
+    return view('forms_cirufacil.form', ["id_user" => $id_user, "id_line" => $id_line]);
+});

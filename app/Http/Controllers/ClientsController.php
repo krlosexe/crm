@@ -74,7 +74,7 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
         //if ($this->VerifyLogin($request["id_user"],$request["token"])){
-
+          
             $messages = [
                 'required' => 'El Campo :attribute es requirdo.',
                 'unique'   => 'El Campo :attribute ya se encuentra en uso.'
