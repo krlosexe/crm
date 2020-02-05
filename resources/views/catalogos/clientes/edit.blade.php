@@ -502,7 +502,7 @@
               
                 <div class="embed-responsive embed-responsive-16by9">
 
-                    <iframe class="embed-responsive-item " id="iframeValuationsView" allowfullscreen="">
+                    <iframe class="embed-responsive-item " id="iframeValuationsEdit" allowfullscreen="">
 
                     </iframe>
 

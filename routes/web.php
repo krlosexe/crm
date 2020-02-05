@@ -120,8 +120,8 @@ Route::get('forms/cirufacil/{id_user}/{id_line}', function ($id_user, $id_line) 
     return view('forms_cirufacil.form', ["id_user" => $id_user, "id_line" => $id_line]);
 });
 
-Route::get('valuations/client/{id_client}/{option}', function ($id_client) {
-    return view('catalogos.clientes.valuations.gestion', ["id_client" => $id_client,]);
+Route::get('valuations/client/{id_client}/{option}', function ($id_client, $option) {
+    return view('catalogos.clientes.valuations.gestion', ["id_client" => $id_client,"option" => $option,]);
 });
 
 

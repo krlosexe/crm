@@ -125,6 +125,7 @@
 	@section('CustomJs')
 
 		<script>
+		
 			$(document).ready(function(){
 				store();
 				list();
@@ -320,6 +321,12 @@
 					$("#linea-negocio-view").trigger("change");
 					$("#asesora-view").val(data.id_user_asesora).attr("disabled", "disabled")
 					cuadros('#cuadro1', '#cuadro3');
+
+
+					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/0"
+					$('#iframeValuationsView').attr('src', url);
+
+
 				});
 			}
 
@@ -419,7 +426,7 @@
 				
 
 					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
-					$('#iframeValuationsView').attr('src', url);
+					$('#iframeValuationsEdit').attr('src', url);
 
 
 
