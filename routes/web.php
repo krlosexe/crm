@@ -125,3 +125,6 @@ Route::get('valuations/client/{id_client}/{option}', function ($id_client, $opti
 });
 
 
+Route::get('preanesthesia/client/{id_client}/{option}', function ($id_client, $option) {
+    return view('catalogos.clientes.preanesthesia.gestion', ["id_client" => $id_client,"option" => $option,]);
+});

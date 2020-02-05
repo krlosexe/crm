@@ -14,7 +14,7 @@
                 <a id="tab0" class="nav-link active" id="patient_record_edit" data-toggle="tab" href="#init_edit" role="tab" aria-controls="init" aria-selected="true">Ficha Paciente</a>
             </li>
             <li  class="nav-item">
-                <a id="tab1" class="nav-link" id="information_aditionals_edit" data-toggle="tab" href="#info-add-edit" role="tab" aria-controls="info-add" aria-selected="false">Cirugia A Programar</a>
+                <a id="tab1" class="nav-link" id="information_aditionals_edit" data-toggle="tab" href="#info-add-edit" role="tab" aria-controls="info-add" aria-selected="false">Cirugia a Programar</a>
             </li>
 
             <li  class="nav-item">

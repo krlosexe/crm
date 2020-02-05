@@ -74,6 +74,7 @@ Route::post('valuations/status/{id}/{status}', 'ValuationsController@status');
 
 
 Route::resource('preanesthesia', 'PreanesthesiaController');
+Route::get('preanesthesia/client/{id_client}', 'PreanesthesiaController@Clients');
 Route::post('preanesthesia/status/{id}/{status}', 'PreanesthesiaController@status');
 
 Route::resource('surgeries', 'SurgeriesController');

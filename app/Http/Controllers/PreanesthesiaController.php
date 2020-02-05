@@ -43,6 +43,23 @@ class PreanesthesiaController extends Controller
         }
     }
 
+
+    function Clients($id_client){
+        
+        $valuations = Preanesthesia::select("preanesthesias.*", "preanesthesias.clinic as id_clinic","clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
+                            ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic")
+                            ->join("auditoria", "auditoria.cod_reg", "=", "preanesthesias.id_preanesthesias")
+                            ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente")
+                            ->join("users", "users.id", "=", "auditoria.usr_regins")
+
+                             ->where("preanesthesias.id_cliente", $id_client)
+                            ->where("auditoria.tabla", "preanesthesias")
+                            ->where("auditoria.status", "!=", "0")
+                            ->orderBy("preanesthesias.id_preanesthesias", "DESC")
+                            ->get();
+        echo json_encode($valuations);
+        
+    }
     /**
      * Show the form for creating a new resource.
      *

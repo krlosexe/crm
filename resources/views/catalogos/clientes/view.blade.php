@@ -11,7 +11,7 @@
                 <a id="tab0" class="nav-link active" id="patient_record_view" data-toggle="tab" href="#init_view" role="tab" aria-controls="init" aria-selected="true">Ficha Paciente</a>
             </li>
             <li  class="nav-item">
-                <a id="tab1" class="nav-link" id="information_aditionals_view" data-toggle="tab" href="#info-add-view" role="tab" aria-controls="info-add" aria-selected="false">Cirugia A Programar</a>
+                <a id="tab1" class="nav-link" id="information_aditionals_view" data-toggle="tab" href="#info-add-view" role="tab" aria-controls="info-add" aria-selected="false">Cirugia a Programar</a>
             </li>
 
             <li  class="nav-item">
@@ -25,6 +25,11 @@
 
             <li  class="nav-item">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-valuations-view" role="tab" aria-controls="info-add" aria-selected="false">Valoraciones</a>
+            </li>
+
+
+            <li  class="nav-item">
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-preanestesia-view" role="tab" aria-controls="info-add" aria-selected="false">Pre Anestesias</a>
             </li>
 
 
@@ -492,22 +497,29 @@
 
 
               <div class="tab-pane fade tab_content1-0" id="info-valuations-view" role="tabpanel" aria-labelledby="patient_record">
-              
                     <div class="embed-responsive embed-responsive-16by9">
-
                         <iframe class="embed-responsive-item " id="iframeValuationsView" allowfullscreen="">
+                        </iframe>
+                    </div>
+                    <br><br>
+              </div>
+
+
+
+              <div class="tab-pane fade tab_content1-0" id="info-preanestesia-view" role="tabpanel" aria-labelledby="patient_record">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item " id="iframepPreanestesiaView" allowfullscreen="">
 
                         </iframe>
-
                     </div>
-                   
                     <br><br>
-                    
               </div>
 
 
 
 
+
+              
 
 
         </div>

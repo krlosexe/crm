@@ -327,6 +327,12 @@
 					$('#iframeValuationsView').attr('src', url);
 
 
+					var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/0"
+					$('#iframepPreanestesiaView').attr('src', url);
+
+
+
+
 				});
 			}
 
@@ -429,6 +435,8 @@
 					$('#iframeValuationsEdit').attr('src', url);
 
 
+					var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/1"
+					$('#iframepPreanestesiaEdit').attr('src', url);
 
 					cuadros('#cuadro1', '#cuadro4');
 				});
