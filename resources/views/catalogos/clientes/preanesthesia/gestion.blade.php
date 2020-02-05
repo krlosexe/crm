@@ -349,10 +349,8 @@
 				$("#store")[0].reset();
 
 				GetClinic("#clinic-store")
-
 				SelectClinic("#paciente-store", "#clinic-store")
-
-				getPacientes("#paciente-store")
+			
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
