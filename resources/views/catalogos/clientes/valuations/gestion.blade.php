@@ -365,7 +365,6 @@
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
 
-				getPacientes("#paciente-store")
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
