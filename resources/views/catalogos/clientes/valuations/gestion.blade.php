@@ -377,8 +377,6 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					getPacientes("#paciente-view")
-
 					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
 					$("#time-view").val(data.time).attr("disabled", "disabled")
@@ -448,8 +446,6 @@
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-
-					getPacientes("#paciente-edit")
 
 					$("#paciente-edit").val(data.id_cliente)
 					$("#fecha-edit").val(data.fecha)

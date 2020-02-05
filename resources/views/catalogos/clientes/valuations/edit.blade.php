@@ -11,17 +11,6 @@
         
         <div class="row">
            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                        <label for=""><b>Paciente</b></label>
-                        <select name="id_cliente" id="paciente-edit" class="form-control select2" required>
-                            <option value="">Seleccione</option>
-                        </select>
-                    </div>
-                </div>
-              </div>
-
 
               <div class="row">
 
