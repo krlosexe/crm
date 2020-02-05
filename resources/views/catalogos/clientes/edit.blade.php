@@ -30,6 +30,13 @@
             </li>
 
 
+            <li  class="nav-item">
+                <a id="tab4" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-preanestesia-edit" role="tab" aria-controls="info-add" aria-selected="false">Pre Anestesia</a>
+            </li>
+
+
+
+
         </ul>
 
         <br><br>
@@ -492,12 +499,6 @@
               </div>
 
 
-
-
-
-
-
-
               <div class="tab-pane fade tab_content1-0" id="info-valuations-edit" role="tabpanel" aria-labelledby="patient_record">
               
                 <div class="embed-responsive embed-responsive-16by9">
@@ -511,6 +512,25 @@
                     <br><br>
                     
               </div>
+
+
+
+              <div class="tab-pane fade tab_content1-0" id="info-preanestesia-edit" role="tabpanel" aria-labelledby="patient_record">
+              
+                <div class="embed-responsive embed-responsive-16by9">
+
+                    <iframe class="embed-responsive-item " id="iframepPreanestesiaEdit" allowfullscreen="">
+
+                    </iframe>
+
+                </div>
+                   
+                    <br><br>
+                    
+              </div>
+
+
+
 
 
         </div>
