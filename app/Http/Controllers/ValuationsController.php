@@ -195,7 +195,7 @@ class ValuationsController extends Controller
 
             $queries = Valuations::find($valuations)->update($request->all());
 
-            if ($queries) {
+            // if ($queries) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
                 return response()->json($data)->setStatusCode(200);
             }else{

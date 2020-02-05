@@ -156,6 +156,7 @@ class CalendarController extends Controller
 
 
                                 ->where("auditoria.tabla", "valuations")
+                                ->where("valuations.status", 0)
                                 ->where("auditoria.status", "!=", 0)
                             
                                 ->get();
