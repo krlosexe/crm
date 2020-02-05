@@ -68,6 +68,7 @@ Route::post('revision/appointment/status/{id}/{status}', 'RevisionAppointmentCon
 
 
 Route::resource('valuations', 'ValuationsController');
+Route::get('valuations/client/{id_client}', 'ValuationsController@Clients');
 Route::post('valuations/status/{id}/{status}', 'ValuationsController@status');
 
 

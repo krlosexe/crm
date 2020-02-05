@@ -103,6 +103,34 @@ class ValuationsController extends Controller
         //}
     }
 
+
+
+
+    public function Clients(Request $request, $client)
+    {
+        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+
+            $rol     = $request["rol"];
+            $id_user = $request["id_user"];
+
+            $valuations = Valuations::select("valuations.*", "valuations.status as status_valuations*", "auditoria.*", "users.email as email_regis", "clientes.*", "valuations.status as status_valuations")
+                                ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
+                                ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                                ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                ->where("auditoria.tabla", "valuations")
+                                ->where("auditoria.status", "!=", "0")
+                                ->where("valuations.id_cliente", $client)
+
+                                ->orderBy("valuations.id_valuations", "DESC")
+                                ->get();
+            echo json_encode($valuations);
+        }else{
+            return response()->json("No esta autorizado")->setStatusCode(400);
+        }
+    }
+
+
+
     /**
      * Display the specified resource.
      *
