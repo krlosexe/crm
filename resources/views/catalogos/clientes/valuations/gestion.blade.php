@@ -425,7 +425,7 @@
 						],
 
 						initialPreviewConfig: [
-							{caption: data.cotizacion , downloadUrl: url_imagen+data.cotizacion  ,url: url+"uploads/delete", key: data.cotizacion}
+							{caption: data.cotizacion , downloadUrl: url+url_imagen+data.cotizacion  ,url: url+"uploads/delete", key: data.cotizacion}
 						],
 					});
 
@@ -495,7 +495,7 @@
 						],
 
 						initialPreviewConfig: [
-							{caption: data.cotizacion , downloadUrl: url_imagen+data.cotizacion  ,url: url+"uploads/delete", key: data.cotizacion}
+							{caption: data.cotizacion , downloadUrl: url+url_imagen+data.cotizacion  ,url: url+"uploads/delete", key: data.cotizacion}
 						],
 					});
 
