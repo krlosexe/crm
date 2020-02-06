@@ -324,7 +324,6 @@
 						{"data": "name_clinic"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
-						
 					],
 					"language": idioma_espanol,
 					"dom": 'Bfrtip',
