@@ -23,7 +23,7 @@ class RevisionAppointmentController extends Controller
 
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $queries = RevisionAppointment::select("revision_appointment.*", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clinic.nombre as name_clinic","auditoria.*", "users.email as email_regis")
+            $queries = RevisionAppointment::select("revision_appointment.*", "clientes.id_user_asesora","clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clinic.nombre as name_clinic","auditoria.*", "users.email as email_regis")
 
                                             ->join("clientes", "clientes.id_cliente", "revision_appointment.id_paciente")
                                             ->join("clinic", "clinic.id_clinic", "revision_appointment.clinica")
@@ -49,6 +49,33 @@ class RevisionAppointmentController extends Controller
             return response()->json("No esta autorizado")->setStatusCode(400);
         }
     }
+
+
+
+
+    public function Clients($id_client)
+    {
+       
+        $queries = RevisionAppointment::select("revision_appointment.*", "clientes.nombres as name_client","clientes.id_user_asesora", "clientes.apellidos as last_name_client", "clinic.nombre as name_clinic","auditoria.*", "users.email as email_regis")
+
+                                        ->join("clientes", "clientes.id_cliente", "revision_appointment.id_paciente")
+                                        ->join("clinic", "clinic.id_clinic", "revision_appointment.clinica")
+
+
+                                        ->join("auditoria", "auditoria.cod_reg", "=", "revision_appointment.id_revision")
+                                        ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                        ->with('agenda')
+
+                                        ->where("revision_appointment.id_paciente", $id_client)
+                                        ->where("auditoria.tabla", "revision_appointment")
+                                        ->where("auditoria.status", "!=", "0")
+                                        ->orderBy("revision_appointment.id_revision", "DESC")
+                                        ->get();
+        echo json_encode($queries);
+        
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -77,8 +104,8 @@ class RevisionAppointmentController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'id_paciente'      => 'required',
-                'numero_contrato'  => 'required',
-                'cirugia'          => 'required',
+                //'numero_contrato'  => 'required',
+                //'cirugia'          => 'required',
                 'clinica'          => 'required'
             ], $messages);  
 

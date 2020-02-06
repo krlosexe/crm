@@ -334,6 +334,11 @@
 					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/0"
 					$('#iframepCirugiaView').attr('src', url);
 
+
+					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/0"
+					$('#iframepRevisionView').attr('src', url);
+
+
 				});
 			}
 
@@ -442,6 +447,10 @@
 
 					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/1"
 					$('#iframepCirugiaEdit').attr('src', url);
+
+
+					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/1"
+					$('#iframepRevisionEdit').attr('src', url);
 
 					cuadros('#cuadro1', '#cuadro4');
 				});

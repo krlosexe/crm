@@ -135,3 +135,7 @@ Route::get('surgeries/client/{id_client}/{option}', function ($id_client, $optio
     return view('catalogos.clientes.surgeries.gestion', ["id_client" => $id_client,"option" => $option,]);
 });
 
+
+Route::get('revision-appointment/client/{id_client}/{option}', function ($id_client, $option) {
+    return view('catalogos.clientes.revisiones.gestion', ["id_client" => $id_client,"option" => $option,]);
+});

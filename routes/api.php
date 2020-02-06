@@ -64,6 +64,7 @@ Route::post('status-queries/{id}/{status}', 'QueriesController@status');
 
 
 Route::resource('revision/appointment', 'RevisionAppointmentController');
+Route::get('revision/appointment/client/{id_client}', 'RevisionAppointmentController@Clients');
 Route::post('revision/appointment/status/{id}/{status}', 'RevisionAppointmentController@status');
 
 

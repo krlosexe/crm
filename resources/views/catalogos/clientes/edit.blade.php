@@ -34,10 +34,15 @@
                 <a id="tab4" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-preanestesia-edit" role="tab" aria-controls="info-add" aria-selected="false">Pre Anestesia</a>
             </li>
 
-
             <li  class="nav-item">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-cirugia-edit" role="tab" aria-controls="info-add" aria-selected="false">Cirugias</a>
             </li>
+
+            <li  class="nav-item">
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-revision-edit" role="tab" aria-controls="info-add" aria-selected="false">Revisiones</a>
+            </li>
+
+
 
         </ul>
 
@@ -535,6 +540,19 @@
                 </div>
                 <br><br>
               </div>
+
+
+
+              <div class="tab-pane fade tab_content1-0" id="info-revision-edit" role="tabpanel" aria-labelledby="patient_record">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item " id="iframepRevisionEdit" allowfullscreen="">
+                    </iframe>
+                </div>
+                <br><br>
+              </div>
+
+
+
 
 
 

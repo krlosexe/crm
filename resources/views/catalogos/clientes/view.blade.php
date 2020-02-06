@@ -37,8 +37,9 @@
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-cirugias-view" role="tab" aria-controls="info-add" aria-selected="false">Cirugias</a>
             </li>
 
-
-
+            <li  class="nav-item">
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-revision-view" role="tab" aria-controls="info-add" aria-selected="false">Revisiones</a>
+            </li>
 
 
         </ul>
@@ -530,6 +531,18 @@
                 </div>
                 <br><br>
               </div>
+
+
+
+              <div class="tab-pane fade tab_content1-0" id="info-revision-view" role="tabpanel" aria-labelledby="patient_record">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item " id="iframepRevisionView" allowfullscreen="">
+                    </iframe>
+                </div>
+                <br><br>
+              </div>
+
+
 
 
 
