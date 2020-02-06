@@ -331,7 +331,8 @@
 					$('#iframepPreanestesiaView').attr('src', url);
 
 
-
+					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/0"
+					$('#iframepCirugiaView').attr('src', url);
 
 				});
 			}
@@ -437,6 +438,10 @@
 
 					var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/1"
 					$('#iframepPreanestesiaEdit').attr('src', url);
+
+
+					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/1"
+					$('#iframepCirugiaEdit').attr('src', url);
 
 					cuadros('#cuadro1', '#cuadro4');
 				});

@@ -22,7 +22,7 @@ class SurgeriesController extends Controller
 
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $valuations = Surgeries::select("surgeries.*", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
+            $valuations = Surgeries::select("surgeries.*", "surgeries.clinic as id_clinic", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
                                 ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
                                 ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente")
@@ -47,6 +47,25 @@ class SurgeriesController extends Controller
 
     }
 
+
+
+    public function Clients($id){
+
+        $surgeries = Surgeries::select("surgeries.*", "surgeries.clinic as id_clinic", "clinic.id_clinic as clinic", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
+                                ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic")
+                                ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
+                                ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente")
+                                ->join("users", "users.id", "=", "auditoria.usr_regins")
+
+                                ->with("payments")
+
+                                ->where("surgeries.id_cliente", $id)
+                                ->where("auditoria.tabla", "surgeries")
+                                ->where("auditoria.status", "!=", "0")
+                                ->orderBy("surgeries.id_surgeries", "DESC")
+                                ->get();
+            echo json_encode($surgeries);
+    }
     /**
      * Show the form for creating a new resource.
      *

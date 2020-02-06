@@ -8,18 +8,18 @@
         
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li  class="nav-item">
-                <a id="tab0" class="nav-link active" id="patient_record_view" data-toggle="tab" href="#init_view" role="tab" aria-controls="init" aria-selected="true">Ficha Paciente</a>
+                <a id="tab0" class="nav-link active" id="patient_record_view" data-toggle="tab" href="#init_view" role="tab" aria-controls="init" aria-selected="true">Ficha</a>
             </li>
             <li  class="nav-item">
-                <a id="tab1" class="nav-link" id="information_aditionals_view" data-toggle="tab" href="#info-add-view" role="tab" aria-controls="info-add" aria-selected="false">Cirugia a Programar</a>
-            </li>
-
-            <li  class="nav-item">
-                <a id="tab2" class="nav-link" id="init_history_view" data-toggle="tab" href="#init-history-view" role="tab" aria-controls="info-add" aria-selected="false">Historial Clinico Inicial</a>
+                <a id="tab1" class="nav-link" id="information_aditionals_view" data-toggle="tab" href="#info-add-view" role="tab" aria-controls="info-add" aria-selected="false">Info Cirugia</a>
             </li>
 
             <li  class="nav-item">
-                <a id="tab3" class="nav-link" id="info_credit_patient_view" data-toggle="tab" href="#info-credit-patient-view" role="tab" aria-controls="info-add" aria-selected="false">Informacion Crediticia</a>
+                <a id="tab2" class="nav-link" id="init_history_view" data-toggle="tab" href="#init-history-view" role="tab" aria-controls="info-add" aria-selected="false">Historial Clinico</a>
+            </li>
+
+            <li  class="nav-item">
+                <a id="tab3" class="nav-link" id="info_credit_patient_view" data-toggle="tab" href="#info-credit-patient-view" role="tab" aria-controls="info-add" aria-selected="false">Info Crediticia</a>
             </li>
 
 
@@ -31,6 +31,13 @@
             <li  class="nav-item">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-preanestesia-view" role="tab" aria-controls="info-add" aria-selected="false">Pre Anestesias</a>
             </li>
+
+
+            <li  class="nav-item">
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-cirugias-view" role="tab" aria-controls="info-add" aria-selected="false">Cirugias</a>
+            </li>
+
+
 
 
 
@@ -514,6 +521,17 @@
                     </div>
                     <br><br>
               </div>
+
+
+              <div class="tab-pane fade tab_content1-0" id="info-cirugias-view" role="tabpanel" aria-labelledby="patient_record">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item " id="iframepCirugiaView" allowfullscreen="">
+                    </iframe>
+                </div>
+                <br><br>
+              </div>
+
+
 
 
 
