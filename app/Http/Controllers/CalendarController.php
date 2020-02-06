@@ -33,11 +33,11 @@ class CalendarController extends Controller
                                 }
                             })
 
-                            ->where(function ($query) use ($rol, $id_user) {
-                                if($rol == "Asesor"){
-                                    $query->where("tasks.responsable", $id_user);
-                                }
-                            })
+                            // ->where(function ($query) use ($rol, $id_user) {
+                            //     if($rol == "Asesor"){
+                            //         $query->where("tasks.responsable", $id_user);
+                            //     }
+                            // })
 
                             ->join("auditoria", "auditoria.cod_reg", "=", "tasks.id_tasks")
                             ->where("auditoria.tabla", "tasks")
@@ -148,11 +148,11 @@ class CalendarController extends Controller
                                     }
                                 })
 
-                                ->where(function ($query) use ($rol, $id_user) {
-                                    if($rol == "Asesor"){
-                                        $query->where("clientes.id_user_asesora", $id_user);
-                                    }
-                                })
+                                // ->where(function ($query) use ($rol, $id_user) {
+                                //     if($rol == "Asesor"){
+                                //         $query->where("clientes.id_user_asesora", $id_user);
+                                //     }
+                                // })
 
 
                                 ->where("auditoria.tabla", "valuations")
@@ -201,11 +201,11 @@ class CalendarController extends Controller
                                         }
                                     })
 
-                                    ->where(function ($query) use ($rol, $id_user) {
-                                        if($rol == "Asesor"){
-                                            $query->where("clientes.id_user_asesora", $id_user);
-                                        }
-                                    })
+                                    // ->where(function ($query) use ($rol, $id_user) {
+                                    //     if($rol == "Asesor"){
+                                    //         $query->where("clientes.id_user_asesora", $id_user);
+                                    //     }
+                                    // })
 
                                     ->where("auditoria.tabla", "preanesthesias")
                                     ->where("auditoria.status", "!=", 0)
@@ -248,11 +248,11 @@ class CalendarController extends Controller
                                 })
 
 
-                                ->where(function ($query) use ($rol, $id_user) {
-                                    if($rol == "Asesor"){
-                                        $query->where("clientes.id_user_asesora", $id_user);
-                                    }
-                                })
+                                // ->where(function ($query) use ($rol, $id_user) {
+                                //     if($rol == "Asesor"){
+                                //         $query->where("clientes.id_user_asesora", $id_user);
+                                //     }
+                                // })
 
 
                                 ->where("auditoria.tabla", "surgeries")
@@ -303,11 +303,11 @@ class CalendarController extends Controller
                                         }
                                     })
 
-                                    ->where(function ($query) use ($rol, $id_user) {
-                                        if($rol == "Asesor"){
-                                            $query->where("clientes.id_user_asesora", $id_user);
-                                        }
-                                    })
+                                    // ->where(function ($query) use ($rol, $id_user) {
+                                    //     if($rol == "Asesor"){
+                                    //         $query->where("clientes.id_user_asesora", $id_user);
+                                    //     }
+                                    // })
 
 
                                     ->where("auditoria.tabla", "revision_appointment")
