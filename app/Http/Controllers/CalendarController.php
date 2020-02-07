@@ -300,8 +300,6 @@ class CalendarController extends Controller
                                         }
                                     })
 
-
-
                                     ->where(function ($query) use ($id_clinic) {
                                         if($id_clinic != "All"){
                                             $query->where("preanesthesias.clinic", $id_clinic);
@@ -323,7 +321,7 @@ class CalendarController extends Controller
 
         foreach($data as $key => $value){
             $value["fecha"] = $value["start"];
-            $value["start"] = $value["start"]."T".$value["time"];
+            $value["start"] = $value["start"]."T"."00:00:00";
 
             $prefix = "Pre Antestesia: ";
             $value["title"] =  $prefix.$value["name_client"]." ".$value["last_name_client"];
