@@ -76,6 +76,7 @@
 			                      <th>Apellidos</th>
 								  <th>Identificacion</th>
 			                      <th>Telefono</th>
+								  <th>Origen</th>
 								  <th>Estado</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
@@ -197,6 +198,7 @@
 						{"data":"apellidos"},
 						{"data":"identificacion"},
 						{"data":"telefono"},
+						{"data":"origen"},
 						{"data":"state"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
