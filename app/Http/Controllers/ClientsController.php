@@ -42,7 +42,7 @@ class ClientsController extends Controller
                                     }
                                 })
 
-
+                                ->orWhere("clientes.id_asesora_valoracion", $id_user)
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.status", "!=", "0")

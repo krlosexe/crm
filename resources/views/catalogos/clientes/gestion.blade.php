@@ -229,6 +229,7 @@
 				GetCity("#city");
 				GetClinic("#city", "#clinic")
 				GetAsesorasbyBusisnessLine("#linea-negocio", "#asesora");
+				GetAsesorasValoracion("#id_asesora_valoracion")
 				GetBusinessLine("#linea-negocio");
 				Children("#children", "#number_children")
 				Surgery("#surgery", "#previous_surgery")
@@ -252,8 +253,6 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-
-					console.log(data)
 					GetCity("#city_view");
 					GetClinic("#city_view", "#clinic_view")
 					GetBusinessLine("#linea-negocio-view");

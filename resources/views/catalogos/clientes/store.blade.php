@@ -165,6 +165,16 @@
                                 </div>
 
 
+                                <div class="form-group">
+                                    <label for=""><b>Asesora de Valoracion</b></label>
+                                    <select name="id_asesora_valoracion" id="id_asesora_valoracion" class="form-control select2">
+                                        <option value="">Seleccione</option>
+                                    </select>
+                                </div>
+
+
+
+
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for=""><b>Origen</b></label>
