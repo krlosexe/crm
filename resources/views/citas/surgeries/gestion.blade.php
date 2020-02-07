@@ -77,7 +77,6 @@
 								  <th>Hora Desde</th>
 								  <th>Hora Hasta</th>
 								  <th>Cirujano</th>
-								  <th>Quirofano</th>
 								  <th>Clinica</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
@@ -199,7 +198,6 @@
 						{"data": "time"},
 						{"data": "time_end"},
 						{"data": "surgeon"},
-						{"data": "operating_room"},
 						{"data": "name_clinic"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}

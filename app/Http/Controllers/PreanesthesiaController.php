@@ -21,7 +21,7 @@ class PreanesthesiaController extends Controller
 
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $valuations = Preanesthesia::select("preanesthesias.*", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
+            $valuations = Preanesthesia::select("preanesthesias.*","preanesthesias.clinic as id_clinic", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
                                 ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "preanesthesias.id_preanesthesias")
                                 ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente")

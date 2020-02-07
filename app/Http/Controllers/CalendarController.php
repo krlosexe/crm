@@ -128,9 +128,9 @@ class CalendarController extends Controller
 
     function getValuations(Request $request, $today = false){
         
-        $rol     = $request["rol"];
-        $id_user = $request["id_user"];
-
+        $rol       = $request["rol"];
+        $id_user   = $request["id_user"];
+        $id_clinic = $request["clinic"];
 
         $data = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
                                    "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
@@ -145,6 +145,12 @@ class CalendarController extends Controller
                                 ->where(function ($query) use ($today) {
                                     if($today != false){
                                         $query->where("valuations.fecha", $today);
+                                    }
+                                })
+
+                                ->where(function ($query) use ($id_clinic) {
+                                    if($id_clinic != "All"){
+                                        $query->where("clientes.clinic", $id_clinic);
                                     }
                                 })
 
@@ -182,9 +188,9 @@ class CalendarController extends Controller
 
     function Preanesthesia(Request $request, $today = false){
        
-        $rol     = $request["rol"];
-        $id_user = $request["id_user"];
-
+        $rol       = $request["rol"];
+        $id_user   = $request["id_user"];
+        $id_clinic = $request["clinic"];
         $data = Preanesthesia::select("preanesthesias.id_preanesthesias","preanesthesias.fecha as start", "preanesthesias.time as time",  "preanesthesias.time_end as time_end",
                                    "preanesthesias.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p")
@@ -201,12 +207,22 @@ class CalendarController extends Controller
                                         }
                                     })
 
+
+
+                                    ->where(function ($query) use ($id_clinic) {
+                                        if($id_clinic != "All"){
+                                            $query->where("preanesthesias.clinic", $id_clinic);
+                                        }
+                                    })
+
+
                                     // ->where(function ($query) use ($rol, $id_user) {
                                     //     if($rol == "Asesor"){
                                     //         $query->where("clientes.id_user_asesora", $id_user);
                                     //     }
                                     // })
 
+                                    ->where("preanesthesias.status_surgeries", 0)
                                     ->where("auditoria.tabla", "preanesthesias")
                                     ->where("auditoria.status", "!=", 0)
                                 
@@ -230,7 +246,7 @@ class CalendarController extends Controller
         
         $rol     = $request["rol"];
         $id_user = $request["id_user"];
-
+        $id_clinic = $request["clinic"];
         $data = Surgeries::select("surgeries.id_surgeries","surgeries.fecha as start", "surgeries.time as time", "surgeries.time_end as time_end",
                                    "surgeries.observaciones", "surgeries.attempt", "surgeries.type", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p")
@@ -246,6 +262,12 @@ class CalendarController extends Controller
                                         $query->where("surgeries.fecha", $today);
                                     }
                                 })
+                                
+                                ->where(function ($query) use ($id_clinic) {
+                                    if($id_clinic != "All"){
+                                        $query->where("surgeries.clinic", $id_clinic);
+                                    }
+                                })
 
 
                                 // ->where(function ($query) use ($rol, $id_user) {
@@ -254,7 +276,7 @@ class CalendarController extends Controller
                                 //     }
                                 // })
 
-
+                                ->where("surgeries.status_surgeries", 0)
                                 ->where("auditoria.tabla", "surgeries")
                                 ->where("auditoria.status", "!=", 0)
                             
@@ -284,7 +306,7 @@ class CalendarController extends Controller
 
         $rol     = $request["rol"];
         $id_user = $request["id_user"];
-
+        $id_clinic = $request["clinic"];
 
         $data = RevisionAppointment::select("revision_appointment.id_revision", "appointments_agenda.fecha as start", "appointments_agenda.time as time","appointments_agenda.time_end as time_end",
                                             "appointments_agenda.descripcion as observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
@@ -302,6 +324,16 @@ class CalendarController extends Controller
                                             $query->where("appointments_agenda.fecha", $today);
                                         }
                                     })
+
+
+
+                                    ->where(function ($query) use ($id_clinic) {
+                                        if($id_clinic != "All"){
+                                            $query->where("revision_appointment.clinica", $id_clinic);
+                                        }
+                                    })
+
+
 
                                     // ->where(function ($query) use ($rol, $id_user) {
                                     //     if($rol == "Asesor"){

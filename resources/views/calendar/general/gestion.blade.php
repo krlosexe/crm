@@ -166,6 +166,16 @@
 								
 								<div class="col-md-8">
 									
+									<div class="row">
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for=""><b>Clinica</b></label>
+												<select name="" id="clinic" class="form-control">
+													<option value="All">Todas</option>
+												</select>
+											</div>
+										</div>
+									</div>
 									<div id='calendar'></div>
 								</div>
 							</div>
@@ -319,9 +329,17 @@
 
 				ListTasksToday("#tasks-today")
 
+				GetClinicFilter("#clinic")
+
 				initCalendar()
 
 
+			});
+
+
+			$("#clinic").change(function (e) { 
+				$("#calendar").html("");
+				initCalendar()
 			});
 			
 			function initCalendar() {
@@ -329,6 +347,7 @@
 					var localeSelectorEl = document.getElementById('locale-selector');
 					var calendarEl = document.getElementById('calendar');
 
+				    
 					var calendar = new FullCalendar.Calendar(calendarEl, {
 
 						loading: function (bool) {
@@ -370,8 +389,9 @@
 								color: '#FFAAD4',   
 								textColor: 'white',
 								extraParams: {
-									rol: name_rol,
-									id_user: id_user
+									rol     : name_rol,
+									id_user : id_user,
+									clinic  : $("#clinic").val()
 								},
 							},
 							{
@@ -380,7 +400,9 @@
 								textColor: 'white',
 								extraParams: {
 									rol: name_rol,
-									id_user: id_user
+									id_user: id_user,
+									clinic  : $("#clinic").val()
+									
 								}
 							},
 							{
@@ -389,7 +411,8 @@
 								textColor: 'white',
 								extraParams: {
 									rol: name_rol,
-									id_user: id_user
+									id_user: id_user,
+									clinic  : $("#clinic").val()
 								}
 							},
 
@@ -400,13 +423,16 @@
 								textColor: 'white',
 								extraParams: {
 									rol: name_rol,
-									id_user: id_user
+									id_user: id_user,
+									clinic  : $("#clinic").val()
 								}
 							}
 
 
 
 						],
+
+
 						eventClick: function(calEvent, jsEvent, view) {
 
 							$("#issue-view").val(calEvent.event.title).attr("disabled", "disabled");
@@ -438,20 +464,20 @@
 					calendar.render();
 
 					// build the locale selector's options
-					calendar.getAvailableLocaleCodes().forEach(function(localeCode) {
-						var optionEl = document.createElement('option');
-						optionEl.value = localeCode;
-						optionEl.selected = localeCode == initialLocaleCode;
-						optionEl.innerText = localeCode;
-						localeSelectorEl.appendChild(optionEl);
-					});
+					// calendar.getAvailableLocaleCodes().forEach(function(localeCode) {
+					// 	var optionEl = document.createElement('option');
+					// 	optionEl.value = localeCode;
+					// 	optionEl.selected = localeCode == initialLocaleCode;
+					// 	optionEl.innerText = localeCode;
+					// 	//localeSelectorEl.appendChild(optionEl);
+					// });
 
 					// when the selected option changes, dynamically change the calendar option
-					localeSelectorEl.addEventListener('change', function() {
-						if (this.value) {
-						calendar.setOption('locale', this.value);
-						}
-					});
+					// localeSelectorEl.addEventListener('change', function() {
+					// 	if (this.value) {
+					// 	calendar.setOption('locale', this.value);
+					// 	}
+					// });
 			}
 			
 	
@@ -585,24 +611,49 @@
 				});
 			}
 
+
+			function GetClinicFilter(select){
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/clinic',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+					},
+					dataType:'JSON',
+					async: false,
+					beforeSend: function(){
+					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+					},
+					error: function (data) {
+					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+					},
+					success: function(data){
+					$(select+" option").remove();
+					$(select).append($('<option>',
+					{
+						value: "All",
+						text : "Todas"
+					}));
+					$.each(data, function(i, item){
+						if (item.status == 1) {
+						$(select).append($('<option>',
+						{
+							value: item.id_clinic,
+							text : item.nombre
+						}));
+						}
+					});
+
+					}
+				});
+			}
+
+
+
 		</script>
 
-
-
-
-
-
-
-
-
-		<script>
-			
-
-			
-
-			
-
-		</script>
 
 
 		

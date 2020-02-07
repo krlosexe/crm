@@ -76,8 +76,6 @@
 								  <th>Fecha</th>
 								  <th>Hora desde</th>
 								  <th>Hora hasta</th>
-								  <th>Cirujano</th>
-								  <th>Quirofano</th>
 								  <th>Clinica</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
@@ -198,8 +196,6 @@
 						{"data": "fecha"},
 						{"data": "time"},
 						{"data": "time_end"},
-						{"data": "surgeon"},
-						{"data": "operating_room"},
 						{"data": "name_clinic"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
@@ -254,7 +250,7 @@
 					$("#time-end-view").val(data.time_end).attr("disabled", "disabled")
 					$("#surgeon-view").val(data.surgeon).attr("disabled", "disabled")
 					$("#operating_room-view").val(data.operating_room).attr("disabled", "disabled")
-					$("#clinic-view").val(data.clinic).attr("disabled", "disabled")
+					$("#clinic-view").val(data.id_clinic).attr("disabled", "disabled")
 					$("#observaciones-view").val(data.observaciones).attr("disabled", "disabled")
 					$("#status-view").val(data.status_surgeries).attr("disabled", "disabled")
 
@@ -287,7 +283,7 @@
 					$("#time-end-edit").val(data.time_end)
 					$("#surgeon-edit").val(data.surgeon)
 					$("#operating_room-edit").val(data.operating_room)
-					$("#clinic-edit").val(data.clinic)
+					$("#clinic-edit").val(data.id_clinic)
 					$("#observaciones-edit").val(data.observaciones)
 					$("#status-edit").val(data.status_surgeries)
 

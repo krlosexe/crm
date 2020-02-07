@@ -156,7 +156,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for=""><b>Estatus</b></label>
-                            <select name="status" id="status-edit" class="form-control select2" required>
+                            <select name="status_surgeries" id="status-edit" class="form-control select2" required>
                                 <option value="0">Pendiente</option>
                                 <option value="1">Procesado</option>
                                 <option value="2">Cancelado</option>
