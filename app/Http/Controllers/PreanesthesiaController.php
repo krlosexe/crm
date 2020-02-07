@@ -83,21 +83,21 @@ class PreanesthesiaController extends Controller
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
 
-            if($hora_init >= $hora_end){
-                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
-                return response()->json($data)->setStatusCode(400); 
-            }
+            // if($hora_init >= $hora_end){
+            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
+            //     return response()->json($data)->setStatusCode(400); 
+            // }
 
 
-            $valid = Preanesthesia::where("fecha", $request["fecha"])
-                                ->where("time_end", ">=", $request["time"])
-                                ->where("time",     "<=", $request["time"])
-                                ->get();
+            // $valid = Preanesthesia::where("fecha", $request["fecha"])
+            //                     ->where("time_end", ">=", $request["time"])
+            //                     ->where("time",     "<=", $request["time"])
+            //                     ->get();
 
-            if(sizeof($valid) > 0){
-                $data = array('mensagge' => "Ya existen citas en ese Horario");    
-                return response()->json($data)->setStatusCode(400); 
-            }
+            // if(sizeof($valid) > 0){
+            //     $data = array('mensagge' => "Ya existen citas en ese Horario");    
+            //     return response()->json($data)->setStatusCode(400); 
+            // }
 
 
 
@@ -159,22 +159,22 @@ class PreanesthesiaController extends Controller
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
 
-            if($hora_init >= $hora_end){
-                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
-                return response()->json($data)->setStatusCode(400); 
-            }
+            // if($hora_init >= $hora_end){
+            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
+            //     return response()->json($data)->setStatusCode(400); 
+            // }
 
 
-            $valid = Preanesthesia::where("fecha", $request["fecha"])
-                                    ->where("time_end",         ">=", $request["time"])
-                                    ->where("time",             "<=", $request["time"])
-                                    ->where("id_preanesthesias", "!=", $preanesthesia)
-                                    ->get();
+            // $valid = Preanesthesia::where("fecha", $request["fecha"])
+            //                         ->where("time_end",         ">=", $request["time"])
+            //                         ->where("time",             "<=", $request["time"])
+            //                         ->where("id_preanesthesias", "!=", $preanesthesia)
+            //                         ->get();
 
-            if(sizeof($valid) > 0){
-                $data = array('mensagge' => "Ya existen citas en ese Horario");    
-                return response()->json($data)->setStatusCode(400); 
-            }
+            // if(sizeof($valid) > 0){
+            //     $data = array('mensagge' => "Ya existen citas en ese Horario");    
+            //     return response()->json($data)->setStatusCode(400); 
+            // }
 
 
             $update = Preanesthesia::find($preanesthesia)->update($request->all());
