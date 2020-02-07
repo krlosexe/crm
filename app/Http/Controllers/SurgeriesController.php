@@ -101,10 +101,10 @@ class SurgeriesController extends Controller
                 return response()->json($data)->setStatusCode(400); 
             }
 
-            if($hora_init >= $hora_end){
-                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
-                return response()->json($data)->setStatusCode(400); 
-            }
+            // if($hora_init >= $hora_end){
+            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
+            //     return response()->json($data)->setStatusCode(400); 
+            // }
 
 
             $request["amount"]          = str_replace('.', '', $request["amount"]);
@@ -201,10 +201,10 @@ class SurgeriesController extends Controller
                 return response()->json($data)->setStatusCode(400); 
             }
 
-            if($hora_init >= $hora_end){
-                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
-                return response()->json($data)->setStatusCode(400); 
-            }
+            // if($hora_init >= $hora_end){
+            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
+            //     return response()->json($data)->setStatusCode(400); 
+            // }
 
 
             $request["amount"]          = str_replace('.', '', $request["amount"]);
