@@ -377,7 +377,7 @@ class CalendarController extends Controller
 
         foreach($data as $key => $value){
             $value["fecha"] = $value["start"];
-            $value["start"] = $value["start"]."T".$value["time"];
+            $value["start"] = $value["start"]."T"."00:00:00";
 
 
             $type = $value["type"] == "Financiado" ? "FX " : "";
