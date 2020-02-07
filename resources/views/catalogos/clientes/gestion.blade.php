@@ -257,7 +257,11 @@
 					GetClinic("#city_view", "#clinic_view")
 					GetBusinessLine("#linea-negocio-view");
 					GetAsesorasbyBusisnessLine("#linea-negocio-view", "#asesora-view");
-					
+
+					GetAsesorasValoracion("#id_asesora_valoracion-view")
+
+					$("#id_asesora_valoracion-view").val(data.id_asesora_valoracion).attr("disabled", "disabled")
+
 					$("#state_view").val(data.state)
 					$("#state_view").trigger("change");
 					$("#state_view").attr("disabled", "disabled")
@@ -363,6 +367,11 @@
 					Disease("#disease_edit", "#major_disease_edit")
 					Medication("#medication_edit", "#drink_medication_edit")
 					Allergic("#allergic_edit ", "#allergic_medication_edit")
+
+
+					GetAsesorasValoracion("#id_asesora_valoracion-edit")
+
+					$("#id_asesora_valoracion-edit").val(data.id_asesora_valoracion)
 
 
 					$("#state_edit").val(data.state).trigger("change")

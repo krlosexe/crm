@@ -183,11 +183,21 @@
 
 
                                 <div class="form-group">
-                                    <label for=""><b>Asesora</b></label>
+                                    <label for=""><b>Asesora Responsable</b></label>
                                     <select name="id_user_asesora" id="asesora-view" class="form-control select2" required>
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
+
+
+                                <div class="form-group">
+                                    <label for=""><b>Asesora de Valoracion</b></label>
+                                    <select name="id_asesora_valoracion" id="id_asesora_valoracion-view" class="form-control select2">
+                                        <option value="">Seleccione</option>
+                                    </select>
+                                </div>
+
+
 
 
                                 <div class="row">

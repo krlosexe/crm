@@ -187,11 +187,21 @@
 
 
                                 <div class="form-group">
-                                    <label for=""><b>Asesora</b></label>
+                                    <label for=""><b>Asesora Responsable</b></label>
                                     <select name="id_user_asesora" id="asesora-edit" class="form-control select2" required>
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
+
+
+                                <div class="form-group">
+                                    <label for=""><b>Asesora de Valoracion</b></label>
+                                    <select name="id_asesora_valoracion" id="id_asesora_valoracion-edit" class="form-control select2">
+                                        <option value="">Seleccione</option>
+                                    </select>
+                                </div>
+
+
 
 
                                 <div class="row">

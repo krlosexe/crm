@@ -158,7 +158,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for=""><b>Asesora</b></label>
+                                    <label for=""><b>Asesora Responsable</b></label>
                                     <select name="id_user_asesora" id="asesora" class="form-control select2" required>
                                         <option value="">Seleccione</option>
                                     </select>
