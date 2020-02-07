@@ -119,6 +119,7 @@
 								  <th>Hora desde</th>
 								  <th>Hora hasta</th>
 								  <th>Clinica</th>
+								  <th>Origen</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -316,6 +317,7 @@
 						{"data": "time"},
 						{"data": "time_end"},
 						{"data": "name_clinic"},
+						{"data": "origen"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
 						
