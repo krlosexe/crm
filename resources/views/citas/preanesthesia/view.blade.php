@@ -30,7 +30,7 @@
                 </div>
 
 
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora desde</b></label>
                         <input type="time" name="time" id="time-view" class="form-control select2" required>
@@ -42,7 +42,7 @@
                         <label for=""><b>Hora hasta</b></label>
                         <input type="time" name="time_end" id="time-end-view" class="form-control select2" required>
                     </div>
-                </div>
+                </div> -->
 
 
               </div>
