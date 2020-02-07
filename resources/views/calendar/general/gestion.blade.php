@@ -175,6 +175,17 @@
 												</select>
 											</div>
 										</div>
+
+
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for=""><b>Asesora</b></label>
+												<select name="" id="consultant" name="data[]" class="form-control select2" multiple>
+													<option value="All">Todas</option>
+												</select>
+											</div>
+										</div>
+
 									</div>
 									<div id='calendar'></div>
 								</div>
@@ -330,19 +341,28 @@
 				ListTasksToday("#tasks-today")
 
 				GetClinicFilter("#clinic")
+				GetAsesorasValoracion("#consultant")
 
-				initCalendar()
-
+				var asesoras = []
+				initCalendar(asesoras)
 
 			});
 
 
 			$("#clinic").change(function (e) { 
 				$("#calendar").html("");
-				initCalendar()
+				asesoras = $("#consultant").val()
+				initCalendar(asesoras)
+			});
+
+			$("#consultant").change(function (e) { 
+				$("#calendar").html("");
+				asesoras = $(this).val()
+				initCalendar(asesoras)
 			});
 			
-			function initCalendar() {
+			function initCalendar(asesoras) {
+
 				var initialLocaleCode = 'es';
 					var localeSelectorEl = document.getElementById('locale-selector');
 					var calendarEl = document.getElementById('calendar');
@@ -375,9 +395,11 @@
 								color: '#4e73df',    
 								textColor: 'white'  ,
 								extraParams: {
-									rol: name_rol,
-									id_user: id_user
+									rol      : name_rol,
+									id_user  : id_user,
+									asesoras : asesoras.length > 0 ? asesoras : 0
 								},
+								
 							},
 							// {
 							// 	url: 'api/calendar/queries', 
@@ -391,7 +413,8 @@
 								extraParams: {
 									rol     : name_rol,
 									id_user : id_user,
-									clinic  : $("#clinic").val()
+									clinic  : $("#clinic").val(),
+									asesoras : asesoras.length > 0 ? asesoras : 0
 								},
 							},
 							{
@@ -650,7 +673,7 @@
 				});
 			}
 
-
+			
 
 		</script>
 

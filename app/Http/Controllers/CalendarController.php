@@ -20,6 +20,13 @@ class CalendarController extends Controller
         $id_user = $request["id_user"];
 
 
+        if($request["asesoras"] != 0){
+            $asesoras = explode(",", $request["asesoras"]);
+        }else{
+            $asesoras = 0;
+        }
+        
+        
         $data = Tasks::select("tasks.id_tasks", "tasks.issue as title", "tasks.fecha as start", "tasks.time as time", "tasks.observaciones", "datos_personales.nombres", "datos_personales.apellido_p", "user_responsable.img_profile")
                            
                             ->join("datos_personales", "datos_personales.id_usuario", "=", "tasks.responsable")
@@ -33,11 +40,14 @@ class CalendarController extends Controller
                                 }
                             })
 
-                            // ->where(function ($query) use ($rol, $id_user) {
-                            //     if($rol == "Asesor"){
-                            //         $query->where("tasks.responsable", $id_user);
-                            //     }
-                            // })
+                            ->where(function ($query) use ($asesoras) {
+                                
+                                if($asesoras != 0){
+                                    $query->whereIn("tasks.responsable", $asesoras);
+                                }
+                            }) 
+
+
 
                             ->join("auditoria", "auditoria.cod_reg", "=", "tasks.id_tasks")
                             ->where("auditoria.tabla", "tasks")
@@ -62,6 +72,9 @@ class CalendarController extends Controller
                                             $query->where("tasks.fecha", $today);
                                         }
                                     })
+
+
+                                    
 
                                     ->where("tasks_followers.id_follower", $id_user)
 
@@ -132,6 +145,15 @@ class CalendarController extends Controller
         $id_user   = $request["id_user"];
         $id_clinic = $request["clinic"];
 
+
+        if($request["asesoras"] != 0){
+            $asesoras = explode(",", $request["asesoras"]);
+        }else{
+            $asesoras = 0;
+        }
+
+
+
         $data = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
                                    "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p")
@@ -153,6 +175,14 @@ class CalendarController extends Controller
                                         $query->where("clientes.clinic", $id_clinic);
                                     }
                                 })
+                                
+
+                                ->where(function ($query) use ($asesoras) {
+                                    if($asesoras != 0){
+                                        $query->whereIn("clientes.id_user_asesora", $asesoras);
+                                    }
+                                }) 
+
 
                                 // ->where(function ($query) use ($rol, $id_user) {
                                 //     if($rol == "Asesor"){
@@ -160,12 +190,75 @@ class CalendarController extends Controller
                                 //     }
                                 // })
 
-
+                                
                                 ->where("auditoria.tabla", "valuations")
                                 ->where("valuations.status", 0)
                                 ->where("auditoria.status", "!=", 0)
                             
                                 ->get();
+
+
+
+        if($asesoras != 0){
+            $data_asesora = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
+                                        "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
+                                        "datos_personales.nombres", "datos_personales.apellido_p")
+                
+                                        ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                                        ->join("users", "users.id", "=", "clientes.id_user_asesora")
+                                        ->join("datos_personales", "datos_personales.id_usuario", "=", "clientes.id_user_asesora")
+
+                                        ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
+
+                                        ->where(function ($query) use ($today) {
+                                            if($today != false){
+                                                $query->where("valuations.fecha", $today);
+                                            }
+                                        })
+
+                                        ->where(function ($query) use ($id_clinic) {
+                                            if($id_clinic != "All"){
+                                                $query->where("clientes.clinic", $id_clinic);
+                                            }
+                                        })
+                                        
+
+                                        ->where(function ($query) use ($asesoras) {
+                                            if($asesoras != 0){
+                                                $query->whereIn("clientes.id_asesora_valoracion", $asesoras);
+                                            }
+                                        }) 
+
+
+                                        ->where("auditoria.tabla", "valuations")
+                                        ->where("valuations.status", 0)
+                                        ->where("auditoria.status", "!=", 0)
+                                    
+                                        ->get();
+
+            foreach($data_asesora as $key => $value){
+                $data[] = $value;
+            }
+        }
+
+
+
+
+        // $new = array();  
+
+		// $exclude = array("");  
+
+		// for ($i = 0; $i<=count($data)-1; $i++) {  
+		// 	if (!in_array(trim($data[$i]["id_valuations"]) ,$exclude)) 
+		// 	{
+		// 		$data[$i]["cout"] = 1;
+		// 		$new[] = $data[$i]; 
+		// 		$exclude[] = trim($data[$i]["id_valuations"]); 
+		// 	}  
+        // }  
+        
+
+
 
         foreach($data as $key => $value){
             $value["fecha"] = $value["start"];
