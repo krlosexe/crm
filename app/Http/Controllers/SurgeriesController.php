@@ -91,15 +91,15 @@ class SurgeriesController extends Controller
             $hora_end  = strtotime( $request["time_end"] );
 
 
-            $valid = Surgeries::where("fecha", $request["fecha"])
-                                ->where("time_end", ">=", $request["time"])
-                                ->where("time",     "<=", $request["time"])
-                                ->get();
+            // $valid = Surgeries::where("fecha", $request["fecha"])
+            //                     ->where("time_end", ">=", $request["time"])
+            //                     ->where("time",     "<=", $request["time"])
+            //                     ->get();
 
-            if(sizeof($valid) > 0){
-                $data = array('mensagge' => "Ya existen cirugias en ese Horario");    
-                return response()->json($data)->setStatusCode(400); 
-            }
+            // if(sizeof($valid) > 0){
+            //     $data = array('mensagge' => "Ya existen cirugias en ese Horario");    
+            //     return response()->json($data)->setStatusCode(400); 
+            // }
 
             // if($hora_init >= $hora_end){
             //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
@@ -171,11 +171,11 @@ class SurgeriesController extends Controller
             $hora_end  = strtotime( $request["time_end"] );
 
 
-            $valid = Surgeries::where("fecha", $request["fecha"])
-                                ->where("time_end", ">=", $request["time"])
-                                ->where("time",     "<=", $request["time"])
-                                ->where("id_surgeries", "!=", $surgeries)
-                                ->get();
+            // $valid = Surgeries::where("fecha", $request["fecha"])
+            //                     ->where("time_end", ">=", $request["time"])
+            //                     ->where("time",     "<=", $request["time"])
+            //                     ->where("id_surgeries", "!=", $surgeries)
+            //                     ->get();
             
             SurgeriesPayments::where('id_surgerie', $surgeries)->delete();
 
@@ -196,10 +196,10 @@ class SurgeriesController extends Controller
             }
 
 
-            if(sizeof($valid) > 0){
-                $data = array('mensagge' => "Ya existen cirugias en ese Horario");    
-                return response()->json($data)->setStatusCode(400); 
-            }
+            // if(sizeof($valid) > 0){
+            //     $data = array('mensagge' => "Ya existen cirugias en ese Horario");    
+            //     return response()->json($data)->setStatusCode(400); 
+            // }
 
             // if($hora_init >= $hora_end){
             //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
