@@ -177,14 +177,14 @@
 										</div>
 
 
-										<!-- <div class="col-md-3">
+										<div class="col-md-3">
 											<div class="form-group">
 												<label for=""><b>Asesora</b></label>
 												<select name="" id="consultant" name="data[]" class="form-control select2" multiple>
 													<option value="All">Todas</option>
 												</select>
 											</div>
-										</div> -->
+										</div>
 
 									</div>
 									<div id='calendar'></div>
