@@ -56,7 +56,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Nombres:*</b></label>
-                        <input type="text" name="nombres" id="names-store" class="form-control" required >
+                        <input type="text" name="nombres" id="nombres" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -66,7 +66,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Apellidos:*</b></label>
-                        <input type="text" name="apellidos" id="last_names-store" class="form-control" required >
+                        <input type="text" name="apellidos" id="apellidos" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -77,7 +77,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Numero de Cedula:*</b></label>
-                        <input type="text" name="identificacion" id="identification-store" class="form-control" required >
+                        <input type="text" name="identificacion" id="identificacion" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -87,7 +87,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Fecha de Nacimiento:*</b></label>
-                        <input type="date" name="fecha_nacimiento" id="date-store" class="form-control" required >
+                        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -97,7 +97,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Ciudad *</b></label>
-                        <input type="text" name="direccion" id="city-store" class="form-control" required >
+                        <input type="text" name="direccion" id="direccion" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -107,7 +107,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Telefono *</b></label>
-                        <input type="number" name="telefono" id="phone-store" class="form-control" required >
+                        <input type="number" name="telefono" id="telefono" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -117,7 +117,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Email *</b></label>
-                        <input type="email" name="email" id="email-store" class="form-control" required >
+                        <input type="email" name="email" id="email" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -182,8 +182,8 @@
 
        		<input type="hidden" name="state" value="No Contactada">
 			    <input type="hidden" name="origen" value="Formulario Web">
-          <input type="hidden" name="id_user" value="{{$id_user}}">
-          <input type="hidden" name="id_line" value="{{$id_line}}">
+          <input type="hidden" name="id_user" id="id_user" value="{{$id_user}}">
+          <input type="hidden" name="id_line" id="id_line" value="{{$id_line}}">
           <input type="hidden" name="id_user_asesora" value="{{$id_user}}">
           <br>
           <br>
@@ -305,8 +305,10 @@
 					   
                 },
                  success: function(respuesta){
-					 warning(respuesta.mensagge)
-					 $("#store")[0].reset();
+                  warning(respuesta.mensagge)
+                  $("#store")[0].reset();
+
+                  enviarEmail()
                 }	
 
             });
@@ -314,7 +316,47 @@
     }
 
 
+    function enviarEmail(){
+        
+        var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable
+        $('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
+        $.ajax({
+            url:''+url+'/api/email/forms/',
+            type:"GET",
+            dataType:'JSON',
+            data:{
+              nombres : $("#nombres").val(),
+              apellidos : $("#apellidos").val(),
+              identificacion : $("#identificacion").val(),
+              fecha_nacimiento : $("#fecha_nacimiento").val(),
+              direccion : $("#direccion").val(),
+              telefono : $("#telefono").val(),
+              email : $("#email").val(),
+              user_id : $("#id_user").val()
+            },
+            beforeSend: function(){
+                mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+            },
+            error: function (repuesta) {
+                $('input[type="submit"]').removeAttr('disabled'); //activa el input submit
+                var errores=repuesta.responseText;
+                if(errores!=""){
+                mensajes('danger', errores);
+                warning(respuesta.errores)
+                        }else{
+                mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
+                warning("Ha ocurrido un error, por favor intentelo de nuevo.")
+              }
+          
+            },
+              success: function(respuesta){
+                
+              $("#store")[0].reset();
+            }	
 
+        });
+       
+    }
 
 
   </script>
