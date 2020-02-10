@@ -77,7 +77,7 @@
 								  <th>Origen</th>
 								  <th>Estado</th>
 			                      <th>Fecha de registro</th>
-								  <th>Registrado por</th>
+								  <th>Asesora Responsable</th>
 			                    </tr>
 			                  </thead>
 			                  <tbody>

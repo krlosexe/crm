@@ -37,7 +37,7 @@ class ClientsController extends Controller
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
-                                ->join('datos_personales', 'datos_personales.id_usuario', '=', 'auditoria.usr_regins')
+                                ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
 
 
                                 ->where(function ($query) use ($rol, $id_user) {
