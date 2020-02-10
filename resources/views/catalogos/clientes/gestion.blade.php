@@ -201,7 +201,11 @@
 						{"data":"origen"},
 						{"data":"state"},
 						{"data": "fec_regins"},
-						{"data": "email_regis"}
+						{"data": "name_register",
+							render : function(data, type, row){
+								return "<b>"+data+" "+row.apellido_register+"</b>"
+							}
+						}
 						
 					],
 					"language": idioma_espanol,
