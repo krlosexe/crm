@@ -261,17 +261,20 @@
                     $('input[type="submit"]').removeAttr('disabled'); //activa el input submit
                     var errores=repuesta.responseText;
                     if(errores!=""){
-						mensajes('danger', errores);
-						warning(respuesta.errores)
-                    }else{
-						mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
-						warning("Ha ocurrido un error, por favor intentelo de nuevo.")
-					}
+                    mensajes('danger', errores);
+                    warning(respuesta.errores)
+                            }else{
+                    mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
+                    warning("Ha ocurrido un error, por favor intentelo de nuevo.")
+                  }
 					   
                 },
                  success: function(respuesta){
-					 warning(respuesta.mensagge)
-					 $("#store")[0].reset();
+                  warning(respuesta.mensagge)
+                  
+
+
+                  enviarEmail()
                 }	
 
             });
@@ -280,6 +283,40 @@
 
 
 
+    function enviarEmail(){
+           
+        var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable
+        $('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
+        $.ajax({
+            url:''+url+'/api/email/forms/',
+            type:"POST",
+            dataType:'JSON',
+            cache:false,
+            contentType:false,
+            processData:false,
+            beforeSend: function(){
+                mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+            },
+            error: function (repuesta) {
+                $('input[type="submit"]').removeAttr('disabled'); //activa el input submit
+                var errores=repuesta.responseText;
+                if(errores!=""){
+                mensajes('danger', errores);
+                warning(respuesta.errores)
+                        }else{
+                mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
+                warning("Ha ocurrido un error, por favor intentelo de nuevo.")
+              }
+          
+            },
+              success: function(respuesta){
+                
+              $("#store")[0].reset();
+            }	
+
+        });
+       
+    }
 
 
   </script>

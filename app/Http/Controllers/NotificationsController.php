@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
 use App\Tasks;
 use App\Queries;
 use App\Valuations;
@@ -319,6 +320,29 @@ class NotificationsController extends Controller
         $data = array('mensagge' => "Exito"); 
 
         return response()->json($data)->setStatusCode(200);
+
+    }
+
+
+
+
+    public function Email(Request $request){
+
+        echo "adasd";
+
+        $subject = "Asunto del correo";
+        $for = "cardenascarlos18@gmail.com";
+        $request["name"] = "JUAN";
+        $request["msg"]  = "MENSAJES";
+
+        Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+            $msj->from("cardenascarlos18@gmail.com","Carlos Cardenas");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+        
+        return redirect()->back();
+
 
     }
 }

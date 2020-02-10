@@ -111,3 +111,7 @@ Route::get('notifications/revision', 'NotificationsController@Revision');
 Route::get('notifications/get', 'NotificationsController@Get');
 Route::post('notifications/read', 'NotificationsController@Read');
 Route::get('notifications/generate', 'NotificationsController@Generate');
+
+
+
+Route::get('email/forms', 'NotificationsController@Email');
