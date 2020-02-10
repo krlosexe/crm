@@ -27,7 +27,7 @@ class ClientsController extends Controller
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             
-            $modulos = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", "clientc_credit_information.*",                                          "auditoria.*", "user_registro.email as email_regis")
+            $modulos = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis")
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
 
@@ -36,12 +36,12 @@ class ClientsController extends Controller
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
 
 
-                                // ->where(function ($query) use ($rol, $id_user) {
-                                //     if($rol == "Asesor"){
-                                //         $query->where("clientes.id_user_asesora", $id_user);
-                                //         $query->orWhere("clientes.id_asesora_valoracion", $id_user);
-                                //     }
-                                // })
+                                ->where(function ($query) use ($rol, $id_user) {
+                                    if($rol == "Asesor"){
+                                        $query->where("clientes.id_user_asesora", $id_user);
+                                        $query->orWhere("clientes.id_asesora_valoracion", $id_user);
+                                    }
+                                })
 
 
                                 ->where("auditoria.tabla", "clientes")
