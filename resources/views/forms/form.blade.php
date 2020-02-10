@@ -149,8 +149,8 @@
 
        		<input type="hidden" name="state" value="No Contactada">
 			   <input type="hidden" name="origen" value="Formulario Web">
-			<input type="hidden" name="id_user" value="{{$id_user}}">
-			<input type="hidden" name="id_line" value="{{$id_line}}">
+			<input type="hidden" name="id_user" id="id_user" value="{{$id_user}}">
+			<input type="hidden" name="id_line" id="id_line" value="{{$id_line}}">
 			<input type="hidden" name="id_user_asesora" value="{{$id_user}}">
           <br>
           <br>
@@ -300,7 +300,8 @@
               fecha_nacimiento : $("#fecha_nacimiento").val(),
               direccion : $("#direccion").val(),
               telefono : $("#telefono").val(),
-              email : $("#email").val()
+              email : $("#email").val(),
+              user_id : $("#id_user").val()
             },
             beforeSend: function(){
                 mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');

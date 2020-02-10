@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Mail;
+use App\User;
 use App\Tasks;
 use App\Queries;
 use App\Valuations;
@@ -328,14 +329,15 @@ class NotificationsController extends Controller
 
     public function Email(Request $request){
 
-
+        $user = User::find($request["user_id"]);
         $subject = "Formulario Web";
-        $for = "cardenascarlos18@gmail.com";
-        
+        //$for = "cardenascarlos18@gmail.com";
+        $for = $user["email"];
+
         $request["msg"]  = "Un Paciente a registrado un Formulario Web";
 
         Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
-            $msj->from("cardenascarlos18@gmail.com","Carlos Cardenas");
+            $msj->from("cardenascarlos18@gmail.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
