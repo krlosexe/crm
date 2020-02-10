@@ -287,14 +287,11 @@
 
     function enviarEmail(){
         
-
-     
-
         var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable
         $('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
         $.ajax({
             url:''+url+'/api/email/forms/',
-            type:"POST",
+            type:"GET",
             dataType:'JSON',
             data:{
               nombres : "asdasd"
@@ -322,7 +319,6 @@
         });
        
     }
-
 
   </script>
 
