@@ -306,7 +306,6 @@
                 },
                  success: function(respuesta){
                   warning(respuesta.mensagge)
-                  $("#store")[0].reset();
 
                   enviarEmail()
                 }	
