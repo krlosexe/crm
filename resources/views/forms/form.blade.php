@@ -47,6 +47,8 @@
       <form class="user" autocomplete="off" method="post" id="store" enctype="multipart/form-data">
         @csrf
 
+        <input type="hidden" name="_method" value="post">
+
         <div class="row">
 			
 			
