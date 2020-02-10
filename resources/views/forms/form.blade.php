@@ -58,7 +58,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Nombres:*</b></label>
-                        <input type="text" name="nombres" id="names-store" class="form-control" required >
+                        <input type="text" name="nombres" id="nombres" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -68,7 +68,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Apellidos:*</b></label>
-                        <input type="text" name="apellidos" id="last_names-store" class="form-control" required >
+                        <input type="text" name="apellidos" id="apellidos" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -79,7 +79,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Numero de Cedula:*</b></label>
-                        <input type="text" name="identificacion" id="identification-store" class="form-control" required >
+                        <input type="text" name="identificacion" id="identificacion" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -89,7 +89,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Fecha de Nacimiento:*</b></label>
-                        <input type="date" name="fecha_nacimiento" id="date-store" class="form-control" required >
+                        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -99,7 +99,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Ciudad *</b></label>
-                        <input type="text" name="direccion" id="city-store" class="form-control" required >
+                        <input type="text" name="direccion" id="direccion" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -109,7 +109,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Telefono *</b></label>
-                        <input type="number" name="telefono" id="phone-store" class="form-control" required >
+                        <input type="number" name="telefono" id="telefono" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -119,7 +119,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Email *</b></label>
-                        <input type="email" name="email" id="email-store" class="form-control" required >
+                        <input type="email" name="email" id="email" class="form-control" required >
                     </div>
                 </div>
               </div>
@@ -294,7 +294,13 @@
             type:"GET",
             dataType:'JSON',
             data:{
-              nombres : "asdasd"
+              nombres : $("#nombres").val(),
+              apellidos : $("#apellidos").val(),
+              identificacion : $("#identificacion").val(),
+              fecha_nacimiento : $("#fecha_nacimiento").val(),
+              direccion : $("#direccion").val(),
+              telefono : $("#telefono").val(),
+              email : $("#email").val()
             },
             beforeSend: function(){
                 mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
