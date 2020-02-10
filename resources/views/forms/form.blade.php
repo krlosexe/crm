@@ -296,6 +296,9 @@
             url:''+url+'/api/email/forms/',
             type:"POST",
             dataType:'JSON',
+            data:{
+              nombres : "asdasd"
+            }
             beforeSend: function(){
                 mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
             },
