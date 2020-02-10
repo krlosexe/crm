@@ -340,8 +340,8 @@ class NotificationsController extends Controller
             $msj->subject($subject);
             $msj->to($for);
         });
-        
-        return redirect()->back();
+
+        return true;
 
 
     }
