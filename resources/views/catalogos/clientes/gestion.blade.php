@@ -72,10 +72,8 @@
 			                  <thead>
 			                    <tr>
 								  <th>Acciones</th>
-								  <th>Nombres</th>
-			                      <th>Apellidos</th>
+								  <th>Datos</th>
 								  <th>Identificacion</th>
-			                      <th>Telefono</th>
 								  <th>Origen</th>
 								  <th>Estado</th>
 			                      <th>Fecha de registro</th>
@@ -194,10 +192,12 @@
 								return botones;
 							}
 						},
-						{"data":"nombres"},
-						{"data":"apellidos"},
+						{"data":"nombres",
+							render : function(data, type, row){
+								return "<b>"+data+" "+row.apellidos+"</b><br><i class='fa fa-phone'></i> <a href='#' >"+row.telefono+"</a><br><i class='fa fa-envelope'></i><a href='#'> "+row.email+"</a>"
+							}
+						},
 						{"data":"identificacion"},
-						{"data":"telefono"},
 						{"data":"origen"},
 						{"data":"state"},
 						{"data": "fec_regins"},
