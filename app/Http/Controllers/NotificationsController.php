@@ -329,7 +329,7 @@ class NotificationsController extends Controller
     public function Email(Request $request){
 
 
-        $subject = "Asunto del correo";
+        $subject = "Formulario Web";
         $for = "cardenascarlos18@gmail.com";
         
         $request["msg"]  = "Un Paciente a registrado un Formulario Web";
