@@ -115,3 +115,4 @@ Route::get('notifications/generate', 'NotificationsController@Generate');
 
 
 Route::get('email/forms', 'NotificationsController@Email');
+Route::post('email/forms', 'NotificationsController@Email');

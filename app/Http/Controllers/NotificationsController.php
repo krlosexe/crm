@@ -328,12 +328,11 @@ class NotificationsController extends Controller
 
     public function Email(Request $request){
 
-        echo "adasd";
 
         $subject = "Asunto del correo";
         $for = "cardenascarlos18@gmail.com";
-        $request["name"] = "JUAN";
-        $request["msg"]  = "MENSAJES";
+        
+        $request["msg"]  = "Un Paciente a registrado un Formulario Web";
 
         Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
             $msj->from("cardenascarlos18@gmail.com","Carlos Cardenas");
