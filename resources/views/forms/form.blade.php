@@ -288,7 +288,7 @@
     function enviarEmail(){
         
 
-      var formData=new FormData($("#store")[0]);
+     
 
         var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable
         $('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
@@ -296,10 +296,6 @@
             url:''+url+'/api/email/forms/',
             type:"POST",
             dataType:'JSON',
-            data:formData,
-            cache:false,
-            contentType:false,
-            processData:false,
             beforeSend: function(){
                 mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
             },
