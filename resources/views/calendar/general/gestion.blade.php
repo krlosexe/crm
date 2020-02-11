@@ -581,7 +581,7 @@
 			
 				$("#observaciones-view").val(data.observaciones).attr("disabled", "disabled");
 
-				var img = "<img class='rounded' style='height: 8rem; width: 8rem; margin: 1%; border-radius: 50%!important;' src='/img/usuarios/profile/"+data.img_profile+"'>"
+				var img = "<img class='rounded' style='height: 8rem; width: 8rem; margin: 1%; border-radius: 50%!important;' src='img/usuarios/profile/"+data.img_profile+"'>"
 		
 				$("#img_profile_responsable").html(img)
 				
