@@ -71,7 +71,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for=""><b>Clinica</b></label>
-                        <select name="clinic" id="clinic" class="form-control select2">
+                        <select name="clinic" id="clinic" class="form-control select2" required>
                             <option value="">Seleccione</option>
                         </select>
                     </div>
