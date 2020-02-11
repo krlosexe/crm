@@ -177,14 +177,14 @@
 										</div>
 
 
-										<!-- <div class="col-md-3">
+										<div class="col-md-3">
 											<div class="form-group">
 												<label for=""><b>Asesora</b></label>
 												<select name="" id="consultant" name="data[]" class="form-control select2" multiple>
 													<option value="All">Todas</option>
 												</select>
 											</div>
-										</div> -->
+										</div>
 
 									</div>
 									<div id='calendar'></div>
@@ -425,7 +425,8 @@
 								extraParams: {
 									rol: name_rol,
 									id_user: id_user,
-									clinic  : $("#clinic").val()
+									clinic  : $("#clinic").val(),
+									asesoras : asesoras.length > 0 ? asesoras : 0
 									
 								}
 							},
@@ -436,7 +437,8 @@
 								extraParams: {
 									rol: name_rol,
 									id_user: id_user,
-									clinic  : $("#clinic").val()
+									clinic  : $("#clinic").val(),
+									asesoras : asesoras.length > 0 ? asesoras : 0
 								}
 							},
 
@@ -448,7 +450,8 @@
 								extraParams: {
 									rol: name_rol,
 									id_user: id_user,
-									clinic  : $("#clinic").val()
+									clinic  : $("#clinic").val(),
+									asesoras : asesoras.length > 0 ? asesoras : 0
 								}
 							}
 

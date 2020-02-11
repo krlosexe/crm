@@ -365,7 +365,7 @@
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
-
+				GetAsesorasValoracion("#id_asesora_valoracion")
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
@@ -377,9 +377,12 @@
 				$(tbody).on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-
+					GetAsesorasValoracion("#id_asesora_valoracion_view")
 					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
+
+					//alert(data.id_asesora_valoracion)
+					$("#id_asesora_valoracion_view").val(data.id_asesora).attr("disabled", "disabled")
 					$("#time-view").val(data.time).attr("disabled", "disabled")
 					$("#time-end-view").val(data.time_end).attr("disabled", "disabled")
 					$("#type-view").val(data.type).attr("disabled", "disabled")

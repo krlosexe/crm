@@ -116,8 +116,6 @@
 								<th>Acciones</th>
 								<th>Nombres</th>
 								<th>Fecha</th>
-								<th>Hora Desde</th>
-								<th>Hora Hasta</th>
 								<th>Cirujano</th>
 								<th>Clinica</th>
 								<th>Fecha de registro</th>
@@ -316,8 +314,6 @@
 							}
 						},
 						{"data": "fecha"},
-						{"data": "time"},
-						{"data": "time_end"},
 						{"data": "surgeon"},
 						{"data": "name_clinic"},
 						{"data": "fec_regins"},

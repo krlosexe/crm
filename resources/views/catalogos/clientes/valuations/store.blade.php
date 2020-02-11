@@ -40,6 +40,15 @@
               <div class="row">
 
                   <div class="col-md-6">
+                    <div class="form-group">
+                        <label for=""><b>Asesora de Valoracion</b></label>
+                        <select name="id_asesora_valoracion" id="id_asesora_valoracion" class="form-control select2">
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
                       <div class="form-group">
                           <div class="form-group">
                             <label for=""><b>Tipo</b></label>

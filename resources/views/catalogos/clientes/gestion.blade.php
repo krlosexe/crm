@@ -74,10 +74,10 @@
 								  <th>Acciones</th>
 								  <th>Datos</th>
 								  <th>Identificacion</th>
-								  <th>Origen</th>
-								  <th>Estado</th>
-			                      <th>Fecha de registro</th>
-								  <th>Asesora Responsable</th>
+								  <th style="width: 150px;">Origen</th>
+								  <th style="width: 150px;">Estado</th>
+			                      <th style="width: 180px;">Fecha de registro</th>
+								  <th style="width: 140px;">Asesora Responsable</th>
 			                    </tr>
 			                  </thead>
 			                  <tbody>

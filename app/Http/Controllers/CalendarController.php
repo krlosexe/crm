@@ -243,39 +243,33 @@ class CalendarController extends Controller
 
 
 
+        $depositeArray = json_encode($data);
+        $depositeArray = json_decode($depositeArray,true);
+        $depositeArrayNew = $this->Json_Super_Unique($depositeArray,'id_valuations');
+        $depositeArray = $depositeArrayNew ;
 
-        // $new = array();  
+        $array = [];
+        foreach($depositeArray as $key => $value){
 
-		// $exclude = array("");  
-
-		// for ($i = 0; $i<=count($data)-1; $i++) {  
-		// 	if (!in_array(trim($data[$i]["id_valuations"]) ,$exclude)) 
-		// 	{
-		// 		$data[$i]["cout"] = 1;
-		// 		$new[] = $data[$i]; 
-		// 		$exclude[] = trim($data[$i]["id_valuations"]); 
-		// 	}  
-        // }  
-        
-
-
-
-        foreach($data as $key => $value){
+            
             $value["fecha"] = $value["start"];
             $value["start"] = $value["start"]."T".$value["time"];
             $value["end"]   = $value["start"]."T".$value["time_end"];
 
             $value["title"] = "VLR: ".$value["name_client"]." ".$value["last_name_client"];
-           
+            
+            $array[] = $value;
         }
-        return response()->json($data)->setStatusCode(200);
+        return response()->json($array)->setStatusCode(200);
+
+        
     }
 
 
 
 
 
-
+    
 
 
 
@@ -284,6 +278,15 @@ class CalendarController extends Controller
         $rol       = $request["rol"];
         $id_user   = $request["id_user"];
         $id_clinic = $request["clinic"];
+
+
+        if($request["asesoras"] != 0){
+            $asesoras = explode(",", $request["asesoras"]);
+        }else{
+            $asesoras = 0;
+        }
+
+
         $data = Preanesthesia::select("preanesthesias.id_preanesthesias","preanesthesias.fecha as start", "preanesthesias.time as time",  "preanesthesias.time_end as time_end",
                                    "preanesthesias.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p")
@@ -305,6 +308,13 @@ class CalendarController extends Controller
                                             $query->where("preanesthesias.clinic", $id_clinic);
                                         }
                                     })
+
+
+                                    ->where(function ($query) use ($asesoras) {
+                                        if($asesoras != 0){
+                                            $query->whereIn("clientes.id_user_asesora", $asesoras);
+                                        }
+                                    }) 
 
 
                                     // ->where(function ($query) use ($rol, $id_user) {
@@ -338,6 +348,15 @@ class CalendarController extends Controller
         $rol     = $request["rol"];
         $id_user = $request["id_user"];
         $id_clinic = $request["clinic"];
+
+
+        if($request["asesoras"] != 0){
+            $asesoras = explode(",", $request["asesoras"]);
+        }else{
+            $asesoras = 0;
+        }
+
+
         $data = Surgeries::select("surgeries.id_surgeries","surgeries.fecha as start", "surgeries.time as time", "surgeries.time_end as time_end",
                                    "surgeries.observaciones", "surgeries.attempt", "surgeries.type", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p")
@@ -359,6 +378,15 @@ class CalendarController extends Controller
                                         $query->where("surgeries.clinic", $id_clinic);
                                     }
                                 })
+
+
+
+                                ->where(function ($query) use ($asesoras) {
+                                    if($asesoras != 0){
+                                        $query->whereIn("clientes.id_user_asesora", $asesoras);
+                                    }
+                                }) 
+
 
 
                                 // ->where(function ($query) use ($rol, $id_user) {
@@ -399,6 +427,14 @@ class CalendarController extends Controller
         $id_user = $request["id_user"];
         $id_clinic = $request["clinic"];
 
+
+
+        if($request["asesoras"] != 0){
+            $asesoras = explode(",", $request["asesoras"]);
+        }else{
+            $asesoras = 0;
+        }
+
         $data = RevisionAppointment::select("revision_appointment.id_revision", "appointments_agenda.fecha as start", "appointments_agenda.time as time","appointments_agenda.time_end as time_end",
                                             "appointments_agenda.descripcion as observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                             "datos_personales.nombres", "datos_personales.apellido_p"
@@ -424,6 +460,13 @@ class CalendarController extends Controller
                                         }
                                     })
 
+
+
+                                    ->where(function ($query) use ($asesoras) {
+                                        if($asesoras != 0){
+                                            $query->whereIn("clientes.id_user_asesora", $asesoras);
+                                        }
+                                    }) 
 
 
                                     // ->where(function ($query) use ($rol, $id_user) {
@@ -473,6 +516,14 @@ class CalendarController extends Controller
         }
     }
 
-
+    public function Json_Super_Unique($array,$key){
+        $temp_array = array();
+        foreach ($array as &$v) {
+            if (!isset($temp_array[$v[$key]]))
+            $temp_array[$v[$key]] =& $v;
+        }
+        $array = array_values($temp_array);
+        return $array;
+     }
 
 }

@@ -35,6 +35,7 @@
 </head>
 
 
+
 <body class="{{ Request::path() != '/' ? 'dasboard-body' : ''}} bg-gradient-primary" style="overflow: hidden;  background: #fff !important;
 ">
 
