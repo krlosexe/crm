@@ -209,9 +209,9 @@
 						
 					],
 					"language": idioma_espanol,
-					"dom": 'Bfrtip',
 					"responsive": true,
-					"buttons":[
+					"dom": 'Bfrtip',
+					"buttons": [
 						'copy', 'csv', 'excel', 'pdf', 'print'
 					]
 				});
