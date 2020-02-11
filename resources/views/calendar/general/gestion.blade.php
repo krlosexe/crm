@@ -271,6 +271,14 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group">
+													<label for=""><b>Clinica</b></label>
+													<input type="text"  id="clinic_cite" class="form-control" required>
+												</div>
+											</div>
+
+
+											<div class="col-md-12">
+												<div class="form-group">
 													<label for=""><b>Obervaciones</b></label>
 													<textarea name="observaciones" id="observaciones-view" class="form-control" cols="30" rows="5"></textarea>
 												</div>
@@ -350,8 +358,6 @@
 
 			$("#clinic").change(function (e) { 
 				$("#calendar").html("");
-				//asesoras = $("#consultant").val()
-			//	asesoras = []
 				initCalendar(asesoras)
 			});
 
@@ -460,11 +466,12 @@
 
 
 						eventClick: function(calEvent, jsEvent, view) {
-
+							
 							$("#issue-view").val(calEvent.event.title).attr("disabled", "disabled");
 							$("#fecha-view").val(calEvent.event.extendedProps.fecha).attr("disabled", "disabled");
 							$("#time-view").val(calEvent.event.extendedProps.time).attr("disabled", "disabled");
 							$("#time-end-view").val(calEvent.event.extendedProps.time_end).attr("disabled", "disabled");
+							$("#clinic_cite").val(calEvent.event.extendedProps.name_clinic).attr("disabled", "disabled");
 							
 							$("#observaciones-view").val(calEvent.event.extendedProps.observaciones).attr("disabled", "disabled");
 

@@ -156,11 +156,13 @@ class CalendarController extends Controller
 
         $data = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
                                    "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
-                                   "datos_personales.nombres", "datos_personales.apellido_p")
+                                   "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic")
                             
                                 ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                                ->join("clinic", "clinic.id_clinic", "=", "clientes.clinic")
                                 ->join("users", "users.id", "=", "clientes.id_user_asesora")
                                 ->join("datos_personales", "datos_personales.id_usuario", "=", "clientes.id_user_asesora")
+
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
 
@@ -202,9 +204,10 @@ class CalendarController extends Controller
         if($asesoras != 0){
             $data_asesora = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
                                         "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
-                                        "datos_personales.nombres", "datos_personales.apellido_p")
+                                        "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic")
                 
                                         ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                                        ->join("clinic", "clinic.id_clinic", "=", "clientes.clinic")
                                         ->join("users", "users.id", "=", "clientes.id_user_asesora")
                                         ->join("datos_personales", "datos_personales.id_usuario", "=", "clientes.id_user_asesora")
 
@@ -359,9 +362,10 @@ class CalendarController extends Controller
 
         $data = Surgeries::select("surgeries.id_surgeries","surgeries.fecha as start", "surgeries.time as time", "surgeries.time_end as time_end",
                                    "surgeries.observaciones", "surgeries.attempt", "surgeries.type", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
-                                   "datos_personales.nombres", "datos_personales.apellido_p")
+                                   "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic")
                             
                                 ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente")
+                                ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic")
                                 ->join("users", "users.id", "=", "clientes.id_user_asesora")
                                 ->join("datos_personales", "datos_personales.id_usuario", "=", "clientes.id_user_asesora")
 
@@ -437,10 +441,11 @@ class CalendarController extends Controller
 
         $data = RevisionAppointment::select("revision_appointment.id_revision", "appointments_agenda.fecha as start", "appointments_agenda.time as time","appointments_agenda.time_end as time_end",
                                             "appointments_agenda.descripcion as observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
-                                            "datos_personales.nombres", "datos_personales.apellido_p"
+                                            "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic"
                                            )
                                     ->join("appointments_agenda", "appointments_agenda.id_revision", "=", "revision_appointment.id_revision")
                                     ->join("clientes", "clientes.id_cliente", "=", "revision_appointment.id_paciente")
+                                    ->join("clinic", "clinic.id_clinic", "=", "revision_appointment.clinica")
                                     ->join("users", "users.id", "=", "clientes.id_user_asesora")
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "clientes.id_user_asesora")
 
