@@ -326,7 +326,7 @@
 	@section('CustomJs')
 
 		<script>
-		  
+		  	var asesoras = []
 			$(document).ready(function(){
 				
 				store();
@@ -343,7 +343,6 @@
 				GetClinicFilter("#clinic")
 				GetAsesorasValoracion("#consultant")
 
-				var asesoras = []
 				initCalendar(asesoras)
 
 			});
@@ -352,7 +351,7 @@
 			$("#clinic").change(function (e) { 
 				$("#calendar").html("");
 				//asesoras = $("#consultant").val()
-				asesoras = []
+			//	asesoras = []
 				initCalendar(asesoras)
 			});
 
