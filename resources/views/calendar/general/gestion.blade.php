@@ -351,9 +351,8 @@
 
 			$("#clinic").change(function (e) { 
 				$("#calendar").html("");
-				asesoras = $("#consultant").val()
-				//asesoras = []
-				
+				//asesoras = $("#consultant").val()
+				asesoras = []
 				initCalendar(asesoras)
 			});
 
