@@ -87,11 +87,25 @@
 
            <div class="col-md-6">
 
-              <div class="col-md-12">
-                  <div class="form-group">
-                      <label for=""><b>Obervaciones</b></label>
-                      <textarea name="observaciones" id="observaciones-view" class="form-control" cols="30" rows="5"></textarea>
+
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for=""><b>Clinica</b></label>
+                        <select name="clinic" id="clinic_view" class="form-control select2">
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
                   </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for=""><b>Obervaciones</b></label>
+                        <textarea name="observaciones" id="observaciones-view" class="form-control" cols="30" rows="5"></textarea>
+                    </div>
+                </div>
               </div>
 
 

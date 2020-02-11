@@ -66,6 +66,17 @@
 
 
            <div class="col-md-6">
+
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for=""><b>Clinica</b></label>
+                        <select name="clinic" id="clinic" class="form-control select2">
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                  </div>
+              </div>
               <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">

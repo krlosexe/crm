@@ -366,6 +366,7 @@
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
 				GetAsesorasValoracion("#id_asesora_valoracion")
+				GetClinic("#clinic")
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
@@ -378,6 +379,9 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 					GetAsesorasValoracion("#id_asesora_valoracion_view")
+
+					GetClinic("#clinic_view")
+
 					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
 
@@ -386,6 +390,7 @@
 					$("#time-view").val(data.time).attr("disabled", "disabled")
 					$("#time-end-view").val(data.time_end).attr("disabled", "disabled")
 					$("#type-view").val(data.type).attr("disabled", "disabled")
+					$("#clinic_view").val(data.id_clinic).attr("disabled", "disabled")
 					$("#observaciones-view").val(data.observaciones).attr("disabled", "disabled")
 					$("#status-view").val(data.status_valuations).attr("disabled", "disabled")
 
@@ -450,7 +455,9 @@
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-
+					GetAsesorasValoracion("#id_asesora_valoracion_edit")
+					GetClinic("#clinic_edit")
+					$("#id_asesora_valoracion_edit").val(data.id_asesora)
 					$("#paciente-edit").val(data.id_cliente)
 					$("#fecha-edit").val(data.fecha)
 					$("#time-edit").val(data.time)
@@ -459,7 +466,7 @@
 					$("#observaciones-edit").val(data.observaciones)
 					$("#status-edit").val(data.status_valuations)
 
-
+					$("#clinic_edit").val(data.id_clinic)
 					var url_imagen = '/img/valuations/cotizaciones/'
 					var url        = document.getElementById('ruta').value; 
 					

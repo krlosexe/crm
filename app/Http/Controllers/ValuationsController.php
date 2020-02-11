@@ -21,7 +21,7 @@ class ValuationsController extends Controller
             $id_user = $request["id_user"];
 
 
-            $valuations = Valuations::select("valuations.*", "valuations.id_asesora_valoracion as id_asesora", "valuations.status as status_valuations*", "auditoria.*", "users.email as email_regis", "clientes.*", "valuations.status as status_valuations")
+            $valuations = Valuations::select("valuations.*", "valuations.id_asesora_valoracion as id_asesora", "valuations.status as status_valuations*", "auditoria.*", "users.email as email_regis", "clientes.*", "valuations.status as status_valuations", "valuations.clinic as id_clinic")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                                 ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
@@ -61,8 +61,6 @@ class ValuationsController extends Controller
      */
     public function store(Request $request)
     {
-        //if ($this->VerifyLogin($request["id_user"],$request["token"])){
-
                     
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
@@ -73,16 +71,12 @@ class ValuationsController extends Controller
                                 ->where("time",     "<=", $request["time"])
                                 ->get();
 
-            // if(sizeof($valid) > 0){
-            //     $data = array('mensagge' => "Ya existen valoraciones en ese Horario");    
-            //     return response()->json($data)->setStatusCode(400); 
-            // }
 
             if($hora_init >= $hora_end){
                 $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
                 return response()->json($data)->setStatusCode(400); 
             }
-        //    
+          
             $store = Valuations::create($request->all());
 
             $auditoria              = new Auditoria;
@@ -99,9 +93,6 @@ class ValuationsController extends Controller
                 return response()->json("A ocurrido un error")->setStatusCode(400);
             }
 
-       // }else{
-            //return response()->json("No esta autorizado")->setStatusCode(400);
-        //}
     }
 
 
@@ -114,7 +105,8 @@ class ValuationsController extends Controller
             $rol     = $request["rol"];
             $id_user = $request["id_user"];
 
-            $valuations = Valuations::select("valuations.*", "valuations.id_asesora_valoracion as id_asesora", "valuations.status as status_valuations*", "auditoria.*", "users.email as email_regis", "clientes.*", "valuations.status as status_valuations")
+            $valuations = Valuations::select("valuations.*", "valuations.id_asesora_valoracion as id_asesora", "valuations.status as status_valuations*",
+                                             "auditoria.*", "users.email as email_regis", "clientes.*", "valuations.status as status_valuations", "valuations.clinic as id_clinic")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                                 ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")

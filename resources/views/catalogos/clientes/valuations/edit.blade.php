@@ -36,10 +36,23 @@
                     </div>
                 </div>
 
+                
+
+
+
               </div>
 
 
               <div class="row">
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label for=""><b>Asesora de Valoracion</b></label>
+                        <select name="id_asesora_valoracion" id="id_asesora_valoracion_edit" class="form-control select2">
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                  </div>
 
                   <div class="col-md-6">
                       <div class="form-group">
@@ -52,7 +65,7 @@
                         </div>
                       </div>
                   </div>
-                  
+
               </div>
 
 
@@ -68,40 +81,49 @@
                     </div>
                 </div>
               </div>
-
-
-
-
-
-
-              
            </div>
 
 
            <div class="col-md-6">
 
-              <div class="col-md-12">
-                  <div class="form-group">
-                      <label for=""><b>Obervaciones</b></label>
-                      <textarea name="observaciones" id="observaciones-edit" class="form-control" cols="30" rows="5"></textarea>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for=""><b>Clinica</b></label>
+                        <select name="clinic" id="clinic_edit" class="form-control select2">
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
                   </div>
               </div>
 
 
-
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-sm-12 text-center"> 
-                         <label for=""><b>Adjuntar Cotizacion</b></label>
-                        <div>
-                            <div class="file-loading">
-                                <input id="file-input-edit" name="file" type="file">
-                            </div>
-                        </div>
-                        <div class="kv-avatar-hintss">
-                            <small>Seleccione una foto</small>
-                        </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for=""><b>Obervaciones</b></label>
+                        <textarea name="observaciones" id="observaciones-edit" class="form-control" cols="30" rows="5"></textarea>
                     </div>
+                </div>
+              </div>
+
+
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-sm-12 text-center"> 
+                          <label for=""><b>Adjuntar Cotizacion</b></label>
+                          <div>
+                              <div class="file-loading">
+                                  <input id="file-input-edit" name="file" type="file">
+                              </div>
+                          </div>
+                          <div class="kv-avatar-hintss">
+                              <small>Seleccione una foto</small>
+                          </div>
+                      </div>
+                  </div>
                 </div>
               </div>
 
