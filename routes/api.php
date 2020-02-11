@@ -80,7 +80,7 @@ Route::post('preanesthesia/status/{id}/{status}', 'PreanesthesiaController@statu
 
 Route::resource('surgeries', 'SurgeriesController');
 Route::get('surgeries/client/{id_client}', 'SurgeriesController@Clients');
-Route::post('surgeries/status/{id}/{status}', 'SurgeriesController@status');
+Route::get('surgeries/status/{id}/{status}', 'SurgeriesController@status');
 
 
 
