@@ -492,7 +492,7 @@
 
 							var html = "";
 							$.each(calEvent.event.extendedProps.followers, function (key, item) { 
-								html += '<li class="list-group-item"><img class="rounded" src="/img/usuarios/profile/'+item.img_profile+'" style="height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;" title="'+item.name_follower+''+item.last_name_follower+'"><b>'+item.name_follower+' '+item.last_name_follower+'</b></li>'
+								html += '<li class="list-group-item"><img class="rounded" src="img/usuarios/profile/'+item.img_profile+'" style="height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;" title="'+item.name_follower+''+item.last_name_follower+'"><b>'+item.name_follower+' '+item.last_name_follower+'</b></li>'
 							});
 
 
