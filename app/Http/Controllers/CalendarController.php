@@ -157,14 +157,15 @@ class CalendarController extends Controller
         $data = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
                                    "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic")
-                            
-                                ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
-                                ->join("clinic", "clinic.id_clinic", "=", "clientes.clinic")
-                                ->join("users", "users.id", "=", "clientes.id_user_asesora")
-                                ->join("datos_personales", "datos_personales.id_usuario", "=", "clientes.id_user_asesora")
 
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
+
+                                ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                                ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic")
+                                ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
+                               
 
                                 ->where(function ($query) use ($today) {
                                     if($today != false){
@@ -174,7 +175,7 @@ class CalendarController extends Controller
 
                                 ->where(function ($query) use ($id_clinic) {
                                     if($id_clinic != "All"){
-                                        $query->where("clientes.clinic", $id_clinic);
+                                        $query->where("valuations.clinic", $id_clinic);
                                     }
                                 })
                                 
@@ -207,9 +208,9 @@ class CalendarController extends Controller
                                         "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic")
                 
                                         ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
-                                        ->join("clinic", "clinic.id_clinic", "=", "clientes.clinic")
-                                        ->join("users", "users.id", "=", "clientes.id_user_asesora")
-                                        ->join("datos_personales", "datos_personales.id_usuario", "=", "clientes.id_user_asesora")
+                                        ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic")
+                                        ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                        ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
 
                                         ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
 
@@ -221,14 +222,14 @@ class CalendarController extends Controller
 
                                         ->where(function ($query) use ($id_clinic) {
                                             if($id_clinic != "All"){
-                                                $query->where("clientes.clinic", $id_clinic);
+                                                $query->where("valuations.clinic", $id_clinic);
                                             }
                                         })
                                         
 
                                         ->where(function ($query) use ($asesoras) {
                                             if($asesoras != 0){
-                                                $query->whereIn("clientes.id_asesora_valoracion", $asesoras);
+                                                $query->whereIn("valuations.id_asesora_valoracion", $asesoras);
                                             }
                                         }) 
 
@@ -292,13 +293,13 @@ class CalendarController extends Controller
 
         $data = Preanesthesia::select("preanesthesias.id_preanesthesias","preanesthesias.fecha as start", "preanesthesias.time as time",  "preanesthesias.time_end as time_end",
                                    "preanesthesias.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
-                                   "datos_personales.nombres", "datos_personales.apellido_p")
-                            
-                                    ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente")
-                                    ->join("users", "users.id", "=", "clientes.id_user_asesora")
-                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "clientes.id_user_asesora")
+                                   "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic")
 
                                     ->join("auditoria", "auditoria.cod_reg", "=", "preanesthesias.id_preanesthesias")
+                                    ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente")
+                                    ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                    ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic")
+                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
 
                                     ->where(function ($query) use ($today) {
                                         if($today != false){
@@ -363,13 +364,12 @@ class CalendarController extends Controller
         $data = Surgeries::select("surgeries.id_surgeries","surgeries.fecha as start", "surgeries.time as time", "surgeries.time_end as time_end",
                                    "surgeries.observaciones", "surgeries.attempt", "surgeries.type", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic")
-                            
-                                ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente")
-                                ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic")
-                                ->join("users", "users.id", "=", "clientes.id_user_asesora")
-                                ->join("datos_personales", "datos_personales.id_usuario", "=", "clientes.id_user_asesora")
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
+                                ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente")
+                                ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic")
+                                ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
 
                                 ->where(function ($query) use ($today) {
                                     if($today != false){
@@ -384,14 +384,11 @@ class CalendarController extends Controller
                                 })
 
 
-
                                 ->where(function ($query) use ($asesoras) {
                                     if($asesoras != 0){
-                                        $query->whereIn("clientes.id_user_asesora", $asesoras);
+                                        $query->whereIn("auditoria.usr_regins", $asesoras);
                                     }
                                 }) 
-
-
 
                                 // ->where(function ($query) use ($rol, $id_user) {
                                 //     if($rol == "Asesor"){
@@ -443,13 +440,15 @@ class CalendarController extends Controller
                                             "appointments_agenda.descripcion as observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                             "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic"
                                            )
+
+                                    ->join("auditoria", "auditoria.cod_reg", "=", "revision_appointment.id_revision")
                                     ->join("appointments_agenda", "appointments_agenda.id_revision", "=", "revision_appointment.id_revision")
                                     ->join("clientes", "clientes.id_cliente", "=", "revision_appointment.id_paciente")
                                     ->join("clinic", "clinic.id_clinic", "=", "revision_appointment.clinica")
-                                    ->join("users", "users.id", "=", "clientes.id_user_asesora")
-                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "clientes.id_user_asesora")
+                                    ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
 
-                                    ->join("auditoria", "auditoria.cod_reg", "=", "revision_appointment.id_revision")
+                                    
 
                                     ->where(function ($query) use ($today) {
                                         if($today != false){
@@ -469,7 +468,7 @@ class CalendarController extends Controller
 
                                     ->where(function ($query) use ($asesoras) {
                                         if($asesoras != 0){
-                                            $query->whereIn("clientes.id_user_asesora", $asesoras);
+                                            $query->whereIn("auditoria.usr_regins", $asesoras);
                                         }
                                     }) 
 
