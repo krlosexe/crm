@@ -190,12 +190,12 @@
                                 </div>
 
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for=""><b>Asesora de Valoracion</b></label>
                                     <select name="id_asesora_valoracion" id="id_asesora_valoracion-view" class="form-control select2">
                                         <option value="">Seleccione</option>
                                     </select>
-                                </div>
+                                </div> -->
 
 
 

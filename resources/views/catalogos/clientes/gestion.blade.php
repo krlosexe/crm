@@ -536,6 +536,74 @@
 			
 
 
+			$("#identificacion").keyup(function (e) { 
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/clients/identification/'+$(this).val(),
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+					},
+					dataType:'JSON',
+					
+					beforeSend: function(){
+					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+					},
+					error: function (data) {
+						$(".disabled").removeAttr("disabled")
+						$(".disabled").val("")
+
+						$("#state").trigger("change")
+						$("#city").trigger("change")
+						$("#linea-negocio").trigger("change");
+
+
+					},
+					success: function(data){
+						
+						$(".disabled").attr("disabled", "disabled")
+
+
+
+						$("#state").val(data.state).trigger("change")
+
+						$("#nombre").val(data.nombres)
+						$("#apellido").val(data.apellidos)
+						$("#telefono").val(data.telefono)
+						$("#email").val(data.email)
+						$("#direccion").val(data.direccion)
+						$("#fecha_nacimiento").val(data.fecha_nacimiento)
+						
+						$("#origen").val(data.origen)
+						$("#forma_pago").val(data.forma_pago)
+
+
+						$("#city").val(data.city)
+						$("#city").trigger("change")
+
+						$("#clinic").val(data.clinic)
+
+						$("#year").val(calcularEdad(data.fecha_nacimiento))
+
+						$("#identificacion_verify").prop("checked", data.identificacion_verify ? true : false)
+
+						$("#name_surgery").val(data.name_surgery)
+
+
+						$("#linea-negocio").val(data.id_line)
+						$("#linea-negocio").trigger("change");
+
+						$("#asesora").val(data.id_user_asesora)
+
+
+
+						
+					}
+				});
+			});
+
 
 
 

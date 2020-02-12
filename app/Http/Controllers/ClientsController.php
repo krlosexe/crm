@@ -27,7 +27,7 @@ class ClientsController extends Controller
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             
-            $modulos = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
+            $data = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
                                        "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
                                        "datos_personales.apellido_p as apellido_register"
                                      )
@@ -54,10 +54,24 @@ class ClientsController extends Controller
                                 ->orderBy("clientes.id_cliente", "DESC")
                                 ->get();
            
-            return response()->json($modulos)->setStatusCode(200);
+            return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
         }
+    }
+
+
+
+
+    public function GetByIdentification($identification){
+        $data = Clients::where("identificacion", $identification)->first();
+        
+        if($data){
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json($data)->setStatusCode(400);
+        }
+        
     }
 
     /**

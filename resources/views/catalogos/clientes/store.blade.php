@@ -37,7 +37,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for=""><b>Estado</b></label>
-                                    <select name="state" id="state" class="form-control select2" required>
+                                    <select name="state" id="state" class="form-control select2 disabled" required>
                                         <option value="">Seleccione</option>
                                         <option value="No Contactada">No Contactada</option>
                                         <option value="Agendada">Agendada</option>
@@ -55,22 +55,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for=""><b>Nombres</b></label>
-                                    <input type="text" name="nombres" class="form-control form-control-user" id="nombre" placeholder="PJ. Carlos Javier" required>
-                                </div>
-                            </div>
-                        
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for=""><b>Apellidos</b></label>
-                                    <input type="text" name="apellidos" class="form-control form-control-user" id="apellido" placeholder="PJ. Cardenas" required>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="row">
                             <div class="col-md-8">
@@ -84,7 +69,7 @@
                                 <div class="form-group">
                                     <label for="identificacion_verify"><b>Cédula Verificada?</b></label>
                                     <label class='container-check'>
-                                        <input type='checkbox' name='identificacion_verify' class='checkitem chk-col-blue' id='identificacion_verify' value='1'>
+                                        <input type='checkbox' name='identificacion_verify' class='checkitem chk-col-blue disabled' id='identificacion_verify' value='1'>
                                         <span class='checkmark'></span>
                                         <label for=''></label>
                                     </label>
@@ -94,10 +79,27 @@
 
 
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for=""><b>Nombres</b></label>
+                                    <input type="text" name="nombres" class="form-control form-control-user disabled" id="nombre" placeholder="PJ. Carlos Javier" required>
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for=""><b>Apellidos</b></label>
+                                    <input type="text" name="apellidos" class="form-control form-control-user disabled" id="apellido" placeholder="PJ. Cardenas" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for=""><b>Fecha de Nacimiento</b></label>
-                                    <input type="date" name="fecha_nacimiento" class="form-control form-control-user" id="fecha_nacimiento" placeholder="PJ. Cardenas" >
+                                    <input type="date" name="fecha_nacimiento" class="form-control form-control-user disabled" id="fecha_nacimiento" placeholder="PJ. Cardenas" >
                                 </div>
                             </div>
 
@@ -105,7 +107,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for=""><b>Edad</b></label>
-                                    <input type="text" name="year" class="form-control form-control-user" id="year"  disabled>
+                                    <input type="text" name="year" class="form-control form-control-user disabled" id="year"  disabled>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +118,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for=""><b>Ciudad</b></label>
-                                    <select name="city" id="city" class="form-control select2" required>
+                                    <select name="city" id="city" class="form-control select2 disabled" required>
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
@@ -125,7 +127,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for=""><b>Clinica</b></label>
-                                    <select name="clinic" id="clinic" class="form-control select2" required>
+                                    <select name="clinic" id="clinic" class="form-control select2 disabled" required>
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
@@ -142,35 +144,35 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for=""><b>Telefono</b></label>
-                                    <input type="number" name="telefono" class="form-control form-control-user" id="telefono" placeholder="PJ. 315 2077862" required>
+                                    <input type="number" name="telefono" class="form-control form-control-user disabled" id="telefono" placeholder="PJ. 315 2077862" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for=""><b>E-mail</b></label>
-                                    <input type="email" name="email" class="form-control form-control-user" id="email" placeholder="PJ. correo@dominio.com" required>
+                                    <input type="email" name="email" class="form-control form-control-user disabled" id="email" placeholder="PJ. correo@dominio.com" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for=""><b>Linea de Negocio</b></label>
-                                    <select name="id_line" id="linea-negocio" class="form-control select2" required>
+                                    <select name="id_line" id="linea-negocio" class="form-control select2 disabled" required>
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for=""><b>Asesora Responsable</b></label>
-                                    <select name="id_user_asesora" id="asesora" class="form-control select2" required>
+                                    <select name="id_user_asesora" id="asesora" class="form-control select2 disabled" required>
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
 
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for=""><b>Asesora de Valoracion</b></label>
-                                    <select name="id_asesora_valoracion" id="id_asesora_valoracion" class="form-control select2">
+                                    <select name="id_asesora_valoracion" id="id_asesora_valoracion" class="form-control select2 disabled">
                                         <option value="">Seleccione</option>
                                     </select>
-                                </div>
+                                </div> -->
 
 
 
@@ -178,12 +180,12 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for=""><b>Origen</b></label>
-                                        <input type="text" name="origen" class="form-control form-control-user" id="origen">
+                                        <input type="text" name="origen" class="form-control form-control-user disabled" id="origen">
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for=""><b>Forma de pago (Contado/Financiación)</b></label>
-                                        <input type="text" name="forma_pago" class="form-control form-control-user" id="forma_pago">
+                                        <input type="text" name="forma_pago" class="form-control form-control-user disabled" id="forma_pago">
                                     </div>
                                 </div>
 
@@ -199,7 +201,7 @@
                 <div class="row">
                     <div class="col md-12">
                         <label for=""><br><b>Direccion</b></label>
-                        <textarea name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion" class="form-control" cols="30" rows="10"></textarea>
+                        <textarea name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion" class="form-control disabled" cols="30" rows="10"></textarea>
                     </div>
                 </div>
               </div>

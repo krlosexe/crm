@@ -45,6 +45,7 @@ Route::post('status-rol/{id}/{status}', 'RolesController@status');
 
 
 Route::resource('clients', 'ClientsController');
+Route::get('clients/identification/{identification}', 'ClientsController@GetByIdentification');
 Route::get('status-cliente/{id}/{status}', 'ClientsController@status');
 
 
