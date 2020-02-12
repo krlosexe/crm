@@ -499,7 +499,12 @@
 							if(calEvent.event.extendedProps.valuations == true){
 								$("#adviser-input").css("display", "block")
 
-								var name_asesora = calEvent.event.extendedProps.name_asesora+" "+calEvent.event.extendedProps.apellido_asesora
+								if(calEvent.event.extendedProps.name_asesora != null){
+									var name_asesora = calEvent.event.extendedProps.name_asesora+" "+calEvent.event.extendedProps.apellido_asesora
+								}else{
+									var name_asesora = ""
+								}
+								
 								$("#adviser").val(name_asesora).attr("disabled", "disabled")
 							}else{
 								$("#adviser-input").css("display", "none")
