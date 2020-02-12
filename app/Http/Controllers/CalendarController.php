@@ -206,13 +206,15 @@ class CalendarController extends Controller
             $data_asesora = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
                                         "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                         "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic")
-                
+                                        
+
+                                        ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                                         ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
                                         ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic")
                                         ->join("users", "users.id", "=", "auditoria.usr_regins")
                                         ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
 
-                                        ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
+                                       
 
                                         ->where(function ($query) use ($today) {
                                             if($today != false){
