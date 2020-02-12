@@ -536,7 +536,7 @@
 			
 
 
-			$("#identificacion").keyup(function (e) { 
+			$("#identificacion").change(function (e) { 
 
 				var url=document.getElementById('ruta').value;
 				$.ajax({
