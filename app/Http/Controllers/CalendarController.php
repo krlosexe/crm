@@ -156,7 +156,9 @@ class CalendarController extends Controller
 
         $data = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
                                    "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
-                                   "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic")
+                                   "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic",
+                                   "dpa.nombres as name_asesora", "dpa.apellido_p as apellido_asesora"
+                                )
 
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
@@ -165,6 +167,7 @@ class CalendarController extends Controller
                                 ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
                                 ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
+                                ->join("datos_personales AS dpa", "dpa.id_usuario", "=", "valuations.id_asesora_valoracion", "left")
                                
 
                                 ->where(function ($query) use ($today) {
@@ -205,7 +208,9 @@ class CalendarController extends Controller
         if($asesoras != 0){
             $data_asesora = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
                                         "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
-                                        "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic")
+                                        "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic",
+                                        "dpa.nombres as name_asesora", "dpa.apellido_p as apellido_asesora"
+                                    )
                                         
 
                                         ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
@@ -213,7 +218,7 @@ class CalendarController extends Controller
                                         ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic")
                                         ->join("users", "users.id", "=", "auditoria.usr_regins")
                                         ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
-
+                                        ->join("datos_personales AS dpa", "dpa.id_usuario", "=", "valuations.id_asesora_valoracion", "left")
                                        
 
                                         ->where(function ($query) use ($today) {
@@ -263,7 +268,7 @@ class CalendarController extends Controller
             $value["end"]   = $value["start"]."T".$value["time_end"];
 
             $value["title"] = "VLR: ".$value["name_client"]." ".$value["last_name_client"];
-            
+            $value["valuations"] = true;
             $array[] = $value;
         }
         return response()->json($array)->setStatusCode(200);

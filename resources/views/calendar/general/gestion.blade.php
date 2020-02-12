@@ -269,6 +269,14 @@
 
 									<div class="col-md-6">
 										<div class="row">
+											<div class="col-md-12" id="adviser-input">
+												<div class="form-group">
+													<label for=""><b>Asesora de Valoracion</b></label>
+													<input type="text"  id="adviser" class="form-control">
+												</div>
+											</div>
+
+
 											<div class="col-md-12">
 												<div class="form-group">
 													<label for=""><b>Clinica</b></label>
@@ -487,6 +495,18 @@
 								html += '<li class="list-group-item"><img class="rounded" src="/img/usuarios/profile/'+item.img_profile+'" style="height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;" title="'+item.name_follower+''+item.last_name_follower+'"><b>'+item.name_follower+' '+item.last_name_follower+'</b></li>'
 							});
 
+
+							if(calEvent.event.extendedProps.valuations == true){
+								$("#adviser-input").css("display", "block")
+
+								var name_asesora = calEvent.event.extendedProps.name_asesora+" "+calEvent.event.extendedProps.apellido_asesora
+								$("#adviser").val(name_asesora)
+							}else{
+								$("#adviser-input").css("display", "none")
+							}
+
+
+
 							$("#list_followers").html(html)
 
 							$("#exampleModalCenter").modal('show');
@@ -596,6 +616,8 @@
 				$("#list_followers").html(html)
 
 				$("#exampleModalCenter").modal('show');
+
+				
 
 			}
 
