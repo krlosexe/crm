@@ -40,12 +40,12 @@ class ClientsController extends Controller
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
 
 
-                                ->where(function ($query) use ($rol, $id_user) {
-                                    if($rol == "Asesor"){
-                                        $query->where("clientes.id_user_asesora", $id_user);
-                                        $query->orWhere("clientes.id_asesora_valoracion", $id_user);
-                                    }
-                                })
+                                // ->where(function ($query) use ($rol, $id_user) {
+                                //     if($rol == "Asesor"){
+                                //         $query->where("clientes.id_user_asesora", $id_user);
+                                //         $query->orWhere("clientes.id_asesora_valoracion", $id_user);
+                                //     }
+                                // })
 
 
                                 ->where("auditoria.tabla", "clientes")
