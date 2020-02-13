@@ -602,9 +602,24 @@
 						$("#asesora").val(data.id_user_asesora)
 
 
-						$(".tabs-remove").css("display", "none")
+						$(".tabs-remove").css("display", "block")
 
 						$("#btn-store").attr("disabled", "disabled")
+
+
+						var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/0"
+						$('#iframeValuationsStore').attr('src', url);
+
+						var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/0"
+						$('#iframepPreanestesiaStore').attr('src', url);
+
+
+						var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/0"
+						$('#iframepCirugiaStore').attr('src', url);
+
+
+						var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/0"
+						$('#iframepRevisionStore').attr('src', url);
 						
 					}
 				});

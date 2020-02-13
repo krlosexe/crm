@@ -26,25 +26,25 @@
 
 
             <li  class="nav-item tabs-remove" style="display: none">
-                <a id="tab4" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-valuations-edit" role="tab" aria-controls="info-add" aria-selected="false">Valoraciones</a>
+                <a id="tab4" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-valuations-store" role="tab" aria-controls="info-add" aria-selected="false">Valoraciones</a>
             </li>
 
 
             <li  class="nav-item tabs-remove" style="display: none">
-                <a id="tab4" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-preanestesia-edit" role="tab" aria-controls="info-add" aria-selected="false">Pre Anestesia</a>
+                <a id="tab4" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-preanestesia-store" role="tab" aria-controls="info-add" aria-selected="false">Pre Anestesia</a>
             </li>
 
             <li  class="nav-item tabs-remove" style="display: none">
-                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-cirugia-edit" role="tab" aria-controls="info-add" aria-selected="false">Cirugias</a>
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-cirugia-store" role="tab" aria-controls="info-add" aria-selected="false">Cirugias</a>
             </li>
 
             <li  class="nav-item tabs-remove" style="display: none">
-                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-revision-edit" role="tab" aria-controls="info-add" aria-selected="false">Revisiones</a>
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-revision-store" role="tab" aria-controls="info-add" aria-selected="false">Revisiones</a>
             </li>
 
-            <li  class="nav-item tabs-remove" style="display: none">
+            <!-- <li  class="nav-item tabs-remove" style="display: none">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-edit" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
-            </li>
+            </li> -->
 
         </ul>
         <br><br>
@@ -513,6 +513,60 @@
                     <br><br>
                     
               </div>
+
+
+
+              <div class="tab-pane fade tab_content1-0" id="info-valuations-store" role="tabpanel" aria-labelledby="patient_record">
+                
+                <div class="embed-responsive embed-responsive-16by9">
+
+                    <iframe class="embed-responsive-item " id="iframeValuationsStore" allowfullscreen="">
+
+                    </iframe>
+
+                </div>
+                   
+                    <br><br>
+                    
+              </div>
+
+
+
+              <div class="tab-pane fade tab_content1-0" id="info-preanestesia-store" role="tabpanel" aria-labelledby="patient_record">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item " id="iframepPreanestesiaStore" allowfullscreen="">
+                    </iframe>
+                </div>
+                <br><br>
+              </div>
+
+
+
+              <div class="tab-pane fade tab_content1-0" id="info-cirugia-store" role="tabpanel" aria-labelledby="patient_record">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item " id="iframepCirugiaStore" allowfullscreen="">
+                    </iframe>
+                </div>
+                <br><br>
+              </div>
+
+
+
+              <div class="tab-pane fade tab_content1-0" id="info-revision-store" role="tabpanel" aria-labelledby="patient_record">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item " id="iframepRevisionStore" allowfullscreen="">
+                    </iframe>
+                </div>
+                <br><br>
+              </div>
+
+
+
+
+
+
+
+
 
 
 

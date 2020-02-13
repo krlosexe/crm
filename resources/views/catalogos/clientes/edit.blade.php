@@ -43,9 +43,9 @@
             </li>
 
 
-            <li  class="nav-item">
+            <!-- <li  class="nav-item">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-edit" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
-            </li>
+            </li> -->
 
 
 
