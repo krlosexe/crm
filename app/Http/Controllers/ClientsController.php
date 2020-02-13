@@ -53,6 +53,9 @@ class ClientsController extends Controller
                                 ->where("auditoria.status", "!=", "0")
                                 ->orderBy("clientes.id_cliente", "DESC")
                                 ->get();
+
+
+                
            
             return response()->json($data)->setStatusCode(200);
         }else{

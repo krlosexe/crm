@@ -51,6 +51,10 @@ class CalendarController extends Controller
 
                             ->join("auditoria", "auditoria.cod_reg", "=", "tasks.id_tasks")
                             ->where("auditoria.tabla", "tasks")
+
+                            ->where("tasks.status_task", "!=", "Finalizada")
+
+
                             ->where("auditoria.status", "!=", 0)
                             
                             ->get();

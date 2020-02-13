@@ -415,11 +415,7 @@
 								},
 								
 							},
-							// {
-							// 	url: 'api/calendar/queries', 
-							// 	color: '#E5F4FD',   
-							// 	textColor: '#31B5F4' 
-							// },
+						
 							{
 								url: 'api/calendar/valuations', 
 								color: '#FFAAD4',   
@@ -521,21 +517,6 @@
 
 					calendar.render();
 
-					// build the locale selector's options
-					// calendar.getAvailableLocaleCodes().forEach(function(localeCode) {
-					// 	var optionEl = document.createElement('option');
-					// 	optionEl.value = localeCode;
-					// 	optionEl.selected = localeCode == initialLocaleCode;
-					// 	optionEl.innerText = localeCode;
-					// 	//localeSelectorEl.appendChild(optionEl);
-					// });
-
-					// when the selected option changes, dynamically change the calendar option
-					// localeSelectorEl.addEventListener('change', function() {
-					// 	if (this.value) {
-					// 	calendar.setOption('locale', this.value);
-					// 	}
-					// });
 			}
 			
 	
