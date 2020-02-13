@@ -43,6 +43,13 @@
             </li>
 
 
+            <li  class="nav-item">
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-edit" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
+            </li>
+
+
+
+
 
         </ul>
 
@@ -193,15 +200,12 @@
                                     </select>
                                 </div>
 
-
                                 <!-- <div class="form-group">
                                     <label for=""><b>Asesora de Valoracion</b></label>
                                     <select name="id_asesora_valoracion" id="id_asesora_valoracion-edit" class="form-control select2">
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div> -->
-
-
 
 
                                 <div class="row">

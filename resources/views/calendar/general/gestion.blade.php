@@ -377,7 +377,7 @@
 			
 			function initCalendar(asesoras) {
 
-				var initialLocaleCode = 'es';
+				    var initialLocaleCode = 'es';
 					var localeSelectorEl = document.getElementById('locale-selector');
 					var calendarEl = document.getElementById('calendar');
 

@@ -560,6 +560,10 @@
 						$("#linea-negocio").trigger("change");
 
 
+						$(".tabs-remove").css("display", "none")
+						$("#btn-store").removeAttr("disabled")
+
+
 					},
 					success: function(data){
 						
@@ -598,7 +602,9 @@
 						$("#asesora").val(data.id_user_asesora)
 
 
+						$(".tabs-remove").css("display", "none")
 
+						$("#btn-store").attr("disabled", "disabled")
 						
 					}
 				});

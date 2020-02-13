@@ -9,19 +9,43 @@
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li  class="nav-item">
-                <a id="tab0-0" class="nav-link active" id="patient_record" data-toggle="tab" href="#init" role="tab" aria-controls="init" aria-selected="true">FICHA PACIENTE</a>
+                <a id="tab0-0" class="nav-link active" id="patient_record" data-toggle="tab" href="#init" role="tab" aria-controls="init" aria-selected="true">Ficha</a>
             </li>
             <li  class="nav-item">
-                <a id="tab1-0" class="nav-link" id="information_aditionals" data-toggle="tab" href="#info-add" role="tab" aria-controls="info-add" aria-selected="false">INFORMACION ADICIONAL SOBRE LA CIRUGÍA A PROGRAMAR</a>
+                <a id="tab1-0" class="nav-link" id="information_aditionals" data-toggle="tab" href="#info-add" role="tab" aria-controls="info-add" aria-selected="false">Info Cirugia</a>
             </li>
 
             <li  class="nav-item">
-                <a id="tab2-0" class="nav-link" id="init_history" data-toggle="tab" href="#init-history" role="tab" aria-controls="info-add" aria-selected="false">HISTORIA CLÍNICA INICIAL PACIENTE</a>
+                <a id="tab2-0" class="nav-link" id="init_history" data-toggle="tab" href="#init-history" role="tab" aria-controls="info-add" aria-selected="false">Historial Clinico</a>
             </li>
 
             <li  class="nav-item">
-                <a id="tab3-0" class="nav-link" id="info_credit_patient" data-toggle="tab" href="#info-credit-patient" role="tab" aria-controls="info-add" aria-selected="false">INFORMACIÓN CREDITICIA PACIENTE</a>
+                <a id="tab3-0" class="nav-link" id="info_credit_patient" data-toggle="tab" href="#info-credit-patient" role="tab" aria-controls="info-add" aria-selected="false">Info Crediticia</a>
             </li>
+
+
+
+            <li  class="nav-item tabs-remove" style="display: none">
+                <a id="tab4" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-valuations-edit" role="tab" aria-controls="info-add" aria-selected="false">Valoraciones</a>
+            </li>
+
+
+            <li  class="nav-item tabs-remove" style="display: none">
+                <a id="tab4" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-preanestesia-edit" role="tab" aria-controls="info-add" aria-selected="false">Pre Anestesia</a>
+            </li>
+
+            <li  class="nav-item tabs-remove" style="display: none">
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-cirugia-edit" role="tab" aria-controls="info-add" aria-selected="false">Cirugias</a>
+            </li>
+
+            <li  class="nav-item tabs-remove" style="display: none">
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-revision-edit" role="tab" aria-controls="info-add" aria-selected="false">Revisiones</a>
+            </li>
+
+            <li  class="nav-item tabs-remove" style="display: none">
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-edit" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
+            </li>
+
         </ul>
         <br><br>
 
@@ -508,7 +532,7 @@
             <button type="button"  class="btn btn-danger btn-user" onclick="prev('#cuadro2')">
                 Cancelar
             </button>
-            <button class="btn btn-primary btn-user">
+            <button id="btn-store" class="btn btn-primary btn-user">
                 Registrar
             </button>
 
