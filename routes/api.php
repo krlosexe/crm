@@ -45,6 +45,12 @@ Route::post('status-rol/{id}/{status}', 'RolesController@status');
 
 
 Route::resource('clients', 'ClientsController');
+Route::post('client/tasks', 'ClientsController@Tasks');
+Route::put('client/tasks/{id}', 'ClientsController@TasksUpdate');
+Route::get('client/tasks/{id_client}', 'ClientsController@GetTasks');
+Route::get('client/task/status/{id}/{status}', 'ClientsController@TasksStatus');
+
+
 Route::get('clients/identification/{identification}', 'ClientsController@GetByIdentification');
 Route::get('status-cliente/{id}/{status}', 'ClientsController@status');
 
@@ -90,6 +96,7 @@ Route::post('tasks/status/{id}/{status}', 'TasksController@status');
 
 
 Route::get('calendar/tasks', 'CalendarController@getTask');
+Route::get('calendar/tasks/clients', 'CalendarController@getTaskClients');
 Route::get('calendar/queries', 'CalendarController@getQueries');
 Route::get('calendar/valuations', 'CalendarController@getValuations');
 Route::get('calendar/surgeries', 'CalendarController@Surgeries');

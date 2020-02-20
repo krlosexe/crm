@@ -43,9 +43,9 @@
             </li>
 
 
-            <!-- <li  class="nav-item">
+            <li  class="nav-item">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-edit" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
-            </li> -->
+            </li>
 
 
 
@@ -556,7 +556,6 @@
               </div>
 
 
-
               <div class="tab-pane fade tab_content1-0" id="info-revision-edit" role="tabpanel" aria-labelledby="patient_record">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item " id="iframepRevisionEdit" allowfullscreen="">
@@ -569,11 +568,13 @@
 
 
 
-
-
-
-
-
+              <div class="tab-pane fade tab_content1-0" id="info-tracing-edit" role="tabpanel" aria-labelledby="patient_record">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item " id="iframepTracingEdit" allowfullscreen="">
+                    </iframe>
+                </div>
+                <br><br>
+              </div>
 
         </div>
 

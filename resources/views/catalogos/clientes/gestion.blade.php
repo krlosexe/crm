@@ -348,6 +348,13 @@
 					$('#iframepRevisionView').attr('src', url);
 
 
+					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/0"
+					$('#iframepTracingView').attr('src', url);
+
+
+
+
+
 				});
 			}
 
@@ -465,6 +472,10 @@
 
 					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/1"
 					$('#iframepRevisionEdit').attr('src', url);
+
+
+					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/1"
+					$('#iframepTracingEdit').attr('src', url);
 
 					cuadros('#cuadro1', '#cuadro4');
 				});

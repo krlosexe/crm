@@ -142,6 +142,13 @@
     <script src="vendor/select2-4.0.11/dist/js/select2.min.js"></script>
 
 
+
+
+
+
+
+
+
   <script src="js/funciones.js"></script>
   
 

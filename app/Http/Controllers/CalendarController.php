@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Tasks;
+use App\ClientsTasks;
 use App\Queries;
 use App\Surgeries;
 use App\Valuations;
@@ -107,6 +108,106 @@ class CalendarController extends Controller
 
 
 
+
+
+
+
+    function getTaskClients(Request $request, $today = false){
+        
+
+        $rol     = $request["rol"];
+        $id_user = $request["id_user"];
+
+
+        if($request["asesoras"] != 0){
+            $asesoras = explode(",", $request["asesoras"]);
+        }else{
+            $asesoras = 0;
+        }
+        
+        
+        $data = ClientsTasks::select("clients_tasks.id_clients_tasks", "clients_tasks.issue as title", "clients_tasks.fecha as start", "clients_tasks.time as time", "datos_personales.nombres", "datos_personales.apellido_p", "user_responsable.img_profile")
+                           
+                            ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable")
+                            ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable")
+
+                            ->with("followers")
+
+                            ->where(function ($query) use ($today) {
+                                if($today != false){
+                                    $query->where("clients_tasks.fecha", $today);
+                                }
+                            })
+
+                            ->where(function ($query) use ($asesoras) {
+                                
+                                if($asesoras != 0){
+                                    $query->whereIn("clients_tasks.responsable", $asesoras);
+                                }
+                            }) 
+
+
+
+                            ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
+                            ->where("auditoria.tabla", "clients_tasks")
+
+                            ->where("clients_tasks.status_task", "!=", "Finalizada")
+
+
+                            ->where("auditoria.status", "!=", 0)
+                            
+                            ->get();
+
+
+            if($rol == "Asesor"){
+
+
+                $tasks_follow =  ClientsTasks::select("clients_tasks.id_clients_tasks", "clients_tasks.issue as title", "clients_tasks.fecha as start", "clients_tasks.time as time",  "datos_personales.nombres", "datos_personales.apellido_p", "user_responsable.img_profile")
+                           
+                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable")
+                                    ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable")
+                                    ->join("clients_tasks_followers", "clients_tasks_followers.id_task", "=", "clients_tasks.id_clients_tasks")
+
+                                    ->with("followers")
+
+                                    ->where(function ($query) use ($today) {
+                                        if($today != false){
+                                            $query->where("clients_tasks.fecha", $today);
+                                        }
+                                    })
+
+
+                                    
+
+                                    ->where("clients_tasks_followers.id_follower", $id_user)
+
+                                    ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
+                                    ->where("auditoria.tabla", "clients_tasks")
+                                    ->where("auditoria.status", "!=", 0)
+                                    
+                                    ->get();
+
+         
+
+
+                foreach($tasks_follow as $key => $value){
+                    $data[] = $value;
+                }
+            }
+
+
+        foreach($data as $key => $value){
+            $value["fecha"] = $value["start"];
+            $value["start"] = $value["start"]."T".$value["time"];
+           
+        }
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+
+
+
     function getQueries($today = false){
         
         $data = Queries::select("queries.id_queries","queries.fecha as start", "queries.time as time",
@@ -168,7 +269,7 @@ class CalendarController extends Controller
                                 ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
 
                                 ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
-                                ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic")
+                                ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic", "left")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
                                 ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
                                 ->join("datos_personales AS dpa", "dpa.id_usuario", "=", "valuations.id_asesora_valoracion", "left")
@@ -219,7 +320,7 @@ class CalendarController extends Controller
 
                                         ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                                         ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
-                                        ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic")
+                                        ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic", "left")
                                         ->join("users", "users.id", "=", "auditoria.usr_regins")
                                         ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
                                         ->join("datos_personales AS dpa", "dpa.id_usuario", "=", "valuations.id_asesora_valoracion", "left")
@@ -309,7 +410,7 @@ class CalendarController extends Controller
                                     ->join("auditoria", "auditoria.cod_reg", "=", "preanesthesias.id_preanesthesias")
                                     ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente")
                                     ->join("users", "users.id", "=", "auditoria.usr_regins")
-                                    ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic")
+                                    ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic", "left")
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
 
                                     ->where(function ($query) use ($today) {
@@ -378,7 +479,7 @@ class CalendarController extends Controller
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
                                 ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente")
-                                ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic")
+                                ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic", "left")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
                                 ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
 
@@ -455,7 +556,7 @@ class CalendarController extends Controller
                                     ->join("auditoria", "auditoria.cod_reg", "=", "revision_appointment.id_revision")
                                     ->join("appointments_agenda", "appointments_agenda.id_revision", "=", "revision_appointment.id_revision")
                                     ->join("clientes", "clientes.id_cliente", "=", "revision_appointment.id_paciente")
-                                    ->join("clinic", "clinic.id_clinic", "=", "revision_appointment.clinica")
+                                    ->join("clinic", "clinic.id_clinic", "=", "revision_appointment.clinica", "left")
                                     ->join("users", "users.id", "=", "auditoria.usr_regins")
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
 

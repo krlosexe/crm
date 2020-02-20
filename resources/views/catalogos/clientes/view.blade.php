@@ -41,6 +41,10 @@
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-revision-view" role="tab" aria-controls="info-add" aria-selected="false">Revisiones</a>
             </li>
 
+            <li  class="nav-item">
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-view" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
+            </li>
+
 
         </ul>
         <br><br>
@@ -552,7 +556,13 @@
                 <br><br>
               </div>
 
-
+              <div class="tab-pane fade tab_content1-0" id="info-tracing-view" role="tabpanel" aria-labelledby="patient_record">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item " id="iframepTracingView" allowfullscreen="">
+                    </iframe>
+                </div>
+                <br><br>
+              </div>
 
 
 

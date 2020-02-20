@@ -8,6 +8,12 @@ use App\ClientClinicHistory;
 use App\ClientCreditInformation;
 use App\ClientInformationAditionalSurgery;
 
+
+use App\ClientsTasks;
+use App\ClientsTasksFollowers;
+use App\ClientsTasksComments;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -257,6 +263,156 @@ class ClientsController extends Controller
            //return response()->json("No esta autorizado")->setStatusCode(400);
         //}
     }
+
+
+
+
+    public function Tasks(Request $request){
+        
+        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+            $request["responsable"] = $request["id_user"];
+            $store = ClientsTasks::create($request->all());
+
+
+            $auditoria              = new Auditoria;
+            $auditoria->tabla       = "clients_tasks";
+            $auditoria->cod_reg     = $store["id_clients_tasks"];
+            $auditoria->status      = 1;
+            $auditoria->usr_regins  = $request["id_user"];
+            $auditoria->save();
+
+
+            $followers = [];
+            foreach($request->followers as $key => $value){
+                $array = [];
+                $array["id_task"]     = $store["id_clients_tasks"];
+                $array["id_follower"] = $value;
+                array_push($followers, $array);
+            }
+
+            ClientsTasksFollowers::insert($followers);
+            $request["id_task"] = $store["id_clients_tasks"];
+            ClientsTasksComments::create($request->all());
+
+
+            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("No esta autorizado")->setStatusCode(400);
+        }
+
+    }
+
+
+    public function TasksUpdate(Request $request, $id_task){
+        
+        
+
+        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+            
+            $update = ClientsTasks::find($id_task)->update($request->all());
+
+            ClientsTasksFollowers::where("id_task", $id_task)->delete();
+
+            $followers = [];
+            foreach($request->followers as $key => $value){
+                $array = [];
+                $array["id_task"]     = $id_task;
+                $array["id_follower"] = $value;
+                array_push($followers, $array);
+            }
+
+            ClientsTasksFollowers::insert($followers);
+
+
+
+           
+
+            if(isset($request->comments)){
+                $comments = [];
+
+                foreach($request->comments as $key => $value){
+                    $array = [];
+                    $array["id_task"]     = $id_task;
+                    $array["id_user"] = $request["id_user"];
+                    $array["comments"] = $value;
+                    array_push($comments, $array);
+                }
+                ClientsTasksComments::insert($comments);
+                
+            }
+            
+
+
+            if ($update) {
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                return response()->json($data)->setStatusCode(200);
+            }else{
+                return response()->json("A ocurrido un error")->setStatusCode(400);
+            }
+
+        }else{
+            return response()->json("No esta autorizado")->setStatusCode(400);
+        }
+
+
+
+
+    }
+
+
+
+    public function GetTasks(Request $request, $id_client){
+        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+            
+            $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
+                                   "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis")
+
+                                    ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
+                                    ->join("users", "users.id", "=", "auditoria.usr_regins")
+
+                                    ->join("users as responsable", "responsable.id", "=", "clients_tasks.responsable")
+                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
+
+                                    ->with("followers")
+                                    ->with("comments")
+
+                                    ->where("clients_tasks.id_client", $id_client)
+
+                                    ->where("auditoria.tabla", "clients_tasks")
+                                    ->where("auditoria.status", "!=", "0")
+                                    ->orderBy("clients_tasks.id_clients_tasks", "DESC")
+                                    ->get();
+
+
+                echo json_encode($tasks);
+        }else{
+            return response()->json("No esta autorizado")->setStatusCode(400);
+        }
+    }   
+
+
+
+    public function TasksStatus($id_cliente, $status, Request $request)
+    {
+       
+        $auditoria =  Auditoria::where("cod_reg", $id_cliente)
+                                    ->where("tabla", "clients_tasks")->first();
+
+        $auditoria->status = $status;
+
+        if($status == 0){
+            $auditoria->usr_regmod = $request["id_user"];
+            $auditoria->fec_regmod = date("Y-m-d");
+        }
+        $auditoria->save();
+
+        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+        return response()->json($data)->setStatusCode(200);
+     
+    }
+
+
 
 
 

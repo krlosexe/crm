@@ -42,9 +42,16 @@ Route::get('funciones', function () {
     return view('perfiles.Funciones.gestion');
 });
 
+
 Route::get('clients', function () {
     return view('catalogos.clientes.gestion');
 });
+
+
+Route::get('clients/tasks/{id_client}/{option}', function ($id_client, $option) {
+    return view('catalogos.clientes.tasks.gestion', ["id_client" => $id_client, "option" => $option]);
+});
+
 
 
 Route::get('citys', function () {
