@@ -400,7 +400,7 @@
 						html += '<div class="col-md-12" style="margin-bottom: 15px">'
 							html += '<div class="row">'
 								html += '<div class="col-md-2">'
-									html += "<img class='rounded' src='/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+									html += "<img class='rounded' src='img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
 									
 								html += '</div>'
 								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
