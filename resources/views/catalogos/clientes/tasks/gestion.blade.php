@@ -324,7 +324,7 @@
 								
 								var html = ""
 								$.each(row.followers, function (key, item) { 
-									html += "<img class='rounded' src='/img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+									html += "<img class='rounded' src='img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
 								});
 								
 								return html
