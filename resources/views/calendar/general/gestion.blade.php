@@ -551,7 +551,7 @@
 									html_comments += '<div class="col-md-12" style="margin-bottom: 15px">'
 										html_comments += '<div class="row">'
 											html_comments += '<div class="col-md-2">'
-												html_comments += "<img class='rounded' src='/img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+												html_comments += "<img class='rounded' src='img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
 												
 											html_comments += '</div>'
 											html_comments += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;font-size: 11px">'
