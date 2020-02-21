@@ -79,8 +79,6 @@ class CalendarController extends Controller
                                     })
 
 
-                                    
-
                                     ->where("tasks_followers.id_follower", $id_user)
 
                                     ->join("auditoria", "auditoria.cod_reg", "=", "tasks.id_tasks")
@@ -101,7 +99,7 @@ class CalendarController extends Controller
         foreach($data as $key => $value){
             $value["fecha"] = $value["start"];
             $value["start"] = $value["start"]."T".$value["time"];
-            $value["task"]  = true;
+          //  $value["task"]  = true;
         }
         return response()->json($data)->setStatusCode(200);
     }
@@ -132,6 +130,10 @@ class CalendarController extends Controller
                             ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable")
 
                             ->with("followers")
+
+                            ->with("comments")
+
+
 
                             ->where(function ($query) use ($today) {
                                 if($today != false){
@@ -169,6 +171,9 @@ class CalendarController extends Controller
                                     ->join("clients_tasks_followers", "clients_tasks_followers.id_task", "=", "clients_tasks.id_clients_tasks")
 
                                     ->with("followers")
+
+                                    ->with("comments")
+
 
                                     ->where(function ($query) use ($today) {
                                         if($today != false){

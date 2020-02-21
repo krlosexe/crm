@@ -285,12 +285,30 @@
 											</div>
 
 
-											<div class="col-md-12">
+											<div class="col-md-12" id="observations-input">
 												<div class="form-group">
 													<label for=""><b>Obervaciones</b></label>
 													<textarea name="observaciones" id="observaciones-view" class="form-control" cols="30" rows="5"></textarea>
 												</div>
 											</div>
+
+
+											<div class="col-md-12" id="comments-input">
+												<div class="row" id="comments">
+													<div class="col-md-12">
+														<div class="row">
+															<div class="col-md-2">
+															Foto
+															</div>
+															<div class="col-md-10">
+															Text
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
 										</div>
 
 										<div class="row">
@@ -525,9 +543,34 @@
 
 
 							if(calEvent.event.extendedProps.task == true){
-								$("#clinic-input").css("display", "none")
+								$("#clinic-input, #observations-input").css("display", "none")
+								$("#comments-input").css("display", "block")
+
+								var html_comments = "";
+								$.map(calEvent.event.extendedProps.comments, function (item, key) {
+									html_comments += '<div class="col-md-12" style="margin-bottom: 15px">'
+										html_comments += '<div class="row">'
+											html_comments += '<div class="col-md-2">'
+												html_comments += "<img class='rounded' src='/img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+												
+											html_comments += '</div>'
+											html_comments += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;font-size: 11px">'
+												html_comments += '<div>'+item.comments+'</div>'
+
+												html_comments += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+											html_comments += '</div>'
+										html_comments += '</div>'
+									html_comments += '</div>'
+									
+								});
+
+								$("#comments").html(html_comments)
+
 							}else{
-								$("#clinic-input").css("display", "block")
+								$("#clinic-input, #observations-input").css("display", "block")
+								$("#comments-input").css("display", "none")
 							}
 
 
