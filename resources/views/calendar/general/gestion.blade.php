@@ -277,7 +277,7 @@
 											</div>
 
 
-											<div class="col-md-12">
+											<div class="col-md-12" id="clinic-input">
 												<div class="form-group">
 													<label for=""><b>Clinica</b></label>
 													<input type="text"  id="clinic_cite" class="form-control" required>
@@ -520,6 +520,14 @@
 								$("#adviser").val(name_asesora).attr("disabled", "disabled")
 							}else{
 								$("#adviser-input").css("display", "none")
+							}
+
+
+
+							if(calEvent.event.extendedProps.task == true){
+								$("#clinic-input").css("display", "none")
+							}else{
+								$("#clinic-input").css("display", "block")
 							}
 
 
