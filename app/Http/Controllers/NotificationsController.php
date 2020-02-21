@@ -312,6 +312,8 @@ class NotificationsController extends Controller
         $this->PreAnestisia();
         $this->Surgeries();
         $this->Revision();
+
+        echo "SI";
     }
 
     public function Read(request $request){
