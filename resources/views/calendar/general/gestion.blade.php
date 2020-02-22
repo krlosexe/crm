@@ -283,7 +283,7 @@
 
 											<center>
 												<button id="send_usuario" class="btn btn-primary btn-user">
-													Actualizar
+													Repogramar
 												</button>
 											</center>
 
