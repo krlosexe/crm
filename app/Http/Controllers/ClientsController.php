@@ -314,19 +314,19 @@ class ClientsController extends Controller
 
             ClientsTasksFollowers::where("id_task", $id_task)->delete();
 
-            $followers = [];
-            foreach($request->followers as $key => $value){
-                $array = [];
-                $array["id_task"]     = $id_task;
-                $array["id_follower"] = $value;
-                array_push($followers, $array);
+
+            if(isset($request->followers)){
+                $followers = [];
+                foreach($request->followers as $key => $value){
+                    $array = [];
+                    $array["id_task"]     = $id_task;
+                    $array["id_follower"] = $value;
+                    array_push($followers, $array);
+                }
+
+                ClientsTasksFollowers::insert($followers);
             }
-
-            ClientsTasksFollowers::insert($followers);
-
-
-
-           
+            
 
             if(isset($request->comments)){
                 $comments = [];
@@ -345,7 +345,7 @@ class ClientsController extends Controller
 
 
             if ($update) {
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);

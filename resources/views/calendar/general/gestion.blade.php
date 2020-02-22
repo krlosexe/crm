@@ -213,115 +213,152 @@
 							</div>
 							<div class="modal-body">
 
-								<div class="row">
+								<form method="POST" id="update_event">
 
-									<div class="col-md-6">
-									
-										<div class="row">
-											<div class="col-md-12">
-												<center>
-													<label for=""><b>Responsable</b></label>
-													<div id="img_profile_responsable"></div>
-													<div id="name_responsable"></div>
-												</center>
-											</div>
-										</div>
-										<br>
+									<input type="hidden" name="_method" value="put">
 
+									<div class="row">
 
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<label for=""><b>Asunto</b></label>
-													<input type="text" name="issue" id="issue-view" class="form-control" required >
+										<div class="col-md-6">
+
+											<div class="row">
+												<div class="col-md-12">
+													<center>
+														<label for=""><b>Responsable</b></label>
+														<div id="img_profile_responsable"></div>
+														<div id="name_responsable"></div>
+													</center>
 												</div>
 											</div>
-										</div>
+											<br>
 
 
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<label for=""><b>Fecha</b></label>
-													<input type="date" name="fecha" id="fecha-view" class="form-control" required min="<?= date("Y-m-d")?>">
-												</div>
-											</div>
-										</div>
-
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<label for=""><b>Hora desde</b></label>
-													<input type="time" name="time" id="time-view" class="form-control" required>
-												</div>
-											</div>
-
-											<div class="col-md-6">
-												<div class="form-group">
-													<label for=""><b>Hora hasta</b></label>
-													<input type="time" name="time_end" id="time-end-view" class="form-control" required>
-												</div>
-											</div>
-										</div>
-									
-									</div>
-
-
-									<div class="col-md-6">
-										<div class="row">
-											<div class="col-md-12" id="adviser-input">
-												<div class="form-group">
-													<label for=""><b>Asesora de Valoracion</b></label>
-													<input type="text"  id="adviser" class="form-control">
-												</div>
-											</div>
-
-
-											<div class="col-md-12" id="clinic-input">
-												<div class="form-group">
-													<label for=""><b>Clinica</b></label>
-													<input type="text"  id="clinic_cite" class="form-control" required>
-												</div>
-											</div>
-
-
-											<div class="col-md-12" id="observations-input">
-												<div class="form-group">
-													<label for=""><b>Obervaciones</b></label>
-													<textarea name="observaciones" id="observaciones-view" class="form-control" cols="30" rows="5"></textarea>
-												</div>
-											</div>
-
-
-											<div class="col-md-12" id="comments-input">
-												<div class="row" id="comments">
-													<div class="col-md-12">
-														<div class="row">
-															<div class="col-md-2">
-															Foto
-															</div>
-															<div class="col-md-10">
-															Text
-															</div>
-														</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label for=""><b>Asunto</b></label>
+														<input type="text" name="issue" id="issue-view" class="form-control"  >
 													</div>
 												</div>
 											</div>
 
 
+											<div class="row" id="paciente-input">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label for=""><b>Paciente</b></label>
+														<input type="text" name="paciente" id="paciente-view" class="form-control"  >
+													</div>
+												</div>
+											</div>
+
+
+
+
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label for=""><b>Fecha</b></label>
+														<input type="date" name="fecha" id="fecha-view" class="form-control" min="<?= date("Y-m-d")?>">
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for=""><b>Hora desde</b></label>
+														<input type="time" name="time" id="time-view" class="form-control">
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for=""><b>Hora hasta</b></label>
+														<input type="time" name="time_end" id="time-end-view" class="form-control">
+													</div>
+												</div>
+											</div>
+
+
+											<center>
+												<button id="send_usuario" class="btn btn-primary btn-user">
+													Actualizar
+												</button>
+											</center>
+
+
+
 										</div>
 
-										<div class="row">
-											<div class="col-md-12">
-											<label for=""><b>Seguidores</b></label>
-											<ul class="list-group" id=list_followers>
-											</ul>
+
+										<div class="col-md-6">
+											<div class="row">
+												<div class="col-md-12" id="adviser-input">
+													<div class="form-group">
+														<label for=""><b>Asesora de Valoracion</b></label>
+														<input type="text"  id="adviser" class="form-control">
+													</div>
+												</div>
+
+
+												<div class="col-md-12" id="clinic-input">
+													<div class="form-group">
+														<label for=""><b>Clinica</b></label>
+														<input type="text"  id="clinic_cite" class="form-control" required>
+													</div>
+												</div>
+
+
+												<div class="col-md-12" id="observations-input">
+													<div class="form-group">
+														<label for=""><b>Obervaciones</b></label>
+														<textarea name="observaciones" id="observaciones-view" class="form-control" cols="30" rows="5"></textarea>
+													</div>
+												</div>
+
+
+												<div class="col-md-12" id="comments-input">
+													<div class="row" id="comments">
+														<div class="col-md-12">
+															<div class="row">
+																<div class="col-md-2">
+																Foto
+																</div>
+																<div class="col-md-10">
+																Text
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+
+											</div>
+
+											<div class="row">
+												<div class="col-md-12">
+												<label for=""><b>Seguidores</b></label>
+												<ul class="list-group" id=list_followers>
+												</ul>
+											</div>
+
+
+										</div>
 										</div>
 
 
-									</div>
+										<input type="hidden" name="inicial" id="inicial">
+										<input type="hidden" name="id_user" class="id_user">
+										<input type="hidden" name="token" class="token">
+
+										<input type="hidden" name="id_user_edit" id="id_edit">
+
+
+										
+
+									</form>
 								</div>
-							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 							</div>
@@ -505,13 +542,13 @@
 
 						eventClick: function(calEvent, jsEvent, view) {
 							
-							$("#issue-view").val(calEvent.event.title).attr("disabled", "disabled");
-							$("#fecha-view").val(calEvent.event.extendedProps.fecha).attr("disabled", "disabled");
-							$("#time-view").val(calEvent.event.extendedProps.time).attr("disabled", "disabled");
-							$("#time-end-view").val(calEvent.event.extendedProps.time_end).attr("disabled", "disabled");
+							$("#issue-view").val(calEvent.event.title)
+							$("#fecha-view").val(calEvent.event.extendedProps.fecha)
+							$("#time-view").val(calEvent.event.extendedProps.time)
+							$("#time-end-view").val(calEvent.event.extendedProps.time_end)
 							$("#clinic_cite").val(calEvent.event.extendedProps.name_clinic).attr("disabled", "disabled");
 							
-							$("#observaciones-view").val(calEvent.event.extendedProps.observaciones).attr("disabled", "disabled");
+							$("#observaciones-view").val(calEvent.event.extendedProps.observaciones)
 
 							var img = "<img class='rounded' style='height: 8rem; width: 8rem; margin: 1%; border-radius: 50%!important;' src='img/usuarios/profile/"+calEvent.event.extendedProps.img_profile+"'>"
 						
@@ -542,10 +579,14 @@
 
 
 
-							if(calEvent.event.extendedProps.task == true){
+							if(calEvent.event.extendedProps.task_cient == true){
 								$("#clinic-input, #observations-input").css("display", "none")
 								$("#comments-input").css("display", "block")
+								$("#paciente-input").css("display", "block")
+								$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
 
+								console.log("aa")
+								
 								var html_comments = "";
 								$.map(calEvent.event.extendedProps.comments, function (item, key) {
 									html_comments += '<div class="col-md-12" style="margin-bottom: 15px">'
@@ -568,9 +609,18 @@
 
 								$("#comments").html(html_comments)
 
+
+								$("#id_edit").val(calEvent.event.extendedProps.id_clients_tasks)
+
+								enviarFormularioPutEvent("#update_event", 'api/client/tasks', '#cuadro4', false, "#avatar-edit");
+
+
+
+
 							}else{
 								$("#clinic-input, #observations-input").css("display", "block")
 								$("#comments-input").css("display", "none")
+								$("#paciente-input").css("display", "none")
 							}
 
 
@@ -738,25 +788,76 @@
 					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
 					},
 					success: function(data){
-					$(select+" option").remove();
-					$(select).append($('<option>',
-					{
-						value: "All",
-						text : "Todas"
-					}));
-					$.each(data, function(i, item){
-						if (item.status == 1) {
+						$(select+" option").remove();
 						$(select).append($('<option>',
 						{
-							value: item.id_clinic,
-							text : item.nombre
+							value: "All",
+							text : "Todas"
 						}));
-						}
-					});
+						$.each(data, function(i, item){
+							if (item.status == 1) {
+							$(select).append($('<option>',
+							{
+								value: item.id_clinic,
+								text : item.nombre
+							}));
+							}
+						});
 
 					}
 				});
 			}
+
+
+
+
+
+
+
+			function enviarFormularioPutEvent(form, controlador, cuadro, auth = false, inputFile){
+				$(form).submit(function(e){
+					e.preventDefault(); //previene el comportamiento por defecto del formulario al darle click al input submit
+					var url=document.getElementById('ruta').value; 
+					var formData=new FormData($(form)[0]); //obtiene todos los datos de los inputs del formulario pasado por parametros
+					
+					var method = $(this).attr('method'); //obtiene el method del formulario
+					console.log(method)
+
+
+					$('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
+					$.ajax({
+						url:''+url+'/'+controlador+'/'+$("#id_edit").val(),
+						type:method,
+						dataType:'JSON',
+						data:formData,
+						cache:false,
+							contentType:false,
+							processData:false,
+						beforeSend: function(){
+							mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+						},
+						error: function (repuesta) {
+							$('input[type="submit"]').removeAttr('disabled'); //activa el input submit
+							var errores=repuesta.responseText;
+							if(errores!="")
+								mensajes('danger', errores);
+							else
+								mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");        
+						},
+						success: function(respuesta){
+							$("#calendar").html("");
+
+							
+							var asesoras = []
+							initCalendar(asesoras)
+						}
+
+					});
+				});
+			}
+
+
+
 
 			
 

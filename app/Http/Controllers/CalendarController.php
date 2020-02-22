@@ -124,8 +124,13 @@ class CalendarController extends Controller
         }
         
         
-        $data = ClientsTasks::select("clients_tasks.id_clients_tasks", "clients_tasks.issue as title", "clients_tasks.fecha as start", "clients_tasks.time as time", "datos_personales.nombres", "datos_personales.apellido_p", "user_responsable.img_profile")
-                           
+        $data = ClientsTasks::select("clients_tasks.id_clients_tasks", "clients_tasks.issue as title", 
+                                     "clients_tasks.fecha as start", "clients_tasks.time as time", "datos_personales.nombres",
+                                     "datos_personales.apellido_p", "user_responsable.img_profile",
+                                     "clientes.nombres as name_client", "clientes.apellidos as last_name_client"
+                                     )
+
+                            ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client")
                             ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable")
                             ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable")
 
@@ -164,8 +169,11 @@ class CalendarController extends Controller
             if($rol == "Asesor"){
 
 
-                $tasks_follow =  ClientsTasks::select("clients_tasks.id_clients_tasks", "clients_tasks.issue as title", "clients_tasks.fecha as start", "clients_tasks.time as time",  "datos_personales.nombres", "datos_personales.apellido_p", "user_responsable.img_profile")
-                           
+                $tasks_follow =  ClientsTasks::select("clients_tasks.id_clients_tasks", "clients_tasks.issue as title", "clients_tasks.fecha as start", 
+                                                      "clients_tasks.time as time",  "datos_personales.nombres", "datos_personales.apellido_p",
+                                                      "user_responsable.img_profile", "clientes.nombres as name_client", "clientes.apellidos as last_name_client")
+
+                                    ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client")
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable")
                                     ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable")
                                     ->join("clients_tasks_followers", "clients_tasks_followers.id_task", "=", "clients_tasks.id_clients_tasks")
@@ -202,9 +210,9 @@ class CalendarController extends Controller
 
 
         foreach($data as $key => $value){
-            $value["fecha"] = $value["start"];
-            $value["start"] = $value["start"]."T".$value["time"];
-            $value["task"]  = true;
+            $value["fecha"]       = $value["start"];
+            $value["start"]       = $value["start"]."T".$value["time"];
+            $value["task_cient"]  = true;
            
         }
         return response()->json($data)->setStatusCode(200);
