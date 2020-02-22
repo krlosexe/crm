@@ -739,7 +739,87 @@
 
 				$("#list_followers").html(html)
 
-				$("#exampleModalCenter").modal('show');
+
+				if(data.valuations == true){
+
+					enviarFormularioPutEvent("#update_event", 'api/valuations', '#cuadro4', false, "#avatar-edit");
+					$("#id_edit").val(data.id_valuations)
+
+					$("#adviser-input").css("display", "block")
+
+					if(data.name_asesora != null){
+						var name_asesora = data.name_asesora+" "+data.apellido_asesora
+					}else{
+						var name_asesora = ""
+					}
+
+					$("#adviser").val(name_asesora).attr("disabled", "disabled")
+					}else{
+					$("#adviser-input").css("display", "none")
+					}
+
+
+					if(data.task == true){
+					$("#id_edit").val(data.id_tasks)
+					enviarFormularioPutEvent("#update_event", 'api/tasks', '#cuadro4', false, "#avatar-edit");
+					}
+
+
+					if(data.task_cient == true){
+					$("#clinic-input, #observations-input").css("display", "none")
+					$("#comments-input").css("display", "block")
+					$("#paciente-input").css("display", "block")
+					$("#paciente-view").val(data.name_client+" "+data.last_name_client)
+
+					var html_comments = "";
+					$.map(data.comments, function (item, key) {
+						html_comments += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html_comments += '<div class="row">'
+								html_comments += '<div class="col-md-2">'
+									html_comments += "<img class='rounded' src='img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+									
+								html_comments += '</div>'
+								html_comments += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;font-size: 11px">'
+									html_comments += '<div>'+item.comments+'</div>'
+
+									html_comments += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+								html_comments += '</div>'
+							html_comments += '</div>'
+						html_comments += '</div>'
+						
+					});
+
+					$("#comments").html(html_comments)
+
+
+					$("#id_edit").val(data.id_clients_tasks)
+
+					enviarFormularioPutEvent("#update_event", 'api/client/tasks', '#cuadro4', false, "#avatar-edit");
+
+
+
+
+					}else{
+						$("#clinic-input, #observations-input").css("display", "block")
+						$("#comments-input").css("display", "none")
+						$("#paciente-input").css("display", "none")
+					}
+
+
+					if(data.preanesthesias == true){
+						$("#id_edit").val(data.id_preanesthesias)
+						enviarFormularioPutEvent("#update_event", 'api/preanesthesia', '#cuadro4', false, "#avatar-edit");
+					}
+
+
+					if(data.surgeries == true){
+						$("#id_edit").val(data.id_surgeries)
+						enviarFormularioPutEvent("#update_event", 'api/surgeries', '#cuadro4', false, "#avatar-edit");
+					}
+
+					$("#exampleModalCenter").modal('show');
 
 				
 
