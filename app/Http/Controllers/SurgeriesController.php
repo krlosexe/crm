@@ -206,9 +206,12 @@ class SurgeriesController extends Controller
             //     return response()->json($data)->setStatusCode(400); 
             // }
 
-
-            $request["amount"]          = str_replace('.', '', $request["amount"]);
-            $request["amount"]          = str_replace(',', '.', $request["amount"]);
+            
+            if(isset($request["amount"])){
+                $request["amount"]          = str_replace('.', '', $request["amount"]);
+                $request["amount"]          = str_replace(',', '.', $request["amount"]);
+            }
+            
 
             $update = Surgeries::find($surgeries)->update($request->all());
 

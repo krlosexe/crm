@@ -543,6 +543,8 @@ class CalendarController extends Controller
             $value["title"] =  $prefix.$type.$value["name_client"]." ".$value["last_name_client"];
 
             $value["attempt"] == 1 ? $value["color"] = "#FF2A55" : '';
+
+            $value["surgeries"] = true;
            
         }
         return response()->json($data)->setStatusCode(200);

@@ -637,6 +637,14 @@
 							}
 
 
+							if(calEvent.event.extendedProps.surgeries == true){
+								$("#id_edit").val(calEvent.event.extendedProps.id_surgeries)
+								enviarFormularioPutEvent("#update_event", 'api/surgeries', '#cuadro4', false, "#avatar-edit");
+							}
+
+
+
+
 
 							$("#list_followers").html(html)
 
