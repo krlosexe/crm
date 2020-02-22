@@ -164,7 +164,11 @@ class SurgeriesController extends Controller
     public function update(Request $request, $surgeries)
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $request["attempt"] == 1 ? $request["attempt"] = 1 : $request["attempt"] = 0;
+            
+            if(isset($request["attempt"])){
+                $request["attempt"] == 1 ? $request["attempt"] = 1 : $request["attempt"] = 0;
+            }
+            
 
 
             $hora_init = strtotime( $request["time"] );
