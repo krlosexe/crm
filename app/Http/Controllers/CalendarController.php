@@ -99,7 +99,7 @@ class CalendarController extends Controller
         foreach($data as $key => $value){
             $value["fecha"] = $value["start"];
             $value["start"] = $value["start"]."T".$value["time"];
-          //  $value["task"]  = true;
+            $value["task"]  = true;
         }
         return response()->json($data)->setStatusCode(200);
     }

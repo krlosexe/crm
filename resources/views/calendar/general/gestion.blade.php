@@ -578,6 +578,11 @@
 							}
 
 
+							if(calEvent.event.extendedProps.task == true){
+								$("#id_edit").val(calEvent.event.extendedProps.id_tasks)
+								enviarFormularioPutEvent("#update_event", 'api/tasks', '#cuadro4', false, "#avatar-edit");
+							}
+
 
 							if(calEvent.event.extendedProps.task_cient == true){
 								$("#clinic-input, #observations-input").css("display", "none")
@@ -821,7 +826,6 @@
 					var formData=new FormData($(form)[0]); //obtiene todos los datos de los inputs del formulario pasado por parametros
 					
 					var method = $(this).attr('method'); //obtiene el method del formulario
-					console.log(method)
 
 
 					$('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
@@ -845,6 +849,10 @@
 								mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");        
 						},
 						success: function(respuesta){
+
+							mensajes('success', "El evento se actualizo exitosamente");
+
+
 							$("#calendar").html("");
 
 							

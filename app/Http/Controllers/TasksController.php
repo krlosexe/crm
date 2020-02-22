@@ -179,15 +179,23 @@ class TasksController extends Controller
 
             TasksFollowers::where("id_task", $tasks)->delete();
 
-            $followers = [];
-            foreach($request->followers as $key => $value){
-                $array = [];
-                $array["id_task"]     = $tasks;
-                $array["id_follower"] = $value;
-                array_push($followers, $array);
-            }
 
-            TasksFollowers::insert($followers);
+            if(isset($request->followers)){
+
+                $followers = [];
+                foreach($request->followers as $key => $value){
+                    $array = [];
+                    $array["id_task"]     = $tasks;
+                    $array["id_follower"] = $value;
+                    array_push($followers, $array);
+                }
+
+                TasksFollowers::insert($followers);
+
+            }
+            
+
+            
 
             if ($update) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
