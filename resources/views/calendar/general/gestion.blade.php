@@ -719,11 +719,11 @@
 				var data = JSON.parse($(data).attr("data-event"));
 
 				$("#issue-view").val(data.title).attr("disabled", "disabled");
-				$("#fecha-view").val(data.fecha).attr("disabled", "disabled");
-				$("#time-view").val(data.time).attr("disabled", "disabled");
+				$("#fecha-view").val(data.fecha)
+				$("#time-view").val(data.time)
 				$("#time-end-view").val(data.time_end).attr("disabled", "disabled");
 			
-				$("#observaciones-view").val(data.observaciones).attr("disabled", "disabled");
+				$("#observaciones-view").val(data.observaciones)
 
 				var img = "<img class='rounded' style='height: 8rem; width: 8rem; margin: 1%; border-radius: 50%!important;' src='img/usuarios/profile/"+data.img_profile+"'>"
 		
