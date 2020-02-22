@@ -564,6 +564,10 @@
 
 
 							if(calEvent.event.extendedProps.valuations == true){
+
+								enviarFormularioPutEvent("#update_event", 'api/valuations', '#cuadro4', false, "#avatar-edit");
+								$("#id_edit").val(calEvent.event.extendedProps.id_valuations)
+
 								$("#adviser-input").css("display", "block")
 
 								if(calEvent.event.extendedProps.name_asesora != null){
@@ -590,8 +594,6 @@
 								$("#paciente-input").css("display", "block")
 								$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
 
-								console.log("aa")
-								
 								var html_comments = "";
 								$.map(calEvent.event.extendedProps.comments, function (item, key) {
 									html_comments += '<div class="col-md-12" style="margin-bottom: 15px">'
