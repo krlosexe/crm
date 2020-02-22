@@ -465,7 +465,7 @@ class CalendarController extends Controller
 
             $prefix = "Pre Antestesia: ";
             $value["title"] =  $prefix.$value["name_client"]." ".$value["last_name_client"];
-           
+            $value["preanesthesias"] = true;
         }
         return response()->json($data)->setStatusCode(200);
     }

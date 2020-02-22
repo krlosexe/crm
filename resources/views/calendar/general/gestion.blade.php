@@ -631,6 +631,12 @@
 							}
 
 
+							if(calEvent.event.extendedProps.preanesthesias == true){
+								$("#id_edit").val(calEvent.event.extendedProps.id_preanesthesias)
+								enviarFormularioPutEvent("#update_event", 'api/preanesthesia', '#cuadro4', false, "#avatar-edit");
+							}
+
+
 
 							$("#list_followers").html(html)
 
