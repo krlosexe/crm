@@ -30,7 +30,7 @@
   <link href="<?= url('/') ?>/vendor/sweetalert/sweetalert.css" rel="stylesheet">
 
       <!-- include summernote css/js -->
-	  <link href="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.css" rel="stylesheet">
+	<link href="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.css" rel="stylesheet">
     <script src="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.js"></script>
 
 

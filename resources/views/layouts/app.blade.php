@@ -33,9 +33,6 @@
 
 
 
-
-
-
    @yield('CustomCss')
   
   @if(Request::path() != '/')

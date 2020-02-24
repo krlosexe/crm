@@ -203,7 +203,7 @@
 
 					<!-- Modal -->
 					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-						<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-dialog modal-lg" role="document" style="max-width: 55% !important;">
 							<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLongTitle">Actividad</h5>
@@ -219,7 +219,7 @@
 
 									<div class="row">
 
-										<div class="col-md-6">
+										<div class="col-md-5">
 
 											<div class="row">
 												<div class="col-md-12">
@@ -292,7 +292,7 @@
 										</div>
 
 
-										<div class="col-md-6">
+										<div class="col-md-7">
 											<div class="row">
 												<div class="col-md-12" id="adviser-input">
 													<div class="form-group">
@@ -332,9 +332,18 @@
 														</div>
 													</div>
 												</div>
-
-
 											</div>
+
+
+											<div class="row">
+												<div class="col-md-12" id="comments2-input">
+													<div class="form-group">
+														<label for=""><b>Comentarios</b></label>
+														<textarea id="summernote" name="comments"></textarea>
+													</div>
+												</div>
+											</div>
+
 
 											<div class="row">
 												<div class="col-md-12">
@@ -393,9 +402,10 @@
 
 
 
-
+	
 	@section('CustomJs')
-
+	<link href="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.css" rel="stylesheet">
+    <script src="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.js"></script>
 		<script>
 		  	var asesoras = []
 			$(document).ready(function(){
@@ -592,6 +602,8 @@
 								$("#clinic-input, #observations-input").css("display", "none")
 								$("#comments-input").css("display", "block")
 								$("#paciente-input").css("display", "block")
+								$("#comments2-input").css("display", "block")
+								$('#summernote').summernote();
 								$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
 
 								var html_comments = "";
@@ -628,6 +640,7 @@
 								$("#clinic-input, #observations-input").css("display", "block")
 								$("#comments-input").css("display", "none")
 								$("#paciente-input").css("display", "none")
+								$("#comments2-input").css("display", "none")
 							}
 
 
