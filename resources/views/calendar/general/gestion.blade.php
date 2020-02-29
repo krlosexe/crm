@@ -237,7 +237,7 @@
 												<div class="col-md-12">
 													<div class="form-group">
 														<label for=""><b>Asunto</b></label>
-														<input type="text" name="issue" id="issue-view" class="form-control"  >
+														<input type="text" name="issue" id="issue-view" class="form-control input-disabled"  >
 													</div>
 												</div>
 											</div>
@@ -259,7 +259,7 @@
 												<div class="col-md-12">
 													<div class="form-group">
 														<label for=""><b>Fecha</b></label>
-														<input type="date" name="fecha" id="fecha-view" class="form-control" min="<?= date("Y-m-d")?>">
+														<input type="date" name="fecha" id="fecha-view" class="form-control input-disabled" min="<?= date("Y-m-d")?>">
 													</div>
 												</div>
 											</div>
@@ -268,14 +268,14 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label for=""><b>Hora desde</b></label>
-														<input type="time" name="time" id="time-view" class="form-control">
+														<input type="time" name="time" id="time-view" class="form-control input-disabled">
 													</div>
 												</div>
 
 												<div class="col-md-6">
 													<div class="form-group">
 														<label for=""><b>Hora hasta</b></label>
-														<input type="time" name="time_end" id="time-end-view" class="form-control">
+														<input type="time" name="time_end" id="time-end-view" class="form-control input-disabled">
 													</div>
 												</div>
 											</div>
@@ -313,7 +313,7 @@
 												<div class="col-md-12" id="observations-input">
 													<div class="form-group">
 														<label for=""><b>Obervaciones</b></label>
-														<textarea name="observaciones" id="observaciones-view" class="form-control" cols="30" rows="5"></textarea>
+														<textarea name="observaciones" id="observaciones-view" class="form-control input-disabled" cols="30" rows="5"></textarea>
 													</div>
 												</div>
 
@@ -550,6 +550,17 @@
 						],
 
 
+						eventDrop: function(info) {
+
+							console.log(info.oldEvent._def.extendedProps)
+							//alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+
+							if (!confirm("Are you sure about this change?")) {
+								info.revert();
+							}
+						},
+
+
 						eventClick: function(calEvent, jsEvent, view) {
 							
 							$("#issue-view").val(calEvent.event.title)
@@ -585,6 +596,15 @@
 								}else{
 									var name_asesora = ""
 								}
+
+
+								if(id_user == calEvent.event.extendedProps.usr_regins){
+									$(".input-disabled").removeAttr("disabled")
+								}else{
+									$(".input-disabled").attr("disabled", "disabled")
+								}
+
+
 								
 								$("#adviser").val(name_asesora).attr("disabled", "disabled")
 							}else{
@@ -594,6 +614,14 @@
 
 							if(calEvent.event.extendedProps.task == true){
 								$("#id_edit").val(calEvent.event.extendedProps.id_tasks)
+
+								if(id_user == calEvent.event.extendedProps.responsable){
+									$(".input-disabled").removeAttr("disabled")
+								}else{
+									$(".input-disabled").attr("disabled", "disabled")
+								}
+
+
 								enviarFormularioPutEvent("#update_event", 'api/tasks', '#cuadro4', false, "#avatar-edit");
 							}
 
@@ -633,7 +661,11 @@
 
 								enviarFormularioPutEvent("#update_event", 'api/client/tasks', '#cuadro4', false, "#avatar-edit");
 
-
+								if(id_user == calEvent.event.extendedProps.responsable){
+									$(".input-disabled").removeAttr("disabled")
+								}else{
+									$(".input-disabled").attr("disabled", "disabled")
+								}
 
 
 							}else{
@@ -647,12 +679,27 @@
 							if(calEvent.event.extendedProps.preanesthesias == true){
 								$("#id_edit").val(calEvent.event.extendedProps.id_preanesthesias)
 								enviarFormularioPutEvent("#update_event", 'api/preanesthesia', '#cuadro4', false, "#avatar-edit");
+
+
+								if(id_user == calEvent.event.extendedProps.usr_regins){
+									$(".input-disabled").removeAttr("disabled")
+								}else{
+									$(".input-disabled").attr("disabled", "disabled")
+								}
+
+
 							}
 
 
 							if(calEvent.event.extendedProps.surgeries == true){
 								$("#id_edit").val(calEvent.event.extendedProps.id_surgeries)
 								enviarFormularioPutEvent("#update_event", 'api/surgeries', '#cuadro4', false, "#avatar-edit");
+
+								if(id_user == calEvent.event.extendedProps.usr_regins){
+									$(".input-disabled").removeAttr("disabled")
+								}else{
+									$(".input-disabled").attr("disabled", "disabled")
+								}
 							}
 
 
@@ -768,21 +815,21 @@
 
 					$("#adviser").val(name_asesora).attr("disabled", "disabled")
 					}else{
-					$("#adviser-input").css("display", "none")
+						$("#adviser-input").css("display", "none")
 					}
 
 
 					if(data.task == true){
-					$("#id_edit").val(data.id_tasks)
-					enviarFormularioPutEvent("#update_event", 'api/tasks', '#cuadro4', false, "#avatar-edit");
+						$("#id_edit").val(data.id_tasks)
+						enviarFormularioPutEvent("#update_event", 'api/tasks', '#cuadro4', false, "#avatar-edit");
 					}
 
 
 					if(data.task_cient == true){
-					$("#clinic-input, #observations-input").css("display", "none")
-					$("#comments-input").css("display", "block")
-					$("#paciente-input").css("display", "block")
-					$("#paciente-view").val(data.name_client+" "+data.last_name_client)
+						$("#clinic-input, #observations-input").css("display", "none")
+						$("#comments-input").css("display", "block")
+						$("#paciente-input").css("display", "block")
+						$("#paciente-view").val(data.name_client+" "+data.last_name_client)
 
 					var html_comments = "";
 					$.map(data.comments, function (item, key) {
@@ -929,7 +976,7 @@
 
 
 			function enviarFormularioPutEvent(form, controlador, cuadro, auth = false, inputFile){
-				$(form).submit(function(e){
+				$(form).unbind().submit(function(e){
 					e.preventDefault(); //previene el comportamiento por defecto del formulario al darle click al input submit
 					var url=document.getElementById('ruta').value; 
 					var formData=new FormData($(form)[0]); //obtiene todos los datos de los inputs del formulario pasado por parametros
