@@ -133,9 +133,9 @@ class CalendarController extends Controller
                                      "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clients_tasks.responsable"
                                     )
 
-                            ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client")
-                            ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable")
-                            ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable")
+                            ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client", "left")
+                            ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable", "left")
+                            ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable", "left")
 
                             ->with("followers")
 
@@ -177,10 +177,10 @@ class CalendarController extends Controller
                                                       "user_responsable.img_profile", "clientes.nombres as name_client", 
                                                       "clientes.apellidos as last_name_client", "clients_tasks.responsable")
 
-                                    ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client")
-                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable")
-                                    ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable")
-                                    ->join("clients_tasks_followers", "clients_tasks_followers.id_task", "=", "clients_tasks.id_clients_tasks")
+                                    ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client", "left")
+                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable", "left")
+                                    ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable", "left")
+                                    ->join("clients_tasks_followers", "clients_tasks_followers.id_task", "=", "clients_tasks.id_clients_tasks", "left")
 
                                     ->with("followers")
 
