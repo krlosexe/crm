@@ -469,17 +469,17 @@
 						editable: true,
 						eventLimit: true, 
 						eventSources: [
-							{
-								url: 'api/calendar/tasks', 
-								color: '#4e73df',    
-								textColor: 'white'  ,
-								extraParams: {
-									rol      : name_rol,
-									id_user  : id_user,
-									asesoras : asesoras.length > 0 ? asesoras : 0
-								},
+							// {
+							// 	url: 'api/calendar/tasks', 
+							// 	color: '#4e73df',    
+							// 	textColor: 'white'  ,
+							// 	extraParams: {
+							// 		rol      : name_rol,
+							// 		id_user  : id_user,
+							// 		asesoras : asesoras.length > 0 ? asesoras : 0
+							// 	},
 								
-							},
+							// },
 
 
 							{
