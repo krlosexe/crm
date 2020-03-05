@@ -11,7 +11,7 @@
         
         <div class="row">
 
-           <div class="col-md-6">
+           <div class="col-md-5">
               
               <div class="row">
                 <div class="col-md-12">
@@ -23,6 +23,21 @@
                     </div>
                 </div>
               </div>
+
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Paciente</b></label>
+                        <select name="id_client" id="paciente-edit" class="form-control select2" required>
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                </div>
+              </div>
+
+
+
 
 
               <div class="row">
@@ -67,18 +82,68 @@
            </div>
 
 
-           <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for=""><b>Obervaciones</b></label>
-                        <textarea name="observaciones" id="observaciones-edit" class="form-control" cols="30" rows="5"></textarea>
+           <div class="col-md-7">
+              <div class="row" id="comments_edit">
+                  <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                          Foto
+                        </div>
+                        <div class="col-md-10">
+                          Text
+                        </div>
                     </div>
-                </div>
+                  </div>
               </div>
 
+
+
               <div class="row">
-                <div class="col-md-12">
+
+
+                    <div class="col-md-2">
+                            
+                    </div>
+
+                        
+                  <div class="col-md-10">
+                    <div class="form-group">
+                            <label for=""><b>Comentarios</b></label>
+                            <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
+                            <textarea id="summernote_edit"></textarea>
+                        </div>
+                    </div>
+
+                  </div>
+
+
+                  <div class="row">
+
+                     <div class="col-md-2">
+                           
+                    </div>
+
+                    <div class="col-md-10">
+                      <button type="button" id="add-comments"  class="btn btn-primary">
+                        Comentar
+                      </button>
+                    </div>
+                    
+                  </div>
+        
+              
+
+
+
+              <br><br>
+              <div class="row">
+
+                <div class="col-md-2">
+                            
+                            </div>
+
+
+                <div class="col-md-10">
                   <div class="form-group">
                         <label for=""><b>Seguidores</b></label>
                         <select name="followers[]" id="followers-edit" class="form-control select2" multiple required>
@@ -87,6 +152,7 @@
                     </div>
                 </div>
               </div>
+
 
 
            </div>

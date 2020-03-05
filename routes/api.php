@@ -46,8 +46,9 @@ Route::post('status-rol/{id}/{status}', 'RolesController@status');
 
 Route::resource('clients', 'ClientsController');
 Route::post('client/tasks', 'ClientsController@Tasks');
+Route::get('client/tasks', 'ClientsController@GetTasks');
 Route::put('client/tasks/{id}', 'ClientsController@TasksUpdate');
-Route::get('client/tasks/{id_client}', 'ClientsController@GetTasks');
+Route::get('client/tasks/{id_client}', 'ClientsController@GetTasksByClient');
 Route::get('client/task/status/{id}/{status}', 'ClientsController@TasksStatus');
 
 

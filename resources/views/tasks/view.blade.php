@@ -23,6 +23,22 @@
               </div>
 
 
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Paciente</b></label>
+                        <select name="id_client" id="paciente-view" class="form-control select2" required>
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                </div>
+              </div>
+
+
+
+
+
               <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -65,14 +81,18 @@
 
 
            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for=""><b>Obervaciones</b></label>
-                        <textarea name="observaciones" id="observaciones-view" class="form-control" cols="30" rows="5"></textarea>
+              <div class="row" id="comments">
+                  <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                          Foto
+                        </div>
+                        <div class="col-md-10">
+                          Text
+                        </div>
                     </div>
+                  </div>
                 </div>
-              </div>
 
               <div class="row">
                 <div class="col-md-12">

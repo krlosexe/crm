@@ -24,6 +24,18 @@
 
               <div class="row">
                 <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Paciente</b></label>
+                        <select name="id_client" id="paciente-store" class="form-control select2" required>
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-12">
                     <div class="form-group">
                           <label for=""><b>Asunto</b></label>
                           <input type="text" name="issue" id="issue-store" class="form-control" required >
@@ -67,9 +79,10 @@
            <div class="col-md-6">
               <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group">
-                        <label for=""><b>Obervaciones</b></label>
-                        <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea>
+                   <div class="form-group">
+                        <label for=""><b>Comentarios</b></label>
+                        <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
+                        <textarea id="summernote" name="comments"></textarea>
                     </div>
                 </div>
               </div>

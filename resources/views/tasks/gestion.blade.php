@@ -26,6 +26,11 @@
 		</style>
 
 
+	<link href="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.css" rel="stylesheet">
+    <script src="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.js"></script>
+
+
+
 	@endsection
 
 
@@ -134,15 +139,21 @@
 				$("#nav_tasks, #modulo_Tareas").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "citys");
+
+				$('#summernote').summernote({
+					'height' : 200
+				});
+
+
 			});
 
 
 			function update(){
-				enviarFormularioPut("#form-update", 'api/tasks', '#cuadro4', false, "#avatar-edit");
+				enviarFormularioPut("#form-update", 'api/client/tasks', '#cuadro4', false, "#avatar-edit");
 			}
 
 			function store(){
-				enviarFormulario("#store", 'api/tasks', '#cuadro2');
+				enviarFormulario("#store", 'api/client/tasks', '#cuadro2');
 			}
 
 
@@ -165,7 +176,7 @@
 					"serverSide":false,
 					"ajax":{
 						"method":"GET",
-						 "url":''+url+'/api/tasks',
+						 "url":''+url+'/api/client/tasks',
 						 "data": {
 							"rol"    : name_rol,
 							"id_user": id_user,
@@ -190,7 +201,7 @@
 								return botones;
 							}
 						},
-						{"data": "id_tasks"},
+						{"data": "id_clients_tasks"},
 						{"data":"name_responsable", 
 							render : function(data, type, row) {
 								return data+" "+row.last_name_responsable;
@@ -241,6 +252,9 @@
 
 				GetUsers("#responsable-store")
 				GetUsers("#followers-store")
+
+				getPacientes("#paciente-store")
+
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
@@ -255,9 +269,15 @@
 
 					GetUsers("#responsable-view")
 					GetUsers("#followers-view")
+
+					getPacientes("#paciente-view")
+
+
+
 					
 					$("#responsable-view").val(data.responsable).attr("disabled", "disabled")
 					$("#issue-view").val(data.issue).attr("disabled", "disabled")
+					$("#paciente-view").val(data.id_client).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
 					$("#time-view").val(data.time).attr("disabled", "disabled")
 					$("#observaciones-view").val(data.observaciones).attr("disabled", "disabled")
@@ -270,6 +290,34 @@
 
 					$("#followers-view").val(followers).attr("disabled", "disabled")
 					$("#followers-view").trigger("change");
+
+
+
+					var url=document.getElementById('ruta').value; 
+					var html = "";
+					$.map(data.comments, function (item, key) {
+						html += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html += '<div class="row">'
+								html += '<div class="col-md-2">'
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+									
+								html += '</div>'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div>'+item.comments+'</div>'
+
+									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+								html += '</div>'
+							html += '</div>'
+						html += '</div>'
+						
+					});
+
+					$("#comments").html(html)
+
+
+
 
 					cuadros('#cuadro1', '#cuadro3');
 				});
@@ -289,8 +337,9 @@
 
 					GetUsers("#responsable-edit")
 					GetUsers("#followers-edit")
-					
+					getPacientes("#paciente-edit")
 					$("#responsable-edit").val(data.responsable)
+					$("#paciente-edit").val(data.id_client)
 					$("#issue-edit").val(data.issue)
 					$("#fecha-edit").val(data.fecha)
 					$("#time-edit").val(data.time)
@@ -304,14 +353,63 @@
 
 					$("#followers-edit").val(followers)
 					$("#followers-edit").trigger("change");
-					cuadros('#cuadro1', '#cuadro4');
-					$("#id_edit").val(data.id_tasks)
+					
+					
+					$('#summernote_edit').summernote();
+					var url=document.getElementById('ruta').value; 
+					var html = "";
+					$.map(data.comments, function (item, key) {
+						html += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html += '<div class="row">'
+								html += '<div class="col-md-2">'
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+									
+								html += '</div>'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div>'+item.comments+'</div>'
+
+									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+								html += '</div>'
+							html += '</div>'
+						html += '</div>'
+						
+					});
+
+					$("#comments_edit").html(html)
+
+
+
+					$("#id_edit").val(data.id_clients_tasks)
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
 
 
-					
+			$("#add-comments").click(function (e) { 
+				
+				var html = ""
+
+
+				html += '<div class="col-md-12" style="margin-bottom: 15px">'
+					html += "<input type='hidden' name='comments[]' value='"+$("#summernote_edit").val()+"'>"
+					html += '<div class="row">'
+						html += '<div class="col-md-2">'
+							//html += "<img class='rounded' src='/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+							
+						html += '</div>'
+						html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+							html += '<div>'+$("#summernote_edit").val()+'</div>'
+
+							html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
+
+						html += '</div>'
+					html += '</div>'
+				html += '</div>'
+
+				$("#comments_edit").append(html)
+			});	
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -319,7 +417,7 @@
 			function desactivar(tbody, table){
 				$(tbody).on("click", "span.desactivar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/tasks/status/'+data.id_tasks+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
+					statusConfirmacion('api/tasks/status/'+data.id_clients_tasks+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
@@ -331,7 +429,7 @@
 			function activar(tbody, table){
 				$(tbody).on("click", "span.activar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/tasks/status/'+data.id_tasks+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
+					statusConfirmacion('api/tasks/status/'+data.id_clients_tasks+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
@@ -341,7 +439,7 @@
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/tasks/status/'+data.id_tasks+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
+					statusConfirmacion('api/tasks/status/'+data.id_clients_tasks+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
 			}
 

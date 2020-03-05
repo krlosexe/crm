@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Tasks;
 use App\Auditoria;
 use App\TasksFollowers;
+
+
+use App\ClientsTasks;
+use App\ClientsTasksFollowers;
+use App\ClientsTasksComments;
+
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
@@ -21,13 +27,13 @@ class TasksController extends Controller
             $rol     = $request["rol"];
             $id_user = $request["id_user"];
 
-            $tasks = Tasks::select("tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
+            $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
                                    "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis")
 
-                                ->join("auditoria", "auditoria.cod_reg", "=", "tasks.id_tasks")
+                                ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
 
-                                ->join("users as responsable", "responsable.id", "=", "tasks.responsable")
+                                ->join("users as responsable", "responsable.id", "=", "clients_tasks.responsable")
                                 ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
 
                                 ->with("followers")
@@ -35,38 +41,38 @@ class TasksController extends Controller
 
                                 ->where(function ($query) use ($rol, $id_user) {
                                     if($rol == "Asesor"){
-                                        $query->where("tasks.responsable", $id_user);
+                                        $query->where("clients_tasks.responsable", $id_user);
                                     }
                                 })
 
 
-                                ->where("auditoria.tabla", "tasks")
+                                ->where("auditoria.tabla", "clients_tasks")
                                 ->where("auditoria.status", "!=", "0")
-                                ->orderBy("tasks.id_tasks", "DESC")
+                                ->orderBy("clients_tasks.id_clients_tasks", "DESC")
                                 ->get();
 
 
 
             if($rol == "Asesor"){
 
-                $tasks_follow = Tasks::select("tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
-                                "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis")
+                $tasks_follow = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
+                                                    "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis")
 
-                                ->join("auditoria", "auditoria.cod_reg", "=", "tasks.id_tasks")
-                                ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                                    ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
+                                                    ->join("users", "users.id", "=", "auditoria.usr_regins")
 
-                                ->join("users as responsable", "responsable.id", "=", "tasks.responsable")
-                                ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
+                                                    ->join("users as responsable", "responsable.id", "=", "clients_tasks.responsable")
+                                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
 
-                                ->join("tasks_followers", "tasks_followers.id_task", "=", "tasks.id_tasks")
+                                                    ->join("clients_tasks_followers", "clients_tasks_followers.id_task", "=", "clients_tasks.id_clients_tasks")
 
-                                ->with("followers")
-                                
-                                ->where("tasks_followers.id_follower", $id_user)
-                                ->where("auditoria.tabla", "tasks")
-                                ->where("auditoria.status", "!=", "0")
-                                ->orderBy("tasks.id_tasks", "DESC")
-                                ->get();
+                                                    ->with("followers")
+                                                    
+                                                    ->where("clients_tasks_followers.id_follower", $id_user)
+                                                    ->where("auditoria.tabla", "clients_tasks")
+                                                    ->where("auditoria.status", "!=", "0")
+                                                    ->orderBy("clients_tasks.id_clients_tasks", "DESC")
+                                                    ->get();
 
 
                 foreach($tasks_follow as $key => $value){
@@ -232,7 +238,67 @@ class TasksController extends Controller
 
 
 
+    public function Migrate(){
+       
+        
 
+        $tasks = Tasks::select("tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
+                                   "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis", "auditoria.usr_regins")
+
+                                ->join("auditoria", "auditoria.cod_reg", "=", "tasks.id_tasks")
+                                ->join("users", "users.id", "=", "auditoria.usr_regins")
+
+                                ->join("users as responsable", "responsable.id", "=", "tasks.responsable")
+                                ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
+
+                                ->with("followers")
+
+
+                                ->where("auditoria.tabla", "tasks")
+                                ->where("auditoria.status", "!=", "0")
+                                ->orderBy("tasks.id_tasks", "DESC")
+                                ->get();
+
+        
+        foreach($tasks as $value){
+            echo json_encode($value["observaciones"])."<br><br>";
+
+            $data = [];
+            $data["responsable"] = $value["responsable"];
+            $data["issue"]       = $value["issue"]; 
+            $data["fecha"]       = $value["fecha"];
+            $data["time"]        = $value["time"];
+            $data["status_task"] = $value["status_task"]; 
+            $store = ClientsTasks::create($data);
+
+
+            $auditoria              = new Auditoria;
+            $auditoria->tabla       = "clients_tasks";
+            $auditoria->cod_reg     = $store["id_clients_tasks"];
+            $auditoria->status      = 1;
+            $auditoria->usr_regins  = $value["usr_regins"];
+            $auditoria->save();
+
+
+            $followers = [];
+            foreach($value["followers"] as $key => $follow){
+                $array = [];
+                $array["id_task"]     = $store["id_clients_tasks"];
+                $array["id_follower"] = $follow["id_follower"];
+                array_push($followers, $array);
+            }
+            ClientsTasksFollowers::insert($followers);
+
+            $comments = [];
+            $comments["id_task"]   = $store["id_clients_tasks"];
+            $comments["id_user"]   = $value["usr_regins"];
+            $comments["comments"]  = $value["observaciones"];
+            ClientsTasksComments::create($comments);
+
+
+        }
+
+    }
 
 
     /**

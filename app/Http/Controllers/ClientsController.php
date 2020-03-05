@@ -362,7 +362,7 @@ class ClientsController extends Controller
 
 
 
-    public function GetTasks(Request $request, $id_client){
+    public function GetTasksByClient(Request $request, $id_client){
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             
             $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
@@ -390,6 +390,51 @@ class ClientsController extends Controller
             return response()->json("No esta autorizado")->setStatusCode(400);
         }
     }   
+
+
+
+
+    public function GetTasks(Request $request){
+        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+            
+
+            $rol     = $request["rol"];
+            $id_user = $request["id_user"];
+
+
+
+            $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
+                                   "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis")
+
+                                    ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
+                                    ->join("users", "users.id", "=", "auditoria.usr_regins")
+
+                                    ->join("users as responsable", "responsable.id", "=", "clients_tasks.responsable")
+                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
+
+                                    ->with("followers")
+                                    ->with("comments")
+
+
+                                    ->where(function ($query) use ($rol, $id_user) {
+                                        if($rol == "Asesor"){
+                                            $query->where("clients_tasks.responsable", $id_user);
+                                        }
+                                    })
+
+                                    
+
+                                    ->where("auditoria.tabla", "clients_tasks")
+                                    ->where("auditoria.status", "!=", "0")
+                                    ->orderBy("clients_tasks.id_clients_tasks", "DESC")
+                                    ->get();
+
+
+                echo json_encode($tasks);
+        }else{
+            return response()->json("No esta autorizado")->setStatusCode(400);
+        }
+    } 
 
 
 
