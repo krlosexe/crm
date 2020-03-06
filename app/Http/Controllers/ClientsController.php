@@ -17,6 +17,13 @@ use App\ClientsTasksComments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+
+
+use App\Exports\ClientsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+
+
 class ClientsController extends Controller
 {
     /**
@@ -457,6 +464,12 @@ class ClientsController extends Controller
      
     }
 
+
+
+
+    public function Excel(){
+        return Excel::download(new ClientsExport, 'ClientExport.xlsx');
+    }
 
 
 
