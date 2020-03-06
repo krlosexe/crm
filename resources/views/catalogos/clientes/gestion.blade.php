@@ -229,71 +229,21 @@
 
 				$("#xls").remove();
 
-				var a = '<button id="xls" target="_blank" class="dt-button buttons-excel buttons-html5">Excel</button>';
+				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$('.dt-buttons').append(a);
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="assets/ReporteCorrida.xls" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
-
-				generataPdf(table);
-
-
+				$("#xls").click(function (e) { 
+					url = $("#view_xls").attr("href");
+					window.open(url, '_blank');
+				});
 
 			}
 
 
 			
-			function generataPdf(table) {
-
-				$("#xls").click(function() {
-
-					var url=document.getElementById('ruta').value;
-					$.ajax({
-							
-						url:''+url+'/api/clients/export/excel',
-						type: 'GET',
-						dataType: 'JSON',
-						beforeSend: function() {
-							mensajes('info', "Espere por favor");
-						},
-						error: function() {
-
-							// $("#cancelar_descuento").removeAttr("disabled");
-
-							// warning("A ocurrido un error");
-
-						},
-
-						success: function(data) {
-
-							$("#alertas").css("display", "none");
-
-							//console.log(data);
-
-							url = $("#view_pdf").attr("href");
-
-							window.open(url, '_blank');
-
-							// $("#cancelar_descuento").removeAttr("disabled");
-
-							// warning("El descuento Especial ha sido cancelado");
-
-						}
-
-					});
-
-
-
-
-
-				});
-
-				}
-
-
-
-
 
 			function nuevo() {
 				$("#alertas").css("display", "none");
