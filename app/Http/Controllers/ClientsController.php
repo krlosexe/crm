@@ -496,11 +496,14 @@ class ClientsController extends Controller
                 $array["id_user_asesora"] = $request["id_user_asesora"];
                 $array["id_line"]         = $request["id_line"];
 
-
-
-                echo json_encode($array)."<br><br>";
-
+             //  echo json_encode($array)."<br><br>";
                 $cliente = Clients::create($array);
+
+                $array["id_client"]   = $cliente["id_cliente"];
+                
+                ClientInformationAditionalSurgery::create($array);
+                ClientClinicHistory::create($array);
+                ClientCreditInformation::create($array);
 
                 $auditoria              = new Auditoria;
                 $auditoria->tabla       = "clientes";
@@ -513,8 +516,8 @@ class ClientsController extends Controller
             $fila++;
         }
 
-
-       
+        $data = array('mensagge' => "Se importaron ".$fila." contactos");    
+        return response()->json($data)->setStatusCode(200);
         
         
     }
