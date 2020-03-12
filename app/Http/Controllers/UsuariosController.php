@@ -75,7 +75,7 @@ class UsuariosController extends Controller
 
                           ->where("users_line_business.id_line", $id_line)
 
-                          ->where("roles.nombre_rol", "Asesor")
+                         // ->where("roles.nombre_rol", "Asesor")
                           ->where("auditoria.tabla", "users")
                           ->where("auditoria.status", "!=", "0")
                          // ->where("users.id_line", "=", $id_line)
