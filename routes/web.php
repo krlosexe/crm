@@ -150,3 +150,6 @@ Route::get('revision-appointment/client/{id_client}/{option}', function ($id_cli
 
 Route::get('tasks/migrate/clients', "TasksController@Migrate");
 
+Route::get('client-import', function () {
+    return view('catalogos.clientes.import');
+});

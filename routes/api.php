@@ -127,4 +127,4 @@ Route::get('email/forms', 'NotificationsController@Email');
 Route::post('email/forms', 'NotificationsController@Email');
 
 Route::get('clients/export/excel', 'ClientsController@Excel');
-
+Route::post('clients/import/', 'ClientsController@Import');

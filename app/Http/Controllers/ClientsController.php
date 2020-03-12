@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Exports\ClientsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-
+use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class ClientsController extends Controller
 {
@@ -472,6 +472,52 @@ class ClientsController extends Controller
     }
 
 
+
+    public function Import(Request $request){
+        $file            = $request->file('file_import');
+        $destinationPath = 'import_csv';
+        $name_file       = $file->getClientOriginalName();
+        $file->move($destinationPath,$name_file);
+
+        $xmldata = simplexml_load_file("import_csv/".$name_file) or die("Failed to load");
+       
+        $fila = 0;
+
+        $data = [];
+        foreach($xmldata->Worksheet->Table->Row as $key => $data) {   
+
+            if($fila != 0){
+                $array = [];
+                $array["origen"]          = "Pauta ".(string) $data->Cell[1]->{'Data'};
+                $array["nombres"]         = (string) $data->Cell[2]->{'Data'};
+                $array["telefono"]        = (string) $data->Cell[3]->{'Data'};
+                $array["email"]           = (string) $data->Cell[4]->{'Data'};
+                $array["direccion"]       = (string) $data->Cell[5]->{'Data'};
+                $array["id_user_asesora"] = $request["id_user_asesora"];
+                $array["id_line"]         = $request["id_line"];
+
+
+
+                echo json_encode($array)."<br><br>";
+
+                $cliente = Clients::create($array);
+
+                $auditoria              = new Auditoria;
+                $auditoria->tabla       = "clientes";
+                $auditoria->cod_reg     = $cliente["id_cliente"];
+                $auditoria->status      = 1;
+                $auditoria->usr_regins  = $request["id_user"];
+                $auditoria->save();
+
+            }
+            $fila++;
+        }
+
+
+       
+        
+        
+    }
 
 
     /**
