@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
 use App\Clients;
 use App\Auditoria;
 use App\ClientClinicHistory;
@@ -12,7 +13,7 @@ use App\ClientInformationAditionalSurgery;
 use App\ClientsTasks;
 use App\ClientsTasksFollowers;
 use App\ClientsTasksComments;
-
+use App\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -518,6 +519,68 @@ class ClientsController extends Controller
 
         $data = array('mensagge' => "Se importaron ".$fila." contactos");    
         return response()->json($data)->setStatusCode(200);
+        
+        
+    }
+
+
+    public function ClientForms(Request $request){
+
+        $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                        ->where("users.queue", 0)
+                        ->first();
+
+       if($users){
+
+            $request["id_user_asesora"] =  $users["id"];
+            $cliente = Clients::create($request->all());
+                    
+            $request["id_client"] = $cliente["id_cliente"];
+            
+            ClientInformationAditionalSurgery::create($request->all());
+            ClientClinicHistory::create($request->all());
+            ClientCreditInformation::create($request->all());
+
+            $auditoria              = new Auditoria;
+            $auditoria->tabla       = "clientes";
+            $auditoria->cod_reg     = $cliente["id_cliente"];
+            $auditoria->status      = 1;
+            $auditoria->usr_regins  = $users["id"];
+            $auditoria->save();
+
+
+            $update = User::find($users["id"]);
+            $update->queue = 1;
+            $update->save();
+
+
+
+            $subject = "Formulario Web";
+
+            //$for = "cardenascarlos18@gmail.com";
+            $for = $users["email"];
+            $for = "cardenascarlos18@gmail.com";
+
+            $request["msg"]  = "Un Paciente a registrado un Formulario Web";
+
+            Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+           
+           echo json_encode($users);
+
+       }else{
+          
+           $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                        ->where("users.queue", 1)
+                        ->update(["queue" => 0]);
+
+            $this->ClientForms($request);
+       }
         
         
     }

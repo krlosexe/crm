@@ -51,6 +51,7 @@ Route::put('client/tasks/{id}', 'ClientsController@TasksUpdate');
 Route::get('client/tasks/{id_client}', 'ClientsController@GetTasksByClient');
 Route::get('client/task/status/{id}/{status}', 'ClientsController@TasksStatus');
 
+Route::post('clients/forms', 'ClientsController@ClientForms');
 
 Route::get('clients/identification/{identification}', 'ClientsController@GetByIdentification');
 Route::get('status-cliente/{id}/{status}', 'ClientsController@status');

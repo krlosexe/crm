@@ -183,9 +183,9 @@
 
        		<input type="hidden" name="state" value="No Contactada">
 			    <input type="hidden" name="origen" value="Formulario Web">
-          <input type="hidden" name="id_user" id="id_user" value="{{$id_user}}">
+          
           <input type="hidden" name="id_line" id="id_line" value="{{$id_line}}">
-          <input type="hidden" name="id_user_asesora" value="{{$id_user}}">
+          
           <br>
           <br>
         </div>
@@ -270,7 +270,7 @@
 
 	function store(){
 		id_user = 69;
-		enviarFormularioForm("#store", 'api/clients', '#cuadro2');
+		enviarFormularioForm("#store", 'api/clients/forms', '#cuadro2');
 	}
 
 
