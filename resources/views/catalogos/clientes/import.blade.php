@@ -164,12 +164,65 @@
 				verifyPersmisos(id_user, tokens, "clients");
 
 
-				GetAsesorasbyBusisnessLine("#linea-negocio", "#asesora");
+				GetAsesorasbyBusisnessLine2("#linea-negocio", "#asesora");
 				GetBusinessLine("#linea-negocio");
 
 				cuadros("", "#cuadro1");
 
 			});
+
+
+
+
+
+			function GetAsesorasbyBusisnessLine2(line_business, asesoras){
+
+				$(line_business).change(function (e) { 
+				
+					var id_line_business = $(this).val()
+					var url=document.getElementById('ruta').value;
+					$.ajax({
+						url:''+url+'/api/get-asesoras-business-line/'+id_line_business,
+						type:'GET',
+						data: {
+							"id_user": id_user,
+							"token"  : tokens,
+						},
+						dataType:'JSON',
+						async: false,
+						beforeSend: function(){
+						// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+						},
+						error: function (data) {
+						//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+						},
+						success: function(data){
+						$(asesoras+" option").remove();
+						$(asesoras).append($('<option>',
+						{
+							value: "",
+							text : "Seleccione"
+						}));
+					
+						$.each(data, function(i, item){
+							if (item.status == 1) {
+								$(asesoras).append($('<option>',
+								{
+									value: item.id,
+									text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
+									selected: item.id == id_user ? true : false
+								}));
+							}
+						});
+
+						}
+					});
+				});
+
+			}
+
+
+
 
 
 			function store(){
