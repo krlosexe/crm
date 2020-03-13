@@ -308,7 +308,7 @@
                  success: function(respuesta){
                   warning(respuesta.mensagge)
 
-                  enviarEmail()
+                //  enviarEmail()
                 }	
 
             });

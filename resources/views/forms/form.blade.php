@@ -273,8 +273,8 @@
                 },
                  success: function(respuesta){
                   warning(respuesta.mensagge)
-
-                  enviarEmail()
+                  $("#store")[0].reset();
+                 // enviarEmail()
                 }	
 
             });
@@ -318,7 +318,7 @@
             },
               success: function(respuesta){
                 
-              $("#store")[0].reset();
+                 $("#store")[0].reset();
             }	
 
         });
