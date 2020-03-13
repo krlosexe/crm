@@ -570,7 +570,8 @@ class ClientsController extends Controller
                 $msj->to($for);
             });
            
-           echo json_encode($users);
+            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+            return response()->json($data)->setStatusCode(200);
 
        }else{
           
