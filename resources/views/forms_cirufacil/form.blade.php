@@ -307,7 +307,7 @@
                 },
                  success: function(respuesta){
                   warning(respuesta.mensagge)
-
+                  $("#store")[0].reset();
                 //  enviarEmail()
                 }	
 
@@ -351,7 +351,7 @@
             },
               success: function(respuesta){
                 
-              $("#store")[0].reset();
+              
             }	
 
         });
