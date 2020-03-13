@@ -560,7 +560,7 @@ class ClientsController extends Controller
 
             //$for = "cardenascarlos18@gmail.com";
             $for = $users["email"];
-            $for = "cardenascarlos18@gmail.com";
+         //   $for = "cardenascarlos18@gmail.com";
 
             $request["msg"]  = "Un Paciente a registrado un Formulario Web";
 
