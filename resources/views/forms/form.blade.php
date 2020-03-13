@@ -236,7 +236,7 @@
 
 	function store(){
 		id_user = 69;
-		enviarFormularioForm("#store", 'api/clients', '#cuadro2');
+		enviarFormularioForm("#store", 'api/clients/forms', '#cuadro2');
 	}
 
 
