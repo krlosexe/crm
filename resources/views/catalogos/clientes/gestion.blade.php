@@ -444,11 +444,11 @@
 					$("#medication_edit").prop("checked", data.medication ? true : false)
 					$("#allergic_edit").prop("checked", data.allergic ? true : false)
 
-					$("#number_children_edit").val(data.number_children).prop("disabled", data.children ? false : true)
-					$("#previous_surgery_edit").val(data.previous_surgery).prop("disabled", data.surgery ? false : true)
-					$("#major_disease_edit").val(data.major_disease).prop("disabled", data.disease ? false : true)
-					$("#drink_medication_edit").val(data.drink_medication).prop("disabled", data.medication ? false : true)
-					$("#allergic_medication_edit").val(data.allergic_medication).prop("disabled", data.allergic ? false : true)
+					$("#number_children_edit").val(data.number_children).prop("readonly", data.children ? false : true)
+					$("#previous_surgery_edit").val(data.previous_surgery).prop("readonly", data.surgery ? false : true)
+					$("#major_disease_edit").val(data.major_disease).prop("readonly", data.disease ? false : true)
+					$("#drink_medication_edit").val(data.drink_medication).prop("readonly", data.medication ? false : true)
+					$("#allergic_medication_edit").val(data.allergic_medication).prop("readonly", data.allergic ? false : true)
 
 
 					$("#dependent_independent_edit").val(data.dependent_independent)
@@ -509,7 +509,7 @@
 			function Children(checkbox, input){
 				$(checkbox).change(function (e) { 
 					if ($(checkbox).is(':checked')){
-						$(input).removeAttr("disabled").focus();
+						$(input).removeAttr("readonly").focus();
 					}else{
 						$(input).val("0").attr("readonly", "readonly");
 					}
@@ -521,7 +521,7 @@
 			function Surgery(checkbox, input){
 				$(checkbox).change(function (e) { 
 					if ($(checkbox).is(':checked')){
-						$(input).removeAttr("disabled").focus();
+						$(input).removeAttr("readonly").focus();
 					}else{
 						$(input).val("0").attr("readonly", "readonly");
 					}
@@ -533,7 +533,7 @@
 			function Disease(checkbox, input){
 				$(checkbox).change(function (e) { 
 					if ($(checkbox).is(':checked')){
-						$(input).removeAttr("disabled").focus();
+						$(input).removeAttr("readonly").focus();
 					}else{
 						$(input).val("0").attr("readonly", "readonly");
 					}
@@ -544,7 +544,7 @@
 			function Medication(checkbox, input){
 				$(checkbox).change(function (e) { 
 					if ($(checkbox).is(':checked')){
-						$(input).removeAttr("disabled").focus();
+						$(input).removeAttr("readonly").focus();
 					}else{
 						$(input).val("0").attr("readonly", "readonly");
 					}
@@ -554,7 +554,7 @@
 			function Allergic(checkbox, input){
 				$(checkbox).change(function (e) { 
 					if ($(checkbox).is(':checked')){
-						$(input).removeAttr("disabled").focus();
+						$(input).removeAttr("readonly").focus();
 					}else{
 						$(input).val("0").attr("readonly", "readonly");
 					}

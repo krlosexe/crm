@@ -324,7 +324,7 @@
 
                             <div class="col-md-5">
                                 <label for="number_children"><b>Numero de Hijos</b></label>
-                                <input type="number" name="number_children" class="form-control form-control-user" disabled id="number_children_edit" placeholder="PJ. 1">
+                                <input type="number" name="number_children" class="form-control form-control-user" readonly id="number_children_edit" placeholder="PJ. 1">
                             </div>
 
                         </div>
@@ -368,7 +368,7 @@
 
                             <div class="col-md-8">
                                     <label for="previous_surgery_edit"><b>Cirugías Anteriores</b></label>
-                                <input type="text" name="previous_surgery" class="form-control form-control-user" disabled id="previous_surgery_edit" placeholder="PJ. Mamaria">
+                                <input type="text" name="previous_surgery" class="form-control form-control-user" readonly id="previous_surgery_edit" placeholder="PJ. Mamaria">
                             </div>
 
 
@@ -385,7 +385,7 @@
 
                             <div class="col-md-8">
                                     <label for="major_disease"><b>Cual/es</b></label>
-                                <input type="text" name="major_disease" class="form-control form-control-user" disabled id="major_disease_edit" placeholder="PJ. Asma">
+                                <input type="text" name="major_disease" class="form-control form-control-user" readonly id="major_disease_edit" placeholder="PJ. Asma">
                             </div>
 
 
@@ -402,7 +402,7 @@
 
                             <div class="col-md-8">
                                     <label for="drink_medication"><b>Medicamentos que toma</b></label>
-                                <input type="text" name="drink_medication" class="form-control form-control-user" disabled id="drink_medication_edit" placeholder="PJ. Asma">
+                                <input type="text" name="drink_medication" class="form-control form-control-user" readonly id="drink_medication_edit" placeholder="PJ. Asma">
                             </div>
 
 
@@ -419,7 +419,7 @@
 
                             <div class="col-md-8">
                                     <label for="allergic_medication"><b>A que medicamentos o Suturas es Alergic@?</b></label>
-                                <input type="text" name="allergic_medication" class="form-control form-control-user" disabled id="allergic_medication_edit" placeholder="PJ. Acetaminofen" >
+                                <input type="text" name="allergic_medication" class="form-control form-control-user" readonly id="allergic_medication_edit" placeholder="PJ. Acetaminofen" >
                             </div>
 
 
