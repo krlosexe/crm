@@ -190,7 +190,7 @@
           <br>
         </div>
           <center>
-            <button class="btn btn-primary btn-user">
+            <button id="btn-submit"  class="btn btn-primary btn-user">
                 Enviar
             </button>
 
@@ -292,20 +292,29 @@
                 processData:false,
                 beforeSend: function(){
                     mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+
+                    $('#btn-submit').attr("disabled", "disabled")
+                    $('#btn-submit').text("Espere...")
+
+
                 },
                 error: function (repuesta) {
-                    $('input[type="submit"]').removeAttr('disabled'); //activa el input submit
+
+                    $('#btn-submit').removeAttr('disabled'); //activa el input submit
+                    $('#btn-submit').text("Enviar")
                     var errores=repuesta.responseText;
                     if(errores!=""){
-						mensajes('danger', errores);
-						warning(respuesta.errores)
-                    }else{
-						mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
-						warning("Ha ocurrido un error, por favor intentelo de nuevo.")
+                      mensajes('danger', errores);
+                      warning(respuesta.errores)
+                              }else{
+                      mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
+                      warning("Ha ocurrido un error, por favor intentelo de nuevo.")
 					}
 					   
                 },
                  success: function(respuesta){
+                     $('#btn-submit').removeAttr('disabled'); //activa el input submit
+                    $('#btn-submit').text("Enviar")
                   warning(respuesta.mensagge)
                   $("#store")[0].reset();
                 //  enviarEmail()
