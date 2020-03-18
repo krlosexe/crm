@@ -83,9 +83,9 @@ class ValuationsController extends Controller
 
 
 
-            $request["table"]    = "valuations";
-            $request["id_event"] = $store["id_valuations"];
-            Comments::create($request->all());
+            //$request["table"]    = "valuations";
+           // $request["id_event"] = $store["id_valuations"];
+          //  Comments::create($request->all());
 
 
             $auditoria              = new Auditoria;
