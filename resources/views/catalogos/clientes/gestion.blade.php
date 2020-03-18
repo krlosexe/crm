@@ -67,6 +67,28 @@
 		                  </button>
 			            </div>
 			            <div class="card-body">
+
+							<div class="row">
+							
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Filtrar por : Linea de Negocio</b></label>
+										<select name="id_line" id="linea-negocio-filter" class="form-control select2 disabled" required>
+											<option value="">Seleccione</option>
+										</select>
+									</div>
+								</div>
+
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Filtrar por : Asesora</b></label>
+										<select name="adviser[]" id="id_asesora_valoracion-filter" class="form-control select2 disabled" multiple>
+											<option value="">Seleccione</option>
+										</select>
+									</div>
+								</div>
+							</div>
 			              <div class="table-responsive">
 			                <table class="table table-bordered" id="table" width="100%" cellspacing="0">
 			                  <thead>
@@ -127,13 +149,27 @@
 		
 			$(document).ready(function(){
 				store();
-				list();
+	 			list();
 				update();
 
 				$("#collapse_Catálogos").addClass("show");
 				$("#nav_clients, #modulo_Catálogos").addClass("active");
 
+				GetAsesorasValoracion("#id_asesora_valoracion-filter")
+				GetBusinessLine("#linea-negocio-filter");
+
+
+				GetAsesorasbyBusisnessLine("#linea-negocio-filter", "#id_asesora_valoracion-filter");
+				
+
 				verifyPersmisos(id_user, tokens, "clients");
+			});
+
+
+			$("#linea-negocio-filter, #id_asesora_valoracion-filter").change(function (e) { 
+
+				list($("#linea-negocio-filter").val(), $("#id_asesora_valoracion-filter").val(), "")
+
 			});
 
 
@@ -150,28 +186,31 @@
 
 
 
-			function list(cuadro) {
+			function list(business_line, adviser,cuadro) {
 				
 				var data = {
 					"id_user": id_user,
 					"token"  : tokens,
 				};
+
+
 				$('#table tbody').off('click');
 				var url=document.getElementById('ruta').value; 
 				cuadros(cuadro, "#cuadro1");
 
 				var table=$("#table").DataTable({
 					"destroy":true,
-					
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
 						"method":"GET",
 						 "url":''+url+'/api/clients',
 						 "data": {
-							"id_user": id_user,
-							"token"  : tokens,
-							"rol"    : name_rol,
+							"id_user"       : id_user,
+							"token"         : tokens,
+							"rol"           : name_rol,
+							"business_line" : business_line,
+							"adviser"       : adviser
 						},
 						"dataSrc":""
 					},

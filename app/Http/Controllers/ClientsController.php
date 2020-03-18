@@ -40,7 +40,17 @@ class ClientsController extends Controller
 
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            
+        
+            $business_line = 0;
+            if(isset($request["business_line"])){
+                $business_line = $request["business_line"];
+            }
+
+            $adviser = 0;
+            if(isset($request["adviser"])){
+              $adviser = $request["adviser"];
+            }
+
             $data = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
                                        "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
                                        "datos_personales.apellido_p as apellido_register"
@@ -60,6 +70,24 @@ class ClientsController extends Controller
                                 //         $query->orWhere("clientes.id_asesora_valoracion", $id_user);
                                 //     }
                                 // })
+
+
+                                ->where(function ($query) use ($business_line) {
+                                    if($business_line != 0){
+                                        $query->where("clientes.id_line", $business_line);
+                                    }
+                                })
+
+
+
+                                ->where(function ($query) use ($adviser) {
+                                    if($adviser != 0){
+                                        $query->whereIn("clientes.id_user_asesora", $adviser);
+                                    }
+                                }) 
+
+
+
 
 
                                 ->where("auditoria.tabla", "clientes")
