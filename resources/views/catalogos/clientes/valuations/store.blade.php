@@ -34,9 +34,12 @@
                     </div>
                 </div>
 
+                
+
               </div>
 
 
+            
               <div class="row">
 
                   <div class="col-md-6">
@@ -59,6 +62,19 @@
                         </div>
                       </div>
                   </div>
+
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for=""><b>Estatus</b></label>
+                        <select name="status" id="status-store" class="form-control select2" required>
+                            <option value="0">Pendiente</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
                   
               </div>
 
@@ -77,28 +93,18 @@
                     </div>
                   </div>
               </div>
+
+
               <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group">
-                        <label for=""><b>Obervaciones</b></label>
-                        <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea>
+                   <div class="form-group">
+                        <label for=""><b>Comentarios</b></label>
+                        <textarea id="summernote" name="comment"></textarea>
                     </div>
                 </div>
               </div>
-           </div>
 
 
-           <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for=""><b>Estatus</b></label>
-                        <select name="status" id="status-store" class="form-control select2" required>
-                            <option value="0">Pendiente</option>
-                        </select>
-                    </div>
-                </div>
-              </div>
            </div>
 
 

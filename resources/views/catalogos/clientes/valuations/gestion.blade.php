@@ -32,6 +32,13 @@
 
   <link href="<?= url('/') ?>/vendor/select2-4.0.11/dist/css/select2.min.css" rel="stylesheet" />
 
+
+  <link href="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.css" rel="stylesheet">
+    <script src="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.js"></script>
+
+
+	
+
   
   @if(Request::path() != '/')
 
@@ -252,6 +259,14 @@
 				$("#nav_valuations, #modulo_Citas").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "citys");
+
+
+				$('#summernote').summernote({
+					'height' : 200
+				});
+
+
+
 			});
 
 			var  option = {{$option}};

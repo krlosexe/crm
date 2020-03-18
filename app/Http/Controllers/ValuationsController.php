@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Auditoria;
 use App\Valuations;
+use App\Comments;
 use Illuminate\Http\Request;
 
 class ValuationsController extends Controller
@@ -78,6 +79,14 @@ class ValuationsController extends Controller
             }
           
             $store = Valuations::create($request->all());
+
+
+
+
+            $request["table"]    = "valuations";
+            $request["id_event"] = $store["id_valuations"];
+            Comments::create($request->all());
+
 
             $auditoria              = new Auditoria;
             $auditoria->tabla       = "valuations";

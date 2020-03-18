@@ -168,7 +168,7 @@
 
 			$("#linea-negocio-filter, #id_asesora_valoracion-filter").change(function (e) { 
 
-				list($("#linea-negocio-filter").val(), $("#id_asesora_valoracion-filter").val(), "")
+				list($("", "#linea-negocio-filter").val(), $("#id_asesora_valoracion-filter").val())
 
 			});
 
@@ -186,7 +186,7 @@
 
 
 
-			function list(business_line, adviser,cuadro) {
+			function list(cuadro, business_line, adviser) {
 				
 				var data = {
 					"id_user": id_user,

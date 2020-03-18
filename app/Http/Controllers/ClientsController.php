@@ -14,6 +14,7 @@ use App\ClientsTasks;
 use App\ClientsTasksFollowers;
 use App\ClientsTasksComments;
 use App\User;
+use App\Comments;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -174,6 +175,8 @@ class ClientsController extends Controller
                 ClientInformationAditionalSurgery::create($request->all());
                 ClientClinicHistory::create($request->all());
                 ClientCreditInformation::create($request->all());
+
+                
 
                 $auditoria              = new Auditoria;
                 $auditoria->tabla       = "clientes";
