@@ -168,7 +168,7 @@
 
 			$("#linea-negocio-filter, #id_asesora_valoracion-filter").change(function (e) { 
 
-				list($("", "#linea-negocio-filter").val(), $("#id_asesora_valoracion-filter").val())
+				list("", $("#linea-negocio-filter").val(), $("#id_asesora_valoracion-filter").val())
 
 			});
 
@@ -192,6 +192,8 @@
 					"id_user": id_user,
 					"token"  : tokens,
 				};
+
+				console.log(business_line)
 
 
 				$('#table tbody').off('click');
