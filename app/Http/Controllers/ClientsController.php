@@ -176,8 +176,6 @@ class ClientsController extends Controller
                 ClientClinicHistory::create($request->all());
                 ClientCreditInformation::create($request->all());
 
-                
-
                 $auditoria              = new Auditoria;
                 $auditoria->tabla       = "clientes";
                 $auditoria->cod_reg     = $cliente["id_cliente"];

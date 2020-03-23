@@ -571,6 +571,16 @@
 							
 							$("#observaciones-view").val(calEvent.event.extendedProps.observaciones)
 
+
+
+
+							$("#clinic-input, #observations-input").css("display", "block")
+							$("#comments-input").css("display", "none")
+							$("#paciente-input").css("display", "none")
+							$("#comments2-input").css("display", "none")
+
+								
+
 							var img = "<img class='rounded' style='height: 8rem; width: 8rem; margin: 1%; border-radius: 50%!important;' src='img/usuarios/profile/"+calEvent.event.extendedProps.img_profile+"'>"
 						
 							$("#img_profile_responsable").html(img)
@@ -585,6 +595,54 @@
 
 
 							if(calEvent.event.extendedProps.valuations == true){
+								$("#observations-input").css("display", "none")
+								$("#comments-input").css("display", "block")
+								$("#paciente-input").css("display", "block")
+								$("#comments2-input").css("display", "block")
+								$('#summernote').summernote();
+								$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
+
+								var html_comments = "";
+
+
+								if(calEvent.event.extendedProps.observaciones != null){
+									html_comments += '<div class="col-md-12" style="margin-bottom: 15px">'
+										html_comments += '<div class="row">'
+											html_comments += '<div class="col-md-2">'
+												
+											html_comments += '</div>'
+											html_comments += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+												html_comments += '<div>'+calEvent.event.extendedProps.observaciones+'</div>'
+											html_comments += '</div>'
+										html_comments += '</div>'
+									html_comments += '</div>'
+								}
+
+					
+								$.map(calEvent.event.extendedProps.comments, function (item, key) {
+									html_comments += '<div class="col-md-12" style="margin-bottom: 15px">'
+										html_comments += '<div class="row">'
+											html_comments += '<div class="col-md-2">'
+												html_comments += "<img class='rounded' src='img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+												
+											html_comments += '</div>'
+											html_comments += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;font-size: 11px">'
+												html_comments += '<div>'+item.comment+'</div>'
+
+												html_comments += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+											html_comments += '</div>'
+										html_comments += '</div>'
+									html_comments += '</div>'
+									
+								});
+
+								$("#comments").html(html_comments)
+
+
+
+
 
 								enviarFormularioPutEvent("#update_event", 'api/valuations', '#cuadro4', false, "#avatar-edit");
 								$("#id_edit").val(calEvent.event.extendedProps.id_valuations)
@@ -669,10 +727,7 @@
 
 
 							}else{
-								$("#clinic-input, #observations-input").css("display", "block")
-								$("#comments-input").css("display", "none")
-								$("#paciente-input").css("display", "none")
-								$("#comments2-input").css("display", "none")
+								
 							}
 
 

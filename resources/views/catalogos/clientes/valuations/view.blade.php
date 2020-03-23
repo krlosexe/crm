@@ -65,27 +65,7 @@
               </div>
 
 
-              <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for=""><b>Estatus</b></label>
-                        <select name="status" id="status-view" class="form-control select2" required>
-                            <option value="0">Pendiente</option>
-                            <option value="1">Procesado</option>
-                            <option value="2">Cancelado</option>
-                        </select>
-                    </div>
-                </div>
-              </div>
-
               
-
-
-
-           </div>
-
-
-           <div class="col-md-6">
 
 
               <div class="row">
@@ -99,14 +79,22 @@
                   </div>
               </div>
 
+
+
+
               <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for=""><b>Obervaciones</b></label>
-                        <textarea name="observaciones" id="observaciones-view" class="form-control" cols="30" rows="5"></textarea>
+                        <label for=""><b>Estatus</b></label>
+                        <select name="status" id="status-view" class="form-control select2" required>
+                            <option value="0">Pendiente</option>
+                            <option value="1">Procesado</option>
+                            <option value="2">Cancelado</option>
+                        </select>
                     </div>
                 </div>
               </div>
+
 
 
               <div class="col-md-12">
@@ -124,6 +112,52 @@
                     </div>
                 </div>
               </div>
+
+
+
+
+              
+
+
+
+           </div>
+
+
+           <div class="col-md-6">
+
+               <div class="row">
+                  <div class="col-md-12">
+                      <div class="row">
+                          <div class="col-md-2">
+                            <h3 id="code-view"></h3>
+                          </div>
+                          <div class="col-md-2">
+                             <span onclick="copyToClipboard('#code-view')" class='consultar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-copy  ' style='margin-bottom:5px'></i></span> 
+                          </div>
+                        
+                      </div>
+                  </div>
+                </div>
+
+
+                <br><br>
+
+
+              <div class="row" id="comments">
+                  <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                          Foto
+                        </div>
+                        <div class="col-md-10">
+                          Text
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              
 
 
 

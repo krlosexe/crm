@@ -7,10 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Valuations extends Model
 {
     protected $fillable = [
-        'id_cliente', 'clinic','id_asesora_valoracion', 'fecha', 'time', 'time_end', 'type','observaciones', 'cotizacion', 'status'
+        'id_cliente', 'clinic','id_asesora_valoracion', 'fecha', 'time', 'time_end', 'type','observaciones', 'cotizacion', 'code','status'
     ];
 
     protected $table         = 'valuations';
     public    $timestamps    = false;
     protected $primaryKey    = 'id_valuations';
+
+
+    public function comments(){
+        return $this->hasMany('App\Comments', 'id_event')
+                    ->join('users', 'users.id', '=', 'comments.id_user')  
+                    ->join('datos_personales', 'datos_personales.id_usuario', '=', 'comments.id_user')     
+                    ->where("comments.table", "valuations")
+                    ->select(array('comments.*', 'users.email', 'users.img_profile', "datos_personales.nombres as name_user", 
+                    "datos_personales.apellido_p as last_name_user"));
+    }
+
+
+    
 }

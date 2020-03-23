@@ -226,8 +226,70 @@
 
 
 			function store(){
-				enviarFormulario("#store", 'api/clients/import', '#cuadro2');
+				enviarFormulario2("#store", 'api/clients/import', '#cuadro2');
 			}
+
+
+
+
+			function enviarFormulario2(form, controlador, cuadro, auth = false){
+				$(form).submit(function(e){
+					e.preventDefault(); //previene el comportamiento por defecto del formulario al darle click al input submit
+					var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable 
+					var formData=new FormData($(form)[0]); //obtiene todos los datos de los inputs del formulario pasado por parametros
+					var method = $(this).attr('method'); //obtiene el method del formulario
+					$('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
+					$.ajax({
+						url:''+url+'/'+controlador+'',
+						type:method,
+						dataType:'JSON',
+						data:formData,
+						cache:false,
+						contentType:false,
+						processData:false,
+						beforeSend: function(){
+							$('#btn-store').attr('disabled', 'disabled'); //activa el input submit
+							mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+						},
+						error: function (repuesta) {
+							$('#btn-store').removeAttr('disabled'); //activa el input submit
+							$(form)[0].reset()
+							var errores=repuesta.responseText;
+							if(errores!="")
+								mensajes('danger', errores);
+							else
+								mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");        
+						},
+						success: function(respuesta){
+
+							$(form)[0].reset()
+							$('#btn-store').removeAttr('disabled'); //activa el input submit
+							if (respuesta.success == false) {
+								mensajes('danger', respuesta.message);
+								
+							}else{
+							
+								mensajes('success', respuesta.mensagge);
+
+								if (auth) {
+								localStorage.setItem('token', respuesta.token);  
+								localStorage.setItem('email', respuesta.email);
+								localStorage.setItem('user_id', respuesta.user_id);  
+								window.location.href = url+"/dashboard";
+								}else{
+
+									list(cuadro);
+								}
+							
+							}
+
+						}
+
+					});
+				});
+			}
+
+
 
 
 		</script>

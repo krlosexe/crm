@@ -35,6 +35,9 @@ class ValuationsController extends Controller
                                     }
                                 })
 
+
+                                
+
                                 ->orderBy("valuations.id_valuations", "DESC")
                                 ->get();
             echo json_encode($valuations);
@@ -77,15 +80,19 @@ class ValuationsController extends Controller
                 $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
                 return response()->json($data)->setStatusCode(400); 
             }
-          
+
+            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $code = substr(str_shuffle($permitted_chars), 0, 4);
+            
+            $request["code"] = strtoupper($code);
             $store = Valuations::create($request->all());
 
 
 
 
-            //$request["table"]    = "valuations";
-           // $request["id_event"] = $store["id_valuations"];
-          //  Comments::create($request->all());
+            $request["table"]    = "valuations";
+            $request["id_event"] = $store["id_valuations"];
+            Comments::create($request->all());
 
 
             $auditoria              = new Auditoria;
@@ -122,6 +129,10 @@ class ValuationsController extends Controller
                                 ->where("auditoria.tabla", "valuations")
                                 ->where("auditoria.status", "!=", "0")
                                 ->where("valuations.id_cliente", $client)
+
+
+                                ->with("comments")
+
 
                                 ->orderBy("valuations.id_valuations", "DESC")
                                 ->get();
@@ -197,6 +208,26 @@ class ValuationsController extends Controller
 
             $queries = Valuations::find($valuations)->update($request->all());
 
+
+
+            if(isset($request->comments)){
+                $comments = [];
+
+                foreach($request->comments as $key => $value){
+                    $array = [];
+                    $array["id_event"]   = $valuations;
+                    $array["table"]      = "valuations";
+                    $array["id_user"]    = $request["id_user"];
+                    $array["comment"]   = $value;
+                    array_push($comments, $array);
+                }
+                Comments::insert($comments);
+                
+            }
+
+
+
+
             if ($queries) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
                 return response()->json($data)->setStatusCode(200);
@@ -228,6 +259,23 @@ class ValuationsController extends Controller
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
         }
+    }
+
+
+
+    public function ValidateCode($code){
+
+        $data = Valuations::select("valuations.*", "clientes.nombres", "clientes.apellidos")
+                            ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                            ->where("code", $code)
+                            ->first();
+        if($data){
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("Codigo Invalido")->setStatusCode(400);
+        }
+        
+
     }
     /**
      * Remove the specified resource from storage.

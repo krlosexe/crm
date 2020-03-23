@@ -121,11 +121,11 @@
 			                  <thead>
 			                    <tr>
 								  <th>Acciones</th>
+								  <th>Codigo</th>
 								  <th>Nombres</th>
 								  <th>Fecha</th>
 								  <th>Hora Desde</th>
 								  <th>Hora Hasta</th>
-								  <th>Tipo</th>
 								  <th>Estatus</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
@@ -326,6 +326,7 @@
 								return botones;
 							}
 						},
+						{"data": "code"},
 						{"data":"nombres", 
 							render : function(data, type, row) {
 								return data+" "+row.apellidos;
@@ -334,7 +335,6 @@
 						{"data": "fecha"},
 						{"data": "time"},
 						{"data": "time_end"},
-						{"data": "type"},
 						{"data": "status_valuations",
 							render : function(data, type, row){
 								if(data == 1){
@@ -385,6 +385,22 @@
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
+
+
+			function copyToClipboard(element) {
+				var $temp = $("<input>");
+				$("body").append($temp);
+				$temp.val($(element).text()).select();
+				document.execCommand("copy");
+				$temp.remove();
+
+				mensajes('success', "Codigo: "+$(element).text()+" Copiado");
+
+
+			}
+
+
+
 			/* ------------------------------------------------------------------------------- */
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
@@ -408,6 +424,8 @@
 					$("#clinic_view").val(data.id_clinic).attr("disabled", "disabled")
 					$("#observaciones-view").val(data.observaciones).attr("disabled", "disabled")
 					$("#status-view").val(data.status_valuations).attr("disabled", "disabled")
+
+					$("#code-view").text(data.code)
 
 
 
@@ -455,6 +473,55 @@
 
 
 
+					var url=document.getElementById('ruta').value; 
+					var html = "";
+
+
+					if(data.observaciones != null){
+						html += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html += '<div class="row">'
+								html += '<div class="col-md-2">'
+									
+								html += '</div>'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div>'+data.observaciones+'</div>'
+								html += '</div>'
+							html += '</div>'
+						html += '</div>'
+					}
+
+
+					
+					$.map(data.comments, function (item, key) {
+						html += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html += '<div class="row">'
+								html += '<div class="col-md-2">'
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+									
+								html += '</div>'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div>'+item.comment+'</div>'
+
+									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+								html += '</div>'
+							html += '</div>'
+						html += '</div>'
+						
+					});
+
+					
+					$("#comments").html(html)
+
+
+
+
+
+
+
+
+
 					cuadros('#cuadro1', '#cuadro3');
 				});
 			}
@@ -480,6 +547,8 @@
 					$("#type-edit").val(data.type)
 					$("#observaciones-edit").val(data.observaciones)
 					$("#status-edit").val(data.status_valuations)
+
+					$("#code-edit").text(data.code)
 
 					$("#clinic_edit").val(data.id_clinic)
 					var url_imagen = '/img/valuations/cotizaciones/'
@@ -526,6 +595,57 @@
 
 
 
+					$('#summernote_edit').summernote();
+					var url=document.getElementById('ruta').value; 
+					var html = "";
+
+
+					if(data.observaciones != null){
+						html += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html += '<div class="row">'
+								html += '<div class="col-md-2">'
+									
+								html += '</div>'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div>'+data.observaciones+'</div>'
+								html += '</div>'
+							html += '</div>'
+						html += '</div>'
+					}
+
+
+					
+					$.map(data.comments, function (item, key) {
+						html += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html += '<div class="row">'
+								html += '<div class="col-md-2">'
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+									
+								html += '</div>'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div>'+item.comment+'</div>'
+
+									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+								html += '</div>'
+							html += '</div>'
+						html += '</div>'
+						
+					});
+
+
+
+					
+					
+
+
+
+
+					$("#comments_edit").html(html)
+
+
+
 
 
 					cuadros('#cuadro1', '#cuadro4');
@@ -533,6 +653,36 @@
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
+
+
+
+
+			$("#add-comments").click(function (e) { 
+				
+				var html = ""
+
+
+				html += '<div class="col-md-12" style="margin-bottom: 15px">'
+					html += "<input type='hidden' name='comments[]' value='"+$("#summernote_edit").val()+"'>"
+					html += '<div class="row">'
+						html += '<div class="col-md-2">'
+							//html += "<img class='rounded' src='/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+							
+						html += '</div>'
+						html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+							html += '<div>'+$("#summernote_edit").val()+'</div>'
+
+							html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
+
+						html += '</div>'
+					html += '</div>'
+				html += '</div>'
+
+				$("#comments_edit").append(html)
+			});	
+
+
+
 
 					
 		/* ------------------------------------------------------------------------------- */

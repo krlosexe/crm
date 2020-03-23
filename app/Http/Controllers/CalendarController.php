@@ -318,6 +318,10 @@ class CalendarController extends Controller
                                 //         $query->where("clientes.id_user_asesora", $id_user);
                                 //     }
                                 // })
+                                
+
+                                ->with("comments")
+
 
                                 
                                 ->where("auditoria.tabla", "valuations")
@@ -364,6 +368,9 @@ class CalendarController extends Controller
                                         }) 
 
 
+                                        ->with("comments")
+
+                                        
                                         ->where("auditoria.tabla", "valuations")
                                         ->where("valuations.status", 0)
                                         ->where("auditoria.status", "!=", 0)

@@ -10,7 +10,7 @@
         <input type="hidden" name="_method" value="put">
         
         <div class="row">
-           <div class="col-md-6">
+           <div class="col-md-5">
 
               <div class="row">
 
@@ -69,22 +69,6 @@
               </div>
 
 
-              <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for=""><b>Estatus</b></label>
-                        <select name="status" id="status-edit" class="form-control select2" required>
-                            <option value="0">Pendiente</option>
-                            <option value="1">Procesado</option>
-                            <option value="2">Cancelado</option>
-                        </select>
-                    </div>
-                </div>
-              </div>
-           </div>
-
-
-           <div class="col-md-6">
 
               <div class="row">
                 <div class="col-md-12">
@@ -98,16 +82,21 @@
               </div>
 
 
+
+              
+
               <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for=""><b>Obervaciones</b></label>
-                        <textarea name="observaciones" id="observaciones-edit" class="form-control" cols="30" rows="5"></textarea>
+                        <label for=""><b>Estatus</b></label>
+                        <select name="status" id="status-edit" class="form-control select2" required>
+                            <option value="0">Pendiente</option>
+                            <option value="1">Procesado</option>
+                            <option value="2">Cancelado</option>
+                        </select>
                     </div>
                 </div>
               </div>
-
-
 
               <div class="row">
                 <div class="col-md-12">
@@ -126,6 +115,87 @@
                   </div>
                 </div>
               </div>
+
+
+           </div>
+
+
+           <div class="col-md-7">
+
+
+             <div class="row">
+                  <div class="col-md-12">
+                      <div class="row">
+                          <div class="col-md-2">
+                            <h3 id="code-edit"></h3>
+                          </div>
+                          <div class="col-md-2">
+                             <span onclick="copyToClipboard('#code-edit')" class='consultar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-copy  ' style='margin-bottom:5px'></i></span> 
+                          </div>
+                        
+                      </div>
+                  </div>
+                </div>
+
+
+                <br><br>
+
+
+
+                <div class="row" id="comments_edit">
+                    <div class="col-md-12">
+                      <div class="row">
+                          <div class="col-md-2">
+                            Foto
+                          </div>
+                          <div class="col-md-10">
+                            Text
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="row">
+
+
+                  <div class="col-md-2">
+                          
+                  </div>
+
+                        
+                  <div class="col-md-10">
+                    <div class="form-group">
+                            <label for=""><b>Comentarios</b></label>
+                            <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
+                            <textarea id="summernote_edit"></textarea>
+                        </div>
+                    </div>
+
+                  </div>
+
+
+                  <div class="row">
+
+                     <div class="col-md-2">
+                           
+                    </div>
+
+                    <div class="col-md-10">
+                      <button type="button" id="add-comments"  class="btn btn-primary">
+                        Comentar
+                      </button>
+                    </div>
+                    
+              </div>
+
+
+
+
+
+
 
            </div>
 
