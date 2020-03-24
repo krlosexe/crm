@@ -40,7 +40,9 @@ class Logouts extends Command
         $token_user = AuthUsers::get();
 
 		foreach ($token_user as $key => $value) {
-			//$value->delete();
+            //$value->delete();
+            
+            echo "Carlos Cardenas";
         }
     }
 }
