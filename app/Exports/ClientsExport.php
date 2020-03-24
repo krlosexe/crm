@@ -19,11 +19,17 @@ class ClientsExport implements FromView
     /**
     * @return \Illuminate\Support\Collection
     */
-
+    
+    var $linea_negocio;
+    var $asesor;
 
 
     public function view(): View
     {
+
+        $business_line = $this->linea_negocio;
+        $adviser = $this->asesor;
+
 
         $data = DB::table('clientes')->select( 'state',
                                                'clientes.nombres',
@@ -41,8 +47,22 @@ class ClientsExport implements FromView
                                             ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
                                             ->where("auditoria.tabla", "clientes")
                                             ->where("auditoria.status", "!=", "0")
-                                            ->orderBy("clientes.id_cliente", "DESC")->get();
 
+
+                                            ->where(function ($query) use ($business_line) {
+                                                if($business_line != 0){
+                                                    $query->where("clientes.id_line", $business_line);
+                                                }
+                                            })
+            
+                                            ->where(function ($query) use ($adviser) {
+                                                if($adviser != 0){
+                                                    $query->where("clientes.id_user_asesora", $adviser);
+                                                }
+                                            }) 
+                                            
+
+                                            ->orderBy("clientes.id_cliente", "DESC")->get();
 
         return view('exports.clients', [
             'data' => $data

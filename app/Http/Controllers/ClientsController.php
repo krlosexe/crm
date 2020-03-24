@@ -497,8 +497,14 @@ class ClientsController extends Controller
 
 
 
-    public function Excel(){
-        return Excel::download(new ClientsExport, 'ClientExport.xlsx');
+    public function Excel($linea_negocio, $adviser){
+
+        $xls = new ClientsExport;
+
+        $xls->linea_negocio = $linea_negocio;
+        $xls->asesor = $adviser;
+
+        return Excel::download($xls, 'ClientExport.xlsx');
     }
 
 
