@@ -131,3 +131,7 @@ Route::get('clients/export/excel', 'ClientsController@Excel');
 Route::post('clients/import/', 'ClientsController@Import');
 
 Route::get('validate/valoration/code/{code}', 'ValuationsController@ValidateCode');
+
+
+
+Route::get('logs/sessions', 'LogsController@session');

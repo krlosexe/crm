@@ -167,9 +167,7 @@
 
 
 			$("#linea-negocio-filter, #id_asesora_valoracion-filter").change(function (e) { 
-
 				list("", $("#linea-negocio-filter").val(), $("#id_asesora_valoracion-filter").val())
-
 			});
 
 

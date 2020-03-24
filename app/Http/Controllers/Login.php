@@ -202,7 +202,12 @@ class Login extends Controller
 
 		foreach ($token_user as $key => $value) {
 			$value->delete();
-		}
+        }
+        
+
+        LogsSession::create(["id_user" => $user_id, "date_logout" => date("Y-m-d G:i:s")]);
+
+
 
 
 		return redirect(url('/'));
