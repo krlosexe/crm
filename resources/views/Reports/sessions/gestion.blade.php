@@ -132,8 +132,8 @@
 			$(document).ready(function(){
 				list();
 
-				$("#collapse_Tareas").addClass("show");
-				$("#nav_tasks, #modulo_Tareas").addClass("active");
+				$("#collapse_Reportes").addClass("show");
+				$("#nav_Session, #modulo_Reportes").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "citys");
 
