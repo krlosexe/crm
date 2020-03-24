@@ -176,13 +176,22 @@
 					var adviser = $("#id_asesora_valoracion-filter").val()
 				}
 
+
+				if($("#iinea-negocio-filter").val() == ""){
+					var linea_negocio = 0
+				}else{
+					var linea_negocio = $("#iinea-negocio-filter").val()
+				}
+
+
+
 				$("#xls").remove();
 				$("#view_xls").remove();
 
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$('.dt-buttons').append(a);
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+$("#linea-negocio-filter").val()+'/'+adviser+'" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+linea_negocio+'/'+adviser+'" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
 				$("#xls").click(function (e) { 
