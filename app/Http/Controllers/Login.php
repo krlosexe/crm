@@ -6,6 +6,7 @@ use App\User;
 use App\Modulos;
 use App\funciones;
 use App\AuthUsers;
+use App\LogsSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +14,6 @@ class Login extends Controller
 {
     public function Auth(request $request)
     {	
-
     	$messages = [
 		    'required' => 'El Campo :attribute es requirdo.',
 		];
@@ -49,9 +49,11 @@ class Login extends Controller
 	    		$AuthUsers          = new AuthUsers;
 		        $AuthUsers->id_user = $users[0]->id;
 		        $AuthUsers->token   = $token;
-		        $AuthUsers->save();
+                $AuthUsers->save();
+                
 
 
+                LogsSession::create(["id_user" => $users[0]->id, "date_login" => date("Y-m-d G:i:s")]);
 
 
 	    		$data = array('user_id'  => $users[0]->id,

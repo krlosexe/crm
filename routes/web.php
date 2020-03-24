@@ -153,3 +153,13 @@ Route::get('tasks/migrate/clients', "TasksController@Migrate");
 Route::get('client-import', function () {
     return view('catalogos.clientes.import');
 });
+
+
+
+
+Route::get('logs/session', "TasksController@Migrate");
+
+Route::get('Session', function () {
+    return view('Reports.sessions.gestion');
+});
+
