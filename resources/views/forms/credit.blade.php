@@ -113,8 +113,8 @@
 
                   <div class="col-md-3">
                     <div class="form-group">
-                          <label for=""><b>Segundo Nombre:*</b></label>
-                          <input type="text" name="second_name" id="second_name" class="form-control" required >
+                          <label for=""><b>Segundo Nombre:</b></label>
+                          <input type="text" name="second_name" id="second_name" class="form-control" >
                       </div>
                   </div>
 
@@ -129,8 +129,8 @@
 
                   <div class="col-md-3">
                     <div class="form-group">
-                          <label for=""><b>Segundo Apellido:*</b></label>
-                          <input type="text" name="second_last_name" id="second_last_name" class="form-control" required >
+                          <label for=""><b>Segundo Apellido:</b></label>
+                          <input type="text" name="second_last_name" id="second_last_name" class="form-control" >
                       </div>
                   </div>
               </div>
@@ -275,7 +275,7 @@
                           <option value="">Seleccione</option>
                           <option value="Propia">Propia</option>
                           <option value="Familiar">Familiar</option>
-                          <option value="Arrebdada">Arrebdada</option>
+                          <option value="Arrendada">Arrendada</option>
                         </select>
                     </div>
                 </div>
@@ -319,7 +319,7 @@
                   <div class="col-md-3">
                     <div class="form-group">
                           <label for=""><b>Segundo Nombre:*</b></label>
-                          <input type="text" name="second_name_spouse" id="second_name_spouse" class="form-control" required >
+                          <input type="text" name="second_name_spouse" id="second_name_spouse" class="form-control" >
                       </div>
                   </div>
 
@@ -335,7 +335,7 @@
                   <div class="col-md-3">
                     <div class="form-group">
                           <label for=""><b>Segundo Apellido:*</b></label>
-                          <input type="text" name="second_last_name_spouse" id="second_last_name_spouse" class="form-control" required >
+                          <input type="text" name="second_last_name_spouse" id="second_last_name_spouse" class="form-control"  >
                       </div>
                   </div>
 
@@ -380,8 +380,8 @@
 
                   <div class="col-md-3">
                     <div class="form-group">
-                          <label for=""><b>Ceuluar:*</b></label>
-                          <input type="text" name="phone_spouse" id="phone_spouse" class="form-control" required >
+                          <label for=""><b>Celular:*</b></label>
+                          <input type="text" name="phone_spouse" id="phone_spouse" class="form-control" >
                       </div>
                   </div>
 
@@ -389,7 +389,7 @@
                   <div class="col-md-3">
                     <div class="form-group">
                           <label for=""><b>Empresa donde Labora:*</b></label>
-                          <input type="text" name="company_work_spouse" id="company_work_spouse" class="form-control" required >
+                          <input type="text" name="company_work_spouse" id="company_work_spouse" class="form-control" >
                       </div>
                   </div>
 
@@ -397,7 +397,7 @@
                   <div class="col-md-3">
                     <div class="form-group">
                           <label for=""><b>Cargo:*</b></label>
-                          <input type="text" name="charge_worck_spouse" id="charge_worck_spouse" class="form-control" required >
+                          <input type="text" name="charge_worck_spouse" id="charge_worck_spouse" class="form-control" >
                       </div>
                   </div>
 
@@ -405,7 +405,7 @@
                   <div class="col-md-3">
                     <div class="form-group">
                           <label for=""><b>Ingresos Mensuales:*</b></label>
-                          <input type="text" name="monthly_income_spouse" id="monthly_income_spouse" class="form-control" required >
+                          <input type="text" name="monthly_income_spouse" id="monthly_income_spouse" class="form-control" >
                       </div>
                   </div>
 
@@ -1032,7 +1032,7 @@
                           <div class="col-md-3">
                             <div class="form-group">
                                   <label for=""><b>Tipo de Apartamento:*</b></label>
-                                  <select name="type_apartamento" id="type_apartamento" class="form-control" required>
+                                  <select name="type_apartamento" id="type_apartamento" class="form-control">
                                     <option value="">Seleccione</option>
                                     <option value="Local">Local</option>
                                     <option value="Casa">Casa</option>
@@ -1088,7 +1088,7 @@
                           <div class="col-md-3">
                             <div class="form-group">
                                   <label for=""><b>Afectacion Familiar:*</b></label>
-                                  <select name="afectacion_familiar" id="afectacion_familiar" class="form-control" required>
+                                  <select name="afectacion_familiar" id="afectacion_familiar" class="form-control">
                                     <option value="">Seleccione</option>
                                     <option value="Si">Si</option>
                                     <option value="No">No</option>
@@ -1112,7 +1112,7 @@
                            <div class="col-md-3">
                               <div class="form-group">
                                     <label for=""><b>Tipo:*</b></label>
-                                    <select name="type_vehicule" id="type_vehicule" class="form-control" required>
+                                    <select name="type_vehicule" id="type_vehicule" class="form-control">
                                       <option value="">Seleccione</option>
                                       <option value="Particular">Particular</option>
                                       <option value="Publico">Publico</option>
