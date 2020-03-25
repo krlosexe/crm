@@ -170,3 +170,9 @@ Route::get('forms_credit/{id_line}', function ($id_line) {
     return view('forms.credit', ["id_line" => $id_line]);
 });
 
+
+Route::get('forms_autorizacion/{id_line}', function ($id_line) {
+    return view('forms.autorizacion', ["id_line" => $id_line]);
+});
+
+

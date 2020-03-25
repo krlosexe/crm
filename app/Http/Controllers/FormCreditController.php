@@ -12,6 +12,8 @@ use App\FormCreditProcedure;
 use App\FormCreditRelacionActivos;
 use App\FormCreditReferencias;
 
+
+use App\FormAutorizationStudioCredit;
 class FormCreditController extends Controller
 {
     public function store(Request $request){
@@ -41,5 +43,13 @@ class FormCreditController extends Controller
         FormCreditRelacionActivos::create($request->all());
         FormCreditReferencias::create($request->all());
         return response()->json("Ok")->setStatusCode(200);
+    }
+
+
+    public function storeAutorization(Request $request){
+
+        FormAutorizationStudioCredit::create($request->all());
+        return response()->json("Ok")->setStatusCode(200);
+        
     }
 }

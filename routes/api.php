@@ -139,3 +139,6 @@ Route::get('logs/sessions', 'LogsController@session');
 
 
 Route::post('form/credit', 'FormCreditController@store');
+
+
+Route::post('form/authorization/studio/credit', 'FormCreditController@storeAutorization');
