@@ -75,7 +75,7 @@
 
         <div class="wizard-header">
             <h6>
-              <b>AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS E INFORMACION COMERCIAL</b><br>
+              <b>AUTORIZACIÓN PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS E INFORMACIÓN COMERCIAL</b><br>
               
             </h6>
 
@@ -99,7 +99,7 @@
 
               <div class="col-md-4">
                 <div class="form-group">
-                    <label for=""><b>Numero de Cedula</b></label>
+                    <label for=""><b>Número de Cédula</b></label>
                     <input type="text" name="number_document" id="number_document" class="form-control" required>
                 </div>
               </div>
@@ -113,14 +113,14 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                    <label for=""><b>Telefono Casa</b></label>
+                    <label for=""><b>Teléfono fijo</b></label>
                     <input type="text" name="phone_house" id="phone_house" class="form-control" required>
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
-                    <label for=""><b>Telefono de Trabajo</b></label>
+                    <label for=""><b>Teléfono de trabajo</b></label>
                     <input type="text" name="phone_mobil" id="phone_mobil" class="form-control" required>
                 </div>
               </div>
@@ -138,7 +138,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                    <label for=""><b>Direccion</b></label>
+                    <label for=""><b>Dirección</b></label>
                     <textarea name="address" id="" cols="30" rows="10" class="form-control" required></textarea>
                 </div>
               </div>
@@ -153,9 +153,9 @@
                   </div>
 
                   <div class="pull-left">
-                      <input type='checkbox' class='form-comtrol' name='accept' value='1' required/>
+                      <input type='checkbox' class='form-comtrol' name='accept' value='1'  id="accept" required/>
 
-                      <a href="<?= url('/') ?>/autorizacion.pdf" target="_blank">Acepto Terminos y Condiciones</a>
+                      <label for="accept">He leído y acepto los </label> <a href="<?= url('/') ?>/autorizacion.pdf" target="_blank">términos y condiciones</a>
                   </div>
               </div>
             </div>
