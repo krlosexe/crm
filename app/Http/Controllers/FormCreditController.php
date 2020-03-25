@@ -40,6 +40,6 @@ class FormCreditController extends Controller
 
         FormCreditRelacionActivos::create($request->all());
         FormCreditReferencias::create($request->all());
-        echo "asasdsad";
+        return response()->json("Ok")->setStatusCode(200);
     }
 }

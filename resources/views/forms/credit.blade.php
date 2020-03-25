@@ -13,6 +13,12 @@
 	<!--     Fonts and icons     -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
 
+
+    <link href="<?= url('/') ?>/vendor/sweetalert/sweetalert.css" rel="stylesheet">
+
+  <link href="<?= url('/') ?>/vendor/select2-4.0.11/dist/css/select2.min.css" rel="stylesheet" />
+
+
 	<!-- CSS Files -->
     <link href="<?= url('/') ?>/css/wizard/bootstrap.min.css" rel="stylesheet" />
 	<link href="<?= url('/') ?>/css/wizard/gsdk-bootstrap-wizard.css" rel="stylesheet" />
@@ -39,6 +45,11 @@
           border-color: #226fe2;
         }
 
+        .btn-warning{
+          background-color: #226fe2 !important;
+          border-color: #226fe2 !important;
+        }
+
 
     </style>
   @endif
@@ -57,6 +68,11 @@
     <form action="" method="post" id="form-submit">
 <!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
       @csrf   
+
+
+      <input type="hidden" name="id_line" value="{{$id_line}}">
+
+
 
 
      
@@ -504,7 +520,7 @@
                                 <option value="Empresario(a)">Empresario(a)</option>
                                 <option value="Estudiante">Estudiante</option>
                                 <option value="Pensionado">Pensionado</option>
-                                <option value="Rentista de Cspital">Rentista de Cspital</option>
+                                <option value="Rentista de Capital">Rentista de Capital</option>
                                 <option value="Trabajador(a)">Trabajador(a)</option>
                                 <option value="Administrador(a)">Administrador(a)</option>
                                 <option value="Independiente">Independiente</option>
@@ -1386,7 +1402,7 @@
         <div class="wizard-footer height-wizard">
             <div class="pull-right">
                 <input type='button' class='btn btn-next btn-fill btn-warning btn-wd btn-sm' name='next' value='Siguiente' />
-                <input type='submit' class='btn btn-finish btn-fill btn-warning btn-wd btn-sm' name='finish' value='Guardar' />
+                <input type='submit' id="btn-submit" class='btn btn-finish btn-fill btn-warning btn-wd btn-sm' name='finish' value='Guardar' />
 
             </div>
 
@@ -1415,12 +1431,22 @@
 
 	<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
   <script src="<?= url('/') ?>/js/wizard/jquery.validate.min.js"></script>
-  
+
+
+
+  <script src="<?= url('/') ?>/vendor/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+    <script src="<?= url('/') ?>/vendor/sweetalert/sweetalert-dev.js" type="text/javascript"></script>
+
+    <script src="<?= url('/') ?>/vendor/select2-4.0.11/dist/js/select2.min.js"></script>
+
+
+
+  <script src="<?= url('/') ?>/js/funciones.js"></script>
 
   <script>
-    enviarFormulario("#form-submit", "api/form/credit")
+    enviarFormulario23("#form-submit", "api/form/credit")
 
-  function enviarFormulario(form, controlador){   
+  function enviarFormulario23(form, controlador){   
         $(form).submit(function(e){
             e.preventDefault(); //previene el comportamiento por defecto del formulario al darle click al input submit
             var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable 
@@ -1439,10 +1465,20 @@
                     
                 },
                 error: function (repuesta) {
-                    
+                  $('#btn-submit').removeAttr('disabled'); 
                 },
                  success: function(respuesta){
-                
+                   warning("Operacion Exitosa")
+                   $("#form-submit")[0].reset();
+
+                   $('#btn-submit').removeAttr('disabled'); 
+
+                   setTimeout(function(){ location.reload(); }, 5000);
+
+
+
+
+
 
                 }
 
