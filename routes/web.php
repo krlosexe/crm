@@ -163,3 +163,10 @@ Route::get('Session', function () {
     return view('Reports.sessions.gestion');
 });
 
+
+
+
+Route::get('forms_credit/{id_line}', function ($id_line) {
+    return view('forms.credit', ["id_line" => $id_line]);
+});
+

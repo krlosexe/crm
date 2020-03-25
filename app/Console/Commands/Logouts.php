@@ -37,6 +37,8 @@ class Logouts extends Command
      */
     public function handle()
     {
+
+        //php /var/www/html/crm/artisan registered:Logouts
         $token_user = AuthUsers::get();
 
 		foreach ($token_user as $key => $value) {
