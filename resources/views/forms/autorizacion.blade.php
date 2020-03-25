@@ -154,8 +154,17 @@
 
                   <div class="pull-left">
                       <input type='checkbox' class='form-comtrol' name='accept' value='1'  id="accept" required/>
+                      @if($id_line == 6)
+                        <label for="accept">He leído y acepto los </label> <a href="<?= url('/') ?>/autorizacion.pdf" target="_blank">términos y condiciones</a>
+                      @endif
 
-                      <label for="accept">He leído y acepto los </label> <a href="<?= url('/') ?>/autorizacion.pdf" target="_blank">términos y condiciones</a>
+
+                      @if($id_line == 16)
+                        <label for="accept">He leído y acepto los </label> <a href="<?= url('/') ?>/Autorizacion_planmed.pdf" target="_blank">términos y condiciones</a>
+                      @endif
+
+
+                      
                   </div>
               </div>
             </div>
