@@ -18,7 +18,33 @@
 	<link href="<?= url('/') ?>/css/wizard/gsdk-bootstrap-wizard.css" rel="stylesheet" />
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
-	<link href="<?= url('/') ?>/css/wizard/demo.css" rel="stylesheet" />
+  <link href="<?= url('/') ?>/css/wizard/demo.css" rel="stylesheet" />
+  
+
+  @if($id_line == 6 )
+    <style>
+
+        
+        .wizard-card[data-color="orange"] .moving-tab{
+          background: #226fe2;
+        }
+
+        .btn-fill.btn-warning{
+          background-color: #226fe2;
+          border-color: #226fe2;
+        }
+
+        .btn-fill.btn-warning:hover{
+          background-color: #226fe2;
+          border-color: #226fe2;
+        }
+
+
+    </style>
+  @endif
+
+
+ 
 </head>
 
 <body>
