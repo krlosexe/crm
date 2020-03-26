@@ -118,6 +118,21 @@ class FormCreditController extends Controller
         }
 
 
+            $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS";
+            $for = "cardenascarlos18@gmail.com";
+           // $for = $user["email"];
+
+            $request["msg"]  = "Un Paciente dio Autroizacion para Consulta y Reporte a Centrales de Bancos de Datos";
+
+           Mail::send('emails.forms_authorization',$request->all(), function($msj) use($subject,$for){
+                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+
+
+
+
 
         return response()->json("Ok")->setStatusCode(200);
         
