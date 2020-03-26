@@ -61,7 +61,7 @@ class FormCreditController extends Controller
            // $for = "cardenascarlos18@gmail.com";
             $for = $user["email"];
 
-            $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Cridito";
+            $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Credito";
 
             Mail::send('emails.form_solicitud_credit',$request->all(), function($msj) use($subject,$for){
                 $msj->from("cardenascarlos18@gmail.com","CRM");
@@ -77,7 +77,7 @@ class FormCreditController extends Controller
         $for = "cardenascarlos18@gmail.com";
         //$for = $user["email"];
 
-        $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Cridito";
+        $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Credito";
 
         Mail::send('emails.form_solicitud_credit',$request->all(), function($msj) use($subject,$for){
             $msj->from("cardenascarlos18@gmail.com","CRM");
