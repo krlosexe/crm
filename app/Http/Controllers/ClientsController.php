@@ -52,6 +52,9 @@ class ClientsController extends Controller
               $adviser = $request["adviser"];
             }
 
+
+            $origen = $request["origen"];
+
             $data = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
                                        "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
                                        "datos_personales.apellido_p as apellido_register"
@@ -86,6 +89,27 @@ class ClientsController extends Controller
                                         $query->whereIn("clientes.id_user_asesora", $adviser);
                                     }
                                 }) 
+
+
+
+                                ->where(function ($query) use ($origen) {
+
+                                    if($origen == "Formulario"){
+                                        $query->where("clientes.origen", "Formulario Web");
+                                    }
+
+
+
+                                    if($origen == "Otros"){
+                                        $query->where("clientes.origen", "!=","Formulario Web");
+                                        $query->where("clientes.pauta", 0);
+                                    }
+
+
+
+                                }) 
+
+
 
 
 
@@ -533,6 +557,7 @@ class ClientsController extends Controller
                 $array["id_line"]         = $request["id_line"];
 
              //  echo json_encode($array)."<br><br>";
+                $array["pauta"] = 1;
                 $cliente = Clients::create($array);
 
                 $array["id_client"]   = $cliente["id_cliente"];

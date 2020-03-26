@@ -88,6 +88,22 @@
 										</select>
 									</div>
 								</div>
+
+
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Origen</b></label>
+										<select name="" id="origen-filter" class="form-control select2 disabled">
+											<option value="Todos">Todos</option>
+											<option value="Formulario">Formulario Web</option>
+											<option value="Otros">Registrados Manualmente</option>
+										</select>
+									</div>
+								</div>
+
+
+
 							</div>
 			              <div class="table-responsive">
 			                <table class="table table-bordered" id="table" width="100%" cellspacing="0">
@@ -166,8 +182,8 @@
 			});
 
 
-			$("#linea-negocio-filter, #id_asesora_valoracion-filter").change(function (e) { 
-				list("", $("#linea-negocio-filter").val(), $("#id_asesora_valoracion-filter").val())
+			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter").change(function (e) { 
+				list("", $("#linea-negocio-filter").val(), $("#id_asesora_valoracion-filter").val(), $("#origen-filter").val())
 
 
 				if($("#id_asesora_valoracion-filter").val() == ""){
@@ -227,7 +243,7 @@
 
 
 
-			function list(cuadro, business_line, adviser) {
+			function list(cuadro, business_line, adviser, origen) {
 				
 				var data = {
 					"id_user": id_user,
@@ -253,7 +269,8 @@
 							"token"         : tokens,
 							"rol"           : name_rol,
 							"business_line" : business_line,
-							"adviser"       : adviser
+							"adviser"       : adviser,
+							"origen"        : origen
 						},
 						"dataSrc":""
 					},
