@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Auditoria;
 use App\Valuations;
 use App\Comments;
+
+use App\ValuationsPhoto;
 use Illuminate\Http\Request;
 
 class ValuationsController extends Controller
@@ -132,6 +134,10 @@ class ValuationsController extends Controller
 
 
                                 ->with("comments")
+                                ->with("photos")
+                                
+
+
 
 
                                 ->orderBy("valuations.id_valuations", "DESC")
@@ -275,6 +281,26 @@ class ValuationsController extends Controller
             return response()->json("Codigo Invalido")->setStatusCode(400);
         }
         
+
+    }
+
+
+    public function StorePhotos(Request $request){
+    
+        foreach($request["foto"] as $value){
+
+            $img = str_replace('data:image/png;base64,', '', $value);
+
+
+            $fileData = base64_decode($img);
+            $fileName = uniqid().'.png';
+            file_put_contents('img/valuations/'.$fileName, $fileData);
+
+            ValuationsPhoto::create(["code" => $request["code"], "foto" => $fileName]);
+        }
+
+        return response()->json("ok")->setStatusCode(200);
+
 
     }
     /**

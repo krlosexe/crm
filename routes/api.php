@@ -142,3 +142,6 @@ Route::post('form/credit', 'FormCreditController@store');
 
 
 Route::post('form/authorization/studio/credit', 'FormCreditController@storeAutorization');
+
+
+Route::post('valoration/submit/photo', 'ValuationsController@StorePhotos');

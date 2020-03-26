@@ -25,5 +25,9 @@ class Valuations extends Model
     }
 
 
+    public function photos(){
+        return $this->hasMany('App\ValuationsPhoto', 'code', 'code');
+    }
+
     
 }

@@ -176,3 +176,10 @@ Route::get('forms_autorizacion/{id_line}', function ($id_line) {
 });
 
 
+
+
+Route::get('prueba', function () {
+    return view('forms.prueba');
+});
+
+

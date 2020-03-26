@@ -517,6 +517,60 @@
 
 
 
+					$(".photo_valoration").fileinput('destroy');
+					$("#photos_view").html("")
+					var count = 0
+					$.map(data.photos, function (item, key) {
+						
+						var html  = ""
+						html += "<div class='col-md-4'>"
+							html += "<input type='file' class='photo_valoration' id='photo_view_"+count+"'>" 
+						html += "</div>"
+						count++
+
+						$("#photos_view").append(html)
+					});
+
+					
+
+					var count = 0
+					$.map(data.photos, function (item, key) {
+						
+					
+						var url_imagen = '/img/valuations/'
+						var url        = document.getElementById('ruta').value; 
+						img = '<img src="'+url+url_imagen+item.foto+'" class="file-preview-image kv-preview-data">'
+
+						$("#photo_view_"+count).fileinput('destroy');
+						$("#photo_view_"+count).fileinput({
+							theme: "fas",
+							overwriteInitial: true,
+							maxFileSize: 1500,
+							showClose: false,
+							showCaption: false,
+							browseLabel: '',
+							removeLabel: '',
+							browseIcon: '<i class="fa fa-folder-open"></i>',
+							removeIcon: '<i class="fas fa-trash-alt"></i>',
+							previewFileIcon: '<i class="fas fa-file"></i>',
+							removeTitle: 'Cancel or reset changes',
+							elErrorContainer: '#kv-avatar-errors-1',
+							msgErrorClass: 'alert alert-block alert-danger',
+							
+							layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+							allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
+							initialPreview: [ 
+								img
+							],
+
+							initialPreviewConfig: [
+								{caption: data.foto , downloadUrl: url+url_imagen+data.foto  ,url: url+"uploads/delete", key: data.foto}
+							],
+						});
+
+
+						count++
+					});
 
 
 
@@ -636,14 +690,67 @@
 
 
 
-					
-					
-
-
 
 
 					$("#comments_edit").html(html)
 
+					$(".photo_valoration").fileinput('destroy');
+					$("#photos_edit").html("")
+					var count = 0
+					$.map(data.photos, function (item, key) {
+						
+						var html  = ""
+						html += "<div class='col-md-4'>"
+							html += "<input type='file' class='photo_valoration' id='photo_edit_"+count+"'>" 
+						html += "</div>"
+						count++
+
+						$("#photos_edit").append(html)
+					});
+
+					
+
+					var count = 0
+					$.map(data.photos, function (item, key) {
+						
+					
+						var url_imagen = '/img/valuations/'
+						var url        = document.getElementById('ruta').value; 
+						img = '<img src="'+url+url_imagen+item.foto+'" class="file-preview-image kv-preview-data">'
+
+						$("#photo_edit_"+count).fileinput('destroy');
+						$("#photo_edit_"+count).fileinput({
+							theme: "fas",
+							overwriteInitial: true,
+							maxFileSize: 1500,
+							showClose: false,
+							showCaption: false,
+							browseLabel: '',
+							removeLabel: '',
+							browseIcon: '<i class="fa fa-folder-open"></i>',
+							removeIcon: '<i class="fas fa-trash-alt"></i>',
+							previewFileIcon: '<i class="fas fa-file"></i>',
+							removeTitle: 'Cancel or reset changes',
+							elErrorContainer: '#kv-avatar-errors-1',
+							msgErrorClass: 'alert alert-block alert-danger',
+							
+							layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+							allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
+							initialPreview: [ 
+								img
+							],
+
+							initialPreviewConfig: [
+								{caption: data.foto , downloadUrl: url+url_imagen+data.foto  ,url: url+"uploads/delete", key: data.foto}
+							],
+						});
+
+
+						count++
+
+
+					});
+					
 
 
 
