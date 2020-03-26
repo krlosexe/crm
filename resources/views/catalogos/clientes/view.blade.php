@@ -158,11 +158,8 @@
                         </div>
 
 
-                    </div>
 
 
-
-                    <div class="col-md-6">
 
                         <div class="row">
                             <div class="col-sm-12">
@@ -222,6 +219,29 @@
 
                             </div>
                         </div>
+
+
+
+
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                    <h4>Historial</h4>
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="logs_view"></div>
+                            </div>
+                        </div>
+                        
                     </div>
 
                 </div>

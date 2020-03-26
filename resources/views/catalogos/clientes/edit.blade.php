@@ -64,7 +64,7 @@
                     <div class="col-md-6">
 
 
-                    <div class="row">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for=""><b>Estado</b></label>
@@ -166,11 +166,7 @@
                         </div>
 
 
-                    </div>
 
-
-
-                    <div class="col-md-6">
 
                         <div class="row">
                             <div class="col-sm-12">
@@ -221,8 +217,27 @@
                                 </div>
 
 
+                            </div>
+                        </div>
 
 
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                    <h4>Historial</h4>
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="logs_edit"></div>
                             </div>
                         </div>
                     </div>

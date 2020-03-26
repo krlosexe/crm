@@ -250,9 +250,6 @@
 					"token"  : tokens,
 				};
 
-				console.log(business_line)
-
-
 				$('#table tbody').off('click');
 				var url=document.getElementById('ruta').value; 
 				cuadros(cuadro, "#cuadro1");
@@ -445,6 +442,33 @@
 					$("#linea-negocio-view").val(data.id_line).attr("disabled", "disabled")
 					$("#linea-negocio-view").trigger("change");
 					$("#asesora-view").val(data.id_user_asesora).attr("disabled", "disabled")
+
+
+					var url=document.getElementById('ruta').value; 
+					var html = "";
+					$.map(data.logs, function (item, key) {
+						html += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html += '<div class="row">'
+								html += '<div class="col-md-2">'
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+									
+								html += '</div>'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div>'+item.event+'</div>'
+
+									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+								html += '</div>'
+							html += '</div>'
+						html += '</div>'
+						
+					});
+
+					$("#logs_view").html(html)
+
+
+
 					cuadros('#cuadro1', '#cuadro3');
 
 
@@ -499,6 +523,9 @@
 
 
 					GetAsesorasValoracion("#id_asesora_valoracion-edit")
+
+
+			
 
 					$("#id_asesora_valoracion-edit").val(data.id_asesora_valoracion)
 
@@ -571,6 +598,31 @@
 					cuadros('#cuadro1', '#cuadro4');
 
 					$("#id_edit").val(data.id_cliente)
+
+
+				
+					var url=document.getElementById('ruta').value; 
+					var html = "";
+					$.map(data.logs, function (item, key) {
+						html += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html += '<div class="row">'
+								html += '<div class="col-md-2">'
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+									
+								html += '</div>'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div>'+item.event+'</div>'
+
+									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+								html += '</div>'
+							html += '</div>'
+						html += '</div>'
+						
+					});
+
+					$("#logs_edit").html(html)
 
 				
 

@@ -19,7 +19,7 @@ use App\Comments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
+use App\LogsClients;
 
 use App\Exports\ClientsExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -113,7 +113,7 @@ class ClientsController extends Controller
 
 
 
-
+                                ->with("logs")
 
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
@@ -267,8 +267,19 @@ class ClientsController extends Controller
     public function update(Request $request, $id_cliente)
     {   
 
-      
+
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
+
+
+            $data = Clients::select("state")->find($id_cliente);
+
+            if($data->state != $request["state"]){
+                $version["id_user"]   = $request["id_user"];
+                $version["id_client"] = $id_cliente;
+                $version["event"]     = "Actualizo el estado de: ".$data->state." a ".$request['state'];
+
+                LogsClients::create($version);
+            }
 
 
             $request["identificacion_verify"] == 1 ? $request["identificacion_verify"] = 1 : $request["identificacion_verify"] = 0;
@@ -289,6 +300,21 @@ class ClientsController extends Controller
             ClientInformationAditionalSurgery::find($id_cliente)->update($request->all());
             ClientClinicHistory::find($id_cliente)->update($request->all());
             ClientCreditInformation::find($id_cliente)->update($request->all());
+
+
+
+
+
+            $data = Clients::select("state")->find($id_cliente);
+
+            if($data->state != $request["state"]){
+                $version["id_user"]   = $request["id_user"];
+                $version["id_client"] = $id_cliente;
+                $version["event"]     = "Actualizo el estado de: ".$data->state." a ".$request['state'];
+
+                LogsClients::create($version);
+            }
+
 
             if ($cliente) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
