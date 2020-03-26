@@ -159,6 +159,13 @@
                       @endif
 
 
+                      @if($id_line == 3)
+                        <label for="accept">He leído y acepto los </label> <a href="<?= url('/') ?>/autorizacion.pdf" target="_blank">términos y condiciones</a>
+                      @endif
+
+
+
+
                       @if($id_line == 16)
                         <label for="accept">He leído y acepto los </label> <a href="<?= url('/') ?>/Autorizacion_planmed.pdf" target="_blank">términos y condiciones</a>
                       @endif
