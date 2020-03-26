@@ -237,12 +237,12 @@
                  success: function(respuesta){
 
                   console.log(respuesta)
-                   warning("Operacion Exitosa")
+                   warning("Los datos fueron enviados exitosamente, en breve sera atendido por uno de nuestros asesores")
                    $("#form-submit")[0].reset();
 
                    $('#btn-submit').removeAttr('disabled'); 
 
-                   setTimeout(function(){ location.reload(); }, 5000);
+                 //  setTimeout(function(){ location.reload(); }, 5000);
 
                 }
 

@@ -1468,7 +1468,8 @@
                   $('#btn-submit').removeAttr('disabled'); 
                 },
                  success: function(respuesta){
-                   warning("Operacion Exitosa")
+                   
+                   warning("Los datos fueron enviados satisfactoriamente, en breve sera atendido por uno de nuestros asesores")
                    $("#form-submit")[0].reset();
 
                    $('#btn-submit').removeAttr('disabled'); 

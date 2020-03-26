@@ -12,7 +12,9 @@ use App\FormCreditProcedure;
 use App\FormCreditRelacionActivos;
 use App\FormCreditReferencias;
 
+use Mail;
 
+use App\User;
 use App\FormAutorizationStudioCredit;
 class FormCreditController extends Controller
 {
@@ -49,6 +51,32 @@ class FormCreditController extends Controller
     public function storeAutorization(Request $request){
 
         FormAutorizationStudioCredit::create($request->all());
+
+
+        $users = User::join("users_line_business", "users_line_business.id_user" , "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                        ->get();
+
+        
+        
+        foreach($users as $user){
+           
+            $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS";
+            //$for = "cardenascarlos18@gmail.com";
+            $for = $user["email"];
+
+            $request["msg"]  = "Un Paciente dio Autroizacion para Consulta y Reporte a Centrales de Bancos de Datos";
+
+           Mail::send('emails.forms_authorization',$request->all(), function($msj) use($subject,$for){
+                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+
+        }
+
+
+
         return response()->json("Ok")->setStatusCode(200);
         
     }
