@@ -44,6 +44,48 @@ class FormCreditController extends Controller
 
         FormCreditRelacionActivos::create($request->all());
         FormCreditReferencias::create($request->all());
+
+
+
+
+
+        $users = User::join("users_line_business", "users_line_business.id_user" , "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                        ->get();
+
+        
+        
+        foreach($users as $user){
+
+            $subject = "SOLICITUD DE CREDITO";
+           // $for = "cardenascarlos18@gmail.com";
+            $for = $user["email"];
+
+            $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Cridito";
+
+            Mail::send('emails.form_solicitud_credit',$request->all(), function($msj) use($subject,$for){
+                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+
+        }
+
+
+
+        $subject = "SOLICITUD DE CREDITO";
+        $for = "cardenascarlos18@gmail.com";
+        //$for = $user["email"];
+
+        $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Cridito";
+
+        Mail::send('emails.form_solicitud_credit',$request->all(), function($msj) use($subject,$for){
+            $msj->from("cardenascarlos18@gmail.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+
         return response()->json("Ok")->setStatusCode(200);
     }
 
