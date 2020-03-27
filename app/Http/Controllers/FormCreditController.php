@@ -57,7 +57,7 @@ class FormCreditController extends Controller
         
         foreach($users as $user){
 
-            $subject = "SOLICITUD DE CREDITO";
+            $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
            // $for = "cardenascarlos18@gmail.com";
             $for = $user["email"];
 
@@ -73,7 +73,7 @@ class FormCreditController extends Controller
 
 
 
-        $subject = "SOLICITUD DE CREDITO";
+        $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
         $for = "cardenascarlos18@gmail.com";
         //$for = $user["email"];
 
@@ -103,7 +103,7 @@ class FormCreditController extends Controller
         
         foreach($users as $user){
            
-            $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS";
+            $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS ". $request["names"]." ".$request["last_names"];
             //$for = "cardenascarlos18@gmail.com";
             $for = $user["email"];
 
@@ -118,7 +118,7 @@ class FormCreditController extends Controller
         }
 
 
-            $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS";
+            $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS ".$request["names"]." ".$request["last_names"];
             $for = "cardenascarlos18@gmail.com";
            // $for = $user["email"];
 
