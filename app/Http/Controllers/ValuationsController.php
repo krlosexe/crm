@@ -291,7 +291,7 @@ class ValuationsController extends Controller
             $fileName = uniqid().'.png';
             file_put_contents('img/valuations/'.$fileName, $fileData);
 
-            ValuationsPhoto::create(["code" => $request["code"], "foto" => $fileName]);
+            ValuationsPhoto::create(["code" => strtoupper($request["code"]), "foto" => $fileName]);
         }
 
         return response()->json("ok")->setStatusCode(200);
