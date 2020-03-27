@@ -7,119 +7,149 @@
       
         @csrf
 
-        <input type="hidden" name="_method" value="put">
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li  class="nav-item">
+                <a id="tab0" class="nav-link active" data-toggle="tab" href="#init_edit" role="tab" aria-controls="init" aria-selected="true">Datos Generales</a>
+            </li>
+            <li  class="nav-item">
+                <a id="tab1" class="nav-link" data-toggle="tab" href="#fotos-edit" role="tab" aria-controls="fotos" aria-selected="false">Fotos</a>
+            </li>
+        </ul>
+
+        <br><br>
+
+
+
+        <div class="tab-content" id="myTabContent">
+
+            <div class="tab-pane fade show active tab_content0" id="init_edit" role="tabpanel" aria-labelledby="patient_record_edit">
+
+            <input type="hidden" name="_method" value="put">
         
-        <div class="row">
-           <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                        <label for=""><b>Paciente</b></label>
-                        <select name="id_cliente" id="paciente-edit" class="form-control select2" required>
-                            <option value="">Seleccione</option>
-                        </select>
-                    </div>
-                </div>
-              </div>
-
-
-              <div class="row">
-
-                <div class="col-md-12">
-                  <div class="form-group">
-                        <label for=""><b>Fecha</b></label>
-                        <input type="date" name="fecha" id="fecha-edit" class="form-control select2" required>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                        <label for=""><b>Hora desde</b></label>
-                        <input type="time" name="time" id="time-edit" class="form-control select2" required>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                        <label for=""><b>Hora hasta</b></label>
-                        <input type="time" name="time_end" id="time-end-edit" class="form-control select2" required>
-                    </div>
-                </div>
-
-              </div>
-
-
-              <div class="row">
-
-                  <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-12">
                       <div class="form-group">
-                          <div class="form-group">
-                            <label for=""><b>Tipo</b></label>
-                            <select name="type" id="type-edit" class="form-control select2" required>
-                                <option value="Al Contado">Al Contado</option>
-                                <option value="Financiado">Financiado </option>
+                            <label for=""><b>Paciente</b></label>
+                            <select name="id_cliente" id="paciente-edit" class="form-control select2" required>
+                                <option value="">Seleccione</option>
                             </select>
                         </div>
-                      </div>
+                    </div>
                   </div>
+
+
+                  <div class="row">
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                            <label for=""><b>Fecha</b></label>
+                            <input type="date" name="fecha" id="fecha-edit" class="form-control select2" required>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                            <label for=""><b>Hora desde</b></label>
+                            <input type="time" name="time" id="time-edit" class="form-control select2" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                            <label for=""><b>Hora hasta</b></label>
+                            <input type="time" name="time_end" id="time-end-edit" class="form-control select2" required>
+                        </div>
+                    </div>
+
+                  </div>
+
+
+                  <div class="row">
+
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <div class="form-group">
+                                <label for=""><b>Tipo</b></label>
+                                <select name="type" id="type-edit" class="form-control select2" required>
+                                    <option value="Al Contado">Al Contado</option>
+                                    <option value="Financiado">Financiado </option>
+                                </select>
+                            </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for=""><b>Estatus</b></label>
+                            <select name="status" id="status-edit" class="form-control select2" required>
+                                <option value="0">Pendiente</option>
+                                <option value="1">Procesado</option>
+                                <option value="2">Cancelado</option>
+                            </select>
+                        </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
                   
               </div>
 
 
-              <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for=""><b>Estatus</b></label>
-                        <select name="status" id="status-edit" class="form-control select2" required>
-                            <option value="0">Pendiente</option>
-                            <option value="1">Procesado</option>
-                            <option value="2">Cancelado</option>
-                        </select>
-                    </div>
-                </div>
-              </div>
+              <div class="col-md-6">
 
-
-
-
-
-
-              
-           </div>
-
-
-           <div class="col-md-6">
-
-              <div class="col-md-12">
-                  <div class="form-group">
-                      <label for=""><b>Obervaciones</b></label>
-                      <textarea name="observaciones" id="observaciones-edit" class="form-control" cols="30" rows="5"></textarea>
+                  <div class="col-md-12">
+                      <div class="form-group">
+                          <label for=""><b>Obervaciones</b></label>
+                          <textarea name="observaciones" id="observaciones-edit" class="form-control" cols="30" rows="5"></textarea>
+                      </div>
                   </div>
-              </div>
 
 
 
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-sm-12 text-center"> 
-                         <label for=""><b>Adjuntar Cotizacion</b></label>
-                        <div>
-                            <div class="file-loading">
-                                <input id="file-input-edit" name="file" type="file">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-sm-12 text-center"> 
+                            <label for=""><b>Adjuntar Cotizacion</b></label>
+                            <div>
+                                <div class="file-loading">
+                                    <input id="file-input-edit" name="file" type="file">
+                                </div>
+                            </div>
+                            <div class="kv-avatar-hintss">
+                                <small>Seleccione una foto</small>
                             </div>
                         </div>
-                        <div class="kv-avatar-hintss">
-                            <small>Seleccione una foto</small>
-                        </div>
                     </div>
-                </div>
+                  </div>
+
               </div>
 
-           </div>
+
+            </div>
 
 
+            </div>
+
+            <div class="tab-pane fade tab_content0" id="fotos-edit" role="tabpanel" aria-labelledby="patient_record_edit">
+              <div id="photos_edit" class="row">
+
+               </div>
+            </div>
+            
         </div>
+
 
         <input type="hidden" name="inicial" id="inicial">
         <input type="hidden" name="id_user" class="id_user">

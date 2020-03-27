@@ -37,8 +37,7 @@ class ValuationsController extends Controller
                                     }
                                 })
 
-
-                                
+                                ->with("photos")
 
                                 ->orderBy("valuations.id_valuations", "DESC")
                                 ->get();
@@ -136,10 +135,6 @@ class ValuationsController extends Controller
                                 ->with("comments")
                                 ->with("photos")
                                 
-
-
-
-
                                 ->orderBy("valuations.id_valuations", "DESC")
                                 ->get();
             echo json_encode($valuations);
