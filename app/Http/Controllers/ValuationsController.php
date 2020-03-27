@@ -271,6 +271,8 @@ class ValuationsController extends Controller
                             ->where("code", $code)
                             ->first();
         if($data){
+
+            sleep(2);
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("Codigo Invalido")->setStatusCode(400);
