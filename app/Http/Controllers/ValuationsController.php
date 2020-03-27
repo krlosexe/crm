@@ -275,6 +275,10 @@ class ValuationsController extends Controller
             sleep(2);
             return response()->json($data)->setStatusCode(200);
         }else{
+
+            sleep(2);
+
+            
             return response()->json("Codigo Invalido")->setStatusCode(400);
         }
         
