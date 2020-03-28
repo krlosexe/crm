@@ -90,7 +90,50 @@ class UsuariosController extends Controller
 
 
 
-    
+    public function GetAsesorasByBusinessLineArray(Request $request)
+    {   
+        if ($this->VerifyLogin($request["id_user"],$request["token"])) {
+
+
+            $business_line = 0;
+            if(isset($request["array_line"])){
+                $business_line = $request["array_line"];
+            }
+
+            
+          
+            $User = User::select("users.*", "datos_personales.*", "roles.nombre_rol", "auditoria.status", "auditoria.fec_regins", "user_registro.email as user_registro")
+                          ->join('datos_personales', 'datos_personales.id_usuario', '=', 'users.id')
+                          ->join("auditoria", "auditoria.cod_reg", "=", "users.id")
+                          ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                          ->join("roles", "roles.id_rol", "=", "users.id_rol")
+
+                          ->join('users_line_business', 'users_line_business.id_user', '=', 'users.id')
+
+                          //->where("users_line_business.id_line", $id_line)
+
+                          ->where(function ($query) use ($business_line) {
+                                if($business_line != 0){
+                                    $query->whereIn("users_line_business.id_line", $business_line);
+                                }
+                            })
+
+
+                         // ->where("roles.nombre_rol", "Asesor")
+                          ->where("auditoria.tabla", "users")
+                          ->where("auditoria.status", "!=", "0")
+                         // ->where("users.id_line", "=", $id_line)
+                        
+                          ->orderBy("users.id", "desc")
+
+
+                          ->get();
+            
+           return response()->json($User)->setStatusCode(200);
+        }else{
+            return response()->json("No esta autorizado")->setStatusCode(400);
+        }
+    }
 
     /**
      * Show the form for creating a new resource.

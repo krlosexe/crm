@@ -82,7 +82,7 @@
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for=""><b>Filtrar por : Linea de Negocio</b></label>
-										<select name="id_line" id="linea-negocio-filter" class="form-control select2 disabled" multiple>
+										<select name="id_line[]" id="linea-negocio-filter" class="form-control select2 disabled" multiple>
 											<option value="">Seleccione</option>
 										</select>
 									</div>
@@ -122,6 +122,7 @@
 								  <th>Datos</th>
 								  <th>Identificacion</th>
 								  <th style="width: 150px;">Origen</th>
+								  <th style="width: 150px;">Linea</th>
 								  <th style="width: 150px;">Estado</th>
 			                      <th style="width: 180px;">Fecha de registro</th>
 								  <th style="width: 140px;">Asesora Responsable</th>
@@ -184,11 +185,71 @@
 				GetBusinessLine("#linea-negocio-filter");
 
 
-				GetAsesorasbyBusisnessLine("#linea-negocio-filter", "#id_asesora_valoracion-filter");
+				GetAsesorasbyBusisnessLine2("#linea-negocio-filter", "#id_asesora_valoracion-filter");
 				
 
 				verifyPersmisos(id_user, tokens, "clients");
 			});
+
+
+
+			function GetAsesorasbyBusisnessLine2(line_business, asesoras){
+
+				$(line_business).change(function (e) { 
+				
+					var id_line_business = $(this).val()
+					var url=document.getElementById('ruta').value;
+					$.ajax({
+						url:''+url+'/api/get-asesoras-business-line',
+						type:'POST',
+						data: {
+							"id_user": id_user,
+							"token"  : tokens,
+							"array_line" : id_line_business
+						},
+						dataType:'JSON',
+						async: false,
+						beforeSend: function(){
+						// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+						},
+						error: function (data) {
+						//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+						},
+						success: function(data){
+						$(asesoras+" option").remove();
+						$(asesoras).append($('<option>',
+						{
+							value: "",
+							text : "Seleccione"
+						}));
+					
+						$.each(data, function(i, item){
+							if (item.status == 1) {
+							
+							$(asesoras).append($('<option>',
+							{
+								value: item.id,
+								text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
+								
+							}));
+
+							if(item.id == id_user){
+								//$(asesoras+" option").not(':selected').remove();
+								//return false;
+							}
+
+							}
+						});
+
+						}
+					});
+				});
+
+			}
+
+
+
+
 
 
 			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter").change(function (e) { 
@@ -202,11 +263,21 @@
 				}
 
 
-				if($("#iinea-negocio-filter").val() == ""){
+				if($("#linea-negocio-filter").val() == ""){
 					var linea_negocio = 0
 				}else{
-					var linea_negocio = $("#iinea-negocio-filter").val()
+					var linea_negocio = $("#linea-negocio-filter").val()
 				}
+
+
+				if($("#origen-filter").val() == ""){
+					var origen = 0
+				}else{
+					var origen = $("#origen-filter").val()
+				}
+
+
+
 
 
 
@@ -216,7 +287,7 @@
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$('.dt-buttons').append(a);
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+linea_negocio+'/'+adviser+'" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+linea_negocio+'/'+adviser+'/'+origen+'" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
 				$("#xls").click(function (e) { 
@@ -304,6 +375,7 @@
 						},
 						{"data":"identificacion"},
 						{"data":"origen"},
+						{"data":"nombre_line"},
 						{"data":"state"},
 						{"data": "fec_regins"},
 						{"data": "name_register",
@@ -337,7 +409,7 @@
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$('.dt-buttons').append(a);
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/0/0" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/0/0/Todos" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
 				$("#xls").click(function (e) { 

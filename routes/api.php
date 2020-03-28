@@ -28,6 +28,11 @@ Route::get('get-asesoras', 'UsuariosController@GetAsesoras');
 Route::get('get-asesoras-business-line/{id}', 'UsuariosController@GetAsesorasByBusinessLine');
 
 
+Route::post('get-asesoras-business-line', 'UsuariosController@GetAsesorasByBusinessLineArray');
+
+
+
+
 Route::resource('modulos', 'ModulosController');
 Route::post('status-modulo/{id}/{status}', 'ModulosController@status');
 
@@ -127,7 +132,7 @@ Route::get('notifications/generate', 'NotificationsController@Generate');
 Route::get('email/forms', 'NotificationsController@Email');
 Route::post('email/forms', 'NotificationsController@Email');
 
-Route::get('clients/export/excel/{bunisses_line}/{adviser}', 'ClientsController@Excel');
+Route::get('clients/export/excel/{bunisses_line}/{adviser}/{origen}', 'ClientsController@Excel');
 
 Route::post('clients/import/', 'ClientsController@Import');
 

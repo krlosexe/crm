@@ -57,12 +57,16 @@ class ClientsController extends Controller
 
             $data = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
                                        "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
-                                       "datos_personales.apellido_p as apellido_register"
+                                       "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line"
                                      )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
 
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
+
+                                ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line")
+
+
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
@@ -78,7 +82,7 @@ class ClientsController extends Controller
 
                                 ->where(function ($query) use ($business_line) {
                                     if($business_line != 0){
-                                        $query->where("clientes.id_line", $business_line);
+                                        $query->whereIn("clientes.id_line", $business_line);
                                     }
                                 })
 
@@ -105,12 +109,7 @@ class ClientsController extends Controller
                                         $query->where("clientes.pauta", 0);
                                     }
 
-
-
                                 }) 
-
-
-
 
 
                                 ->with("logs")
@@ -118,11 +117,10 @@ class ClientsController extends Controller
 
                                 ->with("comments")
 
-
-
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.status", "!=", "0")
+                                ->orderBy("clientes.id_line", "DESC")
                                 ->orderBy("clientes.id_cliente", "DESC")
                                 ->get();
 
@@ -587,13 +585,16 @@ class ClientsController extends Controller
 
 
 
-    public function Excel($linea_negocio, $adviser){
+    public function Excel($linea_negocio, $adviser, $origen){
+
 
         $xls = new ClientsExport;
 
-        $xls->linea_negocio = $linea_negocio;
-        $xls->asesor = $adviser;
+        $xls->linea_negocio = $linea_negocio == 0 ? 0 :  explode(",", $linea_negocio);
+        $xls->asesor        = $adviser == 0 ? 0 :  explode(",", $adviser);
+        $xls->origen        = $origen;
 
+        
         return Excel::download($xls, 'ClientExport.xlsx');
     }
 
