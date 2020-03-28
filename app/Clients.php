@@ -10,7 +10,7 @@ class Clients extends Model
     protected $fillable = [
         'nombres', 'apellidos', 'identificacion', 'telefono', 'email', 'direccion',
         'fecha_nacimiento', 'identificacion_verify', 'city', 'clinic', 'id_line', 
-        'id_user_asesora', 'id_asesora_valoracion', 'state', 'origen', 'forma_pago', 'pauta'
+        'id_user_asesora', 'id_asesora_valoracion', 'state', 'origen', 'forma_pago', 'pauta', 'code_client'
     ];
 
 
