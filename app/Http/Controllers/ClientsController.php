@@ -192,14 +192,6 @@ class ClientsController extends Controller
                 return response()->json($validator->errors())->setStatusCode(400);
             }else{
 
-
-                $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-                $code = substr(str_shuffle($permitted_chars), 0, 4);
-                
-                $request["code"] = strtoupper($code);
-
-
-
                 $cliente = Clients::create($request->all());
                 
                 $request["id_client"] = $cliente["id_cliente"];
