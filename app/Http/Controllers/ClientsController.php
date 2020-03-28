@@ -115,6 +115,11 @@ class ClientsController extends Controller
 
                                 ->with("logs")
 
+
+                                ->with("comments")
+
+
+
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.status", "!=", "0")
@@ -206,6 +211,15 @@ class ClientsController extends Controller
                 ClientInformationAditionalSurgery::create($request->all());
                 ClientClinicHistory::create($request->all());
                 ClientCreditInformation::create($request->all());
+
+
+
+                $request["table"]    = "clients";
+                $request["id_event"] = $cliente["id_cliente"];
+                Comments::create($request->all());
+
+
+
 
                 $auditoria              = new Auditoria;
                 $auditoria->tabla       = "clientes";
@@ -321,6 +335,25 @@ class ClientsController extends Controller
 
                 LogsClients::create($version);
             }
+
+
+
+
+            if(isset($request->comments)){
+                $comments = [];
+
+                foreach($request->comments as $key => $value){
+                    $array = [];
+                    $array["id_event"]   = $id_cliente;
+                    $array["table"]      = "clients";
+                    $array["id_user"]    = $request["id_user"];
+                    $array["comment"]   = $value;
+                    array_push($comments, $array);
+                }
+                Comments::insert($comments);
+                
+            }
+
 
 
             if ($cliente) {

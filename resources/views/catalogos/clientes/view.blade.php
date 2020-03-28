@@ -215,6 +215,42 @@
 
 
 
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Facebook</b></label>
+                                        <input type="text" name="facebook" class="form-control form-control-user" id="facebook_view">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Instagram</b></label>
+                                        <input type="text" name="instagram" class="form-control form-control-user" id="instagram_view">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Twitter</b></label>
+                                        <input type="text" name="twitter" class="form-control form-control-user" id="twitter_view">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Youtube</b></label>
+                                        <input type="text" name="youtube" class="form-control form-control-user" id="youtube_view">
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>PRP</b></label>
+                                        <select name="prp" id="prp_view" class="form-control select2 select2-hidden-accessible">
+                                            <option value="No">No</option>
+                                            <option value="Si">Si</option>
+                                        </select>
+                                    </div>
+                                </div>
 
 
                             </div>
@@ -241,6 +277,33 @@
                                 <div id="logs_view"></div>
                             </div>
                         </div>
+
+
+
+                        <br><br>
+
+
+                        <div class="col-md-12">
+                                <h4>Comentarios</h4>
+                        </div>
+                        <br><br>
+
+                        <div class="row" id="comments">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                    Foto
+                                    </div>
+                                    <div class="col-md-10">
+                                    Text
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                         
                     </div>
 

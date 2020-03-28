@@ -3,6 +3,15 @@
 
 	@section('CustomCss')
 
+
+
+
+	 <!-- include summernote css/js -->
+	 <link href="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.css" rel="stylesheet">
+     <script src="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.js"></script>
+
+
+
 		<style>
 			.kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {
 			    margin: 0;
@@ -73,7 +82,7 @@
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for=""><b>Filtrar por : Linea de Negocio</b></label>
-										<select name="id_line" id="linea-negocio-filter" class="form-control select2 disabled" required>
+										<select name="id_line" id="linea-negocio-filter" class="form-control select2 disabled" multiple>
 											<option value="">Seleccione</option>
 										</select>
 									</div>
@@ -357,6 +366,13 @@
 				Allergic("#allergic ", "#allergic_medication")
 				$("#clinic").attr("disabled", "disabled")
 
+
+				$('#summernote').summernote({
+					'height' : 200
+				});
+
+
+
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
@@ -393,7 +409,16 @@
 					$("#fecha_nacimiento_view").val(data.fecha_nacimiento).attr("disabled", "disabled")
 					$("#origen_view").val(data.origen).attr("disabled", "disabled")
 					$("#forma_pago_view").val(data.forma_pago).attr("disabled", "disabled")
-					
+
+
+					$("#facebook_view").val(data.facebook).attr("disabled", "disabled")
+					$("#instagram_view").val(data.instagram).attr("disabled", "disabled")
+					$("#twitter_view").val(data.twitter).attr("disabled", "disabled")
+					$("#youtube_view").val(data.youtube).attr("disabled", "disabled")
+					$("#prp_view").val(data.prp).attr("disabled", "disabled")
+					$("#prp_view").trigger("change");
+
+
 					$("#city_view").val(data.city).attr("disabled", "disabled")
 					$("#city_view").trigger("change")
 
@@ -466,6 +491,40 @@
 					});
 
 					$("#logs_view").html(html)
+
+
+
+
+
+
+
+
+
+					var url=document.getElementById('ruta').value; 
+					var html = "";
+
+
+					$.map(data.comments, function (item, key) {
+						html += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html += '<div class="row">'
+								html += '<div class="col-md-2">'
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+									
+								html += '</div>'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div>'+item.comment+'</div>'
+
+									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+								html += '</div>'
+							html += '</div>'
+						html += '</div>'
+						
+					});
+
+					
+					$("#comments").html(html)
 
 
 
@@ -558,6 +617,18 @@
 					$("#desired_size_edit").val(data.desired_size)
 					$("#implant_volumem_edit").val(data.implant_volumem)
 
+
+
+					$("#facebook_edit").val(data.facebook)
+					$("#instagram_edit").val(data.instagram)
+					$("#twitter_edit").val(data.twitter)
+					$("#youtube_edit").val(data.youtube)
+
+
+					$("#prp_edit").val(data.prp)
+					$("#prp_edit").trigger("change");
+
+
 					$("#eps_edit").val(data.eps)
 					$("#height_edit").val(data.height)
 					$("#weight_edit").val(data.weight)
@@ -624,6 +695,67 @@
 
 					$("#logs_edit").html(html)
 
+
+
+
+
+
+
+
+
+
+					$('#summernote_edit').summernote({
+						'height' : 200
+					});
+					var url=document.getElementById('ruta').value; 
+					var html = "";
+
+
+					if(data.observaciones != null){
+						html += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html += '<div class="row">'
+								html += '<div class="col-md-2">'
+									
+								html += '</div>'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div>'+data.observaciones+'</div>'
+								html += '</div>'
+							html += '</div>'
+						html += '</div>'
+					}
+
+
+					
+					$.map(data.comments, function (item, key) {
+						html += '<div class="col-md-12" style="margin-bottom: 15px">'
+							html += '<div class="row">'
+								html += '<div class="col-md-2">'
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+									
+								html += '</div>'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div>'+item.comment+'</div>'
+
+									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+								html += '</div>'
+							html += '</div>'
+						html += '</div>'
+						
+					});
+
+
+
+
+
+					$("#comments_edit").html(html)
+
+
+
+
+
+
 				
 
 					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
@@ -648,6 +780,37 @@
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
+
+
+
+
+			$("#add-comments").click(function (e) { 
+				
+				var html = ""
+
+
+				html += '<div class="col-md-12" style="margin-bottom: 15px">'
+					html += "<input type='hidden' name='comments[]' value='"+$("#summernote_edit").val()+"'>"
+					html += '<div class="row">'
+						html += '<div class="col-md-2">'
+							//html += "<img class='rounded' src='/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+							
+						html += '</div>'
+						html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+							html += '<div>'+$("#summernote_edit").val()+'</div>'
+
+							html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
+
+						html += '</div>'
+					html += '</div>'
+				html += '</div>'
+
+				$("#comments_edit").append(html)
+			});	
+
+
+
+			
 
 
 

@@ -57,7 +57,7 @@
             <div class="tab-pane fade show active tab_content0" id="init_edit" role="tabpanel" aria-labelledby="patient_record_edit">
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
 
 
                         <div class="row">
@@ -213,6 +213,47 @@
                                 </div>
 
 
+
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Facebook</b></label>
+                                        <input type="text" name="facebook" class="form-control form-control-user" id="facebook_edit">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Instagram</b></label>
+                                        <input type="text" name="instagram" class="form-control form-control-user" id="instagram_edit">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Twitter</b></label>
+                                        <input type="text" name="twitter" class="form-control form-control-user" id="twitter_edit">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>Youtube</b></label>
+                                        <input type="text" name="youtube" class="form-control form-control-user" id="youtube_edit">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for=""><b>PRP</b></label>
+                                        <select name="prp" id="prp_edit" class="form-control select2 select2-hidden-accessible">
+                                            <option value="No">No</option>
+                                            <option value="Si">Si</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
 
@@ -222,7 +263,7 @@
 
 
 
-                    <div class="col-md-6">
+                    <div class="col-md-7">
 
                         <div class="row">
                             <div class="col-md-12">
@@ -236,6 +277,69 @@
                                 <div id="logs_edit"></div>
                             </div>
                         </div>
+
+
+                        
+
+
+
+
+                        <br><br>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                    <h4>Comentarios</h4>
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <div class="row" id="comments_edit">
+                            <div class="col-md-12">
+                              <div class="row">
+                                  <div class="col-md-2">
+                                    Foto
+                                  </div>
+                                  <div class="col-md-10">
+                                    Text
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+
+                           <div class="col-md-2"></div>
+                                
+                           <div class="col-md-10">
+                                <div class="form-group">
+                                   
+                                    <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
+                                    <textarea id="summernote_edit"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                          <div class="row">
+
+                              <div class="col-md-2">
+                                    
+                              </div>
+
+                              <div class="col-md-10">
+                                <button type="button" id="add-comments"  class="btn btn-primary">
+                                  Comentar
+                                </button>
+                              </div>
+                            
+                          </div>
+
+
+
                     </div>
 
                 </div>

@@ -176,36 +176,32 @@
 
                         <div class="row">
 
-
-                          <div class="col-md-2">
-                                  
-                          </div>
-
+                           <div class="col-md-2"></div>
                                 
-                          <div class="col-md-10">
-                            <div class="form-group">
+                           <div class="col-md-10">
+                                <div class="form-group">
                                     <label for=""><b>Comentarios</b></label>
                                     <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
                                     <textarea id="summernote_edit"></textarea>
                                 </div>
                             </div>
 
-                          </div>
+                        </div>
 
 
                           <div class="row">
 
-                            <div class="col-md-2">
-                                  
-                            </div>
+                              <div class="col-md-2">
+                                    
+                              </div>
 
-                            <div class="col-md-10">
-                              <button type="button" id="add-comments"  class="btn btn-primary">
-                                Comentar
-                              </button>
-                            </div>
+                              <div class="col-md-10">
+                                <button type="button" id="add-comments"  class="btn btn-primary">
+                                  Comentar
+                                </button>
+                              </div>
                             
-                      </div>
+                          </div>
 
                   </div>
 

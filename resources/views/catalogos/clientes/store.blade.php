@@ -158,11 +158,8 @@
                             </div>
                         </div>
 
-                    </div>
 
 
-
-                    <div class="col-md-6">
 
                         <div class="row">
                             <div class="col-md-12">
@@ -217,6 +214,71 @@
 
                             </div>
                         </div>
+
+
+
+
+
+                    </div>
+
+
+
+                    <div class="col-md-6">
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for=""><b>Facebook</b></label>
+                                <input type="text" name="facebook" class="form-control form-control-user" id="facebook">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for=""><b>Instagram</b></label>
+                                <input type="text" name="instagram" class="form-control form-control-user" id="instagram">
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for=""><b>Twitter</b></label>
+                                <input type="text" name="twitter" class="form-control form-control-user" id="twitter">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for=""><b>Youtube</b></label>
+                                <input type="text" name="youtube" class="form-control form-control-user" id="youtube">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for=""><b>PRP</b></label>
+                                <select name="prp" id="prp" class="form-control select2 select2-hidden-accessible">
+                                    <option value="No">No</option>
+                                    <option value="Si">Si</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for=""><b>Comentarios</b></label>
+                                    <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
+                                    <textarea id="summernote" name="comment"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
                     </div>
 
                 </div>
