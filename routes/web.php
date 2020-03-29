@@ -177,6 +177,11 @@ Route::get('forms_autorizacion/{id_line}', function ($id_line) {
 
 
 
+Route::get('ReportEventAsesora', function () {
+    return view('Reports.envents_advisers.gestion');
+});
+
+
 
 Route::get('prueba', function () {
     return view('forms.prueba');
