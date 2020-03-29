@@ -55,6 +55,8 @@ class ClientsController extends Controller
 
             $origen = $request["origen"];
 
+            ini_set('memory_limit', '-1'); 
+            
             $data = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
                                        "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
                                        "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line"
