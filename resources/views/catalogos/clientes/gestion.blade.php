@@ -195,7 +195,7 @@
 	 		//	list();
 				update();
 
-				list(1)
+				list("",1)
 
 				$("#collapse_Catálogos").addClass("show");
 				$("#nav_clients, #modulo_Catálogos").addClass("active");
@@ -273,14 +273,14 @@
 
 			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter").change(function (e) { 
 
-				list(1, "")
+				list("", 1)
 
 			});
 
 
 
 			$("#search").keyup(function (e) { 
-				list(1, "")
+				list("", 1)
 			});
 
 
@@ -296,7 +296,7 @@
 			}
 
 
-			function list(page = 1, cuadro = ""){
+			function list(cuadro = "", page = 1){
 
 
 				var url=document.getElementById('ruta').value;
@@ -413,9 +413,9 @@
 						
 
 						var li = ""
-						li  += '<li class="paginate_button page-item previous '+className+'" onclick="list('+prev+')" id="table_previous"><a href="javascript:void(0)" aria-controls="table" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a></li>'
+						li  += '<li class="paginate_button page-item previous '+className+'" onclick="list(\'\', '+prev+')" id="table_previous"><a href="javascript:void(0)" aria-controls="table" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a></li>'
 
-						li += '<li class="paginate_button page-item next" onclick="list('+next+')" id="table_next"><a href="javascript:void(0)" aria-controls="table" data-dt-idx="8" tabindex="0" class="page-link">Siguiente</a></li>'
+						li += '<li class="paginate_button page-item next" onclick="list(\'\', '+next+')" id="table_next"><a href="javascript:void(0)" aria-controls="table" data-dt-idx="8" tabindex="0" class="page-link">Siguiente</a></li>'
 
 						$(".pagination").html(li)
 
