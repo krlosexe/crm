@@ -273,7 +273,7 @@
 
 			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter").change(function (e) { 
 
-				
+				list(1, "")
 
 			});
 
