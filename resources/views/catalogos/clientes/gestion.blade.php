@@ -1080,8 +1080,9 @@
 			/*
 				Funcion que capta y envia los datos a desactivar
 			*/
-			function desactivar(tbody, table){
-				$(tbody).unbind().on("click", "span.desactivar", function(){
+			function desactivar(tbody){
+				$(tbody).on("click", "span.desactivar", function(){
+
 					var data = JSON.parse($(this).attr("data")) 
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
 				});
@@ -1092,8 +1093,8 @@
 			/*
 				Funcion que capta y envia los datos a desactivar
 			*/
-			function activar(tbody, table){
-				$(tbody).unbind().on("click", "span.activar", function(){
+			function activar(tbody){
+				$(tbody).on("click", "span.activar", function(){
 					var data = JSON.parse($(this).attr("data")) 
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
 				});
@@ -1102,7 +1103,7 @@
 
 
 
-			function eliminar(tbody, table){
+			function eliminar(tbody){
 				$(tbody).unbind().on("click", "span.eliminar", function(){
 					var data = JSON.parse($(this).attr("data")) 
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
