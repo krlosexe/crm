@@ -53,6 +53,13 @@ class ClientsController extends Controller
             }
 
 
+            $search = 0;
+            if(isset($request["search"]) && $request["search"] != ""){
+              $search = $request["search"];
+            }
+
+         
+
             $origen = $request["origen"];
 
             ini_set('memory_limit', '-1'); 
@@ -72,6 +79,16 @@ class ClientsController extends Controller
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
+
+
+                                ->where(function ($query) use ($search) {
+                                    if($search != "0"){
+                                        $query->where("clientes.nombres", 'like', '%'.$search.'%');
+                                        $query->orWhere("clientes.identificacion", 'like', '%'.$search.'%');
+                                    }
+
+                                }) 
+
 
 
                                 // ->where(function ($query) use ($rol, $id_user) {
@@ -114,6 +131,13 @@ class ClientsController extends Controller
                                 }) 
 
 
+
+                               
+
+
+
+
+
                                 ->with("logs")
 
 
@@ -122,9 +146,12 @@ class ClientsController extends Controller
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.status", "!=", "0")
+
+
                                 ->orderBy("clientes.id_line", "DESC")
                                 ->orderBy("clientes.id_cliente", "DESC")
-                                ->get();
+
+                                ->paginate(10);
 
 
                 
@@ -718,6 +745,22 @@ class ClientsController extends Controller
 
         
         
+    }
+
+
+    public function changeName(){
+
+        $data = Clients::get();
+
+        foreach($data as $value){
+
+           $new_nombre = $value["nombres"]." ".$value["apellidos"];
+
+           $cliente = Clients::find($value["id_cliente"])->update(["nombres" => $new_nombre]);
+
+           echo $new_nombre."<br><br>";
+
+        }
     }
 
 

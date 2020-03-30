@@ -114,8 +114,17 @@
 
 
 							</div>
-			              <div class="table-responsive">
-			                <table class="table table-bordered" id="table" width="100%" cellspacing="0">
+			              <div class="table-responsive dataTables_wrapper dt-bootstrap4 no-footer">
+						  	
+			                <table class="table table-bordered " id="table" width="100%" cellspacing="0">
+
+							<div class="dt-buttons"></div>
+
+							<div id="table_filter" class="dataTables_filter"><label>Buscar:
+								<input type="search" id="search" class="form-control form-control-sm" placeholder="" aria-controls="table"></label>
+							</div>
+
+							
 			                  <thead>
 			                    <tr>
 								  <th>Acciones</th>
@@ -132,6 +141,14 @@
 			                    
 			                  </tbody>
 			                </table>
+
+							<div class="dataTables_info" id="table_info" role="status" aria-live="polite"></div>
+
+
+							<div class="dataTables_paginate paging_simple_numbers">
+								<ul class="pagination"></ul>
+							</div>
+							
 			              </div>
 			            </div>
 			          </div>
@@ -175,8 +192,10 @@
 		
 			$(document).ready(function(){
 				store();
-	 			list();
+	 		//	list();
 				update();
+
+				list(1)
 
 				$("#collapse_Catálogos").addClass("show");
 				$("#nav_clients, #modulo_Catálogos").addClass("active");
@@ -192,7 +211,7 @@
 			});
 
 
-
+			
 			function GetAsesorasbyBusisnessLine2(line_business, asesoras){
 
 				$(line_business).change(function (e) { 
@@ -253,60 +272,16 @@
 
 
 			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter").change(function (e) { 
-				list("", $("#linea-negocio-filter").val(), $("#id_asesora_valoracion-filter").val(), $("#origen-filter").val())
-
-
-				if($("#id_asesora_valoracion-filter").val() == ""){
-					var adviser = 0
-				}else{
-					var adviser = $("#id_asesora_valoracion-filter").val()
-				}
-
-
-				if($("#linea-negocio-filter").val() == ""){
-					var linea_negocio = 0
-				}else{
-					var linea_negocio = $("#linea-negocio-filter").val()
-				}
-
-
-				if($("#origen-filter").val() == ""){
-					var origen = 0
-				}else{
-					var origen = $("#origen-filter").val()
-				}
-
-
-
-
-
-
-				$("#xls").remove();
-				$("#view_xls").remove();
-
-				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
-				$('.dt-buttons').append(a);
-
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+linea_negocio+'/'+adviser+'/'+origen+'" class="dt-button buttons-excel buttons-html5">xls</button>';
-				$('.dt-buttons').append(b);
-
-				$("#xls").click(function (e) { 
-					url = $("#view_xls").attr("href");
-					window.open(url, '_blank');
-				});
-
-
-			});
-
-
-
-			$("#linea-negocio-filter").change(function (e) { 
 
 				
 
 			});
 
 
+
+			$("#search").keyup(function (e) { 
+				list(1, "")
+			});
 
 
 
@@ -321,95 +296,152 @@
 			}
 
 
+			function list(page = 1, cuadro = ""){
 
 
-			function list(cuadro, business_line, adviser, origen) {
-				
-				var data = {
-					"id_user": id_user,
-					"token"  : tokens,
-				};
+				var url=document.getElementById('ruta').value;
 
-				$('#table tbody').off('click');
-				var url=document.getElementById('ruta').value; 
 				cuadros(cuadro, "#cuadro1");
 
-				var table=$("#table").DataTable({
-					"destroy":true,
-					"stateSave": true,
-					"serverSide":false,
-					"ajax":{
-						"method":"GET",
-						 "url":''+url+'/api/clients',
-						 "data": {
-							"id_user"       : id_user,
-							"token"         : tokens,
-							"rol"           : name_rol,
-							"business_line" : business_line,
-							"adviser"       : adviser,
-							"origen"        : origen
-						},
-						"dataSrc":""
+				
+
+				if($("#search").val() != ""){
+
+					var search = $("#search").val()
+
+				}else{
+					var search = null
+				}
+
+
+				$.ajax({
+					url:''+url+'/api/clients/',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+						"page"   : page,
+						"business_line" : $("#linea-negocio-filter").val(),
+						"adviser"       : $("#id_asesora_valoracion-filter").val(),
+						"origen"        : $("#origen-filter").val(),
+						"search"  : search
 					},
-					"columns":[
-						{"data": null,
-							render : function(data, type, row) {
-								var botones = "";
-								if(consultar == 1)
-									botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
-								if(actualizar == 1)
-									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
-								if(data.status == 1 && actualizar == 1)
-									botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
-								else if(data.status == 2 && actualizar == 1)
-									botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
-								if(borrar == 1)
-									botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
-								return botones;
-							}
-						},
-						{"data":"nombres",
-							render : function(data, type, row){
-								return "<b>"+data+" "+row.apellidos+"</b><br><i class='fa fa-phone'></i> <a href='#' >"+row.telefono+"</a><br><i class='fa fa-envelope'></i><a href='#'> "+row.email+"</a>"
-							}
-						},
-						{"data":"identificacion"},
-						{"data":"origen"},
-						{"data":"nombre_line"},
-						{"data":"state"},
-						{"data": "fec_regins"},
-						{"data": "name_register",
-							render : function(data, type, row){
-								return "<b>"+data+" "+row.apellido_register+"</b>"
-							}
+					dataType:'JSON',
+					
+					beforeSend: function(){
+
+						var html = ""
+						 html += "<tr>"
+								html += "<td colspan='8'> Cargando...</td>"
+							html += "</tr>"
+
+						$("#table tbody").html(html)
+					},
+					error: function (data) {
+					},
+					success: function(result){
+
+						var html = ""
+						$.map(result.data, function (item, key) {
+
+							var botones = "";
+							if(consultar == 1)
+								botones += "<span data='"+JSON.stringify(item)+"' class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
+							if(actualizar == 1)
+								botones += "<span data='"+JSON.stringify(item)+"' class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+							if(item.status == 1 && actualizar == 1)
+								botones += "<span data='"+JSON.stringify(item)+"' class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
+							else if(item.status == 2 && actualizar == 1)
+								botones += "<span data='"+JSON.stringify(item)+"' class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
+							if(borrar == 1)
+								botones += "<span data='"+JSON.stringify(item)+"' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+						//	return botones;
+
+
+
+							html += "<tr>"
+								html += "<td>"+botones+"</td>"
+								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a></td>"
+								html += "<td>"+item.identificacion+"</td>"
+								html += "<td>"+item.origen+"</td>"
+								html += "<td>"+item.nombre_line+"</td>"
+								html += "<td>"+item.state+"</td>"
+								html += "<td>"+item.fec_regins+"</td>"
+								html += "<td><b>"+item.name_register+" "+item.apellido_register+"</b></td>"
+							html += "</tr>"
+
+						});
+
+						var table = $("#table tbody").html(html)
+
+						if(result.next_page_url != null){
+							var next = result.next_page_url.split("page=")[1]
+							var className = ''
+						}else{
+							var next = result.last_page
+							var className = 'disabled'
+						}
+
+
+						if(result.prev_page_url != null){
+							var prev = result.prev_page_url.split("page=")[1]
+							var className = ''
+						}else{
+							var prev = 1;
+							var className = 'disabled'
 						}
 						
-					],
-					"language": idioma_espanol,
-					"responsive": true,
-					"dom": 'Bfrtip',
-					"buttons": [
-						'copy', 'csv', 'pdf', 'print'
-					]
+
+						var li = ""
+						li  += '<li class="paginate_button page-item previous '+className+'" onclick="list('+prev+')" id="table_previous"><a href="javascript:void(0)" aria-controls="table" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a></li>'
+
+						li += '<li class="paginate_button page-item next" onclick="list('+next+')" id="table_next"><a href="javascript:void(0)" aria-controls="table" data-dt-idx="8" tabindex="0" class="page-link">Siguiente</a></li>'
+
+						$(".pagination").html(li)
+
+
+						$("#table_info").text("Mostrando registros del "+result.from+" al  "+result.to+" de un total de "+result.total+" registros")
+					
+					}
 				});
 
 
-				ver("#table tbody", table)
-				edit("#table tbody", table)
-				activar("#table tbody", table)
-				desactivar("#table tbody", table)
-				eliminar("#table tbody", table)
+				ver("#table tbody")
+				edit("#table tbody")
+				activar("#table tbody")
+				desactivar("#table tbody")
+				eliminar("#table tbody")
 
 
+
+
+
+				var business_line = $("#linea-negocio-filter").val()
+				var adviser       = $("#id_asesora_valoracion-filter").val()
+				var origen        = $("#origen-filter").val()
+
+				if(business_line.length == 0){
+					business_line = 0
+				}else{
+					business_line  = business_line.join()
+				}
+
+
+				if(adviser.length == 0){
+					adviser = 0
+				}else{
+					adviser  = adviser.join()
+				}
 
 
 
 				$("#xls").remove();
+				$("#view_xls").remove();
 
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$('.dt-buttons').append(a);
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/0/0/Todos" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
 				$("#xls").click(function (e) { 
@@ -417,9 +449,10 @@
 					window.open(url, '_blank');
 				});
 
+
+
+
 			}
-
-
 			
 
 			function nuevo() {
@@ -458,7 +491,8 @@
 			function ver(tbody, table){
 				$(tbody).on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
-					var data = table.row( $(this).parents("tr") ).data();
+
+					var data = JSON.parse($(this).attr("data")) 
 
 					GetCity("#city_view");
 					GetClinic("#city_view", "#clinic_view")
@@ -634,10 +668,12 @@
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
-			function edit(tbody, table){
+			function edit(tbody){
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
-					var data = table.row( $(this).parents("tr") ).data();
+					
+					
+					var data = JSON.parse($(this).attr("data")) 
 
 					
 					GetCity("#city_edit");
@@ -1046,7 +1082,7 @@
 			*/
 			function desactivar(tbody, table){
 				$(tbody).on("click", "span.desactivar", function(){
-					var data=table.row($(this).parents("tr")).data();
+					var data = JSON.parse($(this).attr("data")) 
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
 				});
 			}
@@ -1058,7 +1094,7 @@
 			*/
 			function activar(tbody, table){
 				$(tbody).on("click", "span.activar", function(){
-					var data=table.row($(this).parents("tr")).data();
+					var data = JSON.parse($(this).attr("data")) 
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
 				});
 			}
@@ -1068,7 +1104,7 @@
 
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
-					var data=table.row($(this).parents("tr")).data();
+					var data = JSON.parse($(this).attr("data")) 
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
 			}

@@ -188,3 +188,8 @@ Route::get('prueba', function () {
 });
 
 
+
+
+Route::get('change_name', 'ClientsController@changeName');
+
+
