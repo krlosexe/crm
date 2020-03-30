@@ -489,7 +489,7 @@
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function ver(tbody, table){
-				$(tbody).unbind().on("click", "span.consultar", function(){
+				$(tbody).on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
 
 					var data = JSON.parse($(this).attr("data")) 
@@ -669,13 +669,13 @@
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function edit(tbody){
-				$(tbody).unbind().on("click", "span.editar", function(){
+				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					
 					
 					var data = JSON.parse($(this).attr("data")) 
 
-					console.log("hola")
+					
 					GetCity("#city_edit");
 					GetClinic("#city_edit", "#clinic_edit")
 					GetAsesorasbyBusisnessLine("#linea-negocio-edit", "#asesora-edit");
@@ -1080,9 +1080,8 @@
 			/*
 				Funcion que capta y envia los datos a desactivar
 			*/
-			function desactivar(tbody){
+			function desactivar(tbody, table){
 				$(tbody).on("click", "span.desactivar", function(){
-
 					var data = JSON.parse($(this).attr("data")) 
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
 				});
@@ -1093,7 +1092,7 @@
 			/*
 				Funcion que capta y envia los datos a desactivar
 			*/
-			function activar(tbody){
+			function activar(tbody, table){
 				$(tbody).on("click", "span.activar", function(){
 					var data = JSON.parse($(this).attr("data")) 
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
@@ -1103,8 +1102,8 @@
 
 
 
-			function eliminar(tbody){
-				$(tbody).unbind().on("click", "span.eliminar", function(){
+			function eliminar(tbody, table){
+				$(tbody).on("click", "span.eliminar", function(){
 					var data = JSON.parse($(this).attr("data")) 
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
