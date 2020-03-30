@@ -489,11 +489,11 @@
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function ver(tbody, table){
-				$(tbody).on("click", "span.consultar", function(){
+				$(tbody).unbind().on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
 
 					var data = JSON.parse($(this).attr("data")) 
-
+					console.log("hola")
 					GetCity("#city_view");
 					GetClinic("#city_view", "#clinic_view")
 					GetBusinessLine("#linea-negocio-view");
@@ -672,7 +672,7 @@
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					
-					
+					console.log("hola edit")
 					var data = JSON.parse($(this).attr("data")) 
 
 					
