@@ -193,3 +193,13 @@ Route::get('prueba', function () {
 Route::get('change_name', 'ClientsController@changeName');
 
 
+
+
+
+
+
+Route::get('codes', 'ClientsController@GenerateCodes');
+
+
+
+

@@ -763,7 +763,22 @@ class ClientsController extends Controller
         }
     }
 
+    public function GenerateCodes(){
+        $data = Clients::get();
 
+        foreach($data as $value){
+
+
+
+            $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $code                   = substr(str_shuffle($permitted_chars), 0, 4);
+
+           $cliente = Clients::find($value["id_cliente"])->update(["code_client" => strtoupper($code)]);
+
+           echo $code."<br><br>";
+
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
