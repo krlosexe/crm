@@ -346,7 +346,7 @@
 						if(result.data.length == 0){
 
 							html += "<tr>"
-								html += "<td colspan='8'> Cargando...</td>"
+								html += "<td colspan='8'> No se encontraron Resultados...</td>"
 							html += "</tr>"
 
 						$("#table tbody").html(html)
