@@ -489,7 +489,7 @@
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function ver(tbody, table){
-				$(tbody).on("click", "span.consultar", function(){
+				$(tbody).unbind().on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
 
 					var data = JSON.parse($(this).attr("data")) 
@@ -669,13 +669,13 @@
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function edit(tbody){
-				$(tbody).on("click", "span.editar", function(){
+				$(tbody).unbind().on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					
 					
 					var data = JSON.parse($(this).attr("data")) 
 
-					
+					console.log("hola")
 					GetCity("#city_edit");
 					GetClinic("#city_edit", "#clinic_edit")
 					GetAsesorasbyBusisnessLine("#linea-negocio-edit", "#asesora-edit");
