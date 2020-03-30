@@ -359,9 +359,17 @@
 
 
 
+
+							if(item.prp == "Si"){
+								var code = "<i class='fa fa-barcode'></i> "+item.code_client
+							}else{
+								var code = ""
+							}
+
+
 							html += "<tr>"
 								html += "<td>"+botones+"</td>"
-								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a></td>"
+								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+" </td>"
 								html += "<td>"+item.identificacion+"</td>"
 								html += "<td>"+item.origen+"</td>"
 								html += "<td>"+item.nombre_line+"</td>"
