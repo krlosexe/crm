@@ -265,6 +265,28 @@
 
                     <div class="col-md-7">
 
+
+
+
+                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h3 id="code-edit"></h3>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span onclick="copyToClipboard('#code-edit')" class='consultar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-copy  ' style='margin-bottom:5px'></i></span> 
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+
+                            <br><br>
+
+
+
                         <div class="row">
                             <div class="col-md-12">
                                     <h4>Historial</h4>

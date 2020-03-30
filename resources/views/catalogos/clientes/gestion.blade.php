@@ -342,6 +342,18 @@
 					success: function(result){
 
 						var html = ""
+
+						if(result.data.length == 0){
+
+							html += "<tr>"
+								html += "<td colspan='8'> Cargando...</td>"
+							html += "</tr>"
+
+						$("#table tbody").html(html)
+
+
+							return false;
+						}
 						$.map(result.data, function (item, key) {
 
 							var botones = "";
@@ -511,6 +523,7 @@
 
 					$("#id_asesora_valoracion-view").val(data.id_asesora_valoracion).attr("disabled", "disabled")
 
+					$("#code-view").text(data.code_client)
 					$("#state_view").val(data.state)
 					$("#state_view").trigger("change");
 					$("#state_view").attr("disabled", "disabled")
@@ -703,7 +716,7 @@
 			
 
 					$("#id_asesora_valoracion-edit").val(data.id_asesora_valoracion)
-
+					$("#code-edit").text(data.code_client)
 
 					$("#state_edit").val(data.state).trigger("change")
 
@@ -895,6 +908,20 @@
 
 					cuadros('#cuadro1', '#cuadro4');
 				});
+			}
+
+
+
+			function copyToClipboard(element) {
+				var $temp = $("<input>");
+				$("body").append($temp);
+				$temp.val($(element).text()).select();
+				document.execCommand("copy");
+				$temp.remove();
+
+				mensajes('success', "Codigo: "+$(element).text()+" Copiado");
+
+
 			}
 
 
