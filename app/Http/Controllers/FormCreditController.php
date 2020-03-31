@@ -48,18 +48,10 @@ class FormCreditController extends Controller
 
 
 
-
-        $users = User::join("users_line_business", "users_line_business.id_user" , "=", "users.id")
-                        ->where("users_line_business.id_line", $request["id_line"])
-                        ->get();
-
-        
-        
-        foreach($users as $user){
-
+        if($request["id_line"] == 6){
             $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
-           // $for = "cardenascarlos18@gmail.com";
-            $for = $user["email"];
+            $for = "aprobacionescirufacil@gmail.com";
+            //$for = $user["email"];
 
             $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Credito";
 
@@ -68,8 +60,34 @@ class FormCreditController extends Controller
                 $msj->subject($subject);
                 $msj->to($for);
             });
+        }else{
+
+            $users = User::join("users_line_business", "users_line_business.id_user" , "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                        ->get();
+
+        
+        
+
+            foreach($users as $user){
+
+                $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
+            // $for = "cardenascarlos18@gmail.com";
+                $for = $user["email"];
+
+                $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Credito";
+
+                Mail::send('emails.form_solicitud_credit',$request->all(), function($msj) use($subject,$for){
+                    $msj->from("cardenascarlos18@gmail.com","CRM");
+                    $msj->subject($subject);
+                    $msj->to($for);
+                });
+
+            }
 
         }
+
+        
 
 
 
@@ -95,17 +113,12 @@ class FormCreditController extends Controller
         FormAutorizationStudioCredit::create($request->all());
 
 
-        $users = User::join("users_line_business", "users_line_business.id_user" , "=", "users.id")
-                        ->where("users_line_business.id_line", $request["id_line"])
-                        ->get();
 
-        
-        
-        foreach($users as $user){
-           
-            $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS ". $request["names"]." ".$request["last_names"];
-            //$for = "cardenascarlos18@gmail.com";
-            $for = $user["email"];
+        if($request["id_line"] == 6){
+
+            $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS ".$request["names"]." ".$request["last_names"];
+            $for = "aprobacionescirufacil@gmail.com";
+           // $for = $user["email"];
 
             $request["msg"]  = "Un Paciente dio Autroizacion para Consulta y Reporte a Centrales de Bancos de Datos";
 
@@ -115,7 +128,33 @@ class FormCreditController extends Controller
                 $msj->to($for);
             });
 
+        }else{
+            
+            $users = User::join("users_line_business", "users_line_business.id_user" , "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                        ->get();
+
+        
+        
+            foreach($users as $user){
+            
+                $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS ". $request["names"]." ".$request["last_names"];
+                //$for = "cardenascarlos18@gmail.com";
+                $for = $user["email"];
+
+                $request["msg"]  = "Un Paciente dio Autroizacion para Consulta y Reporte a Centrales de Bancos de Datos";
+
+                Mail::send('emails.forms_authorization',$request->all(), function($msj) use($subject,$for){
+                    $msj->from("cardenascarlos18@gmail.com","CRM");
+                    $msj->subject($subject);
+                    $msj->to($for);
+                });
+
+            }
         }
+
+
+        
 
 
             $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS ".$request["names"]." ".$request["last_names"];
