@@ -132,7 +132,7 @@ class ClientsController extends Controller
                                 ->where("auditoria.status", "!=", "0")
 
 
-                                ->orderBy("clientes.id_line", "DESC")
+                               // ->orderBy("clientes.id_line", "DESC")
                                 ->orderBy("clientes.id_cliente", "DESC")
 
                                 ->paginate(10);
