@@ -150,3 +150,4 @@ Route::post('form/authorization/studio/credit', 'FormCreditController@storeAutor
 
 
 Route::post('valoration/submit/photo', 'ValuationsController@StorePhotos');
+Route::get('clients/comments/{id_client}', 'ClientsController@GetComments');

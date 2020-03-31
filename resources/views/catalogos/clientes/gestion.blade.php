@@ -469,10 +469,50 @@
 					window.open(url, '_blank');
 				});
 
-
-
-
 			}
+
+
+			function GetComments(comment_content, id_client){
+				var url=document.getElementById('ruta').value;	
+				$.ajax({
+					url:''+url+'/api/clients/comments/'+id_client,
+					type:'GET',
+					dataType:'JSON',
+					
+					beforeSend: function(){
+
+					},
+					error: function (data) {
+					},
+					success: function(result){
+						
+						var url=document.getElementById('ruta').value; 
+						var html = "";
+
+						$.map(result, function (item, key) {
+							html += '<div class="col-md-12" style="margin-bottom: 15px">'
+								html += '<div class="row">'
+									html += '<div class="col-md-2">'
+										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+										
+									html += '</div>'
+									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+										html += '<div>'+item.comment+'</div>'
+
+										html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+									html += '</div>'
+								html += '</div>'
+							html += '</div>'
+							
+						});
+
+						
+						$(comment_content).html(html)
+					}
+				});
+			}	
 			
 
 			function nuevo() {
@@ -513,13 +553,15 @@
 					$("#alertas").css("display", "none");
 
 					var data = JSON.parse($(this).attr("data")) 
-					console.log("hola")
+				
 					GetCity("#city_view");
 					GetClinic("#city_view", "#clinic_view")
 					GetBusinessLine("#linea-negocio-view");
 					GetAsesorasbyBusisnessLine("#linea-negocio-view", "#asesora-view");
 
 					GetAsesorasValoracion("#id_asesora_valoracion-view")
+
+					GetComments("#comments", data.id_cliente)
 
 					$("#id_asesora_valoracion-view").val(data.id_asesora_valoracion).attr("disabled", "disabled")
 
@@ -623,38 +665,6 @@
 
 
 
-
-
-
-
-					var url=document.getElementById('ruta').value; 
-					var html = "";
-
-
-					$.map(data.comments, function (item, key) {
-						html += '<div class="col-md-12" style="margin-bottom: 15px">'
-							html += '<div class="row">'
-								html += '<div class="col-md-2">'
-									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-									
-								html += '</div>'
-								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
-									html += '<div>'+item.comment+'</div>'
-
-									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
-
-
-								html += '</div>'
-							html += '</div>'
-						html += '</div>'
-						
-					});
-
-					
-					$("#comments").html(html)
-
-
-
 					cuadros('#cuadro1', '#cuadro3');
 
 
@@ -693,7 +703,7 @@
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					
-					console.log("hola edit")
+					
 					var data = JSON.parse($(this).attr("data")) 
 
 					
@@ -840,47 +850,9 @@
 					var html = "";
 
 
-					if(data.observaciones != null){
-						html += '<div class="col-md-12" style="margin-bottom: 15px">'
-							html += '<div class="row">'
-								html += '<div class="col-md-2">'
-									
-								html += '</div>'
-								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
-									html += '<div>'+data.observaciones+'</div>'
-								html += '</div>'
-							html += '</div>'
-						html += '</div>'
-					}
+				
 
-
-					
-					$.map(data.comments, function (item, key) {
-						html += '<div class="col-md-12" style="margin-bottom: 15px">'
-							html += '<div class="row">'
-								html += '<div class="col-md-2">'
-									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-									
-								html += '</div>'
-								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
-									html += '<div>'+item.comment+'</div>'
-
-									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
-
-
-								html += '</div>'
-							html += '</div>'
-						html += '</div>'
-						
-					});
-
-
-
-
-
-					$("#comments_edit").html(html)
-
-
+					GetComments("#comments_edit", data.id_cliente)
 
 
 

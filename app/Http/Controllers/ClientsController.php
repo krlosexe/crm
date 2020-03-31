@@ -89,16 +89,6 @@ class ClientsController extends Controller
 
                                 }) 
 
-
-
-                                // ->where(function ($query) use ($rol, $id_user) {
-                                //     if($rol == "Asesor"){
-                                //         $query->where("clientes.id_user_asesora", $id_user);
-                                //         $query->orWhere("clientes.id_asesora_valoracion", $id_user);
-                                //     }
-                                // })
-
-
                                 ->where(function ($query) use ($business_line) {
                                     if($business_line != 0){
                                         $query->whereIn("clientes.id_line", $business_line);
@@ -131,17 +121,10 @@ class ClientsController extends Controller
                                 }) 
 
 
-
-                               
-
-
-
-
-
                                 ->with("logs")
 
 
-                                ->with("comments")
+                              //  ->with("comments")
 
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
@@ -778,6 +761,22 @@ class ClientsController extends Controller
            echo $code."<br><br>";
 
         }
+        
+
+       
+    }
+
+
+    public function GetComments($id_client){
+
+        $data = Comments::select('comments.*', 'users.email', 'users.img_profile', "datos_personales.nombres as name_user", "datos_personales.apellido_p as last_name_user")
+                            ->where("id_event", $id_client)
+                            ->join('users', 'users.id', '=', 'comments.id_user')  
+                            ->join('datos_personales', 'datos_personales.id_usuario', '=', 'comments.id_user')     
+                            ->where("table", "clients")
+                            ->get();
+
+        return response()->json($data)->setStatusCode(200);
     }
     /**
      * Remove the specified resource from storage.
