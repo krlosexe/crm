@@ -38,14 +38,32 @@ class ImportController extends Controller
                     $code                   = substr(str_shuffle($permitted_chars), 0, 4);
 
 
+                    $city = 3;
+                    if($datos[11] == "Cali"){
+                        $city = 5;
+                    }
+
+                    if($datos[11] == "Medellin"){
+                        $city = 3;
+                    }
+
+
+                    if($datos[11] == "Bogota"){
+                        $city = 4;
+                    }
+
+
+
+
+
                     $row = array(
-                        "nombres" => $datos[0],
-                        "apellidos" => $datos[1],
+                        "nombres" => $datos[0]." ".$datos[1],
+                        "apellidos" => "",
                         "identificacion" =>  isset($datos[10]) ? $datos[10] : null,
                         "identificacion_verify" => 0,
                         "fecha_nacimiento" => $datos[2] != "" ? $datos[2] : null,
-                        "city" => 3,
-                        "clinic" => null,
+                        "city" => $city,
+                        "clinic" => 8,
                         "telefono" => $datos[7],
                         "email" => isset($datos[8]) ? $datos[8] : null,
                         "id_line" => 6,
