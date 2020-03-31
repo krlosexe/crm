@@ -214,6 +214,7 @@ class ClientsController extends Controller
                 $request["code_client"] = strtoupper($code);
 
 
+                $request["nombres"] = $request["nombres"]." ".$request["apellidos"];
 
                 $cliente = Clients::create($request->all());
                 
@@ -329,6 +330,10 @@ class ClientsController extends Controller
             $request["properties"] == 1 ? $request["properties"] = 1 : $request["properties"] = 0;
             $request["vehicle"]    == 1 ? $request["vehicle"]    = 1 : $request["vehicle"]    = 0;
 
+
+
+
+            $request["nombres"] = $request["nombres"]." ".$request["apellidos"];
 
             $cliente = Clients::find($id_cliente)->update($request->all());
             ClientInformationAditionalSurgery::find($id_cliente)->update($request->all());

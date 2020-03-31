@@ -95,7 +95,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for=""><b>Apellidos</b></label>
-                                    <input type="text" name="apellidos" class="form-control form-control-user" id="apellido_edit" placeholder="PJ. Cardenas" required>
+                                    <input type="text" name="apellidos" class="form-control form-control-user" id="apellido_edit" placeholder="PJ. Cardenas">
                                 </div>
                             </div>
                         </div>

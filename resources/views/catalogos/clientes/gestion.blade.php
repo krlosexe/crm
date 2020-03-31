@@ -570,7 +570,7 @@
 					$("#state_view").trigger("change");
 					$("#state_view").attr("disabled", "disabled")
 					$("#nombre_view").val(data.nombres).attr("disabled", "disabled")
-					$("#apellido_view").val(data.apellidos).attr("disabled", "disabled")
+					$("#apellido_view").val("").attr("disabled", "disabled")
 					$("#identificacion_view").val(data.identificacion).attr("disabled", "disabled")
 					$("#telefono_view").val(data.telefono).attr("disabled", "disabled")
 					$("#email_view").val(data.email).attr("disabled", "disabled")
@@ -731,7 +731,7 @@
 					$("#state_edit").val(data.state).trigger("change")
 
 					$("#nombre_edit").val(data.nombres)
-					$("#apellido_edit").val(data.apellidos)
+					$("#apellido_edit").val("")
 					$("#identificacion_edit").val(data.identificacion)
 					$("#telefono_edit").val(data.telefono)
 					$("#email_edit").val(data.email)
