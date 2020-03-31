@@ -110,7 +110,14 @@
 <br><br>
 <h3>INFORMACIÓN DEL CRÉDITO SOLICITADO</h3>
 
-<p><b>PROCEDIMIENTO QUE SE REALIZA:</b> <?= implode(",", $procedure); ?></p>
+<p><b>PROCEDIMIENTO QUE SE REALIZA:</b> 
+
+<?php
+    if(isset($procedure)){
+        implode(",", $procedure);
+    }
+
+?></p>
 <p><b>Valor Cotizado:</b> {{$valor_cotizado}}</p>
 <p><b>N° de Cuotas:</b> {{$numero_cuotas}}</p>
 <p><b>Valor Financiar:</b> {{$valor_financiar}}</p>
