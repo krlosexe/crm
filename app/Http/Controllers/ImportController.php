@@ -26,27 +26,36 @@ class ImportController extends Controller
         $fila = 1;
 
         $data = [];
-        if (($gestor = fopen("data.csv", "r")) !== FALSE) {
-            while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
-                $numero = count($datos);
-                //echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
-                $fila++;
+        if (($gestor = fopen("datos.csv", "r")) !== FALSE) {
+            while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
 
-                $row = array(
-                    "nombres" => $datos[3],
-                    "apellidos" => $datos[4],
-                    "identificacion" =>  isset($datos[57]) ? $datos[57] : null,
-                    "identificacion_verify" => 0,
-                    "fecha_nacimiento" => $datos[6] != "" ? $datos[6] : null,
-                    "city" => 3,
-                    "clinic" => null,
-                    "telefono" => $datos[11],
-                    "email" => isset($datos[25]) ? $datos[25] : null,
-                    "id_line" => 11,
-                    "id_user_asesora" => 69,
-                    "direccion" => isset($datos[66]) ? $datos[66] : null, 
-                    "state"     =>isset($datos[63]) ? $datos[63] != "" ? $datos[63] : null : null,
-                );
+                $numero = count($datos);
+                    echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
+                    
+                if($fila != 1){
+
+                    $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
+                    $code                   = substr(str_shuffle($permitted_chars), 0, 4);
+
+
+                    $row = array(
+                        "nombres" => $datos[0],
+                        "apellidos" => $datos[1],
+                        "identificacion" =>  isset($datos[10]) ? $datos[10] : null,
+                        "identificacion_verify" => 0,
+                        "fecha_nacimiento" => $datos[2] != "" ? $datos[2] : null,
+                        "city" => 3,
+                        "clinic" => null,
+                        "telefono" => $datos[7],
+                        "email" => isset($datos[8]) ? $datos[8] : null,
+                        "id_line" => 6,
+                        "id_user_asesora" => 78,
+                        "direccion" => isset($datos[11]) ? $datos[11] : null, 
+                        "origen"    => $datos[3],
+                        "state"     =>isset($datos[13]) ? $datos[13] != "" ? $datos[13] : null : null,
+                        "code_client" => strtoupper($code)
+                    );
+                    
 
                 $data[] = $row;
                 $cliente = Clients::create($row);
@@ -59,17 +68,22 @@ class ImportController extends Controller
                 $auditoria->save();
 
 
-                $row = array(
-                    "id_client"    => $cliente["id_cliente"],
-                    "name_surgery" => isset($datos[83]) ? $datos[83] : null
-                );
-
-                ClientInformationAditionalSurgery::create($row);
-                ClientClinicHistory::create($row);
-                ClientCreditInformation::create($row);
+                    $row = array(
+                        "id_client"    => $cliente["id_cliente"],
+                        "name_surgery" => isset($datos[30]) ? $datos[30] : null
+                    );
+                    
 
 
-                
+                    ClientInformationAditionalSurgery::create($row);
+                    ClientClinicHistory::create($row);
+                    ClientCreditInformation::create($row);
+                }
+
+
+                $fila++;
+
+
             }
            echo json_encode($data);
                 
