@@ -154,7 +154,7 @@ class ClientsController extends Controller
             ini_set('memory_limit', '-1'); 
 
 
-            $data = Clients::select("clientes.*"
+            $data = Clients::select("clientes.*", "auditoria.status"
                                      )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
