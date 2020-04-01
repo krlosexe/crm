@@ -73,7 +73,7 @@ class ClientsController extends Controller
 
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
 
-                                ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line")
+                                ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line", "left")
 
 
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
