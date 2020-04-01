@@ -266,20 +266,36 @@ class ValuationsController extends Controller
 
     public function ValidateCode($code){
 
-        $data = Valuations::select("valuations.*", "clientes.nombres", "clientes.apellidos")
+        $data = Valuations::select("valuations.*", "clientes.nombres", "clientes.apellidos", 
+
+                                    "client_clinic_history.eps",
+                                    "client_clinic_history.height",
+                                    "client_clinic_history.weight",
+                                    "client_clinic_history.number_children",
+                                    "client_clinic_history.alcohol",
+                                    "client_clinic_history.smoke",
+                                    "client_clinic_history.previous_surgery",
+                                    "client_clinic_history.major_disease",
+                                    "client_clinic_history.drink_medication",
+                                    "client_clinic_history.allergic_medication"
+
+                                )
+
                             ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                            ->join("client_clinic_history", "client_clinic_history.id_client", "=", "valuations.id_cliente")
+
                             ->where("code", $code)
                             ->first();
         if($data){
 
             sleep(2);
             return response()->json($data)->setStatusCode(200);
+
         }else{
 
             sleep(2);
-
-            
             return response()->json("Codigo Invalido")->setStatusCode(400);
+            
         }
         
 

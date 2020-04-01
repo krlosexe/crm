@@ -539,7 +539,7 @@ class ClientsController extends Controller
 
                                     ->join("users as responsable", "responsable.id", "=", "clients_tasks.responsable")
 
-                                    ->join("clientes", "clientes.id_clientes", "=", "clients_tasks.id_client")
+                                    ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client")
 
 
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
