@@ -271,7 +271,7 @@
 					GetUsers("#followers-view")
 					
 
-					getPacientes("#paciente-view", data.id_clients_tasks)
+					getPacientes("#paciente-view", data.id_client)
 
 				
 					
@@ -337,7 +337,7 @@
 
 					GetUsers("#responsable-edit")
 					GetUsers("#followers-edit")
-					getPacientes("#paciente-edit", data.id_clients_tasks)
+					getPacientes("#paciente-edit", data.id_client)
 					$("#responsable-edit").val(data.responsable)
 					$("#paciente-edit").val(data.id_client)
 					$("#issue-edit").val(data.issue)
