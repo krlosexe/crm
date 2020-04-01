@@ -153,7 +153,7 @@ class ClientsController extends Controller
 
             ini_set('memory_limit', '-1'); 
 
-            
+
             $data = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
                                        "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
                                        "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line"
@@ -818,6 +818,29 @@ class ClientsController extends Controller
                             ->get();
 
         return response()->json($data)->setStatusCode(200);
+    }
+
+
+    public function UpdateHc(Request $request, $client){
+
+        $request["children"]    = 1;
+        $request["surgery"]    = 1;
+        $request["disease"]    = 1;
+        $request["medication"] = 1;
+        $request["allergic"]   = 1;
+
+        $alcohol = strtoupper($request["alcohol"]);
+        $alcohol   == "SI" ? $request["alcohol"] = 1 : $request["alcohol"] = 0;
+
+
+        $smoke = strtoupper($request["smoke"]);
+        $smoke   == "SI" ? $request["smoke"] = 1 : $request["smoke"] = 0;
+
+
+
+        ClientClinicHistory::find($client)->update($request->all());
+
+        return response()->json("Ok")->setStatusCode(200);
     }
     /**
      * Remove the specified resource from storage.
