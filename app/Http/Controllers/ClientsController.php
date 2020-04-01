@@ -218,8 +218,8 @@ class ClientsController extends Controller
             $validator = Validator::make($request->all(), [
                 'nombres'         => 'required',
                 'apellidos'       => 'required',
-                'telefono'        => 'required|unique:clientes',
-                'email'           => 'required|unique:clientes',
+               // 'telefono'        => 'required|unique:clientes',
+               // 'email'           => 'required|unique:clientes',
                // 'direccion'       => 'required'
 
             ], $messages);  
