@@ -267,7 +267,7 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					GetUsers("#responsable-view")
+					GetUsers("#responsable-view", data.responsable)
 					GetUsers("#followers-view")
 					
 
@@ -335,8 +335,8 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					GetUsers("#responsable-edit")
-					GetUsers("#followers-edit")
+					GetUsers("#responsable-edit", data.responsable)
+					GetUsers("#followers-edit", data.responsable)
 					getPacientes("#paciente-edit", data.id_client)
 					$("#responsable-edit").val(data.responsable)
 					$("#paciente-edit").val(data.id_client)
