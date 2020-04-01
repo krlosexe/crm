@@ -140,6 +140,10 @@
 
 				verifyPersmisos(id_user, tokens, "citys");
 
+
+				$('#summernote').summernote("reset");
+
+
 				$('#summernote').summernote({
 					'height' : 200
 				});
@@ -271,9 +275,9 @@
 					GetUsers("#followers-view")
 					
 
-					getPacientes("#paciente-view", data.id_client)
+					//getPacientes("#paciente-view", data.id_client)
 
-				
+					$("#name_client-view").val(data.name_client).attr("disabled", "disabled")
 					
 					$("#responsable-view").val(data.responsable).attr("disabled", "disabled")
 					$("#issue-view").val(data.issue).attr("disabled", "disabled")
@@ -337,7 +341,11 @@
 
 					GetUsers("#responsable-edit", data.responsable)
 					GetUsers("#followers-edit", data.responsable)
-					getPacientes("#paciente-edit", data.id_client)
+					//getPacientes("#paciente-edit", data.id_client)
+
+					$("#name_client-edit").val(data.name_client).attr("disabled", "disabled")
+
+
 					$("#responsable-edit").val(data.responsable)
 					$("#paciente-edit").val(data.id_client)
 					$("#issue-edit").val(data.issue)
@@ -354,7 +362,7 @@
 					$("#followers-edit").val(followers)
 					$("#followers-edit").trigger("change");
 					
-					
+					$('#summernote_edit').summernote("reset");
 					$('#summernote_edit').summernote();
 					var url=document.getElementById('ruta').value; 
 					var html = "";

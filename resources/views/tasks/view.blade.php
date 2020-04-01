@@ -28,9 +28,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Paciente</b></label>
-                        <select name="id_client" id="paciente-view" class="form-control select2" required>
-                            <option value="">Seleccione</option>
-                        </select>
+                        <input type="text" name="issue" id="name_client-view" class="form-control" required >
                     </div>
                 </div>
               </div>

@@ -532,12 +532,16 @@ class ClientsController extends Controller
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             
             $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
-                                   "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis")
+                                   "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis", "clientes.nombres as name_client")
 
                                     ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
                                     ->join("users", "users.id", "=", "auditoria.usr_regins")
 
                                     ->join("users as responsable", "responsable.id", "=", "clients_tasks.responsable")
+
+                                    ->join("clientes", "clientes.id_clientes", "=", "clients_tasks.id_client")
+
+
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
 
                                     ->with("followers")
@@ -570,10 +574,13 @@ class ClientsController extends Controller
 
 
             $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
-                                   "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis")
+                                   "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis", "clientes.nombres as name_client")
 
                                     ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
                                     ->join("users", "users.id", "=", "auditoria.usr_regins")
+
+                                    ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client")
+
 
                                     ->join("users as responsable", "responsable.id", "=", "clients_tasks.responsable")
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
