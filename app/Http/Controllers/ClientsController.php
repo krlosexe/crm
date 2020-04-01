@@ -154,25 +154,13 @@ class ClientsController extends Controller
             ini_set('memory_limit', '-1'); 
 
 
-            $data = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
-                                       "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
-                                       "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line"
+            $data = Clients::select("clientes.*"
                                      )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
 
-                                ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
-
-                                ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line")
-
-
-                                ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
-                                ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
-                                ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
-
-
                                 ->where("auditoria.tabla", "clientes")
-                                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                               
                                 ->where("auditoria.status", "!=", "0")
 
                                 ->orderBy("clientes.id_cliente", "DESC")
