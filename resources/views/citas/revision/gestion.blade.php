@@ -188,7 +188,7 @@
 						},
 						{"data":"name_client", 
 							render: function(data, type, row){
-								return row.name_client+" "+row.last_name_client
+								return row.name_client
 							}
 						},
 						{"data": "name_clinic"},
@@ -295,7 +295,7 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					getPacientes("#paciente-view")
+					getPacientes("#paciente-view", data.id_paciente)
 					GetClinic("#clinica-view")
 					GetAsesoras("#asesora-view")
 
@@ -327,7 +327,7 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					getPacientes("#paciente-edit")
+					getPacientes("#paciente-edit", data.id_paciente)
 					GetClinic("#clinica-edit")
 					GetAsesoras("#asesora-edit")
 

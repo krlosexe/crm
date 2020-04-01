@@ -151,7 +151,7 @@ class ClientsController extends Controller
     public function List(Request $request){
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
-            ini_set('memory_limit', '-1'); 
+          //  ini_set('memory_limit', '-1'); 
 
 
             $data = Clients::select("clientes.id_cliente","clientes.nombres", "auditoria.status"

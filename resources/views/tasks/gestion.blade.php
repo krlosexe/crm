@@ -269,11 +269,11 @@
 
 					GetUsers("#responsable-view")
 					GetUsers("#followers-view")
+					
 
-					getPacientes("#paciente-view")
+					getPacientes("#paciente-view", data.id_clients_tasks)
 
-
-
+				
 					
 					$("#responsable-view").val(data.responsable).attr("disabled", "disabled")
 					$("#issue-view").val(data.issue).attr("disabled", "disabled")
@@ -337,7 +337,7 @@
 
 					GetUsers("#responsable-edit")
 					GetUsers("#followers-edit")
-					getPacientes("#paciente-edit")
+					getPacientes("#paciente-edit", data.id_clients_tasks)
 					$("#responsable-edit").val(data.responsable)
 					$("#paciente-edit").val(data.id_client)
 					$("#issue-edit").val(data.issue)

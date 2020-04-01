@@ -190,7 +190,7 @@
 						},
 						{"data":"nombres", 
 							render : function(data, type, row) {
-								return data+" "+row.apellidos;
+								return data;
 							}
 						},
 						{"data": "fecha"},
@@ -242,7 +242,7 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					getPacientes("#paciente-view")
+					getPacientes("#paciente-view", data.id_cliente)
 					GetClinic("#clinic-view")
 					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
@@ -274,7 +274,7 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					getPacientes("#paciente-edit")
+					getPacientes("#paciente-edit", data.id_cliente)
 					GetClinic("#clinic-edit")
 					SelectClinic("#paciente-edit", "#clinic-edit")
 					$("#paciente-edit").val(data.id_cliente)

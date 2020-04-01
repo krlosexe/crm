@@ -249,7 +249,7 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					getPacientes("#paciente-view")
+					getPacientes("#paciente-view", data.id_cliente)
 
 					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
@@ -276,7 +276,7 @@
 					var data = table.row( $(this).parents("tr") ).data();
 
 					$("#file-input-edit").fileinput('destroy');
-					getPacientes("#paciente-edit")
+					getPacientes("#paciente-edit", data.id_cliente)
 
 					if(data.status_queries == 1){
 						file_name = data.file_cotizacion
