@@ -532,6 +532,10 @@
 				$("#clinic").attr("disabled", "disabled")
 
 
+
+				$('#summernote').summernote('reset');
+
+
 				$('#summernote').summernote({
 					'height' : 200
 				});
@@ -841,8 +845,8 @@
 
 
 
-
-
+		
+					$('#summernote_edit').summernote('reset');
 					$('#summernote_edit').summernote({
 						'height' : 200
 					});
