@@ -53,28 +53,24 @@ class ImportController extends Controller
                     }
 
 
-
-
-
                     $row = array(
                         "nombres" => $datos[0]." ".$datos[1],
                         "apellidos" => "",
-                        "identificacion" =>  isset($datos[10]) ? $datos[10] : null,
+                        "identificacion" =>  isset($datos[11]) ? $datos[11] : null,
                         "identificacion_verify" => 0,
-                        "fecha_nacimiento" => $datos[2] != "" ? $datos[2] : null,
+                        "fecha_nacimiento" => $datos[3] != "" ? $datos[3] : null,
                         "city" => $city,
-                        "clinic" => 8,
-                        "telefono" => $datos[7],
-                        "email" => isset($datos[8]) ? $datos[8] : null,
-                        "id_line" => 6,
-                        "id_user_asesora" => 78,
-                        "direccion" => isset($datos[11]) ? $datos[11] : null, 
-                        "origen"    => $datos[3],
-                        "state"     =>isset($datos[13]) ? $datos[13] != "" ? $datos[13] : null : null,
+                        "clinic" => null,
+                        "telefono" => $datos[8],
+                        "email" => isset($datos[9]) ? $datos[9] : null,
+                        "id_line" => 8,
+                        "id_user_asesora" => 75,
+                        "direccion" => isset($datos[12]) ? $datos[12] : null, 
+                        "origen"    => $datos[5],
+                        "state"     =>isset($datos[14]) ? $datos[14] != "" ? $datos[14] : null : null,
                         "code_client" => strtoupper($code)
                     );
                     
-
                 $data[] = $row;
                 $cliente = Clients::create($row);
 
