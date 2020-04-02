@@ -704,8 +704,11 @@ class ClientsController extends Controller
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->where("users.queue", 0)
+                        ->where("users.id", "!=", 69)
                         ->first();
 
+
+       
        if($users){
 
             $request["id_user_asesora"] =  $users["id"];
