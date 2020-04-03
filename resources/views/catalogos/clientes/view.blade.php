@@ -159,19 +159,7 @@
 
 
 
-                        <div class="row">
-                            <div class="col-sm-10">
-                                    <div class="form-group">
-                                        <label for=""><b>Telefono</b></label>
-                                        <input type="number" name="telefono" class="form-control form-control-user" id="telefono_view" placeholder="PJ. 315 2077862" required>
-                                    </div>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-                            </div>
-                        </div>
-
-
+                        
 
                         <div class="row">
                             <div class="col-sm-12">
