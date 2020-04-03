@@ -142,7 +142,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for=""><b>Ciudad</b></label>
-                                    <select name="city" id="city" class="form-control select2 disabled" required>
+                                    <select name="city" id="city" class="form-control  disabled" required>
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
@@ -175,7 +175,7 @@
 
                                 <div class="form-group">
                                     <label for=""><b>Linea de Negocio</b></label>
-                                    <select name="id_line" id="linea-negocio" class="form-control select2 disabled" required>
+                                    <select name="id_line" id="linea-negocio" class="form-control disabled" required>
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
