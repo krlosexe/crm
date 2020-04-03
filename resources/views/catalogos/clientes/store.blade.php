@@ -160,7 +160,7 @@
                         </div>
 
 
-                        <div class="row">
+                       <!-- <div class="row">
                             <div class="col-sm-10">
                                     <div class="form-group">
                                         <label for=""><b>Telefono</b></label>
@@ -171,7 +171,7 @@
                             <br>
                                 <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
                             </div>
-                        </div>
+                        </div>-->
 
 
 
