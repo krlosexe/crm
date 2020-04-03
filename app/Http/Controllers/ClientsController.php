@@ -217,7 +217,7 @@ class ClientsController extends Controller
             $request["identificacion_verify"] == 1 ? $request["identificacion_verify"] = 1 : $request["identificacion_verify"] = 0;
             $validator = Validator::make($request->all(), [
                 'nombres'         => 'required',
-                'apellidos'       => 'required',
+               // 'apellidos'       => 'required',
                // 'telefono'        => 'required|unique:clientes',
                // 'email'           => 'required|unique:clientes',
                // 'direccion'       => 'required'

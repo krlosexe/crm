@@ -103,19 +103,20 @@
 
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for=""><b>Nombres</b></label>
-                                    <input type="text" name="nombres" class="form-control form-control-user disabled" id="nombre" placeholder="PJ. Carlos Javier" required>
+                                    <label for=""><b>Nombres y Apellidos</b></label>
+                                    <input type="text" name="nombres" class="form-control form-control-user disabled" id="nombre" placeholder="PJ. Carlos Javier Cardenas" required>
                                 </div>
                             </div>
                         
-                            <div class="col-md-6">
+                          <!--<div class="col-md-6">
                                 <div class="form-group">
                                     <label for=""><b>Apellidos</b></label>
                                     <input type="text" name="apellidos" class="form-control form-control-user disabled" id="apellido" placeholder="PJ. Cardenas" required>
                                 </div>
-                            </div>
+                            </div>-->
+
                         </div>
 
                         
