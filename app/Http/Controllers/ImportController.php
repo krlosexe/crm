@@ -60,11 +60,11 @@ class ImportController extends Controller
                         "identificacion_verify" => 0,
                         "fecha_nacimiento" => $datos[3] != "" ? $datos[3] : null,
                         "city" => $city,
-                        "clinic" => 6,
+                        "clinic" => null,
                         "telefono" => $datos[8],
                         "email" => isset($datos[9]) ? $datos[9] : null,
-                        "id_line" => 8,
-                        "id_user_asesora" => 75,
+                        "id_line" => 3,
+                        "id_user_asesora" => 71,
                         "direccion" => isset($datos[12]) ? $datos[12] : null, 
                         "origen"    => $datos[5],
                         "state"     =>isset($datos[14]) ? $datos[14] != "" ? $datos[14] : null : null,
@@ -84,7 +84,7 @@ class ImportController extends Controller
 
                     $row = array(
                         "id_client"    => $cliente["id_cliente"],
-                        "name_surgery" => isset($datos[30]) ? $datos[30] : null
+                        "name_surgery" => isset($datos[32]) ? $datos[32] : null
                     );
                     
 
