@@ -81,19 +81,19 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for=""><b>Nombres</b></label>
+                                    <label for=""><b>Nombres y Apellidos</b></label>
                                     <input type="text" name="nombres" class="form-control form-control-user" id="nombre_view" placeholder="PJ. Carlos Javier" required>
                                 </div>
                             </div>
                         
-                            <div class="col-sm-6">
+                           <!-- <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for=""><b>Apellidos</b></label>
                                     <input type="text" name="apellidos" class="form-control form-control-user" id="apellido_view" placeholder="PJ. Cardenas" required>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
 
                         <div class="row">
