@@ -911,7 +911,6 @@
 
 
 
-
 			function revisiones(tab, iframe, data){
 				$(tab).click(function (e) { 
 					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/1"
@@ -996,7 +995,7 @@
 
 
 			function GetClinic(city, select){
-				$(city).change(function (e) { 
+				$(city).unbind().change(function (e) { 
 					GetClinicByCity(select, $(this).val())
 				});
 			}
