@@ -23,25 +23,25 @@
             </li>
 
 
-            <li  class="nav-item">
+            <li  class="nav-item" id="tab4_view">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-valuations-view" role="tab" aria-controls="info-add" aria-selected="false">Valoraciones</a>
             </li>
 
 
-            <li  class="nav-item">
+            <li  class="nav-item" id="tab5_view"> 
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-preanestesia-view" role="tab" aria-controls="info-add" aria-selected="false">Pre Anestesias</a>
             </li>
 
 
-            <li  class="nav-item">
+            <li  class="nav-item" id="tab6_view"> 
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-cirugias-view" role="tab" aria-controls="info-add" aria-selected="false">Cirugias</a>
             </li>
 
-            <li  class="nav-item">
+            <li  class="nav-item" id="tab7_view">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-revision-view" role="tab" aria-controls="info-add" aria-selected="false">Revisiones</a>
             </li>
 
-            <li  class="nav-item">
+            <li  class="nav-item" id="tab8_view">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-view" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
             </li>
 

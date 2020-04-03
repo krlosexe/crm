@@ -157,3 +157,4 @@ Route::get('clients-list', 'ClientsController@List');
 
 
 Route::post('clients/update/hc/{id_cliente}', 'ClientsController@UpdateHc');
+

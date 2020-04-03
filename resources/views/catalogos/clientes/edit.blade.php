@@ -25,25 +25,25 @@
                 <a id="tab3" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-credit-patient-edit" role="tab" aria-controls="info-add" aria-selected="false">Info Crediticia</a>
             </li>
 
-            <li  class="nav-item">
-                <a id="tab4" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-valuations-edit" role="tab" aria-controls="info-add" aria-selected="false">Valoraciones</a>
+            <li  class="nav-item" id="tab4_edit">
+                <a   class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-valuations-edit" role="tab" aria-controls="info-add" aria-selected="false">Valoraciones</a>
             </li>
 
 
-            <li  class="nav-item">
+            <li  class="nav-item" id="tab5_edit">
                 <a id="tab4" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-preanestesia-edit" role="tab" aria-controls="info-add" aria-selected="false">Pre Anestesia</a>
             </li>
 
-            <li  class="nav-item">
+            <li  class="nav-item" id="tab6_edit">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-cirugia-edit" role="tab" aria-controls="info-add" aria-selected="false">Cirugias</a>
             </li>
 
-            <li  class="nav-item">
+            <li  class="nav-item" id="tab7_edit">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-revision-edit" role="tab" aria-controls="info-add" aria-selected="false">Revisiones</a>
             </li>
 
 
-            <li  class="nav-item">
+            <li  class="nav-item" id="tab8_edit">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-edit" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
             </li>
 

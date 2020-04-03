@@ -670,7 +670,7 @@
 
 
 					cuadros('#cuadro1', '#cuadro3');
-
+/*
 
 					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/0"
 					$('#iframeValuationsView').attr('src', url);
@@ -692,7 +692,12 @@
 					$('#iframepTracingView').attr('src', url);
 
 
-
+*/
+				valuations("#tab4_view", "#iframeValuationsView", data)
+				preanestesias("#tab5_view", "#iframepPreanestesiaView", data)
+				surgeries("#tab6_view", "#iframepCirugiaView", data)
+				revisiones("#tab7_view", "#iframepRevisionView", data)
+				tasks("#tab8_view", "#iframepTracingView", data)
 
 
 				});
@@ -863,7 +868,7 @@
 
 				
 
-					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
+					/*var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
 					$('#iframeValuationsEdit').attr('src', url);
 
 
@@ -882,9 +887,66 @@
 					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/1"
 					$('#iframepTracingEdit').attr('src', url);
 
+
+
+*/
+					valuations("#tab4_edit", "#iframeValuationsEdit", data)
+					preanestesias("#tab5_edit", "#iframepPreanestesiaEdit", data)
+					surgeries("#tab6_edit", "#iframepCirugiaEdit", data)
+					revisiones("#tab7_edit", "#iframepRevisionEdit", data)
+					tasks("#tab8_edit", "#iframepTracingEdit", data)
+					
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
+
+
+			function tasks(tab, iframe, data){
+				$(tab).click(function (e) { 
+					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+					
+				});
+			}
+
+
+
+
+			function revisiones(tab, iframe, data){
+				$(tab).click(function (e) { 
+					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+					
+				});
+			}
+
+
+			function surgeries(tab, iframe, data){
+				$(tab).click(function (e) { 
+					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+					
+				});
+			}
+
+
+			function valuations(tab, iframe, data){
+				$(tab).click(function (e) { 
+					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+					
+				});
+			}
+
+
+			function preanestesias(tab, iframe, data){
+				$(tab).click(function (e) { 
+					var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+					
+				});
+			}
+
 
 
 
