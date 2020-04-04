@@ -215,7 +215,7 @@
 
                                 <div class="form-group">
                                     <label for=""><b>Linea de Negocio</b></label>
-                                    <select name="id_line" id="linea-negocio-edit" class="form-control select2" required>
+                                    <select name="id_line" id="linea-negocio-edit" class="form-control" required>
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
@@ -223,7 +223,7 @@
 
                                 <div class="form-group">
                                     <label for=""><b>Asesora Responsable</b></label>
-                                    <select name="id_user_asesora" id="asesora-edit" class="form-control select2" required>
+                                    <select name="id_user_asesora" id="asesora-edit" class="form-control" required>
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
