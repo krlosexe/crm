@@ -160,28 +160,31 @@
                         </div>
 
 
-                       <!-- <div class="row">
+                       <div class="row">
                             <div class="col-sm-10">
                                     <div class="form-group">
                                         <label for=""><b>Telefono</b></label>
-                                        <input type="number" name="telefono" class="form-control form-control-user" id="telefono_view" placeholder="PJ. 315 2077862" required>
+                                        <input type="number" name="telefono" class="form-control form-control-user" id="telefono" placeholder="PJ. 315 2077862" required>
                                     </div>
                             </div>
                             <div class="col-md-2">
                             <br>
-                                <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                                <button type="button" id="add_phone" class="btn btn-primary"><i class="fa fa-plus"></i></button>
                             </div>
-                        </div>-->
 
+                            
+                        </div>
+
+                        <div id="add_phone_content" class="row">
+
+                        </div>
+
+
+                        <hr>
 
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for=""><b>Telefono</b></label>
-                                    <input type="number" name="telefono" class="form-control form-control-user disabled" id="telefono" placeholder="PJ. 315 2077862" required>
-                                </div>
-
                                 <div class="form-group">
                                     <label for=""><b>E-mail</b></label>
                                     <input type="email" name="email" class="form-control form-control-user disabled" id="email" placeholder="PJ. correo@dominio.com" required>

@@ -545,8 +545,68 @@
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
+			var count_phone = 0
+			$("#add_phone").click(function (e) { 
+				e.preventDefault();
 
-			
+				count_phone++
+
+				var html = ""
+
+
+				html += '<div class="col-md-10 phone_add_'+count_phone+'">'
+					html += '<div class="form-group">'
+						html += '<label for=""><b>Telefono</b></label>'
+						html += '<input type="number" name="telefono2[]" class="form-control form-control-user"  placeholder="PJ. 315 2077862">'
+					html += '</div>'
+				html += '</div>'
+
+				
+				html += '<div class="col-md-2 phone_add_'+count_phone+'"">'
+				html += '<br>'
+					html += '<button type="button" id="add_phone" onclick="deletePhone('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+				html += '</div>'
+
+
+
+				$("#add_phone_content").append(html)
+			});
+
+
+
+
+
+			var count_phone_edit = 0
+			$("#add_phone_edit").click(function (e) { 
+				e.preventDefault();
+
+				count_phone_edit++
+
+				var html = ""
+
+
+				html += '<div class="col-md-10 phone_add_'+count_phone_edit+'">'
+					html += '<div class="form-group">'
+						html += '<label for=""><b>Telefono</b></label>'
+						html += '<input type="number" name="telefono2[]" class="form-control form-control-user"  placeholder="PJ. 315 2077862">'
+					html += '</div>'
+				html += '</div>'
+
+				
+				html += '<div class="col-md-2 phone_add_'+count_phone_edit+'"">'
+				html += '<br>'
+					html += '<button type="button" id="add_phone" onclick="deletePhone('+count_phone_edit+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+				html += '</div>'
+
+
+
+				$("#phone_add_content_edit").append(html)
+			});
+
+
+			function deletePhone(id){
+				$(".phone_add_"+id).remove()
+			}
 
 			/* ------------------------------------------------------------------------------- */
 			/* 
@@ -664,6 +724,31 @@
 					});
 
 					$("#logs_view").html(html)
+
+
+
+					var html = ""
+					var count_phone = 0
+					$.map(data.phones, function (item, key) {
+						count_phone++
+						html += '<div class="col-md-12 phone_add_'+count_phone+'">'
+							html += '<div class="form-group">'
+								html += '<label for=""><b>Telefono</b></label>'
+								html += '<input type="number" name="telefono2[]" class="form-control form-control-user"  placeholder="PJ. 315 2077862" value="'+item.phone+'" disabled>'
+							html += '</div>'
+						html += '</div>'
+
+						
+						html += '<div class="col-md-2 phone_add_'+count_phone+'"">'
+						html += '<br>'
+						//	html += '<button type="button" id="add_phone" onclick="deletePhone('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+						html += '</div>'
+
+				
+					});
+
+					$("#phone_add_content_view").html(html)
+					
 
 
 
@@ -847,6 +932,28 @@
 
 
 
+
+					var html = ""
+					var count_phone = 0
+					$.map(data.phones, function (item, key) {
+						count_phone++
+						html += '<div class="col-md-10 phone_add_'+count_phone+'">'
+							html += '<div class="form-group">'
+								html += '<label for=""><b>Telefono</b></label>'
+								html += '<input type="number" name="telefono2[]" class="form-control form-control-user"  placeholder="PJ. 315 2077862" value="'+item.phone+'">'
+							html += '</div>'
+						html += '</div>'
+
+						
+						html += '<div class="col-md-2 phone_add_'+count_phone+'"">'
+						html += '<br>'
+							html += '<button type="button" id="add_phone" onclick="deletePhone('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+						html += '</div>'
+
+				
+					});
+
+					$("#phone_add_content_edit").html(html)
 
 
 

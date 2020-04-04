@@ -26,6 +26,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 use Orchestra\Parser\Xml\Facade as XmlParser;
 
+use DB;
 class ClientsController extends Controller
 {
     /**
@@ -121,9 +122,9 @@ class ClientsController extends Controller
 
                                 }) 
 
-
                                 ->with("logs")
 
+                                ->with("phones")
 
                               //  ->with("comments")
 
@@ -246,6 +247,19 @@ class ClientsController extends Controller
                 ClientCreditInformation::create($request->all());
 
 
+                if(isset($request["telefono2"])){
+                    foreach($request["telefono2"] as $value){
+                       
+                        DB::table('clients_phone_aditional')->insert([
+                            'id_cliente' => $cliente["id_cliente"],
+                            'phone' => $value
+                        ]);
+
+                    }   
+                    
+                }
+
+
 
                 $request["table"]    = "clients";
                 $request["id_event"] = $cliente["id_cliente"];
@@ -362,6 +376,20 @@ class ClientsController extends Controller
             ClientCreditInformation::find($id_cliente)->update($request->all());
 
 
+
+
+            DB::table('clients_phone_aditional')->where("id_cliente", $id_cliente)->delete();
+            if(isset($request["telefono2"])){
+                foreach($request["telefono2"] as $value){
+                   
+                    DB::table('clients_phone_aditional')->insert([
+                        'id_cliente' => $id_cliente,
+                        'phone' => $value
+                    ]);
+
+                }   
+                
+            }
 
 
 

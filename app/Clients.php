@@ -42,5 +42,11 @@ class Clients extends Model
 
 
 
+    public function phones(){
+        return $this->hasMany('App\ClientPhone', 'id_cliente');
+    }
+
+
+
 
 }
