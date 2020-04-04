@@ -175,6 +175,15 @@
                                 <hr>
 
 
+
+                                <div class="row" id="email_add_content_view">
+                                </div>
+
+                                <hr>
+
+
+
+
                                 <div class="form-group">
                                     <label for=""><b>E-mail</b></label>
                                     <input type="text" name="email" class="form-control form-control-user" id="email_view" placeholder="PJ. correo@dominio.com" required>

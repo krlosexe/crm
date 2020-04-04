@@ -608,6 +608,97 @@
 				$(".phone_add_"+id).remove()
 			}
 
+
+			function deletePhoneEdit(id){
+				$(".phone_add_edit_"+id).remove()
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			var count_emal = 0
+			$("#add_email").click(function (e) { 
+				e.preventDefault();
+
+				count_emal++
+
+				var html = ""
+
+
+				html += '<div class="col-md-10 email_add_'+count_emal+'">'
+					html += '<div class="form-group">'
+						html += '<label for=""><b>E-mail</b></label>'
+						html += '<input type="email" name="email2[]" class="form-control form-control-user disabled"  placeholder="PJ. correo@dominio.com" required>'
+					html += '</div>'
+				html += '</div>'
+
+				
+				html += '<div class="col-md-2 email_add_'+count_emal+'"">'
+				html += '<br>'
+					html += '<button type="button" id="add_email" onclick="deleteemail('+count_emal+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+				html += '</div>'
+
+
+
+				$("#add_email_content").append(html)
+			});
+
+
+
+
+
+			var count_email_edit = 0
+			$("#add_email_edit").click(function (e) { 
+				e.preventDefault();
+
+				count_email_edit++
+
+				var html = ""
+
+
+				html += '<div class="col-md-10 email_add_'+count_email_edit+'">'
+					html += '<div class="form-group">'
+						html += '<label for=""><b>E-mail</b></label>'
+						html += '<input type="email" name="email2[]" class="form-control form-control-user"  placeholder="PJ. correo@dominio.com">'
+					html += '</div>'
+				html += '</div>'
+
+				
+				html += '<div class="col-md-2 email_add_'+count_email_edit+'"">'
+				html += '<br>'
+					html += '<button type="button" id="add_email" onclick="deleteemail('+count_email_edit+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+				html += '</div>'
+
+
+
+				$("#email_add_content_edit").append(html)
+			});
+
+
+			function deleteemail(id){
+				$(".email_add_"+id).remove()
+			}
+
+
+			function deleteemailEdit(id){
+				$(".email_add_edit_"+id).remove()
+			}
+
+
+
+
+
+
 			/* ------------------------------------------------------------------------------- */
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
@@ -617,7 +708,7 @@
 					$("#alertas").css("display", "none");
 
 					var data = JSON.parse($(this).attr("data")) 
-				
+				    
 					GetCity("#city_view");
 					GetClinic("#city_view", "#clinic_view")
 					GetBusinessLine("#linea-negocio-view");
@@ -748,6 +839,34 @@
 					});
 
 					$("#phone_add_content_view").html(html)
+
+
+
+
+					var html = ""
+					var count_email = 0
+					$.map(data.emails, function (item, key) {
+						count_email++
+						html += '<div class="col-md-12 email_add_'+count_email+'">'
+							html += '<div class="form-group">'
+								html += '<label for=""><b>E-mail</b></label>'
+								html += '<input type="email" name="email2[]" class="form-control form-control-user"  value="'+item.email+'" disabled>'
+							html += '</div>'
+						html += '</div>'
+
+						
+						html += '<div class="col-md-2 email_add_'+count_email+'"">'
+						html += '<br>'
+						//	html += '<button type="button" id="add_email" onclick="deleteemail('+count_email+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+						html += '</div>'
+
+				
+					});
+
+					$("#email_add_content_view").html(html)
+
+
+
 					
 
 
@@ -937,7 +1056,7 @@
 					var count_phone = 0
 					$.map(data.phones, function (item, key) {
 						count_phone++
-						html += '<div class="col-md-10 phone_add_'+count_phone+'">'
+						html += '<div class="col-md-10 phone_add_edit_'+count_phone+'">'
 							html += '<div class="form-group">'
 								html += '<label for=""><b>Telefono</b></label>'
 								html += '<input type="number" name="telefono2[]" class="form-control form-control-user"  placeholder="PJ. 315 2077862" value="'+item.phone+'">'
@@ -945,15 +1064,41 @@
 						html += '</div>'
 
 						
-						html += '<div class="col-md-2 phone_add_'+count_phone+'"">'
+						html += '<div class="col-md-2 phone_add_edit_'+count_phone+'"">'
 						html += '<br>'
-							html += '<button type="button" id="add_phone" onclick="deletePhone('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+							html += '<button type="button" id="add_phone" onclick="deletePhoneEdit('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 						html += '</div>'
 
 				
 					});
 
 					$("#phone_add_content_edit").html(html)
+
+					
+
+
+					var html = ""
+					var count_email = 0
+					$.map(data.emails, function (item, key) {
+						count_email++
+						html += '<div class="col-md-10 email_add_edit_'+count_email+'">'
+							html += '<div class="form-group">'
+								html += '<label for=""><b>E-mail</b></label>'
+								html += '<input type="email" name="email2[]" class="form-control form-control-user"  value="'+item.email+'">'
+							html += '</div>'
+						html += '</div>'
+
+						
+						html += '<div class="col-md-2 email_add_edit_'+count_email+'"">'
+						html += '<br>'
+							html += '<button type="button" id="add_email" onclick="deleteemailEdit('+count_email+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+						html += '</div>'
+
+				
+					});
+
+					$("#email_add_content_edit").html(html)
+
 
 
 

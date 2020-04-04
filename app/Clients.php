@@ -47,6 +47,9 @@ class Clients extends Model
     }
 
 
+    public function emails(){
+        return $this->hasMany('App\ClientEmailAditional', 'id_cliente');
+    }
 
 
 }

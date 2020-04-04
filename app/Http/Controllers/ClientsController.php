@@ -71,11 +71,8 @@ class ClientsController extends Controller
                                      )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
-
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
-
                                 ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line", "left")
-
 
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
@@ -123,17 +120,14 @@ class ClientsController extends Controller
                                 }) 
 
                                 ->with("logs")
-
                                 ->with("phones")
-
-                              //  ->with("comments")
+                                ->with("emails")
 
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.status", "!=", "0")
 
-
-                               // ->orderBy("clientes.id_line", "DESC")
+                              
                                 ->orderBy("clientes.id_cliente", "DESC")
 
                                 ->paginate(10);
@@ -256,8 +250,22 @@ class ClientsController extends Controller
                         ]);
 
                     }   
-                    
                 }
+
+
+
+
+                if(isset($request["email2"])){
+                    foreach($request["email2"] as $value){
+                       
+                        DB::table('clients_email_aditional')->insert([
+                            'id_cliente' => $cliente["id_cliente"],
+                            'email' => $value
+                        ]);
+
+                    }   
+                }
+
 
 
 
@@ -392,6 +400,23 @@ class ClientsController extends Controller
             }
 
 
+            DB::table('clients_email_aditional')->where("id_cliente", $id_cliente)->delete();
+            if(isset($request["email2"])){
+                foreach($request["email2"] as $value){
+                   
+                    DB::table('clients_email_aditional')->insert([
+                        'id_cliente' => $id_cliente,
+                        'email' => $value
+                    ]);
+
+                }   
+            }
+
+
+
+
+
+
 
             $data = Clients::select("state")->find($id_cliente);
 
@@ -405,6 +430,9 @@ class ClientsController extends Controller
 
 
 
+
+
+            
 
             if(isset($request->comments)){
                 $comments = [];

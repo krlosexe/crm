@@ -160,7 +160,7 @@
                         </div>
 
 
-                       <div class="row">
+                        <div class="row">
                             <div class="col-sm-10">
                                     <div class="form-group">
                                         <label for=""><b>Telefono</b></label>
@@ -183,13 +183,36 @@
                         <hr>
 
 
+
+
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-sm-10">
                                 <div class="form-group">
                                     <label for=""><b>E-mail</b></label>
                                     <input type="email" name="email" class="form-control form-control-user disabled" id="email" placeholder="PJ. correo@dominio.com" required>
                                 </div>
+                            </div>
+                            <div class="col-md-2">
+                            <br>
+                                <button type="button" id="add_email" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                            </div>
 
+                            
+                        </div>
+
+                        <div id="add_email_content" class="row">
+
+                        </div>
+
+
+                        <hr>
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for=""><b>Linea de Negocio</b></label>
                                     <select name="id_line" id="linea-negocio" class="form-control disabled" required>
