@@ -72,6 +72,20 @@
 		                  </button>
 			            </div>
 			            <div class="card-body">
+								
+							<div class="row">
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Filtrar por : Asesora</b></label>
+										<select name="adviser[]" id="id_asesora_valoracion-filter" class="form-control select2 disabled" multiple>
+											<option value="">Seleccione</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+
 			              <div class="table-responsive">
 			                <table class="table table-bordered" id="table" width="100%" cellspacing="0">
 			                  <thead>
@@ -148,6 +162,7 @@
 					'height' : 200
 				});
 
+				GetAsesorasValoracion("#id_asesora_valoracion-filter")
 
 			});
 
@@ -160,6 +175,10 @@
 				enviarFormulario("#store", 'api/client/tasks', '#cuadro2');
 			}
 
+			$("#id_asesora_valoracion-filter").change(function (e) { 
+				list();
+			});
+
 
 			function list(cuadro) {
 				var data = {
@@ -167,6 +186,9 @@
 					"token"  : tokens,
 				};
 
+				var adviser = $("#id_asesora_valoracion-filter").val()
+
+				console.log(adviser)
 
 				$("#div-input-edit").css("display", "none")
 				$('#table tbody').off('click');
@@ -182,9 +204,10 @@
 						"method":"GET",
 						 "url":''+url+'/api/client/tasks',
 						 "data": {
-							"rol"    : name_rol,
-							"id_user": id_user,
-							"token"  : tokens,
+							"rol"     : name_rol,
+							"id_user" : id_user,
+							"token"   : tokens,
+							"adviser" : adviser
 						},
 						"dataSrc":""
 					},

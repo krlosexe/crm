@@ -628,6 +628,11 @@ class ClientsController extends Controller
             $id_user = $request["id_user"];
 
 
+            $adviser = 0;
+            if(isset($request["adviser"])){
+              $adviser = $request["adviser"];
+            }
+
 
             $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
                                    "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis", "clientes.nombres as name_client")
@@ -651,7 +656,12 @@ class ClientsController extends Controller
                                         }
                                     })
 
-                                    
+
+                                    ->where(function ($query) use ($adviser) {
+                                        if($adviser != 0){
+                                            $query->whereIn("clients_tasks.responsable", $adviser);
+                                        }
+                                    }) 
 
                                     ->where("auditoria.tabla", "clients_tasks")
                                     ->where("auditoria.status", "!=", "0")
