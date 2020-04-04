@@ -252,6 +252,16 @@
 				$("#nav_preanesthesia, #modulo_Citas").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "citys");
+
+
+				GetUsers(".getUsers")
+
+				
+
+
+
+
+
 			});
 
 			var  option = {{$option}};
@@ -357,8 +367,6 @@
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
-
-				GetUsers("#followers-store")
 			
 				cuadros("#cuadro1", "#cuadro2");
 			}
@@ -372,10 +380,10 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					GetUsers("#responsable-view")
-					GetUsers("#followers-view")
-					
+							console.log(data.responsable)
+							
 					$("#responsable-view").val(data.responsable).attr("disabled", "disabled")
+					$("#responsable-view").trigger("change");
 					$("#issue-view").val(data.issue).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
 					$("#time-view").val(data.time).attr("disabled", "disabled")
@@ -434,10 +442,13 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					GetUsers("#responsable-edit")
-					GetUsers("#followers-edit")
+					
 					
 					$("#responsable-edit").val(data.responsable)
+
+					$("#responsable-edit").trigger("change");
+
+
 					$("#issue-edit").val(data.issue)
 					$("#fecha-edit").val(data.fecha)
 					$("#time-edit").val(data.time)

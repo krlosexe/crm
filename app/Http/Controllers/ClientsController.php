@@ -492,7 +492,7 @@ class ClientsController extends Controller
     public function Tasks(Request $request){
         
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $request["responsable"] = $request["id_user"];
+          //  $request["responsable"] = $request["id_user"];
             $store = ClientsTasks::create($request->all());
 
 

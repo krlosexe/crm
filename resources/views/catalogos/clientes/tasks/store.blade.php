@@ -12,6 +12,20 @@
 
            <div class="col-md-4">
 
+
+             <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Responsable</b></label>
+                        <select name="responsable" id="responsable" class="form-control getUsers select2" required>
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                </div>
+              </div>
+
+
+
               <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -44,7 +58,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Seguidores</b></label>
-                        <select name="followers[]" id="followers-store" class="form-control select2" multiple required>
+                        <select name="followers[]" id="followers-store" class="form-control getUsers select2"  multiple required>
                             <option value="">Seleccione</option>
                         </select>
                     </div>

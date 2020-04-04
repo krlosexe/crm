@@ -17,7 +17,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Responsable</b></label>
-                        <select name="responsable" id="responsable-edit" class="form-control select2" required>
+                        <select name="responsable" id="responsable-edit" class="form-control select2 getUsers" required>
                             <option value="">Seleccione</option>
                         </select>
                     </div>
@@ -56,7 +56,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Seguidores</b></label>
-                        <select name="followers[]" id="followers-edit" class="form-control select2" multiple required>
+                        <select name="followers[]" id="followers-edit" class="form-control select2 getUsers" multiple required>
                             <option value="">Seleccione</option>
                         </select>
                     </div>
