@@ -60,7 +60,7 @@ class ImportController extends Controller
                         "identificacion_verify" => 0,
                         "fecha_nacimiento" => $datos[3] != "" ? $datos[3] : null,
                         "city" => $city,
-                        "clinic" => 6,
+                        "clinic" => 5,
                         "telefono" => $datos[8],
                         "email" => isset($datos[9]) ? $datos[9] : null,
                         "id_line" => 3,
