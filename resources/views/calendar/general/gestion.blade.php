@@ -728,7 +728,7 @@
 
 								enviarFormularioPutEvent("#update_event", 'api/client/tasks', '#cuadro4', false, "#avatar-edit");
 
-								SubmitComment(calEvent.event.extendedProps.id_clients_tasks, "api/comment/task/client", "#add-comments")
+								SubmitComment(calEvent.event.extendedProps.id_clients_tasks, "api/comment/task/client", "clients", "#add-comments")
 
 								if(id_user == calEvent.event.extendedProps.responsable){
 									$(".input-disabled").removeAttr("disabled")
@@ -785,7 +785,7 @@
 
 
 
-			function SubmitComment(id, api, btn){
+			function SubmitComment(id, api, table, btn){
 
 				$(btn).unbind().click(function (e) { 
 
@@ -810,12 +810,14 @@
 					var url=document.getElementById('ruta').value;
 
 					$.ajax({
-						url:''+url+api,
+						url:''+url+"/"+api,
 						type:'POST',
 						data: {
-							"id_user": id_user,
-							"token"  : tokens,
-							"id"     : id
+							"id_user" : id_user,
+							"token"   : tokens,
+							"id"      : id,
+							"comment" : $("#summernote").val(),
+							
 						},
 						dataType:'JSON',
 						beforeSend: function(){
@@ -826,6 +828,13 @@
 						},
 						success: function(data){
 							$("#add-comments").text("Comentar").removeAttr("disabled")
+
+							$("#calendar").html("");
+							var asesoras = []
+							initCalendar(asesoras)
+
+
+
 						}
 					});
 

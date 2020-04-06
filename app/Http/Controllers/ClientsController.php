@@ -697,6 +697,17 @@ class ClientsController extends Controller
     }
 
 
+    public function AddCommentTask(Request $request){
+
+
+        $array["id_task"]  = $request["id"];
+        $array["id_user"]  = $request["id_user"];
+        $array["comments"] = $request["comment"];
+        ClientsTasksComments::insert($array);
+
+        return response()->json("Ok")->setStatusCode(200);
+
+    }
 
 
     public function Excel($linea_negocio, $adviser, $origen){
