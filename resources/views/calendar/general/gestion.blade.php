@@ -346,7 +346,7 @@
 
 
 											<div class="row">
-												<div class="col-md-12">
+												<div class="col-md-12" id="comments3-input">
 													<button type="button" id="add-comments"  class="btn btn-primary">
 														Comentar
 													</button>
@@ -588,6 +588,7 @@
 							$("#comments-input").css("display", "none")
 							$("#paciente-input").css("display", "none")
 							$("#comments2-input").css("display", "none")
+							$("#comments3-input").css("display", "none")
 
 								
 
@@ -603,7 +604,7 @@
 								html += '<li class="list-group-item"><img class="rounded" src="img/usuarios/profile/'+item.img_profile+'" style="height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;" title="'+item.name_follower+''+item.last_name_follower+'"><b>'+item.name_follower+' '+item.last_name_follower+'</b></li>'
 							});
 
-
+							
 							if(calEvent.event.extendedProps.valuations == true){
 								$("#observations-input").css("display", "none")
 								$("#comments-input").css("display", "block")
@@ -722,7 +723,7 @@
 								});
 
 								$("#comments").html(html_comments)
-
+								$("#comments3-input").css("display", "block")
 
 								$("#id_edit").val(calEvent.event.extendedProps.id_clients_tasks)
 
