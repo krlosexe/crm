@@ -347,6 +347,16 @@
 
 											<div class="row">
 												<div class="col-md-12">
+													<button type="button" id="add-comments"  class="btn btn-primary">
+														Comentar
+													</button>
+												</div>
+											</div>
+
+											<br><br>
+
+											<div class="row">
+												<div class="col-md-12">
 												<label for=""><b>Seguidores</b></label>
 												<ul class="list-group" id=list_followers>
 												</ul>
@@ -689,7 +699,7 @@
 								$("#comments-input").css("display", "block")
 								$("#paciente-input").css("display", "block")
 								$("#comments2-input").css("display", "block")
-								$('#summernote').summernote();
+								$('#summernote').summernote("reset");
 								$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
 
 								var html_comments = "";
@@ -705,7 +715,6 @@
 
 												html_comments += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
 
-
 											html_comments += '</div>'
 										html_comments += '</div>'
 									html_comments += '</div>'
@@ -718,6 +727,8 @@
 								$("#id_edit").val(calEvent.event.extendedProps.id_clients_tasks)
 
 								enviarFormularioPutEvent("#update_event", 'api/client/tasks', '#cuadro4', false, "#avatar-edit");
+
+								SubmitComment(calEvent.event.extendedProps.id_clients_tasks, "api/comment/task/client", "#add-comments")
 
 								if(id_user == calEvent.event.extendedProps.responsable){
 									$(".input-disabled").removeAttr("disabled")
@@ -770,6 +781,59 @@
 
 					calendar.render();
 
+			}
+
+
+
+			function SubmitComment(id, api, btn){
+
+				$(btn).unbind().click(function (e) { 
+
+					var html = ""
+
+					html += '<div class="col-md-12" style="margin-bottom: 15px">'
+						html += '<div class="row">'
+							html += '<div class="col-md-2">'
+							html += '</div>'
+							html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+								html += '<div>'+$("#summernote").val()+'</div>'
+
+								html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
+
+							html += '</div>'
+						html += '</div>'
+					html += '</div>'
+
+					$("#comments").append(html)
+
+
+					var url=document.getElementById('ruta').value;
+
+					$.ajax({
+						url:''+url+api,
+						type:'POST',
+						data: {
+							"id_user": id_user,
+							"token"  : tokens,
+							"id"     : id
+						},
+						dataType:'JSON',
+						beforeSend: function(){
+							$("#add-comments").text("espere...").attr("disabled", "disabled")
+						},
+						error: function (data) {
+							$("#add-comments").text("Comentar").removeAttr("disabled")
+						},
+						success: function(data){
+							$("#add-comments").text("Comentar").removeAttr("disabled")
+						}
+					});
+
+
+
+					
+				});
+				
 			}
 			
 	

@@ -117,7 +117,7 @@
 
                   <div class="row">
 
-                     <div class="col-md-2">
+                    <div class="col-md-2">
                            
                     </div>
 
@@ -127,7 +127,7 @@
                       </button>
                     </div>
                     
-              </div>
+                  </div>
 
               <br><br>
               <div class="row">
