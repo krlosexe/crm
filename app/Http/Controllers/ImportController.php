@@ -54,17 +54,17 @@ class ImportController extends Controller
 
 
                     $row = array(
-                        "nombres" => $datos[0]." ".$datos[1],
+                        "nombres" => $datos[0]." ".$datos[2]." ".$datos[1],
                         "apellidos" => "",
                         "identificacion" =>  isset($datos[11]) ? $datos[11] : null,
                         "identificacion_verify" => 0,
                         "fecha_nacimiento" => $datos[3] != "" ? $datos[3] : null,
                         "city" => $city,
-                        "clinic" => 6,
+                        "clinic" => null,
                         "telefono" => $datos[8],
                         "email" => isset($datos[9]) ? $datos[9] : null,
-                        "id_line" => 2,
-                        "id_user_asesora" => 73,
+                        "id_line" => 3,
+                        "id_user_asesora" => 83,
                         "direccion" => isset($datos[12]) ? $datos[12] : null, 
                         "origen"    => $datos[5],
                         "state"     =>isset($datos[14]) ? $datos[14] != "" ? $datos[14] : null : null,
