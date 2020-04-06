@@ -610,7 +610,8 @@
 								$("#comments-input").css("display", "block")
 								$("#paciente-input").css("display", "block")
 								$("#comments2-input").css("display", "block")
-								$('#summernote').summernote();
+								$("#comments3-input").css("display", "block")
+								$('#summernote').summernote("reset");
 								$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
 
 								var html_comments = "";
@@ -674,8 +675,15 @@
 								}
 
 
+
 								
 								$("#adviser").val(name_asesora).attr("disabled", "disabled")
+
+
+
+								AddComment(calEvent.event.extendedProps.id_valuations, "api/comment/", "clients", "#add-comments", "valuations")
+
+
 							}else{
 								$("#adviser-input").css("display", "none")
 							}
@@ -783,6 +791,65 @@
 					calendar.render();
 
 			}
+
+
+
+			function SubmitComment(id, api, table, btn){
+
+				$(btn).unbind().click(function (e) { 
+
+					var html = ""
+
+					html += '<div class="col-md-12" style="margin-bottom: 15px">'
+						html += '<div class="row">'
+							html += '<div class="col-md-2">'
+							html += '</div>'
+							html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+								html += '<div>'+$("#summernote").val()+'</div>'
+
+								html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
+
+							html += '</div>'
+						html += '</div>'
+					html += '</div>'
+
+					$("#comments").append(html)
+
+
+					var url=document.getElementById('ruta').value;
+
+					$.ajax({
+						url:''+url+"/"+api,
+						type:'POST',
+						data: {
+							"id_user" : id_user,
+							"token"   : tokens,
+							"id"      : id,
+							"comment" : $("#summernote").val(),
+							
+						},
+						dataType:'JSON',
+						beforeSend: function(){
+							$("#add-comments").text("espere...").attr("disabled", "disabled")
+						},
+						error: function (data) {
+							$("#add-comments").text("Comentar").removeAttr("disabled")
+						},
+						success: function(data){
+							$("#add-comments").text("Comentar").removeAttr("disabled")
+
+							$("#calendar").html("");
+							var asesoras = []
+							initCalendar(asesoras)
+
+
+
+						}
+					});
+				});
+
+			}
+
 
 
 
