@@ -339,7 +339,7 @@
 												<div class="col-md-12" id="comments2-input">
 													<div class="form-group">
 														<label for=""><b>Comentarios</b></label>
-														<textarea id="summernote" name="comments"></textarea>
+														<textarea id="summernote"></textarea>
 													</div>
 												</div>
 											</div>

@@ -549,7 +549,6 @@ class ClientsController extends Controller
                 ClientsTasksFollowers::insert($followers);
             }
             
-
             if(isset($request->comments)){
                 $comments = [];
 
