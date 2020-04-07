@@ -39,16 +39,16 @@ class ImportController extends Controller
 
 
                     $city = 3;
-                    if($datos[11] == "Cali"){
+                    if($datos[12] == "Cali"){
                         $city = 5;
                     }
 
-                    if($datos[11] == "Medellin"){
+                    if($datos[12] == "Medellin"){
                         $city = 3;
                     }
 
 
-                    if($datos[11] == "Bogota"){
+                    if($datos[12] == "Bogota"){
                         $city = 4;
                     }
 
@@ -60,7 +60,7 @@ class ImportController extends Controller
                         "identificacion_verify" => 0,
                         "fecha_nacimiento" => $datos[3] != "" ? $datos[3] : null,
                         "city" => $city,
-                        "clinic" => 9,
+                        "clinic" => 6,
                         "telefono" => $datos[8],
                         "email" => isset($datos[9]) ? $datos[9] : null,
                         "id_line" => 2,
@@ -71,7 +71,7 @@ class ImportController extends Controller
                         "code_client" => strtoupper($code)
                     );
                     
-                    
+
                 $data[] = $row;
                 $cliente = Clients::create($row);
 
