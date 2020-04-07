@@ -34,7 +34,7 @@ class ClientsExport implements FromView
         $adviser       = $this->asesor;
         $origen        = $this->origen;
 
-
+        ini_set('memory_limit', '-1'); 
         $data = DB::table('clientes')->select( 'state',
                                                'clientes.nombres',
                                                'apellidos', 
