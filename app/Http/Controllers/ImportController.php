@@ -60,16 +60,17 @@ class ImportController extends Controller
                         "identificacion_verify" => 0,
                         "fecha_nacimiento" => $datos[3] != "" ? $datos[3] : null,
                         "city" => $city,
-                        "clinic" => null,
+                        "clinic" => 9,
                         "telefono" => $datos[8],
                         "email" => isset($datos[9]) ? $datos[9] : null,
-                        "id_line" => 3,
-                        "id_user_asesora" => 91,
+                        "id_line" => 2,
+                        "id_user_asesora" => 72,
                         "direccion" => isset($datos[12]) ? $datos[12] : null, 
                         "origen"    => $datos[5],
                         "state"     =>isset($datos[14]) ? $datos[14] != "" ? $datos[14] : null : null,
                         "code_client" => strtoupper($code)
                     );
+                    
                     
                 $data[] = $row;
                 $cliente = Clients::create($row);
