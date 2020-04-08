@@ -64,7 +64,7 @@ class ImportController extends Controller
                         "telefono" => $datos[8],
                         "email" => isset($datos[9]) ? $datos[9] : null,
                         "id_line" => 9,
-                        "id_user_asesora" => 73,
+                        "id_user_asesora" => 92,
                         "direccion" => isset($datos[12]) ? $datos[12] : null, 
                         "origen"    => $datos[5],
                         "state"     =>isset($datos[14]) ? $datos[14] != "" ? $datos[14] : null : null,
