@@ -68,8 +68,8 @@ class ImportController extends Controller
                         "direccion" => isset($datos[12]) ? $datos[12] : null, 
                         "origen"    => $datos[5],
                         "state"     =>isset($datos[14]) ? $datos[14] != "" ? $datos[14] : null : null,
-                        "code_client" => strtoupper($code)
-                        "to_db  " => 1
+                        "code_client" => strtoupper($code),
+                        "to_db " => 1
                     );
                     
 
