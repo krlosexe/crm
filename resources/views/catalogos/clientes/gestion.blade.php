@@ -459,6 +459,10 @@
 				var adviser       = $("#id_asesora_valoracion-filter").val()
 				var origen        = $("#origen-filter").val()
 
+				var date_init     = $("#date_init").val()
+				var date_finish   = $("#date_finish").val()
+
+
 				if(business_line.length == 0){
 					business_line = 0
 				}else{
@@ -474,13 +478,22 @@
 
 
 
+				if(date_init.length == 0){
+					date_init = 0
+				}
+
+				if(date_finish.length == 0){
+					date_finish = 0
+				}
+
+
 				$("#xls").remove();
 				$("#view_xls").remove();
 
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$('.dt-buttons').append(a);
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
 				$("#xls").click(function (e) { 

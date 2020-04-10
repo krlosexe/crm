@@ -748,7 +748,7 @@ class ClientsController extends Controller
     }
 
 
-    public function Excel($linea_negocio, $adviser, $origen){
+    public function Excel($linea_negocio, $adviser, $origen, $date_init, $date_finish){
 
 
         $xls = new ClientsExport;
@@ -756,6 +756,8 @@ class ClientsController extends Controller
         $xls->linea_negocio = $linea_negocio == 0 ? 0 :  explode(",", $linea_negocio);
         $xls->asesor        = $adviser == 0 ? 0 :  explode(",", $adviser);
         $xls->origen        = $origen;
+        $xls->date_init     = $date_init;
+        $xls->date_finish   = $date_finish;
 
         
         return Excel::download($xls, 'ClientExport.xlsx');

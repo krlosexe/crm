@@ -24,7 +24,8 @@ class ClientsExport implements FromView
     var $asesor;
     var $origen;
 
-
+    var $date_init;
+    var $date_finish;
 
 
     public function view(): View
@@ -33,6 +34,8 @@ class ClientsExport implements FromView
         $business_line = $this->linea_negocio;
         $adviser       = $this->asesor;
         $origen        = $this->origen;
+        $date_init     = $this->date_init;
+        $date_finish   = $this->date_finish;
 
         ini_set('memory_limit', '-1'); 
         $data = DB::table('clientes')->select( 'state',
@@ -88,6 +91,7 @@ class ClientsExport implements FromView
                                                 }
             
                                             }) 
+
 
 
 
