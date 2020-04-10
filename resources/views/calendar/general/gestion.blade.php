@@ -813,9 +813,10 @@
 						html += '</div>'
 					html += '</div>'
 
-					$("#comments").append(html)
+					//$("#comments").append(html)
+					$('#summernote').summernote("reset");
 
-
+			
 					var url=document.getElementById('ruta').value;
 
 					$.ajax({
@@ -837,6 +838,10 @@
 						},
 						success: function(data){
 							$("#add-comments").text("Comentar").removeAttr("disabled")
+
+
+							$('#summernote').summernote("reset")
+
 
 							$("#calendar").html("");
 							var asesoras = []
@@ -873,6 +878,7 @@
 					html += '</div>'
 
 					$("#comments").append(html)
+					$('#summernote').summernote("reset");
 
 
 					var url=document.getElementById('ruta').value;
