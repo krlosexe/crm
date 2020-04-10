@@ -303,7 +303,11 @@ class CalendarController extends Controller
                                 })
                                 
 
-                                
+                                ->where(function ($query) use ($asesoras) {
+                                    if($asesoras != 0){
+                                        $query->whereIn("clientes.id_user_asesora", $asesoras);
+                                    }
+                                }) 
 
 
                                 // ->where(function ($query) use ($rol, $id_user) {
@@ -320,17 +324,6 @@ class CalendarController extends Controller
                                 ->where("auditoria.tabla", "valuations")
                                 ->where("valuations.status", 0)
                                 ->where("auditoria.status", "!=", 0)
-
-
-
-                                ->where(function ($query) use ($asesoras) {
-                                    if($asesoras != 0){
-                                        $query->whereIn("auditoria.cod_reg", $asesoras);
-                                    }
-                                }) 
-
-
-                                
                             
                                 ->get();
 
