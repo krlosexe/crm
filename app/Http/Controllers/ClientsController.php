@@ -114,10 +114,12 @@ class ClientsController extends Controller
 
 
                                     if($origen == "Otros"){
+
+                                        $query->where("clientes.to_db", 0);
                                         $query->where("clientes.origen", "!=","Formulario Web");
                                         $query->OrwhereNull('clientes.origen');
                                         $query->where("clientes.pauta", 0);
-                                        $query->where("clientes.to_db", 0);
+                                        
                                     }
 
                                 }) 
