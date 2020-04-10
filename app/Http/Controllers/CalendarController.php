@@ -169,7 +169,7 @@ class CalendarController extends Controller
                             ->get();
 
 
-            if($rol == "Asesor"){
+            if($rol == "Asesor" && $asesoras == 0){
 
 
                 $tasks_follow =  ClientsTasks::select("clients_tasks.id_clients_tasks", "clients_tasks.issue as title", "clients_tasks.fecha as start", 
@@ -192,9 +192,6 @@ class CalendarController extends Controller
                                             $query->where("clients_tasks.fecha", $today);
                                         }
                                     })
-
-
-                                    
 
                                     ->where("clients_tasks_followers.id_follower", $id_user)
 
