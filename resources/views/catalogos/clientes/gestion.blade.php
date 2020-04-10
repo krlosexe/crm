@@ -114,6 +114,24 @@
 
 
 							</div>
+
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Fecha desde</b></label>
+										<input type="date" class="form-control" id="date_init" max="<?= date("Y-m-d") ?>">
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Fecha hasta</b></label>
+										<input type="date" class="form-control" id="date_finish" max="<?= date("Y-m-d") ?>">
+									</div>
+								</div>
+
+
+							</div>
 			              <div class="table-responsive dataTables_wrapper dt-bootstrap4 no-footer">
 						  	
 			                <table class="table table-bordered " id="table" width="100%" cellspacing="0">
@@ -271,12 +289,11 @@
 
 
 
-			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter").change(function (e) { 
+			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish").change(function (e) { 
 
 				list("", 1)
 
 			});
-
 
 
 			$("#search").keyup(function (e) { 
@@ -324,7 +341,9 @@
 						"business_line" : $("#linea-negocio-filter").val(),
 						"adviser"       : $("#id_asesora_valoracion-filter").val(),
 						"origen"        : $("#origen-filter").val(),
-						"search"  : search
+						"search"        : search,
+						"date_init"     : $("#date_init").val(),
+						"date_finish"   : $("#date_finish").val()
 					},
 					dataType:'JSON',
 					

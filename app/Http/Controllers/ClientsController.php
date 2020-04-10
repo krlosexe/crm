@@ -59,6 +59,20 @@ class ClientsController extends Controller
               $search = $request["search"];
             }
 
+
+            $date_init = 0;
+            if(isset($request["date_init"]) && $request["date_init"] != ""){
+              $date_init = $request["date_init"];
+            }
+
+
+            $date_finish = 0;
+            if(isset($request["date_finish"]) && $request["date_finish"] != ""){
+              $date_finish = $request["date_finish"];
+            }
+
+
+
          
 
             $origen = $request["origen"];
@@ -125,6 +139,25 @@ class ClientsController extends Controller
 
                                 }) 
 
+
+
+                                ->where(function ($query) use ($date_init) {
+                                    if($date_init != 0){
+                                        $query->where("auditoria.fec_regins", ">=", $date_init);
+                                    }
+                                }) 
+
+
+                                ->where(function ($query) use ($date_finish) {
+                                   
+                                    if($date_finish != 0){
+                                        $query->where("auditoria.fec_regins", "<=", $date_finish);
+                                    }
+                                }) 
+
+
+
+
                                 ->with("logs")
                                 ->with("phones")
                                 ->with("emails")
@@ -135,6 +168,7 @@ class ClientsController extends Controller
 
                               
                                 ->orderBy("clientes.id_cliente", "DESC")
+                                ->orderBy("auditoria.fec_regins", "DESC")
 
                                 ->paginate(10);
 
