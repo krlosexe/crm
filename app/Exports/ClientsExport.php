@@ -46,15 +46,30 @@ class ClientsExport implements FromView
                                                'email',
                                                'origen',
                                                'forma_pago',
+                                               'fecha_nacimiento',
+                                               'direccion',
+                                               'facebook',
+                                               'instagram',
+                                               'twitter',
+                                               'youtube',
+                                               'code_client',
+                                               'prp',
                                                "datos_personales.nombres as name_register",
                                                "datos_personales.apellido_p as apellido_register",
                                                "auditoria.*",
-                                               "lines_business.nombre_line"
+                                               "lines_business.nombre_line",
+                                               "citys.nombre as name_city",
+                                               "clinic.nombre as name_clinic"
                                             )
                                             ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
                                             ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
 
                                             ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line")
+
+                                            ->join("citys", "citys.id_city", "=", "clientes.city")
+                                            ->join("clinic", "clinic.id_clinic", "=", "clientes.clinic")
+
+
 
 
                                             ->where("auditoria.tabla", "clientes")
