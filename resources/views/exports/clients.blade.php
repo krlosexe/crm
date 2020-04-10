@@ -33,6 +33,7 @@
             <td>{{ $value->email }}</td>
             <td>{{ $value->fecha_nacimiento }}</td>
             <td>{{ $value->origen }}</td>
+            <td>{{ $value->nombre_line }}</td>
             <td>{{ $value->name_city }}</td>
             <td>{{ $value->name_clinic }}</td>
             <td>{{ $value->direccion }}</td>
