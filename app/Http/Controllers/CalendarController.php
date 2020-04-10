@@ -305,7 +305,7 @@ class CalendarController extends Controller
 
                                 ->where(function ($query) use ($asesoras) {
                                     if($asesoras != 0){
-                                        $query->whereIn("clientes.id_user_asesora", $asesoras);
+                                        $query->whereIn("auditoria.usr_regins", $asesoras);
                                     }
                                 }) 
 
