@@ -681,7 +681,7 @@
 
 
 
-								AddComment(calEvent.event.extendedProps.id_valuations, "api/comment/", "clients", "#add-comments", "valuations")
+						//		AddComment(calEvent.event.extendedProps.id_valuations, "api/comment/", "clients", "#add-comments", "valuations")
 
 
 							}else{
