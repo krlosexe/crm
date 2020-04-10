@@ -141,6 +141,21 @@ class ClientsController extends Controller
 
 
 
+                                ->where(function ($query) use ($date_init) {
+                                    if($date_init != 0){
+                                        $query->where("auditoria.fec_regins", ">=", $date_init." 00:00:00");
+                                    }
+                                }) 
+
+
+
+
+                                ->where(function ($query) use ($date_finish) {
+                                    if($date_finish != 0){
+                                        $query->where("auditoria.fec_regins", "<=", $date_finish." 23:59:59");
+                                    }
+                                }) 
+
                                
                                 ->with("logs")
                                 ->with("phones")
@@ -151,7 +166,7 @@ class ClientsController extends Controller
                                 ->where("auditoria.status", "!=", "0")
 
                               
-                                ->orderBy("clientes.id_cliente", "DESC")
+                              //  ->orderBy("clientes.id_cliente", "DESC")
                                 ->orderBy("auditoria.fec_regins", "DESC")
 
                                 ->paginate(10);

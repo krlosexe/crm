@@ -116,7 +116,7 @@
 							</div>
 
 							<div class="row">
-								<!--<div class="col-md-3">
+								<div class="col-md-3">
 									<div class="form-group">
 										<label for=""><b>Fecha desde</b></label>
 										<input type="date" class="form-control" id="date_init" max="<?= date("Y-m-d") ?>">
@@ -128,7 +128,7 @@
 										<label for=""><b>Fecha hasta</b></label>
 										<input type="date" class="form-control" id="date_finish" max="<?= date("Y-m-d") ?>">
 									</div>
-								</div>-->
+								</div>
 
 
 							</div>
