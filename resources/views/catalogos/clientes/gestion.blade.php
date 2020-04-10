@@ -1270,6 +1270,10 @@
 				html += '</div>'
 
 				$("#comments_edit").append(html)
+
+				$('#summernote_edit').summernote('reset');
+
+				
 			});	
 
 
