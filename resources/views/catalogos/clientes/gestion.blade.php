@@ -551,6 +551,66 @@
 			}	
 			
 
+
+
+
+			function SubmitComment(id, api, table, btn, summer){
+
+				$(btn).unbind().click(function (e) { 
+
+					var html = ""
+
+					html += '<div class="col-md-12" style="margin-bottom: 15px">'
+						html += '<div class="row">'
+							html += '<div class="col-md-2">'
+							html += '</div>'
+							html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+								html += '<div>'+$(summer).val()+'</div>'
+
+								html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
+
+							html += '</div>'
+						html += '</div>'
+					html += '</div>'
+
+					$(table).append(html)
+
+
+					var url=document.getElementById('ruta').value;
+
+					$.ajax({
+						url:''+url+"/"+api,
+						type:'POST',
+						data: {
+							"id_user" : id_user,
+							"token"   : tokens,
+							"id"      : id,
+							"comment" : $(summer).val(),
+							
+						},
+						dataType:'JSON',
+						beforeSend: function(){
+							$(btn).text("espere...").attr("disabled", "disabled")
+						},
+						error: function (data) {
+							$(btn).text("Comentar").removeAttr("disabled")
+						},
+						success: function(data){
+							$(btn).text("Comentar").removeAttr("disabled")
+							$(summer).summernote("reset");
+						}
+					});
+
+
+
+					
+				});
+
+			}
+
+
+
+
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
@@ -1056,6 +1116,13 @@
 
 					cuadros('#cuadro1', '#cuadro4');
 
+
+
+					SubmitComment(data.id_cliente, "api/comments/clients", "#comments_edit", "#add-comments", "#summernote_edit")
+
+
+
+
 					$("#id_edit").val(data.id_cliente)
 
 
@@ -1253,7 +1320,7 @@
 
 
 			$("#add-comments").click(function (e) { 
-				
+				/*
 				var html = ""
 
 
@@ -1277,7 +1344,7 @@
 
 				$('#summernote_edit').summernote('reset');
 
-				
+				*/
 			});	
 
 

@@ -392,8 +392,6 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id_cliente)
     {   
-
-
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
 
@@ -478,9 +476,19 @@ class ClientsController extends Controller
 
 
 
+            if($request->comment != "<p><br></p>"){
 
+                $array = [];
+                $array["id_event"]   = $id_cliente;
+                $array["table"]      = "clients";
+                $array["id_user"]    = $request["id_user"];
+                $array["comment"]    = $request->comment;
+                Comments::insert($array);
 
+            }
             
+
+            /*
 
             if(isset($request->comments)){
                 $comments = [];
@@ -495,7 +503,7 @@ class ClientsController extends Controller
                 }
                 Comments::insert($comments);
                 
-            }
+            }*/
 
             DB::table('auditoria')->where("cod_reg", $id_cliente)->where("tabla", "clientes")
 

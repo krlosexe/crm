@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
+
+Route::post('auth', 'Login@Auth');
+
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -168,3 +173,4 @@ Route::post('comment/task/client', 'ClientsController@AddCommentTask');
 Route::get('tasks/comments/{id}', 'ClientsController@GetCommentsTasks');
 
 
+Route::post('comments/{tabla}', 'CommentsController@store');
