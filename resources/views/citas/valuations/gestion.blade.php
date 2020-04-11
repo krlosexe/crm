@@ -402,9 +402,10 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					getPacientes("#paciente-edit", data.id_cliente)
+					//getPacientes("#paciente-edit", data.id_cliente)
 
 					$("#paciente-edit").val(data.id_cliente)
+					$("#name_client").val(data.nombres)
 					$("#fecha-edit").val(data.fecha)
 					$("#time-edit").val(data.time)
 					$("#time-end-edit").val(data.time_end)
@@ -609,7 +610,7 @@
 			}
 
 
-			
+
 
 			function SubmitComment(id, api, table, btn, summer){
 

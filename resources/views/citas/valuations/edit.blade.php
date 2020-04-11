@@ -26,6 +26,7 @@
             <div class="tab-pane fade show active tab_content0" id="init_edit" role="tabpanel" aria-labelledby="patient_record_edit">
 
             <input type="hidden" name="_method" value="put">
+            <input type="hidden" name="id_cliente" id="paciente-edit">
         
             <div class="row">
               <div class="col-md-5">
@@ -33,9 +34,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                             <label for=""><b>Paciente</b></label>
-                            <select name="id_cliente" id="paciente-edit" class="form-control select2" required>
-                                <option value="">Seleccione</option>
-                            </select>
+                            <input type="text" class="form-control" id="name_client" disabled>
                         </div>
                     </div>
                   </div>
