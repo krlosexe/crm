@@ -845,8 +845,6 @@
 							var asesoras = []
 							initCalendar(asesoras)
 
-
-
 						}
 					});
 

@@ -365,7 +365,8 @@
 					]
 				});
 
-
+				table
+				.search("").draw(); 
 				ver("#table tbody", table)
 				edit("#table tbody", table)
 				activar("#table tbody", table)
