@@ -318,7 +318,7 @@ class ClientsController extends Controller
                 $request["table"]    = "clients";
                 $request["id_event"] = $cliente["id_cliente"];
 
-                if(isset($request["comment"]) && $request["comment"] != ""){
+                if(isset($request["comment"]) && $request["comment"] != "<p><br></p>"){
                     Comments::create($request->all());
                 }
 
