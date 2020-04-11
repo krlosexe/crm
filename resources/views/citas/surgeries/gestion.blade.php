@@ -211,6 +211,9 @@
 					]
 				});
 
+				table
+				.search("").draw()
+
 
 				ver("#table tbody", table)
 				edit("#table tbody", table)
@@ -231,6 +234,10 @@
 
 				SelectClinic("#paciente-store", "#clinic-store")
 
+
+				$("#paciente-store option").remove();
+
+				
 				getPacientes("#paciente-store")
 				cuadros("#cuadro1", "#cuadro2");
 			}

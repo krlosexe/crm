@@ -230,6 +230,8 @@
 					]
 				});
 
+				table
+				.search("").draw()
 
 				ver("#table tbody", table)
 				edit("#table tbody", table)
@@ -245,6 +247,8 @@
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
+
+ 				$("#paciente-store option").remove();
 
 				getPacientes("#paciente-store")
 				cuadros("#cuadro1", "#cuadro2");

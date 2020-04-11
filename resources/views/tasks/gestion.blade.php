@@ -262,6 +262,12 @@
 				});
 
 
+
+				table
+				.search("").draw()
+
+
+
 				ver("#table tbody", table)
 				edit("#table tbody", table)
 				activar("#table tbody", table)
@@ -280,6 +286,10 @@
 				GetUsers("#responsable-store")
 				GetUsers("#followers-store")
 
+
+				$("#paciente-store option").remove();
+
+				
 				getPacientes("#paciente-store")
 
 				cuadros("#cuadro1", "#cuadro2");

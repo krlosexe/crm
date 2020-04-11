@@ -204,6 +204,9 @@
 					]
 				});
 
+				table
+				.search("").draw()
+
 
 				ver("#table tbody", table)
 				edit("#table tbody", table)
@@ -221,6 +224,10 @@
 				$("#store")[0].reset();
 
 				$("#tableRegistrar tbody tr").remove()
+
+				$("#paciente-store option").remove();
+
+				
 				getPacientes("#paciente-store")
 				GetClinic("#clinica-store")
 				GetAsesoras("#asesora-store")
