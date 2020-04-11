@@ -111,21 +111,21 @@ class ClientsExport implements FromView
 
                                             ->where(function ($query) use ($date_init) {
                                                 if($date_init != 0){
-                                                    $query->where("auditoria.fec_regins", ">=", $date_init." 00:00:00");
+                                                    $query->where("auditoria.fec_update", ">=", $date_init." 00:00:00");
                                                 }
                                             }) 
             
             
                                             ->where(function ($query) use ($date_finish) {
                                                 if($date_finish != 0){
-                                                    $query->where("auditoria.fec_regins", "<=", $date_finish." 23:59:59");
+                                                    $query->where("auditoria.fec_update", "<=", $date_finish." 23:59:59");
                                                 }
                                             })
 
 
                                            // ->orderBy("clientes.id_line", "DESC")
                                            // ->orderBy("clientes.id_cliente", "DESC")
-                                           ->orderBy("auditoria.fec_regins", "DESC")
+                                           ->orderBy("auditoria.fec_update", "DESC")
                                             ->get();
 
         return view('exports.clients', [

@@ -81,7 +81,9 @@ class ClientsController extends Controller
             
             $data = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
                                        "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
-                                       "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line"
+                                       "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line", 
+                                       "dp2.nombres as name_update",
+                                       "dp2.apellido_p as apellido_update"
                                      )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
@@ -91,6 +93,10 @@ class ClientsController extends Controller
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
+
+                                ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'auditoria.usr_update', "left")
+
+
 
 
                                 ->where(function ($query) use ($search) {
@@ -143,7 +149,7 @@ class ClientsController extends Controller
 
                                 ->where(function ($query) use ($date_init) {
                                     if($date_init != 0){
-                                        $query->where("auditoria.fec_regins", ">=", $date_init." 00:00:00");
+                                        $query->where("auditoria.fec_update", ">=", $date_init." 00:00:00");
                                     }
                                 }) 
 
@@ -152,7 +158,7 @@ class ClientsController extends Controller
 
                                 ->where(function ($query) use ($date_finish) {
                                     if($date_finish != 0){
-                                        $query->where("auditoria.fec_regins", "<=", $date_finish." 23:59:59");
+                                        $query->where("auditoria.fec_update", "<=", $date_finish." 23:59:59");
                                     }
                                 }) 
 
@@ -167,7 +173,8 @@ class ClientsController extends Controller
 
                               
                               //  ->orderBy("clientes.id_cliente", "DESC")
-                                ->orderBy("auditoria.fec_regins", "DESC")
+                                //->orderBy("auditoria.fec_regins", "DESC")
+                                ->orderBy("auditoria.fec_update", "DESC")
 
                                 ->paginate(10);
 
@@ -322,6 +329,8 @@ class ClientsController extends Controller
                 $auditoria->cod_reg     = $cliente["id_cliente"];
                 $auditoria->status      = 1;
                 $auditoria->usr_regins  = $request["id_user"];
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                $auditoria->fec_update  = date("Y-m-d H:i:s");
                 $auditoria->save();
 
                 if ($cliente) {
@@ -487,6 +496,10 @@ class ClientsController extends Controller
                 Comments::insert($comments);
                 
             }
+
+            DB::table('auditoria')->where("cod_reg", $id_cliente)->where("tabla", "clientes")
+
+            ->update(['usr_update' => $request["id_user"],'fec_update' => date("Y-m-d H:i:s")]);
 
 
 

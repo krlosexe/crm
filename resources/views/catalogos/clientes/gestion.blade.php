@@ -397,7 +397,11 @@
 								var code = ""
 							}
 
-
+							if(item.name_update != null){
+								var name_update = "Por: "+item.name_update+" "+item.apellido_update
+							}else{
+								var name_update = ""
+							}
 							html += "<tr>"
 								html += "<td>"+botones+"</td>"
 								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+" </td>"
@@ -405,7 +409,7 @@
 								html += "<td>"+item.origen+"</td>"
 								html += "<td>"+item.nombre_line+"</td>"
 								html += "<td>"+item.state+"</td>"
-								html += "<td>"+item.fec_regins+"</td>"
+								html += "<td>"+item.fec_regins+"<br><b>Ultima modificacion</b><br>"+item.fec_update+" <b>"+name_update+"</b></td>"
 								html += "<td><b>"+item.name_register+" "+item.apellido_register+"</b></td>"
 							html += "</tr>"
 
