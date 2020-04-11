@@ -573,7 +573,10 @@ class ClientsController extends Controller
 
             ClientsTasksFollowers::insert($followers);
             $request["id_task"] = $store["id_clients_tasks"];
-            ClientsTasksComments::create($request->all());
+
+            if($request->comments != "<p><br></p>"){
+                ClientsTasksComments::create($request->all());
+            }
 
 
             $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
@@ -608,20 +611,15 @@ class ClientsController extends Controller
                 ClientsTasksFollowers::insert($followers);
             }
             
-            if(isset($request->comments)){
-                $comments = [];
+            if($request->comments != "<p><br></p>"){
+                $array = [];
+                $array["id_task"]     = $id_task;
+                $array["id_user"] = $request["id_user"];
+                $array["comments"] = $request->comments;
 
-                foreach($request->comments as $key => $value){
-                    $array = [];
-                    $array["id_task"]     = $id_task;
-                    $array["id_user"] = $request["id_user"];
-                    $array["comments"] = $value;
-                    array_push($comments, $array);
-                }
-                ClientsTasksComments::insert($comments);
+                ClientsTasksComments::insert($array);
                 
             }
-            
 
 
             if ($update) {

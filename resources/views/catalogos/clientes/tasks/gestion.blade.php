@@ -50,8 +50,6 @@
         GetNotifications();
 
 
-		$('#summernote').summernote();
-
 
       });
     </script>
@@ -410,7 +408,7 @@
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
-			
+				$('#summernote').summernote("reset");
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
@@ -529,7 +527,7 @@
 					$("#followers-edit").val(followers)
 					$("#followers-edit").trigger("change");
 
-					$('#summernote_edit').summernote();
+					$('#summernote_edit').summernote("reset");
 
 					
 					var url=document.getElementById('ruta').value; 
@@ -555,6 +553,12 @@
 
 					$("#comments_edit").html(html)
 
+
+					SubmitComment(data.id_clients_tasks, "api/comment/task/client", "#comments_edit", "#add-comments", "#summernote_edit")
+
+
+
+
 					cuadros('#cuadro1', '#cuadro4');
 					$("#id_edit").val(data.id_clients_tasks)
 					
@@ -562,33 +566,63 @@
 			}
 
 
-			$("#add-comments").click(function (e) { 
-				
-				var html = ""
 
 
-				html += '<div class="col-md-12" style="margin-bottom: 15px">'
-					html += "<input type='hidden' name='comments[]' value='"+$("#summernote_edit").val()+"'>"
-					html += '<div class="row">'
-						html += '<div class="col-md-2">'
-							//html += "<img class='rounded' src='/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-							
-						html += '</div>'
-						html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
-							html += '<div>'+$("#summernote_edit").val()+'</div>'
+			function SubmitComment(id, api, table, btn, summer){
 
-							html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
+				$(btn).unbind().click(function (e) { 
 
+					var html = ""
+
+					html += '<div class="col-md-12" style="margin-bottom: 15px">'
+						html += '<div class="row">'
+							html += '<div class="col-md-2">'
+							html += '</div>'
+							html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+								html += '<div>'+$(summer).val()+'</div>'
+
+								html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
+
+							html += '</div>'
 						html += '</div>'
 					html += '</div>'
-				html += '</div>'
 
-				$("#comments_edit").append(html)
+					$(table).append(html)
 
-				$('#summernote_edit').summernote('reset');
 
-				
-			});
+					var url=document.getElementById('ruta').value;
+
+					$.ajax({
+						url:''+url+"/"+api,
+						type:'POST',
+						data: {
+							"id_user" : id_user,
+							"token"   : tokens,
+							"id"      : id,
+							"comment" : $(summer).val(),
+							
+						},
+						dataType:'JSON',
+						beforeSend: function(){
+							$(btn).text("espere...").attr("disabled", "disabled")
+						},
+						error: function (data) {
+							$(btn).text("Comentar").removeAttr("disabled")
+						},
+						success: function(data){
+							$(btn).text("Comentar").removeAttr("disabled")
+							$(summer).summernote("reset");
+						}
+					});
+
+
+
+					
+				});
+
+			}
+
+
 					
 		/* ------------------------------------------------------------------------------- */
 			/*
