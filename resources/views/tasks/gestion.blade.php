@@ -298,6 +298,7 @@
 
 
 			function GetComments(comment_content, id_client){
+				$(comment_content).html("Cargando...")
 				var url=document.getElementById('ruta').value;	
 				$.ajax({
 					url:''+url+'/api/tasks/comments/'+id_client,
