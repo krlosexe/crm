@@ -21,4 +21,17 @@ class CommentsController extends Controller
         return response()->json("Ok")->setStatusCode(200);
 
     }
+
+
+    public function get($table, $id){
+        
+        $data = Comments::select('comments.*', 'users.email', 'users.img_profile', "datos_personales.nombres as name_user", "datos_personales.apellido_p as last_name_user")
+                            ->where("id_event", $id)
+                            ->join('users', 'users.id', '=', 'comments.id_user')  
+                            ->join('datos_personales', 'datos_personales.id_usuario', '=', 'comments.id_user')     
+                            ->where("table", $table)
+                            ->get();
+
+        return response()->json($data)->setStatusCode(200);
+    }
 }

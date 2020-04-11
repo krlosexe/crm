@@ -28,7 +28,7 @@
             <input type="hidden" name="_method" value="put">
         
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-5">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
@@ -96,6 +96,23 @@
                             </select>
                         </div>
                     </div>
+
+
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-sm-12 text-center"> 
+                              <label for=""><b>Adjuntar Cotizacion</b></label>
+                              <div>
+                                  <div class="file-loading">
+                                      <input id="file-input-edit" name="file" type="file">
+                                  </div>
+                              </div>
+                              <div class="kv-avatar-hintss">
+                                  <small>Seleccione una foto</small>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
                   </div>
 
 
@@ -107,32 +124,60 @@
               </div>
 
 
-              <div class="col-md-6">
+              <div class="col-md-7">
 
-                  <div class="col-md-12">
-                      <div class="form-group">
-                          <label for=""><b>Obervaciones</b></label>
-                          <textarea name="observaciones" id="observaciones-edit" class="form-control" cols="30" rows="5"></textarea>
-                      </div>
-                  </div>
+                  <br><br>
 
 
 
-                  <div class="col-md-12">
-                    <div class="row">
-                      <div class="col-sm-12 text-center"> 
-                            <label for=""><b>Adjuntar Cotizacion</b></label>
-                            <div>
-                                <div class="file-loading">
-                                    <input id="file-input-edit" name="file" type="file">
-                                </div>
-                            </div>
-                            <div class="kv-avatar-hintss">
-                                <small>Seleccione una foto</small>
+                        <div class="row" id="comments_edit">
+                            <div class="col-md-12">
+                              <div class="row">
+                                  <div class="col-md-2">
+                                    Foto
+                                  </div>
+                                  <div class="col-md-10">
+                                    Text
+                                  </div>
+                              </div>
                             </div>
                         </div>
-                    </div>
-                  </div>
+
+
+
+
+                        <div class="row">
+
+                           <div class="col-md-2"></div>
+                                
+                           <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for=""><b>Comentarios</b></label>
+                                    <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
+                                    <textarea id="summernote_edit" name="comment"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                          <div class="row">
+
+                              <div class="col-md-2">
+                                    
+                              </div>
+
+                              <div class="col-md-10">
+                                <button type="button" id="add-comments"  class="btn btn-primary">
+                                  Comentar
+                                </button>
+                              </div>
+                            
+                          </div>
+
+
+
+                  
 
               </div>
 
