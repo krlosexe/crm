@@ -484,7 +484,6 @@ class ClientsController extends Controller
                 $array["id_user"]    = $request["id_user"];
                 $array["comment"]    = $request->comment;
                 Comments::insert($array);
-
             }
             
 

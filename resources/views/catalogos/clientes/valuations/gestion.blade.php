@@ -384,6 +384,8 @@
 				GetAsesorasValoracion("#id_asesora_valoracion")
 				GetClinic("#clinic")
 				cuadros("#cuadro1", "#cuadro2");
+
+				$('#summernote').summernote("reset");
 			}
 
 
@@ -650,7 +652,7 @@
 
 
 
-					$('#summernote_edit').summernote();
+					$('#summernote_edit').summernote("reset");
 					var url=document.getElementById('ruta').value; 
 					var html = "";
 
@@ -669,7 +671,9 @@
 					}
 
 
-					
+					SubmitComment(data.id_valuations, "api/comments/valuations", "#comments_edit", "#add-comments", "#summernote_edit")
+
+
 					$.map(data.comments, function (item, key) {
 						html += '<div class="col-md-12" style="margin-bottom: 15px">'
 							html += '<div class="row">'
@@ -688,12 +692,8 @@
 						html += '</div>'
 						
 					});
-
-
-
-
-
 					$("#comments_edit").html(html)
+					
 
 					$(".photo_valoration").fileinput('destroy');
 					$("#photos_edit").html("")
@@ -764,35 +764,60 @@
 
 
 
+			function SubmitComment(id, api, table, btn, summer){
 
-			$("#add-comments").click(function (e) { 
-				
-				var html = ""
+				$(btn).unbind().click(function (e) { 
 
+					var html = ""
 
-				html += '<div class="col-md-12" style="margin-bottom: 15px">'
-					html += "<input type='hidden' name='comments[]' value='"+$("#summernote_edit").val()+"'>"
-					html += '<div class="row">'
-						html += '<div class="col-md-2">'
-							//html += "<img class='rounded' src='/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-							
-						html += '</div>'
-						html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
-							html += '<div>'+$("#summernote_edit").val()+'</div>'
+					html += '<div class="col-md-12" style="margin-bottom: 15px">'
+						html += '<div class="row">'
+							html += '<div class="col-md-2">'
+							html += '</div>'
+							html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+								html += '<div>'+$(summer).val()+'</div>'
 
-							html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
+								html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
 
+							html += '</div>'
 						html += '</div>'
 					html += '</div>'
-				html += '</div>'
 
-				$("#comments_edit").append(html)
+					$(table).append(html)
 
-				$('#summernote_edit').summernote('reset');
 
-				
-			});	
+					var url=document.getElementById('ruta').value;
 
+					$.ajax({
+						url:''+url+"/"+api,
+						type:'POST',
+						data: {
+							"id_user" : id_user,
+							"token"   : tokens,
+							"id"      : id,
+							"comment" : $(summer).val(),
+							
+						},
+						dataType:'JSON',
+						beforeSend: function(){
+							$(btn).text("espere...").attr("disabled", "disabled")
+						},
+						error: function (data) {
+							$(btn).text("Comentar").removeAttr("disabled")
+						},
+						success: function(data){
+							$(btn).text("Comentar").removeAttr("disabled")
+							$(summer).summernote("reset");
+						}
+					});
+
+
+
+					
+				});
+
+			}
+	
 
 
 

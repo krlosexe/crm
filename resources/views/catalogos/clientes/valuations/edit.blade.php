@@ -182,7 +182,7 @@
                                 <div class="form-group">
                                     <label for=""><b>Comentarios</b></label>
                                     <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
-                                    <textarea id="summernote_edit"></textarea>
+                                    <textarea id="summernote_edit" name="comment"></textarea>
                                 </div>
                             </div>
 

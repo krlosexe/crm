@@ -93,8 +93,14 @@ class ValuationsController extends Controller
 
             $request["table"]    = "valuations";
             $request["id_event"] = $store["id_valuations"];
-            Comments::create($request->all());
 
+            
+            if($request->comment != "<p><br></p>"){
+                Comments::create($request->all());
+            }
+
+
+            
 
             $auditoria              = new Auditoria;
             $auditoria->tabla       = "valuations";
@@ -210,21 +216,17 @@ class ValuationsController extends Controller
             $queries = Valuations::find($valuations)->update($request->all());
 
 
+            if($request->comment != "<p><br></p>"){
 
-            if(isset($request->comments)){
-                $comments = [];
-
-                foreach($request->comments as $key => $value){
-                    $array = [];
-                    $array["id_event"]   = $valuations;
-                    $array["table"]      = "valuations";
-                    $array["id_user"]    = $request["id_user"];
-                    $array["comment"]   = $value;
-                    array_push($comments, $array);
-                }
-                Comments::insert($comments);
-                
+                $array = [];
+                $array["id_event"]   = $valuations;
+                $array["table"]      = "valuations";
+                $array["id_user"]    = $request["id_user"];
+                $array["comment"]    = $request->comment;
+                Comments::insert($array);
             }
+
+
 
 
 
