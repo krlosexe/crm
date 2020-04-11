@@ -839,7 +839,8 @@
 						},
 						success: function(data){
 							$("#add-comments").text("Comentar").removeAttr("disabled")
-
+							
+							$('#summernote').summernote("reset");
 							$("#calendar").html("");
 							var asesoras = []
 							initCalendar(asesoras)
