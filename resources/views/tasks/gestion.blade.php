@@ -295,6 +295,53 @@
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
+
+
+			function GetComments(comment_content, id_client){
+				var url=document.getElementById('ruta').value;	
+				$.ajax({
+					url:''+url+'/api/tasks/comments/'+id_client,
+					type:'GET',
+					dataType:'JSON',
+					
+					beforeSend: function(){
+
+					},
+					error: function (data) {
+					},
+					success: function(result){
+						
+						var url=document.getElementById('ruta').value; 
+						var html = "";
+
+						$.map(result, function (item, key) {
+							html += '<div class="col-md-12" style="margin-bottom: 15px">'
+								html += '<div class="row">'
+									html += '<div class="col-md-2">'
+										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+										
+									html += '</div>'
+									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+										html += '<div>'+item.comments+'</div>'
+
+										html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+									html += '</div>'
+								html += '</div>'
+							html += '</div>'
+							
+						});
+
+						
+						$(comment_content).html(html)
+					}
+				});
+			}
+
+
+
+
 			/* ------------------------------------------------------------------------------- */
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
@@ -329,29 +376,9 @@
 					$("#followers-view").trigger("change");
 
 
-
-					var url=document.getElementById('ruta').value; 
-					var html = "";
-					$.map(data.comments, function (item, key) {
-						html += '<div class="col-md-12" style="margin-bottom: 15px">'
-							html += '<div class="row">'
-								html += '<div class="col-md-2">'
-									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-									
-								html += '</div>'
-								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
-									html += '<div>'+item.comments+'</div>'
-
-									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+			//	GetComments("#comments", data.id_client)
 
 
-								html += '</div>'
-							html += '</div>'
-						html += '</div>'
-						
-					});
-
-					$("#comments").html(html)
 
 
 
@@ -397,30 +424,8 @@
 					
 					$('#summernote_edit').summernote("reset");
 					$('#summernote_edit').summernote();
-					var url=document.getElementById('ruta').value; 
-					var html = "";
-					$.map(data.comments, function (item, key) {
-						html += '<div class="col-md-12" style="margin-bottom: 15px">'
-							html += '<div class="row">'
-								html += '<div class="col-md-2">'
-									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-									
-								html += '</div>'
-								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
-									html += '<div>'+item.comments+'</div>'
-
-									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
-
-
-								html += '</div>'
-							html += '</div>'
-						html += '</div>'
-						
-					});
-
-					$("#comments_edit").html(html)
-
-
+					
+					GetComments("#comments_edit", data.id_clients_tasks)
 
 					$("#id_edit").val(data.id_clients_tasks)
 					cuadros('#cuadro1', '#cuadro4');

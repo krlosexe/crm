@@ -698,7 +698,7 @@ class ClientsController extends Controller
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
 
                                     ->with("followers")
-                                    ->with("comments")
+                                    //->with("comments")
 
 
                                     ->where(function ($query) use ($rol, $id_user) {
@@ -726,6 +726,22 @@ class ClientsController extends Controller
         }
     } 
 
+
+
+
+    public function GetCommentsTasks($id){
+
+        $data = DB::table("clients_tasks_comments")->select('clients_tasks_comments.*', 'users.email', 'users.img_profile', "datos_personales.nombres as name_user", 
+                                                            "datos_personales.apellido_p as last_name_user")
+                  
+                    ->join('users', 'users.id', '=', 'clients_tasks_comments.id_user')  
+                    ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clients_tasks_comments.id_user')     
+                    ->where("id_task", $id)
+                    ->get();
+
+
+        return response()->json($data)->setStatusCode(200);
+    }
 
 
     public function TasksStatus($id_cliente, $status, Request $request)

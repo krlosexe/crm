@@ -165,4 +165,6 @@ Route::post('clients/update/hc/{id_cliente}', 'ClientsController@UpdateHc');
 Route::post('comment/task/client', 'ClientsController@AddCommentTask');
 
 
+Route::get('tasks/comments/{id}', 'ClientsController@GetCommentsTasks');
+
 
