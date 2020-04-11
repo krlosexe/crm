@@ -48,7 +48,7 @@
 
 
               <div class="row">
-                <div class="col-md-12">
+                  <div class="col-md-12">
                     <div class="form-group">
                           <label for=""><b>Doctor</b></label>
                           <input type="text" name="surgeon" id="surgeon-store" class="form-control select2">

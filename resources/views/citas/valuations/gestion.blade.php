@@ -76,6 +76,7 @@
 			                  <thead>
 			                    <tr>
 								  <th>Acciones</th>
+								  <th>Code</th>
 								  <th>Nombres</th>
 								  <th>Fecha</th>
 								  <th>Hora Desde</th>
@@ -195,6 +196,7 @@
 								return botones;
 							}
 						},
+						{"data": "code"},
 						{"data":"nombres", 
 							render : function(data, type, row) {
 								return data;

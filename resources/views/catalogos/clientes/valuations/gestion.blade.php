@@ -596,6 +596,10 @@
 					var data = table.row( $(this).parents("tr") ).data();
 					GetAsesorasValoracion("#id_asesora_valoracion_edit")
 					GetClinic("#clinic_edit")
+
+					$("#surgeon-edit").val(data.surgeon)
+
+					
 					$("#id_asesora_valoracion_edit").val(data.id_asesora)
 					$("#paciente-edit").val(data.id_cliente)
 					$("#fecha-edit").val(data.fecha)
