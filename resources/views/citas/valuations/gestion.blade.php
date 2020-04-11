@@ -256,8 +256,52 @@
 				 $('#summernote').summernote("reset");
 
 				getPacientes("#paciente-store")
+
+				GetClinic2("#clinic")
+
+
 				cuadros("#cuadro1", "#cuadro2");
 			}
+
+
+
+			function GetClinic2(select, select_default = false){
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/clinic',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+					},
+					dataType:'JSON',
+					beforeSend: function(){
+					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+					},
+					error: function (data) {
+					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+					},
+					success: function(data){
+					$(select+" option").remove();
+					$(select).append($('<option>',
+					{
+						value: "",
+						text : "Seleccione"
+					}));
+					$.each(data, function(i, item){
+						if (item.status == 1) {
+						$(select).append($('<option>',
+						{
+							value: item.id_clinic,
+							text : item.nombre,
+							selected: select_default == item.id_clinic ? true : false
+						}));
+						}
+					});
+
+					}
+				});
+				}
 
 			/* ------------------------------------------------------------------------------- */
 			/* 
@@ -269,6 +313,9 @@
 					var data = table.row( $(this).parents("tr") ).data();
 
 					getPacientes("#paciente-view", data.id_cliente)
+
+				
+
 
 					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
@@ -404,7 +451,10 @@
 
 					//getPacientes("#paciente-edit", data.id_cliente)
 
+					GetClinic2("#clinic-edit", data.id_clinic)
+
 					$("#paciente-edit").val(data.id_cliente)
+					$("#surgeon-edit").val(data.surgeon)
 					$("#name_client").val(data.nombres)
 					$("#fecha-edit").val(data.fecha)
 					$("#time-edit").val(data.time)
