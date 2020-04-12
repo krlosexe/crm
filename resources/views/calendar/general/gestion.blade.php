@@ -773,9 +773,8 @@
 
 								$("#comments2-input").css("display", "block")
 								$("#comments3-input").css("display", "block")
-								$("#ccomments-input").css("display", "block")
-								
 								$("#comments-input").css("display", "block")
+								$("#add-comments").css("display", "block")
 								
 								$('#summernote').summernote("reset");
 
@@ -789,10 +788,9 @@
 									$(".input-disabled").attr("disabled", "disabled")
 								}
 
-
-
-
 								GetComments("/api/comments/surgerie","#comments", calEvent.event.extendedProps.id_surgeries, calEvent.event.extendedProps.observaciones)
+
+								SubmitComment(calEvent.event.extendedProps.id_surgeries, "api/comments/surgerie", "surgerie", "#add-comments")
 							}
 
 
