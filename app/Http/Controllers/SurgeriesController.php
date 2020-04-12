@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Surgeries;
 use App\Auditoria;
 use App\SurgeriesPayments;
+use App\Comments;
 use Illuminate\Http\Request;
 
 class SurgeriesController extends Controller
@@ -113,6 +114,16 @@ class SurgeriesController extends Controller
             $request["attempt"] == 1 ? $request["attempt"] = 1 : $request["attempt"] = 0;
             $store = Surgeries::create($request->all());
 
+
+
+            $request["table"]    = "surgerie";
+            $request["id_event"] = $store["id_surgeries"];
+            
+            if($request->comment != "<p><br></p>"){
+                Comments::create($request->all());
+            }
+
+
             $auditoria              = new Auditoria;
             $auditoria->tabla       = "surgeries";
             $auditoria->cod_reg     = $store["id_surgeries"];
@@ -218,6 +229,19 @@ class SurgeriesController extends Controller
             
 
             $update = Surgeries::find($surgeries)->update($request->all());
+
+
+            if($request->comment != "<p><br></p>"){
+
+                $array = [];
+                $array["id_event"]   = $surgeries;
+                $array["table"]      = "surgerie";
+                $array["id_user"]    = $request["id_user"];
+                $array["comment"]    = $request->comment;
+                Comments::insert($array);
+            }
+
+
 
             if ($update) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    

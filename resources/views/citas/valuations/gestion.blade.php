@@ -651,7 +651,6 @@
 
 					SubmitComment(data.id_valuations, "api/comments/valuations", "#comments_edit", "#add-comments", "#summernote_edit")
 
-
 					GetComments("#comments_edit", data.id_valuations)
 
 

@@ -146,8 +146,6 @@
 
                   <br><br>
 
-
-
                         <div class="row" id="comments_edit">
                             <div class="col-md-12">
                               <div class="row">
