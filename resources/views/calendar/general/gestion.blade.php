@@ -783,8 +783,8 @@
 								$("#name_paciente").attr("onclick")
 
 								$("#name_paciente").unbind().click(function (e) { 
-									$("#slide").toggleClass("show")
-									$(".side-panel-container").toggleClass("slide-show")
+									//$("#slide").toggleClass("show")
+								//	$(".side-panel-container").toggleClass("slide-show")
 									
 								});
 								var html_comments = "";
