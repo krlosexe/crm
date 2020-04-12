@@ -590,6 +590,7 @@
 							$("#comments2-input").css("display", "none")
 							$("#comments3-input").css("display", "none")
 							$("#add-comments").css("display", "none")
+							$("#observations-input").css("display", "none")
 								
 
 							var img = "<img class='rounded' style='height: 8rem; width: 8rem; margin: 1%; border-radius: 50%!important;' src='img/usuarios/profile/"+calEvent.event.extendedProps.img_profile+"'>"
@@ -769,6 +770,16 @@
 
 
 							if(calEvent.event.extendedProps.surgeries == true){
+
+								$("#comments2-input").css("display", "block")
+								$("#comments3-input").css("display", "block")
+								$("#ccomments-input").css("display", "block")
+								
+								$("#comments-input").css("display", "block")
+								
+								$('#summernote').summernote("reset");
+
+
 								$("#id_edit").val(calEvent.event.extendedProps.id_surgeries)
 								enviarFormularioPutEvent("#update_event", 'api/surgeries', '#cuadro4', false, "#avatar-edit");
 
@@ -777,6 +788,11 @@
 								}else{
 									$(".input-disabled").attr("disabled", "disabled")
 								}
+
+
+
+
+								GetComments("/api/comments/surgerie","#comments", calEvent.event.extendedProps.id_surgeries, calEvent.event.extendedProps.observaciones)
 							}
 
 
@@ -784,7 +800,7 @@
 
 
 							$("#list_followers").html(html)
-
+							
 							$("#exampleModalCenter").modal('show');
 						}
 
@@ -854,6 +870,76 @@
 				});
 				
 			}
+
+
+
+
+
+
+
+
+			function GetComments(api, comment_content, id, observaciones){
+				$(comment_content).html("Cargando...")
+				var url=document.getElementById('ruta').value;	
+				$.ajax({
+					url:''+url+'/'+api+'/'+id,
+					type:'GET',
+					dataType:'JSON',
+					
+					beforeSend: function(){
+
+					},
+					error: function (data) {
+					},
+					success: function(result){
+						
+						var url=document.getElementById('ruta').value; 
+						var html = "";
+
+
+						if(observaciones != null){
+							html += '<div class="col-md-12" style="margin-bottom: 15px">'
+								html += '<div class="row">'
+									html += '<div class="col-md-2">'
+										
+									html += '</div>'
+									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+										html += '<div>'+observaciones+'</div>'
+									html += '</div>'
+								html += '</div>'
+							html += '</div>'
+						}
+						$(comment_content).html(html)
+
+						
+						$.map(result, function (item, key) {
+							html += '<div class="col-md-12" style="margin-bottom: 15px">'
+								html += '<div class="row">'
+									html += '<div class="col-md-2">'
+										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+										
+									html += '</div>'
+									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+										html += '<div>'+item.comment+'</div>'
+
+										html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+									html += '</div>'
+								html += '</div>'
+							html += '</div>'
+							
+						});
+
+						
+						$(comment_content).html(html)
+					}
+				});
+			}
+
+
+
+
 			
 	
 			function ListTasksToday(list){
