@@ -95,6 +95,141 @@
 			}
 
 
+
+			#slide{
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 3000;
+				display: none;
+				/* background-color: rgba(0,0,0,.4); */
+				transform: translateZ(0);
+				-webkit-transform: translateZ(0);
+				-moz-transform: translateZ(0);
+				-ms-transform: translateZ(0);
+				-o-transform: translateZ(0);
+				overflow: hidden;
+				 -webkit-transition: 3s;
+					-moz-transition: 3s;
+					-ms-transition: 3s;
+					-o-transition: 3s;
+					transition: 3s;
+			}
+
+			#slide.show{
+				display: block;
+    			pointer-events: auto;
+				z-index: 3000;
+				left: 0px;
+				top: 0px;
+				right: 0px;
+				height: 912px;
+				background-color: rgba(0, 0, 0, 0.4);
+				-webkit-transition: 3s;
+				-moz-transition: 3s;
+				-ms-transition: 3s;
+				-o-transition: 3s;
+				transition: 3s;
+				
+			}
+
+
+			.side-panel-container {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 3001;
+				display: block;
+				width: calc(100% - 300px);
+				background: #ebf1f4;
+				transform: translateX(100%);
+				 -webkit-transition: 3s;
+					-moz-transition: 3s;
+					-ms-transition: 3s;
+					-o-transition: 3s;
+					transition: 3s;
+
+			}
+
+			.slide-show{
+				z-index: 3001;
+				width: calc(100% - 65px);
+				height: 912px;
+				max-width: 1200px;
+				-webkit-transform: translateX(0%);
+				-moz-transform: translateX(0%);
+				-ms-transform: translateX(0%);
+				-o-transform: translateX(0%);
+				transform: translateX(0%);
+			
+			}
+
+
+			.side-panel-label {
+				display: flex;
+				position: absolute;
+				left: 0;
+				top: 21px;
+				min-width: 30px;
+				height: 38px;
+				padding-right: 5px;
+				background: rgba(47,198,246,.95);
+				border-top-left-radius: 19px;
+				border-bottom-left-radius: 19px;
+				white-space: nowrap;
+				overflow: hidden;
+				transition: top .3s;
+				box-shadow: inset -6px 0 8px -10px rgba(0,0,0,0.95);
+				z-index: 1;
+				transform: translateX(-100%);
+				cursor: pointer;
+			}
+
+			.side-panel-close-btn-inner:before {
+				-webkit-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+				-moz-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+				-ms-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+				-o-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+				transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+			}
+
+
+			.side-panel-close-btn-inner:after, .side-panel-close-btn-inner:before {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 14px;
+				height: 2px;
+				background-color: #fff;
+				content: "";
+			}
+
+
+			.side-panel-close-btn-inner:after {
+				-webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+				-moz-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+				-ms-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+				-o-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+				transform: translateX(-50%) translateY(-50%) rotate(45deg);
+			}
+
+
+			.side-panel-close-btn-inner:after, .side-panel-close-btn-inner:before {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 14px;
+				height: 2px;
+				background-color: #fff;
+				content: "";
+			}
+
+
+
+
 		</style>
 	   
 	   
@@ -247,7 +382,8 @@
 												<div class="col-md-12">
 													<div class="form-group">
 														<label for=""><b>Paciente</b></label>
-														<input type="text" name="paciente" id="paciente-view" class="form-control"  >
+														<a href="javascript:void(0)" id="name_paciente"></a>
+														<!--<input type="text" name="paciente" id="paciente-view" class="form-control"  >-->
 													</div>
 												</div>
 											</div>
@@ -390,6 +526,27 @@
 		      </div>
 		      <!-- End of Main Content -->
 
+
+
+
+				<div id="slide">
+					
+					<div class="side-panel-container">
+
+
+						<div id="content">
+							<h3 style="text-align: center;margin: 22% 0;">AQUI TODOS LOS DATOS DEL PACIENTE</h3>
+						</div>
+
+						<div class="side-panel-label" style="max-width: 40px; top: 21px;" onclick="closeSlide()">
+							<div class="side-panel-close-btn" title="Cerrar">
+								<div class="side-panel-close-btn-inner"></div>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
 		      <!-- Footer -->
 		      <footer class="sticky-footer bg-white">
 		        <div class="container my-auto">
@@ -449,6 +606,12 @@
 				asesoras = $(this).val()
 				initCalendar(asesoras)
 			});
+
+
+			function closeSlide(){
+				$("#slide").removeClass("show")
+				$(".side-panel-container").removeClass("slide-show")
+			}
 			
 			function initCalendar(asesoras) {
 
@@ -615,8 +778,15 @@
 								$("#add-comments").css("display", "block")
 								$('#summernote').summernote("reset");
 								
-								$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
+							//	$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
+								$("#name_paciente").text(calEvent.event.extendedProps.name_client)
+								$("#name_paciente").attr("onclick")
 
+								$("#name_paciente").unbind().click(function (e) { 
+									$("#slide").toggleClass("show")
+									$(".side-panel-container").toggleClass("slide-show")
+									
+								});
 								var html_comments = "";
 
 
@@ -678,8 +848,8 @@
 								$("#comments2-input").css("display", "block")
 								$("#add-comments").css("display", "block")
 								$('#summernote').summernote("reset");
-								$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
-
+							//	$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
+								$("#name_paciente").text(calEvent.event.extendedProps.name_client)
 
 								GetCommentsTask("/api/tasks/comments","#comments", calEvent.event.extendedProps.id_clients_tasks)
 
