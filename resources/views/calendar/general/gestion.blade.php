@@ -714,26 +714,11 @@
 								$('#summernote').summernote("reset");
 								$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
 
-								var html_comments = "";
-								$.map(calEvent.event.extendedProps.comments, function (item, key) {
-									html_comments += '<div class="col-md-12" style="margin-bottom: 15px">'
-										html_comments += '<div class="row">'
-											html_comments += '<div class="col-md-2">'
-												html_comments += "<img class='rounded' src='img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-												
-											html_comments += '</div>'
-											html_comments += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;font-size: 11px">'
-												html_comments += '<div>'+item.comments+'</div>'
 
-												html_comments += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+								GetCommentsTask("/api/tasks/comments","#comments", calEvent.event.extendedProps.id_clients_tasks)
 
-											html_comments += '</div>'
-										html_comments += '</div>'
-									html_comments += '</div>'
-									
-								});
 
-								$("#comments").html(html_comments)
+								
 								$("#comments3-input").css("display", "block")
 
 								$("#id_edit").val(calEvent.event.extendedProps.id_clients_tasks)
@@ -939,6 +924,53 @@
 
 
 			
+
+
+
+			function GetCommentsTask(api, comment_content, id){
+				$(comment_content).html("Cargando...")
+				var url=document.getElementById('ruta').value;	
+				$.ajax({
+					url:''+url+'/'+api+'/'+id,
+					type:'GET',
+					dataType:'JSON',
+					
+					beforeSend: function(){
+
+					},
+					error: function (data) {
+					},
+					success: function(result){
+						
+						var url=document.getElementById('ruta').value; 
+						var html = "";
+
+						$.map(result, function (item, key) {
+							html += '<div class="col-md-12" style="margin-bottom: 15px">'
+								html += '<div class="row">'
+									html += '<div class="col-md-2">'
+										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+										
+									html += '</div>'
+									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+										html += '<div>'+item.comments+'</div>'
+
+										html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+									html += '</div>'
+								html += '</div>'
+							html += '</div>'
+							
+						});
+
+						
+						$(comment_content).html(html)
+					}
+				});
+			}
+
+
 	
 			function ListTasksToday(list){
 
