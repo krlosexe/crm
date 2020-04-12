@@ -25,7 +25,7 @@
           <div class="tab-pane fade show active tab_content0-0" id="init" role="tabpanel" aria-labelledby="data_general">
 
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-5">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
@@ -113,33 +113,19 @@
 
 
 
-                  
-              </div>
-
-
-              <div class="col-md-6">
-
-                  <div class="col-md-12">
-                    <div class="form-group">
-                          <label for=""><b>Clinica</b></label>
-                          <select name="clinic" id="clinic-edit" class="form-control select2" required>
-                              <option value="">Seleccione</option>
-                          </select>
-                      </div>
-                  </div>
-
-
-                  <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-12">
                       <div class="form-group">
-                          <label for=""><b>Obervaciones</b></label>
-                          <textarea name="observaciones" id="observaciones-edit" class="form-control" cols="30" rows="5"></textarea>
-                      </div>
+                            <label for=""><b>Clinica</b></label>
+                            <select name="clinic" id="clinic-edit" class="form-control select2" required>
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
                   </div>
 
-              </div>
 
-
-              <div class="col-md-6">
+                 
                   <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -152,7 +138,60 @@
                         </div>
                     </div>
                   </div>
+
+                  
               </div>
+
+
+              <div class="col-md-7">
+  
+                  <br><br>
+
+                  <div class="row" id="comments_edit">
+                      <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">
+                              Foto
+                            </div>
+                            <div class="col-md-10">
+                              Text
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+
+
+                  <div class="row">
+
+                      <div class="col-md-2"></div>
+                          
+                      <div class="col-md-10">
+                          <div class="form-group">
+                              <label for=""><b>Comentarios</b></label>
+                              <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
+                              <textarea id="summernote_edit" name="comment"></textarea>
+                          </div>
+                      </div>
+
+                  </div>
+
+
+                  <div class="row">
+
+                      <div class="col-md-2">
+                            
+                      </div>
+
+                      <div class="col-md-10">
+                        <button type="button" id="add-comments"  class="btn btn-primary">
+                          Comentar
+                        </button>
+                      </div>
+                    
+                  </div>
+
+              </div>
+
 
             </div>
           </div>
