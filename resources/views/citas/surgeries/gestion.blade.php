@@ -311,7 +311,7 @@
 					ShowPayments("#tableRegistrar",data.payments, "edit")
 
 
-					GetComments("#comments_edit", data.id_surgeries)
+					GetComments("#comments_edit", data.id_surgeries, data.observaciones)
 
 					$('#summernote_edit').summernote("reset");
 
@@ -381,7 +381,7 @@
 			}
 
 
-			function GetComments(comment_content, id){
+			function GetComments(comment_content, id, observaciones){
 				$(comment_content).html("Cargando...")
 				var url=document.getElementById('ruta').value;	
 				$.ajax({
@@ -399,6 +399,22 @@
 						var url=document.getElementById('ruta').value; 
 						var html = "";
 
+
+						if(observaciones != null){
+							html += '<div class="col-md-12" style="margin-bottom: 15px">'
+								html += '<div class="row">'
+									html += '<div class="col-md-2">'
+										
+									html += '</div>'
+									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+										html += '<div>'+observaciones+'</div>'
+									html += '</div>'
+								html += '</div>'
+							html += '</div>'
+						}
+						$(comment_content).html(html)
+
+						
 						$.map(result, function (item, key) {
 							html += '<div class="col-md-12" style="margin-bottom: 15px">'
 								html += '<div class="row">'
