@@ -658,6 +658,8 @@
 
 
 
+								SubmitComment(calEvent.event.extendedProps.id_valuations, "api/comments/valuations", "surgerie", "#add-comments")
+
 
 								enviarFormularioPutEvent("#update_event", 'api/valuations', '#cuadro4', false, "#avatar-edit");
 								$("#id_edit").val(calEvent.event.extendedProps.id_valuations)
@@ -776,7 +778,7 @@
 
 								GetComments("/api/comments/surgerie","#comments", calEvent.event.extendedProps.id_surgeries, calEvent.event.extendedProps.observaciones)
 
-									
+								SubmitComment(calEvent.event.extendedProps.id_surgeries, "api/comments/surgerie", "surgerie", "#add-comments")
 							}
 
 
