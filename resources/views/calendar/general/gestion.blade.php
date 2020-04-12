@@ -620,44 +620,7 @@
 								var html_comments = "";
 
 
-								if(calEvent.event.extendedProps.observaciones != null){
-									html_comments += '<div class="col-md-12" style="margin-bottom: 15px">'
-										html_comments += '<div class="row">'
-											html_comments += '<div class="col-md-2">'
-												
-											html_comments += '</div>'
-											html_comments += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
-												html_comments += '<div>'+calEvent.event.extendedProps.observaciones+'</div>'
-											html_comments += '</div>'
-										html_comments += '</div>'
-									html_comments += '</div>'
-								}
-
-					
-								$.map(calEvent.event.extendedProps.comments, function (item, key) {
-									html_comments += '<div class="col-md-12" style="margin-bottom: 15px">'
-										html_comments += '<div class="row">'
-											html_comments += '<div class="col-md-2">'
-												html_comments += "<img class='rounded' src='img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-												
-											html_comments += '</div>'
-											html_comments += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;font-size: 11px">'
-												html_comments += '<div>'+item.comment+'</div>'
-
-												html_comments += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
-
-
-											html_comments += '</div>'
-										html_comments += '</div>'
-									html_comments += '</div>'
-									
-								});
-
-								$("#comments").html(html_comments)
-
-
-
-
+								GetComments("/api/comments/valuations","#comments", calEvent.event.extendedProps.id_valuations, calEvent.event.extendedProps.observaciones)
 								SubmitComment(calEvent.event.extendedProps.id_valuations, "api/comments/valuations", "surgerie", "#add-comments")
 
 
