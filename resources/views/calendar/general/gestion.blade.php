@@ -612,6 +612,7 @@
 								$("#paciente-input").css("display", "block")
 								$("#comments2-input").css("display", "block")
 								$("#comments3-input").css("display", "block")
+								$("#add-comments").css("display", "block")
 								$('#summernote').summernote("reset");
 								
 								$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
@@ -775,7 +776,7 @@
 
 								GetComments("/api/comments/surgerie","#comments", calEvent.event.extendedProps.id_surgeries, calEvent.event.extendedProps.observaciones)
 
-								SubmitComment(calEvent.event.extendedProps.id_surgeries, "api/comments/surgerie", "surgerie", "#add-comments")
+									
 							}
 
 

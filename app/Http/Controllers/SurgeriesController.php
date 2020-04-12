@@ -231,15 +231,18 @@ class SurgeriesController extends Controller
             $update = Surgeries::find($surgeries)->update($request->all());
 
 
-            if($request->comment != "<p><br></p>"){
+            if(isset($request->comment)){
+                if($request->comment != "<p><br></p>"){
 
-                $array = [];
-                $array["id_event"]   = $surgeries;
-                $array["table"]      = "surgerie";
-                $array["id_user"]    = $request["id_user"];
-                $array["comment"]    = $request->comment;
-                Comments::insert($array);
+                    $array = [];
+                    $array["id_event"]   = $surgeries;
+                    $array["table"]      = "surgerie";
+                    $array["id_user"]    = $request["id_user"];
+                    $array["comment"]    = $request->comment;
+                    Comments::insert($array);
+                }
             }
+            
 
 
 

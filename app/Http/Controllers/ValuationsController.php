@@ -219,15 +219,18 @@ class ValuationsController extends Controller
             $queries = Valuations::find($valuations)->update($request->all());
 
 
-            if($request->comment != "<p><br></p>"){
+            if(isset($request->comment)){
+                if($request->comment != "<p><br></p>"){
 
-                $array = [];
-                $array["id_event"]   = $valuations;
-                $array["table"]      = "valuations";
-                $array["id_user"]    = $request["id_user"];
-                $array["comment"]    = $request->comment;
-                Comments::insert($array);
+                    $array = [];
+                    $array["id_event"]   = $valuations;
+                    $array["table"]      = "valuations";
+                    $array["id_user"]    = $request["id_user"];
+                    $array["comment"]    = $request->comment;
+                    Comments::insert($array);
+                }
             }
+            
 
 
 
