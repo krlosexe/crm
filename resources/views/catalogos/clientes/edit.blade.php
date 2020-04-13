@@ -77,6 +77,7 @@
                                         <option value="Valorada">Valorada</option>
                                         <option value="Asesorado por FB esperando contacto Telefonico">Asesorado por FB esperando contacto Telefonico</option>
                                         <option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
+                                        <option value="Demandada">Demandada</option>
                                     </select>
                                 </div>
                             </div>
