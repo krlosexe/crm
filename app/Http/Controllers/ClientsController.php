@@ -71,6 +71,7 @@ class ClientsController extends Controller
               $date_finish = $request["date_finish"];
             }
 
+            $state = $request["state"];
 
 
          
@@ -108,6 +109,13 @@ class ClientsController extends Controller
                                         $query->orWhere("clientes.origen", 'like', '%'.$search.'%');
                                     }
 
+                                }) 
+
+
+                                ->where(function ($query) use ($state) {
+                                    if($state != "0"){
+                                        $query->where("clientes.state", $state);
+                                    }
                                 }) 
 
                                 ->where(function ($query) use ($business_line) {
@@ -161,6 +169,11 @@ class ClientsController extends Controller
                                         $query->where("auditoria.fec_update", "<=", $date_finish." 23:59:59");
                                     }
                                 }) 
+
+
+                               
+
+
 
                                
                                 ->with("logs")
@@ -782,7 +795,7 @@ class ClientsController extends Controller
     }
 
 
-    public function Excel($linea_negocio, $adviser, $origen, $date_init, $date_finish){
+    public function Excel($linea_negocio, $adviser, $origen, $date_init, $date_finish, $state){
 
 
         $xls = new ClientsExport;
@@ -792,6 +805,7 @@ class ClientsController extends Controller
         $xls->origen        = $origen;
         $xls->date_init     = $date_init;
         $xls->date_finish   = $date_finish;
+        $xls->state         = $state;
 
         
         return Excel::download($xls, 'ClientExport.xlsx');

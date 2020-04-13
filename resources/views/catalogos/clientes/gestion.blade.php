@@ -113,6 +113,33 @@
 
 
 
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Estado</b></label>
+										<select name="" id="state-filter" class="form-control select2 disabled">
+											<option value="0">Seleccione</option>
+											<option value="No Contactada">No Contactada</option>
+											<option value="Agendada">Agendada</option>
+											<option value="Programada">Programada</option>
+											<option value="Descartada">Descartada</option>
+											<option value="Asesorada No Agendada"> Asesorada No Agendada</option>
+											<option value="Llamada no Asesorada">Llamada no Asesorada</option>
+											<option value="Aprobada">Aprobada</option>
+											<option value="Operada">Operada</option>
+											<option value="Valorada">Valorada</option>
+											<option value="Asesorado por FB esperando contacto Telefonico">Asesorado por FB esperando contacto Telefonico</option>
+											<option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
+											<option value="Demandada">Demandada</option>
+										</select>
+									</div>
+								</div>
+
+
+
+
+
+
+
 							</div>
 
 							<div class="row">
@@ -289,7 +316,7 @@
 
 
 
-			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish").change(function (e) { 
+			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter").change(function (e) { 
 
 				list("", 1)
 
@@ -343,7 +370,8 @@
 						"origen"        : $("#origen-filter").val(),
 						"search"        : search,
 						"date_init"     : $("#date_init").val(),
-						"date_finish"   : $("#date_finish").val()
+						"date_finish"   : $("#date_finish").val(),
+						"state"         : $("#state-filter").val()
 					},
 					dataType:'JSON',
 					
@@ -497,7 +525,7 @@
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$('.dt-buttons').append(a);
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'/'+$("#state-filter").val()+'" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
 				$("#xls").click(function (e) { 
