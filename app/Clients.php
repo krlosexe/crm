@@ -8,7 +8,7 @@ class Clients extends Model
 {   
 
     protected $fillable = [
-        'nombres', 'apellidos', 'identificacion', 'telefono', 'email', 'direccion','facebook','instagram','twitter','youtube',
+        'nombres', 'apellidos', 'identificacion', 'telefono', 'email', 'direccion','facebook','instagram','twitter','youtube', 'photos_google',
         'fecha_nacimiento', 'identificacion_verify', 'city', 'clinic', 'id_line', 
         'id_user_asesora', 'id_asesora_valoracion', 'state', 'origen', 'forma_pago', 'pauta', 'code_client',  'prp', 'to_db'
     ];

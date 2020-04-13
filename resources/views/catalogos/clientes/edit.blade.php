@@ -280,6 +280,17 @@
 
 
                                 <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label for=""><b>Link Fotos de Google</b></label>
+                                        <input type="text" name="photos_google" class="form-control form-control-user" id="photos_google_edit">
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for=""><b>PRP</b></label>
                                         <select name="prp" id="prp_edit" class="form-control select2 select2-hidden-accessible">

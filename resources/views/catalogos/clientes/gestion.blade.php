@@ -1072,6 +1072,9 @@
 					$("#twitter_edit").val(data.twitter)
 					$("#youtube_edit").val(data.youtube)
 
+					$("#photos_google_edit").val(data.photos_google)
+
+
 
 					$("#prp_edit").val(data.prp)
 					$("#prp_edit").trigger("change");
