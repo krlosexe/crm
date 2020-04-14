@@ -26,7 +26,7 @@ class SurgeriesController extends Controller
             $valuations = Surgeries::select("surgeries.*", "surgeries.clinic as id_clinic", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
                                 ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
-                                ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente")
+                                ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente", "left")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
 
                                 ->with("payments")
@@ -87,7 +87,6 @@ class SurgeriesController extends Controller
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
-
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
 
@@ -112,6 +111,10 @@ class SurgeriesController extends Controller
             $request["amount"]          = str_replace(',', '.', $request["amount"]);
 
             $request["attempt"] == 1 ? $request["attempt"] = 1 : $request["attempt"] = 0;
+
+
+            $request["surgerie_rental"] == 1 ? $request["surgerie_rental"] = 1 : $request["surgerie_rental"] = 0;
+
             $store = Surgeries::create($request->all());
 
 

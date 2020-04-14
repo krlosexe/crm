@@ -495,12 +495,12 @@ class CalendarController extends Controller
         }
 
 
-        $data = Surgeries::select("surgeries.id_surgeries","surgeries.fecha as start", "surgeries.time as time", "surgeries.time_end as time_end",
+        $data = Surgeries::select("surgeries.id_surgeries","surgeries.surgerie_rental","surgeries.name_paciente", "surgeries.fecha as start", "surgeries.time as time", "surgeries.time_end as time_end",
                                    "surgeries.observaciones", "surgeries.attempt", "surgeries.type", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic", "auditoria.usr_regins")
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
-                                ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente")
+                                ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente", "left")
                                 ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic", "left")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
                                 ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
@@ -551,6 +551,12 @@ class CalendarController extends Controller
             $value["title"] =  $prefix.$type.$value["name_client"]." ".$value["last_name_client"];
 
             $value["attempt"] == 1 ? $value["color"] = "#FF2A55" : '';
+
+
+            if($value["surgerie_rental"] == 1){
+                $value["title"] =  $prefix.$type.$value["name_paciente"];
+                $value["color"] = "#2853A4";
+            }
 
             $value["surgeries"] = true;
            

@@ -14,17 +14,41 @@
 
         <div class="row">
            <div class="col-md-6">
-              
+
               <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="surgerie_rental"><b>Cirugia de Alquiler ?</b></label>
+                          <label class='container-check'>
+                              <input type='checkbox' name='surgerie_rental' class='checkitem chk-col-blue' id='surgerie_rental' value='1'>
+                              <span class='checkmark'></span>
+                              <label for=''></label>
+                          </label>
+                      </div>
+                    </div>
+              </div>
+              
+              <div class="row"  id="paciente">
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Paciente</b></label>
-                        <select name="id_cliente" id="paciente-store" class="form-control select2" required>
+                        <select name="id_cliente" id="paciente-store" class="form-control select2">
                             <option value="">Seleccione</option>
                         </select>
                     </div>
                 </div>
               </div>
+
+
+              <div class="row" id="paciente_alquiler">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Paciente</b></label>
+                        <input type="text" name="name_paciente" id="name_paciente-store" class="form-control">
+                    </div>
+                </div>
+              </div>
+              
 
 
               <div class="row">

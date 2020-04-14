@@ -193,7 +193,13 @@
 						},
 						{"data":"nombres", 
 							render : function(data, type, row) {
-								return data;
+
+								if(row.surgerie_rental == 1){
+									return row.name_paciente
+								}else{
+									return data;
+								}
+								
 							}
 						},
 						{"data": "fecha"},
@@ -239,10 +245,30 @@
 
 				$("#paciente-store option").remove();
 				$('#summernote').summernote("reset");
+
+				$("#paciente_alquiler").css("display", "none")
+				$("#paciente").css("display", "block")
+
+
 				
 				getPacientes("#paciente-store")
 				cuadros("#cuadro1", "#cuadro2");
 			}
+
+
+			$("#surgerie_rental").change(function (e) { 
+				
+				if($(this).prop("checked") == true){
+					$("#paciente_alquiler").css("display", "block")
+					$("#name_paciente-store").focus()
+					$("#paciente").css("display", "none")
+				}
+				else if($(this).prop("checked") == false){
+					$("#paciente_alquiler").css("display", "none")
+					$("#paciente").css("display", "block")
+				}
+				
+			});
 
 			/* ------------------------------------------------------------------------------- */
 			/* 
@@ -291,7 +317,16 @@
 					var data = table.row( $(this).parents("tr") ).data();
 					
 				//	getPacientes("#paciente-edit", data.id_cliente)
-				
+					
+
+					if(data.surgerie_rental == 1){
+						data.nombres =  data.name_paciente
+					}
+
+					$("#surgerie_rental_edit").prop("checked", data.surgerie_rental ? true : false)
+
+
+
 					$("#name_client-edit").val(data.nombres)
 					GetClinic("#clinic-edit")
 					SelectClinic("#paciente-edit", "#clinic-edit")
