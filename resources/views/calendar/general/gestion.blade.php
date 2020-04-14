@@ -390,6 +390,18 @@
 
 
 
+											<div class="row" id="cirujano-input">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label for=""><b>Cirujano</b></label>
+														
+														<input type="text" name="cirujano" id="cirujano-view" class="form-control">
+													</div>
+												</div>
+											</div>
+
+
+
 
 											<div class="row">
 												<div class="col-md-12">
@@ -754,6 +766,7 @@
 							$("#comments3-input").css("display", "none")
 							$("#add-comments").css("display", "none")
 							$("#observations-input").css("display", "none")
+							$("#cirujano-input").css("display", "none")
 								
 
 							var img = "<img class='rounded' style='height: 8rem; width: 8rem; margin: 1%; border-radius: 50%!important;' src='img/usuarios/profile/"+calEvent.event.extendedProps.img_profile+"'>"
@@ -934,8 +947,12 @@
 								$("#comments3-input").css("display", "block")
 								$("#comments-input").css("display", "block")
 								$("#add-comments").css("display", "block")
+								$("#cirujano-input").css("display", "block")
 								
 								$('#summernote').summernote("reset");
+								$("#send_usuario").css("display", "none")
+
+								$("#cirujano-view").val(calEvent.event.extendedProps.cirujano)
 
 
 								GetComments("/api/comments/revision_appointment","#comments", calEvent.event.extendedProps.id_revision, null)

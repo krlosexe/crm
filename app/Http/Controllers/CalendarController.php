@@ -573,6 +573,7 @@ class CalendarController extends Controller
         }
 
         $data = RevisionAppointment::select("revision_appointment.id_revision", "appointments_agenda.fecha as start", "appointments_agenda.time as time","appointments_agenda.time_end as time_end",
+        "appointments_agenda.cirujano",
                                             "appointments_agenda.descripcion as observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                             "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic"
                                            )
