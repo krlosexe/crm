@@ -398,6 +398,14 @@
 														<input type="text" name="cirujano" id="cirujano-view" class="form-control">
 													</div>
 												</div>
+
+												<div class="col-md-12">
+													<div class="form-group">
+														<label for=""><b>Cirugia</b></label>
+														
+														<input type="text" name="cirujano" id="cirugia-view" class="form-control">
+													</div>
+												</div>
 											</div>
 
 
@@ -953,6 +961,7 @@
 								$("#send_usuario").css("display", "none")
 
 								$("#cirujano-view").val(calEvent.event.extendedProps.cirujano)
+								$("#cirugia-view").val(calEvent.event.extendedProps.cirugia)
 
 
 								GetComments("/api/comments/revision_appointment","#comments", calEvent.event.extendedProps.id_revision, null)
