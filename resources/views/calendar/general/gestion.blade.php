@@ -1002,8 +1002,6 @@
 									$(".side-panel-container").toggleClass("slide-show")
 
 									GetDataPaciente($(this).attr("id_paciente"))
-
-									
 								});
 
 
@@ -1040,6 +1038,22 @@
 
 								$("#cirujano-view").val(calEvent.event.extendedProps.cirujano)
 								$("#cirugia-view").val(calEvent.event.extendedProps.cirugia)
+
+
+								$("#paciente-input").css("display", "block")
+								$("#name_paciente").text(calEvent.event.extendedProps.name_client)
+								$("#name_paciente").attr("id_paciente", calEvent.event.extendedProps.id_paciente)
+
+								$("#name_paciente").unbind().click(function (e) { 
+									$("#slide").toggleClass("show")
+									$(".side-panel-container").toggleClass("slide-show")
+
+									GetDataPaciente($(this).attr("id_paciente"))
+								});
+
+
+
+
 
 
 								GetComments("/api/comments/revision_appointment","#comments", calEvent.event.extendedProps.id_revision, null)
