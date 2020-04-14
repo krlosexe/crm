@@ -425,7 +425,7 @@ class CalendarController extends Controller
         }
 
 
-        $data = Preanesthesia::select("preanesthesias.id_preanesthesias","preanesthesias.surgerie_rental","preanesthesias.name_paciente","preanesthesias.fecha as start", "preanesthesias.time as time",  "preanesthesias.time_end as time_end",
+        $data = Preanesthesia::select("preanesthesias.id_preanesthesias","preanesthesias.id_cliente","preanesthesias.surgerie_rental","preanesthesias.name_paciente","preanesthesias.fecha as start", "preanesthesias.time as time",  "preanesthesias.time_end as time_end",
                                    "preanesthesias.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic", "auditoria.usr_regins")
 

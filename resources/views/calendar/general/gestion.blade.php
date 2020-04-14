@@ -947,6 +947,23 @@
 								$("#comments3-input").css("display", "block")
 								$("#comments-input").css("display", "block")
 								$("#add-comments").css("display", "block")
+
+
+								$("#paciente-input").css("display", "block")
+								$("#name_paciente").text(calEvent.event.extendedProps.name_client)
+								$("#name_paciente").attr("id_paciente", calEvent.event.extendedProps.id_cliente)
+
+								$("#name_paciente").unbind().click(function (e) { 
+									$("#slide").toggleClass("show")
+									$(".side-panel-container").toggleClass("slide-show")
+
+									GetDataPaciente($(this).attr("id_paciente"))
+
+									
+								});
+
+
+
 								
 								$('#summernote').summernote("reset");
 
