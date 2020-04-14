@@ -12,6 +12,22 @@
         
         <div class="row">
            <div class="col-md-6">
+
+
+           <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="surgerie_rental"><b>Alquiler ?</b></label>
+                            <label class='container-check'>
+                                <input type='checkbox' class='checkitem chk-col-blue' id='surgerie_rental_edit' value='1'>
+                                <span class='checkmark'></span>
+                                <label for=''></label>
+                            </label>
+                        </div>
+                      </div>
+                </div>
+
+                
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">

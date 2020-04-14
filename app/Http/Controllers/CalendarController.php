@@ -425,12 +425,12 @@ class CalendarController extends Controller
         }
 
 
-        $data = Preanesthesia::select("preanesthesias.id_preanesthesias","preanesthesias.fecha as start", "preanesthesias.time as time",  "preanesthesias.time_end as time_end",
+        $data = Preanesthesia::select("preanesthesias.id_preanesthesias","preanesthesias.surgerie_rental","preanesthesias.name_paciente","preanesthesias.fecha as start", "preanesthesias.time as time",  "preanesthesias.time_end as time_end",
                                    "preanesthesias.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic", "auditoria.usr_regins")
 
                                     ->join("auditoria", "auditoria.cod_reg", "=", "preanesthesias.id_preanesthesias")
-                                    ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente")
+                                    ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente", "left")
                                     ->join("users", "users.id", "=", "auditoria.usr_regins")
                                     ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic", "left")
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
@@ -474,6 +474,14 @@ class CalendarController extends Controller
             $prefix = "Pre Antestesia: ";
             $value["title"] =  $prefix.$value["name_client"]." ".$value["last_name_client"];
             $value["preanesthesias"] = true;
+
+
+            if($value["surgerie_rental"] == 1){
+                $value["title"] =  $prefix.$value["name_paciente"];
+                $value["color"] = "#921594";
+            }
+
+
         }
         return response()->json($data)->setStatusCode(200);
     }

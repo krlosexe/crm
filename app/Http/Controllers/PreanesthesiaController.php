@@ -25,7 +25,7 @@ class PreanesthesiaController extends Controller
             $valuations = Preanesthesia::select("preanesthesias.*","preanesthesias.clinic as id_clinic", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
                                 ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "preanesthesias.id_preanesthesias")
-                                ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente")
+                                ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente", "left")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
 
                                 /*->where(function ($query) use ($rol, $id_user) {
@@ -100,7 +100,7 @@ class PreanesthesiaController extends Controller
             //     return response()->json($data)->setStatusCode(400); 
             // }
 
-
+            $request["surgerie_rental"] == 1 ? $request["surgerie_rental"] = 1 : $request["surgerie_rental"] = 0;
 
             $store = Preanesthesia::create($request->all());
 

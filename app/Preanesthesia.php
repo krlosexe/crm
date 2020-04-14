@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Preanesthesia extends Model
 {
     protected $fillable = [
-        'id_cliente', 'fecha', 'time', 'time_end','surgeon', 'operating_room', 'clinic','observaciones', 'status_surgeries'
+        'id_cliente', 'surgerie_rental', 'name_paciente','fecha', 'time', 'time_end','surgeon', 'operating_room', 'clinic','observaciones', 'status_surgeries'
     ];
 
     protected $table         = 'preanesthesias';
