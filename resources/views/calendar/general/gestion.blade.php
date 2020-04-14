@@ -888,7 +888,7 @@
 								$('#summernote').summernote("reset");
 
 
-								GetComments("/api/comments/preanesthesias","#comments", calEvent.event.extendedProps.id_preanesthesias, null)
+								GetComments("/api/comments/preanesthesias","#comments", calEvent.event.extendedProps.id_preanesthesias, calEvent.event.extendedProps.observaciones)
 
 								SubmitComment(calEvent.event.extendedProps.id_preanesthesias, "api/comments/preanesthesias", "preanesthesias", "#add-comments")
 
