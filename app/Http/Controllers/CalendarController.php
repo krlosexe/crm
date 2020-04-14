@@ -503,7 +503,7 @@ class CalendarController extends Controller
         }
 
 
-        $data = Surgeries::select("surgeries.id_surgeries","surgeries.surgerie_rental","surgeries.name_paciente", "surgeries.fecha as start", "surgeries.time as time", "surgeries.time_end as time_end",
+        $data = Surgeries::select("surgeries.id_surgeries", "surgeries.id_cliente","surgeries.surgeon","surgeries.surgerie_rental","surgeries.name_paciente", "surgeries.fecha as start", "surgeries.time as time", "surgeries.time_end as time_end",
                                    "surgeries.observaciones", "surgeries.attempt", "surgeries.type", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic", "auditoria.usr_regins")
 
