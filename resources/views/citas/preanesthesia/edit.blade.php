@@ -8,6 +8,7 @@
         @csrf
 
         <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="id_cliente" id="paciente-edit">
         
         <div class="row">
            <div class="col-md-6">
@@ -15,9 +16,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Paciente</b></label>
-                        <select name="id_cliente" id="paciente-edit" class="form-control select2" required>
-                            <option value="">Seleccione</option>
-                        </select>
+                        <input type="text" id="name_paciente_edit" class="form-control" disabled>
                     </div>
                 </div>
               </div>
@@ -79,14 +78,6 @@
                       <select name="clinic" id="clinic-edit" class="form-control select2" required>
                           <option value="">Seleccione</option>
                       </select>
-                  </div>
-              </div>
-
-
-              <div class="col-md-12">
-                  <div class="form-group">
-                      <label for=""><b>Obervaciones</b></label>
-                      <textarea name="observaciones" id="observaciones-edit" class="form-control" cols="30" rows="5"></textarea>
                   </div>
               </div>
 

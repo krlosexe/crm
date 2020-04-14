@@ -25,6 +25,9 @@
 			}
 		</style>
 
+	<link href="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.css" rel="stylesheet">
+  <script src="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.js"></script>
+
 
 	@endsection
 
@@ -234,6 +237,7 @@
 
 				$("#paciente-store option").remove();
 
+				$('#summernote').summernote("reset");
 				
 				getPacientes("#paciente-store")
 				cuadros("#cuadro1", "#cuadro2");
@@ -248,7 +252,7 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					getPacientes("#paciente-view", data.id_cliente)
+					//getPacientes("#paciente-view", data.id_cliente)
 					GetClinic("#clinic-view")
 					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
 					$("#fecha-view").val(data.fecha).attr("disabled", "disabled")
@@ -280,10 +284,11 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					getPacientes("#paciente-edit", data.id_cliente)
+					//getPacientes("#paciente-edit", data.id_cliente)
 					GetClinic("#clinic-edit")
 					SelectClinic("#paciente-edit", "#clinic-edit")
 					$("#paciente-edit").val(data.id_cliente)
+					$("#name_paciente_edit").val(data.nombres)
 					$("#fecha-edit").val(data.fecha)
 					$("#time-edit").val(data.time)
 					$("#time-end-edit").val(data.time_end)

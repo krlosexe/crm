@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Auditoria;
+use App\Comments;
 use App\Preanesthesia;
 use Illuminate\Http\Request;
 
@@ -27,11 +28,11 @@ class PreanesthesiaController extends Controller
                                 ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
 
-                                ->where(function ($query) use ($rol, $id_user) {
+                                /*->where(function ($query) use ($rol, $id_user) {
                                     if($rol == "Asesor"){
                                         $query->where("clientes.id_user_asesora", $id_user);
                                     }
-                                })
+                                })*/
                                 
                                 ->where("auditoria.tabla", "preanesthesias")
                                 ->where("auditoria.status", "!=", "0")
@@ -110,6 +111,16 @@ class PreanesthesiaController extends Controller
             $auditoria->usr_regins  = $request["id_user"];
             $auditoria->save();
 
+
+
+            $request["table"]    = "preanesthesias";
+            $request["id_event"] = $store["id_preanesthesias"];
+            
+            if($request->comment != "<p><br></p>"){
+                Comments::create($request->all());
+            }
+
+
             if ($store) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
                 return response()->json($data)->setStatusCode(200);
@@ -178,6 +189,22 @@ class PreanesthesiaController extends Controller
 
 
             $update = Preanesthesia::find($preanesthesia)->update($request->all());
+
+
+            if(isset($request->comment)){
+                if($request->comment != "<p><br></p>"){
+
+                    $array = [];
+                    $array["id_event"]   = $preanesthesia;
+                    $array["table"]      = "preanesthesias";
+                    $array["id_user"]    = $request["id_user"];
+                    $array["comment"]    = $request->comment;
+                    Comments::insert($array);
+                }
+            }
+
+
+
 
             if ($update) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
