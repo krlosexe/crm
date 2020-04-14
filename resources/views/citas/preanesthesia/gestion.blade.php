@@ -77,8 +77,6 @@
 								  <th>Acciones</th>
 								  <th>Nombres</th>
 								  <th>Fecha</th>
-								  <th>Hora desde</th>
-								  <th>Hora hasta</th>
 								  <th>Clinica</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
@@ -197,8 +195,6 @@
 							}
 						},
 						{"data": "fecha"},
-						{"data": "time"},
-						{"data": "time_end"},
 						{"data": "name_clinic"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
@@ -302,9 +298,139 @@
 					$("#attempt-edit").prop("checked", data.attempt ? true : false)
 
 
+
+					$('#summernote_edit').summernote("reset");
+					GetComments("#comments_edit", data.id_preanesthesias, data.observaciones)
+
+					SubmitComment(data.id_preanesthesias, "api/comments/preanesthesias", "#comments_edit", "#add-comments", "#summernote_edit")
+
+
+					
+
+
 					cuadros('#cuadro1', '#cuadro4');
 					$("#id_edit").val(data.id_preanesthesias)
 					cuadros('#cuadro1', '#cuadro4');
+				});
+			}
+
+
+
+
+
+
+
+			function SubmitComment(id, api, table, btn, summer){
+
+				$(btn).unbind().click(function (e) { 
+
+					var html = ""
+
+					html += '<div class="col-md-12" style="margin-bottom: 15px">'
+						html += '<div class="row">'
+							html += '<div class="col-md-2">'
+							html += '</div>'
+							html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+								html += '<div>'+$(summer).val()+'</div>'
+
+								html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
+
+							html += '</div>'
+						html += '</div>'
+					html += '</div>'
+
+					$(table).append(html)
+
+
+					var url=document.getElementById('ruta').value;
+
+					$.ajax({
+						url:''+url+"/"+api,
+						type:'POST',
+						data: {
+							"id_user" : id_user,
+							"token"   : tokens,
+							"id"      : id,
+							"comment" : $(summer).val(),
+							
+						},
+						dataType:'JSON',
+						beforeSend: function(){
+							$(btn).text("espere...").attr("disabled", "disabled")
+						},
+						error: function (data) {
+							$(btn).text("Comentar").removeAttr("disabled")
+						},
+						success: function(data){
+							$(btn).text("Comentar").removeAttr("disabled")
+							$(summer).summernote("reset");
+						}
+					});
+
+
+
+					
+				});
+
+			}
+
+
+			function GetComments(comment_content, id, observaciones){
+				$(comment_content).html("Cargando...")
+				var url=document.getElementById('ruta').value;	
+				$.ajax({
+					url:''+url+'/api/comments/preanesthesias/'+id,
+					type:'GET',
+					dataType:'JSON',
+					
+					beforeSend: function(){
+
+					},
+					error: function (data) {
+					},
+					success: function(result){
+						
+						var url=document.getElementById('ruta').value; 
+						var html = "";
+
+
+						if(observaciones != null){
+							html += '<div class="col-md-12" style="margin-bottom: 15px">'
+								html += '<div class="row">'
+									html += '<div class="col-md-2">'
+										
+									html += '</div>'
+									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+										html += '<div>'+observaciones+'</div>'
+									html += '</div>'
+								html += '</div>'
+							html += '</div>'
+						}
+						$(comment_content).html(html)
+
+						
+						$.map(result, function (item, key) {
+							html += '<div class="col-md-12" style="margin-bottom: 15px">'
+								html += '<div class="row">'
+									html += '<div class="col-md-2">'
+										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+										
+									html += '</div>'
+									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+										html += '<div>'+item.comment+'</div>'
+
+										html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+									html += '</div>'
+								html += '</div>'
+							html += '</div>'
+							
+						});
+
+						
+						$(comment_content).html(html)
+					}
 				});
 			}
 
