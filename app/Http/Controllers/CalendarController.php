@@ -127,7 +127,7 @@ class CalendarController extends Controller
         }
         
         
-        $data = ClientsTasks::select("clients_tasks.id_clients_tasks", "clients_tasks.issue as title", 
+        $data = ClientsTasks::select("clients_tasks.id_clients_tasks","clients_tasks.id_client", "clients_tasks.issue as title", 
                                      "clients_tasks.fecha as start", "clients_tasks.time as time", "datos_personales.nombres",
                                      "datos_personales.apellido_p", "user_responsable.img_profile",
                                      "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clients_tasks.responsable"

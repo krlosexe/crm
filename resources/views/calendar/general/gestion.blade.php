@@ -896,6 +896,24 @@
 							//	$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
 								$("#name_paciente").text(calEvent.event.extendedProps.name_client)
 
+
+
+								$("#paciente-input").css("display", "block")
+								$("#name_paciente").text(calEvent.event.extendedProps.name_client)
+								$("#name_paciente").attr("id_paciente", calEvent.event.extendedProps.id_client)
+
+								$("#name_paciente").unbind().click(function (e) { 
+									$("#slide").toggleClass("show")
+									$(".side-panel-container").toggleClass("slide-show")
+
+									GetDataPaciente($(this).attr("id_paciente"))
+
+									
+								});
+
+
+
+
 								GetCommentsTask("/api/tasks/comments","#comments", calEvent.event.extendedProps.id_clients_tasks)
 
 
