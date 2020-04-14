@@ -289,7 +289,7 @@
 								<!-- <li style="display: inline-block; margin: 2%"> <span style="color: #E5F4FD"><i class="fas fa-circle"></i></span> Consultas</li> -->
 								<li style="display: inline-block; margin: 2%"> <span style="color: #FFAAD4"><i class="fas fa-circle"></i></span> Valoraciones</li>
 								<li style="display: inline-block; margin: 2%"> <span style="color: #FF7F00"><i class="fas fa-circle"></i></span> Pre Anestesias</li>
-								<li style="display: inline-block; margin: 2%"> <span style="color: #921594`"><i class="fas fa-circle"></i></span> Pre Anestesias Alquiler</li>
+								<li style="display: inline-block; margin: 2%"> <span style="color: #921594"><i class="fas fa-circle"></i></span> Pre Anestesias Alquiler</li>
 								<li style="display: inline-block; margin: 2%"> <span style="color: #7F55FF"><i class="fas fa-circle"></i></span> Cirugias</li>
 								<li style="display: inline-block; margin: 2%"> <span style="color: #2853A4"><i class="fas fa-circle"></i></span> Cx Alquiler</li>
 								<li style="display: inline-block; margin: 2%"> <span style="color: #FF2A55"><i class="fas fa-circle"></i></span> Fecha Tentativa</li>
