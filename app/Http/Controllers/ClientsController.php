@@ -370,16 +370,28 @@ class ClientsController extends Controller
     public function show(Request $request, $clients)
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $modulos = Clients::select("clientes.*", "auditoria.*", "user_registro.email as email_regis")
-                                ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
-                                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
-                                ->where("auditoria.tabla", "clientes")
-                                ->where("auditoria.status", "!=", "0")
-                                ->where("clientes.id_cliente", "=", $clients)
-                                ->orderBy("clientes.id_cliente", "DESC")
+
+           
+            $data = Clients::select("clientes.*","client_clinic_history.*", 
+                                    "clientc_credit_information.*", "lines_business.nombre_line", "client_information_aditional_surgery.*"
+                                     )
+
+
+                                ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
+                                ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
+                                ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
+                                ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line", "left")
+                               
+                               
+                                ->with("logs")
+                                ->with("phones")
+                                ->with("emails")
+
+                                ->where("clientes.id_cliente", $clients)
+                               
                                 ->first();
            
-            return response()->json($modulos)->setStatusCode(200);
+            return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
         }

@@ -104,6 +104,7 @@
 				left: 0;
 				z-index: 3000;
 				display: none;
+				
 				/* background-color: rgba(0,0,0,.4); */
 				transform: translateZ(0);
 				-webkit-transform: translateZ(0);
@@ -126,6 +127,25 @@
 				top: 0px;
 				right: 0px;
 				height: 912px;
+
+
+
+				overflow-x: auto;
+				overflow-y: auto;
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 1050;
+				/* display: none; */
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				outline: 0;
+				overflow: scroll;
+
+
+
+
 				background-color: rgba(0, 0, 0, 0.4);
 				-webkit-transition: 3s;
 				-moz-transition: 3s;
@@ -144,7 +164,8 @@
 				z-index: 3001;
 				display: block;
 				width: calc(100% - 300px);
-				background: #ebf1f4;
+				background: #fff;
+				
 				transform: translateX(100%);
 				 -webkit-transition: 3s;
 					-moz-transition: 3s;
@@ -156,9 +177,7 @@
 
 			.slide-show{
 				z-index: 3001;
-				width: calc(100% - 65px);
-				height: 912px;
-				max-width: 1200px;
+				width: 90%;
 				-webkit-transform: translateX(0%);
 				-moz-transform: translateX(0%);
 				-ms-transform: translateX(0%);
@@ -270,7 +289,7 @@
 								<!-- <li style="display: inline-block; margin: 2%"> <span style="color: #E5F4FD"><i class="fas fa-circle"></i></span> Consultas</li> -->
 								<li style="display: inline-block; margin: 2%"> <span style="color: #FFAAD4"><i class="fas fa-circle"></i></span> Valoraciones</li>
 								<li style="display: inline-block; margin: 2%"> <span style="color: #FF7F00"><i class="fas fa-circle"></i></span> Pre Anestesias</li>
-								<li style="display: inline-block; margin: 2%"> <span style="color: #921594"><i class="fas fa-circle"></i></span> Pre Anestesias Alquiler</li>
+								<li style="display: inline-block; margin: 2%"> <span style="color: #921594`"><i class="fas fa-circle"></i></span> Pre Anestesias Alquiler</li>
 								<li style="display: inline-block; margin: 2%"> <span style="color: #7F55FF"><i class="fas fa-circle"></i></span> Cirugias</li>
 								<li style="display: inline-block; margin: 2%"> <span style="color: #2853A4"><i class="fas fa-circle"></i></span> Cx Alquiler</li>
 								<li style="display: inline-block; margin: 2%"> <span style="color: #FF2A55"><i class="fas fa-circle"></i></span> Fecha Tentativa</li>
@@ -557,7 +576,7 @@
 
 
 						<div id="content">
-							<h3 style="text-align: center;margin: 22% 0;">AQUI TODOS LOS DATOS DEL PACIENTE</h3>
+							@include('calendar.general.ficha_paciente')
 						</div>
 
 						<div class="side-panel-label" style="max-width: 40px; top: 21px;" onclick="closeSlide()">
@@ -803,11 +822,14 @@
 								
 							//	$("#paciente-view").val(calEvent.event.extendedProps.name_client+" "+calEvent.event.extendedProps.last_name_client)
 								$("#name_paciente").text(calEvent.event.extendedProps.name_client)
-								$("#name_paciente").attr("onclick")
+								$("#name_paciente").attr("id_paciente", calEvent.event.extendedProps.id_cliente)
 
 								$("#name_paciente").unbind().click(function (e) { 
-									//$("#slide").toggleClass("show")
-									//$(".side-panel-container").toggleClass("slide-show")
+									$("#slide").toggleClass("show")
+									$(".side-panel-container").toggleClass("slide-show")
+
+									GetDataPaciente($(this).attr("id_paciente"))
+
 									
 								});
 								var html_comments = "";
@@ -1472,6 +1494,355 @@
 
 			
 
+		</script>
+
+
+
+
+
+		<script>
+			function GetDataPaciente(id_paciente){
+				var url=document.getElementById('ruta').value;	
+				$.ajax({
+					url:''+url+'/api/clients/'+id_paciente,
+					type:'GET',
+					dataType:'JSON',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+					},
+					
+					beforeSend: function(){
+
+					},
+					error: function (data) {
+					},
+					success: function(data){
+						GetCity("#city_edit");
+						GetClinic("#city_edit", "#clinic_edit")
+						GetAsesorasbyBusisnessLine("#linea-negocio-edit", "#asesora-edit");
+						GetBusinessLine("#linea-negocio-edit");
+
+
+						Children("#children_edit", "#number_children_edit")
+						Surgery("#surgery_edit", "#previous_surgery_edit")
+						Disease("#disease_edit", "#major_disease_edit")
+						Medication("#medication_edit", "#drink_medication_edit")
+						Allergic("#allergic_edit ", "#allergic_medication_edit")
+
+
+						GetAsesorasValoracion("#id_asesora_valoracion-edit")
+
+
+				
+
+						$("#id_asesora_valoracion-edit").val(data.id_asesora_valoracion)
+						$("#code-edit").text(data.code_client)
+
+						$("#state_edit").val(data.state).trigger("change")
+
+						$("#nombre_edit").val(data.nombres)
+						$("#apellido_edit").val("")
+						$("#identificacion_edit").val(data.identificacion)
+						$("#telefono_edit").val(data.telefono)
+						$("#email_edit").val(data.email)
+						$("#direccion_edit").val(data.direccion)
+						$("#fecha_nacimiento_edit").val(data.fecha_nacimiento)
+						
+						$("#origen_edit").val(data.origen)
+						$("#forma_pago_edit").val(data.forma_pago)
+
+
+						$("#city_edit").val(data.city)
+						$("#city_edit").trigger("change")
+
+						$("#clinic_edit").val(data.clinic)
+
+						$("#year_edit").val(calcularEdad(data.fecha_nacimiento))
+
+						$("#identificacion_verify_edit").prop("checked", data.identificacion_verify ? true : false)
+
+						$("#name_surgery_edit").val(data.name_surgery)
+						$("#current_size_edit").val(data.current_size)
+						$("#desired_size_edit").val(data.desired_size)
+						$("#implant_volumem_edit").val(data.implant_volumem)
+
+
+
+						$("#facebook_edit").val(data.facebook)
+						$("#instagram_edit").val(data.instagram)
+						$("#twitter_edit").val(data.twitter)
+						$("#youtube_edit").val(data.youtube)
+
+						$("#photos_google_edit").val(data.photos_google)
+
+
+
+						$("#prp_edit").val(data.prp)
+						$("#prp_edit").trigger("change");
+
+
+						$("#eps_edit").val(data.eps)
+						$("#height_edit").val(data.height)
+						$("#weight_edit").val(data.weight)
+
+						$("#children_edit").prop("checked", data.children ? true : false)
+						$("#smoke_edit").prop("checked", data.smoke ? true : false)
+						$("#alcohol_edit").prop("checked", data.alcohol ? true : false)
+						$("#surgery_edit").prop("checked", data.surgery ? true : false)
+						$("#disease_edit").prop("checked", data.disease ? true : false)
+						$("#medication_edit").prop("checked", data.medication ? true : false)
+						$("#allergic_edit").prop("checked", data.allergic ? true : false)
+
+						$("#number_children_edit").val(data.number_children).prop("readonly", data.children ? false : true)
+						$("#previous_surgery_edit").val(data.previous_surgery).prop("readonly", data.surgery ? false : true)
+						$("#major_disease_edit").val(data.major_disease).prop("readonly", data.disease ? false : true)
+						$("#drink_medication_edit").val(data.drink_medication).prop("readonly", data.medication ? false : true)
+						$("#allergic_medication_edit").val(data.allergic_medication).prop("readonly", data.allergic ? false : true)
+
+
+						$("#dependent_independent_edit").val(data.dependent_independent)
+						$("#type_contract_edit").val(data.type_contract)
+						$("#antiquity_edit").val(data.antiquity)
+						$("#average_monthly_income_edit").val(data.average_monthly_income)
+						$("#previous_credits_edit").val(data.previous_credits)
+						$("#reported_edit").val(data.reported)
+						$("#bank_account_edit").val(data.bank_account)
+					
+						$("#properties_edit").prop("checked", data.properties ? true : false)
+						$("#vehicle_edit").prop("checked", data.vehicle ? true : false)
+						
+						
+						$("#linea-negocio-edit").val(data.id_line)
+						$("#linea-negocio-edit").trigger("change");
+
+						$("#asesora-edit").val(data.id_user_asesora)
+
+
+						SubmitComment(data.id_cliente, "api/comments/clients", "#comments_edit", "#add-comments", "#summernote_edit")
+
+
+
+
+						$("#id_edit").val(data.id_cliente)
+
+
+				
+						var url=document.getElementById('ruta').value; 
+						var html = "";
+						$.map(data.logs, function (item, key) {
+							html += '<div class="col-md-12" style="margin-bottom: 15px">'
+								html += '<div class="row">'
+									html += '<div class="col-md-2">'
+										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+										
+									html += '</div>'
+									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+										html += '<div>'+item.event+'</div>'
+
+										html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+									html += '</div>'
+								html += '</div>'
+							html += '</div>'
+							
+						});
+
+						$("#logs_edit").html(html)
+
+
+
+						var html = ""
+						var count_phone = 0
+						$.map(data.phones, function (item, key) {
+							count_phone++
+							html += '<div class="col-md-10 phone_add_edit_'+count_phone+'">'
+								html += '<div class="form-group">'
+									html += '<label for=""><b>Telefono</b></label>'
+									html += '<input type="number" name="telefono2[]" class="form-control form-control-user"  placeholder="PJ. 315 2077862" value="'+item.phone+'">'
+								html += '</div>'
+							html += '</div>'
+
+							
+							html += '<div class="col-md-2 phone_add_edit_'+count_phone+'"">'
+							html += '<br>'
+								html += '<button type="button" id="add_phone" onclick="deletePhoneEdit('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+							html += '</div>'
+
+					
+						});
+
+						$("#phone_add_content_edit").html(html)
+
+					
+
+
+						var html = ""
+						var count_email = 0
+						$.map(data.emails, function (item, key) {
+							count_email++
+							html += '<div class="col-md-10 email_add_edit_'+count_email+'">'
+								html += '<div class="form-group">'
+									html += '<label for=""><b>E-mail</b></label>'
+									html += '<input type="email" name="email2[]" class="form-control form-control-user"  value="'+item.email+'">'
+								html += '</div>'
+							html += '</div>'
+
+							
+							html += '<div class="col-md-2 email_add_edit_'+count_email+'"">'
+							html += '<br>'
+								html += '<button type="button" id="add_email" onclick="deleteemailEdit('+count_email+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+							html += '</div>'
+
+					
+						});
+
+						$("#email_add_content_edit").html(html)
+
+
+
+
+			
+						$('#summernote_edit').summernote('reset');
+						$('#summernote_edit').summernote({
+							'height' : 200
+						});
+						var url=document.getElementById('ruta').value; 
+						var html = "";
+
+
+					
+
+					//	GetComments("#comments_edit", data.id_cliente)
+				
+						GetComments("/api/comments/clients","#comments_edit",  data.id_cliente, null)
+
+						valuations("#tab4_edit", "#iframeValuationsEdit", data)
+						preanestesias("#tab5_edit", "#iframepPreanestesiaEdit", data)
+						surgeries("#tab6_edit", "#iframepCirugiaEdit", data)
+						revisiones("#tab7_edit", "#iframepRevisionEdit", data)
+						tasks("#tab8_edit", "#iframepTracingEdit", data)
+					}
+				});
+			}
+
+
+
+
+			
+			function GetClinic(city, select){
+				$(city).unbind().change(function (e) { 
+					GetClinicByCity(select, $(this).val())
+				});
+			}
+
+			function Children(checkbox, input){
+				$(checkbox).change(function (e) { 
+					if ($(checkbox).is(':checked')){
+						$(input).removeAttr("readonly").focus();
+					}else{
+						$(input).val("0").attr("readonly", "readonly");
+					}
+				});
+			}
+
+
+
+			function Surgery(checkbox, input){
+				$(checkbox).change(function (e) { 
+					if ($(checkbox).is(':checked')){
+						$(input).removeAttr("readonly").focus();
+					}else{
+						$(input).val("0").attr("readonly", "readonly");
+					}
+				});
+			}
+
+
+
+			function Disease(checkbox, input){
+				$(checkbox).change(function (e) { 
+					if ($(checkbox).is(':checked')){
+						$(input).removeAttr("readonly").focus();
+					}else{
+						$(input).val("0").attr("readonly", "readonly");
+					}
+				});
+			}
+
+
+			function Medication(checkbox, input){
+				$(checkbox).change(function (e) { 
+					if ($(checkbox).is(':checked')){
+						$(input).removeAttr("readonly").focus();
+					}else{
+						$(input).val("0").attr("readonly", "readonly");
+					}
+				});
+			}
+
+			function Allergic(checkbox, input){
+				$(checkbox).change(function (e) { 
+					if ($(checkbox).is(':checked')){
+						$(input).removeAttr("readonly").focus();
+					}else{
+						$(input).val("0").attr("readonly", "readonly");
+					}
+				});
+			}
+
+			
+
+
+
+			function tasks(tab, iframe, data){
+				$(tab).click(function (e) { 
+					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+					
+				});
+			}
+
+
+
+			function revisiones(tab, iframe, data){
+				$(tab).click(function (e) { 
+					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+					
+				});
+			}
+
+
+			function surgeries(tab, iframe, data){
+				$(tab).click(function (e) { 
+					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+					
+				});
+			}
+
+
+			function valuations(tab, iframe, data){
+				$(tab).click(function (e) { 
+					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+					
+				});
+			}
+
+
+			function preanestesias(tab, iframe, data){
+				$(tab).click(function (e) { 
+					var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+					
+				});
+			}
+
+
+		
 		</script>
 
 

@@ -275,7 +275,7 @@ class CalendarController extends Controller
 
 
         $data = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
-                                   "valuations.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
+                                   "valuations.observaciones", "valuations.id_cliente","clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic",
                                    "dpa.nombres as name_asesora", "dpa.apellido_p as apellido_asesora", "auditoria.usr_regins"
                                 )
