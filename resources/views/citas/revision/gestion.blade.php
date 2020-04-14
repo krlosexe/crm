@@ -27,6 +27,9 @@
 			}
 		</style>
 
+	<link href="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.css" rel="stylesheet">
+    <script src="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.js"></script>
+
 
 	@endsection
 
@@ -236,6 +239,10 @@
 				SelectClinic("#paciente-store", "#clinica-store")
 				SelectAsesora("#paciente-store", "#asesora-store")
 
+				$('#summernote').summernote("reset");
+
+
+
 			}
 			
 			function SelectClinic(select_cliente, select_clinica) {  
@@ -334,13 +341,14 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					getPacientes("#paciente-edit", data.id_paciente)
+					//getPacientes("#paciente-edit", data.id_paciente)
 					GetClinic("#clinica-edit")
 					GetAsesoras("#asesora-edit")
 
 					SelectClinic("#paciente-edit", "#clinica-edit")
 					SelectAsesora("#paciente-edit", "#asesora-edit")
 
+					$("#name_paciente-edit").val(data.nombres)
 					$("#paciente-edit").val(data.id_paciente).attr("disabled", "disabled")
 					$("#paciente-edit").trigger("change");
 					$("#clinica-edit").attr("disabled", "disabled")
@@ -351,8 +359,117 @@
 					showSchedule(data.agenda, "#tableEdit", "edit")
 
 
+					GetComments("#comments_edit", data.id_revision)
+
+					$('#summernote_edit').summernote("reset");
+
+					SubmitComment(data.id_revision, "api/comments/revision_appointment", "#comments_edit", "#add-comments", "#summernote_edit")
+
+
+
+
 					$("#id_edit").val(data.id_revision)
 					cuadros('#cuadro1', '#cuadro4');
+				});
+			}
+
+
+
+			function SubmitComment(id, api, table, btn, summer){
+
+				$(btn).unbind().click(function (e) { 
+
+					var html = ""
+
+					html += '<div class="col-md-12" style="margin-bottom: 15px">'
+						html += '<div class="row">'
+							html += '<div class="col-md-2">'
+							html += '</div>'
+							html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+								html += '<div>'+$(summer).val()+'</div>'
+
+								html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
+
+							html += '</div>'
+						html += '</div>'
+					html += '</div>'
+
+					$(table).append(html)
+
+
+					var url=document.getElementById('ruta').value;
+
+					$.ajax({
+						url:''+url+"/"+api,
+						type:'POST',
+						data: {
+							"id_user" : id_user,
+							"token"   : tokens,
+							"id"      : id,
+							"comment" : $(summer).val(),
+							
+						},
+						dataType:'JSON',
+						beforeSend: function(){
+							$(btn).text("espere...").attr("disabled", "disabled")
+						},
+						error: function (data) {
+							$(btn).text("Comentar").removeAttr("disabled")
+						},
+						success: function(data){
+							$(btn).text("Comentar").removeAttr("disabled")
+							$(summer).summernote("reset");
+						}
+					});
+
+
+
+					
+				});
+
+			}
+
+
+			function GetComments(comment_content, id){
+				$(comment_content).html("Cargando...")
+				var url=document.getElementById('ruta').value;	
+				$.ajax({
+					url:''+url+'/api/comments/revision_appointment/'+id,
+					type:'GET',
+					dataType:'JSON',
+					
+					beforeSend: function(){
+
+					},
+					error: function (data) {
+					},
+					success: function(result){
+						
+						var url=document.getElementById('ruta').value; 
+						var html = "";
+						
+						$.map(result, function (item, key) {
+							html += '<div class="col-md-12" style="margin-bottom: 15px">'
+								html += '<div class="row">'
+									html += '<div class="col-md-2">'
+										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
+										
+									html += '</div>'
+									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+										html += '<div>'+item.comment+'</div>'
+
+										html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
+
+
+									html += '</div>'
+								html += '</div>'
+							html += '</div>'
+							
+						});
+
+						
+						$(comment_content).html(html)
+					}
 				});
 			}
 

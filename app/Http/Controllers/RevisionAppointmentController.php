@@ -24,7 +24,7 @@ class RevisionAppointmentController extends Controller
 
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $queries = RevisionAppointment::select("revision_appointment.*", "clientes.id_user_asesora","clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clinic.nombre as name_clinic","auditoria.*", "users.email as email_regis")
+            $queries = RevisionAppointment::select("revision_appointment.*", "clientes.nombres", "clientes.id_user_asesora","clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clinic.nombre as name_clinic","auditoria.*", "users.email as email_regis")
 
                                             ->join("clientes", "clientes.id_cliente", "revision_appointment.id_paciente")
                                             ->join("clinic", "clinic.id_clinic", "revision_appointment.clinica")
