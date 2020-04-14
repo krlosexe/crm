@@ -880,6 +880,22 @@
 								enviarFormularioPutEvent("#update_event", 'api/preanesthesia', '#cuadro4', false, "#avatar-edit");
 
 
+								$("#comments2-input").css("display", "block")
+								$("#comments3-input").css("display", "block")
+								$("#comments-input").css("display", "block")
+								$("#add-comments").css("display", "block")
+								
+								$('#summernote').summernote("reset");
+
+
+								GetComments("/api/comments/preanesthesias","#comments", calEvent.event.extendedProps.id_preanesthesias, null)
+
+								SubmitComment(calEvent.event.extendedProps.id_preanesthesias, "api/comments/preanesthesias", "preanesthesias", "#add-comments")
+
+
+
+
+
 								if(id_user == calEvent.event.extendedProps.usr_regins){
 									$(".input-disabled").removeAttr("disabled")
 								}else{
