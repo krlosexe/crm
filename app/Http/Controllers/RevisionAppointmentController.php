@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Auditoria;
+use App\Comments;
 use App\AppointmentsAgenda;
 use App\RevisionAppointment;
 use Illuminate\Http\Request;
@@ -138,6 +139,16 @@ class RevisionAppointmentController extends Controller
                 $auditoria->usr_regins  = $request["id_user"];
                 $auditoria->save();
 
+
+                $request["table"]    = "revision_appointment";
+                $request["id_event"] = $store["id_revision"];
+                
+                if($request->comment != "<p><br></p>"){
+                    Comments::create($request->all());
+                }
+
+
+
                 if ($store) {
                     $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
                     return response()->json($data)->setStatusCode(200);
@@ -204,6 +215,19 @@ class RevisionAppointmentController extends Controller
                     
                     $AppointmentsAgenda->save();
                 }    
+            }
+
+
+            if(isset($request->comment)){
+                if($request->comment != "<p><br></p>"){
+
+                    $array = [];
+                    $array["id_event"]   = $revisionAppointment;
+                    $array["table"]      = "revision_appointment";
+                    $array["id_user"]    = $request["id_user"];
+                    $array["comment"]    = $request->comment;
+                    Comments::insert($array);
+                }
             }
             
             if ($update) {

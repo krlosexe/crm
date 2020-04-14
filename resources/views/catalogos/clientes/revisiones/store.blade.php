@@ -57,81 +57,104 @@
         <br>
 
         <div class="row">
-            <div class="col-md-3">
-              <div class="form-group">
-                  <label for=""><b>Fecha</b></label>
-                  <input type="date" name="fecha" id="fecha-store" class="form-control  form-control-user" required min="<?= date('Y-m-d')?>">
+
+            <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label for=""><b>Fecha</b></label>
+                        <input type="date" name="fecha" id="fecha-store" class="form-control  form-control-user" required min="<?= date('Y-m-d')?>">
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label for=""><b>Hora desde</b></label>
+                        <input type="time" name="time" id="time-store" class="form-control  form-control-user" required>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label for=""><b>Hora hasta</b></label>
+                        <input type="time" name="time_end" id="time-end-store" class="form-control  form-control-user" required>
+                    </div>
+                  </div>
+
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for=""><b>Cirujano</b></label>
+                        <input type="text" name="cirujano" id="cirujano-store" class="form-control  form-control-user" required>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for=""><b>Enfermera</b></label>
+                        <input type="text" name="enfermera" id="enfermera-store" class="form-control  form-control-user" required>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for=""><b>Descripcion</b></label>
+                        <input type="text" name="descripcion" id="descripcion-store" class="form-control  form-control-user" required>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12" style="padding-top: 25px;">
+                  <button type="button" class="btn btn-primary waves-effect pull-left" onclick="addAppointment('#tableRegistrar', 'store')">Agregar</button>
+                </div>
+              </div>
+
+
+              <br><br>
+
+
+
+              <div class="row">
+                <table class="table table-bordered table-striped table-hover" id="tableRegistrar">
+                    <thead>
+                      <tr>
+                        <th>Fecha</th>
+                        <th>Hora desde</th>
+                        <th>Hora hasta</th>
+                        <th>Descripcion</th>
+                        <th>Cirujano</th>
+                        <th>Enfermera</th>
+                        <th>&nbsp;</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
               </div>
             </div>
 
 
-            <div class="col-md-3">
-              <div class="form-group">
-                  <label for=""><b>Hora desde</b></label>
-                  <input type="time" name="time" id="time-store" class="form-control  form-control-user" required>
+
+
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-12">
+                   <div class="form-group">
+                        <label for=""><b>Comentarios</b></label>
+                        <textarea id="summernote" name="comment"></textarea>
+                    </div>
+                </div>
               </div>
             </div>
-
-
-            <div class="col-md-3">
-              <div class="form-group">
-                  <label for=""><b>Hora hasta</b></label>
-                  <input type="time" name="time_end" id="time-end-store" class="form-control  form-control-user" required>
-              </div>
-            </div>
-
-
-
-           <div class="col-md-3">
-              <div class="form-group">
-                  <label for=""><b>Cirujano</b></label>
-                  <input type="text" name="cirujano" id="cirujano-store" class="form-control  form-control-user" required>
-              </div>
-          </div>
-
-
-          <div class="col-md-3">
-              <div class="form-group">
-                  <label for=""><b>Enfermera</b></label>
-                  <input type="text" name="enfermera" id="enfermera-store" class="form-control  form-control-user" required>
-              </div>
-          </div>
-
-
-          <div class="col-md-3">
-              <div class="form-group">
-                  <label for=""><b>Descripcion</b></label>
-                  <input type="text" name="descripcion" id="descripcion-store" class="form-control  form-control-user" required>
-              </div>
-          </div>
-
-
-          <div class="col-md-12" style="padding-top: 25px;">
-            <button type="button" class="btn btn-primary waves-effect pull-left" onclick="addAppointment('#tableRegistrar', 'store')">Agregar</button>
-          </div>
 
         </div>
+        
 
         <br>
-
-        <div class="row">
-          <div class="col-sm-12">
-            <table class="table table-bordered table-striped table-hover" id="tableRegistrar">
-              <thead>
-                <tr>
-                  <th>Fecha</th>
-                  <th>Hora desde</th>
-                  <th>Hora hasta</th>
-                  <th>Descripcion</th>
-                  <th>Cirujano</th>
-                  <th>Enfermera</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
 
         <input type="hidden" name="id_user" class="id_user">
         <input type="hidden" name="token" class="token">
