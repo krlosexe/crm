@@ -893,9 +893,6 @@
 								SubmitComment(calEvent.event.extendedProps.id_preanesthesias, "api/comments/preanesthesias", "preanesthesias", "#add-comments")
 
 
-
-
-
 								if(id_user == calEvent.event.extendedProps.usr_regins){
 									$(".input-disabled").removeAttr("disabled")
 								}else{
@@ -932,6 +929,22 @@
 
 
 
+							if(calEvent.event.extendedProps.revision == true){
+								$("#comments2-input").css("display", "block")
+								$("#comments3-input").css("display", "block")
+								$("#comments-input").css("display", "block")
+								$("#add-comments").css("display", "block")
+								
+								$('#summernote').summernote("reset");
+
+
+								GetComments("/api/comments/revision_appointment","#comments", calEvent.event.extendedProps.id_revision, null)
+
+								SubmitComment(calEvent.event.extendedProps.id_revision, "api/comments/revision_appointment", "revision_appointment", "#add-comments")
+
+
+
+							}
 
 
 							$("#list_followers").html(html)

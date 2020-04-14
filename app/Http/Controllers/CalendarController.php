@@ -628,6 +628,10 @@ class CalendarController extends Controller
             $value["start"] = $value["start"]."T".$value["time"];
 
             $value["title"] = "Revision: ".$value["name_client"]." ".$value["last_name_client"];
+
+            $value["revision"] = true;
+
+
             
         }
 
