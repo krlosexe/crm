@@ -67,7 +67,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                        <label for=""><b> NÚNMERO DE WHATSAPP O CELULAR *</b></label>
+                        <label for=""><b> NÚMERO DE WHATSAPP O CELULAR *</b></label>
                         <input type="number" name="telefono" id="telefono" class="form-control" required >
                     </div>
                 </div>
