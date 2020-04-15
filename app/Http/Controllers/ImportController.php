@@ -52,6 +52,11 @@ class ImportController extends Controller
                         $city = 4;
                     }
 
+                    $date=date_create($datos[3]); 
+  
+                    // using date_format() function to format date 
+                    $datos[3] = date_format($date, "Y-m-d"); 
+
 
                     $row = array(
                         "nombres" => $datos[0]." ".$datos[2]." ".$datos[1],
@@ -63,8 +68,8 @@ class ImportController extends Controller
                         "clinic" => 6,
                         "telefono" => $datos[8],
                         "email" => isset($datos[9]) ? $datos[9] : null,
-                        "id_line" => 16,
-                        "id_user_asesora" => 96,
+                        "id_line" => 18,
+                        "id_user_asesora" => 74,
                         "direccion" => isset($datos[12]) ? $datos[12] : null, 
                         "origen"    => $datos[5],
                         "state"     =>isset($datos[14]) ? $datos[14] != "" ? $datos[14] : null : null,
