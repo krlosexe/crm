@@ -194,11 +194,12 @@ Route::get('change_name', 'ClientsController@changeName');
 
 
 
-
-
-
-
 Route::get('codes', 'ClientsController@GenerateCodes');
+
+
+Route::get('form-prp/{id_line}', function ($id_line) {
+    return view('forms.prp', ["id_line" => $id_line]);
+});
 
 
 

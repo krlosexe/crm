@@ -63,6 +63,10 @@ Route::get('client/task/status/{id}/{status}', 'ClientsController@TasksStatus');
 
 Route::post('clients/forms', 'ClientsController@ClientForms');
 
+Route::post('clients/forms/prp', 'ClientsController@ClientFormsPrp');
+
+
+
 Route::get('clients/identification/{identification}', 'ClientsController@GetByIdentification');
 Route::get('status-cliente/{id}/{status}', 'ClientsController@status');
 
