@@ -983,7 +983,7 @@ class ClientsController extends Controller
 
 
             $request["name_user"]   = $users["nombres"]." ".$users["apellido_p"];
-            
+
             $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
             $code                   = substr(str_shuffle($permitted_chars), 0, 4);
             $request["code_client"] = strtoupper($code);
@@ -1053,8 +1053,8 @@ class ClientsController extends Controller
             }
 
             //$for = "cardenascarlos18@gmail.com";
-           // $for = $users["email"];
-            $for = "cardenascarlos18@gmail.com";
+            $for = $users["email"];
+           // $for = "cardenascarlos18@gmail.com";
 
             $request["msg"]  = "Wiiii :D";
 
@@ -1063,7 +1063,13 @@ class ClientsController extends Controller
                 $msj->subject($subject);
                 $msj->to($for);
             });
-           
+
+
+            Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
+                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->subject($subject);
+                $msj->to("pdtagenciademedios@gmail.com");
+            });
             
 
        }else{
