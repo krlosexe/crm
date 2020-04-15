@@ -81,6 +81,7 @@ class ModulosController extends Controller
                 $auditoria->tabla       = "modulos";
                 $auditoria->cod_reg     = $modulo->id_modulo;
                 $auditoria->status      = 1;
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
                 $auditoria->usr_regins  = $request["id_user"];
                 $auditoria->save();
 

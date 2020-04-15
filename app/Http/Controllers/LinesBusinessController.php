@@ -71,6 +71,9 @@ class LinesBusinessController extends Controller
                 $auditoria->tabla       = "lines_business";
                 $auditoria->cod_reg     = $line["id_line"];
                 $auditoria->status      = 1;
+
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                
                 $auditoria->usr_regins  = $request["id_user"];
                 $auditoria->save();
 

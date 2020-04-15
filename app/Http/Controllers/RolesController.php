@@ -99,6 +99,8 @@ class RolesController extends Controller
                 $auditoria->tabla       = "roles";
                 $auditoria->cod_reg     = $rol->id_rol;
                 $auditoria->status      = 1;
+
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
                 $auditoria->usr_regins  = $request["id_user"];
                 $auditoria->save();
 

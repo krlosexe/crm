@@ -131,6 +131,7 @@ class SurgeriesController extends Controller
             $auditoria->tabla       = "surgeries";
             $auditoria->cod_reg     = $store["id_surgeries"];
             $auditoria->status      = 1;
+            $auditoria->fec_regins  = date("Y-m-d H:i:s");
             $auditoria->usr_regins  = $request["id_user"];
             $auditoria->save();
 

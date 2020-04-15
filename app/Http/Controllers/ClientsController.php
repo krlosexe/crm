@@ -584,6 +584,7 @@ class ClientsController extends Controller
             $auditoria->tabla       = "clients_tasks";
             $auditoria->cod_reg     = $store["id_clients_tasks"];
             $auditoria->status      = 1;
+            $auditoria->fec_regins  = date("Y-m-d H:i:s");
             $auditoria->usr_regins  = $request["id_user"];
             $auditoria->save();
 
@@ -862,6 +863,7 @@ class ClientsController extends Controller
                 $auditoria->tabla       = "clientes";
                 $auditoria->cod_reg     = $cliente["id_cliente"];
                 $auditoria->status      = 1;
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
                 $auditoria->usr_regins  = $request["id_user"];
                 $auditoria->save();
 
@@ -901,6 +903,7 @@ class ClientsController extends Controller
             $auditoria->tabla       = "clientes";
             $auditoria->cod_reg     = $cliente["id_cliente"];
             $auditoria->status      = 1;
+            $auditoria->fec_regins  = date("Y-m-d H:i:s");
             $auditoria->usr_regins  = $users["id"];
             $auditoria->save();
 

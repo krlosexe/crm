@@ -74,6 +74,7 @@ class QueriesController extends Controller
                 $auditoria->tabla       = "queries";
                 $auditoria->cod_reg     = $queries["id_queries"];
                 $auditoria->status      = 1;
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
                 $auditoria->usr_regins  = $request["id_user"];
                 $auditoria->save();
 

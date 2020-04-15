@@ -74,6 +74,7 @@ class ClinicController extends Controller
                 $auditoria->tabla       = "clinic";
                 $auditoria->cod_reg     = $cliente["id_clinic"];
                 $auditoria->status      = 1;
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
                 $auditoria->usr_regins  = $request["id_user"];
                 $auditoria->save();
 
