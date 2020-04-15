@@ -192,7 +192,7 @@ class UsuariosController extends Controller
                 $User->password    = md5($request["password"]);
                 $User->img_profile = $file->getClientOriginalName();
                 $User->id_rol      = $request["rol"];
-                $auditoria->fec_regins  = date("Y-m-d H:i:s");
+               // $auditoria->fec_regins  = date("Y-m-d H:i:s");
                 $User->id_line     = $request["id_line"];
                 
                 $User->save();
