@@ -95,7 +95,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                           <label for=""><b>Clinica</b></label>
-                          <select name="clinic" id="clinic-store" class="form-control select2" required>
+                          <select name="clinic" id="clinic-store" class="form-control" required>
                               <option value="">Seleccione</option>
                           </select>
                       </div>

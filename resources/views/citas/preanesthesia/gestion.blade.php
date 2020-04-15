@@ -665,7 +665,7 @@
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
 
-				GetClinic("#clinic-store")
+				GetClinic2("#clinic-store")
 
 				SelectClinic("#paciente-store", "#clinic-store")
 
@@ -676,12 +676,52 @@
 				$("#paciente_alquiler").css("display", "none")
 				$("#paciente").css("display", "block")
 
-
-
 				
 				getPacientes("#paciente-store")
 				cuadros("#cuadro1", "#cuadro2");
 			}
+
+
+
+			function GetClinic2(select, select_default = false){
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/clinic',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+					},
+					dataType:'JSON',
+					beforeSend: function(){
+					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+					},
+					error: function (data) {
+					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+					},
+					success: function(data){
+					$(select+" option").remove();
+					$(select).append($('<option>',
+					{
+						value: "",
+						text : "Seleccione"
+					}));
+					$.each(data, function(i, item){
+						if (item.status == 1) {
+						$(select).append($('<option>',
+						{
+							value: item.id_clinic,
+							text : item.nombre,
+							selected: select_default == item.id_clinic ? true : false
+						}));
+						}
+					});
+
+					}
+				});
+				}
+
+
 
 			/* ------------------------------------------------------------------------------- */
 			/* 
