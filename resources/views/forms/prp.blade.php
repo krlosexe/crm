@@ -41,7 +41,7 @@
 
 <div class="card shadow mb-4 " id="cuadro2">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Pide tu Cita de Valoración</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Trabaja con Nosotros</h6>
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="store" enctype="multipart/form-data">
@@ -100,7 +100,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>¿QUE CIRUGÍA TE PRACTICASTE?(si aun no eres nuestro paciente deja este campo en blanco)</b></label>
-                        <input type="text" name="surgeri" id="surgeri" class="form-control" required >
+                        <input type="text" name="surgeri" id="surgeri" class="form-control" >
                     </div>
                 </div>
               </div>
@@ -153,7 +153,7 @@
 
                         <div class="row">
                           <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radiosPago" id="radiosPago1" value="Efectivo">
+                            <input class="form-check-input" type="radio" name="radiosPago" id="radiosPago1" value="Efectivo" required>
                             <label class="form-check-label" for="radiosPago1">
                              Efectivo
                             </label>
@@ -163,7 +163,7 @@
 
                         <div class="row">
                           <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radiosPago" id="radiosPago2" value="Transferencia">
+                            <input class="form-check-input" type="radio" name="radiosPago" id="radiosPago2" value="Transferencia" required> 
                             <label class="form-check-label" for="radiosPago2">
                              Transferencia Bancaria (Bancolombia)
                             </label>
@@ -182,13 +182,13 @@
                         <label for=""><b>SI ELEGISTE PAGO POR TRANSFERENCIA INGRESA</b></label>
                         <br>
                         <label for=""><b>Nombre del Titular</b></label>
-                        <input type="text" name="name_titular" class="form-control" required >
+                        <input type="text" name="name_titular" class="form-control"  >
                         <br>
                         <label for=""><b>Numero de Cedula</b></label>
-                        <input type="text" name="cedula_titular" class="form-control" required >
+                        <input type="text" name="cedula_titular" class="form-control"  >
                         <br>
                         <label for=""><b>Número de Cuenta</b></label>
-                        <input type="text" name="cuenta_titular" class="form-control" required >
+                        <input type="text" name="cuenta_titular" class="form-control"  >
                     </div>
                 </div>
               </div>
