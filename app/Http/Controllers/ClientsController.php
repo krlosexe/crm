@@ -904,6 +904,7 @@ class ClientsController extends Controller
             $auditoria->cod_reg     = $cliente["id_cliente"];
             $auditoria->status      = 1;
             $auditoria->fec_regins  = date("Y-m-d H:i:s");
+            $auditoria->fec_update  = date("Y-m-d H:i:s");
             $auditoria->usr_regins  = $users["id"];
             $auditoria->save();
 
