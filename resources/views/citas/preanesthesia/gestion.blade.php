@@ -261,7 +261,7 @@
 
 
 
-			  <div id="slide">
+			   <div id="slide">
 					
 					<div class="side-panel-container">
 
