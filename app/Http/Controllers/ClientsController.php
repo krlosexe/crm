@@ -1047,11 +1047,11 @@ class ClientsController extends Controller
                 $subject = "Formulario Trabaja con Nosotros para Paulina y Manuela Clinica Laser: ".$request["nombres"];
             }
 
-            if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17) || ($request["id_line"] == 16)){
+            if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17)){
                 $subject = "Formulario Trabaja con Nosotros para Paulina ".$request["name_line"]." : ".$request["nombres"];
             }
 
-            if(($request["id_line"] == 18) || ($request["id_line"] == 14) || ($request["id_line"] == 15)){
+            if(($request["id_line"] == 18) || ($request["id_line"] == 14) || ($request["id_line"] == 15)  || ($request["id_line"] == 16)){
                 $subject = "Formulario Trabaja con Nosotros para Manuela ".$request["name_line"].": ".$request["nombres"];
             }
 
