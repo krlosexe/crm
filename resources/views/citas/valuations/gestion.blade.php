@@ -321,6 +321,10 @@
 				$("#nav_valuations, #modulo_Citas").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "citys");
+
+				GetUsersTasksclient2(".getUserssss")
+
+
 			});
 
 
@@ -676,14 +680,14 @@
 
 				GetClinic2("#clinic")
 
-				GetUsersTasksclient(".getUsers")
+			
 
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
 
 
-			function GetUsersTasksclient(select, select_default){
+			function GetUsersTasksclient2(select, select_default){
 
 				var url=document.getElementById('ruta').value;
 				$.ajax({
@@ -694,7 +698,7 @@
 						"token"  : tokens,
 						},
 					dataType:'JSON',
-					//async: false,
+					async: false,
 					beforeSend: function(){
 						
 					},
@@ -723,9 +727,6 @@
 						$(select).select2({
 							width: '100%'
 						});
-
-
-
 
 					}
 				});

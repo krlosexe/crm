@@ -266,13 +266,14 @@
 				});
 
 
-				GetUsersTasksclient(".getUsers")
+				GetUsersTasksclient2(".getUsers2")
+				GetUsersTasksclient2(".getUsersEdit")
 
 			});
 
 
 
-			function GetUsersTasksclient(select, select_default){
+			function GetUsersTasksclient2(select, select_default){
 
 				var url=document.getElementById('ruta').value;
 				$.ajax({

@@ -25,14 +25,14 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Fecha</b></label>
-                        <input type="date" name="fecha" id="fecha-store" class="form-control select2" required min="<?= date("Y-m-d")?>">
+                        <input type="date" name="fecha" id="fecha-store" class="form-control" required min="<?= date("Y-m-d")?>">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora desde</b></label>
-                        <input type="time" name="time" id="time-store" class="form-control select2" required>
+                        <input type="time" name="time" id="time-store" class="form-control" required>
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora hasta</b></label>
-                        <input type="time" name="time_end" id="time-end-store" class="form-control select2" required>
+                        <input type="time" name="time_end" id="time-end-store" class="form-control" required>
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                           <label for=""><b>Doctor</b></label>
-                          <input type="text" name="surgeon" id="surgeon-store" class="form-control select2">
+                          <input type="text" name="surgeon" id="surgeon-store" class="form-control">
                       </div>
                   </div>
 
@@ -59,7 +59,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                         <label for=""><b>Clinica</b></label>
-                        <select name="clinic" id="clinic" class="form-control select2">
+                        <select name="clinic" id="clinic" class="form-control">
                             <option value="">Seleccione</option>
                         </select>
                     </div>
@@ -73,7 +73,7 @@
                       <div class="form-group">
                           <div class="form-group">
                             <label for=""><b>Tipo</b></label>
-                            <select name="type" id="type-store" class="form-control select2" required>
+                            <select name="type" id="type-store" class="form-control" required>
                                 <option value="Al Contado">Al Contado</option>
                                 <option value="Financiado">Financiado </option>
                             </select>
@@ -108,7 +108,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Seguidores</b></label>
-                        <select name="followers[]" id="followers-store" class="form-control getUsers"  multiple>
+                        <select name="followers[]" id="followers-store" class="form-control getUserssss"  multiple>
                             <option value="">Seleccione</option>
                         </select>
                     </div>
@@ -117,7 +117,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for=""><b>Estatus</b></label>
-                        <select name="status" id="status-store" class="form-control select2" required>
+                        <select name="status" id="status-store" class="form-control" required>
                             <option value="0">Pendiente</option>
                         </select>
                     </div>

@@ -78,14 +78,14 @@
 
                
                   <div class="col-md-12">
-                    <div class="form-group">
-                          <label for=""><b>Seguidores</b></label>
-                          <select name="followers[]" id="followers-store" class="form-control getUsers"  multiple>
-                              <option value="">Seleccione</option>
-                          </select>
-                      </div>
-                  </div>
-             
+                      <div class="form-group">
+                            <label for=""><b>Seguidores</b></label>
+                            <select name="followers[]" id="follower" class="form-control select2 getUsers2" multiple>
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+          
 
 
 
