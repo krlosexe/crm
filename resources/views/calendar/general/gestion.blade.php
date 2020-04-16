@@ -776,7 +776,7 @@
 
 
 						eventClick: function(calEvent, jsEvent, view) {
-							
+								
 							$("#issue-view").val(calEvent.event.title)
 							$("#fecha-view").val(calEvent.event.extendedProps.fecha)
 							$("#time-view").val(calEvent.event.extendedProps.time)
@@ -857,6 +857,13 @@
 									$(".input-disabled").attr("disabled", "disabled")
 								}
 
+								$.map(calEvent.event.extendedProps.followers, function (item, ke) {
+									
+									if(id_user == item.id_user){
+										
+										$(".input-disabled").removeAttr("disabled")
+									}
+								});
 
 
 								

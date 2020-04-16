@@ -46,6 +46,39 @@ class ValuationsController extends Controller
 
                                 ->orderBy("valuations.id_valuations", "DESC")
                                 ->get();
+
+
+
+            if($rol == "Asesor"){
+
+                $valuations_follow = Valuations::select("valuations.*", "valuations.id_asesora_valoracion as id_asesora", "valuations.clinic as id_clinic",
+                                             "valuations.status as status_valuations*", "auditoria.*", "users.email as email_regis", "clientes.*",
+                                            "valuations.status as status_valuations", "valuations.clinic as id_clinic")
+
+                                ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
+                                ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                                ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                ->where("auditoria.tabla", "valuations")
+                                ->where("auditoria.status", "!=", "0")
+
+                                ->join("followers_events", "followers_events.id_event", "=", "valuations.id_valuations")
+
+                                
+                                ->with("followers")
+                                
+                                ->with("photos")
+
+                                ->where("followers_events.id_user", $id_user)
+                                ->where("followers_events.tabla", "valuations")
+
+                                ->orderBy("valuations.id_valuations", "DESC")
+                                ->get();
+
+
+                foreach($valuations_follow as $key => $value){
+                  $valuations[] = $value;
+                }
+            }
             echo json_encode($valuations);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
@@ -251,11 +284,12 @@ class ValuationsController extends Controller
             
 
 
-            FollwersEvents::where("id_event", $valuations)->delete();
+            
 
 
             if(isset($request->followers)){
 
+                FollwersEvents::where("id_event", $valuations)->delete();
                 $followers = [];
                 foreach($request->followers as $key => $value){
                     $array = [];
@@ -264,6 +298,7 @@ class ValuationsController extends Controller
                     $array["tabla"]       = "valuations";
                     FollwersEvents::create($array);
                 }
+                
             }
 
 
