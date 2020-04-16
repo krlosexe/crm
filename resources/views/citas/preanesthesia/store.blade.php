@@ -53,14 +53,14 @@
                     </div>
                 </div>
 
-                <!-- <div class="col-md-6">
+               <div class="col-md-6">
                   <div class="form-group">
-                        <label for=""><b>Hora desde</b></label>
+                        <label for=""><b>Hora</b></label>
                         <input type="time" name="time" id="time-store" class="form-control select2" required>
                     </div>
                 </div>
 
-
+ <!-- 
                 <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora hasta</b></label>

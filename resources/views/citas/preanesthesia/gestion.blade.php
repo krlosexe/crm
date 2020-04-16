@@ -774,8 +774,7 @@
 
 
 					
-					GetClinic("#clinic-edit")
-					SelectClinic("#paciente-edit", "#clinic-edit")
+					GetClinic2("#clinic-edit", data.id_clinic)
 					$("#paciente-edit").val(data.id_cliente)
 					$("#name_paciente_edit").val(data.nombres)
 					$("#fecha-edit").val(data.fecha)

@@ -47,14 +47,14 @@
                 </div>
 
 
-                <!-- <div class="col-md-6">
+              <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora desde</b></label>
                         <input type="time" name="time" id="time-edit" class="form-control select2" required>
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                 <!--  <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Hora hasta</b></label>
                         <input type="time" name="time_end" id="time-end-edit" class="form-control select2" required>
@@ -104,7 +104,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                           <label for=""><b>Clinica</b></label>
-                          <select name="clinic" id="clinic-edit" class="form-control select2" required>
+                          <select name="clinic" id="clinic-edit" class="form-control" required>
                               <option value="">Seleccione</option>
                           </select>
                       </div>

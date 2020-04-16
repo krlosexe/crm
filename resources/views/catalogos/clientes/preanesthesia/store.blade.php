@@ -18,7 +18,21 @@
                         <input type="date" name="fecha" id="fecha-store" class="form-control select2" required min="<?= date("Y-m-d")?>">
                     </div>
                 </div>
+
               </div>
+
+             
+
+            <div class="row">
+              
+               <div class="col-md-6">
+                  <div class="form-group">
+                          <label for=""><b>Hora</b></label>
+                          <input type="time" name="time" id="time-store" class="form-control select2" required>
+                   
+                  </div>
+                </div>
+            </div>
 
 
               <div class="row">
