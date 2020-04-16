@@ -33,6 +33,8 @@ class ValuationsController extends Controller
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.tabla", "valuations")
                                 ->where("auditoria.status", "!=", "0")
+
+                                ->with("followers")
                                 
                                 ->where(function ($query) use ($rol, $id_user) {
                                     if($rol == "Asesor"){

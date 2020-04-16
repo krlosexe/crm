@@ -830,7 +830,7 @@
 						followers.push(item.id_user)
 					});
 
-					console.log(followers)
+			
 					$("#followers-edit").val(followers)
 					$("#followers-edit").trigger("change");
 

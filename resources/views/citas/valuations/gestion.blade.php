@@ -240,6 +240,7 @@
 								  <th>Hora Hasta</th>
 								  <th>Tipo</th>
 								  <th>Estatus</th>
+								  <th>Seguidores</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -411,6 +412,20 @@
 
 							}
 						},
+
+						{"data": null,
+							render : function(data, type, row) {
+								
+								var html = ""
+								$.each(row.followers, function (key, item) { 
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_user+" "+item.name_user+"'>"
+								});
+								
+								return html
+							}
+						},
+
+
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
 						
@@ -654,7 +669,7 @@
 						var html = "";
 
 
-					
+						
 
 					//	GetComments("#comments_edit", data.id_cliente)
 				
@@ -1032,6 +1047,15 @@
 
 						count++
 					});
+
+					var followers = []
+						$.each(data.followers, function (key, item) { 
+							followers.push(item.id_user)
+						});
+
+				
+						$("#followers-edit").val(followers)
+						$("#followers-edit").trigger("change");
 
 
 
