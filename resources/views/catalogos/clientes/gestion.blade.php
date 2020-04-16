@@ -645,8 +645,8 @@
 
 				GetCity("#city");
 				GetClinic("#city", "#clinic")
-				GetAsesorasbyBusisnessLine("#linea-negocio", "#asesora");
-				GetAsesorasValoracion("#id_asesora_valoracion")
+			//	GetAsesorasbyBusisnessLine("#linea-negocio", "#asesora");
+			//	GetAsesorasValoracion("#id_asesora_valoracion")
 				GetBusinessLine("#linea-negocio");
 				Children("#children", "#number_children")
 				Surgery("#surgery", "#previous_surgery")
@@ -663,6 +663,9 @@
 				$('#summernote').summernote({
 					'height' : 200
 				});
+
+
+				GetAsesorasValoracion2("#asesora")
 
 
 
@@ -1032,6 +1035,49 @@
 			}
 
 
+
+			function GetAsesorasValoracion2(select, select_default = false){
+				console.log(select_default)
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/get-asesoras',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+					},
+					dataType:'JSON',
+				//	async: false,
+					beforeSend: function(){
+					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+					},
+					error: function (data) {
+					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+					},
+					success: function(data){
+					$(select+" option").remove();
+					$(select).append($('<option>',
+					{
+						value: "",
+						text : "Seleccione"
+					}));
+				
+					$.each(data, function(i, item){
+						if (item.status == 1) {
+						
+							$(select).append($('<option>',
+							{
+								value: item.id,
+								text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
+								selected: select_default == item.id ? true : false
+							}));
+
+						}
+					});
+
+					}
+				});
+			}
 			/* ------------------------------------------------------------------------------- */
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
@@ -1046,9 +1092,10 @@
 					
 					GetCity("#city_edit");
 					GetClinic("#city_edit", "#clinic_edit")
-					GetAsesorasbyBusisnessLine("#linea-negocio-edit", "#asesora-edit");
+				//	GetAsesorasbyBusisnessLine("#linea-negocio-edit", "#asesora-edit");
 					GetBusinessLine("#linea-negocio-edit");
 
+					GetAsesorasValoracion2("#asesora-edit", data.id_user_asesora)
 
 					Children("#children_edit", "#number_children_edit")
 					Surgery("#surgery_edit", "#previous_surgery_edit")
