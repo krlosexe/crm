@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Auditoria;
 use App\Valuations;
 use App\Comments;
-
+use App\FollwersEvents;
 use App\ValuationsPhoto;
 use Illuminate\Http\Request;
 
@@ -102,9 +102,6 @@ class ValuationsController extends Controller
                 Comments::create($request->all());
             }
 
-
-            
-
             $auditoria              = new Auditoria;
             $auditoria->tabla       = "valuations";
             $auditoria->cod_reg     = $store["id_valuations"];
@@ -112,6 +109,23 @@ class ValuationsController extends Controller
             $auditoria->fec_regins  = date("Y-m-d H:i:s");
             $auditoria->usr_regins  = $request["id_user"];
             $auditoria->save();
+
+
+
+            $followers = [];
+            if(isset($request->followers)){
+
+                foreach($request->followers as $key => $value){
+                    $array = [];
+                    $array["id_event"]    = $store["id_valuations"];
+                    $array["id_user"]     = $value;
+                    $array["tabla"]       = "valuations";
+                    array_push($followers, $array);
+                    FollwersEvents::create($array);
+                }
+                
+            }
+
 
             if ($store) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
@@ -144,6 +158,7 @@ class ValuationsController extends Controller
 
                                 ->with("comments")
                                 ->with("photos")
+                                ->with("followers")
                                 
                                 ->orderBy("valuations.id_valuations", "DESC")
                                 ->get();
@@ -234,7 +249,20 @@ class ValuationsController extends Controller
             
 
 
+            FollwersEvents::where("id_event", $valuations)->delete();
 
+
+            if(isset($request->followers)){
+
+                $followers = [];
+                foreach($request->followers as $key => $value){
+                    $array = [];
+                    $array["id_event"]    = $valuations;
+                    $array["id_user"]     = $value;
+                    $array["tabla"]       = "valuations";
+                    FollwersEvents::create($array);
+                }
+            }
 
 
 

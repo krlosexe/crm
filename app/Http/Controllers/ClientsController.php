@@ -977,8 +977,6 @@ class ClientsController extends Controller
 
         
 
-        
-
        if($users){
 
 
@@ -1025,6 +1023,11 @@ class ClientsController extends Controller
             if($request["id_line"] == 17){
                 $request["name_line"] = "Doctor Daniel Correa";
             }
+            if($request["id_line"] == 16){
+                $request["name_line"] = "Planmed";
+            }
+
+
 
 
             if($request["id_line"] == 18){
@@ -1044,7 +1047,7 @@ class ClientsController extends Controller
                 $subject = "Formulario Trabaja con Nosotros para Paulina y Manuela Clinica Laser: ".$request["nombres"];
             }
 
-            if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17)){
+            if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17) || ($request["id_line"] == 16)){
                 $subject = "Formulario Trabaja con Nosotros para Paulina ".$request["name_line"]." : ".$request["nombres"];
             }
 

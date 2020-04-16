@@ -75,10 +75,26 @@
                   </div>
 
 
+
+               
+                  <div class="col-md-12">
+                    <div class="form-group">
+                          <label for=""><b>Seguidores</b></label>
+                          <select name="followers[]" id="followers-store" class="form-control getUsers"  multiple>
+                              <option value="">Seleccione</option>
+                          </select>
+                      </div>
+                  </div>
+             
+
+
+
+
+
                   <div class="col-md-12">
                     <div class="form-group">
                         <label for=""><b>Estatus</b></label>
-                        <select name="status" id="status-store" class="form-control select2" required>
+                        <select name="status" id="status-store" class="form-control" required>
                             <option value="0">Pendiente</option>
                         </select>
                     </div>

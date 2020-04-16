@@ -37,7 +37,6 @@
     <script src="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.js"></script>
 
 
-	
 
   
   @if(Request::path() != '/')
@@ -127,6 +126,7 @@
 								  <th>Hora Desde</th>
 								  <th>Hora Hasta</th>
 								  <th>Estatus</th>
+								  <th>Seguidores</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -266,8 +266,60 @@
 				});
 
 
+				GetUsersTasksclient(".getUsers")
 
 			});
+
+
+
+			function GetUsersTasksclient(select, select_default){
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/user',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+						},
+					dataType:'JSON',
+					async: false,
+					beforeSend: function(){
+						$('#page-loader').css("display", "block");
+					},
+					error: function (data) {
+						$('#page-loader').css("display", "none");
+					},
+					success: function(data){
+						$('#page-loader').css("display", "none");
+						$(select+" option").remove();
+						$(select).append($('<option>',
+						{
+						value: "",
+						text : "Seleccione"
+						}));
+						$.each(data, function(i, item){
+							if (item.status == 1 && item.id != id_user) {
+								$(select).append($('<option>',
+								{
+								value: item.id,
+								text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
+								selected : select_default == item.id ? true : false
+								}));
+							}
+						});
+
+						$(select).select2({
+							width: '100%'
+						});
+
+
+
+
+					}
+				});
+			}
+
 
 			var  option = {{$option}};
 
@@ -353,6 +405,20 @@
 
 							}
 						},
+
+						{"data": null,
+							render : function(data, type, row) {
+								
+								var html = ""
+								$.each(row.followers, function (key, item) { 
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_user+" "+item.name_user+"'>"
+								});
+								
+								return html
+							}
+						},
+
+
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
 						
@@ -759,7 +825,16 @@
 
 
 
+					var followers = []
+					$.each(data.followers, function (key, item) { 
+						followers.push(item.id_user)
+					});
 
+					console.log(followers)
+					$("#followers-edit").val(followers)
+					$("#followers-edit").trigger("change");
+
+					
 					cuadros('#cuadro1', '#cuadro4');
 					$("#id_edit").val(data.id_valuations)
 					cuadros('#cuadro1', '#cuadro4');

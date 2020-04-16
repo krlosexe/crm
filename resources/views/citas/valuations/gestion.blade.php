@@ -676,8 +676,59 @@
 
 				GetClinic2("#clinic")
 
+				GetUsersTasksclient(".getUsers")
 
 				cuadros("#cuadro1", "#cuadro2");
+			}
+
+
+
+			function GetUsersTasksclient(select, select_default){
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/user',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+						},
+					dataType:'JSON',
+					//async: false,
+					beforeSend: function(){
+						
+					},
+					error: function (data) {
+						
+					},
+					success: function(data){
+						
+						$(select+" option").remove();
+						$(select).append($('<option>',
+						{
+						value: "",
+						text : "Seleccione"
+						}));
+						$.each(data, function(i, item){
+							if (item.status == 1 && item.id != id_user) {
+								$(select).append($('<option>',
+								{
+								value: item.id,
+								text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
+								selected : select_default == item.id ? true : false
+								}));
+							}
+						});
+
+						$(select).select2({
+							width: '100%'
+						});
+
+
+
+
+					}
+				});
 			}
 
 
