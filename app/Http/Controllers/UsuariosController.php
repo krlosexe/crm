@@ -48,7 +48,7 @@ class UsuariosController extends Controller
                           ->join("auditoria", "auditoria.cod_reg", "=", "users.id")
                           ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                           ->join("roles", "roles.id_rol", "=", "users.id_rol")
-                          ->where("roles.nombre_rol", "Asesor")
+                       //   ->where("roles.nombre_rol", "Asesor")
                           ->where("auditoria.tabla", "users")
                           ->where("auditoria.status", "!=", "0")
                           ->orderBy("users.id", "desc")
