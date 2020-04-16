@@ -266,8 +266,7 @@
 				});
 
 
-				GetUsersTasksclient2(".getUsers2")
-				GetUsersTasksclient2(".getUsersEdit")
+				GetUsersTasksclient2(".getUsers")
 
 			});
 

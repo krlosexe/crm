@@ -80,7 +80,7 @@
                   <div class="col-md-12">
                       <div class="form-group">
                             <label for=""><b>Seguidores</b></label>
-                            <select name="followers[]" id="follower" class="form-control select2 getUsers2" multiple>
+                            <select name="followers[]" id="follower" class="form-control select2 getUsers" multiple>
                                 <option value="">Seleccione</option>
                             </select>
                         </div>
