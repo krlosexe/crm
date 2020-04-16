@@ -108,7 +108,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>Seguidores</b></label>
-                        <select name="followers[]" id="followers-store" class="form-control getUserssss"  multiple>
+                        <select name="followers[]" id="followers" class="form-control getUsers"  multiple>
                             <option value="">Seleccione</option>
                         </select>
                     </div>

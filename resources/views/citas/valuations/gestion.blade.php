@@ -322,7 +322,7 @@
 
 				verifyPersmisos(id_user, tokens, "citys");
 
-				GetUsersTasksclient2(".getUserssss")
+				GetUsersTasksclient2(".getUsers")
 
 
 			});
