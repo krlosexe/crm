@@ -318,6 +318,7 @@ class CalendarController extends Controller
                                 
 
                                 ->with("comments")
+                                ->with("followers")
 
 
                                 
