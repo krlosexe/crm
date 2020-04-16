@@ -22,4 +22,18 @@ class Surgeries extends Model
     }
 
 
+
+    public function followers(){
+      return $this->hasMany('App\FollwersEvents', 'id_event')
+                  ->join('users', 'users.id', '=', 'followers_events.id_user')  
+                  ->join('datos_personales', 'datos_personales.id_usuario', '=', 'followers_events.id_user')     
+                  ->where("followers_events.tabla", "surgeries")
+                  ->select(array('followers_events.*', 'users.img_profile', "datos_personales.nombres as name_user", 
+                  "datos_personales.apellido_p as last_name_user"));
+  }
+
+
+
+
+
 }

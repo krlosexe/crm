@@ -119,6 +119,7 @@
 								<th>Fecha</th>
 								<th>Cirujano</th>
 								<th>Clinica</th>
+								<th>Seguidores</th>
 								<th>Fecha de registro</th>
 								<th>Registrado por</th>
 							</tr>
@@ -251,8 +252,108 @@
 				$("#nav_surgeries, #modulo_Citas").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "citys");
+
+				GetUsersTasksclient2(".getUsers")
+
+
 			});
 
+
+			function GetUsersTasksclient2(select, select_default){
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/user',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+						},
+					dataType:'JSON',
+					async: false,
+					beforeSend: function(){
+						$('#page-loader').css("display", "block");
+					},
+					error: function (data) {
+						$('#page-loader').css("display", "none");
+					},
+					success: function(data){
+						$('#page-loader').css("display", "none");
+						$(select+" option").remove();
+						$(select).append($('<option>',
+						{
+						value: "",
+						text : "Seleccione"
+						}));
+						$.each(data, function(i, item){
+							if (item.status == 1 && item.id != id_user) {
+								$(select).append($('<option>',
+								{
+								value: item.id,
+								text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
+								selected : select_default == item.id ? true : false
+								}));
+							}
+						});
+
+						$(select).select2({
+							width: '100%'
+						});
+
+
+
+
+					}
+				});
+			}
+			
+			function GetUsersTasksclient2(select, select_default){
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/user',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+						},
+					dataType:'JSON',
+					async: false,
+					beforeSend: function(){
+						$('#page-loader').css("display", "block");
+					},
+					error: function (data) {
+						$('#page-loader').css("display", "none");
+					},
+					success: function(data){
+						$('#page-loader').css("display", "none");
+						$(select+" option").remove();
+						$(select).append($('<option>',
+						{
+						value: "",
+						text : "Seleccione"
+						}));
+						$.each(data, function(i, item){
+							if (item.status == 1 && item.id != id_user) {
+								$(select).append($('<option>',
+								{
+								value: item.id,
+								text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
+								selected : select_default == item.id ? true : false
+								}));
+							}
+						});
+
+						$(select).select2({
+							width: '100%'
+						});
+
+
+
+
+					}
+				});
+			}
 
 			function update(){
 				enviarFormularioPut("#form-update", 'api/surgeries', '#cuadro4', false, "#avatar-edit");
@@ -317,6 +418,19 @@
 						{"data": "fecha"},
 						{"data": "surgeon"},
 						{"data": "name_clinic"},
+
+						{"data": null,
+							render : function(data, type, row) {
+								
+								var html = ""
+								$.each(row.followers, function (key, item) { 
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_user+" "+item.name_user+"'>"
+								});
+								
+								return html
+							}
+						},
+
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
 					],
@@ -422,6 +536,18 @@
 					$('#summernote_edit').summernote("reset");
 
 					SubmitComment(data.id_surgeries, "api/comments/surgerie", "#comments_edit", "#add-comments", "#summernote_edit")
+
+
+
+					var followers = []
+					$.each(data.followers, function (key, item) { 
+						followers.push(item.id_user)
+					});
+
+			
+					$("#followers-edit").val(followers)
+					$("#followers-edit").trigger("change");
+
 
 
 					cuadros('#cuadro1', '#cuadro4');

@@ -231,10 +231,9 @@
 								  <th>Acciones</th>
 								  <th>Nombres</th>
 								  <th>Fecha</th>
-								  <th>Hora Desde</th>
-								  <th>Hora Hasta</th>
 								  <th>Cirujano</th>
 								  <th>Clinica</th>
+								  <th>Seguidores</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -311,8 +310,61 @@
 				$("#nav_surgeries, #modulo_Citas").addClass("active");
 
 				verifyPersmisos(id_user, tokens, "citys");
+
+				GetUsersTasksclient2(".getUsers")
+
+
 			});
 
+
+
+			function GetUsersTasksclient2(select, select_default){
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/user',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+						},
+					dataType:'JSON',
+					async: false,
+					beforeSend: function(){
+						$('#page-loader').css("display", "block");
+					},
+					error: function (data) {
+						$('#page-loader').css("display", "none");
+					},
+					success: function(data){
+						$('#page-loader').css("display", "none");
+						$(select+" option").remove();
+						$(select).append($('<option>',
+						{
+						value: "",
+						text : "Seleccione"
+						}));
+						$.each(data, function(i, item){
+							if (item.status == 1 && item.id != id_user) {
+								$(select).append($('<option>',
+								{
+								value: item.id,
+								text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
+								selected : select_default == item.id ? true : false
+								}));
+							}
+						});
+
+						$(select).select2({
+							width: '100%'
+						});
+
+
+
+
+					}
+				});
+			}
 
 			function update(){
 				enviarFormularioPut("#form-update", 'api/surgeries', '#cuadro4', false, "#avatar-edit");
@@ -379,10 +431,22 @@
 							}
 						},
 						{"data": "fecha"},
-						{"data": "time"},
-						{"data": "time_end"},
 						{"data": "surgeon"},
 						{"data": "name_clinic"},
+
+						{"data": null,
+							render : function(data, type, row) {
+								
+								var html = ""
+								$.each(row.followers, function (key, item) { 
+									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_user+" "+item.name_user+"'>"
+								});
+								
+								return html
+							}
+						},
+
+
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
 						
@@ -544,8 +608,13 @@
 
 
 					$("#name_client-edit").val(data.nombres)
-					GetClinic("#clinic-edit")
-					SelectClinic("#paciente-edit", "#clinic-edit")
+
+					GetClinic2("#clinic-edit")
+
+
+				//	SelectClinic("#paciente-edit", "#clinic-edit")
+
+
 					$("#paciente-edit").val(data.id_cliente)
 					$("#fecha-edit").val(data.fecha)
 					$("#time-edit").val(data.time)
@@ -569,6 +638,18 @@
 					SubmitComment(data.id_surgeries, "api/comments/surgerie", "#comments_edit", "#add-comments", "#summernote_edit")
 
 
+					var followers = []
+					$.each(data.followers, function (key, item) { 
+						followers.push(item.id_user)
+					});
+
+			
+					$("#followers-edit").val(followers)
+					$("#followers-edit").trigger("change");
+
+
+
+
 					cuadros('#cuadro1', '#cuadro4');
 					$("#id_edit").val(data.id_surgeries)
 					cuadros('#cuadro1', '#cuadro4');
@@ -577,7 +658,46 @@
 
 
 
-			function SubmitComment(id, api, table, btn, summer){
+			function GetClinic2(select){
+
+				console.log("adasd")
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/clinic',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+					},
+					dataType:'JSON',
+					async: false,
+					beforeSend: function(){
+					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+					},
+					error: function (data) {
+					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+					},
+					success: function(data){
+					$(select+" option").remove();
+					$(select).append($('<option>',
+					{
+						value: "",
+						text : "Seleccione"
+					}));
+					$.each(data, function(i, item){
+						if (item.status == 1) {
+						$(select).append($('<option>',
+						{
+							value: item.id_clinic,
+							text : item.nombre
+						}));
+						}
+					});
+
+					}
+				});
+				}
+							function SubmitComment(id, api, table, btn, summer){
 
 				$(btn).unbind().click(function (e) { 
 

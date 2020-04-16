@@ -6,6 +6,7 @@ use App\Surgeries;
 use App\Auditoria;
 use App\SurgeriesPayments;
 use App\Comments;
+use App\FollwersEvents;
 use Illuminate\Http\Request;
 
 class SurgeriesController extends Controller
@@ -30,10 +31,12 @@ class SurgeriesController extends Controller
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
 
                                 ->with("payments")
+                                ->with("followers")
+                                
 
                                 ->where(function ($query) use ($rol, $id_user) {
                                     if($rol == "Asesor"){
-                                        $query->where("clientes.id_user_asesora", $id_user);
+                                        $query->where("auditoria.usr_regins", $id_user);
                                     }
                                 })
 
@@ -59,6 +62,7 @@ class SurgeriesController extends Controller
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
 
                                 ->with("payments")
+                                ->with("followers")
 
                                 ->where("surgeries.id_cliente", $id)
                                 ->where("auditoria.tabla", "surgeries")
@@ -134,6 +138,23 @@ class SurgeriesController extends Controller
             $auditoria->fec_regins  = date("Y-m-d H:i:s");
             $auditoria->usr_regins  = $request["id_user"];
             $auditoria->save();
+
+
+            $followers = [];
+            if(isset($request->followers)){
+
+                foreach($request->followers as $key => $value){
+                    $array = [];
+                    $array["id_event"]    = $store["id_surgeries"];
+                    $array["id_user"]     = $value;
+                    $array["tabla"]       = "surgeries";
+                    array_push($followers, $array);
+                    FollwersEvents::create($array);
+                }
+                
+            }
+
+
 
             if ($store) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
@@ -247,6 +268,22 @@ class SurgeriesController extends Controller
                 }
             }
             
+
+
+            if(isset($request->followers)){
+
+                FollwersEvents::where("id_event", $surgeries)->delete();
+                $followers = [];
+                foreach($request->followers as $key => $value){
+                    $array = [];
+                    $array["id_event"]    = $surgeries;
+                    $array["id_user"]     = $value;
+                    $array["tabla"]       = "surgeries";
+                    FollwersEvents::create($array);
+                }
+                
+            }
+
 
 
 

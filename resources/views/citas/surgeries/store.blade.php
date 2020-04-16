@@ -164,6 +164,18 @@
 
            <div class="col-md-6">
               <div class="row">
+
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Seguidores</b></label>
+                        <select name="followers[]" id="follower" class="form-control select2 getUsers" multiple>
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                </div>
+
+
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for=""><b>Estatus</b></label>
