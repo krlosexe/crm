@@ -539,6 +539,11 @@ class CalendarController extends Controller
                                 //     }
                                 // })
 
+
+                                ->with("followers")
+
+                                
+
                                 ->where("surgeries.status_surgeries", 0)
                                 ->where("auditoria.tabla", "surgeries")
                                 ->where("auditoria.status", "!=", 0)

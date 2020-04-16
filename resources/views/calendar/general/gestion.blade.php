@@ -1026,6 +1026,17 @@
 									$(".input-disabled").attr("disabled", "disabled")
 								}
 
+
+								$.map(calEvent.event.extendedProps.followers, function (item, ke) {
+									
+									if(id_user == item.id_user){
+										
+										$(".input-disabled").removeAttr("disabled")
+									}
+								});
+
+								
+
 								GetComments("/api/comments/surgerie","#comments", calEvent.event.extendedProps.id_surgeries, calEvent.event.extendedProps.observaciones)
 
 								SubmitComment(calEvent.event.extendedProps.id_surgeries, "api/comments/surgerie", "surgerie", "#add-comments")
