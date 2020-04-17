@@ -1174,15 +1174,15 @@ class ClientsController extends Controller
 
 
             if(($request["id_line"] == 9)){
-                $subject = "Formulario Trabaja con Nosotros para Paulina Clinica Laser: ".$request["nombres"];
+                $subject = "Formulario PRP Asesora para Paulina Clinica Laser: ".$request["nombres"];
             }
 
             if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17)){
-                $subject = "Formulario Trabaja con Nosotros para Paulina ".$request["name_line"]." : ".$request["nombres"];
+                $subject = "Formulario PRP Asesora para Paulina ".$request["name_line"]." : ".$request["nombres"];
             }
 
             if(($request["id_line"] == 18) || ($request["id_line"] == 14) || ($request["id_line"] == 15)  || ($request["id_line"] == 16)){
-                $subject = "Formulario Trabaja con Nosotros para Manuela ".$request["name_line"].": ".$request["nombres"];
+                $subject = "Formulario PRP Asesora para Manuela ".$request["name_line"].": ".$request["nombres"];
             }
 
             //$for = "cardenascarlos18@gmail.com";
