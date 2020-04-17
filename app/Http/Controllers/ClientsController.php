@@ -1263,51 +1263,17 @@ class ClientsController extends Controller
 
 
 
-            if($request["id_line"] == 2){
-                $request["name_line"] = "Clínica Especialistas del Poblado (CEP)";
-            }
-
-            if($request["id_line"] == 3){
-                $request["name_line"] = "CiruCredito";
-            }
-
-            if($request["id_line"] == 17){
-                $request["name_line"] = "Doctor Daniel Correa";
-            }
-            if($request["id_line"] == 16){
-                $request["name_line"] = "Planmed";
+            if($request["id_line"] == 8){
+                $request["name_line"] = "Cirugía Plástica Medellin CPEI";
             }
 
 
 
-
-            if($request["id_line"] == 18){
-                $request["name_line"] = "CEP";
-            }
-
-            if($request["id_line"] == 14){
-                $request["name_line"] = "Mas Estetic";
-            }
-
-            if($request["id_line"] == 15){
-                $request["name_line"] = "Global Medical";
-            }
+            $subject = "Formulario PRP para ".$request["name_user"]." : ".$request["name_line"].": ".$request["nombres"];
 
 
-            if(($request["id_line"] == 9)){
-                $subject = "Formulario PRP Asesora para Paulina Clinica Laser: ".$request["nombres"];
-            }
-
-            if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17)){
-                $subject = "Formulario PRP Asesora para Paulina ".$request["name_line"]." : ".$request["nombres"];
-            }
-
-            if(($request["id_line"] == 18) || ($request["id_line"] == 14) || ($request["id_line"] == 15)  || ($request["id_line"] == 16)){
-                $subject = "Formulario PRP Asesora para Manuela ".$request["name_line"].": ".$request["nombres"];
-            }
-
-            //$for = "cardenascarlos18@gmail.com";
-            $for = $users["email"];
+            $for = "cardenascarlos18@gmail.com";
+            //$for = $users["email"];
            // $for = "cardenascarlos18@gmail.com";
 
             $request["msg"]  = "Wiiii :D";
