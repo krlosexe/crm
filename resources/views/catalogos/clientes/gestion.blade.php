@@ -413,7 +413,7 @@
 							else if(item.status == 2 && actualizar == 1)
 								botones += "<span data='"+JSON.stringify(item)+"' class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
 							
-							if(item.id_user_asesora == id_user)
+							if((item.id_user_asesora == id_user) || borrar == 1)
 								botones += "<span data='"+JSON.stringify(item)+"' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 						//	return botones;
 
