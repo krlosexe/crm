@@ -1044,7 +1044,7 @@ class ClientsController extends Controller
 
 
             if(($request["id_line"] == 9)){
-                $subject = "Formulario Trabaja con Nosotros para Paulina y Manuela Clinica Laser: ".$request["nombres"];
+                $subject = "Formulario Trabaja con Nosotros para Paulina  Clinica Laser: ".$request["nombres"];
             }
 
             if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17)){
@@ -1093,6 +1093,132 @@ class ClientsController extends Controller
         
         
     }
+
+
+
+
+
+
+    public function ClientFormsPrpAdviser(Request $request){
+
+       
+        $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                        ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                        ->where("users.id", $request["adviser"])
+                        ->where("users.id", "!=", 69)
+                        ->first();
+
+
+       if($users){
+
+
+            $request["name_user"]   = $users["nombres"]." ".$users["apellido_p"];
+
+            $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $code                   = substr(str_shuffle($permitted_chars), 0, 4);
+            $request["code_client"] = strtoupper($code);
+            $request["prp"]         = "Si";
+            $request["to_db"]       = "1";
+
+            $request["id_user_asesora"] =  $users["id"];
+            $request["origen"] =  "PRP Asesora ". $request["name_user"];
+            $cliente = Clients::create($request->all());
+                    
+            $request["id_client"] = $cliente["id_cliente"];
+            
+            ClientInformationAditionalSurgery::create($request->all());
+            ClientClinicHistory::create($request->all());
+            ClientCreditInformation::create($request->all());
+
+            $auditoria              = new Auditoria;
+            $auditoria->tabla       = "clientes";
+            $auditoria->cod_reg     = $cliente["id_cliente"];
+            $auditoria->status      = 1;
+            $auditoria->fec_regins  = date("Y-m-d H:i:s");
+            $auditoria->fec_update  = date("Y-m-d H:i:s");
+            $auditoria->usr_regins  = $users["id"];
+            $auditoria->save();
+
+
+
+            if($request["id_line"] == 2){
+                $request["name_line"] = "Clínica Especialistas del Poblado (CEP)";
+            }
+
+            if($request["id_line"] == 3){
+                $request["name_line"] = "CiruCredito";
+            }
+
+            if($request["id_line"] == 17){
+                $request["name_line"] = "Doctor Daniel Correa";
+            }
+            if($request["id_line"] == 16){
+                $request["name_line"] = "Planmed";
+            }
+
+
+
+
+            if($request["id_line"] == 18){
+                $request["name_line"] = "CEP";
+            }
+
+            if($request["id_line"] == 14){
+                $request["name_line"] = "Mas Estetic";
+            }
+
+            if($request["id_line"] == 15){
+                $request["name_line"] = "Global Medical";
+            }
+
+
+            if(($request["id_line"] == 9)){
+                $subject = "Formulario Trabaja con Nosotros para Paulina Clinica Laser: ".$request["nombres"];
+            }
+
+            if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17)){
+                $subject = "Formulario Trabaja con Nosotros para Paulina ".$request["name_line"]." : ".$request["nombres"];
+            }
+
+            if(($request["id_line"] == 18) || ($request["id_line"] == 14) || ($request["id_line"] == 15)  || ($request["id_line"] == 16)){
+                $subject = "Formulario Trabaja con Nosotros para Manuela ".$request["name_line"].": ".$request["nombres"];
+            }
+
+            //$for = "cardenascarlos18@gmail.com";
+            $for = $users["email"];
+           // $for = "cardenascarlos18@gmail.com";
+
+            $request["msg"]  = "Wiiii :D";
+
+            Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
+                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+
+
+            Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
+                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->subject($subject);
+                $msj->to("pdtagenciademedios@gmail.com");
+            });
+            
+
+       }
+
+
+       $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+       return response()->json($data)->setStatusCode(200);
+
+
+        
+        
+    }
+
+
+
+    
 
 
 
