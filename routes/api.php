@@ -67,6 +67,11 @@ Route::post('clients/forms/prp', 'ClientsController@ClientFormsPrp');
 
 Route::post('clients/forms/prp/adviser', 'ClientsController@ClientFormsPrpAdviser');
 
+
+
+Route::post('clients/forms/prp/adviser/luisa', 'ClientsController@ClientFormsPrpAdviserLuisa');
+
+
 Route::get('clients/identification/{identification}', 'ClientsController@GetByIdentification');
 Route::get('status-cliente/{id}/{status}', 'ClientsController@status');
 

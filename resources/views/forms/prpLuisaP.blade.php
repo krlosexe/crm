@@ -37,6 +37,11 @@
         h6.text-primary, label{
           color: #800080 !important;
         }
+
+        #btn-submit{
+          background:  #800080 !important;
+          border-color: #800080;
+        }
      </style>
   @endif
 </head>
@@ -315,7 +320,7 @@
 
 	function store(){
 		id_user = 69;
-		enviarFormularioForm("#store", 'api/clients/forms/prp/adviser', '#cuadro2');
+		enviarFormularioForm("#store", 'api/clients/forms/prp/adviser/luisa', '#cuadro2');
 	}
 
 
