@@ -1272,11 +1272,11 @@ class ClientsController extends Controller
             $subject = "Formulario PRP para ".$request["name_user"]." : ".$request["name_line"].": ".$request["nombres"];
 
 
-            $for = "cardenascarlos18@gmail.com";
-            //$for = $users["email"];
+            //$for = "cardenascarlos18@gmail.com";
+            $for = $users["email"];
            // $for = "cardenascarlos18@gmail.com";
 
-            $request["msg"]  = "Wiiii :D";
+            $request["msg"]  = "..";
 
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
                 $msj->from("cardenascarlos18@gmail.com","CRM");
@@ -1284,13 +1284,13 @@ class ClientsController extends Controller
                 $msj->to($for);
             });
 
-/*
+
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
                 $msj->from("cardenascarlos18@gmail.com","CRM");
                 $msj->subject($subject);
-                $msj->to("pdtagenciademedios@gmail.com");
+                $msj->to("cardenascarlos18@gmail.com");
             });
-            */
+           
 
        }
 
