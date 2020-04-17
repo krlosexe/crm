@@ -284,7 +284,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label for=""><b>Link Fotos de Google</b></label>
-                                        <input type="text" name="photos_google" class="form-control form-control-user" id="photos_google_edit">
+                                        <a href="" target="_blank" id="photos_google_edit"></a>
                                     </div>
                                 </div>
 

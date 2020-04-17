@@ -571,7 +571,6 @@
 
 
 				<div id="slide">
-					
 					<div class="side-panel-container">
 
 
@@ -585,8 +584,6 @@
 							</div>
 						</div>
 					</div>
-
-
 				</div>
 		      <!-- Footer -->
 		      <footer class="sticky-footer bg-white">
@@ -1660,7 +1657,8 @@
 						$("#twitter_edit").val(data.twitter)
 						$("#youtube_edit").val(data.youtube)
 
-						$("#photos_google_edit").val(data.photos_google)
+						$("#photos_google_edit").text(data.photos_google)
+						$("#photos_google_edit").attr("href", data.photos_google)
 
 
 
