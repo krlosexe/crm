@@ -210,3 +210,8 @@ Route::get('form-prp/{id_line}/{id_asesora}', function ($id_line, $id_asesora) {
 
 
 
+Route::get('form-prp-luisa/{id_line}/{id_asesora}', function ($id_line, $id_asesora) {
+    return view('forms.prpLuisaP', ["id_line" => $id_line, "id_asesora" => $id_asesora]);
+});
+
+

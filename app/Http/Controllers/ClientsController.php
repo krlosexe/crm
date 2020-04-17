@@ -1197,13 +1197,13 @@ class ClientsController extends Controller
                 $msj->to($for);
             });
 
-
+/*
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
                 $msj->from("cardenascarlos18@gmail.com","CRM");
                 $msj->subject($subject);
                 $msj->to("pdtagenciademedios@gmail.com");
             });
-            
+            */
 
        }
 
