@@ -494,6 +494,7 @@
 
 				var date_init     = $("#date_init").val()
 				var date_finish   = $("#date_finish").val()
+				var search        = $("#search").val()
 
 
 				if(business_line.length == 0){
@@ -519,6 +520,10 @@
 					date_finish = 0
 				}
 
+				
+				if(search.length === 0){
+					search = 5
+				}
 
 				$("#xls").remove();
 				$("#view_xls").remove();
@@ -526,11 +531,13 @@
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$('.dt-buttons').append(a);
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'/'+$("#state-filter").val()+'" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'/'+$("#state-filter").val()+'/'+search+'" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
 				$("#xls").click(function (e) { 
 					url = $("#view_xls").attr("href");
+
+					console.log(url)
 					window.open(url, '_blank');
 				});
 

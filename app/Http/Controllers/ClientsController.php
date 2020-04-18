@@ -808,7 +808,7 @@ class ClientsController extends Controller
     }
 
 
-    public function Excel($linea_negocio, $adviser, $origen, $date_init, $date_finish, $state){
+    public function Excel($linea_negocio, $adviser, $origen, $date_init, $date_finish, $state, $search = 5){
 
 
         $xls = new ClientsExport;
@@ -819,6 +819,7 @@ class ClientsController extends Controller
         $xls->date_init     = $date_init;
         $xls->date_finish   = $date_finish;
         $xls->state         = $state;
+        $xls->search        = $search;
 
         
         return Excel::download($xls, 'ClientExport.xlsx');
@@ -967,6 +968,9 @@ class ClientsController extends Controller
 
     public function ClientFormsPrp(Request $request){
 
+
+        
+
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
@@ -979,6 +983,39 @@ class ClientsController extends Controller
 
        if($users){
 
+
+            
+
+
+            $client = Clients::where("identificacion", $request["identificacion"])->get();
+
+        
+            if(sizeof($client) > 0){
+
+                foreach($client as $value){
+
+                    echo json_encode($value["id_cliente"])."<br><br>";
+
+                    $update = array(
+
+                    );
+
+                    Clients::find($value["id_cliente"])->update($request->all());
+                    DB::table('auditoria')->where("cod_reg", $id_cliente)
+                            ->where("tabla", "clientes")
+                            ->update(['usr_update' => $request["id_user"],'fec_update' => date("Y-m-d H:i:s")]);
+                }
+
+
+    
+                echo "asdasdasd";
+                return false;
+    
+
+            }
+            
+
+            
 
             $request["name_user"]   = $users["nombres"]." ".$users["apellido_p"];
 

@@ -27,6 +27,7 @@ class ClientsExport implements FromView
     var $date_init;
     var $date_finish;
     var $state;
+    var $search;
 
 
     public function view(): View
@@ -38,6 +39,7 @@ class ClientsExport implements FromView
         $date_init     = $this->date_init;
         $date_finish   = $this->date_finish;
         $state         = $this->state;
+        $search        = $this->search;
 
         ini_set('memory_limit', '-1'); 
         $data = DB::table('clientes')->select( 'state',
@@ -76,6 +78,19 @@ class ClientsExport implements FromView
 
                                             ->where("auditoria.tabla", "clientes")
                                             ->where("auditoria.status", "!=", "0")
+
+
+
+                                            ->where(function ($query) use ($search) {
+                                                if($search != 5){
+                                                    $query->where("clientes.nombres", 'like', '%'.$search.'%');
+                                                    $query->orWhere("clientes.identificacion", 'like', '%'.$search.'%');
+                                                    $query->orWhere("clientes.telefono", 'like', '%'.$search.'%');
+                                                    $query->orWhere("clientes.code_client", 'like', '%'.$search.'%');
+                                                    $query->orWhere("clientes.origen", 'like', '%'.$search.'%');
+                                                }
+                                            }) 
+
 
 
                                             ->where(function ($query) use ($business_line) {
