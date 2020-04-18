@@ -968,19 +968,12 @@ class ClientsController extends Controller
 
     public function ClientFormsPrp(Request $request){
 
-
-        
-
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->where("users.queue_prp", 0)
                         ->where("users.id", "!=", 69)
                         ->first();
-
-
-        
-
        if($users){
 
             $request["name_user"]   = $users["nombres"]." ".$users["apellido_p"];
@@ -1002,11 +995,13 @@ class ClientsController extends Controller
                 foreach($client as $value){
 
                     $update = array(
-                        "code_client" => $request["code_client"],
-                        "prp"         => "Si",
-                        "to_db"       => "1",
-                        "origen"      =>  $request["origen"],
-                        "telefono"    =>  $request["telefono"]
+                        "code_client"     => $request["code_client"],
+                        "prp"             => "Si",
+                        "to_db"           => "1",
+                        "origen"          =>  $request["origen"],
+                        "telefono"        =>  $request["telefono"],
+                        "id_user_asesora" => $request["id_user_asesora"],
+                        "id_line"         => $request["id_line"]
                     );
 
                     Clients::find($value["id_cliente"])->update($update);
@@ -1082,8 +1077,8 @@ class ClientsController extends Controller
                 $subject = "Formulario Trabaja con Nosotros para Manuela ".$request["name_line"].": ".$request["nombres"];
             }
 
-            $for = "cardenascarlos18@gmail.com";
-           // $for = $users["email"];
+            //$for = "cardenascarlos18@gmail.com";
+            $for = $users["email"];
            // $for = "cardenascarlos18@gmail.com";
 
             $request["msg"]  = "Wiiii :D";
@@ -1137,7 +1132,6 @@ class ClientsController extends Controller
 
        if($users){
 
-
             $request["name_user"]   = $users["nombres"]." ".$users["apellido_p"];
 
             $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
@@ -1148,23 +1142,50 @@ class ClientsController extends Controller
 
             $request["id_user_asesora"] =  $users["id"];
             $request["origen"] =  "PRP Asesora ". $request["name_user"];
-            $cliente = Clients::create($request->all());
-                    
-            $request["id_client"] = $cliente["id_cliente"];
+
+
+            $client = Clients::where("identificacion", $request["identificacion"])->get();
             
-            ClientInformationAditionalSurgery::create($request->all());
-            ClientClinicHistory::create($request->all());
-            ClientCreditInformation::create($request->all());
+            if(sizeof($client) > 0){
 
-            $auditoria              = new Auditoria;
-            $auditoria->tabla       = "clientes";
-            $auditoria->cod_reg     = $cliente["id_cliente"];
-            $auditoria->status      = 1;
-            $auditoria->fec_regins  = date("Y-m-d H:i:s");
-            $auditoria->fec_update  = date("Y-m-d H:i:s");
-            $auditoria->usr_regins  = $users["id"];
-            $auditoria->save();
+                foreach($client as $value){
 
+                    $update = array(
+                        "code_client"     => $request["code_client"],
+                        "prp"             => "Si",
+                        "to_db"           => "1",
+                        "origen"          =>  $request["origen"],
+                        "telefono"        =>  $request["telefono"],
+                        "id_user_asesora" => $request["id_user_asesora"],
+                        "id_line"         => $request["id_line"]
+                    );
+
+                    Clients::find($value["id_cliente"])->update($update);
+                    DB::table('auditoria')->where("cod_reg", $value["id_cliente"])
+                            ->where("tabla", "clientes")
+                            ->update(['fec_update' => date("Y-m-d H:i:s")]);
+                }
+
+            }else{
+
+                $cliente = Clients::create($request->all());
+                    
+                $request["id_client"] = $cliente["id_cliente"];
+                
+                ClientInformationAditionalSurgery::create($request->all());
+                ClientClinicHistory::create($request->all());
+                ClientCreditInformation::create($request->all());
+
+                $auditoria              = new Auditoria;
+                $auditoria->tabla       = "clientes";
+                $auditoria->cod_reg     = $cliente["id_cliente"];
+                $auditoria->status      = 1;
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                $auditoria->fec_update  = date("Y-m-d H:i:s");
+                $auditoria->usr_regins  = $users["id"];
+                $auditoria->save();
+
+            }
 
 
             if($request["id_line"] == 2){
@@ -1210,7 +1231,7 @@ class ClientsController extends Controller
                 $subject = "Formulario PRP Asesora  ".$request["name_line"].": ".$request["nombres"];
             }
 
-            //$for = "cardenascarlos18@gmail.com";
+           // $for = "cardenascarlos18@gmail.com";
             $for = $users["email"];
            // $for = "cardenascarlos18@gmail.com";
 
