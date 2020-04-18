@@ -990,8 +990,8 @@ class ClientsController extends Controller
 
             $client = Clients::where("identificacion", $request["identificacion"])->get();
 
-
-            if(sizeof($client) > 0){
+          
+            if((sizeof($client) > 0) && ($request["identificacion"] != "")){
 
                 foreach($client as $value){
 
@@ -1165,10 +1165,10 @@ class ClientsController extends Controller
 
 
             $client = Clients::where("identificacion", $request["identificacion"])->get();
-            
-            if(sizeof($client) > 0){
+        
 
-               
+            if((sizeof($client) > 0) && ($request["identificacion"] != "")){
+
 
                 foreach($client as $value){
 
@@ -1332,7 +1332,7 @@ class ClientsController extends Controller
 
             $client = Clients::where("identificacion", $request["identificacion"])->get();
 
-            if(sizeof($client) > 0){
+            if((sizeof($client) > 0) && ($request["identificacion"] != "")){
 
                 foreach($client as $value){
 

@@ -95,8 +95,8 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                        <label for=""><b>INGRESA TU NÚMERO DE CEDULA:*</b></label>
-                        <input type="text" name="identificacion" id="identificacion" class="form-control" required>
+                        <label for=""><b>INGRESA TU NÚMERO DE CEDULA:</b></label>
+                        <input type="text" name="identificacion" id="identificacion" class="form-control">
                     </div>
                 </div>
               </div>
@@ -378,10 +378,12 @@
                 error: function (repuesta) {
                     $('#btn-submit').removeAttr('disabled'); //activa el input submit
                     $('#btn-submit').text("Enviar")
-                    var errores=repuesta.responseText;
+                    var errores=repuesta.responseJSON;
+
+              
                     if(errores!=""){
                     mensajes('danger', errores);
-                    warning(respuesta.errores)
+                    warning(errores.mensagge)
                             }else{
                     mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
                     warning("Ha ocurrido un error, por favor intentelo de nuevo.")
