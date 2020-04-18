@@ -393,17 +393,20 @@
                 mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
             },
             error: function (repuesta) {
-                $('input[type="submit"]').removeAttr('disabled'); //activa el input submit
-                var errores=repuesta.responseText;
-                if(errores!=""){
-                mensajes('danger', errores);
-                warning(respuesta.errores)
-                        }else{
-                mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
-                warning("Ha ocurrido un error, por favor intentelo de nuevo.")
-              }
-          
-            },
+                    $('#btn-submit').removeAttr('disabled'); //activa el input submit
+                    $('#btn-submit').text("Enviar")
+                    var errores=repuesta.responseJSON;
+
+              
+                    if(errores!=""){
+                    mensajes('danger', errores);
+                    warning(errores.mensagge)
+                            }else{
+                    mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
+                    warning("Ha ocurrido un error, por favor intentelo de nuevo.")
+                  }
+					   
+                },
               success: function(respuesta){
                 
                  $("#store")[0].reset();
