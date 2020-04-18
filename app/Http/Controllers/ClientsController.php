@@ -1243,12 +1243,12 @@ class ClientsController extends Controller
                 $msj->to($for);
             });
 
-/*
-            Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
-                $msj->from("cardenascarlos18@gmail.com","CRM");
-                $msj->subject($subject);
-                $msj->to("pdtagenciademedios@gmail.com");
-            });
+            /*
+                Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
+                    $msj->from("cardenascarlos18@gmail.com","CRM");
+                    $msj->subject($subject);
+                    $msj->to("pdtagenciademedios@gmail.com");
+                });
             */
 
        }
@@ -1257,13 +1257,8 @@ class ClientsController extends Controller
        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
        return response()->json($data)->setStatusCode(200);
 
-
-        
         
     }
-
-
-
     
 
 
@@ -1290,22 +1285,48 @@ class ClientsController extends Controller
 
             $request["id_user_asesora"] =  $users["id"];
             $request["origen"]          =  "PRP Asesora ". $request["name_user"];
-            $cliente = Clients::create($request->all());
-                    
-            $request["id_client"] = $cliente["id_cliente"];
-            
-            ClientInformationAditionalSurgery::create($request->all());
-            ClientClinicHistory::create($request->all());
-            ClientCreditInformation::create($request->all());
 
-            $auditoria              = new Auditoria;
-            $auditoria->tabla       = "clientes";
-            $auditoria->cod_reg     = $cliente["id_cliente"];
-            $auditoria->status      = 1;
-            $auditoria->fec_regins  = date("Y-m-d H:i:s");
-            $auditoria->fec_update  = date("Y-m-d H:i:s");
-            $auditoria->usr_regins  = $users["id"];
-            $auditoria->save();
+
+            $client = Clients::where("identificacion", $request["identificacion"])->get();
+
+            if(sizeof($client) > 0){
+
+                foreach($client as $value){
+
+                    $update = array(
+                        "code_client"     => $request["code_client"],
+                        "prp"             => "Si",
+                        "to_db"           => "1",
+                        "origen"          =>  $request["origen"],
+                        "telefono"        =>  $request["telefono"],
+                        "id_user_asesora" => $request["id_user_asesora"],
+                        "id_line"         => $request["id_line"]
+                    );
+
+                    Clients::find($value["id_cliente"])->update($update);
+                    DB::table('auditoria')->where("cod_reg", $value["id_cliente"])
+                            ->where("tabla", "clientes")
+                            ->update(['fec_update' => date("Y-m-d H:i:s")]);
+                }
+
+            }else{
+                $cliente = Clients::create($request->all());
+                    
+                $request["id_client"] = $cliente["id_cliente"];
+                
+                ClientInformationAditionalSurgery::create($request->all());
+                ClientClinicHistory::create($request->all());
+                ClientCreditInformation::create($request->all());
+
+                $auditoria              = new Auditoria;
+                $auditoria->tabla       = "clientes";
+                $auditoria->cod_reg     = $cliente["id_cliente"];
+                $auditoria->status      = 1;
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                $auditoria->fec_update  = date("Y-m-d H:i:s");
+                $auditoria->usr_regins  = $users["id"];
+                $auditoria->save();
+            }
 
 
 
@@ -1316,7 +1337,6 @@ class ClientsController extends Controller
 
 
             $subject = "Formulario PRP para ".$request["name_user"]." : ".$request["name_line"].": ".$request["nombres"];
-
 
             //$for = "cardenascarlos18@gmail.com";
             $for = $users["email"];
