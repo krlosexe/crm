@@ -1305,6 +1305,12 @@ class ClientsController extends Controller
 
                 foreach($client as $value){
 
+                    if($value["prp"] == "Si"){
+                        $data = array('mensagge' => "Ya se encuentra registrado en el PRP con el codigo: ".$value["code_client"]);    
+                        return response()->json($data)->setStatusCode(400);
+                    }
+
+                    
                     $update = array(
                         "code_client"     => $request["code_client"],
                         "prp"             => "Si",
