@@ -15,6 +15,7 @@ use App\ClientsTasksFollowers;
 use App\ClientsTasksComments;
 use App\User;
 use App\Comments;
+use App\Notification;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -1013,7 +1014,10 @@ class ClientsController extends Controller
                     DB::table('auditoria')->where("cod_reg", $value["id_cliente"])
                             ->where("tabla", "clientes")
                             ->update(['fec_update' => date("Y-m-d H:i:s")]);
+
+                    $id_client = $value["id_cliente"];
                 }
+                
 
             }else{
 
@@ -1038,8 +1042,19 @@ class ClientsController extends Controller
                 $update->queue_prp = 1;
                 $update->save();
 
+                $id_client = $cliente["id_cliente"];
             }
             
+
+
+            $notification["fecha"]    = date("Y-m-d");
+            $notification["title"]    = "Hoy Ingreso de PRP ".$request["nombres"]." codigo: ".$request["code_client"];
+            $notification["id_user"]  = $users["id"];
+            $notification["id_event"] = $id_client;
+            $notification["type"]     = "prp";
+
+            Notification::insert($notification);
+
 
             if($request["id_line"] == 2){
                 $request["name_line"] = "Clínica Especialistas del Poblado (CEP)";
@@ -1176,6 +1191,8 @@ class ClientsController extends Controller
                     DB::table('auditoria')->where("cod_reg", $value["id_cliente"])
                             ->where("tabla", "clientes")
                             ->update(['fec_update' => date("Y-m-d H:i:s")]);
+                    
+                    $id_client = $value["id_cliente"];
                 }
 
             }else{
@@ -1197,7 +1214,21 @@ class ClientsController extends Controller
                 $auditoria->usr_regins  = $users["id"];
                 $auditoria->save();
 
+
+                $id_client = $cliente["id_cliente"];
+
+
             }
+
+
+            $notification["fecha"]    = date("Y-m-d");
+            $notification["title"]    = "Hoy Ingreso de PRP ".$request["nombres"]." codigo: ".$request["code_client"];
+            $notification["id_user"]  = $users["id"];
+            $notification["id_event"] = $id_client;
+            $notification["type"]     = "prp";
+
+            Notification::insert($notification);
+
 
 
             if($request["id_line"] == 2){
@@ -1310,7 +1341,7 @@ class ClientsController extends Controller
                         return response()->json($data)->setStatusCode(400);
                     }
 
-                    
+
                     $update = array(
                         "code_client"     => $request["code_client"],
                         "prp"             => "Si",
@@ -1325,6 +1356,8 @@ class ClientsController extends Controller
                     DB::table('auditoria')->where("cod_reg", $value["id_cliente"])
                             ->where("tabla", "clientes")
                             ->update(['fec_update' => date("Y-m-d H:i:s")]);
+                    
+                    $id_client = $value["id_cliente"];
                 }
 
             }else{
@@ -1344,12 +1377,28 @@ class ClientsController extends Controller
                 $auditoria->fec_update  = date("Y-m-d H:i:s");
                 $auditoria->usr_regins  = $users["id"];
                 $auditoria->save();
+
+                $id_client = $cliente["id_cliente"];
             }
+            
+
+            $notification["fecha"]    = date("Y-m-d");
+            $notification["title"]    = "Hoy Ingreso de PRP ".$request["nombres"]." codigo: ".$request["code_client"];
+            $notification["id_user"]  = $users["id"];
+            $notification["id_event"] = $id_client;
+            $notification["type"]     = "prp";
+
+            Notification::insert($notification);
+
 
 
 
             if($request["id_line"] == 8){
                 $request["name_line"] = "Cirugía Plástica Medellin CPEI";
+            }
+
+            if($request["id_line"] == 6){
+                $request["name_line"] = "Cirufacil";
             }
 
 
