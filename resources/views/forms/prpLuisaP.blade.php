@@ -44,6 +44,23 @@
         }
      </style>
   @endif
+
+
+  @if($id_line == 6)
+     <style>
+        h6.text-primary, label{
+          color: #3366ff !important;
+        }
+
+        #btn-submit{
+          background:  #3366ff !important;
+          border-color: #3366ff;
+        }
+     </style>
+  @endif
+
+
+
 </head>
 
 
