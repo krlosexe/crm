@@ -184,3 +184,7 @@ Route::get('tasks/comments/{id}', 'ClientsController@GetCommentsTasks');
 
 Route::post('comments/{tabla}', 'CommentsController@store');
 Route::get('comments/{tabla}/{id}', 'CommentsController@get');
+
+
+Route::post('register/referred', 'ReferredController@store');
+

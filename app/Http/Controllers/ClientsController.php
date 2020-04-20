@@ -969,6 +969,12 @@ class ClientsController extends Controller
 
     public function ClientFormsPrp(Request $request){
 
+
+        
+
+      
+
+
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
@@ -1016,6 +1022,27 @@ class ClientsController extends Controller
                             ->update(['fec_update' => date("Y-m-d H:i:s")]);
 
                     $id_client = $value["id_cliente"];
+
+
+
+
+                    $comment = "<b>FECHA EN LA QUE TE OPERASTE CON NOSOTROS:</b> ".$request["fecha_opero"]."<br>";
+                    $comment .= "<b>¿QUE CIRUGÍA TE PRACTICASTE?:</b> ".$request["surgeri"]."<br>";
+                    $comment .= "<b>¿DESEAS QUE TE PROGRAMEMOS UNA CITA DE CONTROL?:</b> ".$request["radios"]."<br>";
+                    $comment .= "<b>EL PAGO DE LA BONIFICACION PREFIERES QUE SEA:</b> ".$request["radiosPago"]."<br>";
+                    $comment .= "<b>SI ELEGISTE PAGO POR TRANSFERENCIA:</b><br>";
+                    $comment .= "<b>Nombre del Titular:</b> ".$request["name_titular"]."<br>";
+                    $comment .= "<b>Numero de Cedula:</b> ".$request["cedula_titular"]."<br>";
+                    $comment .= "<b>Número de Cuenta:</b> ".$request["cuenta_titular"]."<br>";
+                    $comment .= "<b>¿TIENES ALGUNA SUGERENCIA PARA NUESTRO GRUPO?:</b> ".$request["sugrencias"]."<br>";
+
+                    $data["table"]    = "clients";
+                    $data["id_event"] = $id_client;
+                    $data["comments"] = $comment;
+
+                    Comments::create($data);
+                   
+
                 }
                 
 
@@ -1043,6 +1070,30 @@ class ClientsController extends Controller
                 $update->save();
 
                 $id_client = $cliente["id_cliente"];
+
+
+
+
+
+                $comment = "<b>FECHA EN LA QUE TE OPERASTE CON NOSOTROS:</b> ".$request["fecha_opero"]."<br>";
+                $comment .= "<b>¿QUE CIRUGÍA TE PRACTICASTE?:</b> ".$request["surgeri"]."<br>";
+                $comment .= "<b>¿DESEAS QUE TE PROGRAMEMOS UNA CITA DE CONTROL?:</b> ".$request["radios"]."<br>";
+                $comment .= "<b>EL PAGO DE LA BONIFICACION PREFIERES QUE SEA:</b> ".$request["radiosPago"]."<br>";
+                $comment .= "<b>SI ELEGISTE PAGO POR TRANSFERENCIA:</b><br>";
+                $comment .= "<b>Nombre del Titular:</b> ".$request["name_titular"]."<br>";
+                $comment .= "<b>Numero de Cedula:</b> ".$request["cedula_titular"]."<br>";
+                $comment .= "<b>Número de Cuenta:</b> ".$request["cuenta_titular"]."<br>";
+                $comment .= "<b>¿TIENES ALGUNA SUGERENCIA PARA NUESTRO GRUPO?:</b> ".$request["sugrencias"]."<br>";
+
+                $data["table"]    = "clients";
+                $data["id_event"] = $id_client;
+                $data["id_user"]  = $users["id"];
+                $data["comment"] = $comment;
+
+                Comments::create($data);
+
+
+
             }
             
 
@@ -1098,7 +1149,7 @@ class ClientsController extends Controller
             }
 
             //$for = "cardenascarlos18@gmail.com";
-            $for = $users["email"];
+              $for = $users["email"];
            // $for = "cardenascarlos18@gmail.com..";
 
             $request["msg"]  = "Wiiii :D";
@@ -1193,6 +1244,25 @@ class ClientsController extends Controller
                             ->update(['fec_update' => date("Y-m-d H:i:s")]);
                     
                     $id_client = $value["id_cliente"];
+
+
+
+                    $comment = "<b>FECHA EN LA QUE TE OPERASTE CON NOSOTROS:</b> ".$request["fecha_opero"]."<br>";
+                    $comment .= "<b>¿QUE CIRUGÍA TE PRACTICASTE?:</b> ".$request["surgeri"]."<br>";
+                    $comment .= "<b>¿DESEAS QUE TE PROGRAMEMOS UNA CITA DE CONTROL?:</b> ".$request["radios"]."<br>";
+                    $comment .= "<b>EL PAGO DE LA BONIFICACION PREFIERES QUE SEA:</b> ".$request["radiosPago"]."<br>";
+                    $comment .= "<b>SI ELEGISTE PAGO POR TRANSFERENCIA:</b><br>";
+                    $comment .= "<b>Nombre del Titular:</b> ".$request["name_titular"]."<br>";
+                    $comment .= "<b>Numero de Cedula:</b> ".$request["cedula_titular"]."<br>";
+                    $comment .= "<b>Número de Cuenta:</b> ".$request["cuenta_titular"]."<br>";
+                    $comment .= "<b>¿TIENES ALGUNA SUGERENCIA PARA NUESTRO GRUPO?:</b> ".$request["sugrencias"]."<br>";
+
+                    $data["table"]    = "clients";
+                    $data["id_event"] = $id_client;
+                    $data["id_user"]  = $users["id"];
+                    $data["comment"] = $comment;
+
+                    Comments::create($data);
                 }
 
             }else{
@@ -1216,6 +1286,26 @@ class ClientsController extends Controller
 
 
                 $id_client = $cliente["id_cliente"];
+
+
+                $comment = "<b>FECHA EN LA QUE TE OPERASTE CON NOSOTROS:</b> ".$request["fecha_opero"]."<br>";
+                $comment .= "<b>¿QUE CIRUGÍA TE PRACTICASTE?:</b> ".$request["surgeri"]."<br>";
+                $comment .= "<b>¿DESEAS QUE TE PROGRAMEMOS UNA CITA DE CONTROL?:</b> ".$request["radios"]."<br>";
+                $comment .= "<b>EL PAGO DE LA BONIFICACION PREFIERES QUE SEA:</b> ".$request["radiosPago"]."<br>";
+                $comment .= "<b>SI ELEGISTE PAGO POR TRANSFERENCIA:</b><br>";
+                $comment .= "<b>Nombre del Titular:</b> ".$request["name_titular"]."<br>";
+                $comment .= "<b>Numero de Cedula:</b> ".$request["cedula_titular"]."<br>";
+                $comment .= "<b>Número de Cuenta:</b> ".$request["cuenta_titular"]."<br>";
+                $comment .= "<b>¿TIENES ALGUNA SUGERENCIA PARA NUESTRO GRUPO?:</b> ".$request["sugrencias"]."<br>";
+
+                $data["table"]    = "clients";
+                $data["id_event"] = $id_client;
+                $data["id_user"]  = $users["id"];
+                $data["comment"] = $comment;
+
+                Comments::create($data);
+
+
 
 
             }
@@ -1358,6 +1448,28 @@ class ClientsController extends Controller
                             ->update(['fec_update' => date("Y-m-d H:i:s")]);
                     
                     $id_client = $value["id_cliente"];
+
+
+
+                    $comment = "<b>FECHA EN LA QUE TE OPERASTE CON NOSOTROS:</b> ".$request["fecha_opero"]."<br>";
+                    $comment .= "<b>¿QUE CIRUGÍA TE PRACTICASTE?:</b> ".$request["surgeri"]."<br>";
+                    $comment .= "<b>¿DESEAS QUE TE PROGRAMEMOS UNA CITA DE CONTROL?:</b> ".$request["radios"]."<br>";
+                    $comment .= "<b>EL PAGO DE LA BONIFICACION PREFIERES QUE SEA:</b> ".$request["radiosPago"]."<br>";
+                    $comment .= "<b>SI ELEGISTE PAGO POR TRANSFERENCIA:</b><br>";
+                    $comment .= "<b>Nombre del Titular:</b> ".$request["name_titular"]."<br>";
+                    $comment .= "<b>Numero de Cedula:</b> ".$request["cedula_titular"]."<br>";
+                    $comment .= "<b>Número de Cuenta:</b> ".$request["cuenta_titular"]."<br>";
+                    $comment .= "<b>¿TIENES ALGUNA SUGERENCIA PARA NUESTRO GRUPO?:</b> ".$request["sugrencias"]."<br>";
+
+                    $data["table"]    = "clients";
+                    $data["id_event"] = $id_client;
+                    $data["id_user"]  = $users["id"];
+                    $data["comment"] = $comment;
+
+                    Comments::create($data);
+
+
+                    
                 }
 
             }else{
@@ -1379,6 +1491,28 @@ class ClientsController extends Controller
                 $auditoria->save();
 
                 $id_client = $cliente["id_cliente"];
+
+
+
+                $comment = "<b>FECHA EN LA QUE TE OPERASTE CON NOSOTROS:</b> ".$request["fecha_opero"]."<br>";
+                $comment .= "<b>¿QUE CIRUGÍA TE PRACTICASTE?:</b> ".$request["surgeri"]."<br>";
+                $comment .= "<b>¿DESEAS QUE TE PROGRAMEMOS UNA CITA DE CONTROL?:</b> ".$request["radios"]."<br>";
+                $comment .= "<b>EL PAGO DE LA BONIFICACION PREFIERES QUE SEA:</b> ".$request["radiosPago"]."<br>";
+                $comment .= "<b>SI ELEGISTE PAGO POR TRANSFERENCIA:</b><br>";
+                $comment .= "<b>Nombre del Titular:</b> ".$request["name_titular"]."<br>";
+                $comment .= "<b>Numero de Cedula:</b> ".$request["cedula_titular"]."<br>";
+                $comment .= "<b>Número de Cuenta:</b> ".$request["cuenta_titular"]."<br>";
+                $comment .= "<b>¿TIENES ALGUNA SUGERENCIA PARA NUESTRO GRUPO?:</b> ".$request["sugrencias"]."<br>";
+
+                $data["table"]    = "clients";
+                $data["id_event"] = $id_client;
+                $data["id_user"]  = $users["id"];
+                $data["comment"] = $comment;
+
+                Comments::create($data);
+
+
+
             }
             
 
@@ -1405,8 +1539,8 @@ class ClientsController extends Controller
 
             $subject = "Formulario PRP para ".$request["name_user"]." : ".$request["name_line"].": ".$request["nombres"];
 
-            //$for = "cardenascarlos18@gmail.com";
-            $for = $users["email"];
+            $for = "cardenascarlos18@gmail.com";
+            //$for = $users["email"];
            // $for = "cardenascarlos18@gmail.com";
 
             $request["msg"]  = "..";
