@@ -122,7 +122,7 @@ class Login extends Controller
                           'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/".$users[0]->img_profile,
                           'token'     => $token,
                           'mensagge'  => "Ha iniciado sesion exitosamente",
-                          "type_user" => "Affliate"
+                          "type_user" => "Asesor"
 	    		);
 
             return response()->json($data)->setStatusCode(200);
