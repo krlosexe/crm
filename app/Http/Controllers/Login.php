@@ -6,6 +6,7 @@ use App\User;
 use App\Modulos;
 use App\funciones;
 use App\AuthUsers;
+use App\AuthUsersApp;
 use App\LogsSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -30,6 +31,7 @@ class Login extends Controller
         }else{
 
             $users = User::join("auditoria", "auditoria.cod_reg", "=", "users.id")
+                        ->join("datos_personales", "datos_personales.id_usuario", "users.id")
                          ->where("email", $request["email"])
                          ->where("password", md5($request["password"]))
                          ->where("auditoria.tabla", "users")
@@ -57,7 +59,8 @@ class Login extends Controller
 
 
 	    		$data = array('user_id'  => $users[0]->id,
-	    			          'email'    => $users[0]->email,
+                              'email'    => $users[0]->email,
+                              'nombres'  => $users[0]->nombres." ".$users[0]->apellido_p,
 	    					  'token'    => $token,
 	    					  'mensagge' => "Ha iniciado sesion exitosamente"
 	    		);
@@ -70,6 +73,69 @@ class Login extends Controller
 
 
     }
+
+
+
+
+
+
+
+
+
+    public function AuthApp(request $request)
+    {	
+
+        if($request["email"] == "" || $request["password"] == ""){
+
+            return response()->json("El Email y Contraseña son Requeridos")->setStatusCode(400);
+
+        }
+
+        $users = User::join("auditoria", "auditoria.cod_reg", "=", "users.id")
+                         ->join("datos_personales", "datos_personales.id_usuario", "users.id")
+                         ->where("email", $request["email"])
+                         ->where("password", md5($request["password"]))
+                         ->where("auditoria.tabla", "users")
+                         ->where("auditoria.status", "!=", "0")
+	    				 ->get();
+
+        if (sizeof($users) > 0) {
+            
+            $token = bin2hex(random_bytes(64));
+
+
+            $token_user  = AuthUsersApp::where("id_user", $users[0]->id)->get();
+
+            foreach ($token_user as $key => $value) {
+                $value->delete();
+            }
+
+            $AuthUsers          = new AuthUsersApp;
+            $AuthUsers->id_user = $users[0]->id;
+            $AuthUsers->token   = $token;
+            $AuthUsers->save();
+            
+
+            $data = array('user_id'   => $users[0]->id,
+                          'email'     => $users[0]->email,
+                          'nombres'   => $users[0]->nombres." ".$users[0]->apellido_p,
+                          'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/".$users[0]->img_profile,
+                          'token'     => $token,
+                          'mensagge'  => "Ha iniciado sesion exitosamente",
+                          "type_user" => "Asesor"
+	    		);
+
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("Usuario o contrasena invalida")->setStatusCode(400);
+	    }
+    }
+
+
+
+
+
+
 
 
 

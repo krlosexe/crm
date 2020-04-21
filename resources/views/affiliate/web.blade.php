@@ -148,7 +148,7 @@
         </div>
 
        		<input type="hidden" name="state" value="No Contactada">
-			    <input type="hidden" name="origen" value="Formulario Web">
+			    <input type="hidden" name="origen" value="Referido PRP">
 			    <input type="hidden" name="code" id="code" value="{{$code}}">
           <br>
           <br>

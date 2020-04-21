@@ -188,3 +188,8 @@ Route::get('comments/{tabla}/{id}', 'CommentsController@get');
 
 Route::post('register/referred', 'ReferredController@store');
 
+
+Route::post('authApp', 'Login@AuthApp');
+
+
+

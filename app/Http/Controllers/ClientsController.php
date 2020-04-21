@@ -956,7 +956,7 @@ class ClientsController extends Controller
        }
 
 
-       $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
         return response()->json($data)->setStatusCode(200);
 
 
