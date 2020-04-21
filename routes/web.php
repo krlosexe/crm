@@ -217,3 +217,7 @@ Route::get('form-prp-luisa/{id_line}/{id_asesora}', function ($id_line, $id_ases
 Route::get('affiliate/{code}', function ($code) {
     return view('affiliate.web', ["code" => $code]);
 });
+
+
+
+Route::get("create_user_prp");

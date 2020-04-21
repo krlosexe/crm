@@ -1703,7 +1703,7 @@
 						$("#asesora-edit").val(data.id_user_asesora)
 
 
-						SubmitComment(data.id_cliente, "api/comments/clients", "#comments_edit", "#add-comments", "#summernote_edit")
+						//SubmitComment(data.id_cliente, "api/comments/clients", "#comments_edit", "#add-comments", "#summernote_edit")
 
 
 
