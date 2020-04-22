@@ -7,6 +7,7 @@ use App\Valuations;
 use App\Comments;
 use App\FollwersEvents;
 use App\ValuationsPhoto;
+use DB;
 use Illuminate\Http\Request;
 
 class ValuationsController extends Controller
@@ -160,6 +161,14 @@ class ValuationsController extends Controller
                 }
                 
             }
+
+
+            DB::table("events_client")->insert([
+                "event"     => "Valoracion",
+                "id_client" => $request["id_cliente"],
+                "id_event"  => $store["id_valuations"]
+            ]);
+
 
 
             if ($store) {

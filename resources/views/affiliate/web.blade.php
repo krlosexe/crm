@@ -57,22 +57,11 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                        <label for=""><b>Nombres:*</b></label>
+                        <label for=""><b>Nombres y Apellidos:*</b></label>
                         <input type="text" name="nombres" id="nombres" class="form-control" required >
                     </div>
                 </div>
               </div>
-
-
-			  <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                        <label for=""><b>Apellidos:*</b></label>
-                        <input type="text" name="apellidos" id="apellidos" class="form-control" required >
-                    </div>
-                </div>
-              </div>
-
 
 
 			  <div class="row">

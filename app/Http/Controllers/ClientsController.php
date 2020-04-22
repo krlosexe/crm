@@ -14,6 +14,7 @@ use App\ClientsTasks;
 use App\ClientsTasksFollowers;
 use App\ClientsTasksComments;
 use App\User;
+use App\datosPersonaesModel;
 use App\Comments;
 use App\Notification;
 
@@ -1645,6 +1646,55 @@ class ClientsController extends Controller
         ClientClinicHistory::find($client)->update($request->all());
 
         return response()->json("Ok")->setStatusCode(200);
+    }
+
+
+
+    public function CreateUserPrp(){
+       
+        $where = array(
+            "prp" => "Si"
+        );
+
+        $data = Clients::where($where)
+                ->get();
+        foreach($data as $client){
+           
+
+
+            $User              = new User;
+            $User->email       = $client["email"];
+            $User->password    = md5($client["code_client"]);
+            $User->img_profile = null;
+            $User->id_client   = $client["id_cliente"];
+            $User->id_rol      = 17;
+
+            echo json_encode($User)."<br><br>";
+
+
+            $User->save();
+
+
+
+            $datos_personales                   = new datosPersonaesModel;
+            $datos_personales->nombres          = $client["nombres"];
+            $datos_personales->apellido_p       = "";
+            $datos_personales->apellido_m       = "";
+            $datos_personales->n_cedula         = $client["identificacion"];;   
+            $datos_personales->fecha_nacimiento = $client["fecha_nacimiento"];
+            $datos_personales->telefono         = $client["telefono"];
+            $datos_personales->direccion        = $client["direccion"];
+            $datos_personales->id_usuario       = $User->id;
+            $datos_personales->save();
+
+
+            
+            
+            
+
+
+        }
+
     }
     /**
      * Remove the specified resource from storage.

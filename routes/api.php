@@ -192,5 +192,11 @@ Route::post('register/referred', 'ReferredController@store');
 Route::post('authApp', 'Login@AuthApp');
 
 Route::get('adviser/affiliate/{id_adviser}', 'AdviserController@GetAffiliates');
+Route::get('adviser/refferers/{id_adviser}', 'AdviserController@GetTotalRefferers');
+
+Route::get('refferers/qty/{id_affiliate}', 'AffiliateController@qty');
+
+
+
 
 

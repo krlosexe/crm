@@ -220,4 +220,4 @@ Route::get('affiliate/{code}', function ($code) {
 
 
 
-Route::get("create_user_prp");
+Route::get("create_user_prp", "ClientsController@CreateUserPrp");

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Auditoria;
 use App\Comments;
 use App\Preanesthesia;
+use DB;
 use Illuminate\Http\Request;
 
 class PreanesthesiaController extends Controller
@@ -119,7 +120,18 @@ class PreanesthesiaController extends Controller
             
             if($request->comment != "<p><br></p>"){
                 Comments::create($request->all());
-            }
+            }  
+
+
+
+            DB::table("events_client")->insert([
+                "event"     => "Preanestesia",
+                "id_client" => $request["id_cliente"],
+                "id_event"  => $store["id_preanesthesias"]
+            ]);
+
+
+
 
 
             if ($store) {

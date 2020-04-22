@@ -8,6 +8,7 @@ use App\SurgeriesPayments;
 use App\Comments;
 use App\FollwersEvents;
 use Illuminate\Http\Request;
+use DB;
 
 class SurgeriesController extends Controller
 {
@@ -154,6 +155,12 @@ class SurgeriesController extends Controller
                 
             }
 
+            DB::table("events_client")->insert([
+                "event"     => "Cirugia",
+                "id_client" => $request["id_cliente"],
+                "id_event"  => $store["id_surgeries"]
+            ]);
+            
 
 
             if ($store) {
