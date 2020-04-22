@@ -1306,9 +1306,6 @@
 
 
 
-
-				
-
 					/*var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
 					$('#iframeValuationsEdit').attr('src', url);
 

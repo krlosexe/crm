@@ -221,3 +221,8 @@ Route::get('affiliate/{code}', function ($code) {
 
 
 Route::get("create_user_prp", "ClientsController@CreateUserPrp");
+
+
+Route::get('clients/view/{id}', function ($id) {
+    return view('catalogos.clientes.show', ["id" => $id]);
+});
