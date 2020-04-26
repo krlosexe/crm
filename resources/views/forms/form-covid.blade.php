@@ -58,8 +58,6 @@
 
   </div>
 
-
-
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="store" enctype="multipart/form-data">
         @csrf
@@ -383,7 +381,30 @@
 
 
               <div class="row">
-                <div class="col-md-12">
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                        <label for=""><b>En caso de usted ser paciente de la institución y encontrarse programado para cualquier actividad asistencial usted declara que ha cumplido con las recomendaciones de cuidado entregadas por la institución?</b></label>
+                        
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="declara" id="declara_si1" value="Si" required>
+                          <label class="form-check-label" for="declara_si1">
+                            Si
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="declara" id="declara_no2" value="No" required>
+                          <label class="form-check-label" for="declara_no2">
+                            No
+                          </label>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Observaciones</b></label>
                         
