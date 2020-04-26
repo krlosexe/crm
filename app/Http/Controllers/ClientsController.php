@@ -1316,7 +1316,7 @@ class ClientsController extends Controller
 
 
 
-            $data_user = AuthUsersApp::where("id_user", $users["id"])->first();
+           /* $data_user = AuthUsersApp::where("id_user", $users["id"])->first();
 
             $ConfigNotification = [
                 "tokens" => [$data_user["token_notifications"]],
@@ -1331,7 +1331,7 @@ class ClientsController extends Controller
 
 
 
-            
+            */
 
             $notification["fecha"]    = date("Y-m-d");
             $notification["title"]    = "Hoy Ingreso de PRP ".$request["nombres"]." codigo: ".$request["code_client"];
