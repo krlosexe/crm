@@ -192,11 +192,22 @@ Route::post('register/referred', 'ReferredController@store');
 Route::post('authApp', 'Login@AuthApp');
 
 Route::get('adviser/affiliate/{id_adviser}', 'AdviserController@GetAffiliates');
-Route::get('adviser/refferers/{id_adviser}', 'AdviserController@GetTotalRefferers');
+Route::get('prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferers');
+Route::get('prp/refferers/processes/{id_user}/{display}', 'AdviserController@GetProcesses');
 
 Route::get('refferers/qty/{id_affiliate}', 'AffiliateController@qty');
 
+Route::get('prp/dashboard/stats/{id_user}', 'AffiliateController@Dasboard');
 
+
+
+Route::get('prp/sales/statistics/{id_user}', 'AffiliateController@StatisticsSales');
+
+
+Route::get('test/notification', 'NotificationApp@index');
+
+
+Route::post('forms/covid', 'CovidController@store');
 
 
 

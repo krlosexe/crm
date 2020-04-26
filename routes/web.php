@@ -226,3 +226,11 @@ Route::get("create_user_prp", "ClientsController@CreateUserPrp");
 Route::get('clients/view/{id}', function ($id) {
     return view('catalogos.clientes.show', ["id" => $id]);
 });
+
+
+
+Route::get('form-covid/{id_line}', function ($id_line) {
+    return view('forms.form-covid', ["id_line" => $id_line]);
+});
+
+

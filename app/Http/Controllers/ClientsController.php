@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Mail;
+use App\AuthUsersApp;
 use App\Clients;
 use App\Auditoria;
 use App\ClientClinicHistory;
@@ -970,12 +971,6 @@ class ClientsController extends Controller
 
     public function ClientFormsPrp(Request $request){
 
-
-        
-
-      
-
-
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
@@ -1097,6 +1092,14 @@ class ClientsController extends Controller
 
             }
             
+
+
+
+            
+
+
+
+
 
 
             $notification["fecha"]    = date("Y-m-d");
@@ -1311,6 +1314,24 @@ class ClientsController extends Controller
 
             }
 
+
+
+            $data_user = AuthUsersApp::where("id_user", $users["id"])->first();
+
+            $ConfigNotification = [
+                "tokens" => [$data_user["token_notifications"]],
+        
+                "tittle" => "PRP",
+                "body"   => "Se ah registrado un nuevo Afiliado",
+                "data"   => ['type' => 'affiliates']
+        
+              ];
+        
+            $code = SendNotifications($ConfigNotification);
+
+
+
+            
 
             $notification["fecha"]    = date("Y-m-d");
             $notification["title"]    = "Hoy Ingreso de PRP ".$request["nombres"]." codigo: ".$request["code_client"];

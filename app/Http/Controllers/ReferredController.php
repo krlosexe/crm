@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Clients;
+use App\AuthUsersApp;
 use App\Auditoria;
 use App\ClientInformationAditionalSurgery;
 use App\ClientClinicHistory;
@@ -41,6 +42,23 @@ class ReferredController extends Controller
         $auditoria->fec_update  = date("Y-m-d H:i:s");
         $auditoria->usr_regins  = $request["id_user_asesora"];
         $auditoria->save();
+
+
+
+        $data_user = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
+
+
+        $ConfigNotification = [
+            "tokens" => [$data_user["token_notifications"]],
+    
+            "tittle" => "PRP",
+            "body"   => "Se ah registrado un Referido",
+            "data"   => ['type' => 'refferers']
+    
+          ];
+    
+        $code = SendNotifications($ConfigNotification);
+
 
 
         $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    

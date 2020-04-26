@@ -91,12 +91,11 @@ class Login extends Controller
 
         }
 
-        $users = User::join("auditoria", "auditoria.cod_reg", "=", "users.id")
-                         ->join("datos_personales", "datos_personales.id_usuario", "users.id")
+        $users = User::join("datos_personales", "datos_personales.id_usuario", "users.id")
                          ->where("email", $request["email"])
                          ->where("password", md5($request["password"]))
-                         ->where("auditoria.tabla", "users")
-                         ->where("auditoria.status", "!=", "0")
+                        // ->where("auditoria.tabla", "users")
+                       //  ->where("auditoria.status", "!=", "0")
 	    				 ->get();
 
         if (sizeof($users) > 0) {
@@ -110,9 +109,10 @@ class Login extends Controller
                 $value->delete();
             }
 
-            $AuthUsers          = new AuthUsersApp;
-            $AuthUsers->id_user = $users[0]->id;
-            $AuthUsers->token   = $token;
+            $AuthUsers                       = new AuthUsersApp;
+            $AuthUsers->id_user              = $users[0]->id;
+            $AuthUsers->token                = $token;
+            $AuthUsers->token_notifications  = $request["fcmToken"];
             $AuthUsers->save();
             
 
@@ -122,7 +122,7 @@ class Login extends Controller
                           'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/".$users[0]->img_profile,
                           'token'     => $token,
                           'mensagge'  => "Ha iniciado sesion exitosamente",
-                          "type_user" => "Asesor"
+                          "type_user" => $users[0]->id_rol == 6 ? "Asesor" : "Afiliado"
 	    		);
 
             return response()->json($data)->setStatusCode(200);
