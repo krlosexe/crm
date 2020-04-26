@@ -72,27 +72,25 @@
            <div class="col-md-12">
               
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Nombre del Paciente:*</b></label>
                         <input type="text" name="nombres" id="nombres" class="form-control" required >
                     </div>
                 </div>
-              </div>
 
-
-			       <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Número del Documento de Identidad:*</b></label>
                         <input type="text" name="identificacion" id="identificacion" class="form-control" required >
                     </div>
                 </div>
+
+
               </div>
 
-
 			        <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>¿Ha presentado alguno de los siguientes síntomas?</b></label>
 
@@ -169,87 +167,9 @@
 
                     </div>
                 </div>
-              </div>
 
 
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                        <label for=""><b>¿Ha tenido algún viaje al extranjero en los últimos 30 días?</b></label>
-                        
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="travel" id="si1_travel" value="Si" required>
-                          <label class="form-check-label" for="si1_travel">
-                            Si
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="travel" id="no_travel" value="No" required>
-                          <label class="form-check-label" for="no_travel">
-                            No
-                          </label>
-                        </div>
-                    </div>
-                </div>
-              </div>
-
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                        <label for=""><b>¿Ha estado en contacto estrecho con algún paciente sospechoso o confirmado de coronavirus?</b></label>
-                        
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="contacto_sospechoso" id="contacto_sospechoso" value="Si" required>
-                          <label class="form-check-label" for="contacto_sospechoso">
-                            Si
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="contacto_sospechoso" id="contacto_sospechoso_no" value="No" required>
-                          <label class="form-check-label" for="contacto_sospechoso_no">
-                            No
-                          </label>
-                        </div>
-                    </div>
-                </div>
-              </div>
-
-
-
-
-
-
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                        <label for=""><b>¿Ha tenido algún contacto con alguna persona procedente de los sitios decirculación de COVID-19 en los últimos 30 días?</b></label>
-                        
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="contacto_ultimos_dias" id="contacto_ultimos_dias_si1" value="Si" required>
-                          <label class="form-check-label" for="contacto_ultimos_dias_si1">
-                            Si
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="contacto_ultimos_dias" id="contacto_ultimos_dias_no2" value="No" required>
-                          <label class="form-check-label" for="contacto_ultimos_dias_no2">
-                            No
-                          </label>
-                        </div>
-
-
-                    </div>
-                </div>
-              </div>
-
-
-
-
-              <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Presenta alguna de las siguientes enfermedades: </b></label>
 
@@ -358,12 +278,86 @@
                         </div>
                     </div>
                 </div>
+
+
+
               </div>
 
 
 
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
+                  <div class="form-group">
+                        <label for=""><b>¿Ha tenido algún viaje al extranjero en los últimos 30 días?</b></label>
+                        
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="travel" id="si1_travel" value="Si" required>
+                          <label class="form-check-label" for="si1_travel">
+                            Si
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="travel" id="no_travel" value="No" required>
+                          <label class="form-check-label" for="no_travel">
+                            No
+                          </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                        <label for=""><b>¿Ha estado en contacto estrecho con algún paciente sospechoso o confirmado de coronavirus?</b></label>
+                        
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contacto_sospechoso" id="contacto_sospechoso" value="Si" required>
+                          <label class="form-check-label" for="contacto_sospechoso">
+                            Si
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contacto_sospechoso" id="contacto_sospechoso_no" value="No" required>
+                          <label class="form-check-label" for="contacto_sospechoso_no">
+                            No
+                          </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+              </div>
+
+
+
+
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                        <label for=""><b>¿Ha tenido algún contacto con alguna persona procedente de los sitios decirculación de COVID-19 en los últimos 30 días?</b></label>
+                        
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contacto_ultimos_dias" id="contacto_ultimos_dias_si1" value="Si" required>
+                          <label class="form-check-label" for="contacto_ultimos_dias_si1">
+                            Si
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="contacto_ultimos_dias" id="contacto_ultimos_dias_no2" value="No" required>
+                          <label class="form-check-label" for="contacto_ultimos_dias_no2">
+                            No
+                          </label>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Se compromete a informar al personal de la institución en caso de que después de la práctica del presente cuestionario, usted llegaré a presentar alguno de los sintomas expresados en el numeral 1 o llegue a tener contacto con alguien que presente sintomas de COVID 19 o sea caso confirmado de dicha enfermedad?</b></label>
                         
@@ -383,6 +377,13 @@
 
                     </div>
                 </div>
+
+
+
+              </div>
+
+              <div class="row">
+               
               </div>
 
 
