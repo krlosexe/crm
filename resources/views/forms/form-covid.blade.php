@@ -44,17 +44,19 @@
 </head>
 
 
+
+
   <body class="{{ Request::path() != '/' ? 'dasboard-body' : ''}} bg-gradient-primary" style="{{ $id_line != 17 ? 'overflow: hidden;' : ''}} background: #fff !important;
   ">
 
 <div class="card shadow mb-4 " id="cuadro2">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">CUESTIONARIO DE ABORDAJE AL PACIENTE PARA APLICAR A CUALQUIER SERVICIO DE ATENCIÓN DE LA CLINICA LASER </h6>
+    <h6 class="m-0 font-weight-bold text-primary">CUESTIONARIO DE ABORDAJE AL PACIENTE PARA APLICAR A CUALQUIER SERVICIO DE ATENCIÓN DE LA {{$name_line}} </h6>
   </div>
 
 
   <div class="alert alert-primary" role="alert">
-  El presente cuestionario se realiza con el objetivo de definir el manejo del paciente de manera previa al ingreso de la CLINICA LASER,  según directriz del Instituto Nacional de Salud, a fin de salvaguardar la vida, integridad y salud de los pacientes y trabajadores de la IPS.
+  El presente cuestionario se realiza con el objetivo de definir el manejo del paciente de manera previa al ingreso de la {{$name_line}},  según directriz del Instituto Nacional de Salud, a fin de salvaguardar la vida, integridad y salud de los pacientes y trabajadores de la IPS.
 
   </div>
 
