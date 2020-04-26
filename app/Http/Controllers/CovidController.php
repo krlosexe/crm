@@ -14,7 +14,7 @@ class CovidController extends Controller
 
         $subject = $line->nombre_line." CUESTIONARIO DE ABORDAJE AL PACIENTE : $request[nombres]";
 
-        $for = "cardenascarlos18@gmail.com";
+        $for = "basededatospacientes2020@gmail.com";
  
         $request["msg"]  = "Linea: $line->nombre_line";
         $request["sintomas"] = implode(",", $request["sintomas"]);
