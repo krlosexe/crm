@@ -157,6 +157,16 @@
                           </label>
                         </div>
 
+
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="sintomas[]" value="Ninguna de las Anteriores" id="Ninguna de las Anteriores">
+                          <label class="form-check-label" for="Ninguna de las Anteriores">
+                            Ninguna de las Anteriores
+                          </label>
+                        </div>
+
+
+
                     </div>
                 </div>
 
@@ -268,6 +278,20 @@
                             Enfermedad huerfana rara diagnosticada
                           </label>
                         </div>
+
+
+
+
+
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="enfermendades[]" value="Ninguna de las Ateriores" id="Ninguna de las Ateriores">
+                          <label class="form-check-label" for="Ninguna de las Ateriores">
+                            Ninguna de las Ateriores
+                          </label>
+                        </div>
+
+
+
                     </div>
                 </div>
 
