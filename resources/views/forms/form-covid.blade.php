@@ -151,14 +151,6 @@
 
 
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" name="sintomas[]" value="Secreción nasal" id="Secreción nasal">
-                          <label class="form-check-label" for="Secreción nasal">
-                           Secreción nasal
-                          </label>
-                        </div>
-
-
-                        <div class="form-check">
                           <input class="form-check-input" type="checkbox" name="sintomas[]" value=" Dolor de garganta" id=" Dolor de garganta">
                           <label class="form-check-label" for=" Dolor de garganta">
                             Dolor de garganta
