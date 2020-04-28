@@ -47,6 +47,13 @@
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-edit" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
             </li>
 
+
+            <li  class="nav-item" id="tab9_edit">
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-masajes-edit" role="tab" aria-controls="info-add" aria-selected="false">Masajes</a>
+            </li>
+
+
+
         </ul>
 
         <br><br>
@@ -761,6 +768,20 @@
                 </div>
                 <br><br>
               </div>
+
+
+
+              <div class="tab-pane fade tab_content1-0" id="info-masajes-edit" role="tabpanel" aria-labelledby="patient_record">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item " id="iframepMsajesEdit" allowfullscreen="">
+                    </iframe>
+                </div>
+                <br><br>
+              </div>
+
+
+
+
 
         </div>
 

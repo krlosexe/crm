@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -112,6 +113,14 @@ Route::get('surgeries/status/{id}/{status}', 'SurgeriesController@status');
 
 
 
+Route::resource('masajes', 'MasajesController');
+Route::get('masajes/client/{id_client}', 'MasajesController@Clients');
+Route::post('masajes/status/{id}/{status}', 'MasajesController@status');
+
+
+
+
+
 Route::resource('tasks', 'TasksController');
 Route::post('tasks/status/{id}/{status}', 'TasksController@status');
 
@@ -210,4 +219,15 @@ Route::get('test/notification', 'NotificationApp@index');
 Route::post('forms/covid', 'CovidController@store');
 
 
+
+Route::post('generate/token/chat', 'UsuariosController@generateTokenChat');
+
+
+Route::get('generate/token/chat', function () {
+    
+    $users = User::get();
+
+    return response()->json($users)->setStatusCode(200);
+
+});
 

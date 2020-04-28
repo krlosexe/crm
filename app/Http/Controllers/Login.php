@@ -115,14 +115,27 @@ class Login extends Controller
             $AuthUsers->token_notifications  = $request["fcmToken"];
             $AuthUsers->save();
             
+            if($users[0]->id_rol == 6){
+                $name_rol = "Asesor";
+            }
+
+            if($users[0]->id_rol == 17){
+                $name_rol = "Afiliado";
+            }
+
+            if($users[0]->id_rol == 19){
+                $name_rol = "Referido";
+            }
+
 
             $data = array('user_id'   => $users[0]->id,
                           'email'     => $users[0]->email,
                           'nombres'   => $users[0]->nombres." ".$users[0]->apellido_p,
                           'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/".$users[0]->img_profile,
                           'token'     => $token,
+                          'token_chat' => $users[0]->token_chat,
                           'mensagge'  => "Ha iniciado sesion exitosamente",
-                          "type_user" => $users[0]->id_rol == 6 ? "Asesor" : "Afiliado"
+                          "type_user" => $name_rol
 	    		);
 
             return response()->json($data)->setStatusCode(200);

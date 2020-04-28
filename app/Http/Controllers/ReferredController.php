@@ -9,6 +9,12 @@ use App\Auditoria;
 use App\ClientInformationAditionalSurgery;
 use App\ClientClinicHistory;
 use App\ClientCreditInformation;
+use App\User;
+
+use App\datosPersonaesModel;
+use Illuminate\Support\Facades\Hash;
+
+use DB;
 class ReferredController extends Controller
 {
     public function store(Request $request){
@@ -44,21 +50,57 @@ class ReferredController extends Controller
         $auditoria->save();
 
 
+        $data_adviser   = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
 
-        $data_user = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
+        $data_affiliate = AuthUsersApp::join("users", "users.id", "=", "auth_users_app.id_user")
+                                        ->where("users.id_client", $affiliate["id_cliente"])
+                                        ->first();
 
+
+        
+
+        
+
+        
 
         $ConfigNotification = [
-            "tokens" => [$data_user["token_notifications"]],
+            "tokens" => [$data_adviser["token_notifications"], $data_affiliate["token_notifications"]],
     
             "tittle" => "PRP",
             "body"   => "Se ah registrado un Referido",
             "data"   => ['type' => 'refferers']
     
-          ];
+        ];
     
         $code = SendNotifications($ConfigNotification);
 
+
+
+
+
+
+
+       $User =  User::create([
+            "email"       => $request["email"],
+            "password"    => Hash::make("123456789"),
+            "id_rol"      => 19,
+            "id_client"   => $cliente["id_cliente"]
+        ]);
+
+
+
+
+
+        $datos_personales                   = new datosPersonaesModel;
+        $datos_personales->nombres          = $request["nombres"];
+        $datos_personales->apellido_p       = "afasfasf";
+        $datos_personales->apellido_m       = "afasfa";
+        $datos_personales->n_cedula         = "12412124";
+        $datos_personales->fecha_nacimiento = null;
+        $datos_personales->telefono         = null;
+        $datos_personales->direccion        = null;
+        $datos_personales->id_usuario       = $User->id;
+        $datos_personales->save();
 
 
         $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
