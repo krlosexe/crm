@@ -131,6 +131,9 @@ Route::get('calendar/queries', 'CalendarController@getQueries');
 Route::get('calendar/valuations', 'CalendarController@getValuations');
 Route::get('calendar/surgeries', 'CalendarController@Surgeries');
 Route::get('calendar/revision', 'CalendarController@Revision');
+Route::get('calendar/masajes', 'CalendarController@Masajes');
+
+
 
 Route::get('calendar/preanesthesia', 'CalendarController@Preanesthesia');
 

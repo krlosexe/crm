@@ -294,6 +294,7 @@
 								<li style="display: inline-block; margin: 2%"> <span style="color: #2853A4"><i class="fas fa-circle"></i></span> Cx Alquiler</li>
 								<li style="display: inline-block; margin: 2%"> <span style="color: #FF2A55"><i class="fas fa-circle"></i></span> Fecha Tentativa</li>
 								<li style="display: inline-block; margin: 2%"> <span style="color: #FF7F7F"><i class="fas fa-circle"></i></span> Revision</li>
+								<li style="display: inline-block; margin: 2%"> <span style="color: #7FAAFF"><i class="fas fa-circle"></i></span> Masajes</li>
 							</ul>
 							</center>
 							<div class="row">
@@ -704,9 +705,6 @@
 								},
 								
 							},
-
-
-
 						
 							{
 								url: 'api/calendar/valuations', 
@@ -754,9 +752,20 @@
 									clinic  : $("#clinic").val(),
 									asesoras : asesoras.length > 0 ? asesoras : 0
 								}
+							},
+
+
+							{
+								url: 'api/calendar/masajes', 
+								color: '#7FAAFF',   
+								textColor: 'white',
+								extraParams: {
+									rol: name_rol,
+									id_user: id_user,
+									clinic  : $("#clinic").val(),
+									asesoras : asesoras.length > 0 ? asesoras : 0
+								}
 							}
-
-
 
 						],
 
@@ -1078,6 +1087,56 @@
 
 
 							}
+
+
+
+
+
+
+
+							if(calEvent.event.extendedProps.masajes == true){
+								$("#id_edit").val(calEvent.event.extendedProps.id_masajes)
+								enviarFormularioPutEvent("#update_event", 'api/masajes', '#cuadro4', false, "#avatar-edit");
+
+
+								$("#comments2-input").css("display", "block")
+								$("#comments3-input").css("display", "block")
+								$("#comments-input").css("display", "block")
+								$("#add-comments").css("display", "block")
+
+
+								$("#paciente-input").css("display", "block")
+								$("#name_paciente").text(calEvent.event.extendedProps.name_client)
+								$("#name_paciente").attr("id_paciente", calEvent.event.extendedProps.id_cliente)
+
+								$("#name_paciente").unbind().click(function (e) { 
+									$("#slide").toggleClass("show")
+									$(".side-panel-container").toggleClass("slide-show")
+
+									GetDataPaciente($(this).attr("id_paciente"))
+
+									
+								});
+
+
+
+								
+								$('#summernote').summernote("reset");
+
+
+								GetComments("/api/comments/masajes","#comments", calEvent.event.extendedProps.id_masajes, calEvent.event.extendedProps.observaciones)
+
+								SubmitComment(calEvent.event.extendedProps.id_masajes, "api/comments/masajes", "masajes", "#add-comments")
+
+
+								if(id_user == calEvent.event.extendedProps.usr_regins){
+									$(".input-disabled").removeAttr("disabled")
+								}else{
+									$(".input-disabled").attr("disabled", "disabled")
+								}
+
+							}
+							
 
 
 							$("#list_followers").html(html)

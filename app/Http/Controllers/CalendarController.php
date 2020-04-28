@@ -9,6 +9,7 @@ use App\Queries;
 use App\Surgeries;
 use App\Valuations;
 use App\Preanesthesia;
+use App\Masajes;
 use App\RevisionAppointment;
 use Illuminate\Http\Request;
 
@@ -658,6 +659,86 @@ class CalendarController extends Controller
 
         return response()->json($data)->setStatusCode(200);
     }
+
+
+
+
+
+    function Masajes(Request $request, $today = false){
+       
+        $rol       = $request["rol"];
+        $id_user   = $request["id_user"];
+        $id_clinic = $request["clinic"];
+
+
+        if($request["asesoras"] != 0){
+            $asesoras = explode(",", $request["asesoras"]);
+        }else{
+            $asesoras = 0;
+        }
+
+
+        $data = Masajes::select("masajes.id_masajes","masajes.id_cliente","masajes.fecha as start", "masajes.time as time","clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
+                                   "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic", "auditoria.usr_regins")
+
+                                    ->join("auditoria", "auditoria.cod_reg", "=", "masajes.id_masajes")
+                                    ->join("clientes", "clientes.id_cliente", "=", "masajes.id_cliente", "left")
+                                    ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                    ->join("clinic", "clinic.id_clinic", "=", "masajes.clinic", "left")
+                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "auditoria.usr_regins")
+
+                                    ->where(function ($query) use ($today) {
+                                        if($today != false){
+                                            $query->where("masajes.fecha", $today);
+                                        }
+                                    })
+
+                                    ->where(function ($query) use ($id_clinic) {
+                                        if($id_clinic != "All"){
+                                            $query->where("masajes.clinic", $id_clinic);
+                                        }
+                                    })
+
+
+                                    ->where(function ($query) use ($asesoras) {
+                                        if($asesoras != 0){
+                                            $query->whereIn("clientes.id_user_asesora", $asesoras);
+                                        }
+                                    }) 
+
+
+                                    // ->where(function ($query) use ($rol, $id_user) {
+                                    //     if($rol == "Asesor"){
+                                    //         $query->where("clientes.id_user_asesora", $id_user);
+                                    //     }
+                                    // })
+
+                                    ->where("masajes.status_surgeries", 0)
+                                    ->where("auditoria.tabla", "masajes")
+                                    ->where("auditoria.status", "!=", 0)
+                                
+                                    ->get();
+
+        foreach($data as $key => $value){
+            $value["fecha"] = $value["start"];
+            $value["start"] = $value["start"]."T".$value["time"];
+
+            $prefix = "Masajes: ";
+            $value["title"] =  $prefix.$value["name_client"]." ".$value["last_name_client"];
+            $value["masajes"] = true;
+
+
+            if($value["surgerie_rental"] == 1){
+                $value["title"] =  $prefix.$value["name_paciente"];
+                $value["color"] = "#921594";
+            }
+
+        }
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+
 
 
 
