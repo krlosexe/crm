@@ -433,16 +433,24 @@ class ClientsController extends Controller
                 LogsClients::create($version);
             }
 
-
+           
 
             if($data->clinic != $request["clinic"]){
 
                 $clinic_from = DB::table("clinic")->where("id_clinic", $data->clinic)->first();
+
+               if($clinic_from == ""){
+                   $name_clinic = "";
+               }else{
+                    $name_clinic = $clinic_from->nombre;
+               }
+
+
                 $clinic_to   = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
 
                 $version["id_user"]   = $request["id_user"];
                 $version["id_client"] = $id_cliente;
-                $version["event"]     = "Actualizo la clinica de ".$clinic_from->nombre." a ".$clinic_to->nombre."";
+                $version["event"]     = "Actualizo la clinica de ".$name_clinic." a ".$clinic_to->nombre."";
 
                 LogsClients::create($version);
             }
@@ -453,11 +461,20 @@ class ClientsController extends Controller
 
                 $line_from = DB::table("lines_business")->where("id_line", $data->id_line)->first();
 
+
+                if($line_from == ""){
+                    $name_line = "";
+                }else{
+                    $name_line = $line_from->nombre;
+                }
+
+
+
                 $line_to   = DB::table("lines_business")->where("id_line", $request["id_line"])->first();
 
                 $version["id_user"]   = $request["id_user"];
                 $version["id_client"] = $id_cliente;
-                $version["event"]     = "Actualizo la linea de ".$line_from->nombre_line." a ".$line_to->nombre_line."";
+                $version["event"]     = "Actualizo la linea de ".$name_line." a ".$line_to->nombre_line."";
 
                 LogsClients::create($version);
             }
