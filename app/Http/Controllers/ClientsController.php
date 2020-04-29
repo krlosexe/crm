@@ -423,12 +423,54 @@ class ClientsController extends Controller
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
 
-            $data = Clients::select("state")->find($id_cliente);
+            $data = Clients::select("state", "clinic", "id_line", "id_user_asesora")->find($id_cliente);
 
             if($data->state != $request["state"]){
                 $version["id_user"]   = $request["id_user"];
                 $version["id_client"] = $id_cliente;
                 $version["event"]     = "Actualizo el estado de: ".$data->state." a ".$request['state'];
+
+                LogsClients::create($version);
+            }
+
+
+
+            if($data->clinic != $request["clinic"]){
+
+                $clinic_from = DB::table("clinic")->where("id_clinic", $data->clinic)->first();
+                $clinic_to   = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+
+                $version["id_user"]   = $request["id_user"];
+                $version["id_client"] = $id_cliente;
+                $version["event"]     = "Actualizo la clinica de ".$clinic_from->nombre." a ".$clinic_to->nombre."";
+
+                LogsClients::create($version);
+            }
+
+
+
+            if($data->id_line != $request["id_line"]){
+
+                $line_from = DB::table("lines_business")->where("id_line", $data->id_line)->first();
+
+                $line_to   = DB::table("lines_business")->where("id_line", $request["id_line"])->first();
+
+                $version["id_user"]   = $request["id_user"];
+                $version["id_client"] = $id_cliente;
+                $version["event"]     = "Actualizo la linea de ".$line_from->nombre_line." a ".$line_to->nombre_line."";
+
+                LogsClients::create($version);
+            }
+
+            if($data->id_user_asesora != $request["id_user_asesora"]){
+
+                $asesora_from = DB::table("datos_personales")->where("id_usuario", $data->id_user_asesora)->first();
+
+                $asesora_to   = DB::table("datos_personales")->where("id_usuario", $request["id_user_asesora"])->first();
+
+                $version["id_user"]   = $request["id_user"];
+                $version["id_client"] = $id_cliente;
+                $version["event"]     = "Actualizo Asesora Respondable de ".$asesora_from->nombres." ".$asesora_from->apellido_p." a ".$asesora_to->nombres." ".$asesora_to->apellido_p." ";
 
                 LogsClients::create($version);
             }

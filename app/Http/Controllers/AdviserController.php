@@ -59,7 +59,7 @@ class AdviserController extends Controller
                 $data = Clients::where($where)->select("clientes.*", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.name_surgery as interes", "users.token_chat", "users.id as user_id")
                                               ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
                                               ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
-                                              ->join("users", "users.id_client", "clientes.id_cliente")
+                                              ->join("users", "users.id_client", "clientes.id_cliente", "left")
                                               ->whereNotNull('clientes.id_affiliate')
                                               ->orderBy("clientes.id_cliente", "DESC")
                                               ->get();
