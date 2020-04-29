@@ -21,6 +21,7 @@ use App\Notification;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 use App\LogsClients;
 
@@ -465,7 +466,7 @@ class ClientsController extends Controller
                 if($line_from == ""){
                     $name_line = "";
                 }else{
-                    $name_line = $line_from->nombre;
+                    $name_line = $line_from->nombre_line;
                 }
 
 
@@ -1153,11 +1154,25 @@ class ClientsController extends Controller
             
 
 
-
-            
-
-
-
+            $User =  User::create([
+                "email"       => $request["email"],
+                "password"    => Hash::make("123456789"),
+                "id_rol"      => 17,
+                "id_client"   => $id_client
+            ]);
+    
+    
+    
+            $datos_personales                   = new datosPersonaesModel;
+            $datos_personales->nombres          = $request["nombres"];
+            $datos_personales->apellido_p       = "";
+            $datos_personales->apellido_m       = "afasfa";
+            $datos_personales->n_cedula         = "12412124";
+            $datos_personales->fecha_nacimiento = null;
+            $datos_personales->telefono         = null;
+            $datos_personales->direccion        = null;
+            $datos_personales->id_usuario       = $User->id;
+            $datos_personales->save();
 
 
 
@@ -1739,8 +1754,6 @@ class ClientsController extends Controller
         $data = Clients::where($where)
                 ->get();
         foreach($data as $client){
-           
-
 
             $User              = new User;
             $User->email       = $client["email"];
@@ -1754,8 +1767,6 @@ class ClientsController extends Controller
 
             $User->save();
 
-
-
             $datos_personales                   = new datosPersonaesModel;
             $datos_personales->nombres          = $client["nombres"];
             $datos_personales->apellido_p       = "";
@@ -1766,11 +1777,6 @@ class ClientsController extends Controller
             $datos_personales->direccion        = $client["direccion"];
             $datos_personales->id_usuario       = $User->id;
             $datos_personales->save();
-
-
-            
-            
-            
 
 
         }

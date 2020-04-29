@@ -57,12 +57,6 @@ class ReferredController extends Controller
                                         ->first();
 
 
-        
-
-        
-
-        
-
         $ConfigNotification = [
             "tokens" => [$data_adviser["token_notifications"], $data_affiliate["token_notifications"]],
     
@@ -76,18 +70,12 @@ class ReferredController extends Controller
 
 
 
-
-
-
-
        $User =  User::create([
             "email"       => $request["email"],
             "password"    => Hash::make("123456789"),
             "id_rol"      => 19,
             "id_client"   => $cliente["id_cliente"]
         ]);
-
-
 
 
 

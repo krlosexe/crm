@@ -73,7 +73,6 @@ class AffiliateController extends Controller
                 "clientes.origen"          => "Referido Asesora",
             );
 
-
             $total_refferers = Clients::where($where)->selectRaw("clientes.*")
                                                     ->get();
         }
