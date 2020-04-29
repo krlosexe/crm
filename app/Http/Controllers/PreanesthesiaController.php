@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Auditoria;
 use App\Comments;
 use App\Preanesthesia;
+use App\LogsClients;
 use DB;
 use Illuminate\Http\Request;
 
@@ -131,6 +132,17 @@ class PreanesthesiaController extends Controller
             ]);
 
 
+            
+
+            $clinic = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+
+            $version["id_user"]   = $request["id_user"];
+            $version["id_client"] = $request["id_cliente"];
+            $version["event"]     = "Agendo Pre Anestesia para el dia $request[fecha] a las $request[time] en la clinica ".$clinic->nombre;
+
+            LogsClients::create($version);
+
+
 
 
 
@@ -216,6 +228,16 @@ class PreanesthesiaController extends Controller
                 }
             }
 
+
+            $clinic    = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+            $cita      = DB::table("preanesthesias")->where("id_preanesthesias", $preanesthesia)->first();
+          
+   
+            $version["id_user"]   = $request["id_user"];
+            $version["id_client"] = $cita->id_cliente;
+            $version["event"]     = "Actualizo Pre Anestesia para el dia $request[fecha] a las $request[time] en la clinica ".$clinic->nombre;
+
+            LogsClients::create($version);
 
 
 

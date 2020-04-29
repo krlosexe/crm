@@ -7,6 +7,7 @@ use App\Valuations;
 use App\Comments;
 use App\FollwersEvents;
 use App\ValuationsPhoto;
+use App\LogsClients;
 use DB;
 use Illuminate\Http\Request;
 
@@ -171,6 +172,19 @@ class ValuationsController extends Controller
 
 
 
+            
+            $clinic = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+
+            $version["id_user"]   = $request["id_user"];
+            $version["id_client"] = $request["id_cliente"];
+            $version["event"]     = "Agendo Cita de Valoracion para el dia $request[fecha] a las $request[time] con el Doctor $request[surgeon] en la clinica ".$clinic->nombre;
+
+            LogsClients::create($version);
+
+
+
+
+
             if ($store) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
                 return response()->json($data)->setStatusCode(200);
@@ -278,7 +292,7 @@ class ValuationsController extends Controller
 
             $queries = Valuations::find($valuations)->update($request->all());
 
-
+            
             if(isset($request->comment)){
                 if($request->comment != "<p><br></p>"){
 
@@ -309,6 +323,20 @@ class ValuationsController extends Controller
                 }
                 
             }
+
+
+            $clinic    = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+            $valuation = DB::table("valuations")->where("id_valuations", $valuations)->first();
+          
+   
+            $version["id_user"]   = $request["id_user"];
+            $version["id_client"] = $valuation->id_cliente;
+            $version["event"]     = "Actualizo Cita de Valoracion para el dia $request[fecha] a las $request[time] con el Doctor $request[surgeon] en la clinica ".$clinic->nombre;
+
+            LogsClients::create($version);
+
+
+
 
 
 

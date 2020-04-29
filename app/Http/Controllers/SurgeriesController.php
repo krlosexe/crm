@@ -7,6 +7,7 @@ use App\Auditoria;
 use App\SurgeriesPayments;
 use App\Comments;
 use App\FollwersEvents;
+use App\LogsClients;
 use Illuminate\Http\Request;
 use DB;
 
@@ -160,8 +161,17 @@ class SurgeriesController extends Controller
                 "id_client" => $request["id_cliente"],
                 "id_event"  => $store["id_surgeries"]
             ]);
-            
 
+
+
+
+            $clinic = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+
+            $version["id_user"]   = $request["id_user"];
+            $version["id_client"] = $request["id_cliente"];
+            $version["event"]     = "Agendo Cirugia para el dia $request[fecha] con el Doctor ".$request["surgeon"]." en la clinica ".$clinic->nombre;
+
+            LogsClients::create($version);
 
             if ($store) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
@@ -290,6 +300,18 @@ class SurgeriesController extends Controller
                 }
                 
             }
+
+
+            $clinic    = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+            $cita      = DB::table("surgeries")->where("id_surgeries", $surgeries)->first();
+          
+   
+            $version["id_user"]   = $request["id_user"];
+            $version["id_client"] = $cita->id_cliente;
+            $version["event"]     = "Actualizo Cirugia para el dia $request[fecha] con el Doctor ".$request["surgeon"]." en la clinica ".$clinic->nombre;
+
+            LogsClients::create($version);
+
 
 
 
