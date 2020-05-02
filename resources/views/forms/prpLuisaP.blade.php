@@ -96,7 +96,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                         <label for=""><b>INGRESA TU NÚMERO DE CEDULA:</b></label>
-                        <input type="text" name="identificacion" id="identificacion" class="form-control">
+                        <input type="number" name="identificacion" id="identificacion" class="form-control">
                     </div>
                 </div>
               </div>
