@@ -325,13 +325,19 @@ class ValuationsController extends Controller
             }
 
 
-            $clinic    = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+            if(isset($request["clinic"])){
+                $clinic    = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+                $name_clinic = $clinic->nombre;
+            }else{
+                $name_clinic = "";
+            }
+            
             $valuation = DB::table("valuations")->where("id_valuations", $valuations)->first();
           
    
             $version["id_user"]   = $request["id_user"];
             $version["id_client"] = $valuation->id_cliente;
-            $version["event"]     = "Actualizo Cita de Valoracion para el dia $request[fecha] a las $request[time] con el Doctor $request[surgeon] en la clinica ".$clinic->nombre;
+            $version["event"]     = "Actualizo Cita de Valoracion para el dia $request[fecha] a las $request[time] con el Doctor $request[surgeon] en la clinica ".$name_clinic;
 
             LogsClients::create($version);
 

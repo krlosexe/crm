@@ -457,7 +457,6 @@ class ClientsController extends Controller
             }
 
 
-
             if($data->id_line != $request["id_line"]){
 
                 $line_from = DB::table("lines_business")->where("id_line", $data->id_line)->first();
