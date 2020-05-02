@@ -302,13 +302,21 @@ class SurgeriesController extends Controller
             }
 
 
+            if(isset($request["clinic"])){
+                $clinic    = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+                $name_clinic = $clinic->nombre;
+            }else{
+                $name_clinic = "";
+            }
+
+
             $clinic    = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
             $cita      = DB::table("surgeries")->where("id_surgeries", $surgeries)->first();
           
    
             $version["id_user"]   = $request["id_user"];
             $version["id_client"] = $cita->id_cliente;
-            $version["event"]     = "Actualizo Cirugia para el dia $request[fecha] con el Doctor ".$request["surgeon"]." en la clinica ".$clinic->nombre;
+            $version["event"]     = "Actualizo Cirugia para el dia $request[fecha] con el Doctor ".$request["surgeon"]." en la clinica ".$name_clinic;
 
             LogsClients::create($version);
 
