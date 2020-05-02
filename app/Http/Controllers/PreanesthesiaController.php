@@ -228,14 +228,19 @@ class PreanesthesiaController extends Controller
                 }
             }
 
+            if(isset($request["clinic"])){
+                $clinic    = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+                $name_clinic = $clinic->nombre;
+            }else{
+                $name_clinic = "";
+            }
 
-            $clinic    = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
             $cita      = DB::table("preanesthesias")->where("id_preanesthesias", $preanesthesia)->first();
           
    
             $version["id_user"]   = $request["id_user"];
             $version["id_client"] = $cita->id_cliente;
-            $version["event"]     = "Actualizo Pre Anestesia para el dia $request[fecha] a las $request[time] en la clinica ".$clinic->nombre;
+            $version["event"]     = "Actualizo Pre Anestesia para el dia $request[fecha] a las $request[time] en la clinica ".$name_clinic;
 
             LogsClients::create($version);
 
