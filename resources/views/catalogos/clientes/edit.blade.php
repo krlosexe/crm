@@ -659,7 +659,7 @@
 
                         <div class="col-md-4">
                             <label for="average_monthly_income"><b>Promedio de Ingresos Mensuales</b></label>
-                            <input type="text" name="average_monthly_income" class="form-control form-control-user"  id="average_monthly_income_edit" placeholder="PJ. 1 Año">
+                            <input type="number" name="average_monthly_income" class="form-control form-control-user"  id="average_monthly_income_edit" placeholder="PJ. 1 Año">
                         </div>
 
 
