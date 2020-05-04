@@ -134,15 +134,23 @@
 									</div>
 								</div>
 
-
-
-
-
-
-
 							</div>
 
 							<div class="row">
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Filtrar por : Ciudad</b></label>
+										<select id="city-filter" class="form-control">
+											<option value="0">Seleccione</option>
+											<option value="3">Medellin</option>
+											<option value="4">Bogota</option>
+											<option value="5">Cali</option>
+										</select>
+									</div>
+								</div>
+
+
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for=""><b>Fecha desde</b></label>
@@ -317,7 +325,7 @@
 
 
 
-			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter").change(function (e) { 
+			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter, #city-filter").change(function (e) { 
 
 				list("", 1)
 
@@ -370,6 +378,7 @@
 						"adviser"       : $("#id_asesora_valoracion-filter").val(),
 						"origen"        : $("#origen-filter").val(),
 						"search"        : search,
+						"city"          : $("#city-filter").val(),
 						"date_init"     : $("#date_init").val(),
 						"date_finish"   : $("#date_finish").val(),
 						"state"         : $("#state-filter").val()

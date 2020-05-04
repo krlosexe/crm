@@ -76,6 +76,11 @@ class ClientsController extends Controller
 
 
 
+            $city = 0;
+            if(isset($request["city"])){
+                $city = $request["city"];
+            }
+
 
 
             $state = $request["state"];
@@ -125,14 +130,14 @@ class ClientsController extends Controller
                                     }
                                 }) 
 
-/*
+
                                 ->where(function ($query) use ($city) {
                                     if($city != 0){
                                         $query->where("clientes.city", $city);
                                     }
                                 }) 
 
-*/
+
                                 ->where(function ($query) use ($business_line) {
                                     if($business_line != 0){
                                         $query->whereIn("clientes.id_line", $business_line);
