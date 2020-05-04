@@ -28,6 +28,7 @@ class ClientsExport implements FromView
     var $date_finish;
     var $state;
     var $search;
+    var $city;
 
 
     public function view(): View
@@ -40,6 +41,7 @@ class ClientsExport implements FromView
         $date_finish   = $this->date_finish;
         $state         = $this->state;
         $search        = $this->search;
+        $city          = $this->city ;
 
         ini_set('memory_limit', '-1'); 
         $data = DB::table('clientes')->select( 'state',
@@ -98,6 +100,15 @@ class ClientsExport implements FromView
                                                     $query->whereIn("clientes.id_line", $business_line);
                                                 }
                                             })
+
+
+                                            ->where(function ($query) use ($city) {
+                                                if($city != 0){
+                                                    $query->where("clientes.city", $city);
+                                                }
+                                            }) 
+
+                                            
 
 
                                             ->where(function ($query) use ($state) {

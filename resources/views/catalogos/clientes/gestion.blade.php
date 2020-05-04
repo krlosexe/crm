@@ -508,6 +508,7 @@
 				var date_init     = $("#date_init").val()
 				var date_finish   = $("#date_finish").val()
 				var search        = $("#search").val()
+				var city          = $("#city-filter").val()
 
 
 				if(business_line.length == 0){
@@ -544,7 +545,7 @@
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$('.dt-buttons').append(a);
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'/'+$("#state-filter").val()+'/'+search+'" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'/'+$("#state-filter").val()+'/'+search+'/'+city+'" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
 				$("#xls").click(function (e) { 

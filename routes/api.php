@@ -158,7 +158,7 @@ Route::get('notifications/generate', 'NotificationsController@Generate');
 Route::get('email/forms', 'NotificationsController@Email');
 Route::post('email/forms', 'NotificationsController@Email');
 
-Route::get('clients/export/excel/{bunisses_line}/{adviser}/{origen}/{date_init}/{date_finish}/{state}/{search}', 'ClientsController@Excel');
+Route::get('clients/export/excel/{bunisses_line}/{adviser}/{origen}/{date_init}/{date_finish}/{state}/{search}/{city}', 'ClientsController@Excel');
 
 Route::post('clients/import/', 'ClientsController@Import');
 
