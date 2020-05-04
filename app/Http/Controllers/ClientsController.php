@@ -57,26 +57,11 @@ class ClientsController extends Controller
               $adviser = $request["adviser"];
             }
 
-
             $search = 0;
-            $city   = 0;
             if(isset($request["search"]) && $request["search"] != ""){
                 $search = $request["search"];
-
-
-                if($request["search"] == "Medellin" || $request["search"] == "medellin"){
-                        $city = 3;
-                }
-
-                if($request["search"] == "Bogota" || $request["search"] == "bogota"){
-                        $city = 4;
-                }
-
-                if($request["search"] == "Cali"|| $request["search"] == "cali"){
-                        $city = 5;
-                }
-
             }
+
 
             $date_init = 0;
             if(isset($request["date_init"]) && $request["date_init"] != ""){
@@ -140,14 +125,14 @@ class ClientsController extends Controller
                                     }
                                 }) 
 
-
+/*
                                 ->where(function ($query) use ($city) {
-                                    if($city != "0"){
+                                    if($city != 0){
                                         $query->where("clientes.city", $city);
                                     }
                                 }) 
 
-
+*/
                                 ->where(function ($query) use ($business_line) {
                                     if($business_line != 0){
                                         $query->whereIn("clientes.id_line", $business_line);

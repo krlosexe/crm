@@ -432,6 +432,8 @@
 							}else{
 								var name_update = ""
 							}
+
+						
 							html += "<tr>"
 								html += "<td>"+botones+"</td>"
 								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+" </td>"
