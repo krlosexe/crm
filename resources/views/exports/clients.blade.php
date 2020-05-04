@@ -34,8 +34,8 @@
             <td>{{ $value->fecha_nacimiento }}</td>
             <td>{{ $value->origen }}</td>
             <td>{{ $value->nombre_line }}</td>
-            <td>{{ $value->name_city }}</td>
             <td>{{ $value->name_clinic }}</td>
+            <td>{{ $value->name_city }}</td>
             <td>{{ $value->direccion }}</td>
             <td>{{ $value->facebook }}</td>
             <td>{{ $value->instagram }}</td>
