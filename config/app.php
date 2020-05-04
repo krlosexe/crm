@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
 
 
     ],
@@ -230,7 +231,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'FCM'      => LaravelFCM\Facades\FCM::class,
-	    'FCMGroup' => LaravelFCM\Facades\FCMGroup::class, // Optional
+        'FCMGroup' => LaravelFCM\Facades\FCMGroup::class, // Optional,
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

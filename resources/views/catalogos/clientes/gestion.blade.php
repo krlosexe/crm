@@ -177,6 +177,7 @@
 								  <th>Identificacion</th>
 								  <th style="width: 150px;">Origen</th>
 								  <th style="width: 150px;">Linea</th>
+								  <th style="width: 150px;">Ciudad</th>
 								  <th style="width: 150px;">Estado</th>
 			                      <th style="width: 180px;">Fecha de registro</th>
 								  <th style="width: 140px;">Asesora Responsable</th>
@@ -437,6 +438,7 @@
 								html += "<td>"+item.identificacion+"</td>"
 								html += "<td>"+item.origen+"</td>"
 								html += "<td>"+item.nombre_line+"</td>"
+								html += "<td>"+item.name_city+"</td>"
 								html += "<td>"+item.state+"</td>"
 								html += "<td>"+item.fec_regins+"<br><b>Ultima modificacion</b><br>"+item.fec_update+" <b>"+name_update+"</b></td>"
 								html += "<td><b>"+item.name_register+" "+item.apellido_register+"</b></td>"

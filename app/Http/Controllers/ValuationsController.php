@@ -9,6 +9,7 @@ use App\FollwersEvents;
 use App\ValuationsPhoto;
 use App\LogsClients;
 use DB;
+use Image;
 use Illuminate\Http\Request;
 
 class ValuationsController extends Controller
@@ -420,21 +421,71 @@ class ValuationsController extends Controller
 
 
     public function StorePhotos(Request $request){
-    
+
+        $folder_valoration = "img/valuations/".$request["code"];
+        if(!is_dir($folder_valoration)){
+            mkdir($folder_valoration, 0755);
+        }
+
         foreach($request["foto"] as $value){
 
-            $img = str_replace('data:image/png;base64,', '', $value);
+            $code          = uniqid();
+            $folder_photos = $folder_valoration."/".$code;
 
 
+            if(!is_dir($folder_photos)){
+                mkdir($folder_photos, 0755);
+            }
+
+            $img      = str_replace('data:image/png;base64,', '', $value);
             $fileData = base64_decode($img);
-            $fileName = uniqid().'.png';
-            file_put_contents('img/valuations/'.$fileName, $fileData);
+            $fileName = 'original.png';
+            file_put_contents($folder_photos."/".$fileName, $fileData);
 
-            ValuationsPhoto::create(["code" => strtoupper($request["code"]), "foto" => $fileName]);
+            
+            $imageResize = Image::make($folder_photos."/".$fileName);
+            $imageResize->orientate()
+            ->fit(75, 75, function ($constraint) {
+                $constraint->upsize();
+            })
+            ->save($folder_photos."/small.png");
+
+
+            $imageResizeMedium = Image::make($folder_photos."/".$fileName);
+            $imageResizeMedium->orientate()
+            ->fit(300, 300, function ($constraint) {
+                $constraint->upsize();
+            })
+            ->save($folder_photos."/medium.png");
+
+
+            $imageResizeLarge = Image::make($folder_photos."/".$fileName);
+            $imageResizeLarge->orientate()
+            ->fit(600, 600, function ($constraint) {
+                $constraint->upsize();
+            })
+            ->save($folder_photos."/large.png");
+
+
+
+            ValuationsPhoto::create(["code" => strtoupper($request["code"]), "code_img" => $code]);
         }
 
         return response()->json("ok")->setStatusCode(200);
+    }
 
+
+    public function GetPhotos($code){
+
+        $photos = ValuationsPhoto::where("code", $code)->get();
+
+
+        $data = [
+            "path"   => "img/valuations/$code",
+            "photos" => $photos
+        ];
+        
+        return response()->json($data)->setStatusCode(200);
 
     }
     /**
