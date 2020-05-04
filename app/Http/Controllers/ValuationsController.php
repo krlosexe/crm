@@ -479,7 +479,6 @@ class ValuationsController extends Controller
 
         $photos = ValuationsPhoto::where("code", $code)->get();
 
-
         $data = [
             "path"   => "img/valuations/$code",
             "photos" => $photos
