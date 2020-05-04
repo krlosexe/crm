@@ -176,6 +176,7 @@ Route::post('form/authorization/studio/credit', 'FormCreditController@storeAutor
 
 
 Route::post('valoration/submit/photo', 'ValuationsController@StorePhotos');
+Route::get('valorations/photos/{code}', 'ValuationsController@GetPhotos');
 Route::get('clients/comments/{id_client}', 'ClientsController@GetComments');
 
 
@@ -211,20 +212,13 @@ Route::get('refferers/qty/{id_affiliate}', 'AffiliateController@qty');
 
 Route::get('prp/dashboard/stats/{id_user}', 'AffiliateController@Dasboard');
 
-
-
 Route::get('prp/sales/statistics/{id_user}', 'AffiliateController@StatisticsSales');
-
 
 Route::get('test/notification', 'NotificationApp@index');
 
-
 Route::post('forms/covid', 'CovidController@store');
 
-
-
 Route::post('generate/token/chat', 'UsuariosController@generateTokenChat');
-
 
 Route::get('generate/token/chat', function () {
     
@@ -233,4 +227,6 @@ Route::get('generate/token/chat', function () {
     return response()->json($users)->setStatusCode(200);
 
 });
+
+
 
