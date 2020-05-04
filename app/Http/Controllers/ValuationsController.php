@@ -466,8 +466,6 @@ class ValuationsController extends Controller
             })
             ->save($folder_photos."/large.png");
 
-
-
             ValuationsPhoto::create(["code" => strtoupper($request["code"]), "code_img" => $code]);
         }
 
