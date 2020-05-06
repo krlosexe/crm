@@ -217,6 +217,7 @@ Route::get('prp/sales/statistics/{id_user}', 'AffiliateController@StatisticsSale
 Route::get('test/notification', 'NotificationApp@index');
 
 Route::post('forms/covid', 'CovidController@store');
+Route::post('forms/bioseguridad', 'CovidController@Bioseguridad');
 
 Route::post('generate/token/chat', 'UsuariosController@generateTokenChat');
 
