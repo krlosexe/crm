@@ -48,7 +48,7 @@ class CovidController extends Controller
         }
     
         if($request["id_line"] == 16){
-            $for = "cardenascarlos18@gmail.com";
+            $for = "datosclinicacep@gmail.com";
         }
         
  
