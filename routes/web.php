@@ -245,6 +245,20 @@ Route::get('clients/view/{id}', function ($id) {
 
 Route::get('form-covid/{id_line}', function ($id_line) {
 
+    if($id_line == 2){
+        $name_line = strtoupper("Clínica Especialistas del Poblado");
+    }
+
+    if($id_line == 9){
+        $name_line = strtoupper("Clínica Laser");
+    }
+
+    return view('forms.form-covid', ["id_line" => $id_line, "name_line" => $name_line]);
+});
+
+
+
+Route::get('form-bioseguridad/{id_line}', function ($id_line) {
 
     if($id_line == 2){
         $name_line = strtoupper("Clínica Especialistas del Poblado");
@@ -254,9 +268,16 @@ Route::get('form-covid/{id_line}', function ($id_line) {
         $name_line = strtoupper("Clínica Laser");
     }
 
+    if($id_line == 16){
+        $name_line = strtoupper("Planmed");
+    }
 
 
-    return view('forms.form-covid', ["id_line" => $id_line, "name_line" => $name_line]);
+
+    return view('forms.form-bioseguridad', ["id_line" => $id_line, "name_line" => $name_line]);
 });
+
+
+
 
 
