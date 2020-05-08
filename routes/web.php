@@ -173,10 +173,16 @@ Route::get('client-import', function () {
 
 Route::get('logs/session', "TasksController@Migrate");
 
+
+Route::get('logs-asesoras', function () {
+    return view('Reports.events_clients.gestion');
+});
+
+
+
 Route::get('Session', function () {
     return view('Reports.sessions.gestion');
 });
-
 
 
 

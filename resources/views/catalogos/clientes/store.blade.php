@@ -76,7 +76,10 @@
                                         <option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
                                         <option value="Demandada">Demandada</option>
                                         <option value="Afiliada">Afiliada</option>
-                                        
+                                        <option value="No Contesta">No Contesta</option>
+                                        <option value="Numero Equivocado">Numero Equivocado</option>
+                                        <option value="Valorada / Descartada">Valorada / Descartada</option>
+                                        <option value="Aprobada / Descartada">Aprobada / Descartada</option>
                                     </select>
                                 </div>
                             </div>

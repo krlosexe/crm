@@ -168,6 +168,7 @@ Route::get('validate/valoration/code/{code}', 'ValuationsController@ValidateCode
 
 Route::get('logs/sessions', 'LogsController@session');
 Route::get('logs/events/adviser', 'LogsController@EventsAdvisers');
+Route::get('logs/events/clients', 'LogsController@eventsClients');
 
 Route::post('form/credit', 'FormCreditController@store');
 

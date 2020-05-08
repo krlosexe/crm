@@ -8,6 +8,7 @@ use App\Valuations;
 use App\Preanesthesia;
 use App\Surgeries;
 use App\RevisionAppointment;
+use DB;
 use Illuminate\Http\Request;
 
 class LogsController extends Controller
@@ -296,6 +297,38 @@ class LogsController extends Controller
            
         }
         return $data;
+    }
+
+
+
+    public function eventsClients(Request $request){
+
+        if($request["adviser"] != null){
+            $adviser = $request["adviser"];
+        }else{
+            $adviser = 0;
+        }
+       $data = DB::table("logs_client")
+                ->selectRaw("logs_client.*, clientes.nombres, CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as name_asesora")
+                ->join("clientes", "clientes.id_cliente", "=", "logs_client.id_client")
+                ->join("users", "users.id", "=", "logs_client.id_user")
+                ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+
+                ->where(function ($query) use ($adviser) {
+                                
+                    if($adviser != 0){
+                        $query->whereIn("logs_client.id_user", $adviser);
+                    }
+                }) 
+    
+                ->orderBy("logs_client.create_at", "DESC")
+                ->get();
+
+
+       return response()->json($data)->setStatusCode(200);
+
+
+
     }
 
 
