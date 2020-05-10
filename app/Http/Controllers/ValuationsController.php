@@ -89,6 +89,85 @@ class ValuationsController extends Controller
 
     }
 
+
+
+    public function getToday(){
+       
+        $valuations = Valuations::selectRaw("valuations.fecha, valuations.time, valuations.code as valoration_code, clientes.id_cliente as id_client,clientes.nombres as name_client, CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as name_adviser, u2.id as user_id")
+
+                                ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
+                                ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                                ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+
+                                ->join("users as u2", "u2.id_client", "=", "clientes.id_cliente")
+
+
+                                ->where("auditoria.tabla", "valuations")
+                                ->where("auditoria.status", "!=", "0")
+                                ->where("valuations.fecha", date("Y-m-d"))
+
+                                ->orderBy("valuations.time", "ASC")
+                                ->get();
+
+        return response()->json($valuations)->setStatusCode(200);
+
+    }
+
+
+
+    public function getTodayClient($user_id){
+       
+        $valuations = Valuations::selectRaw("valuations.fecha, valuations.time, valuations.code as valoration_code, clientes.id_cliente as id_client,clientes.nombres as name_client, CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as name_adviser, u2.id as user_id")
+
+                                ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
+                                ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                                ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+
+                                ->join("users as u2", "u2.id_client", "=", "clientes.id_cliente")
+
+                                ->where("auditoria.tabla", "valuations")
+                                ->where("auditoria.status", "!=", "0")
+                                ->where("valuations.fecha", date("Y-m-d"))
+                                ->where("u2.id", $user_id)
+
+                                ->orderBy("valuations.time", "ASC")
+                                ->first();
+        
+
+        
+        $data = DB::table("valuations_photo")->where("code", $valuations["valoration_code"])->get();
+
+        if(sizeof($data) > 0){
+            $valuations["photos"] = 1;
+        }else{
+            $valuations["photos"] = 0;
+        }
+
+
+        $data_hc = DB::table("client_clinic_history")
+                        ->where("id_client", $valuations["id_client"])
+                        ->whereNotNull("eps")
+                        ->get();
+
+
+        if(sizeof($data_hc) > 0){
+            $valuations["history_clinic"] = 1;
+        }else{
+            $valuations["history_clinic"] = 0;
+        }
+
+
+
+
+        return response()->json($valuations)->setStatusCode(200);
+
+    }
+
+
+
+
     /**
      * Show the form for creating a new resource.
      *

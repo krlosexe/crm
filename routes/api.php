@@ -100,8 +100,9 @@ Route::post('revision/appointment/status/{id}/{status}', 'RevisionAppointmentCon
 Route::resource('valuations', 'ValuationsController');
 Route::get('valuations/client/{id_client}', 'ValuationsController@Clients');
 Route::post('valuations/status/{id}/{status}', 'ValuationsController@status');
-
-
+Route::get('valorations/today', 'ValuationsController@getToday');
+Route::get('valorations/today/{user_id}', 'ValuationsController@getTodayClient');
+Route::get('clients/history/clinic/{id_client}', 'ClientsController@getHc');
 
 Route::resource('preanesthesia', 'PreanesthesiaController');
 Route::get('preanesthesia/client/{id_client}', 'PreanesthesiaController@Clients');
@@ -186,7 +187,7 @@ Route::get('clients-list', 'ClientsController@List');
 
 Route::post('clients/update/hc/{id_cliente}', 'ClientsController@UpdateHc');
 
-
+Route::post('v2/clients/update/hc/{user_id}', 'ClientsController@UpdateHcByUserId');
 
 
 
@@ -205,6 +206,9 @@ Route::post('register/referred', 'ReferredController@store');
 
 Route::post('authApp', 'Login@AuthApp');
 
+Route::post('authDoc', 'Login@AuthDoc');
+Route::post('authValoration', 'Login@authValoration');
+
 Route::get('adviser/affiliate/{id_adviser}', 'AdviserController@GetAffiliates');
 Route::get('prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferers');
 Route::get('prp/refferers/processes/{id_user}/{display}', 'AdviserController@GetProcesses');
@@ -222,13 +226,23 @@ Route::post('forms/bioseguridad', 'CovidController@Bioseguridad');
 
 Route::post('generate/token/chat', 'UsuariosController@generateTokenChat');
 
+
+
+
 Route::get('generate/token/chat', function () {
     
     $users = User::get();
+
+    //UPDATE users SET sync_token = Right( MD5(created_at), 20 )
 
     return response()->json($users)->setStatusCode(200);
 
 });
 
+
+Route::get('generate/token/sync', function () {
+    $users = User::get();
+    return response()->json($users)->setStatusCode(200);
+});
 
 

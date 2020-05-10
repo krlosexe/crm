@@ -1761,6 +1761,31 @@ class ClientsController extends Controller
 
 
 
+
+    public function UpdateHcByUserId(Request $request, $user_id){
+
+        $request["children"]   = 1;
+        $request["surgery"]    = 1;
+        $request["disease"]    = 1;
+        $request["medication"] = 1;
+        $request["allergic"]   = 1;
+
+        $alcohol = strtoupper($request["alcohol"]);
+        $alcohol   == "SI" ? $request["alcohol"] = 1 : $request["alcohol"] = 0;
+
+
+        $smoke = strtoupper($request["smoke"]);
+        $smoke   == "SI" ? $request["smoke"] = 1 : $request["smoke"] = 0;
+
+        $user = DB::table("users")->where("id", $user_id)->first();
+
+        ClientClinicHistory::find($user->id_client)->update($request->all());
+
+        return response()->json("Ok")->setStatusCode(200);
+    }
+
+
+
     public function CreateUserPrp(){
        
         $where = array(
@@ -1797,6 +1822,13 @@ class ClientsController extends Controller
 
         }
 
+    }
+
+
+    public function getHc($id_client){
+
+        $data = DB::table("client_clinic_history")->where("id_client", $id_client)->first();
+        return response()->json($data)->setStatusCode(200);
     }
     /**
      * Remove the specified resource from storage.
