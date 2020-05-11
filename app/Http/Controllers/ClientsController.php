@@ -960,16 +960,28 @@ class ClientsController extends Controller
 
     public function ClientForms(Request $request){
 
+        $id_line =  $request["id_line"];
+
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->where("users.queue", 0)
                         ->where("users.id", "!=", 69)
+                        ->where("users.id", "!=", 106)
+
+                        ->where(function ($query) use ($id_line) {
+                            if($id_line == "8"){
+                                $query->where("users.id", "!=", 75);
+                            }
+                        })
+
+
                         ->first();
 
-
+        
+        
        
        if($users){
-
+           
             $request["id_user_asesora"] =  $users["id"];
 
             $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';

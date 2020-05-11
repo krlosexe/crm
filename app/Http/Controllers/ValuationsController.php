@@ -129,7 +129,7 @@ class ValuationsController extends Controller
 
                                 ->where("auditoria.tabla", "valuations")
                                 ->where("auditoria.status", "!=", "0")
-                                ->where("valuations.fecha", date("Y-m-d"))
+                              // ->where("valuations.fecha", date("Y-m-d"))
                                 ->where("u2.id", $user_id)
 
                                 ->orderBy("valuations.time", "ASC")
@@ -137,31 +137,52 @@ class ValuationsController extends Controller
         
 
         
-        $data = DB::table("valuations_photo")->where("code", $valuations["valoration_code"])->get();
+        if($valuations){
 
-        if(sizeof($data) > 0){
-            $valuations["photos"] = 1;
+            $data = DB::table("valuations_photo")->where("code", $valuations["valoration_code"])->get();
+
+            if(sizeof($data) > 0){
+                $valuations["photos"] = 1;
+            }else{
+                $valuations["photos"] = 0;
+            }
+
+
+            $data_hc = DB::table("client_clinic_history")
+                            ->where("id_client", $valuations["id_client"])
+                            ->whereNotNull("eps")
+                            ->get();
+
+
+            if(sizeof($data_hc) > 0){
+                $valuations["history_clinic"] = 1;
+            }else{
+                $valuations["history_clinic"] = 0;
+            }
+
+
+
+            if($valuations["fecha"] == date("Y-m-d")){
+                $valuations["is_today"] = 1;
+            }else{
+                $valuations["is_today"] = 0;
+            }
+
+
+
+
+
+            return response()->json($valuations)->setStatusCode(200);
+
         }else{
-            $valuations["photos"] = 0;
+            return response()->json([])->setStatusCode(200);
         }
-
-
-        $data_hc = DB::table("client_clinic_history")
-                        ->where("id_client", $valuations["id_client"])
-                        ->whereNotNull("eps")
-                        ->get();
-
-
-        if(sizeof($data_hc) > 0){
-            $valuations["history_clinic"] = 1;
-        }else{
-            $valuations["history_clinic"] = 0;
-        }
+        
 
 
 
 
-        return response()->json($valuations)->setStatusCode(200);
+        
 
     }
 
