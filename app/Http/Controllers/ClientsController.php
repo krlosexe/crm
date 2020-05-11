@@ -960,16 +960,28 @@ class ClientsController extends Controller
 
     public function ClientForms(Request $request){
 
+        $id_line =  $request["id_line"];
+
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->where("users.queue", 0)
                         ->where("users.id", "!=", 69)
+                        ->where("users.id", "!=", 106)
+
+                        ->where(function ($query) use ($id_line) {
+                            if($id_line == "8"){
+                                $query->where("users.id", "!=", 75);
+                            }
+                        })
+
+
                         ->first();
 
-
+        
+        
        
        if($users){
-
+           
             $request["id_user_asesora"] =  $users["id"];
 
             $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
@@ -1761,6 +1773,31 @@ class ClientsController extends Controller
 
 
 
+
+    public function UpdateHcByUserId(Request $request, $user_id){
+
+        $request["children"]   = 1;
+        $request["surgery"]    = 1;
+        $request["disease"]    = 1;
+        $request["medication"] = 1;
+        $request["allergic"]   = 1;
+
+        $alcohol = strtoupper($request["alcohol"]);
+        $alcohol   == "SI" ? $request["alcohol"] = 1 : $request["alcohol"] = 0;
+
+
+        $smoke = strtoupper($request["smoke"]);
+        $smoke   == "SI" ? $request["smoke"] = 1 : $request["smoke"] = 0;
+
+        $user = DB::table("users")->where("id", $user_id)->first();
+
+        ClientClinicHistory::find($user->id_client)->update($request->all());
+
+        return response()->json("Ok")->setStatusCode(200);
+    }
+
+
+
     public function CreateUserPrp(){
        
         $where = array(
@@ -1797,6 +1834,13 @@ class ClientsController extends Controller
 
         }
 
+    }
+
+
+    public function getHc($id_client){
+
+        $data = DB::table("client_clinic_history")->where("id_client", $id_client)->first();
+        return response()->json($data)->setStatusCode(200);
     }
     /**
      * Remove the specified resource from storage.

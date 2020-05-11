@@ -115,7 +115,7 @@ class Login extends Controller
             $AuthUsers->token_notifications  = $request["fcmToken"];
             $AuthUsers->save();
             
-            if($users[0]->id_rol == 6){
+            if($users[0]->id_rol == 6 || $users[0]->id_rol == 9){
                 $name_rol = "Asesor";
             }
 
@@ -125,6 +125,11 @@ class Login extends Controller
 
             if($users[0]->id_rol == 19){
                 $name_rol = "Referido";
+            }
+
+
+            if($users[0]->id_rol == 20){
+                $name_rol = "Doctor";
             }
 
 
@@ -144,6 +149,143 @@ class Login extends Controller
 	    }
     }
 
+
+
+
+
+
+
+    public function AuthDoc(request $request)
+    {	
+
+        if($request["email"] == "" || $request["password"] == ""){
+
+            return response()->json("El Email y Contraseña son Requeridos")->setStatusCode(400);
+
+        }
+
+        $users = User::join("datos_personales", "datos_personales.id_usuario", "users.id")
+                         ->where("email", $request["email"])
+                         ->where("id_rol", "!=", 17)
+                         ->where("id_rol", "!=", 19)
+                         ->where("password", md5($request["password"]))
+                        // ->where("auditoria.tabla", "users")
+                       //  ->where("auditoria.status", "!=", "0")
+	    				 ->get();
+
+        if (sizeof($users) > 0) {
+            
+            $token = bin2hex(random_bytes(64));
+
+
+            $token_user  = AuthUsersApp::where("id_user", $users[0]->id)->get();
+
+            foreach ($token_user as $key => $value) {
+                $value->delete();
+            }
+
+            $AuthUsers                       = new AuthUsersApp;
+            $AuthUsers->id_user              = $users[0]->id;
+            $AuthUsers->token                = $token;
+            $AuthUsers->token_notifications  = $request["fcmToken"];
+            $AuthUsers->save();
+            
+            if($users[0]->id_rol == 6 || $users[0]->id_rol == 9){
+                $name_rol = "Asesor";
+            }
+
+            if($users[0]->id_rol == 20){
+                $name_rol = "Doctor";
+            }
+
+
+            if($users[0]->id_rol == 19){
+                $name_rol = "Referido";
+            }
+
+
+            $data = array('user_id'    => $users[0]->id,
+                          'email'      => $users[0]->email,
+                          'nombres'    => $users[0]->nombres." ".$users[0]->apellido_p,
+                          'avatar'     => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/".$users[0]->img_profile,
+                          'token'      => $token,
+                          'sync_token' => $users[0]->sync_token,
+                          'mensagge'   => "Ha iniciado sesion exitosamente",
+                          "type_user"  => $name_rol
+	    		);
+
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("Usuario o contrasena invalida")->setStatusCode(400);
+	    }
+    }
+
+
+
+    public function authValoration(request $request)
+    {	
+
+        if($request["email"] == "" || $request["password"] == ""){
+
+            return response()->json("El Email y Contraseña son Requeridos")->setStatusCode(400);
+
+        }
+
+        $users = User::join("datos_personales", "datos_personales.id_usuario", "users.id")
+                         ->where("email", $request["email"])
+                         ->where("password", md5($request["password"]))
+	    				 ->get();
+
+        if (sizeof($users) > 0) {
+            
+            $token = bin2hex(random_bytes(64));
+
+
+            $token_user  = AuthUsersApp::where("id_user", $users[0]->id)->get();
+
+            foreach ($token_user as $key => $value) {
+                $value->delete();
+            }
+
+            $AuthUsers                       = new AuthUsersApp;
+            $AuthUsers->id_user              = $users[0]->id;
+            $AuthUsers->token                = $token;
+            $AuthUsers->token_notifications  = $request["fcmToken"];
+            $AuthUsers->save();
+            
+            if($users[0]->id_rol == 6 || $users[0]->id_rol == 9){
+                $name_rol = "Asesor";
+            }
+
+            if($users[0]->id_rol == 17){
+                $name_rol = "Afiliado";
+            }
+
+            if($users[0]->id_rol == 19){
+                $name_rol = "Referido";
+            }
+
+
+            if($users[0]->id_rol == 20){
+                $name_rol = "Doctor";
+            }
+
+
+            $data = array('user_id'    => $users[0]->id,
+                          'email'      => $users[0]->email,
+                          'nombres'    => $users[0]->nombres." ".$users[0]->apellido_p,
+                          'avatar'     => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/".$users[0]->img_profile,
+                          'token'      => $token,
+                          'sync_token' => $users[0]->sync_token,
+                          'mensagge'   => "Ha iniciado sesion exitosamente",
+                          "type_user"  => $name_rol
+	    		);
+
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("Usuario o contrasena invalida")->setStatusCode(400);
+	    }
+    }
 
 
 
