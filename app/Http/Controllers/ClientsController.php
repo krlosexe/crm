@@ -976,12 +976,10 @@ class ClientsController extends Controller
 
 
                         ->first();
-
-        
         
        
        if($users){
-           
+
             $request["id_user_asesora"] =  $users["id"];
 
             $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
