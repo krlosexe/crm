@@ -1240,6 +1240,14 @@ class ClientsController extends Controller
             }
 
 
+            if($request["id_line"] == 20){
+                $request["name_line"] = "Linea de Carlos Cardenas no Tocar :D";
+            }
+
+
+
+
+
             if(($request["id_line"] == 9)){
                 $subject = "Formulario Trabaja con Nosotros para Paulina  Clinica Laser: ".$request["nombres"];
             }
@@ -1426,6 +1434,32 @@ class ClientsController extends Controller
 
 
 
+            $User =  User::create([
+                "email"       => $request["email"],
+                "password"    => md5("123456789"),
+                "id_rol"      => 17,
+                "id_client"   => $id_client
+            ]);
+
+
+
+
+
+            $datos_personales                   = new datosPersonaesModel;
+            $datos_personales->nombres          = $request["nombres"];
+            $datos_personales->apellido_p       = "";
+            $datos_personales->apellido_m       = "afasfa";
+            $datos_personales->n_cedula         = "12412124";
+            $datos_personales->fecha_nacimiento = null;
+            $datos_personales->telefono         = null;
+            $datos_personales->direccion        = null;
+            $datos_personales->id_usuario       = $User->id;
+            $datos_personales->save();
+
+
+
+
+
            /* $data_user = AuthUsersApp::where("id_user", $users["id"])->first();
 
             $ConfigNotification = [
@@ -1484,6 +1518,13 @@ class ClientsController extends Controller
             }
 
 
+            if($request["id_line"] == 20){
+                $request["name_line"] = "Linea de Carlos Cardenas No Tocar :D";
+            }
+
+
+
+
             if(($request["id_line"] == 9)){
                 $subject = "Formulario PRP Asesora  Clinica Laser: ".$request["nombres"];
             }
@@ -1495,6 +1536,13 @@ class ClientsController extends Controller
             if(($request["id_line"] == 18) || ($request["id_line"] == 14) || ($request["id_line"] == 15)  || ($request["id_line"] == 16)){
                 $subject = "Formulario PRP Asesora  ".$request["name_line"].": ".$request["nombres"];
             }
+
+
+
+            if(($request["id_line"] == 20)){
+                $subject = "Formulario PRP Asesora  ".$request["name_line"].": ".$request["nombres"];
+            }
+
 
            // $for = "cardenascarlos18@gmail.com";
             $for = $users["email"];
