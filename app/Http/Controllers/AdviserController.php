@@ -125,7 +125,7 @@ class AdviserController extends Controller
         $user = User::where("id", $id_user)->first();
 
 
-        if($user["id_rol"] == 6){
+        if($user["id_rol"] == 6 || $user["id_rol"] == 9){
 
             if($display == "self"){
                 $where = array(
