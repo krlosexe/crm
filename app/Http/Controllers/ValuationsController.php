@@ -425,6 +425,7 @@ class ValuationsController extends Controller
             }
 
 
+            
             $queries = Valuations::find($valuations)->update($request->all());
 
             

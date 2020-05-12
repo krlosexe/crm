@@ -218,12 +218,8 @@ class SurgeriesController extends Controller
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             
-            if(isset($request["attempt"])){
-                $request["attempt"] == 1 ? $request["attempt"] = 1 : $request["attempt"] = 0;
-            }
-            
-
-
+            $request["attempt"] == 1 ? $request["attempt"] = 1 : $request["attempt"] = 0;
+          
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
 
