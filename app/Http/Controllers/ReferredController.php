@@ -72,11 +72,10 @@ class ReferredController extends Controller
 
        $User =  User::create([
             "email"       => $request["email"],
-            "password"    => Hash::make("123456789"),
+            "password"    => md5("123456789"),
             "id_rol"      => 19,
             "id_client"   => $cliente["id_cliente"]
         ]);
-
 
 
         $datos_personales                   = new datosPersonaesModel;
