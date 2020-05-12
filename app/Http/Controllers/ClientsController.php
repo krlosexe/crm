@@ -1252,6 +1252,16 @@ class ClientsController extends Controller
                 $subject = "Formulario Trabaja con Nosotros para Manuela ".$request["name_line"].": ".$request["nombres"];
             }
 
+
+
+            if(($request["id_line"] == 20)){
+                $subject = "Formulario Trabaja con Nosotros para Carlos Cardenas ".$request["name_line"].": ".$request["nombres"];
+            }
+
+
+
+
+
             //$for = "cardenascarlos18@gmail.com";
               $for = $users["email"];
            // $for = "cardenascarlos18@gmail.com..";
