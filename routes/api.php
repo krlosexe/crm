@@ -301,6 +301,7 @@ Route::get('create/users/reffers', function () {
                         // ->where("prp", "=", "No") 
                         ->join("users", "users.id_client", "=", "clientes.id_cliente", "left")
                         ->whereNull("clientes.prp")
+                        ->whereNotNull("clientes.email")
                         ->whereNull("users.id")
                         ->limit(1000)
                         ->get();
