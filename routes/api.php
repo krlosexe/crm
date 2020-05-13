@@ -298,11 +298,45 @@ Route::get('create/users/affiliate', function () {
 Route::get('create/users/reffers', function () {
     
     $clients = Clients::where("prp", "=", "No")
-                       // ->orwhereNull("prp")
+                      //  ->orwhereNull("prp")
                         ->get();
-                        return response()->json(sizeof($clients))->setStatusCode(200);
 
-  
+    foreach($clients as $client){
+
+        if(!User::where("id_client", $client["id_cliente"])->first()){
+
+
+            if(!User::where("email", $client["email"])->first()){
+                
+                $User =  User::create([
+                    "email"       => $client["email"],
+                    "password"    => md5("123456789"),
+                    "id_rol"      => 19,
+                    "id_client"   => $client["id_cliente"]
+                ]);
+            
+            
+                $datos_personales                   = new datosPersonaesModel;
+                $datos_personales->nombres          = $client["nombres"];
+                $datos_personales->apellido_p       = "";
+                $datos_personales->apellido_m       = "afasfa";
+                $datos_personales->n_cedula         = "12412124";
+                $datos_personales->fecha_nacimiento = null;
+                $datos_personales->telefono         = null;
+                $datos_personales->direccion        = null;
+                $datos_personales->id_usuario       = $User->id;
+                $datos_personales->save();
+
+            }
+
+
+        }
+
+    }
+    
+
+
+    return response()->json($clients)->setStatusCode(200);
 
 });
 
