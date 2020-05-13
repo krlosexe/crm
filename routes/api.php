@@ -298,7 +298,7 @@ Route::get('create/users/affiliate', function () {
 
 Route::get('create/users/reffers', function () {
     
-    $clients = DB::select( DB::raw("SELECT * FROM `clientes` WHERE prp is NULL") );
+    $clients = DB::select( DB::raw("SELECT * FROM `clientes` WHERE prp is NULL LIMIT 1000") );
 
 
     foreach($clients as $client){
