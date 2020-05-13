@@ -48,7 +48,7 @@
 			        <div class="container-fluid">
 
 			          <!-- Page Heading -->
-			          <h1 class="h3 mb-2 text-gray-800">Ciudades</h1>
+			          <h1 class="h3 mb-2 text-gray-800">Galeria</h1>
 
 			          <div id="alertas"></div>
 			          <input type="hidden" class="id_user">
