@@ -65,20 +65,14 @@ class GalleryImageController extends Controller
            
 
         }
-         /*
-            $data_category["sub_category"] = $sub_cate;
-
-            
-
-
-            //$data_category["images"]   = $images;
+       
            
         $gallery = [
             "path" => "img/gallery",
             "gallery" => $data
         ];
-        */
-        return response()->json($data)->setStatusCode(200);
+      
+        return response()->json($gallery)->setStatusCode(200);
 
     }
     /**
