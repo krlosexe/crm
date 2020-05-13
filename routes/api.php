@@ -309,9 +309,9 @@ Route::get('create/users/reffers', function () {
     
     foreach($clients as $client){
 
-        if(!User::where("id_client", $client["id_cliente"])->first()){
+       // if(!User::where("id_client", $client["id_cliente"])->first()){
 
-            echo "ENTRO AL PRIMERO";
+           // echo "ENTRO AL PRIMERO";
             if(!User::where("email", $client["email"])->first()){
                 echo "ENTRO AL SEGUNDO";
                 $User =  User::create([
@@ -337,7 +337,7 @@ Route::get('create/users/reffers', function () {
             }
 
 
-        }
+       // }
 
 
         return response()->json($clients)->setStatusCode(200);
