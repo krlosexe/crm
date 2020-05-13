@@ -299,7 +299,7 @@ Route::get('create/users/reffers', function () {
     
     $clients = Clients::select("clientes.nombres", "users.id")
                         // ->where("prp", "=", "No") 
-                        ->join("users", "users.id_client", "=", "clientes.id_cliente")
+                        ->join("users", "users.id_client", "=", "clientes.id_cliente", "left")
                         ->whereNull("clientes.prp")
                         ->whereNull("users.id")
                         ->limit(1000)
