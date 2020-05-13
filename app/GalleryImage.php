@@ -9,7 +9,7 @@ class GalleryImage extends Model
 
 
     protected $fillable = [
-        'image', 'thumbnail',"id_category"
+        'image', 'thumbnail',"id_category", "id_sub_category"
     ];
 
 

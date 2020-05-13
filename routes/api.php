@@ -232,10 +232,12 @@ Route::post('generate/token/chat', 'UsuariosController@generateTokenChat');
 
 
 Route::resource('category', 'CategoryController');
+Route::get('category/sub/{category}', 'CategoryController@getSubCategory');
 
 Route::resource('gallery/image', 'GalleryImageController');
-
 Route::get('image/gallery', 'GalleryImageController@get');
+
+
 
 Route::get('generate/token/chat', function () {
     

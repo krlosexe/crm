@@ -73,6 +73,7 @@
 			                    <tr>
 								  <th>Acciones</th>
 								  <th>Categoria</th>
+								  <th>Sub Categoria</th>
 			                      <th>Image</th>
 			                    </tr>
 			                  </thead>
@@ -163,7 +164,7 @@
 							{
 								value: item.id,
 								text : item.name,
-								selected : select_default == item.id ? 'selected' : ''
+								selected : select_default == item.id ? true : false
 								
 							}));
 
@@ -176,6 +177,50 @@
 			}
 
 
+			function ChangeCategory(select, select_sub, select_default = false){
+				$(select).change(function (e) { 
+					
+					$.ajax({
+						url: ''+document.getElementById('ruta').value+'/api/category/sub/'+$(select).val(),
+						type:'GET',
+						data: {
+							"id_user": id_user,
+							"token"  : tokens,
+						},
+						dataType:'JSON',
+						async: false,
+						error: function() {
+							
+						},
+						success: function(data){
+							console.log(data)
+							$(select_sub+" option").remove();
+							$(select_sub).append($('<option>',
+							{
+								value: "",
+								text : "Seleccione"
+							}));
+						
+							$.each(data, function(i, item){
+								
+								
+								$(select_sub).append($('<option>',
+								{
+									value: item.id,
+									text : item.name,
+									selected : select_default == item.id ? true : false
+									
+								}));
+
+								
+							});
+
+						}
+					
+					});
+					
+				});
+			}
 
 			function update(){
 				enviarFormularioPut("#form-update", 'api/gallery/image', '#cuadro4', false, "#avatar-edit");
@@ -223,6 +268,7 @@
 							}
 						},
 						{"data":"name_category"},
+						{"data":"name_sub_category"},
 						{"data":"image",
 							render : function(data, type, row) {
 							
@@ -257,7 +303,8 @@
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
 
-				getCategory("#category")
+				getCategory("#category", 124124124)
+				ChangeCategory("#category", "#sub_category")
 
 
 				$("#file-input-edit").fileinput('destroy');
@@ -313,6 +360,10 @@
 					var data = table.row( $(this).parents("tr") ).data();
 
 					getCategory("#category_edit", data.id_category)
+					ChangeCategory("#category_edit", "#sub_category_edit")
+
+					$("#category_edit").trigger("change");
+					$("#sub_category_edit").val(data.id_sub_category)
 
 					var url_imagen = 'img/gallery/'
 					var url        = document.getElementById('ruta').value; 
