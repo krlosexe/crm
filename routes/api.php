@@ -297,7 +297,7 @@ Route::get('create/users/affiliate', function () {
 
 Route::get('create/users/reffers', function () {
     
-    $clients = Clients::whereNull("prp")
+    $clients = Clients::whereRaw("prp is Null")
                        // ->where("prp", "=", "No") 
                         ->get();
 
