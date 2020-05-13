@@ -311,16 +311,17 @@ Route::get('create/users/reffers', function () {
 
         if(!User::where("id_client", $client["id_cliente"])->first()){
 
-
+            echo "ENTRO AL PRIMERO";
             if(!User::where("email", $client["email"])->first()){
-                
+                echo "ENTRO AL SEGUNDO";
                 $User =  User::create([
                     "email"       => $client["email"],
                     "password"    => md5("123456789"),
                     "id_rol"      => 19,
                     "id_client"   => $client["id_cliente"]
                 ]);
-            
+                
+                echo json_encode($User->id);
             
                 $datos_personales                   = new datosPersonaesModel;
                 $datos_personales->nombres          = $client["nombres"];
@@ -338,9 +339,14 @@ Route::get('create/users/reffers', function () {
 
         }
 
+
+        return response()->json($clients)->setStatusCode(200);
+
+        break;
+
     }
     
-    return response()->json($clients)->setStatusCode(200);
+    
 
     
 
