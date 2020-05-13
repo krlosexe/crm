@@ -297,13 +297,16 @@ Route::get('create/users/affiliate', function () {
 
 Route::get('create/users/reffers', function () {
     
-    $clients = Clients::whereNull("prp")
-                        ->select("clientes.nombres", "users.id")
-                       // ->where("prp", "=", "No") 
-                       ->join("users", "users.id_client", "=", "clientes.id_cliente")
+    $clients = Clients::select("clientes.nombres", "users.id")
+                        // ->where("prp", "=", "No") 
+                        ->join("users", "users.id_client", "=", "clientes.id_cliente")
+                        ->whereNull("clientes.prp")
+                        ->whereNull("users.id")
                         ->limit(1000)
                         ->get();
-                        return response()->json($clients)->setStatusCode(200);
+    
+    
+    return response()->json($clients)->setStatusCode(200);
     foreach($clients as $client){
 
         if(!User::where("id_client", $client["id_cliente"])->first()){
