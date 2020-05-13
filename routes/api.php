@@ -336,7 +336,7 @@ Route::get('create/users/reffers', function () {
     
 
 
-    return response()->json($clients)->setStatusCode(200);
+    return response()->json(sizeof($clients))->setStatusCode(200);
 
 });
 
