@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 
+use DB;
 use App\User;
 use App\Clients;
 use App\datosPersonaesModel;
@@ -297,9 +298,8 @@ Route::get('create/users/affiliate', function () {
 
 Route::get('create/users/reffers', function () {
     
-    $clients = Clients::whereRaw("prp is Null")
-                       // ->where("prp", "=", "No") 
-                        ->get();
+    $clients = DB::select( DB::raw("SELECT * FROM `clientes` WHERE prp is NULL") );
+
 
     foreach($clients as $client){
 
