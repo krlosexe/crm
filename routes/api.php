@@ -300,7 +300,9 @@ Route::get('create/users/reffers', function () {
     $clients = Clients::where("prp", "=", "No")
                         ->orwhereNull("prp")
                         ->get();
+                        return response()->json(sizeof($clients))->setStatusCode(200);
 
+                        
     foreach($clients as $client){
 
         if(!User::where("id_client", $client["id_cliente"])->first()){
