@@ -304,6 +304,8 @@ Route::get('create/users/reffers', function () {
                         ->whereNotNull("clientes.email")
                         ->whereNull("users.id")
                         ->where("clientes.email", "!=", "")
+
+                        ->where("clientes.id_cliente", ">", 22491)
                         ->limit(1000)
                         ->get();
     
