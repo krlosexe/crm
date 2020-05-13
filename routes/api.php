@@ -297,8 +297,8 @@ Route::get('create/users/affiliate', function () {
 
 Route::get('create/users/reffers', function () {
     
-    $clients = Clients::where("prp", "=", "No")
-                      //  ->orwhereNull("prp")
+    $clients = Clients::whereNull("prp")
+                       // ->where("prp", "=", "No") 
                         ->get();
 
     foreach($clients as $client){
