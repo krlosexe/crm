@@ -995,7 +995,7 @@ class ClientsController extends Controller
             
 
 
-
+            $id_client = $cliente["id_cliente"];
             
             ClientInformationAditionalSurgery::create($request->all());
             ClientClinicHistory::create($request->all());
@@ -1014,6 +1014,27 @@ class ClientsController extends Controller
             $update = User::find($users["id"]);
             $update->queue = 1;
             $update->save();
+
+
+            $User =  User::create([
+                "email"       => $request["email"],
+                "password"    => md5("123456789"),
+                "id_rol"      => 19,
+                "id_client"   => $id_client
+            ]);
+
+            $datos_personales                   = new datosPersonaesModel;
+            $datos_personales->nombres          = $request["nombres"];
+            $datos_personales->apellido_p       = "";
+            $datos_personales->apellido_m       = "afasfa";
+            $datos_personales->n_cedula         = "12412124";
+            $datos_personales->fecha_nacimiento = null;
+            $datos_personales->telefono         = null;
+            $datos_personales->direccion        = null;
+            $datos_personales->id_usuario       = $User->id;
+            $datos_personales->save();
+
+
 
 
 
@@ -1695,6 +1716,30 @@ class ClientsController extends Controller
 
             }
             
+
+
+
+            $User =  User::create([
+                "email"       => $request["email"],
+                "password"    => md5("123456789"),
+                "id_rol"      => 17,
+                "id_client"   => $id_client
+            ]);
+    
+    
+    
+            $datos_personales                   = new datosPersonaesModel;
+            $datos_personales->nombres          = $request["nombres"];
+            $datos_personales->apellido_p       = "";
+            $datos_personales->apellido_m       = "afasfa";
+            $datos_personales->n_cedula         = "12412124";
+            $datos_personales->fecha_nacimiento = null;
+            $datos_personales->telefono         = null;
+            $datos_personales->direccion        = null;
+            $datos_personales->id_usuario       = $User->id;
+            $datos_personales->save();
+
+
 
             $notification["fecha"]    = date("Y-m-d");
             $notification["title"]    = "Hoy Ingreso de PRP ".$request["nombres"]." codigo: ".$request["code_client"];
