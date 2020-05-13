@@ -231,6 +231,12 @@ Route::post('generate/token/chat', 'UsuariosController@generateTokenChat');
 
 
 
+Route::resource('category', 'CategoryController');
+
+Route::resource('gallery/image', 'GalleryImageController');
+
+Route::get('image/gallery', 'GalleryImageController@get');
+
 Route::get('generate/token/chat', function () {
     
     $users = User::get();

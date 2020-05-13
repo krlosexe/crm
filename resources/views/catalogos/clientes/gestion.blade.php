@@ -289,30 +289,30 @@
 						//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
 						},
 						success: function(data){
-						$(asesoras+" option").remove();
-						$(asesoras).append($('<option>',
-						{
-							value: "",
-							text : "Seleccione"
-						}));
-					
-						$.each(data, function(i, item){
-							if (item.status == 1) {
-							
+							$(asesoras+" option").remove();
 							$(asesoras).append($('<option>',
 							{
-								value: item.id,
-								text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
-								
+								value: "",
+								text : "Seleccione"
 							}));
+						
+							$.each(data, function(i, item){
+								if (item.status == 1) {
+								
+								$(asesoras).append($('<option>',
+								{
+									value: item.id,
+									text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
+									
+								}));
 
-							if(item.id == id_user){
-								//$(asesoras+" option").not(':selected').remove();
-								//return false;
-							}
+								if(item.id == id_user){
+									//$(asesoras+" option").not(':selected').remove();
+									//return false;
+								}
 
-							}
-						});
+								}
+							});
 
 						}
 					});
