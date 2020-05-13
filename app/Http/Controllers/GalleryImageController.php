@@ -16,8 +16,9 @@ class GalleryImageController extends Controller
     public function index()
     {
 
-        $data = GalleryImage::select("gallery_photos.*", "category.name as name_category")
+        $data = GalleryImage::select("gallery_photos.*", "category.name as name_category", "sub_category.name as name_sub_category")
                               ->join("category", "category.id", "=", "gallery_photos.id_category")
+                              ->join("sub_category", "sub_category.id", "=", "gallery_photos.id_sub_category")
 
                               ->orderBy("gallery_photos.id", "DESC")
                               ->get();
@@ -148,7 +149,7 @@ class GalleryImageController extends Controller
             $request["thumbnail"] = $request["image"]."-thumbnail.png";
 
 
-            
+
         }
 
         GalleryImage::find($galleryImage)->update($request->all());

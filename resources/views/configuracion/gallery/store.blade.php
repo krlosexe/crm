@@ -12,7 +12,17 @@
                 <div class="form-group valid-required">
                   <select name="id_category" class="form-control" id="category" required></select>
                 </div>
-            </div>
+          </div>
+
+
+
+          <div class="col-md-3">
+              <label for=""><b>Sub Categoria</b></label>
+                <div class="form-group valid-required">
+                  <select name="id_sub_category" class="form-control" id="sub_category" required></select>
+                </div>
+          </div>
+
 
         </div>
 

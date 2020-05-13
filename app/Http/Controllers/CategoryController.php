@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use DB;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -17,6 +18,13 @@ class CategoryController extends Controller
        $data = Category::get();
        return response()->json($data)->setStatusCode(200);
     }
+
+
+    public function getSubCategory($category){
+
+        $data = DB::table("sub_category")->where("id_category", $category)->get();
+        return response()->json($data)->setStatusCode(200);
+    }   
 
     /**
      * Show the form for creating a new resource.
