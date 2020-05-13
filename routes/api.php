@@ -305,7 +305,7 @@ Route::get('create/users/reffers', function () {
                         ->whereNull("users.id")
                         ->where("clientes.email", "!=", "")
 
-                        ->where("clientes.id_cliente", ">", 36984)
+                        ->where("clientes.id_cliente", ">", 39981)
                         ->limit(1000)
                         ->get();
     
