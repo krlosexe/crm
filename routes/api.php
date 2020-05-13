@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 
-use DB;
 use App\User;
 use App\Clients;
 use App\datosPersonaesModel;
@@ -298,9 +297,11 @@ Route::get('create/users/affiliate', function () {
 
 Route::get('create/users/reffers', function () {
     
-    $clients = DB::select( DB::raw("SELECT * FROM `clientes` WHERE prp is NULL LIMIT 1000") );
-
-
+    $clients = Clients::whereNull("prp")
+                       // ->where("prp", "=", "No") 
+                        ->limit(1000)
+                        ->get();
+                        return response()->json($clients)->setStatusCode(200);
     foreach($clients as $client){
 
         if(!User::where("id_client", $client["id_cliente"])->first()){
@@ -336,7 +337,7 @@ Route::get('create/users/reffers', function () {
     
 
 
-    return response()->json($clients)->setStatusCode(200);
+    
 
 });
 
