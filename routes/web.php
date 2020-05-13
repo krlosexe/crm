@@ -287,3 +287,10 @@ Route::get('form-bioseguridad/{id_line}', function ($id_line) {
 
 
 
+
+Route::get('gallery', function () {
+    return view('configuracion.gallery.gestion');
+});
+
+
+
