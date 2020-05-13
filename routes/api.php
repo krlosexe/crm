@@ -298,7 +298,7 @@ Route::get('create/users/affiliate', function () {
 Route::get('create/users/reffers', function () {
     
     $clients = Clients::where("prp", "=", "No")
-                        ->orwhereNull("prp")
+                       // ->orwhereNull("prp")
                         ->get();
                         return response()->json(sizeof($clients))->setStatusCode(200);
 
