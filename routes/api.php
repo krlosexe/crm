@@ -306,7 +306,7 @@ Route::get('create/users/reffers', function () {
                         ->get();
     
     
-    return response()->json($clients)->setStatusCode(200);
+    
     foreach($clients as $client){
 
         if(!User::where("id_client", $client["id_cliente"])->first()){
@@ -340,7 +340,7 @@ Route::get('create/users/reffers', function () {
 
     }
     
-
+    return response()->json($clients)->setStatusCode(200);
 
     
 
