@@ -6,6 +6,7 @@ use App\GalleryImage;
 use App\Category;
 use Illuminate\Http\Request;
 use Image;
+use DB;
 class GalleryImageController extends Controller
 {
     /**
@@ -38,26 +39,46 @@ class GalleryImageController extends Controller
         foreach($categories as $category){
             $data_category = [];
 
+            $sub_categorias = DB::table("sub_category")->where("id_category", $category["id"])->get();
             $data_category["category"] = $category["name"];
 
+            $sub_cates = [];
+            foreach($sub_categorias as $sub_categoria){
+                $data_sub_cate = [];
+                $data_sub_cate["name"] = $sub_categoria->name;
 
-            $images = GalleryImage::select("gallery_photos.*", "category.name as name_category")
+
+                $images = GalleryImage::select("gallery_photos.*", "category.name as name_category")
                               ->join("category", "category.id", "=", "gallery_photos.id_category")
                               ->where("gallery_photos.id_category", $category["id"])
+                              ->where("gallery_photos.id_sub_category", $sub_categoria->id)
                               ->get();
 
 
-            $data_category["images"]   = $images;
+                $data_sub_cate["images"] = $images;
+                array_push($sub_cates, $data_sub_cate);
+
+            }
+
+            $data_category["sub_category"] = $sub_cates;
             array_push($data, $data_category);
+           
 
         }
+         /*
+            $data_category["sub_category"] = $sub_cate;
 
+            
+
+
+            //$data_category["images"]   = $images;
+           
         $gallery = [
             "path" => "img/gallery",
             "gallery" => $data
         ];
-        
-        return response()->json($gallery)->setStatusCode(200);
+        */
+        return response()->json($data)->setStatusCode(200);
 
     }
     /**
