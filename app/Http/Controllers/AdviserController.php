@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Clients;
 use App\User;
+use App\Valuations;
+use App\Surgeries;
+use App\Preanesthesia;
+use App\Masajes;
+
+use DB;
 class AdviserController extends Controller
 {
     public function GetAffiliates($id_adviser){
@@ -134,7 +140,7 @@ class AdviserController extends Controller
                 );
 
 
-                $data = Clients::where($where)->selectRaw("clientes.nombres, client_information_aditional_surgery.name_surgery as interes,
+                $data = Clients::where($where)->selectRaw("clientes.id_cliente","clientes.nombres, client_information_aditional_surgery.name_surgery as interes,
                                                         CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as name_affiliate")
                                               ->join("users", "users.id", "clientes.id_user_asesora")
                                               ->join("datos_personales", "datos_personales.id_usuario", "users.id")
@@ -156,7 +162,7 @@ class AdviserController extends Controller
                 );
 
 
-                $data = Clients::where($where)->select("clientes.nombres", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.name_surgery as interes")
+                $data = Clients::where($where)->select("clientes.id_cliente","clientes.nombres", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.name_surgery as interes")
                                               ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
                                               ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
                                               ->join("events_client", "events_client.id_client", "=", "clientes.id_cliente")
@@ -184,7 +190,7 @@ class AdviserController extends Controller
             
 
             $data = Clients::where($where)
-                ->select("clientes.nombres", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
+                ->select("clientes.id_cliente","clientes.nombres", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
                 ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate")
                 ->join("events_client", "events_client.id_client", "=", "clientes.id_cliente")
@@ -204,5 +210,45 @@ class AdviserController extends Controller
 
         return response()->json($data)->setStatusCode(200);
 
+    }
+
+
+
+    public function GetProcessesDetails($id_client){
+        $data = DB::table("events_client")->where("id_client", $id_client)->get();
+
+
+
+        foreach($data as $event){
+
+            if($event->event == "Valoracion"){
+               $valoration         =  Valuations::find($event->id_event)->first();
+               $event->date_event  = $valoration["fecha"];
+            }
+
+
+            if($event->event == "Cirugia"){
+                $surgeries         =  Surgeries::find($event->id_event)->first();
+                $event->date_event = $surgeries["fecha"];
+            }
+
+
+            if($event->event == "Preanestesia"){
+                $preanestesia      =  Preanesthesia::find($event->id_event)->first();
+                $event->date_event = $preanestesia["fecha"];
+            }
+
+
+            if($event->event == "Masajes"){
+                $masajes           =  Masajes::where("id_masajes", $event->id_event)->first();
+                $event->date_event = $masajes["fecha"];
+            }
+
+        }
+
+
+
+
+       return response()->json($data)->setStatusCode(200);
     }
 }
