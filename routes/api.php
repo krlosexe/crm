@@ -214,6 +214,7 @@ Route::post('authValoration', 'Login@authValoration');
 Route::get('adviser/affiliate/{id_adviser}', 'AdviserController@GetAffiliates');
 Route::get('prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferers');
 Route::get('prp/refferers/processes/{id_user}/{display}', 'AdviserController@GetProcesses');
+Route::get('prp/refferers/processes/details/{id_client}/all', 'AdviserController@GetProcessesDetails');
 
 Route::get('refferers/qty/{id_affiliate}', 'AffiliateController@qty');
 
