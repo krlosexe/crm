@@ -794,6 +794,13 @@ class ClientsController extends Controller
             }
 
 
+            $overdue = "all";
+            if(isset($request["overdue"])){
+              $overdue = $request["overdue"];
+            }
+
+
+
             $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
                                    "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis", "clientes.nombres as name_client")
 
@@ -813,6 +820,13 @@ class ClientsController extends Controller
                                     ->where(function ($query) use ($rol, $id_user) {
                                         if($rol == "Asesor"){
                                             $query->where("clients_tasks.responsable", $id_user);
+                                        }
+                                    })
+
+
+                                    ->where(function ($query) use ($overdue) {
+                                        if($overdue == "overdue"){
+                                            $query->where("clients_tasks.fecha", "<" ,date("Y-m-d"));
                                         }
                                     })
 
