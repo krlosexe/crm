@@ -239,6 +239,11 @@ Route::resource('gallery/image', 'GalleryImageController');
 Route::get('image/gallery', 'GalleryImageController@get');
 
 
+Route::get('image/gallery', 'GalleryImageController@get');
+
+Route::get('jobs/tasks/overdue', 'JobsController@TasksOverdue');
+
+
 
 Route::get('generate/token/chat', function () {
     
