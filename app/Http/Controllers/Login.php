@@ -138,6 +138,7 @@ class Login extends Controller
                           'nombres'   => $users[0]->nombres." ".$users[0]->apellido_p,
                           'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/".$users[0]->img_profile,
                           'token'     => $token,
+                          'code'      => "DOXQ",
                           'token_chat' => $users[0]->token_chat,
                           'mensagge'  => "Ha iniciado sesion exitosamente",
                           "type_user" => $name_rol
