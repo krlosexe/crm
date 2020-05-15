@@ -346,6 +346,5 @@ class NotificationsController extends Controller
 
         return true;
 
-
     }
 }
