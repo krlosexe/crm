@@ -239,6 +239,20 @@
 									</div>
 								</div>
 
+
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b><br></b></label>
+										<select id="overdue-filter" class="form-control">
+											<option value="all">Todas</option>
+											<option value="overdue">Vencidas</option>
+										</select>
+									</div>
+								</div>
+
+
+
 							</div>
 
 			              <div class="table-responsive">
@@ -352,7 +366,7 @@
 				enviarFormulario("#store", 'api/client/tasks', '#cuadro2');
 			}
 
-			$("#id_asesora_valoracion-filter").change(function (e) { 
+			$("#id_asesora_valoracion-filter, #overdue-filter").change(function (e) { 
 				list();
 			});
 
@@ -364,8 +378,9 @@
 				};
 
 				var adviser = $("#id_asesora_valoracion-filter").val()
+				var overdue = $("#overdue-filter").val()
 
-				console.log(adviser)
+				console.log(overdue)
 
 				$("#div-input-edit").css("display", "none")
 				$('#table tbody').off('click');
@@ -384,7 +399,8 @@
 							"rol"     : name_rol,
 							"id_user" : id_user,
 							"token"   : tokens,
-							"adviser" : adviser
+							"adviser" : adviser,
+							"overdue" : overdue
 						},
 						"dataSrc":""
 					},
