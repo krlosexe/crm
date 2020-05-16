@@ -199,6 +199,11 @@ class CalendarController extends Controller
                                     ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
                                     ->where("auditoria.tabla", "clients_tasks")
                                     ->where("auditoria.status", "!=", 0)
+
+
+                                    ->where("clients_tasks.status_task", "=", "Abierta")
+
+                                    
                                     
                                     ->get();
 
