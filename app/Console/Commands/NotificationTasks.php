@@ -5,12 +5,11 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Mail;
-
+use App\ClientsTasks;
 use App\Notification;
 use App\User;
 
+use Mail;
 
 
 class NotificationTasks extends Command
@@ -55,17 +54,15 @@ class NotificationTasks extends Command
         $this->comment("Just a comment passing by");
 
         //php /var/www/html/crm/artisan registered:Logouts
-        $data = DB::table("clients_tasks")
-                    ->where("fecha", "<", date("Y-m-d"))
-                    ->where("status_task", "'Abierta'")
+        $data = ClientsTasks::where("fecha", "<", date("Y-m-d"))
+                    ->where("status_task", "Abierta")
                     ->get();
 
         //$this->comment("Just a comment passing by");
 
         foreach($data as $task){
             $this->comment("Just a comment passing by");
-
-            /*
+           
             $notification             = [];
             $notification["fecha"]    = $task->fecha;
             $notification["title"]    = "Tarea ".$task->id_clients_tasks." esta vencida: ".$task->issue;
@@ -82,8 +79,6 @@ class NotificationTasks extends Command
                 "mensage" => $notification["title"],
             ];
             $this->SendEmail($info_email);
-
-            */
 
         }
 
