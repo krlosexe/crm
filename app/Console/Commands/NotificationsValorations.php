@@ -1,62 +1,56 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\Commands;
 
-use Illuminate\Http\Request;
-use DB;
-use Mail;
+use Illuminate\Console\Command;
 
-use App\ClientsTasks;
+
+use App\Valuations;
 use App\Notification;
 use App\User;
 
-use App\Valuations;
+use Mail;
 
-
-class JobsController extends Controller
+class NotificationsValorations extends Command
 {
-    public function Logouts(){
-        echo "adasd";
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'registered:NotificationsValorations';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Recordad valoracione vencidas';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
     }
 
-    public function TasksOverdue(){
-
-        $data = ClientsTasks::where("fecha", "<", date("Y-m-d"))
-                    ->where("status_task", "Abierta")
-                    ->get();
-
-        foreach($data as $task){
-            $notification             = [];
-            $notification["fecha"]    = $task->fecha;
-            $notification["title"]    = "Tarea ".$task->id_clients_tasks." esta vencida: ".$task->issue;
-            $notification["id_user"]  = $task->responsable;
-            $notification["id_event"] = $task->id_clients_tasks;
-            $notification["type"]     = "task";
-
-            Notification::insert($notification);
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
 
 
-            $info_email = [
-                "user_id" => $task->responsable,
-                "issue"   => $notification["title"],
-                "mensage" => $notification["title"],
-            ];
-            $this->SendEmail($info_email);
+        $this->line("Some text");
+        $this->info("Hey, watch this !");
+        $this->comment("Just a comment passing by");
 
-        }
-
-        return response()->json($data)->setStatusCode(200);
-        
-    }
-
-
-
-
-
-
-
-    public function ValuationsOverdue(){
-
+        //php /var/www/html/crm/artisan registered:Logouts
         $data = Valuations::select("valuations.*", "clientes.nombres", "auditoria.usr_regins")
                     ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                     ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
@@ -67,6 +61,9 @@ class JobsController extends Controller
                     ->get();
 
         foreach($data as $event){
+
+            $this->comment("Just a comment passing by");
+
             $notification             = [];
             $notification["fecha"]    = $event->fecha;
             $notification["title"]    = "Valoracion ".$event->code." esta vencida PX: ".$event->nombres;
@@ -86,14 +83,8 @@ class JobsController extends Controller
 
         }
 
-        return response()->json($data)->setStatusCode(200);
-        
+
     }
-
-
-
-
-
 
 
     public function SendEmail($data){
@@ -102,7 +93,7 @@ class JobsController extends Controller
         $subject = $data["issue"];
 
         $for = "cardenascarlos18@gmail.com";
-        //$for = $user["email"];
+      //  $for = $user["email"];
 
         $request["msg"] = $data["mensage"];
 
@@ -115,7 +106,4 @@ class JobsController extends Controller
         return true;
 
     }
-
-
-
 }

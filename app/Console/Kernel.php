@@ -14,7 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         'App\console\Commands\Logouts',
-        'App\console\Commands\NotificationTasks'
+        'App\console\Commands\NotificationTasks',
+        'App\console\Commands\NotificationsValorations'
+        
     ];
 
     /**
