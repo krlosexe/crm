@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Mail;
 
+use App\ClientsTasks;
 use App\Notification;
 use App\User;
 class JobsController extends Controller
@@ -16,8 +17,7 @@ class JobsController extends Controller
 
     public function TasksOverdue(){
 
-        $data = DB::table("clients_tasks")
-                    ->where("fecha", "<", date("Y-m-d"))
+        $data = ClientsTasks::where("fecha", "<", date("Y-m-d"))
                     ->where("status_task", "Abierta")
                     ->get();
 
@@ -52,8 +52,8 @@ class JobsController extends Controller
         $user = User::find($data["user_id"]);
         $subject = $data["issue"];
 
-        //$for = "cardenascarlos18@gmail.com";
-        $for = $user["email"];
+        $for = "cardenascarlos18@gmail.com";
+        //$for = $user["email"];
 
         $request["msg"] = $data["mensage"];
 
