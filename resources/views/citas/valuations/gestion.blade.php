@@ -228,6 +228,36 @@
 		                  </button>
 			            </div>
 			            <div class="card-body">
+
+
+							<div class="row">
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Filtrar por : Asesora</b></label>
+										<select name="adviser[]" id="id_asesora_valoracion-filter" class="form-control select2 disabled" multiple>
+											<option value="">Seleccione</option>
+										</select>
+									</div>
+								</div>
+
+
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b><br></b></label>
+										<select id="overdue-filter" class="form-control">
+											<option value="all">Todas</option>
+											<option value="overdue">Vencidas</option>
+										</select>
+									</div>
+								</div>
+
+
+
+							</div>
+
+
 			              <div class="table-responsive">
 			                <table class="table table-bordered" id="table" width="100%" cellspacing="0">
 			                  <thead>
@@ -325,6 +355,9 @@
 
 				GetUsersTasksclient2(".getUsers")
 
+				GetAsesorasValoracion("#id_asesora_valoracion-filter")
+
+				
 
 			});
 
@@ -338,12 +371,29 @@
 			}
 
 
+
+
+
+			$("#id_asesora_valoracion-filter, #overdue-filter").change(function (e) { 
+				list();
+			});
+
+
+
 			function list(cuadro) {
 
 				var data = {
 					"id_user" : id_user,
 					"token"   : tokens,
 				};
+
+
+
+				var adviser = $("#id_asesora_valoracion-filter").val()
+				var overdue = $("#overdue-filter").val()
+
+				console.log(overdue)
+
 
 
 				$("#div-input-edit").css("display", "none")
@@ -360,9 +410,11 @@
 						"method":"GET",
 						 "url":''+url+'/api/valuations',
 						 "data": {
-							"rol"    : name_rol,
-							"id_user": id_user,
-							"token"  : tokens
+							"rol"     : name_rol,
+							"id_user" : id_user,
+							"token"   : tokens,
+							"adviser" : adviser,
+							"overdue" : overdue
 							
 						},
 						"dataSrc":""

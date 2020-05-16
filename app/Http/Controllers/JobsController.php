@@ -47,6 +47,46 @@ class JobsController extends Controller
 
 
 
+
+
+
+
+    public function ValuationsOverdue(){
+
+        $data = ClientsTasks::where("fecha", "<", date("Y-m-d"))
+                    ->where("status_task", "Abierta")
+                    ->get();
+
+        foreach($data as $task){
+            $notification             = [];
+            $notification["fecha"]    = $task->fecha;
+            $notification["title"]    = "Tarea ".$task->id_clients_tasks." esta vencida: ".$task->issue;
+            $notification["id_user"]  = $task->responsable;
+            $notification["id_event"] = $task->id_clients_tasks;
+            $notification["type"]     = "task";
+
+            Notification::insert($notification);
+
+
+            $info_email = [
+                "user_id" => $task->responsable,
+                "issue"   => $notification["title"],
+                "mensage" => $notification["title"],
+            ];
+            $this->SendEmail($info_email);
+
+        }
+
+        return response()->json($data)->setStatusCode(200);
+        
+    }
+
+
+
+
+
+
+
     public function SendEmail($data){
 
         $user = User::find($data["user_id"]);
