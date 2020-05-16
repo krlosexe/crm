@@ -320,6 +320,34 @@ class ClientsController extends Controller
                 ClientCreditInformation::create($request->all());
 
 
+
+                $User =  User::create([
+                    "email"       => $request["email"],
+                    "password"    => md5("123456789"),
+                    "id_rol"      => 19,
+                    "id_client"   => $cliente["id_cliente"]
+                ]);
+    
+                $datos_personales                   = new datosPersonaesModel;
+                $datos_personales->nombres          = $request["nombres"];
+                $datos_personales->apellido_p       = "";
+                $datos_personales->apellido_m       = ".";
+                $datos_personales->n_cedula         = "12412124";
+                $datos_personales->fecha_nacimiento = null;
+                $datos_personales->telefono         = null;
+                $datos_personales->direccion        = null;
+                $datos_personales->id_usuario       = $User->id;
+                $datos_personales->save();
+
+
+
+                
+    
+
+
+
+
+
                 if(isset($request["telefono2"])){
                     foreach($request["telefono2"] as $value){
                        
@@ -366,6 +394,21 @@ class ClientsController extends Controller
                 $auditoria->fec_update  = date("Y-m-d H:i:s");
                 $auditoria->save();
 
+
+
+
+                $mensaje = "Bienvenido, tus datos de acceso son: ".$request["email"]." clave: 123456789";
+                
+                $info_email = [
+                    "user_id" => $User->id,
+                    "issue"   => "Bienvenido",
+                    "mensage" => $mensaje,
+                ];
+                
+                $this->SendEmail($info_email);
+
+
+
                 if ($cliente) {
                     $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
                     return response()->json($data)->setStatusCode(200);
@@ -380,6 +423,30 @@ class ClientsController extends Controller
 
         
     }
+
+
+
+    public function SendEmail($data){
+    
+        $user = User::find($data["user_id"]);
+        $subject = $data["issue"];
+
+        //$for = "cardenascarlos18@gmail.com";
+        $for = $user["email"];
+
+        $request["msg"] = $data["mensage"];
+
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("cardenascarlos18@gmail.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+        return true;
+
+    }
+
+
 
     /**
      * Display the specified resource.
