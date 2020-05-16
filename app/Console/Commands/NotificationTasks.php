@@ -93,8 +93,8 @@ class NotificationTasks extends Command
         $user = User::find($data["user_id"]);
         $subject = $data["issue"];
 
-        $for = "cardenascarlos18@gmail.com";
-        //$for = $user["email"];
+        //$for = "cardenascarlos18@gmail.com";
+        $for = $user["email"];
 
         $request["msg"] = $data["mensage"];
 
