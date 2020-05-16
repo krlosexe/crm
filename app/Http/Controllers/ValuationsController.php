@@ -27,6 +27,17 @@ class ValuationsController extends Controller
             $rol     = $request["rol"];
             $id_user = $request["id_user"];
 
+            $adviser = 0;
+            if(isset($request["adviser"])){
+              $adviser = $request["adviser"];
+            }
+
+
+            $overdue = "all";
+            if(isset($request["overdue"])){
+              $overdue = $request["overdue"];
+            }
+
 
             $valuations = Valuations::select("valuations.*", "valuations.id_asesora_valoracion as id_asesora", "valuations.clinic as id_clinic",
                                              "valuations.status as status_valuations*", "auditoria.*", "users.email as email_regis", "clientes.*",
@@ -45,6 +56,20 @@ class ValuationsController extends Controller
                                         $query->where("clientes.id_user_asesora", $id_user);
                                     }
                                 })
+
+
+
+                                ->where(function ($query) use ($overdue) {
+                                    if($overdue == "overdue"){
+                                        $query->where("valuations.fecha", "<" ,date("Y-m-d"));
+                                    }
+                                })
+
+                                ->where(function ($query) use ($adviser) {
+                                    if($adviser != 0){
+                                        $query->whereIn("auditoria.usr_regins", $adviser);
+                                    }
+                                }) 
 
                                 ->with("photos")
 
