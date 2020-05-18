@@ -311,7 +311,7 @@
 				$("#file-input-edit").fileinput({
 					theme: "fas",
 					overwriteInitial: true,
-					maxFileSize: 1500,
+					//maxFileSize: 1500,
 					showClose: false,
 					showCaption: false,
 					browseLabel: '',
@@ -383,7 +383,7 @@
 					$("#file-input-edit2").fileinput({
 						theme: "fas",
 						overwriteInitial: true,
-						maxFileSize: 1500,
+						//maxFileSize: 1500,
 						showClose: false,
 						showCaption: false,
 						browseLabel: '',
