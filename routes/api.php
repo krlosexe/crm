@@ -125,7 +125,7 @@ Route::post('masajes/status/{id}/{status}', 'MasajesController@status');
 
 
 Route::resource('tasks', 'TasksController');
-Route::post('tasks/status/{id}/{status}', 'TasksController@status');
+Route::get('tasks/status/{id}/{status}', 'TasksController@status');
 
 
 Route::get('calendar/tasks', 'CalendarController@getTask');
