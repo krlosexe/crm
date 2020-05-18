@@ -1399,7 +1399,7 @@ class ClientsController extends Controller
                         ->where("users.queue_prp", 1)
                         ->update(["queue_prp" => 0]);
 
-            $this->ClientForms($request);
+            $this->ClientFormsPrp($request);
        }
 
 
