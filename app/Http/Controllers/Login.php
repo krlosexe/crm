@@ -259,7 +259,7 @@ class Login extends Controller
             }
 
             if($users[0]->id_rol == 17){
-                $name_rol = "Afiliado";
+                $name_rol = "Referido";
             }
 
             if($users[0]->id_rol == 19){
