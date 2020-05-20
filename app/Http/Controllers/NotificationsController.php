@@ -354,18 +354,11 @@ class NotificationsController extends Controller
 
 
     public function NotificationsPost(Request $request){
-
-        $lines = DB::table("lines_business")->select("id_line")->whereIn("nombre_line", $request["lines"])->get();
-
-        $array_lines = [];
-        foreach($lines as $value){
-            $array_lines[] = $value->id_line;
-        }
-
+        
         $users = Clients::selectRaw("clientes.nombres, users.id as user_id, auth_users_app.token_notifications")
                           ->join("users", "users.id_client", "=", "clientes.id_cliente")
                           ->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
-                          ->whereIn("clientes.id_line", $array_lines)
+                          ->whereIn("clientes.id_line", $request["lines"])
                           ->where("clientes.PRP", "Si")
                           ->where("users.id_rol", 17)
                           ->get();
