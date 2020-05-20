@@ -521,22 +521,20 @@ class ValuationsController extends Controller
 
     public function status($id, $status, Request $request)
     {
-        if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $auditoria =  Auditoria::where("cod_reg", $id)
-                                     ->where("tabla", "valuations")->first();
-            $auditoria->status = $status;
+       
+        $auditoria =  Auditoria::where("cod_reg", $id)
+                                    ->where("tabla", "valuations")->first();
+        $auditoria->status = $status;
 
-            if($status == 0){
-                $auditoria->usr_regmod = $request["id_user"];
-                $auditoria->fec_regmod = date("Y-m-d");
-            }
-            $auditoria->save();
-
-            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
-            return response()->json($data)->setStatusCode(200);
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
+        if($status == 0){
+            $auditoria->usr_regmod = 86;
+            $auditoria->fec_regmod = date("Y-m-d");
         }
+        $auditoria->save();
+
+        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+        return response()->json($data)->setStatusCode(200);
+       
     }
 
 
