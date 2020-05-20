@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\User;
 use App\Modulos;
 use App\funciones;
@@ -119,8 +120,18 @@ class Login extends Controller
                 $name_rol = "Asesor";
             }
 
+            $id_line = null;
             if($users[0]->id_rol == 17){
                 $name_rol = "Afiliado";
+
+
+                $line = DB::table("users")
+                            ->select("clientes.id_line")
+                            ->join("clientes", "clientes.id_cliente", "=", "users.id_client")
+                            ->where("users.id", $users[0]->id)
+                            ->first();
+
+                $id_line = $line->id_line;
             }
 
             if($users[0]->id_rol == 19){
@@ -139,7 +150,7 @@ class Login extends Controller
                           'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/".$users[0]->img_profile,
                           'token'     => $token,
                           'code'      => "DOXQ",
-                          'line'      => $users[0]->id_line,
+                          'line'      => $id_line,
                           'token_chat' => $users[0]->token_chat,
                           'mensagge'  => "Ha iniciado sesion exitosamente",
                           "type_user" => $name_rol
