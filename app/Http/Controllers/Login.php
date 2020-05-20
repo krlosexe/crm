@@ -94,8 +94,8 @@ class Login extends Controller
         $users = User::selectRaw("users.*, datos_personales.*, clientes.id_line")
                          ->join("datos_personales", "datos_personales.id_usuario", "users.id")
                          ->join("clientes", "clientes.id_cliente", "users.id_client", "left")
-                         ->where("email", $request["email"])
-                         ->where("password", md5($request["password"]))
+                         ->where("users.email", $request["email"])
+                         ->where("users.password", md5($request["password"]))
                         // ->where("auditoria.tabla", "users")
                        //  ->where("auditoria.status", "!=", "0")
 	    				 ->get();
