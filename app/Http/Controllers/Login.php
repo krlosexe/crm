@@ -91,7 +91,9 @@ class Login extends Controller
 
         }
 
-        $users = User::join("datos_personales", "datos_personales.id_usuario", "users.id")
+        $users = User::seletRaw("users.*, datos_personales.*, clientes.id_line")
+                         ->join("datos_personales", "datos_personales.id_usuario", "users.id")
+                         ->join("clientes", "clientes.id_cliente", "users.id_client", "left")
                          ->where("email", $request["email"])
                          ->where("password", md5($request["password"]))
                         // ->where("auditoria.tabla", "users")
@@ -139,6 +141,7 @@ class Login extends Controller
                           'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/".$users[0]->img_profile,
                           'token'     => $token,
                           'code'      => "DOXQ",
+                          'line'      => $users[0]->id_line,
                           'token_chat' => $users[0]->token_chat,
                           'mensagge'  => "Ha iniciado sesion exitosamente",
                           "type_user" => $name_rol
