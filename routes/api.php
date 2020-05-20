@@ -244,6 +244,9 @@ Route::get('image/gallery', 'GalleryImageController@get');
 Route::get('jobs/tasks/overdue', 'JobsController@TasksOverdue');
 Route::get('jobs/valuations/overdue', 'JobsController@ValuationsOverdue');
 
+Route::post('notification/post', 'NotificationsController@NotificationsPost');
+
+
 
 Route::get('generate/token/chat', function () {
     

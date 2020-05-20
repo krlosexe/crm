@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Mail;
 use App\User;
 use App\Tasks;
+use App\Clients;
 use App\Queries;
 use App\Valuations;
 use App\Notification;
@@ -346,5 +348,47 @@ class NotificationsController extends Controller
 
         return true;
 
+    }
+
+
+
+
+    public function NotificationsPost(Request $request){
+
+        $lines = DB::table("lines_business")->select("id_line")->whereIn("nombre_line", $request["lines"])->get();
+
+        $array_lines = [];
+        foreach($lines as $value){
+            $array_lines[] = $value->id_line;
+        }
+
+        $users = Clients::selectRaw("clientes.nombres, users.id as user_id, auth_users_app.token_notifications")
+                          ->join("users", "users.id_client", "=", "clientes.id_cliente")
+                          ->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
+                          ->whereIn("clientes.id_line", $array_lines)
+                          ->where("clientes.PRP", "Si")
+                          ->where("users.id_rol", 17)
+                          ->get();
+
+
+
+        $tokens = [];
+        foreach($users as $user){
+            $tokens[] = $user["token_notifications"];
+        }
+
+
+        $ConfigNotification = [
+            "tokens" => $tokens,
+
+            "tittle" => "Contenido para Publicar",
+            "body"   => "Se ah publicado un nuevo Post",
+            "data"   => ['type' => 'post']
+
+        ];
+        
+        $code = SendNotifications($ConfigNotification);
+
+        return response()->json($users)->setStatusCode(200);
     }
 }
