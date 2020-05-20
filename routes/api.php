@@ -87,6 +87,7 @@ Route::post('status-clinic/{id}/{status}', 'ClinicController@status');
 
 
 Route::resource('line-business', 'LinesBusinessController');
+Route::get('lines/bussiness', 'LinesBusinessController@get');
 Route::post('status-line/{id}/{status}', 'LinesBusinessController@status');
 
 

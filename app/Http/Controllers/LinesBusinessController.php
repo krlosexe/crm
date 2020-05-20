@@ -31,6 +31,29 @@ class LinesBusinessController extends Controller
        // }
     }
 
+
+
+
+
+
+
+    public function get(Request $request)
+    {
+       
+        $data = LinesBusiness::select("lines_business.nombre_line as label, lines_business.id_line as value")
+                            ->join("auditoria", "auditoria.cod_reg", "=", "lines_business.id_line")
+                            ->where("auditoria.tabla", "lines_business")
+                            ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                            ->where("auditoria.status", "!=", "0")
+                            ->orderBy("lines_business.id_line", "DESC")
+                            ->get();
+        
+        return response()->json($data)->setStatusCode(200);
+      
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      *
