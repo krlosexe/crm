@@ -1571,8 +1571,7 @@ class ClientsController extends Controller
                 "body"   => "Se ah registrado un nuevo Afiliado",
                 "data"   => ['type' => 'affiliates']
         
-              ];
-        
+            ];
             $code = SendNotifications($ConfigNotification);
 
 
