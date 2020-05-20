@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Illuminate\Support\Facades\Route;
 class Cors
 {
     /**
@@ -15,9 +15,16 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
-        return $next($request)
+
+        if ($request->is('api/clients/export/excel/*')) {
+            return $next($request);
+        }else{
+            return $next($request)
                 ->header('Access-Control-Allow-Origin', '*')
                 ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
                 ->header('Access-Control-Allow-Headers', 'Content-Type, Authorizations');
+
+        }
+        
     }
 }
