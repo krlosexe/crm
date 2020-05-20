@@ -91,7 +91,7 @@ class Login extends Controller
 
         }
 
-        $users = User::seletRaw("users.*, datos_personales.*, clientes.id_line")
+        $users = User::selectRaw("users.*, datos_personales.*, clientes.id_line")
                          ->join("datos_personales", "datos_personales.id_usuario", "users.id")
                          ->join("clientes", "clientes.id_cliente", "users.id_client", "left")
                          ->where("email", $request["email"])
