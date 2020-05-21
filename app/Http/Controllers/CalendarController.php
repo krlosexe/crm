@@ -127,102 +127,109 @@ class CalendarController extends Controller
             $asesoras = 0;
         }
         
-        
-        $data = ClientsTasks::select("clients_tasks.id_clients_tasks","clients_tasks.id_client", "clients_tasks.issue as title", 
-                                     "clients_tasks.fecha as start", "clients_tasks.time as time", "datos_personales.nombres",
-                                     "datos_personales.apellido_p", "user_responsable.img_profile",
-                                     "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clients_tasks.responsable"
-                                    )
-
-                            ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client", "left")
-                            ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable", "left")
-                            ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable", "left")
-
-                            ->with("followers")
-
-                            //->with("comments")
 
 
+        if(($request["type_event"] == "0") || ($request["type_event"] == "Tareas")){
+                
+                $data = ClientsTasks::select("clients_tasks.id_clients_tasks","clients_tasks.id_client", "clients_tasks.issue as title", 
+                                        "clients_tasks.fecha as start", "clients_tasks.time as time", "datos_personales.nombres",
+                                        "datos_personales.apellido_p", "user_responsable.img_profile",
+                                        "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clients_tasks.responsable"
+                                        )
 
-                            ->where(function ($query) use ($today) {
-                                if($today != false){
-                                    $query->where("clients_tasks.fecha", $today);
-                                }
-                            })
+                                ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client", "left")
+                                ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable", "left")
+                                ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable", "left")
 
-                            ->where(function ($query) use ($asesoras) {
+                                ->with("followers")
+
+                                //->with("comments")
+
+
+
+                                ->where(function ($query) use ($today) {
+                                    if($today != false){
+                                        $query->where("clients_tasks.fecha", $today);
+                                    }
+                                })
+
+                                ->where(function ($query) use ($asesoras) {
+                                    
+                                    if($asesoras != 0){
+                                        $query->whereIn("clients_tasks.responsable", $asesoras);
+                                    }
+                                }) 
+
+
+
+                                ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
+                                ->where("auditoria.tabla", "clients_tasks")
+
+                                ->where("clients_tasks.status_task", "=", "Abierta")
+
+
+                                ->where("auditoria.status", "!=", 0)
                                 
-                                if($asesoras != 0){
-                                    $query->whereIn("clients_tasks.responsable", $asesoras);
-                                }
-                            }) 
+                                ->get();
 
 
-
-                            ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
-                            ->where("auditoria.tabla", "clients_tasks")
-
-                            ->where("clients_tasks.status_task", "=", "Abierta")
+                if($rol == "Asesor" && $asesoras == 0){
 
 
-                            ->where("auditoria.status", "!=", 0)
-                            
-                            ->get();
+                    $tasks_follow =  ClientsTasks::select("clients_tasks.id_clients_tasks", "clients_tasks.issue as title", "clients_tasks.fecha as start", 
+                                                        "clients_tasks.time as time",  "datos_personales.nombres", "datos_personales.apellido_p",
+                                                        "user_responsable.img_profile", "clientes.nombres as name_client", 
+                                                        "clientes.apellidos as last_name_client", "clients_tasks.responsable")
+
+                                        ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client", "left")
+                                        ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable", "left")
+                                        ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable", "left")
+                                        ->join("clients_tasks_followers", "clients_tasks_followers.id_task", "=", "clients_tasks.id_clients_tasks", "left")
+
+                                        ->with("followers")
+
+                                        ->with("comments")
 
 
-            if($rol == "Asesor" && $asesoras == 0){
+                                        ->where(function ($query) use ($today) {
+                                            if($today != false){
+                                                $query->where("clients_tasks.fecha", $today);
+                                            }
+                                        })
+
+                                        ->where("clients_tasks_followers.id_follower", $id_user)
+
+                                        ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
+                                        ->where("auditoria.tabla", "clients_tasks")
+                                        ->where("auditoria.status", "!=", 0)
 
 
-                $tasks_follow =  ClientsTasks::select("clients_tasks.id_clients_tasks", "clients_tasks.issue as title", "clients_tasks.fecha as start", 
-                                                      "clients_tasks.time as time",  "datos_personales.nombres", "datos_personales.apellido_p",
-                                                      "user_responsable.img_profile", "clientes.nombres as name_client", 
-                                                      "clientes.apellidos as last_name_client", "clients_tasks.responsable")
+                                        ->where("clients_tasks.status_task", "=", "Abierta")
 
-                                    ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client", "left")
-                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "clients_tasks.responsable", "left")
-                                    ->join("users as user_responsable", "user_responsable.id", "=", "clients_tasks.responsable", "left")
-                                    ->join("clients_tasks_followers", "clients_tasks_followers.id_task", "=", "clients_tasks.id_clients_tasks", "left")
+                                        
+                                        
+                                        ->get();
 
-                                    ->with("followers")
-
-                                    ->with("comments")
+            
 
 
-                                    ->where(function ($query) use ($today) {
-                                        if($today != false){
-                                            $query->where("clients_tasks.fecha", $today);
-                                        }
-                                    })
-
-                                    ->where("clients_tasks_followers.id_follower", $id_user)
-
-                                    ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
-                                    ->where("auditoria.tabla", "clients_tasks")
-                                    ->where("auditoria.status", "!=", 0)
-
-
-                                    ->where("clients_tasks.status_task", "=", "Abierta")
-
-                                    
-                                    
-                                    ->get();
-
-         
-
-
-                foreach($tasks_follow as $key => $value){
-                    $data[] = $value;
+                    foreach($tasks_follow as $key => $value){
+                        $data[] = $value;
+                    }
                 }
+
+
+            foreach($data as $key => $value){
+                $value["fecha"]       = $value["start"];
+                $value["start"]       = $value["start"]."T".$value["time"];
+                $value["task_cient"]  = true;
+            
             }
+            return response()->json($data)->setStatusCode(200);
 
-
-        foreach($data as $key => $value){
-            $value["fecha"]       = $value["start"];
-            $value["start"]       = $value["start"]."T".$value["time"];
-            $value["task_cient"]  = true;
-           
         }
-        return response()->json($data)->setStatusCode(200);
+        
+        
     }
 
 
@@ -279,6 +286,9 @@ class CalendarController extends Controller
         }
 
 
+        if(($request["type_event"] != "0") && ($request["type_event"] != "Valoraciones")){
+            return response()->json([])->setStatusCode(200);
+        }
 
         $data = Valuations::select("valuations.id_valuations","valuations.fecha as start", "valuations.time as time", "valuations.time_end as time_end",
                                    "valuations.observaciones", "valuations.id_cliente","clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
@@ -432,6 +442,13 @@ class CalendarController extends Controller
         }
 
 
+
+        if(($request["type_event"] != "0") && ($request["type_event"] != "Pre Anestesias")){
+            return response()->json([])->setStatusCode(200);
+        }
+
+
+
         $data = Preanesthesia::select("preanesthesias.id_preanesthesias","preanesthesias.id_cliente","preanesthesias.surgerie_rental","preanesthesias.name_paciente","preanesthesias.fecha as start", "preanesthesias.time as time",  "preanesthesias.time_end as time_end",
                                    "preanesthesias.observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
                                    "datos_personales.nombres", "datos_personales.apellido_p", "clinic.nombre as name_clinic", "auditoria.usr_regins")
@@ -507,6 +524,11 @@ class CalendarController extends Controller
             $asesoras = explode(",", $request["asesoras"]);
         }else{
             $asesoras = 0;
+        }
+
+
+        if(($request["type_event"] != "0") && ($request["type_event"] != "Cirugias")){
+            return response()->json([])->setStatusCode(200);
         }
 
 
@@ -598,6 +620,12 @@ class CalendarController extends Controller
             $asesoras = 0;
         }
 
+
+        if(($request["type_event"] != "0") && ($request["type_event"] != "Revision")){
+            return response()->json([])->setStatusCode(200);
+        }
+
+
         $data = RevisionAppointment::select("revision_appointment.id_revision", "revision_appointment.id_paciente", "revision_appointment.cirugia", "appointments_agenda.fecha as start", "appointments_agenda.time as time","appointments_agenda.time_end as time_end",
         "appointments_agenda.cirujano",
                                             "appointments_agenda.descripcion as observaciones", "clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
@@ -681,6 +709,12 @@ class CalendarController extends Controller
         }else{
             $asesoras = 0;
         }
+
+
+        if(($request["type_event"] != "0") && ($request["type_event"] != "Masajes")){
+            return response()->json([])->setStatusCode(200);
+        }
+
 
 
         $data = Masajes::select("masajes.id_masajes","masajes.id_cliente","masajes.fecha as start", "masajes.time as time","clientes.nombres as name_client", "clientes.apellidos as last_name_client", "users.img_profile", 
