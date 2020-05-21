@@ -285,15 +285,15 @@
 			            <div class="card-body">
 							<center>
 							<ul style="list-style:none">
-								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('event')"> <span style="color: #4e73df"><i class="fas fa-circle"></i></span> Tareas</li>
-								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('event')"> <span style="color: #FFAAD4"><i class="fas fa-circle"></i></span> Valoraciones</li>
-								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('event')"> <span style="color: #FF7F00"><i class="fas fa-circle"></i></span> Pre Anestesias</li>
-								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('event')"> <span style="color: #921594"><i class="fas fa-circle"></i></span> Pre Anestesias Alquiler</li>
-								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('event')"> <span style="color: #7F55FF"><i class="fas fa-circle"></i></span> Cirugias</li>
-								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('event')"> <span style="color: #2853A4"><i class="fas fa-circle"></i></span> Cx Alquiler</li>
-								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('event')"> <span style="color: #FF2A55"><i class="fas fa-circle"></i></span> Fecha Tentativa</li>
-								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('event')"> <span style="color: #FF7F7F"><i class="fas fa-circle"></i></span> Revision</li>
-								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('event')"> <span style="color: #7FAAFF"><i class="fas fa-circle"></i></span> Masajes</li>
+								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('Tareas')"> <span style="color: #4e73df"><i class="fas fa-circle"></i></span> Tareas</li>
+								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('Valoraciones')"> <span style="color: #FFAAD4"><i class="fas fa-circle"></i></span> Valoraciones</li>
+								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('Pre Anestesias')"> <span style="color: #FF7F00"><i class="fas fa-circle"></i></span> Pre Anestesias</li>
+								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('Pre Anestesias')"> <span style="color: #921594"><i class="fas fa-circle"></i></span> Pre Anestesias Alquiler</li>
+								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('Cirugias')"> <span style="color: #7F55FF"><i class="fas fa-circle"></i></span> Cirugias</li>
+								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('Cirugias')"> <span style="color: #2853A4"><i class="fas fa-circle"></i></span> Cx Alquiler</li>
+								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('Cirugias')"> <span style="color: #FF2A55"><i class="fas fa-circle"></i></span> Fecha Tentativa</li>
+								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('Revision')"> <span style="color: #FF7F7F"><i class="fas fa-circle"></i></span> Revision</li>
+								<li style="display: inline-block; margin: 2%; cursor: pointer" onclick="FillerEvent('Masajes')"> <span style="color: #7FAAFF"><i class="fas fa-circle"></i></span> Masajes</li>
 							</ul>
 							</center>
 							<div class="row">
@@ -650,7 +650,7 @@
 
 			var event_filtter = 0;
 			function FillerEvent(event){
-				
+				$("#calendar").html("");
 				event_filtter = event
 				initCalendar(asesoras)
 			}
@@ -697,9 +697,10 @@
 								color: '#4e73df',    
 								textColor: 'white'  ,
 								extraParams: {
-									rol      : name_rol,
-									id_user  : id_user,
-									asesoras : asesoras.length > 0 ? asesoras : 0
+									rol        : name_rol,
+									id_user    : id_user,
+									asesoras   : asesoras.length > 0 ? asesoras : 0,
+									type_event : event_filtter
 								},
 								
 							},
@@ -712,7 +713,8 @@
 									rol     : name_rol,
 									id_user : id_user,
 									clinic  : $("#clinic").val(),
-									asesoras : asesoras.length > 0 ? asesoras : 0
+									asesoras : asesoras.length > 0 ? asesoras : 0,
+									type_event : event_filtter
 								},
 							},
 							{
@@ -723,7 +725,8 @@
 									rol: name_rol,
 									id_user: id_user,
 									clinic  : $("#clinic").val(),
-									asesoras : asesoras.length > 0 ? asesoras : 0
+									asesoras : asesoras.length > 0 ? asesoras : 0,
+									type_event : event_filtter
 									
 								}
 							},
@@ -735,7 +738,8 @@
 									rol: name_rol,
 									id_user: id_user,
 									clinic  : $("#clinic").val(),
-									asesoras : asesoras.length > 0 ? asesoras : 0
+									asesoras : asesoras.length > 0 ? asesoras : 0,
+									type_event : event_filtter
 								}
 							},
 
@@ -748,7 +752,8 @@
 									rol: name_rol,
 									id_user: id_user,
 									clinic  : $("#clinic").val(),
-									asesoras : asesoras.length > 0 ? asesoras : 0
+									asesoras : asesoras.length > 0 ? asesoras : 0,
+									type_event : event_filtter
 								}
 							},
 
@@ -761,7 +766,8 @@
 									rol: name_rol,
 									id_user: id_user,
 									clinic  : $("#clinic").val(),
-									asesoras : asesoras.length > 0 ? asesoras : 0
+									asesoras : asesoras.length > 0 ? asesoras : 0,
+									type_event : event_filtter
 								}
 							}
 
