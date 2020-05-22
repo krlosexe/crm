@@ -484,6 +484,34 @@ class ClientsController extends Controller
         }
     }
 
+
+
+
+
+
+
+
+
+
+    public function ShowByCode($code)
+    {
+        $data = Clients::select("clientes.*", "users.id as user_id")
+
+                            ->join("users", "users.id_client", "=", "clientes.id_cliente")
+
+                            ->where("clientes.code", $code)
+                            
+                            ->first();
+        
+        return response()->json($data)->setStatusCode(200);
+       
+    }
+
+
+
+
+
+
     /**
      * Show the form for editing the specified resource.
      *
