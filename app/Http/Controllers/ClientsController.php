@@ -499,7 +499,7 @@ class ClientsController extends Controller
 
                             ->join("users", "users.id_client", "=", "clientes.id_cliente")
 
-                            ->where("clientes.code", $code)
+                            ->where("clientes.code_client", $code)
                             
                             ->first();
         
