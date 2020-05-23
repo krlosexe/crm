@@ -502,8 +502,14 @@ class ClientsController extends Controller
                             ->where("clientes.code_client", $code)
                             
                             ->first();
+
+        if($data){
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json([])->setStatusCode(204);
+        }
         
-        return response()->json($data)->setStatusCode(200);
+        
        
     }
 
