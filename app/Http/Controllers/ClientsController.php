@@ -1312,29 +1312,35 @@ class ClientsController extends Controller
 
 
 
+
+
+                $User =  User::create([
+                    "email"       => $request["email"],
+                    "password"    => md5("123456789"),
+                    "id_rol"      => 17,
+                    "id_client"   => $id_client
+                ]);
+        
+        
+        
+                $datos_personales                   = new datosPersonaesModel;
+                $datos_personales->nombres          = $request["nombres"];
+                $datos_personales->apellido_p       = "";
+                $datos_personales->apellido_m       = "afasfa";
+                $datos_personales->n_cedula         = "12412124";
+                $datos_personales->fecha_nacimiento = null;
+                $datos_personales->telefono         = null;
+                $datos_personales->direccion        = null;
+                $datos_personales->id_usuario       = $User->id;
+                $datos_personales->save();
+
+
+
             }
             
 
 
-            $User =  User::create([
-                "email"       => $request["email"],
-                "password"    => md5("123456789"),
-                "id_rol"      => 17,
-                "id_client"   => $id_client
-            ]);
-    
-    
-    
-            $datos_personales                   = new datosPersonaesModel;
-            $datos_personales->nombres          = $request["nombres"];
-            $datos_personales->apellido_p       = "";
-            $datos_personales->apellido_m       = "afasfa";
-            $datos_personales->n_cedula         = "12412124";
-            $datos_personales->fecha_nacimiento = null;
-            $datos_personales->telefono         = null;
-            $datos_personales->direccion        = null;
-            $datos_personales->id_usuario       = $User->id;
-            $datos_personales->save();
+            
 
 
 
@@ -1563,6 +1569,27 @@ class ClientsController extends Controller
 
                 Comments::create($data);
 
+                
+
+
+                $User =  User::create([
+                    "email"       => $request["email"],
+                    "password"    => md5("123456789"),
+                    "id_rol"      => 17,
+                    "id_client"   => $id_client
+                ]);
+    
+    
+                $datos_personales                   = new datosPersonaesModel;
+                $datos_personales->nombres          = $request["nombres"];
+                $datos_personales->apellido_p       = "";
+                $datos_personales->apellido_m       = "afasfa";
+                $datos_personales->n_cedula         = "12412124";
+                $datos_personales->fecha_nacimiento = null;
+                $datos_personales->telefono         = null;
+                $datos_personales->direccion        = null;
+                $datos_personales->id_usuario       = $User->id;
+                $datos_personales->save();
 
 
 
@@ -1570,27 +1597,7 @@ class ClientsController extends Controller
 
 
 
-            $User =  User::create([
-                "email"       => $request["email"],
-                "password"    => md5("123456789"),
-                "id_rol"      => 17,
-                "id_client"   => $id_client
-            ]);
-
-
-
-
-
-            $datos_personales                   = new datosPersonaesModel;
-            $datos_personales->nombres          = $request["nombres"];
-            $datos_personales->apellido_p       = "";
-            $datos_personales->apellido_m       = "afasfa";
-            $datos_personales->n_cedula         = "12412124";
-            $datos_personales->fecha_nacimiento = null;
-            $datos_personales->telefono         = null;
-            $datos_personales->direccion        = null;
-            $datos_personales->id_usuario       = $User->id;
-            $datos_personales->save();
+            
 
 
 
@@ -1828,30 +1835,35 @@ class ClientsController extends Controller
 
 
 
+                $User =  User::create([
+                    "email"       => $request["email"],
+                    "password"    => md5("123456789"),
+                    "id_rol"      => 17,
+                    "id_client"   => $id_client
+                ]);
+        
+        
+        
+                $datos_personales                   = new datosPersonaesModel;
+                $datos_personales->nombres          = $request["nombres"];
+                $datos_personales->apellido_p       = "";
+                $datos_personales->apellido_m       = "afasfa";
+                $datos_personales->n_cedula         = "12412124";
+                $datos_personales->fecha_nacimiento = null;
+                $datos_personales->telefono         = null;
+                $datos_personales->direccion        = null;
+                $datos_personales->id_usuario       = $User->id;
+                $datos_personales->save();
+
+
+                
+
             }
             
 
 
 
-            $User =  User::create([
-                "email"       => $request["email"],
-                "password"    => md5("123456789"),
-                "id_rol"      => 17,
-                "id_client"   => $id_client
-            ]);
-    
-    
-    
-            $datos_personales                   = new datosPersonaesModel;
-            $datos_personales->nombres          = $request["nombres"];
-            $datos_personales->apellido_p       = "";
-            $datos_personales->apellido_m       = "afasfa";
-            $datos_personales->n_cedula         = "12412124";
-            $datos_personales->fecha_nacimiento = null;
-            $datos_personales->telefono         = null;
-            $datos_personales->direccion        = null;
-            $datos_personales->id_usuario       = $User->id;
-            $datos_personales->save();
+            
 
 
 
