@@ -506,7 +506,7 @@ class ClientsController extends Controller
         if($data){
             return response()->json($data)->setStatusCode(200);
         }else{
-            return response()->json([])->setStatusCode(400);
+            return response()->json([])->setStatusCode(204);
         }
         
         
