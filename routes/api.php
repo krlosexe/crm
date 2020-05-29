@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Clients;
 use App\datosPersonaesModel;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -217,6 +218,9 @@ Route::post('authValoration', 'Login@authValoration');
 
 Route::get('adviser/affiliate/{id_adviser}', 'AdviserController@GetAffiliates');
 Route::get('prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferers');
+Route::get('prp/client/refferers/{id_client}', 'AdviserController@GetRefferersClient');
+
+
 Route::get('prp/refferers/processes/{id_user}/{display}', 'AdviserController@GetProcesses');
 Route::get('prp/refferers/processes/details/{id_client}/all', 'AdviserController@GetProcessesDetails');
 
@@ -394,13 +398,37 @@ Route::get('sync/reffered/affiliate', function () {
     foreach($clients as $client){
        //echo json_encode($client["origen"])."<br>";
 
-        $affiliate = Clients::where("origen", $client["origen"])->first();
+        $affiliate = Clients::where("code_client", $client["origen"])->first();
 
         echo json_encode($affiliate["id_cliente"])."<br>";
 
-        Clients::where("id_cliente", $client["id_cliente"])->update(["id_affiliate" => $affiliate["id_cliente"], "origen" => "Referido PRP"]);
+        //Clients::where("id_cliente", $client["id_cliente"])->update(["id_affiliate" => $affiliate["id_cliente"], "origen" => "Referido PRP"]);
+        Clients::where("id_cliente", $client["id_cliente"])->update(["id_affiliate" => $affiliate["id_cliente"]]);
     }                        
   // return response()->json($clients)->setStatusCode(200);
+
+});
+
+
+
+
+
+Route::get('restart/data/client', function () {
+    
+    $clients = DB::table("clientes_temp")->selectRaw("id_cliente, origen")->where("origen", "!=", "Chat")
+                        ->where("origen", "!=", "face")
+                        ->where("origen", "!=", "cep")
+                        ->whereRaw("length(origen) = 4")
+                        ->get();
+    
+    foreach($clients as $client){
+
+
+        Clients::where("id_cliente", $client->id_cliente)->update(["origen" => $client->origen]);
+    }
+    
+    
+    return response()->json($clients)->setStatusCode(200);
 
 });
 

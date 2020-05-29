@@ -143,7 +143,7 @@
 
 							<div class="row">
 
-								<div class="col-md-3">
+								<div class="col-md-2">
 									<div class="form-group">
 										<label for=""><b>Filtrar por : Ciudad</b></label>
 										<select id="city-filter" class="form-control">
@@ -169,6 +169,30 @@
 										<input type="date" class="form-control" id="date_finish" max="<?= date("Y-m-d") ?>">
 									</div>
 								</div>
+
+
+
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Buscar Referidos de:</b></label>
+										<input type="text" class="form-control" id="code_affiliate" maxlength="4" placeholder="Ingresa el Codigo del Afiliado, Ejem: POF5" style="text-transform: uppercase">
+									</div>
+								</div>
+
+
+								<div class="col-md-1">
+									<button id="search_reffered" class="btn btn-primary btn-icon-split" style="float: right; margin-top: 21%">
+										<span class="text">Buscar</span>
+									</button>
+								</div>
+
+
+
+
+								
+
+
 
 
 							</div>
@@ -339,6 +363,20 @@
 
 			$("#search").keyup(function (e) { 
 				list("", 1)
+			});
+
+
+
+			$("#search_reffered").click(function (e) { 
+
+				const code_client = $("#code_affiliate").val()
+
+				if(code_client.length < 4){
+					$("#code_affiliate").focus()
+					alert("Debe Ingresar un Codigo Valido")
+				}
+				
+				
 			});
 
 
@@ -1355,12 +1393,16 @@
 
 					masajes("#tab9_edit", "#iframepMsajesEdit", data)
 
+					reffered("#tab10_edit", "#iframepRefferedsEdit", data)
+
+
+
 					
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
 
-
+			
 			function tasks(tab, iframe, data){
 				$(tab).click(function (e) { 
 					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/1"
@@ -1415,6 +1457,18 @@
 					
 				});
 			}
+
+
+			function reffered(tab, iframe, data){
+				$(tab).click(function (e) { 
+					var url = document.getElementById('ruta').value+"/clients/reffereds/"+data.id_cliente+""
+					$(iframe).attr('src', url);
+					
+				});
+			}
+
+
+
 
 
 
