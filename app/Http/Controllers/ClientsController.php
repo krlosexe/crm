@@ -109,9 +109,6 @@ class ClientsController extends Controller
                                 ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'auditoria.usr_update', "left")
                                 ->join('citys', 'citys.id_city', '=', 'clientes.city', "left")
 
-
-
-
                                 ->where(function ($query) use ($search) {
                                     if($search != "0"){
                                         $query->where("clientes.nombres", 'like', '%'.$search.'%');

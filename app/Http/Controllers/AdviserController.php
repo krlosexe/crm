@@ -282,4 +282,41 @@ class AdviserController extends Controller
 
        return response()->json($data)->setStatusCode(200);
     }
+
+
+
+
+
+
+
+
+
+
+    public function GetRefferersClient($id_client){
+        
+        echo $id_client;
+        $where = array(
+            "clientes.id_affiliate" => $id_client,
+            "clientes.origen"          => "Referido PRP",
+        );
+        
+
+        $data = Clients::where($where)
+            ->select("clientes.*", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
+            ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
+            ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate")
+            ->whereNotNull('clientes.id_affiliate')
+            ->orderBy("clientes.id_cliente", "DESC")
+            
+            ->get();
+
+        
+
+        return response()->json($data)->setStatusCode(200);
+
+    }
+
+
+
+
 }

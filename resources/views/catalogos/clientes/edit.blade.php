@@ -53,6 +53,10 @@
             </li>
 
 
+            <li  class="nav-item" id="tab10_edit">
+                <a id="tab5" class="nav-link"  data-toggle="tab" href="#info-refferees-edit" role="tab" aria-controls="info-add" aria-selected="false">Referidos PRP</a>
+            </li>
+
 
         </ul>
 
@@ -784,6 +788,19 @@
               </div>
 
 
+
+
+              <div class="tab-pane fade tab_content1-0" id="info-refferees-edit" role="tabpanel" aria-labelledby="patient_record">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item " id="iframepRefferedsEdit" allowfullscreen="">
+                    </iframe>
+                </div>
+                <br><br>
+              </div>
+
+
+
+              
 
 
 
