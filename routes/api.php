@@ -252,6 +252,11 @@ Route::post('notification/post', 'NotificationsController@NotificationsPost');
 
 
 
+
+
+
+
+
 Route::get('generate/token/chat', function () {
     
     $users = User::get();
@@ -370,4 +375,33 @@ Route::get('create/users/reffers', function () {
     
 
 });
+
+
+
+
+
+
+Route::get('sync/reffered/affiliate', function () {
+    
+    $clients = Clients::select("clientes.*")
+                        ->where("origen", "!=", "Chat")
+                        ->where("origen", "!=", "face")
+                        ->where("origen", "!=", "cep")
+                        ->whereRaw("length(origen) = 4")
+                        ->get();
+    
+    
+    foreach($clients as $client){
+       //echo json_encode($client["origen"])."<br>";
+
+        $affiliate = Clients::where("origen", $client["origen"])->first();
+
+        echo json_encode($affiliate["id_cliente"])."<br>";
+
+        Clients::where("id_cliente", $client["id_cliente"])->update(["id_affiliate" => $affiliate["id_cliente"]]);
+    }                        
+  // return response()->json($clients)->setStatusCode(200);
+
+});
+
 
