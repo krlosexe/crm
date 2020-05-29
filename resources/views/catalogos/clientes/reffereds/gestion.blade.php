@@ -118,11 +118,10 @@
 			                    <tr>
 								  <th>Acciones</th>
 								  <th>Nombres</th>
-								  <th>Fecha</th>
-								  <th>Hora</th>
-								  <th>Clinica</th>
-			                      <th>Fecha de registro</th>
-								  <th>Registrado por</th>
+								  <th>Telefono</th>
+								  <th>Email</th>
+								  <th>PRP</th>
+								  <th>Codigo</th>
 			                    </tr>
 			                  </thead>
 			                  <tbody></tbody>
@@ -283,29 +282,29 @@
 						{"data": null,
 							render : function(data, type, row) {
 								var botones = "";
-								if(consultar == 1)
-									//botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
-								if(actualizar == 1)
-									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
-								if(data.status == 1 && actualizar == 1 )
-									botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
-								else if(data.status == 2 && actualizar == 1 )
-									botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
-								if(borrar == 1 )
-									botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
-								return botones;
+								return botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+								
 							}
 						},
 						{"data":"nombres", 
 							render : function(data, type, row) {
-								return data+" "+row.apellidos;
+								return data;
 							}
 						},
-						{"data": "fecha"},
-						{"data": "time"},
-						{"data": "name_clinic"},
-						{"data": "fec_regins"},
-						{"data": "email_regis"}
+						{"data": "telefono"},
+						{"data": "email"},
+						{"data": "prp",
+							render : function(data, type, row) {
+
+								 if(data != null){
+									return "SI";
+								 }else{
+									return "No";
+								 }
+								
+							}
+						},
+						{"data": "code_client"}
 						
 					],
 					"language": idioma_espanol,
