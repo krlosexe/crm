@@ -169,6 +169,8 @@ Route::post('email/forms', 'NotificationsController@Email');
 Route::get('clients/export/excel/{bunisses_line}/{adviser}/{origen}/{date_init}/{date_finish}/{state}/{search}/{city}', 'ClientsController@Excel');
 
 Route::post('clients/import/', 'ClientsController@Import');
+Route::get('clients/refferes/code/{code}', 'ClientsController@getRefferesClient');
+
 
 Route::get('validate/valoration/code/{code}', 'ValuationsController@ValidateCode');
 
