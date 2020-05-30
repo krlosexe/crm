@@ -366,16 +366,18 @@
 			});
 
 
-
+			var code_client = 0
 			$("#search_reffered").click(function (e) { 
-
-				const code_client = $("#code_affiliate").val()
-
+				code_client = $("#code_affiliate").val()
 				if(code_client.length < 4){
+
 					$("#code_affiliate").focus()
+					code_client = 0
 					alert("Debe Ingresar un Codigo Valido")
+
+				}else{
+					listRefferers("", 1)
 				}
-				
 				
 			});
 
@@ -424,8 +426,208 @@
 						"city"          : $("#city-filter").val(),
 						"date_init"     : $("#date_init").val(),
 						"date_finish"   : $("#date_finish").val(),
-						"state"         : $("#state-filter").val()
+						"state"         : $("#state-filter").val(),
+						"code_client"   : code_client
 					},
+					dataType:'JSON',
+					
+					beforeSend: function(){
+
+						var html = ""
+						 html += "<tr>"
+								html += "<td colspan='8'> Cargando...</td>"
+							html += "</tr>"
+
+						$("#table tbody").html(html)
+					},
+					error: function (data) {
+					},
+					success: function(result){
+
+						var html = ""
+
+						if(result.data.length == 0){
+
+							html += "<tr>"
+								html += "<td colspan='8'> No se encontraron Resultados...</td>"
+							html += "</tr>"
+
+						$("#table tbody").html(html)
+
+
+							return false;
+						}
+						$.map(result.data, function (item, key) {
+
+							var botones = "";
+							if(consultar == 1)
+								//botones += "<span data='"+JSON.stringify(item)+"' class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
+							if(actualizar == 1)
+								botones += "<span data='"+JSON.stringify(item)+"' class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
+							if(item.status == 1 && actualizar == 1)
+								botones += "<span data='"+JSON.stringify(item)+"' class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
+							else if(item.status == 2 && actualizar == 1)
+								botones += "<span data='"+JSON.stringify(item)+"' class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
+							
+							if((item.id_user_asesora == id_user) || borrar == 1)
+								botones += "<span data='"+JSON.stringify(item)+"' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+						//	return botones;
+
+
+
+
+							if(item.prp == "Si"){
+								var code = "<i class='fa fa-barcode'></i> "+item.code_client
+							}else{
+								var code = ""
+							}
+
+							if(item.name_update != null){
+								var name_update = "Por: "+item.name_update+" "+item.apellido_update
+							}else{
+								var name_update = ""
+							}
+
+						
+							html += "<tr>"
+								html += "<td>"+botones+"</td>"
+								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+" </td>"
+								html += "<td>"+item.identificacion+"</td>"
+								html += "<td>"+item.origen+"</td>"
+								html += "<td>"+item.nombre_line+"</td>"
+								html += "<td>"+item.name_city+"</td>"
+								html += "<td>"+item.state+"</td>"
+								html += "<td>"+item.fec_regins+"<br><b>Ultima modificacion</b><br>"+item.fec_update+" <b>"+name_update+"</b></td>"
+								html += "<td><b>"+item.name_register+" "+item.apellido_register+"</b></td>"
+							html += "</tr>"
+
+						});
+
+						var table = $("#table tbody").html(html)
+
+						if(result.next_page_url != null){
+							var next = result.next_page_url.split("page=")[1]
+							var className = ''
+						}else{
+							var next = result.last_page
+							var className = 'disabled'
+						}
+
+
+						if(result.prev_page_url != null){
+							var prev = result.prev_page_url.split("page=")[1]
+							var className = ''
+						}else{
+							var prev = 1;
+							var className = 'disabled'
+						}
+						
+
+						var li = ""
+						li  += '<li class="paginate_button page-item previous '+className+'" onclick="list(\'\', '+prev+')" id="table_previous"><a href="javascript:void(0)" aria-controls="table" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a></li>'
+
+						li += '<li class="paginate_button page-item next" onclick="list(\'\', '+next+')" id="table_next"><a href="javascript:void(0)" aria-controls="table" data-dt-idx="8" tabindex="0" class="page-link">Siguiente</a></li>'
+
+						$(".pagination").html(li)
+
+
+						$("#table_info").text("Mostrando registros del "+result.from+" al  "+result.to+" de un total de "+result.total+" registros")
+					
+					}
+				});
+
+
+				ver("#table tbody")
+				edit("#table tbody")
+				activar("#table tbody")
+				desactivar("#table tbody")
+				eliminar("#table tbody")
+
+
+
+
+
+				var business_line = $("#linea-negocio-filter").val()
+				var adviser       = $("#id_asesora_valoracion-filter").val()
+				var origen        = $("#origen-filter").val()
+
+				var date_init     = $("#date_init").val()
+				var date_finish   = $("#date_finish").val()
+				var search        = $("#search").val()
+				var city          = $("#city-filter").val()
+
+
+				if(business_line.length == 0){
+					business_line = 0
+				}else{
+					business_line  = business_line.join()
+				}
+
+
+				if(adviser.length == 0){
+					adviser = 0
+				}else{
+					adviser  = adviser.join()
+				}
+
+
+
+				if(date_init.length == 0){
+					date_init = 0
+				}
+
+				if(date_finish.length == 0){
+					date_finish = 0
+				}
+
+				
+				if(search.length === 0){
+					search = 5
+				}
+
+				$("#xls").remove();
+				$("#view_xls").remove();
+
+				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
+				$('.dt-buttons').append(a);
+
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'/'+$("#state-filter").val()+'/'+search+'/'+city+'" class="dt-button buttons-excel buttons-html5">xls</button>';
+				$('.dt-buttons').append(b);
+
+				$("#xls").click(function (e) { 
+					url = $("#view_xls").attr("href");
+
+					console.log(url)
+					window.open(url, '_blank');
+				});
+
+			}
+
+
+
+
+
+			function listRefferers(cuadro = "", page = 1){
+
+
+				var url=document.getElementById('ruta').value;
+
+				cuadros(cuadro, "#cuadro1");
+
+				
+
+				if($("#search").val() != ""){
+
+					var search = $("#search").val()
+
+				}else{
+					var search = null
+				}
+
+
+				$.ajax({
+					url:''+url+'/api/clients/refferes/code/'+code_client,
+					type:'GET',
 					dataType:'JSON',
 					
 					beforeSend: function(){
