@@ -132,6 +132,7 @@ class ValuationsController extends Controller
                 ->where("auditoria.tabla", "valuations")
                 ->where("auditoria.status", "!=", "0")
                 ->where("valuations.fecha", date("Y-m-d"))
+                ->where("valuations.clinic", 9)
 
                 ->orderBy("valuations.time", "ASC")
                 ->get();
