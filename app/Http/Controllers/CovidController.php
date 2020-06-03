@@ -17,9 +17,22 @@ class CovidController extends Controller
         $for = "basededatospacientes2020@gmail.com";
  
         $request["msg"]  = "Linea: $line->nombre_line";
-        $request["sintomas"] = implode(",", $request["sintomas"]);
 
-        $request["enfermendades"] = implode(",", $request["enfermendades"]);
+
+        if(isset($request["sintomas"])){
+            $request["sintomas"] = implode(",", $request["sintomas"]);
+        }else{
+            $request["sintomas"] = "";
+        }
+
+
+        if(isset($request["enfermendades"])){
+            $request["enfermendades"] = implode(",", $request["enfermendades"]);
+        }else{
+            $request["enfermendades"] = "";
+        }
+
+        
 
         Mail::send('emails.covid',$request->all(), function($msj) use($subject,$for){
             $msj->from("cardenascarlos18@gmail.com","CRM");
@@ -53,7 +66,12 @@ class CovidController extends Controller
         
  
         $request["msg"]  = "Linea: $line->nombre_line";
-        $request["sintomas"] = implode(",", $request["sintomas"]);
+        
+        if(isset($request["sintomas"])){
+            $request["sintomas"] = implode(",", $request["sintomas"]);
+        }else{
+            $request["sintomas"] = "";
+        }
 
         Mail::send('emails.bioseguridad',$request->all(), function($msj) use($subject,$for){
             $msj->from("cardenascarlos18@gmail.com","CRM");
