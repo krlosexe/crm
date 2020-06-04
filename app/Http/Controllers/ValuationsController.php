@@ -283,6 +283,16 @@ class ValuationsController extends Controller
                 return response()->json($data)->setStatusCode(400); 
             }
 
+
+            $request["pay_consultation"] == 1 ? $request["pay_consultation"] = 1 : $request["pay_consultation"] = 0;
+
+
+            if($file = $request->file('acquittance_file')){
+                $destinationPath = 'img/valuations/acquittance';
+                $file->move($destinationPath,$file->getClientOriginalName());
+                $request["acquittance"] = $file->getClientOriginalName();
+            }
+
             $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
             $code = substr(str_shuffle($permitted_chars), 0, 4);
             
