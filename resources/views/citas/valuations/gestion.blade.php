@@ -741,9 +741,42 @@
 				 $("#paciente-store option").remove();
 				 $('#summernote').summernote("reset");
 
+
+				 $("#code_prp-store").removeAttr("required")
+				 $("#code_prp-store").attr("disabled", "disabled")
+				 $("#way_to_pay-store").attr("required", "required")
+				 $("#way_to_pay-store").removeAttr("disabled")
+
+
+
 				getPacientes("#paciente-store")
 
 				GetClinic2("#clinic")
+
+
+
+
+				$("#acquittance").fileinput('destroy');
+				$("#acquittance").fileinput({
+					theme: "fas",
+					overwriteInitial: true,
+					maxFileSize: 21500,
+					showClose: false,
+					showCaption: false,
+					browseLabel: '',
+					removeLabel: '',
+					browseIcon: '<i class="fa fa-folder-open"></i>',
+					removeIcon: '<i class="fas fa-trash-alt"></i>',
+					previewFileIcon: '<i class="fas fa-file"></i>',
+					removeTitle: 'Cancel or reset changes',
+					elErrorContainer: '#kv-avatar-errors-1',
+					msgErrorClass: 'alert alert-block alert-danger',
+					
+					layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+					allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
+				});
+
+
 
 			
 
@@ -996,6 +1029,72 @@
 					$("#type-edit").val(data.type)
 					$("#observaciones-edit").val(data.observaciones)
 					$("#status-edit").val(data.status_valuations)
+
+
+					if(data.pay_consultation == 1){
+						$("#pay_consultation_edit").prop("checked", true)
+						$("#code_prp-edit").val("")
+					}else{
+						$("#pay_consultation_edit").prop("checked", false)
+						$("#code_prp-edit").val(data.code_prp)
+					}
+
+					$("#way_to_pay-edit").val(data.way_to_pay)
+
+					if(data.way_to_pay == "Transferencia"){
+						$("#content_acquittance-edit").css("display", "block")
+					}else{
+						$("#content_acquittance-edit").css("display", "none")
+					}
+
+
+
+
+					var url_imagen = 'img/valuations/acquittance/'
+					var url        = document.getElementById('ruta').value; 
+					
+					if((data.acquittance != "" ) &&  (data.acquittance != null)){
+						var ext = data.acquittance.split('.');
+						if (ext[1] == "pdf") {
+							img = '<embed class="kv-preview-data file-preview-pdf" src="'+url_imagen+data.acquittance+'" type="application/pdf" style="width:213px;height:160px;" internalinstanceid="174">'
+						}else{
+							img = '<img src="'+url_imagen+data.acquittance+'" class="file-preview-image kv-preview-data">'
+						}
+							
+					}else{img = ""}
+
+
+					$("#acquittance-edit").fileinput('destroy');
+					$("#acquittance-edit").fileinput({
+						theme: "fas",
+						overwriteInitial: true,
+						maxFileSize: 1500,
+						showClose: false,
+						showCaption: false,
+						browseLabel: '',
+						removeLabel: '',
+						browseIcon: '<i class="fa fa-folder-open"></i>',
+						removeIcon: '<i class="fas fa-trash-alt"></i>',
+						previewFileIcon: '<i class="fas fa-file"></i>',
+						removeTitle: 'Cancel or reset changes',
+						elErrorContainer: '#kv-avatar-errors-1',
+						msgErrorClass: 'alert alert-block alert-danger',
+						
+						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+						allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
+						initialPreview: [ 
+							img
+						],
+
+						initialPreviewConfig: [
+							{caption: data.acquittance , downloadUrl: url_imagen+data.acquittance  ,url: url+"uploads/delete", key: data.acquittance}
+						],
+					});
+
+
+
+					
+
 
 
 					var url_imagen = 'img/valuations/cotizaciones/'
@@ -1508,6 +1607,36 @@
 				$("#slide").removeClass("show")
 				$(".side-panel-container").removeClass("slide-show")
 			}
+
+
+
+			$("#pay_consultation").change(function (e) { 
+
+				if(!$('#pay_consultation').is(':checked') ) {
+					$("#code_prp-store").removeAttr("disabled").focus()
+					$("#code_prp-store").attr("required", "required")
+					$("#way_to_pay-store").removeAttr("required")
+				}else{
+					$("#code_prp-store").removeAttr("required")
+					$("#code_prp-store").attr("disabled", "disabled")
+					$("#way_to_pay-store").attr("required", "required")
+				}
+				
+			});
+
+
+
+			$("#way_to_pay-store").change(function (e) { 
+				
+				if($(this).val() == "Transferencia"){
+					$("#content_acquittance").css("display", "block")
+					$("#acquittance").attr("required", "required")
+				}else{
+					$("#content_acquittance").css("display", "none")
+					$("#acquittance").removeAttr("required")
+				}
+				
+			});
 
 		</script>
 		

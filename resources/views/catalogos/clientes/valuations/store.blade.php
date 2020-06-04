@@ -131,14 +131,74 @@
                 </div>
               </div>
 
-              <!--   <div class="row">
+              <br><br>
+
+
+
                 <div class="col-md-12">
-                    <div class="form-group">
-                        <label for=""><b>Obervaciones</b></label>
-                        <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea>
-                    </div>
+                   <div class="row">
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for=""><b>Paga Consulta?</b></label>
+                          <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" name="pay_consultation" id="pay_consultation" checked="checked" value="1">
+                            <label class="custom-control-label" for="pay_consultation">Si</label>
+                          </div>
+                       </div>
+                      </div>
+
+
+
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for=""><b>Código PRP de quien remite</b></label>
+                            <input type="text" name="code_prp" id="code_prp-store" class="form-control" disabled>
+                       </div>
+                      </div>
+
+                   </div>
+
+
+                   
+
+
+
+                   <div class="row">
+                        <div class="col-md-12">
+                          <label for=""><b>Forma de Pago</b></label>
+                            <select name="way_to_pay" id="way_to_pay-store" class="form-control" required>
+                                <option value="">Seleccione</option>
+                                <option value="Transferencia">Transferencia</option>
+                                <option value="Efectivo">Efectivo </option>
+                            </select>
+                        </div>
+                   </div>
+
+                   <br>
+                    <br>
+
+
+                   <div class="row">
+                    <div class="col-md-12">
+                        <div class="row" id="content_acquittance" style="display: none">
+                          <div class="col-sm-12 text-center"> 
+                                <label for=""><b>Adjuntar recibo</b></label>
+                                <div>
+                                    <div class="file-loading">
+                                        <input id="acquittance" name="acquittance_file" type="file">
+                                    </div>
+                                </div>
+                                <div class="kv-avatar-hintss">
+                                    <small>Seleccione una imagen</small>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                   </div>
+
                 </div>
-              </div>-->
 
               
 
