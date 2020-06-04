@@ -773,7 +773,7 @@
 					msgErrorClass: 'alert alert-block alert-danger',
 					
 					layoutTemplates: {main2: '{preview}  {remove} {browse}'},
-					allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
+					allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "pdf", "docs"],
 				});
 
 
@@ -1081,7 +1081,7 @@
 						msgErrorClass: 'alert alert-block alert-danger',
 						
 						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
-						allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
+						allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "pdf", "docs"],
 						initialPreview: [ 
 							img
 						],
