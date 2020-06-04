@@ -1032,6 +1032,43 @@
 
 
 
+
+			$("#pay_consultation_edit").change(function (e) { 
+
+			if(!$('#pay_consultation_edit').is(':checked') ) {
+				$("#code_prp-edit").removeAttr("disabled").focus()
+				$("#code_prp-edit").attr("required", "required")
+				$("#way_to_pay-edit").removeAttr("required")
+			}else{
+				$("#code_prp-edit").removeAttr("required")
+				$("#code_prp-edit").attr("disabled", "disabled")
+				$("#way_to_pay-edit").attr("required", "required")
+			}
+
+			});
+
+
+
+			$("#way_to_pay-edit").change(function (e) { 
+
+			if($(this).val() == "Transferencia"){
+				$("#content_acquittance-edit").css("display", "block")
+				$("#acquittance-edit").attr("required", "required")
+			}else{
+				$("#content_acquittance-edit").css("display", "none")
+				$("#acquittance-edit").removeAttr("required")
+			}
+
+			});
+
+
+
+
+
+
+
+
+
 					
 		/* ------------------------------------------------------------------------------- */
 			/*

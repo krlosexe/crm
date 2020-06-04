@@ -248,8 +248,8 @@
                                     <div class="form-group">
                                       <label for=""><b>Paga Consulta?</b></label>
                                       <div class="custom-control custom-switch">
-                                          <input type="checkbox" class="custom-control-input" name="pay_consultation" id="pay_consultation_edit" disabled value="1">
-                                        <label class="custom-control-label" for="pay_consultation">Si</label>
+                                          <input type="checkbox" class="custom-control-input" name="pay_consultation" id="pay_consultation_edit" value="1">
+                                        <label class="custom-control-label" for="pay_consultation_edit">Si</label>
                                       </div>
                                   </div>
                                   </div>
@@ -260,7 +260,7 @@
                                   <div class="col-md-4">
                                     <div class="form-group">
                                       <label for=""><b>Código PRP de quien remite</b></label>
-                                        <input type="text" name="code_prp" id="code_prp-edit" class="form-control" disabled>
+                                        <input type="text" name="code_prp" id="code_prp-edit" class="form-control">
                                   </div>
                                   </div>
 
@@ -274,7 +274,7 @@
                               <div class="row">
                                     <div class="col-md-12">
                                       <label for=""><b>Forma de Pago</b></label>
-                                        <select name="way_to_pay" id="way_to_pay-edit" class="form-control" disabled>
+                                        <select name="way_to_pay" id="way_to_pay-edit" class="form-control">
                                             <option value="">Seleccione</option>
                                             <option value="Transferencia">Transferencia</option>
                                             <option value="Efectivo">Efectivo </option>
@@ -294,7 +294,7 @@
                                             <label for=""><b>Recibo</b></label>
                                             <div>
                                                 <div class="file-loading">
-                                                    <input id="acquittance-edit" name="acquittance_file" type="file" disabled>
+                                                    <input id="acquittance-edit" name="acquittance_file" type="file">
                                                 </div>
                                             </div>
                                             <div class="kv-avatar-hintss">

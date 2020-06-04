@@ -461,6 +461,19 @@ class ValuationsController extends Controller
             }
 
 
+
+
+
+            $request["pay_consultation"] == 1 ? $request["pay_consultation"] = 1 : $request["pay_consultation"] = 0;
+
+
+            if($file = $request->file('acquittance_file')){
+                $destinationPath = 'img/valuations/acquittance';
+                $file->move($destinationPath,$file->getClientOriginalName());
+                $request["acquittance"] = $file->getClientOriginalName();
+            }
+
+
             $queries = Valuations::find($valuations)->update($request->all());
 
             
