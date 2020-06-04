@@ -219,7 +219,9 @@ Route::post('authDoc', 'Login@AuthDoc');
 Route::post('authValoration', 'Login@authValoration');
 
 Route::get('adviser/affiliate/{id_adviser}', 'AdviserController@GetAffiliates');
+Route::get('adviser/affiliate/{id_adviser}/{names}', 'AdviserController@GetAffiliates');
 Route::get('prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferers');
+Route::get('prp/refferers/{id_user}/{display}/{names}', 'AdviserController@GetRefferers');
 Route::get('prp/client/refferers/{id_client}', 'AdviserController@GetRefferersClient');
 
 

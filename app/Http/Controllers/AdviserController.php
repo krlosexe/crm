@@ -13,22 +13,34 @@ use App\Masajes;
 use DB;
 class AdviserController extends Controller
 {
-    public function GetAffiliates($id_adviser){
+    public function GetAffiliates($id_adviser, $name = 0){
        
         $where = array(
             "id_user_asesora" => $id_adviser,
             "prp"             => "Si"
         );
+
+       
+
+       
         $data = Clients::where($where)
                         ->select("clientes.*", "users.img_profile as avatar", "users.id as user_id")
                         ->join("users", "users.id_client", "clientes.id_cliente")
+
+                        ->where(function ($query) use ($name) {
+                            if($name != "0"){
+                                $query->where("clientes.nombres", 'like', '%'.$name.'%');
+                            }
+                        }) 
+
+
                         ->orderBy("clientes.id_cliente", "DESC")
                         ->get();
         return response()->json($data)->setStatusCode(200);
     }
 
 
-    public function GetRefferers($id_user, $display){
+    public function GetRefferers($id_user, $display, $name = 0){
         
         $user = User::where("id", $id_user)->first();
 
@@ -50,6 +62,14 @@ class AdviserController extends Controller
 
                                               ->join("users as u2", "u2.id_client", "clientes.id_cliente")
 
+                                              ->where(function ($query) use ($name) {
+                                                if($name != "0"){
+                                                    $query->where("clientes.nombres", 'like', '%'.$name.'%');
+                                                    }
+                                                }) 
+
+
+
 
                                               ->orderBy("clientes.id_cliente", "DESC")
                                               ->get();
@@ -67,6 +87,14 @@ class AdviserController extends Controller
                                               ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
                                               ->join("users", "users.id_client", "clientes.id_cliente", "left")
                                               ->whereNotNull('clientes.id_affiliate')
+
+                                              ->where(function ($query) use ($name) {
+                                                if($name != "0"){
+                                                    $query->where("clientes.nombres", 'like', '%'.$name.'%');
+                                                }
+                                             }) 
+
+
                                               ->orderBy("clientes.id_cliente", "DESC")
                                               ->get();
 
@@ -87,6 +115,15 @@ class AdviserController extends Controller
                 ->select("clientes.*", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
                 ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate")
+
+
+                ->where(function ($query) use ($name) {
+                    if($name != "0"){
+                        $query->where("clientes.nombres", 'like', '%'.$name.'%');
+                    }
+                }) 
+
+
                 ->whereNotNull('clientes.id_affiliate')
                 ->orderBy("clientes.id_cliente", "DESC")
                 
@@ -111,6 +148,15 @@ class AdviserController extends Controller
                             ->selectRaw("users.id as user_id , users.email, CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as nombres, datos_personales.telefono , auth_users_app.token_notifications, users.token_chat")
                             ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
                             ->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
+
+
+                            ->where(function ($query) use ($name) {
+                                if($name != "0"){
+                                    $query->where("clientes.nombres", 'like', '%'.$name.'%');
+                                }
+                            }) 
+
+
                             ->get();
 
         }
