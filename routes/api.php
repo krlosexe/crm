@@ -225,8 +225,9 @@ Route::get('prp/refferers/{id_user}/{display}/{names}', 'AdviserController@GetRe
 Route::get('prp/client/refferers/{id_client}', 'AdviserController@GetRefferersClient');
 
 
-Route::get('prp/refferers/processes/{id_user}/{display}', 'AdviserController@GetProcesses');
-Route::get('prp/refferers/processes/details/{id_client}/all', 'AdviserController@GetProcessesDetails');
+Route::get('prp/processes/{id_user}/{display}', 'AdviserController@GetProcesses');
+Route::get('prp/processes/details/{id_client}/all', 'AdviserController@GetProcessesDetails');
+
 
 Route::get('refferers/qty/{id_affiliate}', 'AffiliateController@qty');
 
