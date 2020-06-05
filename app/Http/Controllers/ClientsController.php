@@ -1153,6 +1153,17 @@ class ClientsController extends Controller
        
        if($users){
 
+
+
+            $client = Clients::where("identificacion", $request["identificacion"])->get();
+            if((sizeof($client) > 0) && ($request["identificacion"] != "")){
+
+                $data = array('mensagge' => "Ya te encuentras registrado en nuestra base de datos");    
+                return response()->json($data)->setStatusCode(200);
+
+            }
+
+
             $request["id_user_asesora"] =  $users["id"];
 
             $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
