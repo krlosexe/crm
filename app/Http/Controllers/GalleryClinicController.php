@@ -133,13 +133,18 @@ class GalleryClinicController extends Controller
                               ->limit($limit)
                               ->get();
         
-        $response = [
-            "path_gallery" => "img/gallery/clinic/",
-            "path_logo"    => "img/clinic/gallery/",
-            "logo"         => $data[0]["logo_clinic"],
-            "data"         => $data
-        ];
-        return response()->json($response)->setStatusCode(200);
+        if($data){
+            $response = [
+                "path_gallery" => "img/gallery/clinic/",
+                "path_logo"    => "img/clinic/gallery/",
+                "logo"         => $data[0]["logo_clinic"],
+                "data"         => $data
+            ];
+            return response()->json($response)->setStatusCode(200);
+        }else{
+            return response()->json([])->setStatusCode(200);
+        }
+        
     }
 
     /**
