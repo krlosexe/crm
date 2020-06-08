@@ -124,6 +124,12 @@ class ClinicController extends Controller
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
+            if($file = $request->file('file')){
+                $destinationPath = 'img/clinic/gallery';
+                $file->move($destinationPath,$file->getClientOriginalName());
+                $request["logo"] = $file->getClientOriginalName();
+            }
+
             $clinic = clinic::find($clinic)->update($request->all());
 
             if ($clinic) {

@@ -27,10 +27,24 @@
 
 
         <div class="row">
-            <div class="col md-12">
+            <div class="col-md-6">
                 <label for=""><br><b>Direccion</b></label>
 				        <textarea required name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion" class="form-control" cols="30" rows="10"></textarea>
             </div>
+
+            <div class="col-sm-6 text-center"> 
+              <label for=""><b>Adjuntar Logo</b></label>
+              <div>
+                  <div class="file-loading">
+                      <input id="file-input" name="file" type="file" required>
+                  </div>
+              </div>
+              <div class="kv-avatar-hintss">
+                  <small>Seleccione una foto</small>
+              </div>
+          </div>
+
+
         </div>
 
 
