@@ -262,7 +262,8 @@ Route::post('notification/post', 'NotificationsController@NotificationsPost');
 
 
 
-
+Route::resource('gallery/clinic', 'GalleryClinicController');
+Route::get('gallery/clinic/{id_clinic}/{limit}', 'GalleryClinicController@show');
 
 
 

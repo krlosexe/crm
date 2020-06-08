@@ -297,3 +297,10 @@ Route::get('gallery', function () {
 
 
 
+Route::get('gallety-cinic', function () {
+    return view('configuracion.gallery.clinic.gestion');
+});
+
+
+
+

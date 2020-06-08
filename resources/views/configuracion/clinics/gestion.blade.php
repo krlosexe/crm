@@ -211,6 +211,30 @@
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
 				GetCity("#city-store")
+
+				$("#file-input-edit").fileinput('destroy');
+				$("#file-input-edit").fileinput({
+					theme: "fas",
+					overwriteInitial: true,
+					//maxFileSize: 1500,
+					showClose: false,
+					showCaption: false,
+					browseLabel: '',
+					removeLabel: '',
+					browseIcon: '<i class="fa fa-folder-open"></i>',
+					removeIcon: '<i class="fas fa-trash-alt"></i>',
+					previewFileIcon: '<i class="fas fa-file"></i>',
+					removeTitle: 'Cancel or reset changes',
+					elErrorContainer: '#kv-avatar-errors-1',
+					msgErrorClass: 'alert alert-block alert-danger',
+					
+					layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+					allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "pdf", "docs"],
+					
+				});
+
+
+
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
@@ -288,6 +312,56 @@
 					$("#city-edit").val(data.id_city)
 					$("#direccion-edit").val(data.direccion)
 					$("#id_edit").val(data.id_clinic)
+
+
+
+					var url_imagen = 'img/clinic/gallery/'
+					var url        = document.getElementById('ruta').value; 
+					if((data.logo != "" ) &&  (data.logo != null)){
+						var ext = data.logo.split('.');
+						if (ext[1] == "pdf") {
+							img = '<embed class="kv-preview-data file-preview-pdf" src="'+url_imagen+data.logo+'" type="application/pdf" style="width:213px;height:160px;" internalinstanceid="174">'
+						}else{
+							img = '<img src="'+url_imagen+data.logo+'" class="file-preview-image kv-preview-data">'
+						}
+							
+					}else{img = ""}
+
+
+
+					$("#file-input-edit").fileinput('destroy');
+					$("#file-input-edit").fileinput({
+						theme: "fas",
+						overwriteInitial: true,
+						//maxFileSize: 1500,
+						showClose: false,
+						showCaption: false,
+						browseLabel: '',
+						removeLabel: '',
+						browseIcon: '<i class="fa fa-folder-open"></i>',
+						removeIcon: '<i class="fas fa-trash-alt"></i>',
+						previewFileIcon: '<i class="fas fa-file"></i>',
+						removeTitle: 'Cancel or reset changes',
+						elErrorContainer: '#kv-avatar-errors-1',
+						msgErrorClass: 'alert alert-block alert-danger',
+						
+						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+						allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "pdf", "docs"],
+
+
+						initialPreview: [ 
+							img
+						],
+
+						initialPreviewConfig: [
+							{caption: data.cotizacion , downloadUrl: url_imagen+data.cotizacion  ,url: url+"uploads/delete", key: data.cotizacion}
+						],
+
+						
+					});
+
+
+
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
