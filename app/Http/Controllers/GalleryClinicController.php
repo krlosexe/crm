@@ -121,12 +121,14 @@ class GalleryClinicController extends Controller
      * @param  \App\GalleryClinic  $galleryClinic
      * @return \Illuminate\Http\Response
      */
-    public function show($galleryClinic, $limit)
-    {
+    public function show($client, $limit)
+    {   
+
+        $client = DB::table("clientes")->where("id_cliente", $client)->first();
    
-        $data = GalleryClinic::select("gallery_clinic.*", "clinic.nombre as name_clinic", "clinic.logo as logo_clinic")
+       $data = GalleryClinic::select("gallery_clinic.*", "clinic.nombre as name_clinic", "clinic.logo as logo_clinic")
                               ->join("clinic", "clinic.id_clinic", "=", "gallery_clinic.id_clinic")
-                              ->where("gallery_clinic.id_clinic", $galleryClinic)
+                              ->where("gallery_clinic.id_clinic", $client->clinic)
                               ->orderBy("gallery_clinic.id", "DESC")
                               ->limit($limit)
                               ->get();
