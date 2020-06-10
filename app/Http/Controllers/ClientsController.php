@@ -2172,16 +2172,20 @@ class ClientsController extends Controller
     public function GetTestimonials($client, $limit)
     {   
 
-        $client = ClientInformationAditionalSurgery::where("id_client", $client)->first();
-
+        $client     = ClientInformationAditionalSurgery::where("id_client", $client)->first();
+        $procedures = DB::table("clients_procedures")->where("id_client", $client->id_client)->get();
         $id_category     = $client->id_category;
         $id_sub_category = $client->id_sub_category;
        
 
+        $sub_categorys = [];
+
+        foreach($procedures as $procedure){
+            $sub_categorys[] = $procedure->id_sub_category;
+        }
    
        $data = GalleryImage::select("gallery_photos.*")
-                              ->where("gallery_photos.id_category", $id_category)
-                              ->where("gallery_photos.id_sub_category", $id_sub_category)
+                              ->whereIn("gallery_photos.id_sub_category", $sub_categorys)
                               ->orderBy("gallery_photos.id", "DESC")
                               ->limit($limit)
                               ->get();
