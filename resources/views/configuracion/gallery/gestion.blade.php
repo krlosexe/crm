@@ -86,8 +86,8 @@
 			          </div>
 
 
-			          @include('configuracion.gallery.clinic.store')
-					  @include('configuracion.gallery.clinic.edit')
+			          @include('configuracion.gallery.store')
+					  @include('configuracion.gallery.edit')
 
 
 			        </div>

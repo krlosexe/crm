@@ -267,6 +267,10 @@ Route::get('gallery/clinic/{client}/{limit}', 'GalleryClinicController@show');
 
 
 
+Route::get('gallery/testimonials/{client}/{limit}', 'ClientsController@GetTestimonials');
+
+
+
 Route::get('generate/token/chat', function () {
     
     $users = User::get();

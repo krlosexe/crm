@@ -449,12 +449,25 @@
 
 
                     <div class="row">
+
+
                         <div class="col-md-4">
-                            <div class="form-group">
-                                <label for=""><b>Nombre Cirugia</b></label>
-                                <input type="text" name="name_surgery" class="form-control form-control-user" id="name_surgery_edit" placeholder="PJ. Mastopexia">
-                            </div>
+                            <label for=""><b>Categoria</b></label>
+                                <div class="form-group valid-required">
+                                <select name="id_category" class="form-control" id="category_edit" required></select>
+                                </div>
                         </div>
+
+                        
+                        <div class="col-md-4">
+                            <label for=""><b>Sub Categoria</b></label>
+                                <div class="form-group valid-required">
+                                <select name="id_sub_category" class="form-control" id="sub_category_edit" required></select>
+                                </div>
+                        </div>
+
+
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""><b>Talla Actual</b></label>

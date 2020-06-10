@@ -19,6 +19,8 @@ use App\datosPersonaesModel;
 use App\Comments;
 use App\Notification;
 
+use App\GalleryImage;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -40,7 +42,6 @@ class ClientsController extends Controller
      */
     public function index(Request $request)
     {
-
         $rol     = $request["rol"];
         $id_user = $request["id_user"];
 
@@ -2138,6 +2139,46 @@ class ClientsController extends Controller
         $data = DB::table("client_clinic_history")->where("id_client", $id_client)->first();
         return response()->json($data)->setStatusCode(200);
     }
+
+
+
+
+
+    
+
+
+
+    public function GetTestimonials($client, $limit)
+    {   
+
+        $client = ClientInformationAditionalSurgery::where("id_client", $client)->first();
+
+        $id_category     = $client->id_category;
+        $id_sub_category = $client->id_sub_category;
+       
+
+   
+       $data = GalleryImage::select("gallery_photos.*")
+                              ->where("gallery_photos.id_category", $id_category)
+                              ->where("gallery_photos.id_sub_category", $id_sub_category)
+                              ->orderBy("gallery_photos.id", "DESC")
+                              ->limit($limit)
+                              ->get();
+        
+        if($data){
+            $response = [
+                "path_gallery" => "img/gallery/",
+                "data"         => $data
+            ];
+            return response()->json($response)->setStatusCode(200);
+        }else{
+            return response()->json([])->setStatusCode(200);
+        }
+        
+    }
+
+
+
     /**
      * Remove the specified resource from storage.
      *

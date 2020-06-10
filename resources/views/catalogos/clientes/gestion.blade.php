@@ -924,6 +924,13 @@
 
 
 
+				getCategory("#category", 124124124)
+				ChangeCategory("#category", "#sub_category")
+
+
+
+
+
 				$('#summernote').summernote('reset');
 
 
@@ -1372,6 +1379,15 @@
 
 
 					GetAsesorasValoracion("#id_asesora_valoracion-edit")
+
+
+					getCategory("#category_edit", data.id_category)
+					ChangeCategory("#category_edit", "#sub_category_edit")
+
+
+					$("#category_edit").trigger("change");
+					$("#sub_category_edit").val(data.id_sub_category)
+
 
 
 			
@@ -1925,6 +1941,95 @@
 			  $("#year_edit").val(calcularEdad($(this).val()))
 		  });
 
+
+
+
+		  function getCategory(select, select_default = false){
+			
+			$.ajax({
+				url: ''+document.getElementById('ruta').value+'/api/category',
+				type:'GET',
+				data: {
+					"id_user": id_user,
+					"token"  : tokens,
+				},
+				dataType:'JSON',
+				async: false,
+				error: function() {
+					
+				},
+				success: function(data){
+					$(select+" option").remove();
+					$(select).append($('<option>',
+					{
+						value: "",
+						text : "Seleccione"
+					}));
+				
+					$.each(data, function(i, item){
+						
+						
+						$(select).append($('<option>',
+						{
+							value: item.id,
+							text : item.name,
+							selected : select_default == item.id ? true : false
+							
+						}));
+
+						
+					});
+
+				}
+			
+			});
+		}
+
+
+		function ChangeCategory(select, select_sub, select_default = false){
+			$(select).change(function (e) { 
+				
+				$.ajax({
+					url: ''+document.getElementById('ruta').value+'/api/category/sub/'+$(select).val(),
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+					},
+					dataType:'JSON',
+					async: false,
+					error: function() {
+						
+					},
+					success: function(data){
+						console.log(data)
+						$(select_sub+" option").remove();
+						$(select_sub).append($('<option>',
+						{
+							value: "",
+							text : "Seleccione"
+						}));
+					
+						$.each(data, function(i, item){
+							
+							
+							$(select_sub).append($('<option>',
+							{
+								value: item.id,
+								text : item.name,
+								selected : select_default == item.id ? true : false
+								
+							}));
+
+							
+						});
+
+					}
+				
+				});
+				
+			});
+		}
 
 
 		 
