@@ -454,7 +454,7 @@
                         <div class="col-md-4">
                             <label for=""><b>Categoria</b></label>
                                 <div class="form-group valid-required">
-                                <select name="id_category" class="form-control" id="category_edit" required></select>
+                                <select name="id_category" class="form-control" id="category_edit"></select>
                                 </div>
                         </div>
 
@@ -462,7 +462,7 @@
                         <div class="col-md-4">
                             <label for=""><b>Sub Categoria</b></label>
                                 <div class="form-group valid-required">
-                                <select name="id_sub_category" class="form-control" id="sub_category_edit" required></select>
+                                <select name="id_sub_category" class="form-control" id="sub_category_edit"></select>
                                 </div>
                         </div>
 
