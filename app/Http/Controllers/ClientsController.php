@@ -9,7 +9,7 @@ use App\Auditoria;
 use App\ClientClinicHistory;
 use App\ClientCreditInformation;
 use App\ClientInformationAditionalSurgery;
-
+use App\ClientsProcedure;
 
 use App\ClientsTasks;
 use App\ClientsTasksFollowers;
@@ -198,6 +198,7 @@ class ClientsController extends Controller
                                 ->with("logs")
                                 ->with("phones")
                                 ->with("emails")
+                                ->with("procedures")
 
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
@@ -378,6 +379,14 @@ class ClientsController extends Controller
                 ClientClinicHistory::create($request->all());
                 ClientCreditInformation::create($request->all());
 
+
+                foreach($request["sub_category"] as $procedure){
+                    $array_procedure = [
+                        "id_client"       => $cliente["id_cliente"],
+                        "id_sub_category" => $procedure
+                    ];
+                    ClientsProcedure::create($array_procedure);
+                }
 
 
                 $User =  User::create([
@@ -749,6 +758,18 @@ class ClientsController extends Controller
                 Comments::insert($array);
             }
             
+
+
+
+            ClientsProcedure::where("id_client", $id_cliente)->delete();
+            foreach($request["sub_category"] as $procedure){
+                $array_procedure = [
+                    "id_client"       => $id_cliente,
+                    "id_sub_category" => $procedure
+                ];
+                ClientsProcedure::create($array_procedure);
+            }
+
 
             /*
 

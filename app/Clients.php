@@ -52,4 +52,16 @@ class Clients extends Model
     }
 
 
+
+    public function procedures(){
+        
+        return $this->hasMany('App\ClientsProcedure', 'id_client')
+                    ->join('sub_category', 'sub_category.id', '=', 'clients_procedures.id_sub_category')  
+                    ->select(array('clients_procedures.*', 'sub_category.name'));
+        
+    }
+
+
+
+
 }

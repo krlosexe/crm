@@ -358,12 +358,46 @@
                         
                         <div class="col-md-4">
                             <label for=""><b>Sub Categoria</b></label>
-                                <div class="form-group valid-required">
-                                <select name="id_sub_category" class="form-control" id="sub_category"></select>
-                                </div>
+                            <div class="form-group valid-required">
+                                <select  class="form-control" id="sub_category"></select>
+                            </div>
                         </div>
 
 
+                        <div class="col-md-4">
+                            <br>
+                            <button type="button" id="btn-add-surgerie" class="btn btn-primary btn-user" >
+                                Agregar <i class="fa fa-pl"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <table class="table table-bordered" id="tablecx"  width="100%" cellspacing="0">
+
+                                <thead>
+                                    <tr>
+                                        <th>Procedimientos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+			                </table>
+                        </div>
+
+                    </div>
+
+
+                    <br><br>
+
+
+
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""><b>Talla Actual</b></label>
@@ -387,6 +421,13 @@
                         </div>
 
 
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""><b>Vol Implante</b></label>
+                                <input type="text" name="implant_volumem" class="form-control form-control-user" id="implant_volumem" placeholder="PJ. 11">
+                            </div>
+                        </div>
+                        
                     </div>
               </div>
 

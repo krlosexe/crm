@@ -450,7 +450,6 @@
 
                     <div class="row">
 
-
                         <div class="col-md-4">
                             <label for=""><b>Categoria</b></label>
                                 <div class="form-group valid-required">
@@ -467,7 +466,41 @@
                         </div>
 
 
+                        <div class="col-md-4">
+                            <br>
+                            <button type="button" id="btn-add-surgerie-edit" class="btn btn-primary btn-user" >
+                                Agregar <i class="fa fa-pl"></i>
+                            </button>
+                        </div>
 
+
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <table class="table table-bordered" id="tablecx_edit"  width="100%" cellspacing="0">
+
+                                <thead>
+                                    <tr>
+                                        <th>Procedimientos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+			                </table>
+                        </div>
+
+                    </div>
+
+
+                    <br><br>
+
+
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""><b>Talla Actual</b></label>
@@ -489,8 +522,6 @@
                                 <input type="text" name="implant_volumem" class="form-control form-control-user" id="implant_volumem_edit" placeholder="PJ. 11">
                             </div>
                         </div>
-
-
                     </div>
               </div>
 

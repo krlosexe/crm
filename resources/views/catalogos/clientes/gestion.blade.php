@@ -926,7 +926,7 @@
 
 				getCategory("#category", 124124124)
 				ChangeCategory("#category", "#sub_category")
-
+				$("#tablecx tbody").html("");
 
 
 
@@ -1389,6 +1389,18 @@
 					$("#sub_category_edit").val(data.id_sub_category)
 
 
+
+
+					var html
+					$.map(data.procedures, function (item, key) {
+						
+						html += "<tr>"
+							html += "<td>"+item.name+"<input type='hidden' name='sub_category[]' value='"+item.id_sub_category+"'></td>"
+						html += "</tr>"
+
+						$("#tablecx_edit tbody").html(html);
+					});
+					
 
 			
 
@@ -2034,6 +2046,30 @@
 
 		 
 
+
+		$("#btn-add-surgerie").click(function (e) { 
+
+			var html
+			html += "<tr>"
+				html += "<td>"+$("#sub_category option:selected").text()+"<input type='hidden' name='sub_category[]' value='"+$("#sub_category").val()+"'></td>"
+			html += "</tr>"
+			
+			$("#tablecx tbody").append(html);
+
+		});
+
+
+
+		$("#btn-add-surgerie-edit").click(function (e) { 
+
+			var html
+			html += "<tr>"
+				html += "<td>"+$("#sub_category_edit option:selected").text()+"<input type='hidden' name='sub_category[]' value='"+$("#sub_category_edit").val()+"'></td>"
+			html += "</tr>"
+			
+			$("#tablecx_edit tbody").append(html);
+
+		});
 
 
 		</script>
