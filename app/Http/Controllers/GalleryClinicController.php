@@ -138,6 +138,7 @@ class GalleryClinicController extends Controller
                 "path_gallery" => "img/gallery/clinic/",
                 "path_logo"    => "img/clinic/gallery/",
                 "logo"         => $data[0]["logo_clinic"],
+                "name_clinic"  => $data[0]["name_clinic"],
                 "data"         => $data
             ];
             return response()->json($response)->setStatusCode(200);
