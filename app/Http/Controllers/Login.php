@@ -154,7 +154,13 @@ class Login extends Controller
                           'token_chat' => $users[0]->token_chat,
                           'mensagge'  => "Ha iniciado sesion exitosamente",
                           "type_user" => $name_rol
-	    		);
+                );
+                
+            if($users[0]->id_rol == 19){
+                $data["id_client"] = $users[0]->id_client;
+            }
+
+
 
             return response()->json($data)->setStatusCode(200);
         }else{
