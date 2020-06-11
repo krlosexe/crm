@@ -380,13 +380,18 @@ class ClientsController extends Controller
                 ClientCreditInformation::create($request->all());
 
 
-                foreach($request["sub_category"] as $procedure){
-                    $array_procedure = [
-                        "id_client"       => $cliente["id_cliente"],
-                        "id_sub_category" => $procedure
-                    ];
-                    ClientsProcedure::create($array_procedure);
+                if($request["sub_category"]){
+
+                    foreach($request["sub_category"] as $procedure){
+                        $array_procedure = [
+                            "id_client"       => $cliente["id_cliente"],
+                            "id_sub_category" => $procedure
+                        ];
+                        ClientsProcedure::create($array_procedure);
+                    }
+
                 }
+                
 
 
                 $User =  User::create([
@@ -760,15 +765,17 @@ class ClientsController extends Controller
             
 
 
-
-            ClientsProcedure::where("id_client", $id_cliente)->delete();
-            foreach($request["sub_category"] as $procedure){
-                $array_procedure = [
-                    "id_client"       => $id_cliente,
-                    "id_sub_category" => $procedure
-                ];
-                ClientsProcedure::create($array_procedure);
+            if($request["sub_category"]){
+                ClientsProcedure::where("id_client", $id_cliente)->delete();
+                foreach($request["sub_category"] as $procedure){
+                    $array_procedure = [
+                        "id_client"       => $id_cliente,
+                        "id_sub_category" => $procedure
+                    ];
+                    ClientsProcedure::create($array_procedure);
+                }
             }
+            
 
 
             /*

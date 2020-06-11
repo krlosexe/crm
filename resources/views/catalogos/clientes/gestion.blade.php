@@ -923,7 +923,7 @@
 				$("#clinic").attr("disabled", "disabled")
 
 
-
+				$("#tablecx tbody").html("");
 				getCategory("#category", 124124124)
 				ChangeCategory("#category", "#sub_category")
 				$("#tablecx tbody").html("");
@@ -1392,6 +1392,7 @@
 
 
 					var html
+					$("#tablecx_edit tbody").html("");
 					$.map(data.procedures, function (item, key) {
 						
 						html += "<tr>"
