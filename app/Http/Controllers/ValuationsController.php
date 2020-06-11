@@ -50,6 +50,7 @@ class ValuationsController extends Controller
                                 ->where("auditoria.status", "!=", "0")
 
                                 ->with("followers")
+                                ->with("photos")
                                 
                                 ->where(function ($query) use ($rol, $id_user) {
                                     if($rol == "Asesor"){
@@ -71,7 +72,6 @@ class ValuationsController extends Controller
                                     }
                                 }) 
 
-                                ->with("photos")
 
                                 ->orderBy("valuations.id_valuations", "DESC")
                                 ->get();
@@ -94,8 +94,8 @@ class ValuationsController extends Controller
 
                                 
                                 ->with("followers")
-                                
                                 ->with("photos")
+                        
 
                                 ->where("followers_events.id_user", $id_user)
                                 ->where("followers_events.tabla", "valuations")
@@ -391,6 +391,8 @@ class ValuationsController extends Controller
                                 
                                 ->orderBy("valuations.id_valuations", "DESC")
                                 ->get();
+
+
             echo json_encode($valuations);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);

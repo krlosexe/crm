@@ -886,9 +886,9 @@
 					$.map(data.photos, function (item, key) {
 						
 					
-						var url_imagen = '/img/valuations/'
+						var url_imagen = '/img/valuations/'+item.code+'/'+item.code_img
 						var url        = document.getElementById('ruta').value; 
-						img = '<img src="'+url+url_imagen+item.foto+'" class="file-preview-image kv-preview-data">'
+						img = '<img src="'+url+url_imagen+'/original.png" class="file-preview-image kv-preview-data">'
 
 						$("#photo_edit_"+count).fileinput('destroy');
 						$("#photo_edit_"+count).fileinput({
