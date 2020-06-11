@@ -934,6 +934,11 @@ class ClientsController extends Controller
 
     public function GetTasksByClient(Request $request, $id_client){
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
+
+
+
+            ini_set('memory_limit', '-1'); 
+
             
             $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
                                    "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis", "clientes.nombres as name_client")
