@@ -987,7 +987,7 @@ class ClientsController extends Controller
               $overdue = $request["overdue"];
             }
 
-
+            ini_set('memory_limit', '-1'); 
 
             $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
                                    "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis", "clientes.nombres as name_client")
