@@ -116,11 +116,21 @@ class Login extends Controller
             $AuthUsers->token_notifications  = $request["fcmToken"];
             $AuthUsers->save();
             
+            $id_line = null;
             if($users[0]->id_rol == 6 || $users[0]->id_rol == 9){
                 $name_rol = "Asesor";
+
+
+                $line = DB::table("users_line_business")
+                            ->where("users_line_business.id_user", $users[0]->id)
+                            ->first();
+
+                $id_line = $line->id_line;
+
+
             }
 
-            $id_line = null;
+           
             if($users[0]->id_rol == 17){
                 $name_rol = "Afiliado";
 
