@@ -424,7 +424,7 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                              <label for=""><b>Direccion de Recidencia: <small>espeficique Nº casa o apartamento</small> *</b></label>
+                              <label for=""><b>Direccion de residencia: <small>espeficique Nº casa o apartamento</small> *</b></label>
                               <input type="text" name="adress_client" id="adress_client" class="form-control" required >
                           </div>
                       </div>
@@ -443,7 +443,7 @@
                     <div class="row">
                       <div class="col-md-3">
                         <div class="form-group">
-                              <label for=""><b>Telefono Recidencia*</b></label>
+                              <label for=""><b>Telefono residencia*</b></label>
                               <input type="text" name="phone_client" id="phone_client" class="form-control" required >
                           </div>
                       </div>
@@ -472,7 +472,7 @@
                               <label for=""><b>Envio de Correspondencia:*</b></label>
                               <select name="mailing" id="mailing" class="form-control" required>
                                 <option value="">Seleccione</option>
-                                <option value="Recidencia">Recidencia</option>
+                                <option value="Recidencia">Residencia</option>
                                 <option value="E-Mail">E-Mail</option>
                                 <option value="Trabajo">Trabajo</option>
                                 <option value="Otra">Otra</option>
@@ -1209,7 +1209,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for=""><b>Parentezco</b></label>
+                                <label for=""><b>Parentesco</b></label>
                                 <input type="text" name="parentezco1" id="parentezco" class="form-control">
                             </div>
                         </div>
@@ -1217,7 +1217,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for=""><b>Telefono de Recidencia</b></label>
+                                <label for=""><b>Telefono de residencia</b></label>
                                 <input type="text" name="phone_recidencia1" id="phone_recidencia" class="form-control">
                             </div>
                         </div>
@@ -1255,7 +1255,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for=""><b>Parentezco</b></label>
+                                <label for=""><b>Parentesco</b></label>
                                 <input type="text" name="parentezco2" id="parentezco" class="form-control">
                             </div>
                         </div>
@@ -1263,7 +1263,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for=""><b>Telefono de Recidencia</b></label>
+                                <label for=""><b>Telefono de residencia</b></label>
                                 <input type="text" name="phone_recidencia2" id="phone_recidencia" class="form-control">
                             </div>
                         </div>
@@ -1313,7 +1313,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for=""><b>Parentezco</b></label>
+                                <label for=""><b>Parentesco</b></label>
                                 <input type="text" name="refer_2_parentezco1" id="refer_2_parentezco" class="form-control">
                             </div>
                         </div>
@@ -1321,7 +1321,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for=""><b>Telefono de Recidencia</b></label>
+                                <label for=""><b>Telefono de residencia</b></label>
                                 <input type="text" name="refer_2_phone_recidencia1" id="refer_2_phone_recidencia" class="form-control">
                             </div>
                         </div>
@@ -1359,7 +1359,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for=""><b>Parentezco</b></label>
+                                <label for=""><b>Parentesco</b></label>
                                 <input type="text" name="refer_2_parentezco2" id="refer_2_parentezco" class="form-control">
                             </div>
                         </div>
@@ -1367,7 +1367,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for=""><b>Telefono de Recidencia</b></label>
+                                <label for=""><b>Telefono de residencia</b></label>
                                 <input type="text" name="refer_2_phone_recidencia2" id="refer_2_phone_recidencia" class="form-control">
                             </div>
                         </div>
