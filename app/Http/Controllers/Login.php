@@ -146,6 +146,17 @@ class Login extends Controller
 
             if($users[0]->id_rol == 19){
                 $name_rol = "Referido";
+
+
+                $line = DB::table("users")
+                            ->select("clientes.id_line")
+                            ->join("clientes", "clientes.id_cliente", "=", "users.id_client")
+                            ->where("users.id", $users[0]->id)
+                            ->first();
+
+                $id_line = $line->id_line;
+
+                
             }
 
 
