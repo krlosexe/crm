@@ -375,17 +375,36 @@
 
             <div class="tab-pane fade tab_content1" id="info-add-edit" role="tabpanel" aria-labelledby="patient_record">
 
+                    <div class="row">
 
-                    
+                        <div class="col-md-4">
+                            <label for=""><b>Categoria</b></label>
+                            <div class="form-group valid-required">
+                                <select name="id_category" class="form-control" id="category_edit"></select>
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-md-4">
+                            <label for=""><b>Sub Categoria</b></label>
+                            <div class="form-group valid-required">
+                                <select name="id_sub_category" class="form-control" id="sub_category_edit"></select>
+                            </div>
+                        </div>
+
+                    </div>
 
 
                     <div class="row">
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""><b>Nombre Cirugia</b></label>
                                 <input type="text" name="name_surgery" class="form-control form-control-user" id="name_surgery_edit" placeholder="PJ. Mastopexia">
                             </div>
                         </div>
+
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""><b>Talla Actual</b></label>
