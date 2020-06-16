@@ -375,7 +375,7 @@ class NotificationsController extends Controller
             "tokens" => $tokens,
 
             "tittle" => "Contenido para Publicar",
-            "body"   => "Se ah publicado un nuevo Post",
+            "body"   => "Se ha publicado un nuevo Post",
             "data"   => ['type' => 'post']
 
         ];

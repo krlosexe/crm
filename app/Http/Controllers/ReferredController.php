@@ -61,7 +61,7 @@ class ReferredController extends Controller
             "tokens" => [$data_adviser["token_notifications"], $data_affiliate["token_notifications"]],
     
             "tittle" => "PRP",
-            "body"   => "Se ah registrado un Referido",
+            "body"   => "Se ha registrado un Referido",
             "data"   => ['type' => 'refferers']
     
         ];
