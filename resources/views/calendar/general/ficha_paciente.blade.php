@@ -395,6 +395,31 @@
                     </div>
 
 
+
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <table class="table table-bordered" id="tablecx_edit"  width="100%" cellspacing="0">
+
+                                <thead>
+                                    <tr>
+                                        <th>Procedimientos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+			                </table>
+                        </div>
+
+                    </div>
+
+
+                    <br><br>
+
+
+
                     <div class="row">
 
                         <div class="col-md-4">

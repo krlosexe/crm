@@ -546,6 +546,7 @@ class ClientsController extends Controller
                                 ->with("logs")
                                 ->with("phones")
                                 ->with("emails")
+                                ->with("procedures")
 
                                 ->where("clientes.id_cliente", $clients)
                                

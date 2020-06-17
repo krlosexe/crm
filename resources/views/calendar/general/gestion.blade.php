@@ -1685,6 +1685,20 @@
 						ChangeCategory("#category_edit", "#sub_category_edit")
 
 
+						var html
+						$("#tablecx_edit tbody").html("");
+						$.map(data.procedures, function (item, key) {
+							
+							html += "<tr>"
+								html += "<td>"+item.name+"<input type='hidden' name='sub_category[]' value='"+item.id_sub_category+"'></td>"
+							html += "</tr>"
+
+							$("#tablecx_edit tbody").html(html);
+						});
+
+
+
+
 						$("#category_edit").trigger("change");
 						$("#sub_category_edit").val(data.id_sub_category)
 
