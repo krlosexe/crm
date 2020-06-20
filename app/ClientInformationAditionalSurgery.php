@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ClientInformationAditionalSurgery extends Model
 {
     protected $fillable = [
-        'id_client', 'name_surgery', 'current_size', 'desired_size', 'implant_volumem', 'id_category', 'id_sub_category'
+        'id_client', 'name_surgery', 'current_size', 'desired_size', 'implant_volumem', 'id_category', 'id_sub_category', 'observations'
     ];
 
 

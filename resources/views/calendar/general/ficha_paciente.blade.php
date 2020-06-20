@@ -375,44 +375,68 @@
 
             <div class="tab-pane fade tab_content1" id="info-add-edit" role="tabpanel" aria-labelledby="patient_record">
 
-                    <div class="row">
+            <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for=""><b>Categoria</b></label>
+                                        <div class="form-group valid-required">
+                                        <select name="id_category" class="form-control" id="category_edit"></select>
+                                        </div>
+                                </div>
 
-                        <div class="col-md-4">
-                            <label for=""><b>Categoria</b></label>
-                            <div class="form-group valid-required">
-                                <select name="id_category" class="form-control" id="category_edit"></select>
+                                
+                                <div class="col-md-4">
+                                    <label for=""><b>Sub Categoria</b></label>
+                                        <div class="form-group valid-required">
+                                        <select name="id_sub_category" class="form-control" id="sub_category_edit"></select>
+                                        </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <br>
+                                    <button type="button" id="btn-add-surgerie-edit" class="btn btn-primary btn-user" >
+                                        Agregar <i class="fa fa-pl"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-12"> 
+                                    <div class="form-group">
+                                        <label for=""><b>Observaciones adicionales</b></label>
+                                        <textarea class="form-control" name="observations" id="observations_edit"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered" id="tablecx_edit"  width="100%" cellspacing="0">
+
+                                        <thead>
+                                            <tr>
+                                                <th>Procedimientos</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
-
-                        
-                        <div class="col-md-4">
-                            <label for=""><b>Sub Categoria</b></label>
-                            <div class="form-group valid-required">
-                                <select name="id_sub_category" class="form-control" id="sub_category_edit"></select>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
-
-                    <div class="row">
-
-                        <div class="col-md-12">
-                            <table class="table table-bordered" id="tablecx_edit"  width="100%" cellspacing="0">
-
-                                <thead>
-                                    <tr>
-                                        <th>Procedimientos</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                </tbody>
-			                </table>
-                        </div>
-
                     </div>
 
 

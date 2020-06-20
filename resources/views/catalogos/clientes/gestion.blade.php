@@ -1391,12 +1391,14 @@
 
 
 
-					var html
+					var html, count
 					$("#tablecx_edit tbody").html("");
 					$.map(data.procedures, function (item, key) {
 						
-						html += "<tr>"
+						count++
+						html += "<tr id='tr_procedure_edit_"+count+"'>"
 							html += "<td>"+item.name+"<input type='hidden' name='sub_category[]' value='"+item.id_sub_category+"'></td>"
+							html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit_'+count+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
 
 						$("#tablecx_edit tbody").html(html);
@@ -1432,6 +1434,8 @@
 					$("#identificacion_verify_edit").prop("checked", data.identificacion_verify ? true : false)
 
 					$("#name_surgery_edit").val(data.name_surgery)
+					$("#observations_edit").val(data.observations)
+					
 					$("#current_size_edit").val(data.current_size)
 					$("#desired_size_edit").val(data.desired_size)
 					$("#implant_volumem_edit").val(data.implant_volumem)
@@ -2047,12 +2051,13 @@
 
 		 
 
-
+		var count = 0
 		$("#btn-add-surgerie").click(function (e) { 
-
+			count++
 			var html
-			html += "<tr>"
+			html += "<tr id='tr_procedure_"+count+"'>"
 				html += "<td>"+$("#sub_category option:selected").text()+"<input type='hidden' name='sub_category[]' value='"+$("#sub_category").val()+"'></td>"
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_'+count+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 			
 			$("#tablecx tbody").append(html);
@@ -2060,12 +2065,13 @@
 		});
 
 
-
+		var count2 = 0
 		$("#btn-add-surgerie-edit").click(function (e) { 
-
+			count2++
 			var html
-			html += "<tr>"
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td>"+$("#sub_category_edit option:selected").text()+"<input type='hidden' name='sub_category[]' value='"+$("#sub_category_edit").val()+"'></td>"
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 			
 			$("#tablecx_edit tbody").append(html);

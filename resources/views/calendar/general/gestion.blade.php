@@ -1732,6 +1732,7 @@
 						$("#identificacion_verify_edit").prop("checked", data.identificacion_verify ? true : false)
 
 						$("#name_surgery_edit").val(data.name_surgery)
+						$("#observations_edit").val(data.observations)
 						$("#current_size_edit").val(data.current_size)
 						$("#desired_size_edit").val(data.desired_size)
 						$("#implant_volumem_edit").val(data.implant_volumem)
