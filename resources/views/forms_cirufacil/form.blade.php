@@ -174,7 +174,7 @@
             <div class="col-md-12">
               <div class="form-group">
                     <label for=""><b>¿Cuenta con una inicial?: *</b></label>
-                    <input type="text" name="name_surgery" id="surgerie-store" class="form-control" required >
+                    <input type="text" name="have_initial" id="have_initial-store" class="form-control" required >
                 </div>
             </div>
           </div>
