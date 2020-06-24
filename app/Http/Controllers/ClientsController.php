@@ -334,7 +334,8 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
         //if ($this->VerifyLogin($request["id_user"],$request["token"])){
-          
+
+            
             $messages = [
                 'required' => 'El Campo :attribute es requirdo.',
                 'unique'   => 'El Campo :attribute ya se encuentra en uso.'
@@ -350,12 +351,7 @@ class ClientsController extends Controller
 
             $request["identificacion_verify"] == 1 ? $request["identificacion_verify"] = 1 : $request["identificacion_verify"] = 0;
             $validator = Validator::make($request->all(), [
-                'nombres'         => 'required',
-               // 'apellidos'       => 'required',
-               // 'telefono'        => 'required|unique:clientes',
-               // 'email'           => 'required|unique:clientes',
-               // 'direccion'       => 'required'
-
+                'nombres'         => 'required'
             ], $messages);  
 
 
@@ -466,6 +462,38 @@ class ClientsController extends Controller
                 $auditoria->fec_regins  = date("Y-m-d H:i:s");
                 $auditoria->fec_update  = date("Y-m-d H:i:s");
                 $auditoria->save();
+
+
+
+
+
+                if(isset($request["create_task_client"]) && ($request["create_task_client"] == 1)){
+                    
+                    $request["id_client"] = $cliente["id_cliente"];
+                    $store_task = ClientsTasks::create($request->all());
+
+                    $auditoria              = new Auditoria;
+                    $auditoria->tabla       = "clients_tasks";
+                    $auditoria->cod_reg     = $store_task["id_clients_tasks"];
+                    $auditoria->status      = 1;
+                    $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                    $auditoria->usr_regins  = $request["id_user"];
+                    $auditoria->save();
+
+
+                    $followers = [];
+                    foreach($request->followers as $key => $value){
+                        $array = [];
+                        $array["id_task"]     = $store_task["id_clients_tasks"];
+                        $array["id_follower"] = $value;
+                        array_push($followers, $array);
+                    }
+
+                    ClientsTasksFollowers::insert($followers);
+                }   
+
+
+
 
 
 

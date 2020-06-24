@@ -357,7 +357,7 @@
                                     <div class="col-md-12">
                                     <div class="form-group">
                                             <label for=""><b>Responsable</b></label>
-                                            <select name="responsable" id="responsable" class="form-control getUsers select2" required>
+                                            <select name="responsable" id="responsable" class="form-control getUsers select2">
                                                 <option value="">Seleccione</option>
                                             </select>
                                         </div>
@@ -370,7 +370,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for=""><b>Asunto</b></label>
-                                            <input type="text" name="issue" id="issue-store" class="form-control" required >
+                                            <input type="text" name="issue" id="issue-store" class="form-control" >
                                         </div>
                                     </div>
                                 </div>
@@ -380,14 +380,14 @@
                                     <div class="col-md-6">
                                     <div class="form-group">
                                             <label for=""><b>Fecha</b></label>
-                                            <input type="date" name="fecha" id="fecha-store" class="form-control" required min="<?= date("Y-m-d")?>">
+                                            <input type="date" name="fecha" id="fecha-store" class="form-control" min="<?= date("Y-m-d")?>">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                     <div class="form-group">
                                             <label for=""><b>Hora</b></label>
-                                            <input type="time" name="time" id="time-store" class="form-control" required>
+                                            <input type="time" name="time" id="time-store" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -398,7 +398,7 @@
                                     <div class="col-md-12">
                                     <div class="form-group">
                                             <label for=""><b>Seguidores</b></label>
-                                            <select name="followers[]" id="followers-store" class="form-control getUsers select2"  multiple required>
+                                            <select name="followers[]" id="followers-store" class="form-control getUsers select2"  multiple>
                                                 <option value="">Seleccione</option>
                                             </select>
                                         </div>

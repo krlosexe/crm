@@ -294,11 +294,53 @@
 
 				GetUsersTasksclient(".getUsers")
 
-				
+
 			});
 
 
-			
+			function GetUsersTasksclient(select, select_default){
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/user',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+						},
+					dataType:'JSON',
+					async: false,
+					beforeSend: function(){
+						$('#page-loader').css("display", "block");
+					},
+					error: function (data) {
+						$('#page-loader').css("display", "none");
+					},
+					success: function(data){
+						$('#page-loader').css("display", "none");
+						$(select+" option").remove();
+						$(select).append($('<option>',
+						{
+						value: "",
+						text : "Seleccione"
+						}));
+						$.each(data, function(i, item){
+							if (item.status == 1) {
+								$(select).append($('<option>',
+								{
+								value: item.id,
+								text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
+								selected : select_default == item.id ? true : false
+								}));
+							}
+						});
+
+					}
+				});
+			}
+
+
+
 			function GetAsesorasbyBusisnessLine2(line_business, asesoras){
 
 				$(line_business).change(function (e) { 
@@ -616,8 +658,10 @@
 
 				if($('#create_task_client').is(':checked') ) {
 					$("#content_create_task").css("display", "block")
+					$("#responsable, #issue-store, #fecha-store, #time-store, #followers-store").attr("required", "required")
 				}else{
 					$("#content_create_task").css("display", "none")
+					$("#responsable, #issue-store, #fecha-store, #time-store, #followers-store").removeAttr("required")
 				}
 			});
 
