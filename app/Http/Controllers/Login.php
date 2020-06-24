@@ -117,6 +117,7 @@ class Login extends Controller
             $AuthUsers->save();
             
             $id_line = null;
+            $code    = null;
             if($users[0]->id_rol == 6 || $users[0]->id_rol == 9){
                 $name_rol = "Asesor";
 
@@ -142,6 +143,11 @@ class Login extends Controller
                             ->first();
 
                 $id_line = $line->id_line;
+
+
+
+                $client = DB::table("clientes")->where("id_cliente", $users[0]->id_client)->first();
+                $code   = $client->code_client;
             }
 
             if($users[0]->id_rol == 19){
@@ -170,7 +176,7 @@ class Login extends Controller
                           'nombres'   => $users[0]->nombres." ".$users[0]->apellido_p,
                           'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/".$users[0]->img_profile,
                           'token'     => $token,
-                          'code'      => "DOXQ",
+                          'code'      => $code,
                           'line'      => $id_line,
                           'token_chat' => $users[0]->token_chat,
                           'mensagge'  => "Ha iniciado sesion exitosamente",

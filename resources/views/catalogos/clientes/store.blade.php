@@ -329,6 +329,103 @@
                         </div>
 
 
+
+
+                        <br>
+                        <br>
+
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for=""><b>Quieres Crear una Tarea?</b></label>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="create_task_client" id="create_task_client" value="1">
+                                        <label class="custom-control-label" for="create_task_client">Si</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row" id="content_create_task" style="display:none">
+
+                            
+
+                            <div class="col-md-12">
+                            <h3>Crear una Tarea</h3>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="form-group">
+                                            <label for=""><b>Responsable</b></label>
+                                            <select name="responsable" id="responsable" class="form-control getUsers select2" required>
+                                                <option value="">Seleccione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for=""><b>Asunto</b></label>
+                                            <input type="text" name="issue" id="issue-store" class="form-control" required >
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label for=""><b>Fecha</b></label>
+                                            <input type="date" name="fecha" id="fecha-store" class="form-control" required min="<?= date("Y-m-d")?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label for=""><b>Hora</b></label>
+                                            <input type="time" name="time" id="time-store" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="form-group">
+                                            <label for=""><b>Seguidores</b></label>
+                                            <select name="followers[]" id="followers-store" class="form-control getUsers select2"  multiple required>
+                                                <option value="">Seleccione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for=""><b>Estatus</b></label>
+                                            <select name="status_task" id="status_task-store" class="form-control" required>
+                                                <option value="Abierta">Abierta</option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+
+
                         
                     </div>
 

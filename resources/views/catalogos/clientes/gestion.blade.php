@@ -291,6 +291,10 @@
 				
 
 				verifyPersmisos(id_user, tokens, "clients");
+
+				GetUsersTasksclient(".getUsers")
+
+				
 			});
 
 
@@ -606,6 +610,16 @@
 
 
 
+
+
+			$("#create_task_client").change(function (e) { 
+
+				if($('#create_task_client').is(':checked') ) {
+					$("#content_create_task").css("display", "block")
+				}else{
+					$("#content_create_task").css("display", "none")
+				}
+			});
 
 			function listRefferers(cuadro = "", page = 1){
 
