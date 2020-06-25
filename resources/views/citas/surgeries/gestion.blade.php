@@ -231,7 +231,7 @@
 								  <th>Acciones</th>
 								  <th>Nombres</th>
 								  <th>Fecha</th>
-								  <th>Cirugias</th>
+								  <th>Procedimientos</th>
 								  <th>Cirujano</th>
 								  <th>Clinica</th>
 								  <th>Seguidores</th>
