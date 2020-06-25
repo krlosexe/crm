@@ -423,6 +423,27 @@ Route::get('sync/reffered/affiliate', function () {
 
 
 
+Route::get('sync/reffered/affiliate/restore', function () {
+    
+    $clients = Clients::select("clientes.*")
+                        ->where("origen", "Referido PRP")
+                        ->get();
+    
+    foreach($clients as $client){
+        $affiliate = Clients::where("id_cliente", $client["id_affiliate"])->first();
+        Clients::where("id_cliente", $client["id_cliente"])->update(["origen" => $affiliate["code_client"]]);
+        echo json_encode($affiliate["code_client"])."<br><br>";
+    }
+    
+});
+
+
+
+
+
+
+
+
 Route::get('restart/data/client', function () {
     
     $clients = DB::table("clientes_temp")->selectRaw("id_cliente, origen")->where("origen", "!=", "Chat")
