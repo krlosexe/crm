@@ -402,6 +402,7 @@ Route::get('sync/reffered/affiliate', function () {
                         ->where("origen", "!=", "face")
                         ->where("origen", "!=", "cep")
                         ->whereRaw("length(origen) = 4")
+                        ->whereNull('id_affiliate')
                         ->get();
     
     
@@ -412,8 +413,8 @@ Route::get('sync/reffered/affiliate', function () {
 
         echo json_encode($affiliate["id_cliente"])."<br>";
 
-        Clients::where("id_cliente", $client["id_cliente"])->update(["id_affiliate" => $affiliate["id_cliente"]]);
         //Clients::where("id_cliente", $client["id_cliente"])->update(["id_affiliate" => $affiliate["id_cliente"]]);
+        
     }                        
   // return response()->json($clients)->setStatusCode(200);
 
