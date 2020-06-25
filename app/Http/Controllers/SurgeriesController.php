@@ -34,8 +34,8 @@ class SurgeriesController extends Controller
 
                                 ->with("payments")
                                 ->with("followers")
+                                ->with("procedures")
                                 
-
                                 ->where(function ($query) use ($rol, $id_user) {
                                     if($rol == "Asesor"){
                                         $query->where("auditoria.usr_regins", $id_user);

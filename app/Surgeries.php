@@ -30,7 +30,20 @@ class Surgeries extends Model
                   ->where("followers_events.tabla", "surgeries")
                   ->select(array('followers_events.*', 'users.img_profile', "datos_personales.nombres as name_user", 
                   "datos_personales.apellido_p as last_name_user"));
-  }
+    }
+
+
+
+    public function procedures(){
+        
+      return $this->hasMany('App\ClientsProcedure', 'id_client', 'id_cliente')
+                  ->join('sub_category', 'sub_category.id', '=', 'clients_procedures.id_sub_category')  
+                  ->select(array('clients_procedures.*', 'sub_category.name'));
+      
+    }
+
+
+
 
 
 

@@ -231,6 +231,7 @@
 								  <th>Acciones</th>
 								  <th>Nombres</th>
 								  <th>Fecha</th>
+								  <th>Cirugias</th>
 								  <th>Cirujano</th>
 								  <th>Clinica</th>
 								  <th>Seguidores</th>
@@ -431,6 +432,16 @@
 							}
 						},
 						{"data": "fecha"},
+						{"data": null,
+							render : function(data, type, row) {
+								
+								var string = ""
+								$.map(row.procedures, function (item, key) {
+									string += item.name+", "
+								});
+								return string
+							}
+						},
 						{"data": "surgeon"},
 						{"data": "name_clinic"},
 
