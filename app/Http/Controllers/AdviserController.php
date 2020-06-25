@@ -336,8 +336,7 @@ class AdviserController extends Controller
     public function GetRefferersClient($id_client){
         
         $where = array(
-            "clientes.id_affiliate" => $id_client,
-            "clientes.origen"          => "Referido PRP",
+            "clientes.id_affiliate" => $id_client
         );
         
 
