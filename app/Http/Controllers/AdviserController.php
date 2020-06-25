@@ -179,8 +179,7 @@ class AdviserController extends Controller
 
             if($display == "self"){
                 $where = array(
-                    "clientes.id_user_asesora" => $id_user,
-                    "clientes.origen"          => "Referido Asesora",
+                    "clientes.id_user_asesora" => $id_user
                 );
 
 
@@ -201,8 +200,7 @@ class AdviserController extends Controller
 
             }else if($display == "all"){
                 $where = array(
-                    "clientes.id_user_asesora" => $id_user,
-                    "clientes.origen"          => "Referido PRP",
+                    "clientes.id_user_asesora" => $id_user
                 );
 
 
@@ -228,8 +226,7 @@ class AdviserController extends Controller
         if($user["id_rol"] == 17){
 
             $where = array(
-                "clientes.id_affiliate" => $user["id_client"],
-                "clientes.origen"          => "Referido PRP",
+                "clientes.id_affiliate" => $user["id_client"]
             );
             
 
