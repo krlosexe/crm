@@ -127,6 +127,7 @@
 											<option value="Demandada">Demandada</option>
 											<option value="Descartada">Descartada</option>
 											<option value="Llamada no Asesorada">Llamada no Asesorada</option>
+											<option value="No Asistio">No Asistio</option>
 											<option value="No Contactada">No Contactada</option>
 											<option value="No Contesta">No Contesta</option>
 											<option value="Numero Equivocado">Numero Equivocado</option>
