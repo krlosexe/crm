@@ -1049,6 +1049,8 @@ class ClientsController extends Controller
                                     ->where(function ($query) use ($overdue) {
                                         if($overdue == "overdue"){
                                             $query->where("clients_tasks.fecha", "<" ,date("Y-m-d"));
+                                            $query->where("clients_tasks.status_task", "!=" ,"Finalizada");
+                                            $query->where("clients_tasks.status_task" ,"Abierta");
                                         }
                                     })
 

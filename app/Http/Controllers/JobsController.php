@@ -41,7 +41,7 @@ class JobsController extends Controller
                 "issue"   => $notification["title"],
                 "mensage" => $notification["title"],
             ];
-            $this->SendEmail($info_email);
+           // $this->SendEmail($info_email);
 
         }
 
@@ -82,7 +82,7 @@ class JobsController extends Controller
                 "issue"   => $notification["title"],
                 "mensage" => $notification["title"],
             ];
-            $this->SendEmail($info_email);
+            //$this->SendEmail($info_email);
 
         }
 
