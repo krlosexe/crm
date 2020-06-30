@@ -913,7 +913,7 @@
 							],
 
 							initialPreviewConfig: [
-								{caption: "original.png" , downloadUrl: `${url_imagen}/img/valuations/${item.code}/${item.code_img}/original.png`  ,url: url+"uploads/delete", key: "original.png"}
+								{caption: "original.png" , downloadUrl: `${url_imagen}/original.png`  ,url: url+"uploads/delete", key: "original.png"}
 							],
 						});
 
