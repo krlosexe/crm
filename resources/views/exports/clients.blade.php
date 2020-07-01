@@ -19,6 +19,7 @@
         <th><b>Codigo de Cliente</b></th>
         <th><b>PRP</b></th>
         <th><b>Forma de Pago</b></th>
+        <th><b>Tiene Inicial ?</b></th>
         <th><b>Asesora</b></th>
         <th><b>Fecha de Registro</b></th>
     </tr>
@@ -44,6 +45,7 @@
             <td>{{ $value->code_client }}</td>
             <td>{{ $value->prp }}</td>
             <td>{{ $value->forma_pago }}</td>
+            <td>{{ $value->have_initial }}</td>
             <td>{{ $value->name_register }} {{ $value->apellido_register }}</td>
             <td>{{ $value->fec_regins }}</td>
         </tr>

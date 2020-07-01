@@ -65,11 +65,12 @@ class ClientsExport implements FromView
                                                "auditoria.*",
                                                "lines_business.nombre_line",
                                                "citys.nombre as name_city",
-                                               "clinic.nombre as name_clinic"
+                                               "clinic.nombre as name_clinic",
+                                               "clientc_credit_information.have_initial"
                                             )
                                             ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente", "left")
                                             ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora', "left")
-
+                                            ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
                                             ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line", "left")
 
                                             ->join("citys", "citys.id_city", "=", "clientes.city", "left")
