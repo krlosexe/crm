@@ -25,6 +25,20 @@ class SurgeriesController extends Controller
         $id_user = $request["id_user"];
 
 
+        $date_init = 0;
+        if(isset($request["date_init"]) && $request["date_init"] != ""){
+            $date_init = $request["date_init"];
+        }
+
+
+        $date_finish = 0;
+        if(isset($request["date_finish"]) && $request["date_finish"] != ""){
+            $date_finish = $request["date_finish"];
+        }
+
+
+
+
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $valuations = Surgeries::select("surgeries.*", "surgeries.clinic as id_clinic", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
                                 ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic")
@@ -41,6 +55,19 @@ class SurgeriesController extends Controller
                                         $query->where("auditoria.usr_regins", $id_user);
                                     }
                                 })
+
+
+                                ->where(function ($query) use ($date_init) {
+                                    if($date_init != 0){
+                                        $query->where("surgeries.fecha", ">=", $date_init);
+                                    }
+                                }) 
+
+                                ->where(function ($query) use ($date_finish) {
+                                    if($date_finish != 0){
+                                        $query->where("surgeries.fecha", "<=", $date_finish);
+                                    }
+                                }) 
 
                                 ->where("auditoria.tabla", "surgeries")
                                 ->where("auditoria.status", "!=", "0")

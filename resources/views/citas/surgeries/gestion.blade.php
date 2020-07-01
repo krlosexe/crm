@@ -225,6 +225,23 @@
 			            </div>
 			            <div class="card-body">
 			              <div class="table-responsive">
+
+						  	<div class="row">
+							  <div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Fecha desde</b></label>
+										<input type="date" class="form-control" id="date_init">
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Fecha hasta</b></label>
+										<input type="date" class="form-control" id="date_finish">
+									</div>
+								</div>  
+							</div>
+
 			                <table class="table table-bordered" id="table" width="100%" cellspacing="0">
 			                  <thead>
 			                    <tr>
@@ -375,12 +392,17 @@
 				enviarFormulario("#store", 'api/surgeries', '#cuadro2');
 			}
 
-
+			$("#date_init, #date_finish").change(function (e) { 
+				list();
+			});
 			function list(cuadro) {
 				var data = {
 					"id_user": id_user,
 					"token"  : tokens,
 				};
+
+				const date_init   = $("#date_init").val()
+				const date_finish = $("#date_finish").val()
 
 
 				$("#div-input-edit").css("display", "none")
@@ -397,9 +419,11 @@
 						"method":"GET",
 						 "url":''+url+'/api/surgeries',
 						 "data": {
-							"rol"    : name_rol,
-							"id_user": id_user,
-							"token"  : tokens,
+							"rol"         : name_rol,
+							"id_user"     : id_user,
+							"token"       : tokens,
+							"date_init"   : date_init,
+							"date_finish" : date_finish
 						},
 						"dataSrc":""
 					},
