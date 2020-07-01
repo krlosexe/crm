@@ -1203,7 +1203,6 @@ class ClientsController extends Controller
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->where("users.queue", 0)
-                        ->where("users.id", "!=", 69)
                         ->where("users.id", "!=", 106)
 
                         ->where(function ($query) use ($id_line) {
@@ -1367,7 +1366,7 @@ class ClientsController extends Controller
                         "id_user_asesora" => $request["id_user_asesora"],
                         "id_line"         => $request["id_line"]
                     );
-
+                    $request["state"] = "Afiliada";
                     Clients::find($value["id_cliente"])->update($update);
                     DB::table('auditoria')->where("cod_reg", $value["id_cliente"])
                             ->where("tabla", "clientes")
@@ -1399,7 +1398,7 @@ class ClientsController extends Controller
                 
 
             }else{
-
+                $request["state"] = "Afiliada";
                 $cliente = Clients::create($request->all());
                     
                 $request["id_client"] = $cliente["id_cliente"];
