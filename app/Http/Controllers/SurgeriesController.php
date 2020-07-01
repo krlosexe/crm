@@ -44,7 +44,7 @@ class SurgeriesController extends Controller
 
                                 ->where("auditoria.tabla", "surgeries")
                                 ->where("auditoria.status", "!=", "0")
-                                ->orderBy("surgeries.id_surgeries", "DESC")
+                                ->orderBy("surgeries.fecha", "DESC")
                                 ->get();
             echo json_encode($valuations);
         }else{
