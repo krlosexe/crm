@@ -231,12 +231,32 @@
 			            </div>
 			            <div class="card-body">
 			              <div class="table-responsive">
+
+
+						   <div class="row">
+							  <div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Fecha desde</b></label>
+										<input type="date" class="form-control" id="date_init">
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Fecha hasta</b></label>
+										<input type="date" class="form-control" id="date_finish">
+									</div>
+								</div>  
+							</div>
+
+
 			                <table class="table table-bordered" id="table" width="100%" cellspacing="0">
 			                  <thead>
 			                    <tr>
 								  <th>Acciones</th>
 								  <th>Paciente</th>
 								  <th>Clinica</th>
+								  <th>Fecha de Revision</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -328,11 +348,19 @@
 			}
 			
 
+			$("#date_init, #date_finish").change(function (e) { 
+				list();
+			});
+
+			
+
+
 			function list(cuadro) {
-				var data = {
-					"id_user": id_user,
-					"token"  : tokens,
-				};
+
+
+				const date_init   = $("#date_init").val()
+				const date_finish = $("#date_finish").val()
+
 				$('#table tbody').off('click');
 				var url=document.getElementById('ruta').value; 
 				cuadros(cuadro, "#cuadro1");
@@ -349,6 +377,8 @@
 							"rol"    : name_rol,
 							"id_user": id_user,
 							"token"  : tokens,
+							"date_init"   : date_init,
+							"date_finish" : date_finish
 						},
 						"dataSrc":""
 					},
@@ -375,6 +405,7 @@
 							}
 						},
 						{"data": "name_clinic"},
+						{"data": "fecha"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
 						

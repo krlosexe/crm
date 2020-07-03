@@ -23,32 +23,63 @@ class RevisionAppointmentController extends Controller
         $id_user = $request["id_user"];
 
 
-        if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            $queries = RevisionAppointment::select("revision_appointment.*", "clientes.nombres", "clientes.id_user_asesora","clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clinic.nombre as name_clinic","auditoria.*", "users.email as email_regis")
-
-                                            ->join("clientes", "clientes.id_cliente", "revision_appointment.id_paciente")
-                                            ->join("clinic", "clinic.id_clinic", "revision_appointment.clinica")
-
-
-                                            ->join("auditoria", "auditoria.cod_reg", "=", "revision_appointment.id_revision")
-                                            ->join("users", "users.id", "=", "auditoria.usr_regins")
-                                            ->with('agenda')
-
-                                            
-                                            ->where(function ($query) use ($rol, $id_user) {
-                                                if($rol == "Asesor"){
-                                                    $query->where("clientes.id_user_asesora", $id_user);
-                                                }
-                                            })
-
-                                            ->where("auditoria.tabla", "revision_appointment")
-                                            ->where("auditoria.status", "!=", "0")
-                                            ->orderBy("revision_appointment.id_revision", "DESC")
-                                            ->get();
-            echo json_encode($queries);
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
+        $date_init = 0;
+        if(isset($request["date_init"]) && $request["date_init"] != ""){
+            $date_init = $request["date_init"];
         }
+
+
+        $date_finish = 0;
+        if(isset($request["date_finish"]) && $request["date_finish"] != ""){
+            $date_finish = $request["date_finish"];
+        }
+
+
+
+        $data = AppointmentsAgenda::select("appointments_agenda.*", "auditoria.*", "users.email as email_regis", "revision_appointment.cirugia", "clientes.nombres", "clientes.id_user_asesora","clientes.nombres as name_client", "clientes.apellidos as last_name_client", "clinic.nombre as name_clinic")
+                                    ->join("revision_appointment", "revision_appointment.id_revision", "=", "appointments_agenda.id_revision")
+                                    ->join("clientes", "clientes.id_cliente", "revision_appointment.id_paciente")
+                                    ->join("clinic", "clinic.id_clinic", "revision_appointment.clinica")
+                                    ->join("auditoria", "auditoria.cod_reg", "=", "appointments_agenda.id_revision")
+                                    ->join("users", "users.id", "=", "auditoria.usr_regins")
+
+                                    ->where(function ($query) use ($rol, $id_user) {
+                                        if($rol == "Asesor"){
+                                            $query->where("clientes.id_user_asesora", $id_user);
+                                        }
+                                    })
+
+
+                                    ->where(function ($query) use ($date_init) {
+                                        if($date_init != 0){
+                                            $query->where("appointments_agenda.fecha", ">=", $date_init);
+                                        }
+                                    }) 
+    
+                                    ->where(function ($query) use ($date_finish) {
+                                        if($date_finish != 0){
+                                            $query->where("appointments_agenda.fecha", "<=", $date_finish);
+                                        }
+                                    }) 
+
+
+
+
+                                    ->with('agenda')
+
+
+
+                                    ->where("auditoria.tabla", "revision_appointment")
+                                    ->where("auditoria.status", "!=", "0")
+                                    ->orderBy("appointments_agenda.fecha", "DESC")
+
+
+
+
+                                    ->get();
+
+        return response()->json($data)->setStatusCode(200);
+     
     }
 
 
