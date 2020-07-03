@@ -2038,7 +2038,7 @@ class ClientsController extends Controller
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for2){
                 $msj->from("cardenascarlos18@gmail.com","CRM");
                 $msj->subject($subject);
-                $msj->to(for2);
+                $msj->to($for2);
             });
 
        }
