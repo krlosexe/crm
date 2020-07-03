@@ -2024,8 +2024,8 @@ class ClientsController extends Controller
 
             //$for = "cardenascarlos18@gmail.com";
             $for = $users["email"];
-            //$for2 = "cherrybomb.lu@gmail.com";
-            $for2 = "cardenascarlos18@gmail.com";
+            $for2 = "cherrybomb.lu@gmail.com";
+           // $for2 = "cardenascarlos18@gmail.com";
             $request["msg"]  = "..";
 
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
