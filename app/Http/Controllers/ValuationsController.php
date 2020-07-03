@@ -668,6 +668,14 @@ class ValuationsController extends Controller
         return response()->json($data)->setStatusCode(200);
 
     }
+
+
+
+    public function DeleteCotizacion($id){
+        $data["cotizacion"] = null;
+        Valuations::find($id)->update($data);
+        return response()->json("Ok")->setStatusCode(200);
+    }
     /**
      * Remove the specified resource from storage.
      *

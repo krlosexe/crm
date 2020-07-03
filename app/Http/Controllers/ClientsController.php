@@ -1862,7 +1862,6 @@ class ClientsController extends Controller
 
        if($users){
 
-
             $request["name_user"]   = $users["nombres"]." ".$users["apellido_p"];
 
             $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
@@ -2023,10 +2022,10 @@ class ClientsController extends Controller
 
             $subject = "Formulario PRP para ".$request["name_user"]." : ".$request["name_line"].": ".$request["nombres"];
 
-            $for = "cardenascarlos18@gmail.com";
-            //$for = $users["email"];
-           // $for = "cardenascarlos18@gmail.com";
-
+            //$for = "cardenascarlos18@gmail.com";
+            $for = $users["email"];
+            //$for2 = "cherrybomb.lu@gmail.com";
+            $for2 = "cardenascarlos18@gmail.com";
             $request["msg"]  = "..";
 
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
@@ -2036,12 +2035,11 @@ class ClientsController extends Controller
             });
 
 
-            Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
+            Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for2){
                 $msj->from("cardenascarlos18@gmail.com","CRM");
                 $msj->subject($subject);
-                $msj->to("cardenascarlos18@gmail.com");
+                $msj->to(for2);
             });
-           
 
        }
 

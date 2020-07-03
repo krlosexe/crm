@@ -817,7 +817,7 @@
 						],
 
 						initialPreviewConfig: [
-							{caption: data.cotizacion , downloadUrl: url+url_imagen+data.cotizacion  ,url: url+"uploads/delete", key: data.cotizacion}
+							{caption: data.cotizacion , downloadUrl: url+url_imagen+data.cotizacion  ,url: url+"/api/valorations/delete/cotizacion/"+data.id_valuations, key: data.cotizacion}
 						],
 					});
 

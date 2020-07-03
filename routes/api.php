@@ -110,6 +110,9 @@ Route::get('valuations/status/{id}/{status}', 'ValuationsController@status');
 Route::get('valorations/today', 'ValuationsController@getToday');
 Route::get('valorations/today/{user_id}', 'ValuationsController@getTodayClient');
 Route::get('clients/history/clinic/{id_client}', 'ClientsController@getHc');
+Route::post('valorations/delete/cotizacion/{id}', 'ValuationsController@DeleteCotizacion');
+
+
 
 Route::resource('preanesthesia', 'PreanesthesiaController');
 Route::get('preanesthesia/client/{id_client}', 'PreanesthesiaController@Clients');
