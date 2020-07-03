@@ -572,7 +572,7 @@ class CalendarController extends Controller
 
                                 
 
-                                ->where("surgeries.status_surgeries", 0)
+                                //->where("surgeries.status_surgeries", 0)
                                 ->where("auditoria.tabla", "surgeries")
                                 ->where("auditoria.status", "!=", 0)
                             
