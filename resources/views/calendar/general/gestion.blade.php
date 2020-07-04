@@ -815,10 +815,7 @@
 							var name_responsable = '<br><span><b>'+calEvent.event.extendedProps.nombres+" "+calEvent.event.extendedProps.apellido_p+'</b></span>'
 							$("#name_responsable").html(name_responsable)
 
-							var html = "";
-							$.each(calEvent.event.extendedProps.followers, function (key, item) { 
-								html += '<li class="list-group-item"><img class="rounded" src="img/usuarios/profile/'+item.img_profile+'" style="height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;" title="'+item.name_user+'"><b>'+item.name_user+'</b></li>'
-							});
+							
 
 							
 							if(calEvent.event.extendedProps.valuations == true){
@@ -860,21 +857,20 @@
 									var name_asesora = ""
 								}
 
-
+							
 								if(id_user == calEvent.event.extendedProps.usr_regins){
 									$(".input-disabled").removeAttr("disabled")
 								}else{
 									$(".input-disabled").attr("disabled", "disabled")
 								}
-
+								var html = "";
 								$.map(calEvent.event.extendedProps.followers, function (item, ke) {
-									
+									console.log(item)
+									html += '<li class="list-group-item"><img class="rounded" src="img/usuarios/profile/'+item.img_profile+'" style="height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;" title="'+item.name_user+" "+item.last_name_user+'"><b>'+item.name_user+" "+item.last_name_user+'</b></li>'
 									if(id_user == item.id_user){
-										
 										$(".input-disabled").removeAttr("disabled")
 									}
 								});
-
 
 								
 								$("#adviser").val(name_asesora).attr("disabled", "disabled")
@@ -904,6 +900,8 @@
 
 
 							if(calEvent.event.extendedProps.task_cient == true){
+
+								console.log("Clint Task")
 								$("#clinic-input, #observations-input").css("display", "none")
 								$("#comments-input").css("display", "block")
 								$("#paciente-input").css("display", "block")
@@ -924,7 +922,6 @@
 									$(".side-panel-container").toggleClass("slide-show")
 
 									GetDataPaciente($(this).attr("id_paciente"))
-
 									
 								});
 
@@ -950,8 +947,15 @@
 								}
 
 
-							}else{
-								
+								var html = ""
+								$.map(calEvent.event.extendedProps.followers, function (item, ke) {
+									console.log(item)
+									html += '<li class="list-group-item"><img class="rounded" src="img/usuarios/profile/'+item.img_profile+'" style="height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;" title="'+item.name_follower+" "+item.last_name_follower+'"><b>'+item.name_follower+" "+item.last_name_follower+'</b></li>'
+									if(id_user == item.id_follower){
+										$(".input-disabled").removeAttr("disabled")
+									}
+								});
+
 							}
 
 
