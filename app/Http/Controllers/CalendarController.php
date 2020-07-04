@@ -188,7 +188,7 @@ class CalendarController extends Controller
 
                                         ->with("followers")
 
-                                        ->with("comments")
+                                       // ->with("comments")
 
 
                                         ->where(function ($query) use ($today) {
