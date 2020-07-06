@@ -501,7 +501,7 @@
 						html += '<div class="row">'
 							html += '<div class="col-md-2">'
 							html += '</div>'
-							html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+							html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;overflow: scroll">'
 								html += '<div>'+$(summer).val()+'</div>'
 
 								html += '<div><b></b> <span style="float: right">Ahora Mismo</span></div>'
@@ -571,7 +571,7 @@
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
 										
 									html += '</div>'
-									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
+									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;overflow: scroll">'
 										html += '<div>'+item.comment+'</div>'
 
 										html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
