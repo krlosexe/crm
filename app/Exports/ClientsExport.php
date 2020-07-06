@@ -42,6 +42,7 @@ class ClientsExport implements FromView
         $state         = $this->state;
         $search        = $this->search;
         $city          = $this->city ;
+        $have_initial  = $this->have_initial ;
 
         ini_set('memory_limit', '-1'); 
         $data = DB::table('clientes')->select( 'state',
@@ -109,8 +110,13 @@ class ClientsExport implements FromView
                                                 }
                                             }) 
 
-                                            
 
+
+                                            ->where(function ($query) use ($have_initial) {
+                                                if($have_initial == 1){
+                                                    $query->whereNotNull("clientc_credit_information.have_initial");
+                                                }
+                                            }) 
 
                                             ->where(function ($query) use ($state) {
                                                 if($state != "0"){

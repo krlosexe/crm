@@ -152,10 +152,6 @@ class ClientsController extends Controller
                                 }) 
 
 
-
-
-
-
                                 ->where(function ($query) use ($business_line) {
                                     if($business_line != 0){
                                         $query->whereIn("clientes.id_line", $business_line);
@@ -1143,7 +1139,7 @@ class ClientsController extends Controller
     }
 
 
-    public function Excel($linea_negocio, $adviser, $origen, $date_init, $date_finish, $state, $search = 5, $city = 0){
+    public function Excel($linea_negocio, $adviser, $origen, $date_init, $date_finish, $state, $search = 5, $city = 0, $have_initial = 0){
 
 
         $xls = new ClientsExport;
@@ -1156,6 +1152,7 @@ class ClientsController extends Controller
         $xls->state         = $state;
         $xls->search        = $search;
         $xls->city          = $city;
+        $xls->have_initial  = $have_initial;
 
         
         return Excel::download($xls, 'ClientExport.xlsx');
