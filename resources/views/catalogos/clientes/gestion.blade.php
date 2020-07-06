@@ -173,7 +173,7 @@
 
 
 
-
+								<!--
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for=""><b>Buscar Referidos de:</b></label>
@@ -188,13 +188,18 @@
 									</button>
 								</div>
 
+								-->
 
 
-
-								
-
-
-
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for="have_initial"><b>Pacientes con Inicial</b></label>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" name="have_initial" id="have_initial" value="1">
+											<label class="custom-control-label" for="have_initial"></label>
+										</div>
+									</div>
+								</div>
 
 							</div>
 			              <div class="table-responsive dataTables_wrapper dt-bootstrap4 no-footer">
@@ -413,6 +418,12 @@
 			});
 
 
+			$("#have_initial").change(function (e) { 
+				list("", 1)
+				
+			});
+
+
 			var code_client = 0
 			$("#search_reffered").click(function (e) { 
 				code_client = $("#code_affiliate").val()
@@ -458,6 +469,11 @@
 					var search = null
 				}
 
+				var have_inital = 0
+				if($("#have_initial").is(":checked")){
+					have_inital = 1
+				}
+
 
 				$.ajax({
 					url:''+url+'/api/clients/',
@@ -474,7 +490,8 @@
 						"date_init"     : $("#date_init").val(),
 						"date_finish"   : $("#date_finish").val(),
 						"state"         : $("#state-filter").val(),
-						"code_client"   : code_client
+						"code_client"   : code_client,
+						"have_inital"   : have_inital
 					},
 					dataType:'JSON',
 					
@@ -1540,6 +1557,7 @@
 					$("#previous_credits_edit").val(data.previous_credits)
 					$("#reported_edit").val(data.reported)
 					$("#bank_account_edit").val(data.bank_account)
+					$("#have_initial_edit").val(data.have_initial)
 					
 					$("#properties_edit").prop("checked", data.properties ? true : false)
 					$("#vehicle_edit").prop("checked", data.vehicle ? true : false)

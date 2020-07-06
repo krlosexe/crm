@@ -83,6 +83,14 @@ class ClientsController extends Controller
             }
 
 
+            $have_inital = 0;
+            if(isset($request["have_inital"])){
+                $have_inital = $request["have_inital"];
+            }
+
+
+
+
 
             $state = $request["state"];
          
@@ -134,6 +142,17 @@ class ClientsController extends Controller
                                         $query->where("clientes.city", $city);
                                     }
                                 }) 
+
+
+
+                                ->where(function ($query) use ($have_inital) {
+                                    if($have_inital == 1){
+                                        $query->whereNotNull("clientc_credit_information.have_initial");
+                                    }
+                                }) 
+
+
+
 
 
 

@@ -755,10 +755,18 @@
 
                     <div class="row">
 
-                        <div class="col-md-8">
+                        <div class="col-md-4">
                             <label for="average_monthly_income"><b>Cuenta Bancaria</b></label>
                             <input type="text" name="bank_account" class="form-control form-control-user"  id="bank_account_edit" placeholder="PJ. 1 Año">
                         </div>
+
+
+                        <div class="col-md-4">
+                            <label for="average_monthly_income"><b>Inicial</b></label>
+                            <input type="text" name="have_initial" class="form-control form-control-user"  id="have_initial_edit" placeholder="PJ. 1 Año">
+                        </div>
+
+
 
                         <div class="col-md-2">
                             <label for="properties_edit"><b>Propiedades</b></label>
