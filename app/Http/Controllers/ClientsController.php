@@ -18,8 +18,9 @@ use App\User;
 use App\datosPersonaesModel;
 use App\Comments;
 use App\Notification;
-
+use App\Valuations;
 use App\GalleryImage;
+use App\FollwersEvents;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -350,7 +351,6 @@ class ClientsController extends Controller
     {
         //if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
-            
             $messages = [
                 'required' => 'El Campo :attribute es requirdo.',
                 'unique'   => 'El Campo :attribute ya se encuentra en uso.'
@@ -507,6 +507,81 @@ class ClientsController extends Controller
                     ClientsTasksFollowers::insert($followers);
                 }   
 
+
+
+
+
+                if(isset($request["create_valorations_client"]) && ($request["create_valorations_client"] == 1)){
+
+                    $valoration = [
+                        "id_cliente"       => $cliente["id_cliente"],
+                        "clinic"           => $request["clinic_valoration"],
+                        "surgeon"          => $request["surgeon"],
+                        "fecha"            => $request["fecha_valoration"],
+                        "time"             => $request["time_valoration"],
+                        "time_end"         => $request["time_end"],
+                        "type"             => $request["type"],
+                        "pay_consultation" => $request["pay_consultation"],
+                        "code_prp"         => $request["code_prp"],
+                        "way_to_pay"       => $request["way_to_pay"],
+                        "status"           => 0
+                    ];
+        
+        
+                    $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+                    $code = substr(str_shuffle($permitted_chars), 0, 4);
+        
+                    $valoration["code"] = $code;
+        
+                    $request["pay_consultation"] == 1 ? $valoration["pay_consultation"] = 1 : $valoration["pay_consultation"] = 0;
+        
+                    if($file = $request->file('acquittance_file')){
+                        $destinationPath = 'img/valuations/acquittance';
+                        $file->move($destinationPath,$file->getClientOriginalName());
+                        $valoration["acquittance"] = $file->getClientOriginalName();
+                    }
+        
+                    
+                    $valoration = Valuations::create($valoration);
+
+
+                    $request["table"]    = "valuations";
+                    $request["id_event"] = $valoration["id_valuations"];
+                    $request["comment"]  = $request->comment_valorations;
+            
+                    if($request->comment_valorations != "<p><br></p>"){
+                        Comments::create($request->all());
+                    }
+
+
+                    $followers = [];
+                    if(isset($request->followers_valoration)){
+
+                        foreach($request->followers_valoration as $key => $value){
+                            $array = [];
+                            $array["id_event"]    = $valoration["id_valuations"];
+                            $array["id_user"]     = $value;
+                            $array["tabla"]       = "valuations";
+                            array_push($followers, $array);
+                            FollwersEvents::create($array);
+                        }
+                        
+                    }
+
+
+
+
+                    $auditoria              = new Auditoria;
+                    $auditoria->tabla       = "valuations";
+                    $auditoria->cod_reg     = $valoration["id_valuations"];
+                    $auditoria->status      = 1;
+                    $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                    $auditoria->usr_regins  = $request["id_user"];
+                    $auditoria->save();
+
+
+
+                }
 
 
 

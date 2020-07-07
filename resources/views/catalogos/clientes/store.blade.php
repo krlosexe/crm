@@ -339,18 +339,31 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for=""><b>Quieres Crear una Tarea?</b></label>
+                                    <label for="create_task_client"><b>Quieres Crear una Tarea?</b></label>
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" name="create_task_client" id="create_task_client" value="1">
                                         <label class="custom-control-label" for="create_task_client">Si</label>
                                     </div>
                                 </div>
                             </div>
+
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="create_valorations_client"><b>Quieres Agendar una Valoracion?</b></label>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="create_valorations_client" id="create_valorations_client" value="1">
+                                        <label class="custom-control-label" for="create_valorations_client">Si</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                         </div>
                         <br>
                         <div class="row" id="content_create_task" style="display:none">
-
-                            
 
                             <div class="col-md-12">
                             <h3>Crear una Tarea</h3>
@@ -399,7 +412,7 @@
                                     <div class="col-md-12">
                                     <div class="form-group">
                                             <label for=""><b>Seguidores</b></label>
-                                            <select name="followers[]" id="followers-store" class="form-control getUsers select2"  multiple>
+                                            <select name="followers[]" id="followers-store" class="form-control getUsers select2 followers"  multiple>
                                                 <option value="">Seleccione</option>
                                             </select>
                                         </div>
@@ -425,6 +438,180 @@
                             </div>
 
                         </div>
+
+
+
+
+                        <br>
+                        <div class="row" id="content_create_valoration" style="display:none">
+
+                            <div class="col-md-12">
+                                <h3>Crear Valoracion</h3>
+
+
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for=""><b>Fecha</b></label>
+                                            <input type="date" name="fecha_valoration" id="fecha-store-valoration" class="form-control select2">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for=""><b>Hora desde</b></label>
+                                            <input type="time" name="time_valoration" id="time-store-valoration" class="form-control select2">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for=""><b>Hora hasta</b></label>
+                                            <input type="time" name="time_end" id="time-end-store" class="form-control select2">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for=""><b>Doctor</b></label>
+                                            <input type="text" name="surgeon" id="surgeon-store" class="form-control select2">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label for=""><b>Tipo</b></label>
+                                                <select name="type" id="type-store" class="form-control select2" required>
+                                                    <option value="Al Contado">Al Contado</option>
+                                                    <option value="Financiado">Financiado </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for=""><b>Seguidores</b></label>
+                                            <select name="followers_valoration[]"  class="form-control select2 getUsers followers" multiple>
+                                                <option value="">Seleccione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for=""><b>Clinica</b></label>
+                                            <select name="clinic_valoration" id="clinic_valoration" class="form-control select2">
+                                                <option value="">Seleccione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="form-group">
+                                            <label for=""><b>Comentarios</b></label>
+                                            <textarea id="summernote_valorations" name="comment_valorations"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br><br>
+
+
+
+                                <div class="col-md-12">
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for=""><b>Paga Consulta?</b></label>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" name="pay_consultation" id="pay_consultation" checked="checked" value="1">
+                                                    <label class="custom-control-label" for="pay_consultation">Si</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                            <label for=""><b>Código PRP de quien remite</b></label>
+                                                <input type="text" name="code_prp" id="code_prp-store" class="form-control" disabled>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                    
+
+
+
+                                    <div class="row">
+                                            <div class="col-md-12">
+                                            <label for=""><b>Forma de Pago</b></label>
+                                                <select name="way_to_pay" id="way_to_pay-store" class="form-control">
+                                                    <option value="">Seleccione</option>
+                                                    <option value="Transferencia">Transferencia</option>
+                                                    <option value="Efectivo">Efectivo </option>
+                                                </select>
+                                            </div>
+                                    </div>
+
+                                    <br>
+                                        <br>
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row" id="content_acquittance" style="display: none">
+                                            <div class="col-sm-12 text-center"> 
+                                                    <label for=""><b>Adjuntar recibo</b></label>
+                                                    <div>
+                                                        <div class="file-loading">
+                                                            <input id="acquittance" name="acquittance_file" type="file">
+                                                        </div>
+                                                    </div>
+                                                    <div class="kv-avatar-hintss">
+                                                        <small>Seleccione una imagen</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    </div>
+
+
+
+                              
+                            </div>
+
+                        </div>
+
+
+
 
 
                         
@@ -526,12 +713,6 @@
                         </div>
 
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for=""><b>Vol Implante</b></label>
-                                <input type="text" name="implant_volumem" class="form-control form-control-user" id="implant_volumem" placeholder="PJ. 11">
-                            </div>
-                        </div>
 
 
                         <div class="col-md-4">

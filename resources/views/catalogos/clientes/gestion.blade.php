@@ -301,6 +301,7 @@
 				GetUsersTasksclient(".getUsers")
 
 
+
 			});
 
 
@@ -340,6 +341,14 @@
 								}));
 							}
 						});
+
+
+
+						$(select).select2({
+							width: '100%'
+						});
+
+
 
 					}
 				});
@@ -691,6 +700,27 @@
 				}
 			});
 
+
+
+			$("#create_valorations_client").change(function (e) { 
+
+				if($('#create_valorations_client').is(':checked') ) {
+					$("#content_create_valoration").css("display", "block")
+					GetClinic2("#clinic_valoration")
+
+					$("#fecha-store-valoration, #time-store-valoration, #time-end-store, #surgeon-store, #type-store, #clinic_valoration, #way_to_pay-store").attr("required", "required")
+
+				}else{
+					$("#content_create_valoration").css("display", "none")
+
+					$("#fecha-store-valoration, #time-store-valoration, #time-end-store, #surgeon-store, #type-store, #clinic_valoration, #way_to_pay-store").removeAttr("required")
+
+				}
+			});
+
+
+
+
 			function listRefferers(cuadro = "", page = 1){
 
 
@@ -1013,14 +1043,37 @@
 				$("#tablecx tbody").html("");
 
 
-
-
-				$('#summernote').summernote('reset');
-
-
-				$('#summernote').summernote({
+				$('#summernote, #summernote_valorations').summernote('reset');
+				$('#summernote, #summernote_valorations').summernote({
 					'height' : 200
 				});
+
+
+
+				$("#acquittance").fileinput('destroy');
+				$("#acquittance").fileinput({
+					theme: "fas",
+					overwriteInitial: true,
+					maxFileSize: 21500,
+					showClose: false,
+					showCaption: false,
+					browseLabel: '',
+					removeLabel: '',
+					browseIcon: '<i class="fa fa-folder-open"></i>',
+					removeIcon: '<i class="fas fa-trash-alt"></i>',
+					previewFileIcon: '<i class="fas fa-file"></i>',
+					removeTitle: 'Cancel or reset changes',
+					elErrorContainer: '#kv-avatar-errors-1',
+					msgErrorClass: 'alert alert-block alert-danger',
+					
+					layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+					allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "pdf", "docs"],
+				});
+
+
+
+
+
 
 
 				GetAsesorasValoracion2("#asesora")
@@ -1029,6 +1082,53 @@
 
 				cuadros("#cuadro1", "#cuadro2");
 			}
+
+
+
+
+			function GetClinic2(select){
+
+				console.log("adasd")
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/clinic',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+						},
+					dataType:'JSON',
+					async: false,
+					beforeSend: function(){
+					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+					},
+					error: function (data) {
+						//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+					},
+					success: function(data){
+						$(select+" option").remove();
+						$(select).append($('<option>',
+						{
+						value: "",
+						text : "Seleccione"
+						}));
+						$.each(data, function(i, item){
+						if (item.status == 1) {
+							$(select).append($('<option>',
+							{
+							value: item.id_clinic,
+							text : item.nombre
+							}));
+						}
+					});
+
+					}
+				});
+			}
+
+
+
+
 
 			var count_phone = 0
 			$("#add_phone").click(function (e) { 
@@ -2162,6 +2262,41 @@
 			$("#tablecx_edit tbody").append(html);
 
 		});
+
+
+
+
+
+		$("#pay_consultation").change(function (e) { 
+
+			if(!$('#pay_consultation').is(':checked') ) {
+				$("#code_prp-store").removeAttr("disabled").focus()
+				$("#code_prp-store").attr("required", "required")
+				$("#way_to_pay-store").removeAttr("required")
+			}else{
+				$("#code_prp-store").removeAttr("required")
+				$("#code_prp-store").attr("disabled", "disabled")
+				$("#way_to_pay-store").attr("required", "required")
+			}
+
+			});
+
+
+
+			$("#way_to_pay-store").change(function (e) { 
+
+			if($(this).val() == "Transferencia"){
+				$("#content_acquittance").css("display", "block")
+				$("#acquittance").attr("required", "required")
+			}else{
+				$("#content_acquittance").css("display", "none")
+				$("#acquittance").removeAttr("required")
+			}
+
+		});
+
+
+
 
 
 		</script>
