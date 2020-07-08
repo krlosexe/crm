@@ -309,7 +309,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for=""><b>PRP</b></label>
-                                <select name="prp" id="prp" class="form-control select2 select2-hidden-accessible">
+                                <select name="prp" id="prp" class="form-control">
                                     <option value="No">No</option>
                                     <option value="Si">Si</option>
                                 </select>
