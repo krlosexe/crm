@@ -35,7 +35,7 @@
             </li>
 
             <li  class="nav-item" id="tab6_edit">
-                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-cirugia-edit" role="tab" aria-controls="info-add" aria-selected="false">Cirugias</a>
+                <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-cirugia-edit" role="tab" aria-controls="info-add" aria-selected="false">Procedimientos</a>
             </li>
 
             <li  class="nav-item" id="tab7_edit">

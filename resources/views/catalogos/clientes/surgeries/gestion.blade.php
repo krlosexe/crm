@@ -91,7 +91,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Cirugias</h1>
+					<h1 class="h3 mb-2 text-gray-800">Procedimientos</h1>
 
 					<div id="alertas"></div>
 					<input type="hidden" class="id_user">
@@ -100,7 +100,7 @@
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Gestion de Cirugias</h6>
+						<h6 class="m-0 font-weight-bold text-primary">Gestion de Procedimientos</h6>
 
 						<button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 						<span class="icon text-white-50">
