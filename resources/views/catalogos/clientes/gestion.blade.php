@@ -561,10 +561,18 @@
 								var name_update = ""
 							}
 
+							let refer = ""
+							if(item.name_affiliate != null){
+								refer = `Referido por: ${item.name_affiliate}`
+							}
+
+
+							console.log(item.name_affiliate)
+							
 						
 							html += "<tr>"
 								html += "<td>"+botones+"</td>"
-								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+" </td>"
+								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+"<br> "+refer+" </td>"
 								html += "<td>"+item.identificacion+"</td>"
 								html += "<td>"+item.origen+"</td>"
 								html += "<td>"+item.nombre_line+"</td>"

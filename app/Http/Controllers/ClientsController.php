@@ -100,7 +100,7 @@ class ClientsController extends Controller
 
             ini_set('memory_limit', '-1'); 
             
-            $data = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
+            $data = Clients::select("clientes.*", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
                                        "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
                                        "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line", 
                                        "dp2.nombres as name_update",
@@ -118,6 +118,11 @@ class ClientsController extends Controller
 
                                 ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'auditoria.usr_update', "left")
                                 ->join('citys', 'citys.id_city', '=', 'clientes.city', "left")
+
+
+                                ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
+
+                                
 
                                 ->where(function ($query) use ($search) {
                                     if($search != "0"){
