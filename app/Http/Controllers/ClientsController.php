@@ -364,6 +364,16 @@ class ClientsController extends Controller
                }
             }
 
+
+            $user_find = User::where("email", $request["email"])->first();
+
+            if($user_find){
+                return response()->json("El Correo ya se encuentra registrado en la tabla de usuarios, comuniquese con Carlos Cardenas o Cambie el Correo")->setStatusCode(400);
+            }
+
+
+
+
             $request["identificacion_verify"] == 1 ? $request["identificacion_verify"] = 1 : $request["identificacion_verify"] = 0;
             $validator = Validator::make($request->all(), [
                 'nombres'         => 'required'
