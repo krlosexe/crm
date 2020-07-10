@@ -446,24 +446,14 @@ Route::get('sync/reffered/affiliate/restore', function () {
 
 
 
+Route::get('code/phones', function () {
 
+    $data = DB::table("clientes")->whereRaw('telefono not like "%+57%"')->limit(1000)->get();
 
-Route::get('restart/data/client', function () {
-    
-    $clients = DB::table("clientes_temp")->selectRaw("id_cliente, origen")->where("origen", "!=", "Chat")
-                        ->where("origen", "!=", "face")
-                        ->where("origen", "!=", "cep")
-                        ->whereRaw("length(origen) = 4")
-                        ->get();
-    
-    foreach($clients as $client){
-
-
-        Clients::where("id_cliente", $client->id_cliente)->update(["origen" => $client->origen]);
+    foreach($data as $value){
+        Clients::where("id_cliente", $value->id_cliente)->update(["telefono" => "+57".$value->telefono]);
     }
-    
-    
-    return response()->json($clients)->setStatusCode(200);
+    return response()->json($data)->setStatusCode(200);
 
 });
 
