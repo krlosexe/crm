@@ -154,7 +154,7 @@ class ClientsController extends Controller
                                 ->where(function ($query) use ($have_inital) {
                                     if($have_inital == 1){
                                         $query->whereNotNull("clientc_credit_information.have_initial");
-                                        $query->whereRaw('clientc_credit_information.have_initial not LIKE "%no%"');
+                                        $query->whereRaw('clientc_credit_information.have_initial LIKE "%si%"');
                                     }
                                 }) 
 
