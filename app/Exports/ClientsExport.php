@@ -115,7 +115,7 @@ class ClientsExport implements FromView
                                             ->where(function ($query) use ($have_initial) {
                                                 if($have_initial == 1){
                                                     $query->whereNotNull("clientc_credit_information.have_initial");
-                                                    $query->whereRaw('clientc_credit_information.have_initial not LIKE "%no%"');
+                                                    $query->whereRaw('clientc_credit_information.have_initial LIKE "%si%"');
                                                 }
                                             }) 
 
