@@ -567,12 +567,24 @@
 							}
 
 
-							console.log(item.name_affiliate)
+							let have_initial = ""
+							if(item.have_initial != null){
+								have_initial = `Tiene Inicial :  ${item.have_initial}`
+							}
+
+
+
+
+
 							
+
+
+
+
 						
 							html += "<tr>"
 								html += "<td>"+botones+"</td>"
-								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+"<br> "+refer+" </td>"
+								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+"<br> "+refer+" <br> "+have_initial+" </td>"
 								html += "<td>"+item.identificacion+"</td>"
 								html += "<td>"+item.origen+"</td>"
 								html += "<td>"+item.nombre_line+"</td>"

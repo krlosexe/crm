@@ -106,7 +106,7 @@ class ClientsController extends Controller
                                        "dp2.nombres as name_update",
                                        "dp2.apellido_p as apellido_update",
                                        "citys.nombre as name_city"
-                                     )
+            )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
@@ -154,6 +154,7 @@ class ClientsController extends Controller
                                 ->where(function ($query) use ($have_inital) {
                                     if($have_inital == 1){
                                         $query->whereNotNull("clientc_credit_information.have_initial");
+                                        $query->whereRaw('clientc_credit_information.have_initial not LIKE "%no%"');
                                     }
                                 }) 
 
