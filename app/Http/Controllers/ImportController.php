@@ -85,8 +85,8 @@ class ImportController extends Controller
                 $auditoria->tabla       = "clientes";
                 $auditoria->cod_reg     = $cliente["id_cliente"];
                 $auditoria->status      = 1;
-                $auditoria->fec_regins  = date("Y-m-d H:i:s");
-                $auditoria->fec_update  = date("Y-m-d H:i:s");
+                $auditoria->fec_regins  = date("2020-04-06 19:05:59");
+                $auditoria->fec_update  = date("2020-04-06 19:05:59");
                 $auditoria->usr_regins  = 69;
                 $auditoria->save();
 
