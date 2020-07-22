@@ -121,7 +121,7 @@ class ClientsController extends Controller
 
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
-                                ->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
+                                //->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
 
                                 ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'auditoria.usr_update', "left")
@@ -171,7 +171,7 @@ class ClientsController extends Controller
                                 ->where(function ($query) use ($procedure) {
                                     if($procedure != 0){
                                         
-                                        $query->where("clients_procedures.id_sub_category", $procedure);
+                                        //$query->where("clients_procedures.id_sub_category", $procedure);
                                     }
                                 }) 
 
