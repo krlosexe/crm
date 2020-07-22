@@ -146,7 +146,7 @@
 
 								<div class="col-md-2">
 									<div class="form-group">
-										<label for=""><b>Filtrar por : Ciudad</b></label>
+										<label for=""><b>Ciudad</b></label>
 										<select id="city-filter" class="form-control">
 											<option value="0">Seleccione</option>
 											<option value="3">Medellin</option>
@@ -191,7 +191,7 @@
 								-->
 
 
-								<div class="col-md-3">
+								<div class="col-md-2">
 									<div class="form-group">
 										<label for="have_initial"><b>Pacientes con Inicial</b></label>
 										<div class="custom-control custom-switch">
@@ -200,6 +200,19 @@
 										</div>
 									</div>
 								</div>
+
+
+								<div class="col-md-2">
+									<div class="form-group">
+										<label for="have_initial"><b>Por Procedimientos</b></label>
+										<select id="procedure-filter" class="form-control">
+											<option value="0">Seleccione</option>
+										</select>
+									</div>
+								</div>
+
+
+
 
 							</div>
 			              <div class="table-responsive dataTables_wrapper dt-bootstrap4 no-footer">
@@ -301,8 +314,62 @@
 				GetUsersTasksclient(".getUsers")
 
 
+				getProcedures("#procedure-filter");
 
 			});
+
+
+
+			function getProcedures(select, select_default){
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/procedures/all',
+					type:'GET',
+					data: {
+						"id_user": id_user,
+						"token"  : tokens,
+						},
+					dataType:'JSON',
+					async: false,
+					beforeSend: function(){
+						$('#page-loader').css("display", "block");
+					},
+					error: function (data) {
+						$('#page-loader').css("display", "none");
+					},
+					success: function(data){
+						$('#page-loader').css("display", "none");
+						$(select+" option").remove();
+						$(select).append($('<option>',
+						{
+						value: "",
+						text : "Seleccione"
+						}));
+						$.each(data, function(i, item){
+							
+							$(select).append($('<option>',
+							{
+							value: item.id,
+							text : item.name,
+							selected : select_default == item.id ? true : false
+							}));
+							
+						});
+
+
+
+						$(select).select2({
+							width: '100%'
+						});
+
+
+
+					}
+				});
+			}
+
+
 
 
 			function GetUsersTasksclient(select, select_default){
@@ -415,7 +482,7 @@
 
 
 
-			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter, #city-filter").change(function (e) { 
+			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter, #city-filter, #procedure-filter").change(function (e) { 
 
 				list("", 1)
 
@@ -484,6 +551,15 @@
 				}
 
 
+
+				var procedure = 0
+				if($("#procedure-filter").val() != ""){
+					procedure = $("#procedure-filter").val()
+				}
+
+
+
+
 				$.ajax({
 					url:''+url+'/api/clients/',
 					type:'GET',
@@ -500,7 +576,8 @@
 						"date_finish"   : $("#date_finish").val(),
 						"state"         : $("#state-filter").val(),
 						"code_client"   : code_client,
-						"have_inital"   : have_inital
+						"have_inital"   : have_inital,
+						"procedure"     : procedure
 					},
 					dataType:'JSON',
 					

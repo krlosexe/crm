@@ -250,6 +250,7 @@ Route::post('generate/token/chat', 'UsuariosController@generateTokenChat');
 
 Route::resource('category', 'CategoryController');
 Route::get('category/sub/{category}', 'CategoryController@getSubCategory');
+Route::get('procedures/all', 'CategoryController@getSubCategoryAll');
 
 Route::resource('gallery/image', 'GalleryImageController');
 Route::get('image/gallery', 'GalleryImageController@get');

@@ -26,6 +26,12 @@ class CategoryController extends Controller
         return response()->json($data)->setStatusCode(200);
     }   
 
+
+    public function getSubCategoryAll(){
+        $data = DB::table("sub_category")->get();
+        return response()->json($data)->setStatusCode(200);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
