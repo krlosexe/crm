@@ -274,6 +274,10 @@ Route::get('gallery/testimonials/{client}/{limit}', 'ClientsController@GetTestim
 
 
 
+Route::post('satisfaction_survey', 'SatisfactionSurveyController@store');
+
+
+
 Route::get('generate/token/chat', function () {
     
     $users = User::get();
