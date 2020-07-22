@@ -106,8 +106,13 @@ class ClientsController extends Controller
             $origen = $request["origen"];
 
             ini_set('memory_limit', '-1'); 
-            
-            $data = Clients::select("clientes.*", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
+
+
+
+            if($procedure != 0){
+
+
+                $data = Clients::select("clientes.*", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
                                        "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
                                        "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line", 
                                        "dp2.nombres as name_update",
@@ -121,7 +126,7 @@ class ClientsController extends Controller
 
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
-                                //->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
+                                ->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
 
                                
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
@@ -133,12 +138,7 @@ class ClientsController extends Controller
                                 ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
 
                                 
-                                ->where(function ($query) use ($procedure) {
-                                    if($procedure != 0){
-                                       // $query->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left");
-                                        //$query->where("clients_procedures.id_sub_category", $procedure);
-                                    }
-                                }) 
+                                
 
 
                                 ->where(function ($query) use ($search) {
@@ -177,10 +177,11 @@ class ClientsController extends Controller
 
 
 
-                                
-
-
-
+                                ->where(function ($query) use ($procedure) {
+                                    if($procedure != 0){
+                                        $query->where("clients_procedures.id_sub_category", $procedure);
+                                    }
+                                }) 
 
 
                                 ->where(function ($query) use ($business_line) {
@@ -257,8 +258,154 @@ class ClientsController extends Controller
 
                                 ->paginate(10);
 
+            }else{
 
-                
+
+                $data = Clients::select("clientes.*", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
+                                       "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
+                                       "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line", 
+                                       "dp2.nombres as name_update",
+                                       "dp2.apellido_p as apellido_update",
+                                       "citys.nombre as name_city"
+            )
+
+                                ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
+                                ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
+                                ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line", "left")
+
+                                ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
+                                ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
+                                //->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
+
+                               
+                                ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
+
+                                ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'auditoria.usr_update', "left")
+                                ->join('citys', 'citys.id_city', '=', 'clientes.city', "left")
+
+
+                                ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
+
+                                
+                                ->where(function ($query) use ($procedure) {
+                                    if($procedure != 0){
+                                       // $query->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left");
+                                        //$query->where("clients_procedures.id_sub_category", $procedure);
+                                    }
+                                }) 
+
+
+                                ->where(function ($query) use ($search) {
+                                    if($search != "0"){
+                                        $query->where("clientes.nombres", 'like', '%'.$search.'%');
+                                        $query->orWhere("clientes.identificacion", 'like', '%'.$search.'%');
+                                        $query->orWhere("clientes.telefono", 'like', '%'.$search.'%');
+                                        $query->orWhere("clientes.code_client", 'like', '%'.$search.'%');
+                                        $query->orWhere("clientes.origen", 'like', '%'.$search.'%');
+                                    }
+
+                                }) 
+
+
+                                ->where(function ($query) use ($state) {
+                                    if($state != "0"){
+                                        $query->where("clientes.state", $state);
+                                    }
+                                }) 
+
+
+                                ->where(function ($query) use ($city) {
+                                    if($city != 0){
+                                        $query->where("clientes.city", $city);
+                                    }
+                                }) 
+
+
+
+                                ->where(function ($query) use ($have_inital) {
+                                    if($have_inital == 1){
+                                        $query->whereNotNull("clientc_credit_information.have_initial");
+                                        $query->whereRaw('clientc_credit_information.have_initial LIKE "%si%"');
+                                    }
+                                }) 
+
+
+                                ->where(function ($query) use ($business_line) {
+                                    if($business_line != 0){
+                                        $query->whereIn("clientes.id_line", $business_line);
+                                    }
+                                })
+
+
+
+                                ->where(function ($query) use ($adviser) {
+                                    if($adviser != 0){
+                                        $query->whereIn("clientes.id_user_asesora", $adviser);
+                                    }
+                                }) 
+
+
+
+                                ->where(function ($query) use ($origen) {
+
+                                    if($origen == "Formulario"){
+                                        $query->where("clientes.origen", "Formulario Web");
+                                    }
+
+
+                                    if($origen == "Otros"){
+
+                                        $query->where("clientes.to_db", 0);
+                                        $query->where("clientes.pauta", 0);
+                                        $query->where("clientes.origen", "!=","Formulario Web");
+                                        $query->OrwhereNull('clientes.origen');
+                                        
+                                        
+                                    }
+
+                                }) 
+
+
+
+                                ->where(function ($query) use ($date_init) {
+                                    if($date_init != 0){
+                                        $query->where("auditoria.fec_update", ">=", $date_init." 00:00:00");
+                                    }
+                                }) 
+
+
+
+
+                                ->where(function ($query) use ($date_finish) {
+                                    if($date_finish != 0){
+                                        $query->where("auditoria.fec_update", "<=", $date_finish." 23:59:59");
+                                    }
+                                }) 
+
+
+                               
+
+
+
+                               
+                                ->with("logs")
+                                ->with("phones")
+                                ->with("emails")
+                                ->with("procedures")
+
+                                ->where("auditoria.tabla", "clientes")
+                                ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                                ->where("auditoria.status", "!=", "0")
+
+                              
+                              //  ->orderBy("clientes.id_cliente", "DESC")
+                                //->orderBy("auditoria.fec_regins", "DESC")
+                                ->orderBy("auditoria.fec_update", "DESC")
+
+                                ->paginate(10);
+
+            }
+            
            
             return response()->json($data)->setStatusCode(200);
         }else{
