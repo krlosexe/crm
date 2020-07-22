@@ -308,11 +308,11 @@ Route::get('gallety-cinic', function () {
 Route::get('form_satisfaction_survey/intro/{id_client}', function ($id_client) {
 
     $client = DB::table("clientes")
-                    ->select("clientes.*", "users.*", "datos_personales.*", "clientes.nombres as name_client")
+                    ->select("clientes.*", "users.*", "datos_personales.*", "clientes.nombres as name_client", "clinic.nombre as name_clinic")
                     ->join("users", "users.id", "=", "clientes.id_user_asesora")
                     ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+                    ->join("clinic", "clinic.id_clinic", "=", "clientes.clinic", 'left')
                     ->where("id_cliente", $id_client)->first();
-
 
     return view('satisfaction_survey.intro', ["data_client" => $client]);
 });
@@ -324,8 +324,10 @@ Route::get('form_satisfaction_survey/intro/{id_client}', function ($id_client) {
 Route::get('form_satisfaction_survey/{id_client}', function ($id_client) {
 
     $client = DB::table("clientes")
+                    ->select("clientes.*", "users.*", "datos_personales.*", "clinic.nombre as name_clinic")
                     ->join("users", "users.id", "=", "clientes.id_user_asesora")
                     ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+                    ->join("clinic", "clinic.id_clinic", "=", "clientes.clinic", 'left')
                     ->where("id_cliente", $id_client)->first();
 
   

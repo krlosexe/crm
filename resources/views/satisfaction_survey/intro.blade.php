@@ -57,8 +57,7 @@
                                  utilizan los servicios de nuestra clínica. Para ello, hemos preparado este cuestionario en el que le pedimos una valoración de los servicios prestados y el 
                                  trato recibido de nuestro personal antes, durante y después de su procedimiento. 
                                  <br><br>
-                                 La información que usted suministre aquí, es con el objetivo de conocer su percepción como paciente de la Clínica 
-                                 Especialistas del Poblado.
+                                 La información que usted suministre aquí, es con el objetivo de conocer su percepción como paciente de la <?= $data_client->name_clinic ?>
                             </h4>
 
 

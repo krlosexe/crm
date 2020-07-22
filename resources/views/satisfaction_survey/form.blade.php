@@ -121,6 +121,8 @@
                 <br><br>
             	<div id="wizard">
                     <form action="af" method="POST" id="formss">
+
+                        <input type="hidden" id="name_clinic" value="<?= $data_client->name_clinic ?>">
                         <!-- SECTION 1 -->
                         <h4></h4>
                         <section>
@@ -439,7 +441,7 @@
                     },
                     success: function(respuesta){
                         
-                        swal("En Clínica Especialistas del Poblado, agradecemos su calificación, esto con el fin de mejorar para ustedes", "Encuesta Enviada", "success");
+                        swal(`En ${$("#name_clinic").val()}, agradecemos su calificación, esto con el fin de mejorar para ustedes`, "Encuesta Enviada", "success");
                         setTimeout(function(){ location.reload(); }, 5000);
 
                     }
