@@ -253,6 +253,14 @@ Route::get('clients/view/{id}', function ($id) {
 
 
 
+
+Route::get('schedule', function () {
+    return view('Reports.schedule.gestion');
+});
+
+
+
+
 Route::get('form-covid/{id_line}', function ($id_line) {
 
     if($id_line == 2){

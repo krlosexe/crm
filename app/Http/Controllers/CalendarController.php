@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Tasks;
 use App\ClientsTasks;
 use App\Queries;
@@ -809,6 +810,113 @@ class CalendarController extends Controller
         }
         $array = array_values($temp_array);
         return $array;
+     }
+
+
+
+
+     public function GetSchedule(){
+
+        $data = [];
+
+
+        $valorations = DB::table("valuations")
+                            ->select("valuations.*", "clinic.nombre as name_clinic", "clientes.nombres as name_client")
+                            ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic", 'left')
+                            ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente", 'left')
+                            ->where("fecha", date("Y-m-d"))
+
+                            ->orderBy("name_client", "ASC")
+                            ->get();
+ 
+        foreach($valorations as $valoration){
+            $valoration->type = "Valoraciones";
+
+            array_push($data, $valoration);
+        }
+
+
+
+
+        $preanestesias = DB::table("preanesthesias")
+                            ->select("preanesthesias.*", "clinic.nombre as name_clinic", "clientes.nombres as name_client")
+                            ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic", 'left')
+                            ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente", 'left')
+                            ->where("fecha", date("Y-m-d"))
+
+                            ->orderBy("name_client", "ASC")
+                            ->get();
+ 
+        foreach($preanestesias as $preanestesia){
+            $preanestesia->type = "Preanestesias";
+
+            array_push($data, $preanestesia);
+        }
+
+
+
+
+
+
+        $surgeries = DB::table("surgeries")
+                            ->select("surgeries.*", "clinic.nombre as name_clinic", "clientes.nombres as name_client")
+                            ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic", 'left')
+                            ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente", 'left')
+                            ->where("fecha", date("Y-m-d"))
+
+                            ->orderBy("name_client", "ASC")
+                            ->get();
+ 
+        foreach($surgeries as $surgerie){
+            $surgerie->type = "Cirugias";
+
+            array_push($data, $surgerie);
+        }
+
+
+
+        $revisiones = DB::table("revision_appointment")
+                        ->select("revision_appointment.*", "appointments_agenda.*","clinic.nombre as name_clinic", "clientes.nombres as name_client")
+                        ->join("clinic", "clinic.id_clinic", "=", "revision_appointment.clinica", 'left')
+                        ->join("clientes", "clientes.id_cliente", "=", "revision_appointment.id_paciente", 'left')
+                        ->join("appointments_agenda", "appointments_agenda.id_revision", "=", "revision_appointment.id_revision")
+                        ->where("appointments_agenda.fecha", date("Y-m-d"))
+                        ->get();
+
+
+
+        foreach($revisiones as $revision){
+            $revision->type = "Revision";
+
+            array_push($data, $revision);
+        }
+
+
+
+
+
+        $masajes = DB::table("masajes")
+                            ->select("masajes.*", "clinic.nombre as name_clinic", "clientes.nombres as name_client")
+                            ->join("clinic", "clinic.id_clinic", "=", "masajes.clinic", 'left')
+                            ->join("clientes", "clientes.id_cliente", "=", "masajes.id_cliente", 'left')
+                            ->where("fecha", date("Y-m-d"))
+
+                            ->orderBy("name_client", "ASC")
+                            ->get();
+ 
+        foreach($masajes as $masaje){
+            $masaje->type = "Masajes";
+
+            array_push($data, $masaje);
+        }
+
+
+
+
+
+
+        return response()->json($data)->setStatusCode(200);
+        
      }
 
 }

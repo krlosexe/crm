@@ -278,6 +278,8 @@ Route::get('gallery/testimonials/{client}/{limit}', 'ClientsController@GetTestim
 Route::post('satisfaction_survey', 'SatisfactionSurveyController@store');
 
 
+Route::get('schedule', 'CalendarController@GetSchedule');
+
 
 Route::get('generate/token/chat', function () {
     
