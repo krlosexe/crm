@@ -19,7 +19,19 @@
         <th><b>Codigo de Cliente</b></th>
         <th><b>PRP</b></th>
         <th><b>Forma de Pago</b></th>
+
+
         <th><b>Tiene Inicial ?</b></th>
+        <th><b>Dependiente / independiente</b></th>
+        <th><b>Tipo de Contrato</b></th>
+        <th><b>Antiguedad</b></th>
+        <th><b>Promedio de Ingresos Mensuales</b></th>
+        <th><b>Créditos Anteriores</b></th>
+        <th><b>Esta reportado</b></th>
+        <th><b>Cuenta Bancaria</b></th>
+
+
+        
         <th><b>Asesora</b></th>
 
         <th><b>Fecha de Valoracion</b></th>
@@ -58,7 +70,18 @@
             <td>{{ $value->code_client }}</td>
             <td>{{ $value->prp }}</td>
             <td>{{ $value->forma_pago }}</td>
+
+
             <td>{{ $value->have_initial }}</td>
+            <td>{{ $value->dependent_independent }}</td>
+            <td>{{ $value->type_contract }}</td>
+            <td>{{ $value->antiquity }}</td>
+            <td>{{ $value->average_monthly_income }}</td>
+            <td>{{ $value->previous_credits }}</td>
+            <td>{{ $value->reported }}</td>
+            <td>{{ $value->bank_account }}</td>
+
+            
             <td>{{ $value->name_register }} {{ $value->apellido_register }}</td>
 
             <td>{{ $value->fecha_valoration }}</td>
