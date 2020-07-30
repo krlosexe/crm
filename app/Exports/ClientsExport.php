@@ -2,8 +2,9 @@
 
 namespace App\Exports;
 
-use App\User;
 use DB;
+use App\User;
+use App\Clients;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -45,7 +46,7 @@ class ClientsExport implements FromView
         $have_initial  = $this->have_initial ;
 
         ini_set('memory_limit', '-1'); 
-        $data = DB::table('clientes')->select( 'state',
+        $data = Clients::select( 'state',      'clientes.id_cliente',
                                                'clientes.nombres',
                                                'apellidos', 
                                                'identificacion',
@@ -67,12 +68,29 @@ class ClientsExport implements FromView
                                                "lines_business.nombre_line",
                                                "citys.nombre as name_city",
                                                "clinic.nombre as name_clinic",
-                                               "clientc_credit_information.have_initial"
+
+
+                                               "clientc_credit_information.*",
+
+                                               "valuations.fecha as fecha_valoration",
+                                               "valuations.surgeon as name_surgeon_valoration",
+                                               "valuations.way_to_pay",
+
+                                               "surgeries.fecha as fecha_surgerie",
+                                               "surgeries.surgeon as name_surgeon_cx",
+                                               "sub_category.name as name_procedure"
                                             )
                                             ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente", "left")
                                             ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora', "left")
                                             ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
                                             ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line", "left")
+
+                                            ->join("surgeries", "surgeries.id_cliente", "=", "clientes.id_cliente", "left")
+                                            ->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
+                                            ->join("sub_category", "sub_category.id", "=", "clients_procedures.id_sub_category", "left")
+
+                                            ->join("valuations", "valuations.id_cliente", "=", "clientes.id_cliente", "left")
+
 
                                             ->join("citys", "citys.id_city", "=", "clientes.city", "left")
                                             ->join("clinic", "clinic.id_clinic", "=", "clientes.clinic", "left")
@@ -168,12 +186,13 @@ class ClientsExport implements FromView
                                                 }
                                             })
 
+                                            ->with("tasks")
 
                                            // ->orderBy("clientes.id_line", "DESC")
                                            // ->orderBy("clientes.id_cliente", "DESC")
                                            ->orderBy("auditoria.fec_update", "DESC")
                                             ->get();
-
+        
         return view('exports.clients', [
             'data' => $data
         ]);

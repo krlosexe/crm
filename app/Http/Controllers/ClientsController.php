@@ -237,11 +237,6 @@ class ClientsController extends Controller
                                 }) 
 
 
-                               
-
-
-
-                               
                                 ->with("logs")
                                 ->with("phones")
                                 ->with("emails")
@@ -387,7 +382,7 @@ class ClientsController extends Controller
 
 
 
-                               
+                                
                                 ->with("logs")
                                 ->with("phones")
                                 ->with("emails")

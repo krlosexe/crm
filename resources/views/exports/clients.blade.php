@@ -21,7 +21,20 @@
         <th><b>Forma de Pago</b></th>
         <th><b>Tiene Inicial ?</b></th>
         <th><b>Asesora</b></th>
+
+        <th><b>Fecha de Valoracion</b></th>
+        <th><b>Cirujano Valoracion</b></th>
+        <th><b>Forma de pago Valoracion</b></th>
+
+
+        <th><b>Cirugia</b></th>
+        <th><b>Cirujano</b></th>
+        <th><b>Fecha de Cirugia</b></th>
+
+        <th><b>Tareas</b></th> 
+
         <th><b>Fecha de Registro</b></th>
+        <th><b>Ultima Modificacion</b></th>
     </tr>
     </thead>
     <tbody>
@@ -47,7 +60,33 @@
             <td>{{ $value->forma_pago }}</td>
             <td>{{ $value->have_initial }}</td>
             <td>{{ $value->name_register }} {{ $value->apellido_register }}</td>
+
+            <td>{{ $value->fecha_valoration }}</td>
+            <td>{{ $value->name_surgeon_valoration }}</td>
+            <td>{{ $value->way_to_pay }}</td>
+
+
+            <td>{{ $value->name_procedure }}</td>
+            <td>{{ $value->name_surgeon_cx }}</td>
+            <td>{{ $value->fecha_surgerie }}</td>
+
+            <th>
+                <b>
+                    @foreach($value->tasks as $task)
+                    {{$task->issue}} {{$task->fecha}} <br>
+                    @endforeach
+                </b>
+            </th> 
+
+
+            
+
+
+
+
+
             <td>{{ $value->fec_regins }}</td>
+            <td>{{ $value->fec_update }}</td>
         </tr>
     @endforeach
     </tbody>

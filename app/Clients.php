@@ -63,5 +63,15 @@ class Clients extends Model
 
 
 
+    public function tasks(){
+        
+        return $this->hasMany('App\ClientsTasks', 'id_client');
+        
+    }
+
+
+
+
+
 
 }
