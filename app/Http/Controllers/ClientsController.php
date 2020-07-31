@@ -95,19 +95,11 @@ class ClientsController extends Controller
             }
 
 
-          
 
-
-
-
-            $state = $request["state"];
-         
-
+            $state  = $request["state"];
             $origen = $request["origen"];
 
             ini_set('memory_limit', '-1'); 
-
-
 
             if($procedure != 0){
 
@@ -118,7 +110,7 @@ class ClientsController extends Controller
                                        "dp2.nombres as name_update",
                                        "dp2.apellido_p as apellido_update",
                                        "citys.nombre as name_city"
-            )
+                )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
