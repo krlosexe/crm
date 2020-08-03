@@ -190,6 +190,7 @@ class ClientsExport implements FromView
 
                                            // ->orderBy("clientes.id_line", "DESC")
                                            // ->orderBy("clientes.id_cliente", "DESC")
+                                           ->groupBy("clientes.id_cliente")
                                            ->orderBy("auditoria.fec_update", "DESC")
                                             ->get();
         

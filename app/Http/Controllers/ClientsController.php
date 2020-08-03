@@ -1420,9 +1420,11 @@ class ClientsController extends Controller
         $fila = 0;
 
         $data = [];
+       
         foreach($xmldata->Worksheet->Table->Row as $key => $data) {   
 
             if($fila != 0){
+               
                 $array = [];
                 $array["origen"]          = "Pauta ".(string) $data->Cell[1]->{'Data'};
                 $array["nombres"]         = (string) $data->Cell[2]->{'Data'};
