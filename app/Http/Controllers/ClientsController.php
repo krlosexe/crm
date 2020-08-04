@@ -1285,6 +1285,25 @@ class ClientsController extends Controller
               $overdue = $request["overdue"];
             }
 
+
+
+
+
+            $date_init = 0;
+            if(isset($request["date_init"]) && $request["date_init"] != ""){
+                $date_init = $request["date_init"];
+            }
+    
+    
+            $date_finish = 0;
+            if(isset($request["date_finish"]) && $request["date_finish"] != ""){
+                $date_finish = $request["date_finish"];
+            }
+
+
+
+
+
             ini_set('memory_limit', '-1'); 
 
             $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
@@ -1325,9 +1344,27 @@ class ClientsController extends Controller
                                         }
                                     }) 
 
+
+
+                                    ->where(function ($query) use ($date_init) {
+                                        if($date_init != 0){
+                                            $query->where("clients_tasks.fecha", ">=", $date_init);
+                                        }
+                                    }) 
+    
+                                    ->where(function ($query) use ($date_finish) {
+                                        if($date_finish != 0){
+                                            $query->where("clients_tasks.fecha", "<=", $date_finish);
+                                        }
+                                    }) 
+
+
+
+
+
                                     ->where("auditoria.tabla", "clients_tasks")
                                     ->where("auditoria.status", "!=", "0")
-                                    ->orderBy("clients_tasks.id_clients_tasks", "DESC")
+                                    ->orderBy("clients_tasks.fecha", "ASC")
                                     ->get();
 
 

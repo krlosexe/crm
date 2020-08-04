@@ -253,7 +253,23 @@
 
 
 
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Fecha desde</b></label>
+										<input type="date" class="form-control" id="date_init">
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Fecha hasta</b></label>
+										<input type="date" class="form-control" id="date_finish">
+									</div>
+								</div>  
+
 							</div>
+
+
 
 			              <div class="table-responsive">
 			                <table class="table table-bordered" id="table" width="100%" cellspacing="0">
@@ -358,6 +374,13 @@
 			});
 
 
+			$("#date_init, #date_finish").change(function (e) { 
+				list();
+			});
+
+
+
+
 			function update(){
 				enviarFormularioPut("#form-update", 'api/client/tasks', '#cuadro4', false, "#avatar-edit");
 			}
@@ -380,7 +403,8 @@
 				var adviser = $("#id_asesora_valoracion-filter").val()
 				var overdue = $("#overdue-filter").val()
 
-				console.log(overdue)
+				const date_init   = $("#date_init").val()
+				const date_finish = $("#date_finish").val()
 
 				$("#div-input-edit").css("display", "none")
 				$('#table tbody').off('click');
@@ -400,7 +424,9 @@
 							"id_user" : id_user,
 							"token"   : tokens,
 							"adviser" : adviser,
-							"overdue" : overdue
+							"overdue" : overdue,
+							"date_init"   : date_init,
+							"date_finish" : date_finish
 						},
 						"dataSrc":""
 					},
