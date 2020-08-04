@@ -1335,6 +1335,10 @@ class ClientsController extends Controller
                                             $query->where("clients_tasks.status_task", "!=" ,"Finalizada");
                                             $query->where("clients_tasks.status_task" ,"Abierta");
                                         }
+
+                                        if($overdue == "Abierta"){
+                                            $query->where("clients_tasks.status_task" ,"Abierta");
+                                        }
                                     })
 
 

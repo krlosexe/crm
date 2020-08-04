@@ -247,6 +247,7 @@
 										<select id="overdue-filter" class="form-control">
 											<option value="all">Todas</option>
 											<option value="overdue">Vencidas</option>
+											<option value="Abierta">En Proceso</option>
 										</select>
 									</div>
 								</div>
