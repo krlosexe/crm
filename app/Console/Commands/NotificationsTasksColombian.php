@@ -4,6 +4,16 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+
+use App\ClientsTasks;
+use App\Notification;
+use App\User;
+
+use Mail;
+
+
+
+
 class NotificationsTasksColombian extends Command
 {
     /**
@@ -94,5 +104,5 @@ class NotificationsTasksColombian extends Command
 
 
 
-    
+
 }
