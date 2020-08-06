@@ -4,6 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+use App\ClientsTasks;
+use App\Notification;
+use App\User;
+
+use Mail;
+
+
+
 class NotificationsTasksPlanmed extends Command
 {
     /**
@@ -93,5 +101,5 @@ class NotificationsTasksPlanmed extends Command
 
 
 
-    
+
 }
