@@ -4,29 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\ClientsTasks;
-use App\Notification;
-use App\User;
-
-use Mail;
-
-
-
-class NotificationsTasksDr extends Command
+class NotificationsTasksPlanmed extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'registered:NotificationsTasksDr';
+    protected $signature = 'registered:NotificationsTasksPlanmed';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Notificar tareas vencidas de la linea del DR';
+    protected $description = 'Notificar tareas vencidas de la linea del Planmed';
 
     /**
      * Create a new command instance.
@@ -50,12 +42,12 @@ class NotificationsTasksDr extends Command
         $data = ClientsTasks::where("fecha", "<", date("Y-m-d"))
                     ->where("status_task", "Abierta")
                     ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client")
-                    ->where("clientes.id_line", 17)
+                    ->where("clientes.id_line", 16)
                     ->get();
 
 
         foreach($data as $task){
-            $this->comment("Tarea ".$task->id_clients_tasks." esta vencida: ".$task->issue);
+            $this->comment("Tarea ".$task->id_clients_tasks." esta vencida: ".$task->issue." Responsable: ". $task->responsable);
            
             $notification             = [];
             $notification["fecha"]    = $task->fecha;
@@ -76,7 +68,6 @@ class NotificationsTasksDr extends Command
 
         }
     }
-
 
 
 
@@ -102,5 +93,5 @@ class NotificationsTasksDr extends Command
 
 
 
-
+    
 }
