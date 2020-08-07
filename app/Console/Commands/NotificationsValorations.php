@@ -18,14 +18,14 @@ class NotificationsValorations extends Command
      *
      * @var string
      */
-    protected $signature = 'registered:NotificationsValorations';
+    protected $signature = 'registered:NotificationsValorationsCep';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Recordad valoracione vencidas';
+    protected $description = 'Recordad valoracione vencidas CEP';
 
     /**
      * Create a new command instance.
@@ -58,6 +58,10 @@ class NotificationsValorations extends Command
                     ->where("valuations.status", 0)
                     ->where("auditoria.tabla", "valuations")
                     ->where("auditoria.status", 1)
+
+                    ->where("clientes.id_line", 18)
+
+
                     ->get();
 
         foreach($data as $event){
