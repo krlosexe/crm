@@ -11,21 +11,22 @@ use App\User;
 
 use Mail;
 
-class NotificationsValorations extends Command
+
+class NotificationsValorationsDr extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'registered:NotificationsValorationsCep';
+    protected $signature = 'registered:NotificationsValorationsDr';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Recordad valoracione vencidas CEP';
+    protected $description = 'Recordad valoracione vencidas Dr';
 
     /**
      * Create a new command instance.
@@ -44,8 +45,6 @@ class NotificationsValorations extends Command
      */
     public function handle()
     {
-
-            //php /var/www/html/crm/artisan registered:Logouts
         $data = Valuations::select("valuations.*", "clientes.nombres", "auditoria.usr_regins")
                     ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                     ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
@@ -54,7 +53,7 @@ class NotificationsValorations extends Command
                     ->where("auditoria.tabla", "valuations")
                     ->where("auditoria.status", 1)
 
-                    ->where("clientes.id_line", 18)
+                    ->where("clientes.id_line", 17)
 
 
                     ->get();
@@ -81,9 +80,9 @@ class NotificationsValorations extends Command
             $this->SendEmail($info_email);
 
         }
-
-
     }
+
+
 
 
     public function SendEmail($data){
@@ -105,4 +104,9 @@ class NotificationsValorations extends Command
         return true;
 
     }
+
+
+
+
+    
 }
