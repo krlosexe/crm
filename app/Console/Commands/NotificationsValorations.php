@@ -66,7 +66,7 @@ class NotificationsValorations extends Command
 
         foreach($data as $event){
 
-            $this->comment("Just a comment passing by");
+            $this->comment("Valoracion ".$event->code." esta vencida PX: ".$event->nombres." Responsable: ".$event->usr_regins);
 
             $notification             = [];
             $notification["fecha"]    = $event->fecha;
