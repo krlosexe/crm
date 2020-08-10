@@ -44,6 +44,7 @@ class ClientsExport implements FromView
         $search        = $this->search;
         $city          = $this->city ;
         $have_initial  = $this->have_initial ;
+        $to_prp        = $this->to_prp ;
 
         ini_set('memory_limit', '-1'); 
         $data = Clients::select( 'state',      'clientes.id_cliente',
@@ -62,6 +63,7 @@ class ClientsExport implements FromView
                                                'youtube',
                                                'code_client',
                                                'prp',
+                                               'created_prp',
                                                "datos_personales.nombres as name_register",
                                                "datos_personales.apellido_p as apellido_register",
                                                "auditoria.*",
@@ -137,6 +139,18 @@ class ClientsExport implements FromView
                                                 }
                                             }) 
 
+
+
+                                            ->where(function ($query) use ($to_prp) {
+                                                if($to_prp == 1){
+                                                    $query->where("clientes.prp", "Si");
+                                                }
+                                            }) 
+
+
+
+                                            
+
                                             ->where(function ($query) use ($state) {
                                                 if($state != "0"){
                                                     $query->where("clientes.state", $state);
@@ -173,18 +187,28 @@ class ClientsExport implements FromView
 
 
 
-                                            ->where(function ($query) use ($date_init) {
-                                                if($date_init != 0){
+                                            ->where(function ($query) use ($date_init, $to_prp) {
+                                                if($date_init != 0 && $to_prp == 0){
                                                     $query->where("auditoria.fec_update", ">=", $date_init." 00:00:00");
+                                                }
+            
+                                                if($date_init != 0 && $to_prp == 1){
+                                                    $query->where("clientes.created_prp", ">=", $date_init);
                                                 }
                                             }) 
             
             
-                                            ->where(function ($query) use ($date_finish) {
-                                                if($date_finish != 0){
+                                            ->where(function ($query) use ($date_finish, $to_prp) {
+                                                if($date_finish != 0 && $to_prp == 0){
                                                     $query->where("auditoria.fec_update", "<=", $date_finish." 23:59:59");
                                                 }
-                                            })
+            
+                                                if($date_finish != 0 && $to_prp == 1){
+                                                    $query->where("clientes.created_prp", "<=", $date_finish);
+                                                }
+            
+            
+                                            }) 
 
                                             ->with("tasks")
 

@@ -347,9 +347,7 @@ class ClientsController extends Controller
 
 
                                 ->where(function ($query) use ($to_prp) {
-                                    
                                     if($to_prp == 1){
-                                       
                                         $query->where("clientes.prp", "Si");
                                     }
                                 }) 
@@ -1492,7 +1490,7 @@ class ClientsController extends Controller
     }
 
 
-    public function Excel($linea_negocio, $adviser, $origen, $date_init, $date_finish, $state, $search = 5, $city = 0, $have_initial = 0){
+    public function Excel($linea_negocio, $adviser, $origen, $date_init, $date_finish, $state, $search = 5, $city = 0, $have_initial = 0, $to_prp = 0){
 
 
         $xls = new ClientsExport;
@@ -1506,6 +1504,7 @@ class ClientsController extends Controller
         $xls->search        = $search;
         $xls->city          = $city;
         $xls->have_initial  = $have_initial;
+        $xls->to_prp        = $to_prp;
 
         
         return Excel::download($xls, 'ClientExport.xlsx');

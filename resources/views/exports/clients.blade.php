@@ -18,6 +18,7 @@
         <th><b>Youtube</b></th>
         <th><b>Codigo de Cliente</b></th>
         <th><b>PRP</b></th>
+        <th><b>Ingreso al PRP</b></th>
         <th><b>Forma de Pago</b></th>
 
 
@@ -69,6 +70,7 @@
             <td>{{ $value->youtube }}</td>
             <td>{{ $value->code_client }}</td>
             <td>{{ $value->prp }}</td>
+            <td>{{ $value->created_prp }}</td>
             <td>{{ $value->forma_pago }}</td>
 
 
