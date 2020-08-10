@@ -1794,6 +1794,13 @@ class ClientsController extends Controller
             Notification::insert($notification);
 
 
+
+
+
+
+            
+
+
             if($request["id_line"] == 2){
                 $request["name_line"] = "Clínica Especialistas del Poblado (CEP)";
             }
@@ -1871,6 +1878,28 @@ class ClientsController extends Controller
                 $msj->subject($subject);
                 $msj->to("pdtagenciademedios@gmail.com");
             });
+
+
+
+
+
+
+
+
+
+            $data_adviser   = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
+
+
+            $ConfigNotification = [
+                "tokens" => [$data_adviser["token_notifications"]],
+        
+                "tittle" => "PRP",
+                "body"   => 'Se ha registrado un Afiliado PRP: '.$request["nombres"].'codigo: '.$request["code_client"],
+                "data"   => ['type' => 'refferers']
+        
+            ];
+        
+            $code = SendNotifications($ConfigNotification);
             
 
        }else{
