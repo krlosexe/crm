@@ -1891,7 +1891,7 @@ class ClientsController extends Controller
 
 
             $ConfigNotification = [
-                "tokens" => [$data_adviser["token_notifications"]],
+                "tokens" => $data_adviser["token_notifications"],
         
                 "tittle" => "PRP",
                 "body"   => 'Se ha registrado un Afiliado PRP: '.$request["nombres"].'codigo: '.$request["code_client"],
