@@ -89,6 +89,18 @@ class ClientsController extends Controller
                 $have_inital = $request["have_inital"];
             }
 
+
+
+            $to_prp = 0;
+            if(isset($request["to_prp"])){
+                $to_prp = $request["to_prp"];
+            }
+
+
+
+           
+
+
             $procedure = 0;
             if(isset($request["procedure"])){
                 $procedure = $request["procedure"];
@@ -160,12 +172,27 @@ class ClientsController extends Controller
 
 
 
+
+                                
+
+
+
+
+
                                 ->where(function ($query) use ($have_inital) {
                                     if($have_inital == 1){
                                         $query->whereNotNull("clientc_credit_information.have_initial");
                                         $query->whereRaw('clientc_credit_information.have_initial LIKE "%si%"');
                                     }
                                 }) 
+
+
+
+
+                                
+
+
+
 
 
 
@@ -317,6 +344,21 @@ class ClientsController extends Controller
                                 }) 
 
 
+
+
+                                ->where(function ($query) use ($to_prp) {
+                                    
+                                    if($to_prp == 1){
+                                       
+                                        $query->where("clientes.prp", "Si");
+                                    }
+                                }) 
+
+
+
+
+
+
                                 ->where(function ($query) use ($business_line) {
                                     if($business_line != 0){
                                         $query->whereIn("clientes.id_line", $business_line);
@@ -354,19 +396,29 @@ class ClientsController extends Controller
 
 
 
-                                ->where(function ($query) use ($date_init) {
-                                    if($date_init != 0){
+                                ->where(function ($query) use ($date_init, $to_prp) {
+                                    if($date_init != 0 && $to_prp == 0){
                                         $query->where("auditoria.fec_update", ">=", $date_init." 00:00:00");
+                                    }
+
+                                    if($date_init != 0 && $to_prp == 1){
+                                        $query->where("clientes.created_prp", ">=", $date_init);
                                     }
                                 }) 
 
 
 
 
-                                ->where(function ($query) use ($date_finish) {
-                                    if($date_finish != 0){
+                                ->where(function ($query) use ($date_finish, $to_prp) {
+                                    if($date_finish != 0 && $to_prp == 0){
                                         $query->where("auditoria.fec_update", "<=", $date_finish." 23:59:59");
                                     }
+
+                                    if($date_finish != 0 && $to_prp == 1){
+                                        $query->where("clientes.created_prp", "<=", $date_finish);
+                                    }
+
+
                                 }) 
 
 

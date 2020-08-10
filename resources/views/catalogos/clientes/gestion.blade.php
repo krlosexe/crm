@@ -144,7 +144,7 @@
 
 							<div class="row">
 
-								<div class="col-md-2">
+								<div class="col-md-1">
 									<div class="form-group">
 										<label for=""><b>Ciudad</b></label>
 										<select id="city-filter" class="form-control">
@@ -191,9 +191,19 @@
 								-->
 
 
+								<div class="col-md-1">
+									<div class="form-group">
+										<label for="to_prp"><b>Solo PRP</b></label>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" name="to_prp" id="to_prp" value="1">
+											<label class="custom-control-label" for="to_prp"></label>
+										</div>
+									</div>
+								</div>
+
 								<div class="col-md-2">
 									<div class="form-group">
-										<label for="have_initial"><b>Pacientes con Inicial</b></label>
+										<label for="have_initial"><b>Px Con Inicial</b></label>
 										<div class="custom-control custom-switch">
 											<input type="checkbox" class="custom-control-input" name="have_initial" id="have_initial" value="1">
 											<label class="custom-control-label" for="have_initial"></label>
@@ -482,7 +492,7 @@
 
 
 
-			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter, #city-filter, #procedure-filter").change(function (e) { 
+			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter, #city-filter, #procedure-filter, #to_prp").change(function (e) { 
 
 				list("", 1)
 
@@ -550,6 +560,13 @@
 					have_inital = 1
 				}
 
+				var to_prp = 0
+				if($("#to_prp").is(":checked")){
+					to_prp = 1
+				}
+				
+
+
 
 
 				var procedure = 0
@@ -576,6 +593,7 @@
 						"date_finish"   : $("#date_finish").val(),
 						"state"         : $("#state-filter").val(),
 						"code_client"   : code_client,
+						"to_prp"        : to_prp,
 						"have_inital"   : have_inital,
 						"procedure"     : procedure
 					},
