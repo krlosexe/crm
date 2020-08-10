@@ -1943,6 +1943,8 @@ class ClientsController extends Controller
             $code                   = substr(str_shuffle($permitted_chars), 0, 4);
             $request["code_client"] = strtoupper($code);
             $request["prp"]         = "Si";
+            $request["created_prp"] = date("Y-m-d");
+ 
             $request["to_db"]       = "1";
 
             $request["id_user_asesora"] =  $users["id"];
@@ -1965,6 +1967,7 @@ class ClientsController extends Controller
                     $update = array(
                         "code_client"     => $request["code_client"],
                         "prp"             => "Si",
+                        "created_prp"     => date("Y-m-d"),
                         "to_db"           => "1",
                         "origen"          =>  $request["origen"],
                         "telefono"        =>  $request["telefono"],
@@ -1999,7 +2002,8 @@ class ClientsController extends Controller
                     Comments::create($data);
                 }
 
-            }else{
+            }else{  
+
 
                 $cliente = Clients::create($request->all());
                     
