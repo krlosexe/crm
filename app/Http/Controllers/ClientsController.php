@@ -907,7 +907,18 @@ class ClientsController extends Controller
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
 
-            $data = Clients::select("state", "clinic", "id_line", "id_user_asesora")->find($id_cliente);
+            $data = Clients::select("state", "clinic", "id_line", "id_user_asesora", "prp")->find($id_cliente);
+
+           
+
+
+
+            if($data->prp == null || $data->prp == "No"){
+                if($request["prp"] == "Si"){
+                    $request["created_prp"] = date("Y-m-d");
+                }
+                
+            }
 
             if($data->state != $request["state"]){
                 $version["id_user"]   = $request["id_user"];
