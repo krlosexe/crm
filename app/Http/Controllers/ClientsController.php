@@ -1891,7 +1891,7 @@ class ClientsController extends Controller
 
 
             $ConfigNotification = [
-                "tokens" => $data_adviser["token_notifications"],
+                "tokens" => [$data_adviser["token_notifications"]],
         
                 "tittle" => "PRP",
                 "body"   => 'Se ha registrado un Afiliado PRP: '.$request["nombres"].'codigo: '.$request["code_client"],
@@ -1913,7 +1913,7 @@ class ClientsController extends Controller
        }
 
 
-       $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+       $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente", "data_token" => $data_adviser["token_notifications"]);    
         return response()->json($data)->setStatusCode(200);
         
         
@@ -2175,6 +2175,28 @@ class ClientsController extends Controller
                     $msj->to("pdtagenciademedios@gmail.com");
                 });
             */
+
+
+
+
+
+            $data_user = AuthUsersApp::where("id_user", $users["id"])->first();
+
+
+            $ConfigNotification = [
+                "tokens" => [$data_user["token_notifications"]],
+        
+                "tittle" => "PRP",
+                "body"   => 'Se ha registrado un Afiliado PRP: '.$request["nombres"].' codigo: '.$request["code_client"],
+                "data"   => ['type' => 'refferers']
+        
+            ];
+        
+            $code = SendNotifications($ConfigNotification);
+
+
+
+
 
        }
 
