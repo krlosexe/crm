@@ -1711,6 +1711,7 @@ class ClientsController extends Controller
             $request["code_client"] = strtoupper($code);
             $request["prp"]         = "Si";
             $request["to_db"]       = "1";
+            $request["created_prp"] = date("Y-m-d");
 
             $request["id_user_asesora"] =  $users["id"];
             $request["origen"] =  "PRP Agencia";
@@ -1731,6 +1732,7 @@ class ClientsController extends Controller
                         "code_client"     => $request["code_client"],
                         "prp"             => "Si",
                         "to_db"           => "1",
+                        "created_prp"     => date("Y-m-d"),
                         "origen"          =>  $request["origen"],
                         "telefono"        =>  $request["telefono"],
                         "id_user_asesora" => $request["id_user_asesora"],
