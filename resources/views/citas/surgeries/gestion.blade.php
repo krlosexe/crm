@@ -252,6 +252,7 @@
 								  <th>Cirujano</th>
 								  <th>Clinica</th>
 								  <th>Seguidores</th>
+								  <th>Estatus</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -478,6 +479,25 @@
 								});
 								
 								return html
+							}
+						},
+
+
+
+						{"data": "status_surgeries",
+							render : function(data, type, row){
+								if(data == 1){
+									return "Procesado"
+								}
+
+								if(data == 0){
+									return "Pendiente"
+								}
+
+								if(data == 2){
+									return "Cancelado"
+								}
+
 							}
 						},
 

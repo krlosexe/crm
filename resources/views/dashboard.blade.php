@@ -33,11 +33,11 @@
 		                <div class="card-body">
 		                  <div class="row no-gutters align-items-center">
 		                    <div class="col mr-2">
-		                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
-		                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+		                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Mis PRP (Del Mes)</div>
+		                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="prp_qty">0</div>
 		                    </div>
 		                    <div class="col-auto">
-		                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+		                      <i class="fas fa-users fa-2x text-gray-300"></i>
 		                    </div>
 		                  </div>
 		                </div>
@@ -50,11 +50,11 @@
 		                <div class="card-body">
 		                  <div class="row no-gutters align-items-center">
 		                    <div class="col mr-2">
-		                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
-		                      <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+		                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Calificaciones Google (Del Mes)</div>
+		                      <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
 		                    </div>
 		                    <div class="col-auto">
-		                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+		                      <i class="fab fa-google fa-2x text-gray-300"></i>
 		                    </div>
 		                  </div>
 		                </div>
@@ -67,14 +67,14 @@
 		                <div class="card-body">
 		                  <div class="row no-gutters align-items-center">
 		                    <div class="col mr-2">
-		                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+		                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Valoradas del Mes</div>
 		                      <div class="row no-gutters align-items-center">
 		                        <div class="col-auto">
-		                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+		                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="valoration_qty">0</div>
 		                        </div>
 		                        <div class="col">
 		                          <div class="progress progress-sm mr-2">
-		                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+		                            <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 		                          </div>
 		                        </div>
 		                      </div>
@@ -93,11 +93,11 @@
 		                <div class="card-body">
 		                  <div class="row no-gutters align-items-center">
 		                    <div class="col mr-2">
-		                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-		                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+		                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Operadas del Mes</div>
+		                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="cx_qty" >0</div>
 		                    </div>
 		                    <div class="col-auto">
-		                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+		                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
 		                    </div>
 		                  </div>
 		                </div>
@@ -328,12 +328,75 @@
 
 		<script>
 			$(document).ready(function(){
-				login();
+				login()
+				prps()
+				valorations()
+				surgeries()
 			});
 
 			function login(){
 				enviarFormulario("#login", 'auth', '#cuadro2', true);
 			}
+
+
+			function prps(){
+
+				var url=document.getElementById('ruta').value;
+		            $.ajax({
+		                url:''+url+'/api/prp/qty/month/'+id_user,
+		                type: 'GET',
+		                dataType:'JSON',
+		                cache:false,
+		                
+		                success: function(response){
+		                   $("#prp_qty").text(response.qty)
+		                }
+		            });
+			}
+
+
+
+
+
+			function valorations(){
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/valorations/qty/month/'+id_user,
+					type: 'GET',
+					dataType:'JSON',
+					cache:false,
+					success: function(response){
+
+						$("#valoration_qty").text(response.qty)
+
+					}
+				});
+			}
+
+
+
+			function surgeries(){
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/surgeries/qty/month/'+id_user,
+					type: 'GET',
+					dataType:'JSON',
+					cache:false,
+					success: function(response){
+
+						$("#cx_qty").text(response.qty)
+
+					}
+				});
+			}
+
+
+
+
+
+
 
 
 		</script>

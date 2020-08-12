@@ -109,8 +109,12 @@ Route::get('valuations/client/{id_client}', 'ValuationsController@Clients');
 Route::get('valuations/status/{id}/{status}', 'ValuationsController@status');
 Route::get('valorations/today', 'ValuationsController@getToday');
 Route::get('valorations/today/{user_id}', 'ValuationsController@getTodayClient');
+
+Route::get('valorations/qty/month/{user_id}', 'ValuationsController@QtyMonth');
+
+
 Route::get('clients/history/clinic/{id_client}', 'ClientsController@getHc');
-Route::post('valorations/delete/cotizacion/{id}', 'ValuationsController@DeleteCotizacion');
+
 
 
 
@@ -121,6 +125,7 @@ Route::post('preanesthesia/status/{id}/{status}', 'PreanesthesiaController@statu
 Route::resource('surgeries', 'SurgeriesController');
 Route::get('surgeries/client/{id_client}', 'SurgeriesController@Clients');
 Route::get('surgeries/status/{id}/{status}', 'SurgeriesController@status');
+Route::get('surgeries/qty/month/{user_id}', 'SurgeriesController@QtyMonth');
 
 
 
@@ -237,6 +242,8 @@ Route::get('refferers/qty/{id_affiliate}', 'AffiliateController@qty');
 Route::get('prp/dashboard/stats/{id_user}', 'AffiliateController@Dasboard');
 
 Route::get('prp/sales/statistics/{id_user}', 'AffiliateController@StatisticsSales');
+Route::get('prp/qty/month/{id_user}', 'AdviserController@QtyPrpMonth');
+
 
 Route::get('test/notification', 'NotificationApp@index');
 

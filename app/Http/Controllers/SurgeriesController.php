@@ -386,4 +386,27 @@ class SurgeriesController extends Controller
     {
         //
     }
+
+
+
+
+
+
+
+
+    public function QtyMonth($user_id){
+        
+        $data = Surgeries::selectRaw("count(id_surgeries) as qty")
+                            ->where("surgeries.status_surgeries", 1)
+                            ->whereRaw("month(fecha) = ".date("m")." ")
+                            ->first();
+
+        return response()->json($data)->setStatusCode(200);
+
+    }
+
+
+
+
+
 }

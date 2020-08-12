@@ -686,4 +686,16 @@ class ValuationsController extends Controller
     {
         //
     }
+
+
+    public function QtyMonth($user_id){
+        
+        $data = Valuations::selectRaw("count(id_valuations) as qty")
+                            ->where("valuations.status", 1)
+                            ->whereRaw("month(fecha) = ".date("m")." ")
+                            ->first();
+
+        return response()->json($data)->setStatusCode(200);
+
+    }
 }

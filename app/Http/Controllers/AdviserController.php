@@ -358,4 +358,32 @@ class AdviserController extends Controller
 
 
 
+
+
+    public function QtyPrpMonth($id_adviser){
+       
+        $where = array(
+            "id_user_asesora" => $id_adviser,
+            "prp"             => "Si"
+        );
+
+       
+
+       
+        $data = Clients::where($where)
+                        ->whereRaw("month(created_prp) = ".date("m")." ")
+                        ->selectRaw("count(id_cliente) as qty")
+                        ->orderBy("clientes.id_cliente", "DESC")
+                        ->first();
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+
+
+
+
+
+
+
 }
