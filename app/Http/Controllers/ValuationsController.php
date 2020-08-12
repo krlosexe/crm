@@ -692,8 +692,8 @@ class ValuationsController extends Controller
         
         $data = Valuations::selectRaw("count(id_valuations) as qty")
                             ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
-                            ->where("valuations.status", $user_id)
-                            ->where("auditoria.usr_regins", 1)
+                            ->where("valuations.status", 1)
+                            ->where("auditoria.usr_regins", $user_id)
                             ->whereRaw("month(fecha) = ".date("m")." ")
                             ->first();
 
