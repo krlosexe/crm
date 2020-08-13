@@ -1762,6 +1762,30 @@
 					$("#prp_edit").trigger("change");
 
 
+
+
+
+
+					$("#testimony").prop("checked", data.testimony ? true : false)
+					$("#testimony_date").val(data.testimony_date)
+
+					$("#before_and_after").prop("checked", data.before_and_after ? true : false)
+					$("#before_and_after_date").val(data.before_and_after_date)
+
+					$("#califications").prop("checked", data.califications ? true : false)
+					$("#califications_date").val(data.califications_date)
+
+					$("#survey").prop("checked", data.survey ? true : false)
+
+
+
+
+
+
+
+
+
+
 					$("#eps_edit").val(data.eps)
 					$("#height_edit").val(data.height)
 					$("#weight_edit").val(data.weight)

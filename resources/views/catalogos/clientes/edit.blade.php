@@ -349,6 +349,90 @@
 
 
                             <br><br>
+                        
+                        <div class="row">
+                            <div class="col-md-2">
+                              
+                            </div>
+                            <div class="col-md-3">
+                                <label for="testimony"><b>Testimonio</b></label>
+                                <label class='container-check'>
+                                    <input type='checkbox' name='testimony' class='checkitem chk-col-blue' id='testimony' value='1'>
+                                    <span class='checkmark'></span>
+                                    <label for=''></label>
+                                </label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="testimony_date"><b>Fecha</b></label>
+                                <input type="date" class="form-control" name="testimony_date" id="testimony_date">
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-2">
+                              
+                              </div>
+                            <div class="col-md-3">
+                                <label for="before_and_after"><b>Fotos Antes y Despues</b></label>
+                                <label class='container-check'>
+                                    <input type='checkbox' name='before_and_after' class='checkitem chk-col-blue' id='before_and_after' value='1'>
+                                    <span class='checkmark'></span>
+                                    <label for=''></label>
+                                </label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="before_and_after_date"><b>Fecha</b></label>
+                                <input type="date" class="form-control" name="before_and_after_date" id="before_and_after_date">
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                             <div class="col-md-2">
+                              
+                              </div>
+                            <div class="col-md-3">
+                                <label for="califications"><b>Calificaciones de Google</b></label>
+                                <label class='container-check'>
+                                    <input type='checkbox' name='califications' class='checkitem chk-col-blue' id='califications' value='1'>
+                                    <span class='checkmark'></span>
+                                    <label for=''></label>
+                                </label>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="califications_date"><b>Fecha</b></label>
+                                <input type="date" class="form-control" name="califications_date" id="califications_date">
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-2">
+                              
+                            </div>
+                            <div class="col-md-3">
+                                <label for="survey"><b>Encuesta Asesora</b></label>
+                                <label class='container-check'>
+                                    <input type='checkbox' name='survey' class='checkitem chk-col-blue' id='survey' value='1'>
+                                    <span class='checkmark'></span>
+                                    <label for=''></label>
+                                </label>
+                            </div>
+                        </div>
+
+
+
+
+
+                            <br><br>
+
+
 
 
 

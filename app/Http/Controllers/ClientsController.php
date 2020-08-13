@@ -121,7 +121,8 @@ class ClientsController extends Controller
                                        "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line", 
                                        "dp2.nombres as name_update",
                                        "dp2.apellido_p as apellido_update",
-                                       "citys.nombre as name_city"
+                                       "citys.nombre as name_city",
+                                       "clients_tasks_adsviser.*"
                 )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
@@ -131,6 +132,11 @@ class ClientsController extends Controller
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
                                 ->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
+
+
+                                ->join("clients_tasks_adsviser", "clients_tasks_adsviser.id_client", "=", "clientes.id_cliente", "left")
+
+
 
                                
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
@@ -280,7 +286,8 @@ class ClientsController extends Controller
                                        "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line", 
                                        "dp2.nombres as name_update",
                                        "dp2.apellido_p as apellido_update",
-                                       "citys.nombre as name_city"
+                                       "citys.nombre as name_city",
+                                       "clients_tasks_adsviser.*"
             )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
@@ -289,6 +296,7 @@ class ClientsController extends Controller
 
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
+                                ->join("clients_tasks_adsviser", "clients_tasks_adsviser.id_client", "=", "clientes.id_cliente", "left")
                                 //->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
 
                                
@@ -956,7 +964,7 @@ class ClientsController extends Controller
     {   
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
-
+        
             $data = Clients::select("state", "clinic", "id_line", "id_user_asesora", "prp")->find($id_cliente);
 
            
@@ -1129,25 +1137,33 @@ class ClientsController extends Controller
                     ClientsProcedure::create($array_procedure);
                 }
             }
-            
 
 
-            /*
+            $data_tasks_advisers = [
 
-            if(isset($request->comments)){
-                $comments = [];
+                "testimony"              => $request["testimony"]               == 1 ? $request["testimony"]        = 1 : $request["testimony"]        = 0,
+                "testimony_date"         => $request["testimony_date"],
+                "before_and_after"       => $request["before_and_after"]        == 1 ? $request["before_and_after"] = 1 : $request["before_and_after"] = 0,
+                "before_and_after_date"  => $request["before_and_after_date"],
+                "califications"          => $request["califications"]           == 1 ? $request["califications"]    = 1 : $request["califications"]    = 0,
+                "califications_date"     => $request["califications_date"],
+                "survey"                 => $request["survey"]                  == 1 ? $request["survey"]           = 1 : $request["survey"]           = 0
 
-                foreach($request->comments as $key => $value){
-                    $array = [];
-                    $array["id_event"]   = $id_cliente;
-                    $array["table"]      = "clients";
-                    $array["id_user"]    = $request["id_user"];
-                    $array["comment"]   = $value;
-                    array_push($comments, $array);
-                }
-                Comments::insert($comments);
-                
-            }*/
+            ];
+
+
+            if(DB::table('clients_tasks_adsviser')->where("id_client", $id_cliente)->first()){
+
+                DB::table('clients_tasks_adsviser')->where("id_client", $id_cliente)->update($data_tasks_advisers);
+
+            }else{
+
+                $data_tasks_advisers["id_client"] = $id_cliente;
+                DB::table('clients_tasks_adsviser')->insert($data_tasks_advisers);
+
+            }
+
+
 
             DB::table('auditoria')->where("cod_reg", $id_cliente)->where("tabla", "clientes")
 
