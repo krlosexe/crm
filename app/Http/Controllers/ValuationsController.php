@@ -704,7 +704,8 @@ class ValuationsController extends Controller
 
     public function QtyMonthList($user_id){
         
-        $data = Valuations::join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
+        $data = Valuations::selectRaw("count(id_valuations) as qty")
+                            ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                             ->where("valuations.status", 1)
                             ->where("auditoria.usr_regins", $user_id)
                             ->whereRaw("month(fecha) = ".date("m")." ")
