@@ -399,6 +399,7 @@ class SurgeriesController extends Controller
         $data = Surgeries::selectRaw("count(id_surgeries) as qty")
                             ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
                             ->where("surgeries.status_surgeries", 1)
+                            ->where("auditoria.tabla", "surgeries")
                             ->where("auditoria.usr_regins", $user_id)
                             ->whereRaw("month(fecha) = ".date("m")." ")
                             ->first();
