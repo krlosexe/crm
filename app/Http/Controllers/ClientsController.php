@@ -1915,12 +1915,24 @@ class ClientsController extends Controller
             }
 
 
+            if($request["id_line"] == 21){
+                $request["name_line"] = "Clinica Laser (Financiacion)";
+            }
+
+
+
 
 
 
             if(($request["id_line"] == 9)){
                 $subject = "Formulario Trabaja con Nosotros para Paulina  Clinica Laser: ".$request["nombres"];
             }
+
+            if(($request["id_line"] == 21)){
+                $subject = "Formulario Trabaja con Nosotros para Manuela  Clinica Laser: ".$request["nombres"];
+            }
+
+
 
             if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17)){
                 $subject = "Formulario Trabaja con Nosotros para Paulina ".$request["name_line"]." : ".$request["nombres"];
@@ -2224,6 +2236,12 @@ class ClientsController extends Controller
             if(($request["id_line"] == 9)){
                 $subject = "Formulario PRP Asesora  Clinica Laser: ".$request["nombres"];
             }
+
+            if(($request["id_line"] == 21)){
+                $subject = "Formulario PRP Asesora  Clinica Laser (Financiacion): ".$request["nombres"];
+            }
+
+
 
             if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17)){
                 $subject = "Formulario PRP Asesora  ".$request["name_line"]." : ".$request["nombres"];
