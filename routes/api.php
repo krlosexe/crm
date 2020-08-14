@@ -113,6 +113,10 @@ Route::get('valorations/today/{user_id}', 'ValuationsController@getTodayClient')
 Route::get('valorations/qty/month/{user_id}', 'ValuationsController@QtyMonth');
 
 
+Route::get('valorations/qty/list/month/{user_id}', 'ValuationsController@QtyMonthList');
+
+
+
 Route::get('clients/history/clinic/{id_client}', 'ClientsController@getHc');
 
 

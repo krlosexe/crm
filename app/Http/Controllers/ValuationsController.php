@@ -700,4 +700,20 @@ class ValuationsController extends Controller
         return response()->json($data)->setStatusCode(200);
 
     }
+
+
+    public function QtyMonthList($user_id){
+        
+        $data = Valuations::join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
+                            ->where("valuations.status", 1)
+                            ->where("auditoria.usr_regins", $user_id)
+                            ->whereRaw("month(fecha) = ".date("m")." ")
+                            ->first();
+
+        return response()->json($data)->setStatusCode(200);
+
+    }
+
+
+
 }
