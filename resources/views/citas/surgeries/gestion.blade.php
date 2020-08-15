@@ -227,6 +227,16 @@
 			              <div class="table-responsive">
 
 						  	<div class="row">
+
+							  <div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Filtrar por : Asesora</b></label>
+										<select name="adviser[]" id="id_asesora_valoracion-filter" class="form-control select2 disabled" multiple>
+											<option value="">Seleccione</option>
+										</select>
+									</div>
+								</div>
+
 							  <div class="col-md-3">
 									<div class="form-group">
 										<label for=""><b>Fecha desde</b></label>
@@ -331,6 +341,8 @@
 				verifyPersmisos(id_user, tokens, "citys");
 
 				GetUsersTasksclient2(".getUsers")
+				GetAsesorasValoracion("#id_asesora_valoracion-filter")
+
 
 
 			});
@@ -396,11 +408,19 @@
 			$("#date_init, #date_finish").change(function (e) { 
 				list();
 			});
+
+			$("#id_asesora_valoracion-filter").change(function (e) { 
+				list();
+			});
+
+
 			function list(cuadro) {
 				var data = {
 					"id_user": id_user,
 					"token"  : tokens,
-				};
+				};	
+
+				const adviser = $("#id_asesora_valoracion-filter").val()
 
 				const date_init   = $("#date_init").val()
 				const date_finish = $("#date_finish").val()
@@ -423,6 +443,7 @@
 							"rol"         : name_rol,
 							"id_user"     : id_user,
 							"token"       : tokens,
+							"adviser" : adviser,
 							"date_init"   : date_init,
 							"date_finish" : date_finish
 						},

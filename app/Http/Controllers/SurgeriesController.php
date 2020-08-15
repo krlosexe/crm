@@ -25,6 +25,13 @@ class SurgeriesController extends Controller
         $id_user = $request["id_user"];
 
 
+        $adviser = 0;
+        if(isset($request["adviser"])){
+            $adviser = $request["adviser"];
+        }
+
+
+
         $date_init = 0;
         if(isset($request["date_init"]) && $request["date_init"] != ""){
             $date_init = $request["date_init"];
@@ -49,12 +56,25 @@ class SurgeriesController extends Controller
                                 ->with("payments")
                                 ->with("followers")
                                 ->with("procedures")
+
+
+
+                                
                                 
                                 ->where(function ($query) use ($rol, $id_user) {
                                     if($rol == "Asesor"){
                                         $query->where("auditoria.usr_regins", $id_user);
                                     }
                                 })
+
+
+                                ->where(function ($query) use ($adviser) {
+                                    if($adviser != 0){
+                                        $query->whereIn("auditoria.usr_regins", $adviser);
+                                    }
+                                }) 
+
+                                
 
 
                                 ->where(function ($query) use ($date_init) {
