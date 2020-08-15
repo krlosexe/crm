@@ -253,6 +253,25 @@
 									</div>
 								</div>
 
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Fecha desde</b></label>
+										<input type="date" class="form-control" id="date_init">
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Fecha hasta</b></label>
+										<input type="date" class="form-control" id="date_finish">
+									</div>
+								</div>  
+
+
+
+
+
 							</div>
 
 
@@ -377,6 +396,13 @@
 			});
 
 
+			$("#date_init, #date_finish").change(function (e) { 
+				list();
+			});
+
+
+
+
 
 			function list(cuadro) {
 
@@ -390,7 +416,9 @@
 				var adviser = $("#id_asesora_valoracion-filter").val()
 				var overdue = $("#overdue-filter").val()
 
-				console.log(overdue)
+
+				const date_init   = $("#date_init").val()
+				const date_finish = $("#date_finish").val()
 
 
 
@@ -412,7 +440,9 @@
 							"id_user" : id_user,
 							"token"   : tokens,
 							"adviser" : adviser,
-							"overdue" : overdue
+							"overdue" : overdue,
+							"date_init"   : date_init,
+							"date_finish" : date_finish
 							
 						},
 						"dataSrc":""

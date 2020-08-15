@@ -39,6 +39,23 @@ class ValuationsController extends Controller
             }
 
 
+
+
+            $date_init = 0;
+            if(isset($request["date_init"]) && $request["date_init"] != ""){
+                $date_init = $request["date_init"];
+            }
+
+
+            $date_finish = 0;
+            if(isset($request["date_finish"]) && $request["date_finish"] != ""){
+                $date_finish = $request["date_finish"];
+            }
+
+
+
+
+
             $valuations = Valuations::select("valuations.*", "valuations.id_asesora_valoracion as id_asesora", "valuations.clinic as id_clinic",
                                              "valuations.status as status_valuations*", "auditoria.*", "users.email as email_regis", "clientes.*",
                                             "valuations.status as status_valuations", "valuations.clinic as id_clinic")
@@ -71,6 +88,23 @@ class ValuationsController extends Controller
                                         $query->whereIn("auditoria.usr_regins", $adviser);
                                     }
                                 }) 
+
+
+
+                                ->where(function ($query) use ($date_init) {
+                                    if($date_init != 0){
+                                        $query->where("valuations.fecha", ">=", $date_init);
+                                    }
+                                }) 
+
+                                ->where(function ($query) use ($date_finish) {
+                                    if($date_finish != 0){
+                                        $query->where("valuations.fecha", "<=", $date_finish);
+                                    }
+                                }) 
+
+
+
 
 
                                 ->orderBy("valuations.id_valuations", "DESC")
