@@ -299,6 +299,9 @@ Route::get('schedule', 'CalendarController@GetSchedule');
 
 Route::get('qty/califications/google/{user_id}', 'AdviserController@QtyCalificationsGoogle');
 
+Route::get('survey/adviser/{user_id}', 'AdviserController@SurveyAdviser');
+
+
 
 
 

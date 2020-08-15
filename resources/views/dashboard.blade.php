@@ -142,36 +142,25 @@
 		              <div class="card shadow mb-4">
 		                <!-- Card Header - Dropdown -->
 		                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-		                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+		                  <h6 class="m-0 font-weight-bold text-primary">Encuestas</h6>
 		                  <div class="dropdown no-arrow">
 		                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
 		                    </a>
-		                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-		                      <div class="dropdown-header">Dropdown Header:</div>
-		                      <a class="dropdown-item" href="#">Action</a>
-		                      <a class="dropdown-item" href="#">Another action</a>
-		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item" href="#">Something else here</a>
-		                    </div>
 		                  </div>
 		                </div>
 		                <!-- Card Body -->
 		                <div class="card-body">
-		                  <div class="chart-pie pt-4 pb-2">
-		                    <canvas id="myPieChart"></canvas>
-		                  </div>
-		                  <div class="mt-4 text-center small">
-		                    <span class="mr-2">
-		                      <i class="fas fa-circle text-primary"></i> Direct
-		                    </span>
-		                    <span class="mr-2">
-		                      <i class="fas fa-circle text-success"></i> Social
-		                    </span>
-		                    <span class="mr-2">
-		                      <i class="fas fa-circle text-info"></i> Referral
-		                    </span>
-		                  </div>
+		                  <div id="survey">
+						  	<div class="row">
+								<div class="col-md-12">
+									<ul style="height: 209px;overflow: scroll;" class="list-group" id="list_followers"></ul>
+								</div>
+							</div>
+
+							<div id="average_general" style="text-align: center;padding: 8%;font-size: 35px;">
+							</div>
+						  </div>
 		                </div>
 		              </div>
 		            </div>
@@ -333,6 +322,7 @@
 				valorations()
 				surgeries()
 				calificationsGoogle()
+				survey()
 			});
 
 			function login(){
@@ -347,7 +337,6 @@
 		                url:''+url+'/api/prp/qty/month/'+id_user,
 		                type: 'GET',
 		                dataType:'JSON',
-		                cache:false,
 		                
 		                success: function(response){
 		                   $("#prp_qty").text(response.qty)
@@ -368,7 +357,6 @@
 					url:''+url+'/api/qty/califications/google/'+id_user,
 					type: 'GET',
 					dataType:'JSON',
-					cache:false,
 					success: function(response){
 
 						$("#google_qty").text(response.qty)
@@ -388,7 +376,6 @@
 					url:''+url+'/api/valorations/qty/month/'+id_user,
 					type: 'GET',
 					dataType:'JSON',
-					cache:false,
 					success: function(response){
 
 						$("#valoration_qty").text(response.qty)
@@ -406,10 +393,64 @@
 					url:''+url+'/api/surgeries/qty/month/'+id_user,
 					type: 'GET',
 					dataType:'JSON',
-					cache:false,
 					success: function(response){
 
 						$("#cx_qty").text(response.qty)
+
+					}
+				});
+			}
+
+
+
+
+			function survey(){
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/survey/adviser/'+id_user,
+					type: 'GET',
+					dataType:'JSON',
+					success: function(response){
+
+						var html = ""
+						$.map(response.data, function (item, key) {
+							
+							html += '<li class="list-group-item">'
+								html += '<img class="rounded" src="http://pdtclientsolutions.com/crm-public.dev/img/default-user.png" style="height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;" title="Johana Andrea Londoño">'
+								html += '<b>'+item.nombres+'</b><br> '+item.created_prp+'<br>'
+
+								for (var i = 0; i < item.average; i++) {
+									html += "<i class='fa fa-star' style='color: #feba03'></i>";
+								}
+
+								const difference = 5 - item.average
+
+								for (var i = 0; i < difference; i++) {
+									html += "<i class='fa fa-star'></i>";
+								}
+								
+							html += '</li>'
+						});
+
+						
+
+						$("#list_followers").html(html)
+
+
+						var html2 = ""
+						for (var i = 0; i < response.total_average; i++) {
+							html2 += "<i class='fa fa-star' style='color: #feba03'></i>";
+						}
+
+						const difference_total = 5 - response.total_average
+
+						for (var i = 0; i < difference_total; i++) {
+							html2 += "<i class='fa fa-star'></i>";
+						}
+
+
+						$("#average_general").html(html2)
 
 					}
 				});

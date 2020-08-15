@@ -388,8 +388,52 @@ class AdviserController extends Controller
                     ->where("clients_tasks_adsviser.califications", 1)
                     ->whereRaw("month(clients_tasks_adsviser.califications_date) = ".date("m")." ")
                     ->first();
-                    
+
         return response()->json($data)->setStatusCode(200);
+    }
+
+
+
+
+
+
+
+
+
+
+    public function SurveyAdviser($id_adviser){
+
+        $data = DB::table("satisfaction_survey")
+                           ->select("satisfaction_survey.*", "clientes.nombres")
+                            ->where("satisfaction_survey.id_user", $id_adviser)
+                            ->join("clientes", "clientes.id_cliente", "=", "satisfaction_survey.id_client")
+                            ->get();
+
+        
+        $total_average = 0;
+        foreach($data as $value){
+
+            $total_stars = $value->question1 
+                            + $value->question2 
+                            + $value->question3 
+                            + $value->question4 
+                            + $value->question5 
+                            + $value->question6 
+                            + $value->question7 
+                            + $value->question8 
+                            + $value->question9
+                            + $value->question10;
+
+            $value->average = round($total_stars / 10);
+
+            $total_average = $total_average + $value->average;
+            
+        }
+
+        $response["data"] = $data;
+        $response["total_average"] = $total_average / count($data);
+        
+        return response()->json($response)->setStatusCode(200);
     }
 
 
