@@ -379,6 +379,20 @@ class AdviserController extends Controller
     }
 
 
+    public function QtyCalificationsGoogle($id_adviser){
+
+        $data = DB::table("clients_tasks_adsviser")
+                    ->selectRaw("count(id) as qty")
+                    ->join("clientes", "clientes.id_cliente", "=", "clients_tasks_adsviser.id_client")
+                    ->where("clientes.id_user_asesora", $id_adviser)
+                    ->where("clients_tasks_adsviser.califications", 1)
+                    ->whereRaw("month(clients_tasks_adsviser.califications_date) = ".date("m")." ")
+                    ->first();
+                    
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
 
 
 

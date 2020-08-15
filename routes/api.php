@@ -295,6 +295,14 @@ Route::post('satisfaction_survey', 'SatisfactionSurveyController@store');
 Route::get('schedule', 'CalendarController@GetSchedule');
 
 
+
+
+Route::get('qty/califications/google/{user_id}', 'AdviserController@QtyCalificationsGoogle');
+
+
+
+
+
 Route::get('generate/token/chat', function () {
     
     $users = User::get();
