@@ -1569,6 +1569,7 @@ class ClientsController extends Controller
                 $auditoria->status      = 1;
                 $auditoria->fec_regins  = date("Y-m-d H:i:s");
                 $auditoria->usr_regins  = $request["id_user"];
+                $auditoria->fec_update  = date("Y-m-d H:i:s");
                 $auditoria->save();
 
             }

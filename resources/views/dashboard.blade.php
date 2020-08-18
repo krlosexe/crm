@@ -291,6 +291,106 @@
 		      </div>
 		      <!-- End of Main Content -->
 
+
+
+
+			  <div class="modal fade bd-example-modal-lg" id="modal_survey" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-12" style="padding: 4%;">
+									<h6>1 - Información que brinda la asesora sobre el procedimiento a realizar</h6>
+
+									<div id="question1"></div>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div class="col-md-12" style="padding: 4%;">
+									<h6>2 - Asesoría personalizada</h6>
+									<div id="question2"></div>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div class="col-md-12" style="padding: 4%;">
+									<h6>3 - La confianza (seguridad) que el personal transmite a los pacientes</h6>
+									<div id="question3"></div>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div class="col-md-12" style="padding: 4%;">
+									<h6>4 - Tiempo para organizar el proceso quirúrgico</h6>
+									<div id="question4"></div>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div class="col-md-12" style="padding: 4%;">
+									<h6>5 - Cómo fue la atención que recibió por parte de la asesora antes, durante y después de la intervención</h6>
+									<div id="question5"></div>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div class="col-md-12" style="padding: 4%;">
+									<h6>6 - Amabilidad (cortesía) del personal en el trato con los pacientes</h6>
+									<div id="question6"></div>
+								</div>
+							</div>
+
+
+
+							<div class="row">
+								<div class="col-md-12" style="padding: 4%;">
+									<h6>7 - Interés del personal para organizar las citas de revisión</h6>
+									<div id="question7"></div>
+								</div>
+							</div>
+
+
+
+							<div class="row">
+								<div class="col-md-12" style="padding: 4%;">
+									<h6>8 - Tiempo en responder mensajes, llamadas</h6>
+									<div id="question8"></div>
+								</div>
+							</div>
+
+
+
+							<div class="row">
+								<div class="col-md-12" style="padding: 4%;">
+									<h6>9 - El trato personalizado que tiene con los pacientes</h6>
+									<div id="question9"></div>
+								</div>
+							</div>
+
+
+
+							<div class="row">
+								<div class="col-md-12" style="padding: 4%;">
+									<h6>10 - Atención y seguridad que brinda todo el personal de la clínica</h6>
+									<div id="question10"></div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
 		      <!-- Footer -->
 		      <footer class="sticky-footer bg-white">
 		        <div class="container my-auto">
@@ -416,7 +516,7 @@
 						var html = ""
 						$.map(response.data, function (item, key) {
 							
-							html += '<li class="list-group-item">'
+							html += "<li class='list-group-item' style='cursor: pointer' onclick='showSurvery("+JSON.stringify(item)+")'>"
 								html += '<img class="rounded" src="http://pdtclientsolutions.com/crm-public.dev/img/default-user.png" style="height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;" title="Johana Andrea Londoño">'
 								html += '<b>'+item.nombres+'</b><br> '+item.created_prp+'<br>'
 
@@ -454,6 +554,200 @@
 
 					}
 				});
+			}
+
+
+			function showSurvery(data){
+
+				$("#modal_survey").modal("show")
+
+				var html = ""
+				for (var i = 0; i < data.question1; i++) {
+					html += "<i class='fa fa-star' style='color: #feba03'></i>";
+				}
+
+				var difference = 5 - data.question1
+
+				for (var i = 0; i < difference; i++) {
+					html += "<i class='fa fa-star'></i>";
+				}
+
+				$("#question1").html(html)
+
+
+
+
+
+
+				var html = ""
+				for (var i = 0; i < data.question2; i++) {
+					html += "<i class='fa fa-star' style='color: #feba03'></i>";
+				}
+
+				var difference = 5 - data.question2
+
+				for (var i = 0; i < difference; i++) {
+					html += "<i class='fa fa-star'></i>";
+				}
+
+				$("#question2").html(html)
+
+
+
+
+
+				var html = ""
+				for (var i = 0; i < data.question3; i++) {
+					html += "<i class='fa fa-star' style='color: #feba03'></i>";
+				}
+
+				var difference = 5 - data.question3
+
+				for (var i = 0; i < difference; i++) {
+					html += "<i class='fa fa-star'></i>";
+				}
+
+				$("#question3").html(html)
+
+
+
+
+
+				var html = ""
+				for (var i = 0; i < data.question4; i++) {
+					html += "<i class='fa fa-star' style='color: #feba03'></i>";
+				}
+
+				var difference = 5 - data.question4
+
+				for (var i = 0; i < difference; i++) {
+					html += "<i class='fa fa-star'></i>";
+				}
+
+				$("#question4").html(html)
+
+
+
+
+
+
+				var html = ""
+				for (var i = 0; i < data.question5; i++) {
+					html += "<i class='fa fa-star' style='color: #feba03'></i>";
+				}
+
+				var difference = 5 - data.question5
+
+				for (var i = 0; i < difference; i++) {
+					html += "<i class='fa fa-star'></i>";
+				}
+
+				$("#question5").html(html)
+
+
+
+
+
+
+
+
+
+
+				var html = ""
+				for (var i = 0; i < data.question6; i++) {
+					html += "<i class='fa fa-star' style='color: #feba03'></i>";
+				}
+
+				var difference = 5 - data.question6
+
+				for (var i = 0; i < difference; i++) {
+					html += "<i class='fa fa-star'></i>";
+				}
+
+				$("#question6").html(html)
+
+
+
+
+
+				var html = ""
+				for (var i = 0; i < data.question7; i++) {
+					html += "<i class='fa fa-star' style='color: #feba03'></i>";
+				}
+
+				var difference = 5 - data.question7
+
+				for (var i = 0; i < difference; i++) {
+					html += "<i class='fa fa-star'></i>";
+				}
+
+				$("#question7").html(html)
+
+
+
+
+
+
+
+
+				var html = ""
+				for (var i = 0; i < data.question8; i++) {
+					html += "<i class='fa fa-star' style='color: #feba03'></i>";
+				}
+
+				var difference = 5 - data.question8
+
+				for (var i = 0; i < difference; i++) {
+					html += "<i class='fa fa-star'></i>";
+				}
+
+				$("#question8").html(html)
+
+
+
+
+
+
+
+
+
+				var html = ""
+				for (var i = 0; i < data.question9; i++) {
+					html += "<i class='fa fa-star' style='color: #feba03'></i>";
+				}
+
+				var difference = 5 - data.question9
+
+				for (var i = 0; i < difference; i++) {
+					html += "<i class='fa fa-star'></i>";
+				}
+
+				$("#question9").html(html)
+
+
+				
+
+
+
+
+
+
+
+				var html = ""
+				for (var i = 0; i < data.question10; i++) {
+					html += "<i class='fa fa-star' style='color: #feba03'></i>";
+				}
+
+				var difference = 5 - data.question10
+
+				for (var i = 0; i < difference; i++) {
+					html += "<i class='fa fa-star'></i>";
+				}
+
+				$("#question10").html(html)
+
+
+
 			}
 
 
