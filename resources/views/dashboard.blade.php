@@ -552,7 +552,7 @@
 
 						$("#list_followers").html(html)
 
-
+						console.log(response.total_average)
 						var html2 = ""
 						for (var i = 0; i < response.total_average; i++) {
 							html2 += "<i class='fa fa-star' style='color: #feba03'></i>";

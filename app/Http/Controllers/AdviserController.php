@@ -435,7 +435,7 @@ class AdviserController extends Controller
         if($total_average == 0){
             $response["total_average"] = 0;
         }else{
-            $response["total_average"] = $total_average / count($data);
+            $response["total_average"] = round($total_average / count($data));
         }
         
         
