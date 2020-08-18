@@ -431,7 +431,13 @@ class AdviserController extends Controller
         }
 
         $response["data"] = $data;
-        $response["total_average"] = $total_average / count($data);
+
+        if($total_average == 0){
+            $response["total_average"] = 0;
+        }else{
+            $response["total_average"] = $total_average / count($data);
+        }
+        
         
         return response()->json($response)->setStatusCode(200);
     }

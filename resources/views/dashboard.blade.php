@@ -143,11 +143,17 @@
 		                <!-- Card Header - Dropdown -->
 		                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 		                  <h6 class="m-0 font-weight-bold text-primary">Encuestas</h6>
-		                  <div class="dropdown no-arrow">
-		                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-		                    </a>
-		                  </div>
+
+						  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		                 
+						 	
+								
+							<select name="adviser[]" id="id_asesora_filter" class="form-control select2 disabled">
+								<option value="">Filtrar por Asesora:</option>
+							</select>
+					
+								
+		                  
 		                </div>
 		                <!-- Card Body -->
 		                <div class="card-body">
@@ -422,12 +428,21 @@
 				valorations()
 				surgeries()
 				calificationsGoogle()
-				survey()
+				survey(id_user)
+				GetAsesorasValoracion("#id_asesora_filter")
 			});
 
 			function login(){
 				enviarFormulario("#login", 'auth', '#cuadro2', true);
 			}
+
+
+
+			$("#id_asesora_filter").change(function (e) { 
+				
+				survey($(this).val())
+				
+			});
 
 
 			function prps(){
@@ -504,11 +519,11 @@
 
 
 
-			function survey(){
+			function survey(adviser){
 
 				var url=document.getElementById('ruta').value;
 				$.ajax({
-					url:''+url+'/api/survey/adviser/'+id_user,
+					url:''+url+'/api/survey/adviser/'+adviser,
 					type: 'GET',
 					dataType:'JSON',
 					success: function(response){
