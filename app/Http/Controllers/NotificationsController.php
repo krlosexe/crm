@@ -354,6 +354,8 @@ class NotificationsController extends Controller
 
 
     public function NotificationsPost(Request $request){
+
+        
         
         $users = Clients::selectRaw("clientes.nombres, users.id as user_id, auth_users_app.token_notifications")
                           ->join("users", "users.id_client", "=", "clientes.id_cliente")
@@ -365,10 +367,24 @@ class NotificationsController extends Controller
 
 
 
+        $users_asesora = User::selectRaw("users.id as user_id, auth_users_app.token_notifications")
+                            ->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
+                            ->join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                            ->whereIn("users_line_business.id_line", $request["lines"])
+                            ->where("users.id_rol", 9)->get();
+
+
         $tokens = [];
         foreach($users as $user){
             $tokens[] = $user["token_notifications"];
         }
+
+
+        foreach($users_asesora as $user){
+            $tokens[] = $user["token_notifications"];
+        }
+
+
 
 
         $ConfigNotification = [
@@ -380,8 +396,8 @@ class NotificationsController extends Controller
 
         ];
         
-        $code = SendNotifications($ConfigNotification);
+       $code = SendNotifications($ConfigNotification);
 
-        return response()->json($users)->setStatusCode(200);
+        return response()->json($ConfigNotification)->setStatusCode(200);
     }
 }

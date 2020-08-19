@@ -57,7 +57,7 @@
                   </div>
 
 
-                  <div class="col-md-3">
+                  <div class="col-md-6">
                       <div class="form-group">
                           <div class="form-group">
                             <label for=""><b>Tipo</b></label>
@@ -69,15 +69,7 @@
                       </div>
                   </div>
 
-                  <div class="col-md-3">
-                      <div class="form-group">
-                          <div class="form-group">
-                            <label for=""><b>Monto de la Cirugia</b></label>
-                            <input type="text" name="amount" id="amount-store" class="monto_formato_decimales form-control" required>
-                        </div>
-                      </div>
-                  </div>
-
+                  
               </div>
 
 
@@ -96,6 +88,32 @@
                       </div>
                   </div> -->
               </div>
+
+
+
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for=""><b>Seguidores</b></label>
+                        <select name="followers[]" id="follower" class="form-control select2 getUsers" multiple>
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for=""><b>Estatus</b></label>
+                        <select name="status_surgeries" id="status-store" class="form-control select2" required>
+                            <option value="0">Pendiente</option>
+                        </select>
+                    </div>
+                </div>
+              </div>
+
+
+
            </div>
 
 
@@ -123,33 +141,34 @@
                 </div>
               </div>
 
+
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                        <label for=""><b>Monto de la Cirugia</b></label>
+                        <input type="text" name="amount" id="amount-store" class="monto_formato_decimales form-control" required>
+                    </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <br>
+                    <button type="button" id="add-additional" class="btn btn-primary btn-user">
+                        Agregar Adicionales <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+
+              </div>
+
+              <div class="row" id="additional">
+                 
+              </div>
+
               
            </div>
 
-
-           <div class="col-md-6">
-              <div class="row">
-
-                    <div class="col-md-12">
-                      <div class="form-group">
-                            <label for=""><b>Seguidores</b></label>
-                            <select name="followers[]" id="follower" class="form-control select2 getUsers" multiple>
-                                <option value="">Seleccione</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for=""><b>Estatus</b></label>
-                        <select name="status_surgeries" id="status-store" class="form-control select2" required>
-                            <option value="0">Pendiente</option>
-                        </select>
-                    </div>
-                </div>
-              </div>
-           </div>
 
 
         </div>

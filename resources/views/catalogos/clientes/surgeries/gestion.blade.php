@@ -747,6 +747,21 @@
 			}
 
 
+			$("#additional").html("")
+			$("#add-additional").click(function (e) { 
+				
+				var html = ""
+				
+				html += "<div class='col-md-6'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
+				html += "<div class='col-md-6'><input type='text' class='form-control' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+				html += "<br><br>"
+				
+
+				$("#additional").append(html)
+				
+			});
+
+
 					
 		/* ------------------------------------------------------------------------------- */
 			/*
