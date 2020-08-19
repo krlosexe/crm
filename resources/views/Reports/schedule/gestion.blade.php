@@ -69,8 +69,8 @@
 							<div class="row">
 								<div class="col-md-3">
 									<div class="form-group">
-										<label for=""><b>Filtrar por : Asesora</b></label>
-										<select name="adviser" id="id_asesora_valoracion-filter" multiple class="form-control select2 disabled">
+										<label for=""><b>Clinica</b></label>
+										<select name="clinic" id="clinic" class="form-control select2 disabled" required>
 											<option value="">Seleccione</option>
 										</select>
 									</div>
@@ -131,21 +131,30 @@
 
 				verifyPersmisos(id_user, tokens, "citys");
 
-				GetUsers("#id_asesora_valoracion-filter")
+				GetClinic("#clinic")
+
 
 			});
 
 
-			$("#id_asesora_valoracion-filter").change(function (e) { 
-				list("", $("#id_asesora_valoracion-filter").val())
+			$("#clinic").change(function (e) { 
+				list("")
 			});
 
 
-			function list(cuadro, adviser) {
+			function list(cuadro) {
 				var data = {
 					"id_user": id_user,
 					"token"  : tokens,
 				};
+
+
+				var clinic = 0
+				if($("#clinic").val() != ""){
+					clinic = $("#clinic").val()
+				}
+
+
 
 
 				$("#div-input-edit").css("display", "none")
@@ -162,7 +171,7 @@
 						"method":"GET",
 						 "url":''+url+'/api/schedule',
 						 "data": {
-							"adviser"       : adviser
+							"clinic" : clinic
 						},
 
 						"dataSrc":""

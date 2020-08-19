@@ -820,11 +820,27 @@ class CalendarController extends Controller
         $data = [];
 
 
+
+        $clinic = 0;
+        if(isset($request["clinic"])){
+            $clinic = $request["clinic"];
+        }
+
+
+
         $valorations = DB::table("valuations")
                             ->select("valuations.*", "clinic.nombre as name_clinic", "clientes.nombres as name_client")
                             ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic", 'left')
                             ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente", 'left')
                             ->where("fecha", date("Y-m-d"))
+
+                            ->where(function ($query) use ($clinic) {
+                                if($city != 0){
+                                    $query->where("valuations.clinic", $clinic);
+                                }
+                            }) 
+
+
 
                             ->orderBy("name_client", "ASC")
                             ->get();
@@ -843,6 +859,15 @@ class CalendarController extends Controller
                             ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic", 'left')
                             ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente", 'left')
                             ->where("fecha", date("Y-m-d"))
+
+
+                            ->where(function ($query) use ($clinic) {
+                                if($city != 0){
+                                    $query->where("preanesthesias.clinic", $clinic);
+                                }
+                            }) 
+
+
 
                             ->orderBy("name_client", "ASC")
                             ->get();
@@ -864,6 +889,15 @@ class CalendarController extends Controller
                             ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente", 'left')
                             ->where("fecha", date("Y-m-d"))
 
+
+                            ->where(function ($query) use ($clinic) {
+                                if($city != 0){
+                                    $query->where("surgeries.clinic", $clinic);
+                                }
+                            }) 
+
+
+
                             ->orderBy("name_client", "ASC")
                             ->get();
  
@@ -881,6 +915,14 @@ class CalendarController extends Controller
                         ->join("clientes", "clientes.id_cliente", "=", "revision_appointment.id_paciente", 'left')
                         ->join("appointments_agenda", "appointments_agenda.id_revision", "=", "revision_appointment.id_revision")
                         ->where("appointments_agenda.fecha", date("Y-m-d"))
+
+                        ->where(function ($query) use ($clinic) {
+                            if($city != 0){
+                                $query->where("revision_appointment.clinica", $clinic);
+                            }
+                        })
+
+
                         ->get();
 
 
@@ -900,6 +942,14 @@ class CalendarController extends Controller
                             ->join("clinic", "clinic.id_clinic", "=", "masajes.clinic", 'left')
                             ->join("clientes", "clientes.id_cliente", "=", "masajes.id_cliente", 'left')
                             ->where("fecha", date("Y-m-d"))
+
+                            ->where(function ($query) use ($clinic) {
+                                if($city != 0){
+                                    $query->where("masajes.clinic", $clinic);
+                                }
+                            })
+
+
 
                             ->orderBy("name_client", "ASC")
                             ->get();
