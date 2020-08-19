@@ -815,7 +815,7 @@ class CalendarController extends Controller
 
 
 
-     public function GetSchedule(){
+     public function GetSchedule(Request $request){
 
         $data = [];
 
@@ -835,6 +835,7 @@ class CalendarController extends Controller
                             ->where("fecha", date("Y-m-d"))
 
                             ->where(function ($query) use ($clinic) {
+                               
                                 if($clinic != 0){
                                     $query->where("valuations.clinic", $clinic);
                                 }
