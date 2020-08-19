@@ -835,7 +835,7 @@ class CalendarController extends Controller
                             ->where("fecha", date("Y-m-d"))
 
                             ->where(function ($query) use ($clinic) {
-                                if($city != 0){
+                                if($clinic != 0){
                                     $query->where("valuations.clinic", $clinic);
                                 }
                             }) 
@@ -862,7 +862,7 @@ class CalendarController extends Controller
 
 
                             ->where(function ($query) use ($clinic) {
-                                if($city != 0){
+                                if($clinic != 0){
                                     $query->where("preanesthesias.clinic", $clinic);
                                 }
                             }) 
@@ -891,7 +891,7 @@ class CalendarController extends Controller
 
 
                             ->where(function ($query) use ($clinic) {
-                                if($city != 0){
+                                if($clinic != 0){
                                     $query->where("surgeries.clinic", $clinic);
                                 }
                             }) 
@@ -917,7 +917,7 @@ class CalendarController extends Controller
                         ->where("appointments_agenda.fecha", date("Y-m-d"))
 
                         ->where(function ($query) use ($clinic) {
-                            if($city != 0){
+                            if($clinic != 0){
                                 $query->where("revision_appointment.clinica", $clinic);
                             }
                         })
@@ -944,7 +944,7 @@ class CalendarController extends Controller
                             ->where("fecha", date("Y-m-d"))
 
                             ->where(function ($query) use ($clinic) {
-                                if($city != 0){
+                                if($clinic != 0){
                                     $query->where("masajes.clinic", $clinic);
                                 }
                             })
