@@ -1941,8 +1941,6 @@
 					dataType:'JSON',
 					
 					success: function(data){
-
-
 						$("#testimony").prop("checked", data.testimony ? true : false)
 						$("#testimony_date").val(data.testimony_date)
 
@@ -1953,7 +1951,6 @@
 						$("#califications_date").val(data.califications_date)
 
 						$("#survey").prop("checked", data.survey ? true : false)
-						
 					}
 				});
 

@@ -309,6 +309,11 @@ Route::get('clients/tasks/advisers/{id_client}', 'ClientsController@GetTasksAdvi
 
 
 
+Route::resource('califications/advisers', 'CalificationsAdvisersController');
+
+
+
+
 Route::get('generate/token/chat', function () {
     
     $users = User::get();
