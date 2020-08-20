@@ -419,7 +419,7 @@
                             <div class="col-md-3">
                                 <label for="survey"><b>Encuesta Asesora</b></label>
                                 <label class='container-check'>
-                                    <input type='checkbox' name='survey' class='checkitem chk-col-blue' id='survey' value='1'>
+                                    <input type='checkbox' name='survey' class='checkitem chk-col-blue' id='survey' value='1' disabled>
                                     <span class='checkmark'></span>
                                     <label for=''></label>
                                 </label>

@@ -2704,6 +2704,23 @@ class ClientsController extends Controller
 
 
 
+    public function GetTasksAdvisers($id_client){
+
+        $data = DB::table("clients_tasks_adsviser")->where("id_client", $id_client)->first();
+
+
+        $satisfaction_survey = DB::table("satisfaction_survey")->where("id_client", $id_client)->first();
+
+        if($satisfaction_survey){
+            $data->survey = 1;
+        }
+
+
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+
     /**
      * Remove the specified resource from storage.
      *

@@ -1763,29 +1763,6 @@
 
 
 
-
-
-
-					$("#testimony").prop("checked", data.testimony ? true : false)
-					$("#testimony_date").val(data.testimony_date)
-
-					$("#before_and_after").prop("checked", data.before_and_after ? true : false)
-					$("#before_and_after_date").val(data.before_and_after_date)
-
-					$("#califications").prop("checked", data.califications ? true : false)
-					$("#califications_date").val(data.califications_date)
-
-					$("#survey").prop("checked", data.survey ? true : false)
-
-
-
-
-
-
-
-
-
-
 					$("#eps_edit").val(data.eps)
 					$("#height_edit").val(data.height)
 					$("#weight_edit").val(data.weight)
@@ -1930,28 +1907,6 @@
 
 
 
-					/*var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
-					$('#iframeValuationsEdit').attr('src', url);
-
-
-					var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/1"
-					$('#iframepPreanestesiaEdit').attr('src', url);
-
-
-					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/1"
-					$('#iframepCirugiaEdit').attr('src', url);
-
-
-					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/1"
-					$('#iframepRevisionEdit').attr('src', url);
-
-
-					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/1"
-					$('#iframepTracingEdit').attr('src', url);
-
-
-
-*/
 					valuations("#tab4_edit", "#iframeValuationsEdit", data)
 					preanestesias("#tab5_edit", "#iframepPreanestesiaEdit", data)
 					surgeries("#tab6_edit", "#iframepCirugiaEdit", data)
@@ -1966,7 +1921,43 @@
 
 					
 					cuadros('#cuadro1', '#cuadro4');
+
+
+
+					getTasksAdvisers(data.id_cliente)
 				});
+			}
+
+
+
+
+			function getTasksAdvisers(id_client){
+
+
+				var url=document.getElementById('ruta').value;
+				$.ajax({
+					url:''+url+'/api/clients/tasks/advisers/'+id_client,
+					type:'GET',
+					dataType:'JSON',
+					
+					success: function(data){
+
+
+						$("#testimony").prop("checked", data.testimony ? true : false)
+						$("#testimony_date").val(data.testimony_date)
+
+						$("#before_and_after").prop("checked", data.before_and_after ? true : false)
+						$("#before_and_after_date").val(data.before_and_after_date)
+
+						$("#califications").prop("checked", data.califications ? true : false)
+						$("#califications_date").val(data.califications_date)
+
+						$("#survey").prop("checked", data.survey ? true : false)
+						
+					}
+				});
+
+
 			}
 
 			

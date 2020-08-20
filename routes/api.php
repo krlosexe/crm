@@ -303,6 +303,9 @@ Route::get('survey/adviser/{user_id}', 'AdviserController@SurveyAdviser');
 
 
 
+Route::get('clients/tasks/advisers/{id_client}', 'ClientsController@GetTasksAdvisers');
+
+
 
 
 
