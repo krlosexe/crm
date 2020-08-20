@@ -121,8 +121,7 @@ class ClientsController extends Controller
                                        "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line", 
                                        "dp2.nombres as name_update",
                                        "dp2.apellido_p as apellido_update",
-                                       "citys.nombre as name_city",
-                                       "clients_tasks_adsviser.*"
+                                       "citys.nombre as name_city"
                 )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
@@ -134,7 +133,7 @@ class ClientsController extends Controller
                                 ->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
 
 
-                                ->join("clients_tasks_adsviser", "clients_tasks_adsviser.id_client", "=", "clientes.id_cliente", "left")
+                               // ->join("clients_tasks_adsviser", "clients_tasks_adsviser.id_client", "=", "clientes.id_cliente", "left")
 
 
 
@@ -286,8 +285,7 @@ class ClientsController extends Controller
                                        "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line", 
                                        "dp2.nombres as name_update",
                                        "dp2.apellido_p as apellido_update",
-                                       "citys.nombre as name_city",
-                                       "clients_tasks_adsviser.*"
+                                       "citys.nombre as name_city"
             )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
@@ -296,7 +294,7 @@ class ClientsController extends Controller
 
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
-                                ->join("clients_tasks_adsviser", "clients_tasks_adsviser.id_client", "=", "clientes.id_cliente", "left")
+                                //->join("clients_tasks_adsviser", "clients_tasks_adsviser.id_client", "=", "clientes.id_cliente", "left")
                                 //->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
 
                                

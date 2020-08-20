@@ -346,3 +346,14 @@ Route::get('form_satisfaction_survey/{id_client}', function ($id_client) {
 
 
 
+
+Route::get('califications', function () {
+    return view('citas.valuations.gestion');
+});
+
+
+
+
+
+
+
