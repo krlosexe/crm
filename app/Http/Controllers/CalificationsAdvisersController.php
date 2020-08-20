@@ -12,12 +12,56 @@ class CalificationsAdvisersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+
+        $adviser = 0;
+        if(isset($request["adviser"])){
+            $adviser = $request["adviser"];
+        }
+
+
+        $date_init = 0;
+        if(isset($request["date_init"]) && $request["date_init"] != ""){
+            $date_init = $request["date_init"];
+        }
+
+
+        $date_finish = 0;
+        if(isset($request["date_finish"]) && $request["date_finish"] != ""){
+            $date_finish = $request["date_finish"];
+        }
+
+
+
+
+
         $data = CalificationsAdvisers::selectRaw("califications_advisers.*, CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as name_adviser")
                                         ->join("users", "users.id", "=", "califications_advisers.id_user")
                                         ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
                                         ->orderBy("califications_advisers.id", "DESC")
+
+                                        ->where(function ($query) use ($adviser) {
+                                            if($adviser != 0){
+                                                $query->whereIn("califications_advisers.id_user", $adviser);
+                                            }
+                                        }) 
+
+
+                                        ->where(function ($query) use ($date_init) {
+                                            if($date_init != 0){
+                                                $query->where("califications_advisers.fecha", ">=", $date_init);
+                                            }
+                                        }) 
+        
+                                        ->where(function ($query) use ($date_finish) {
+                                            if($date_finish != 0){
+                                                $query->where("califications_advisers.fecha", "<=", $date_finish);
+                                            }
+                                        }) 
+
+
                                         ->get();
         return response()->json($data)->setStatusCode(200);
     }
