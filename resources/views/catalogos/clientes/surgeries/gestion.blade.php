@@ -549,6 +549,19 @@
 					$("#followers-edit").trigger("change");
 
 
+					$("#amount-edit").val(number_format(data.amount))
+					var html = ""
+					$.map(data.aditionals, function (item, key) {
+						html += "<div class='col-md-2'></div>"
+						html += "<div class='col-md-6'><input type='text' value='"+item.description+"' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
+						html += "<div class='col-md-4'><input type='text' value='"+number_format(item.price_aditional ,2)+"'  class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+						html += "<br><br>"
+					});
+
+
+					$("#additional_edit").html(html)
+
+
 
 					cuadros('#cuadro1', '#cuadro4');
 					$("#id_edit").val(data.id_surgeries)
@@ -753,13 +766,48 @@
 				var html = ""
 				
 				html += "<div class='col-md-6'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-				html += "<div class='col-md-6'><input type='text' class='form-control' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+				html += "<div class='col-md-6'><input type='text' class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
 				html += "<br><br>"
 				
 
 				$("#additional").append(html)
+
+
+				$(".monto_formato_decimales").change(function() {   
+
+					if($(this).val() != ""){  
+						$(this).val(number_format($(this).val(), 2));   
+					}       
+				});
 				
 			});
+
+
+
+			$("#add-additional_edit").click(function (e) { 
+				
+				var html = ""
+				
+				html += "<div class='col-md-2'></div>"
+				html += "<div class='col-md-6'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
+				html += "<div class='col-md-4'><input type='text' class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+				html += "<br><br>"
+				
+
+				$("#additional_edit").append(html)
+
+
+				$(".monto_formato_decimales").change(function() {   
+
+					if($(this).val() != ""){  
+						$(this).val(number_format($(this).val(), 2));   
+					}       
+				});
+				
+			});
+
+
+
 
 
 					

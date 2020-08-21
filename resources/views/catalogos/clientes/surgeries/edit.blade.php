@@ -65,7 +65,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-group">
                               <label for=""><b>Tipo</b></label>
@@ -76,18 +76,6 @@
                           </div>
                         </div>
                     </div>
-
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <div class="form-group">
-                              <label for=""><b>Monto de la Cirugia</b></label>
-                              <input type="text" name="amount" id="amount-edit" class="monto_formato_decimales form-control" required>
-                          </div>
-                        </div>
-                    </div>
-
-
 
 
 
@@ -202,6 +190,41 @@
                       </div>
                     
                   </div>
+                  
+
+                  <br><br>
+
+
+
+                  <div class="row">
+                    <div class="col-md-2">
+                            
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="form-group">
+                            <label for=""><b>Monto de la Cirugia</b></label>
+                            <input type="text" name="amount" id="amount-edit" class="monto_formato_decimales form-control" required>
+                        </div>
+                        </div>
+                    </div>
+
+
+                  <div class="col-md-4">
+                      <br>
+                      <button type="button" id="add-additional_edit" class="btn btn-primary btn-user">
+                          Agregar Adicionales <i class="fa fa-plus"></i>
+                      </button>
+                  </div>
+
+                </div>
+
+                <div class="row" id="additional_edit">
+                  
+                </div>
+
+
+
 
               </div>
 

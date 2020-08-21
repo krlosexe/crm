@@ -45,6 +45,19 @@ class Surgeries extends Model
 
 
 
+    public function aditionals(){
+        
+      return $this->hasMany('App\SurgeriesAdditional', 'id_surgerie') ;
+      
+    }
+
+
+
+
+
+
+
+
 
 
 

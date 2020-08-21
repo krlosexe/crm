@@ -152,7 +152,7 @@
                     </div>
                 </div>
 
-<!--
+
                 <div class="col-md-6">
                     <br>
                     <button type="button" id="add-additional" class="btn btn-primary btn-user">
@@ -164,9 +164,8 @@
 
               <div class="row" id="additional">
                  
-              </div>-->
-
               </div>
+
            </div>
 
 

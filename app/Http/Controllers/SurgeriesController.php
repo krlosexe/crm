@@ -7,6 +7,7 @@ use App\Auditoria;
 use App\SurgeriesPayments;
 use App\Comments;
 use App\FollwersEvents;
+use App\SurgeriesAdditional;
 use App\LogsClients;
 use Illuminate\Http\Request;
 use DB;
@@ -56,6 +57,7 @@ class SurgeriesController extends Controller
                                 ->with("payments")
                                 ->with("followers")
                                 ->with("procedures")
+                                ->with("aditionals")
 
 
 
@@ -112,6 +114,8 @@ class SurgeriesController extends Controller
 
                                 ->with("payments")
                                 ->with("followers")
+                                ->with("aditionals")
+
 
                                 ->where("surgeries.id_cliente", $id)
                                 ->where("auditoria.tabla", "surgeries")
@@ -139,6 +143,7 @@ class SurgeriesController extends Controller
     public function store(Request $request)
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
+
 
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
@@ -202,6 +207,27 @@ class SurgeriesController extends Controller
                 }
                 
             }
+
+
+
+            if(isset($request->aditional)){
+
+                foreach($request->aditional as $key => $value){
+                    $array = [];
+                    $array["id_surgerie"]     = $store["id_surgeries"];
+                    $array["id_user"]         = $request["id_user"];
+                    $array["description"]     = $value;
+
+                    $array["price_aditional"] = str_replace('.', '', $request["price_aditional"][$key]);
+                    $array["price_aditional"] = str_replace(',', '.', $array["price_aditional"]);
+
+                    SurgeriesAdditional::create($array);
+                }
+                
+            }
+
+
+
 
             DB::table("events_client")->insert([
                 "event"     => "Cirugia",
@@ -294,6 +320,29 @@ class SurgeriesController extends Controller
                     $SurgeriesPayments->save();
                 }    
             }
+
+
+
+
+            SurgeriesAdditional::where('id_surgerie', $surgeries)->delete();
+            if(isset($request->aditional)){
+
+                foreach($request->aditional as $key => $value){
+                    $array = [];
+                    $array["id_surgerie"]     = $surgeries;
+                    $array["id_user"]         = $request["id_user"];
+                    $array["description"]     = $value;
+
+                    $array["price_aditional"] = str_replace('.', '', $request["price_aditional"][$key]);
+                    $array["price_aditional"] = str_replace(',', '.', $array["price_aditional"]);
+
+                    SurgeriesAdditional::create($array);
+                }
+                
+            }
+
+
+
 
 
             // if(sizeof($valid) > 0){
