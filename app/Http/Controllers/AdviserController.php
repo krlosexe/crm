@@ -384,6 +384,7 @@ class AdviserController extends Controller
         $data = DB::table("califications_advisers")
                     ->selectRaw("count(id) as qty")
                     ->where("califications_advisers.id_user", $id_adviser)
+                    ->where("califications_advisers.type", "Calificacion")
                     ->whereRaw("month(califications_advisers.fecha) = ".date("m")." ")
                     ->first();
 

@@ -230,6 +230,19 @@
 								
 							<div class="row">
 
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Filtrar por : Tipo</b></label>
+										<select name="type" id="type-filter" class="form-control disabled">
+											<option value="0">Seleccione</option>
+											<option value="Calificacion">Calificacion de Google</option>
+                          					<option value="Testimonio">Testimonio</option>
+										</select>
+									</div>
+								</div>
+
+
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for=""><b>Filtrar por : Asesora</b></label>
@@ -263,6 +276,7 @@
 			                  <thead>
 			                    <tr>
 								  <th>Acciones</th>
+								  <th>Tipo</th>
 								  <th>Asesor</th>
 								  <th>Descripcion</th>
 								  <th>Fecha de Calificacion</th>
@@ -346,7 +360,7 @@
 			});
 
 
-			$("#date_init, #date_finish").change(function (e) { 
+			$("#date_init, #date_finish, #type-filter").change(function (e) { 
 				list();
 			});
 
@@ -373,6 +387,7 @@
 				};
 
 				var adviser = $("#id_asesora_valoracion-filter").val()
+				var type    = $("#type-filter").val()
 
 				const date_init   = $("#date_init").val()
 				const date_finish = $("#date_finish").val()
@@ -395,6 +410,7 @@
 							"id_user" : id_user,
 							"token"   : tokens,
 							"adviser" : adviser,
+							"type"    : type,
 							"date_init"   : date_init,
 							"date_finish" : date_finish
 						},
@@ -417,6 +433,7 @@
 								return botones;
 							}
 						},
+						{"data": "type"},
 						{"data": "name_adviser"},
 						{"data": "description"},
 						{"data": "fecha"},
@@ -579,7 +596,7 @@
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
 
-					
+					$("#type_edit").val(data.type)
 					$("#description_edit").val(data.description)
 					$("#fecha_edit").val(data.fecha)
 

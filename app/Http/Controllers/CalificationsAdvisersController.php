@@ -16,6 +16,14 @@ class CalificationsAdvisersController extends Controller
     {
 
 
+        $type = 0;
+        
+        if(isset($request["type"])){
+            $type = $request["type"];
+        }
+
+       
+
         $adviser = 0;
         if(isset($request["adviser"])){
             $adviser = $request["adviser"];
@@ -35,12 +43,20 @@ class CalificationsAdvisersController extends Controller
 
 
 
+       
 
 
         $data = CalificationsAdvisers::selectRaw("califications_advisers.*, CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as name_adviser")
                                         ->join("users", "users.id", "=", "califications_advisers.id_user")
                                         ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
                                         ->orderBy("califications_advisers.id", "DESC")
+
+                                        ->where(function ($query) use ($type) {
+                                            if($type != "0"){
+                                               
+                                                $query->where("califications_advisers.type", $type);
+                                            }
+                                        }) 
 
                                         ->where(function ($query) use ($adviser) {
                                             if($adviser != 0){

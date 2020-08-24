@@ -11,6 +11,19 @@
            <div class="col-md-12">
               
               <div class="row">
+
+              <div class="col-md-3">
+                  <div class="form-group">
+                        <label for=""><b>Tipo</b></label>
+                        <select name="type" id="type" class="form-control" required>
+                          <option value="">Seleccione</option>
+                          <option value="Calificacion">Calificacion de Google</option>
+                          <option value="Testimonio">Testimonio</option>
+                        </select>
+                    </div>
+                </div>
+
+
                 <div class="col-md-6">
                   <div class="form-group">
                         <label for=""><b>Descripcion</b></label>

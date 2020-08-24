@@ -8,7 +8,7 @@ class CalificationsAdvisers extends Model
 {
 
     protected $fillable = [
-        'id_user', 'description', 'fecha', 'evidence'
+        'id_user', 'type', 'description', 'fecha', 'evidence'
     ];
 
     protected $table         = 'califications_advisers';
