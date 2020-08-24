@@ -313,6 +313,12 @@ Route::resource('califications/advisers', 'CalificationsAdvisersController');
 
 
 
+Route::get('report/general', 'AdviserController@ReportGeneral');
+
+
+
+
+
 
 Route::get('generate/token/chat', function () {
     

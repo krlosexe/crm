@@ -454,7 +454,7 @@
 				$('#summernote').summernote("reset");
 
 				$("#code_prp-store").removeAttr("required")
-				$("#code_prp-store").attr("disabled", "disabled")
+			//	$("#code_prp-store").attr("disabled", "disabled")
 				$("#way_to_pay-store").attr("required", "required")
 				$("#way_to_pay-store").removeAttr("disabled")
 
@@ -718,8 +718,9 @@
 						$("#code_prp-edit").val("")
 					}else{
 						$("#pay_consultation_edit").prop("checked", false)
-						$("#code_prp-edit").val(data.code_prp)
 					}
+
+					$("#code_prp-edit").val(data.code_prp)
 
 					$("#way_to_pay-edit").val(data.way_to_pay)
 
@@ -1007,7 +1008,7 @@
 					$("#way_to_pay-store").removeAttr("required")
 				}else{
 					$("#code_prp-store").removeAttr("required")
-					$("#code_prp-store").attr("disabled", "disabled")
+					//$("#code_prp-store").attr("disabled", "disabled")
 					$("#way_to_pay-store").attr("required", "required")
 				}
 
@@ -1041,7 +1042,7 @@
 					$("#way_to_pay-edit").removeAttr("required")
 				}else{
 					$("#code_prp-edit").removeAttr("required")
-					$("#code_prp-edit").attr("disabled", "disabled")
+					//$("#code_prp-edit").attr("disabled", "disabled")
 					$("#way_to_pay-edit").attr("required", "required")
 				}
 

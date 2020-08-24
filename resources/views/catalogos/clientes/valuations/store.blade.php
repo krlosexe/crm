@@ -154,7 +154,7 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for=""><b>Código PRP de quien remite</b></label>
-                            <input type="text" name="code_prp" id="code_prp-store" class="form-control" disabled>
+                            <input type="text" name="code_prp" id="code_prp-store" class="form-control">
                        </div>
                       </div>
 

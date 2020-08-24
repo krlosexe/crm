@@ -1950,7 +1950,7 @@
 						//$("#califications").prop("checked", data.califications ? true : false)
 						//$("#califications_date").val(data.califications_date)
 
-						//$("#survey").prop("checked", data.survey ? true : false)
+						$("#survey").prop("checked", data.survey ? true : false)
 					}
 				});
 

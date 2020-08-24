@@ -9,7 +9,7 @@ use App\Valuations;
 use App\Surgeries;
 use App\Preanesthesia;
 use App\Masajes;
-
+use DateTime;
 use DB;
 class AdviserController extends Controller
 {
@@ -395,6 +395,35 @@ class AdviserController extends Controller
 
 
 
+    public function QtyMonthValorations($user_id){
+        
+        $data = Valuations::selectRaw("count(id_valuations) as qty")
+                            ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
+                            ->where("auditoria.tabla", "valuations")
+                            ->where("valuations.status", 1)
+                            ->where("auditoria.usr_regins", $user_id)
+                            ->whereRaw("month(fecha) = ".date("m")." ")
+                            ->first();
+
+        return response()->json($data)->setStatusCode(200);
+
+    }
+
+
+    public function QtyMonthSurgeries($user_id){
+        
+        $data = Surgeries::selectRaw("count(id_surgeries) as qty")
+                            ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
+                            ->where("surgeries.status_surgeries", 1)
+                            ->where("auditoria.tabla", "surgeries")
+                            ->where("auditoria.usr_regins", $user_id)
+                            ->whereRaw("month(fecha) = ".date("m")." ")
+                            ->first();
+
+        return response()->json($data)->setStatusCode(200);
+
+    }
+
 
 
 
@@ -444,7 +473,98 @@ class AdviserController extends Controller
 
 
 
+    public function IcomeMonth($id_user){
 
+        $date_init = date("Y-m")."-01";
+        $date_end  = date("Y-m")."-30";
+
+        $fecha = new DateTime();
+        $fecha->modify('last day of this month');
+        $date_end =  $fecha->format('Y-m-d'); // imprime por ejemplo: 31/12/2012
+
+
+        $data = DB::table("surgeries")
+
+                        ->selectRaw("SUM(surgeries.amount) as amount")
+
+                        ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
+                        ->where("surgeries.fecha", ">=", $date_init)
+                        ->where("surgeries.fecha", "<=", $date_end)
+                        ->where("surgeries.status_surgeries", 1)
+                        ->where("auditoria.tabla", "surgeries")
+                        ->where("auditoria.usr_regins", $id_user)
+
+                        ->first();
+
+
+
+        $surgeries = DB::table("surgeries")
+
+                        ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
+                        ->where("surgeries.fecha", ">=", $date_init)
+                        ->where("surgeries.fecha", "<=", $date_end)
+                        ->where("surgeries.status_surgeries", 1)
+                        ->where("auditoria.tabla", "surgeries")
+                        ->where("auditoria.usr_regins", $id_user)
+
+                        ->get();
+
+        $total_aditionals = 0;
+        foreach($surgeries as $value){
+           
+            $data_aditionals = DB::table("surgeries_additional")
+                                ->selectRaw("SUM(price_aditional) as total")
+                                ->where("id_surgerie", $value->id_surgeries)
+                                ->first();
+
+            $total_aditionals = $total_aditionals + $data_aditionals->total;
+           
+
+        }
+
+        $total_icome = $total_aditionals + $data->amount;
+
+
+     //   echo json_encode($data);
+        return $total_icome;
+    }
+
+
+
+
+
+
+    public function ReportGeneral(){
+
+
+        $advisers = DB::table("users")
+                        ->selectRaw("users.id,  CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as name_adviser")
+                        ->where("users.id_rol", 9)
+                        ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+                        ->get();
+        $data = [];
+        foreach($advisers as $adviser){
+            
+            $array_adviser["name"]                 = $adviser->name_adviser;
+            $array_adviser["prp"]                  = $this->QtyPrpMonth($adviser->id)->original->qty;
+            $array_adviser["califications_google"] = $this->QtyCalificationsGoogle($adviser->id)->original->qty;
+            $array_adviser["valorations"]          = $this->QtyMonthValorations($adviser->id)->original->qty;
+            $array_adviser["surgeries"]            = $this->QtyMonthSurgeries($adviser->id)->original->qty;
+            $array_adviser["income"]               = $this->IcomeMonth($adviser->id);
+            
+            $array_adviser["income"]               = $this->IcomeMonth($adviser->id);
+          //  echo json_encode($array_adviser["income"]."<br><br>");
+
+
+            array_push($data, $array_adviser);
+
+        }
+
+
+
+        echo json_encode($data);
+
+    }
 
 
 
