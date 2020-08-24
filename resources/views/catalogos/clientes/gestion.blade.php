@@ -1941,16 +1941,16 @@
 					dataType:'JSON',
 					
 					success: function(data){
-						$("#testimony").prop("checked", data.testimony ? true : false)
-						$("#testimony_date").val(data.testimony_date)
+						//$("#testimony").prop("checked", data.testimony ? true : false)
+						//$("#testimony_date").val(data.testimony_date)
 
 						$("#before_and_after").prop("checked", data.before_and_after ? true : false)
 						$("#before_and_after_date").val(data.before_and_after_date)
 
-						$("#califications").prop("checked", data.califications ? true : false)
-						$("#califications_date").val(data.califications_date)
+						//$("#califications").prop("checked", data.califications ? true : false)
+						//$("#califications_date").val(data.califications_date)
 
-						$("#survey").prop("checked", data.survey ? true : false)
+						//$("#survey").prop("checked", data.survey ? true : false)
 					}
 				});
 

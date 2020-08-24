@@ -349,7 +349,7 @@
 
 
                             <br><br>
-                        
+                      <!--  
                         <div class="row">
                             <div class="col-md-2">
                               
@@ -367,7 +367,7 @@
                                 <label for="testimony_date"><b>Fecha</b></label>
                                 <input type="date" class="form-control" name="testimony_date" id="testimony_date">
                             </div>
-                        </div>
+                        </div>-->
 
 
                         <div class="row">
@@ -390,7 +390,7 @@
                         </div>
 
 
-
+<!--
                         <div class="row">
                              <div class="col-md-2">
                               
@@ -408,7 +408,7 @@
                                 <label for="califications_date"><b>Fecha</b></label>
                                 <input type="date" class="form-control" name="califications_date" id="califications_date">
                             </div>
-                        </div>
+                        </div>-->
 
 
 
