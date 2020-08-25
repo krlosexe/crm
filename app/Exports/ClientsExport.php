@@ -45,6 +45,7 @@ class ClientsExport implements FromView
         $city          = $this->city ;
         $have_initial  = $this->have_initial ;
         $to_prp        = $this->to_prp ;
+        $use_app       = $this->use_app ;
 
         ini_set('memory_limit', '-1'); 
         $data = Clients::select( 'state',      'clientes.id_cliente',
@@ -148,6 +149,11 @@ class ClientsExport implements FromView
                                             }) 
 
 
+                                            ->where(function ($query) use ($use_app) {
+                                                if($use_app == 1){
+                                                    $query->where("clientes.auth_app", 1);
+                                                }
+                                            }) 
 
                                             
 
