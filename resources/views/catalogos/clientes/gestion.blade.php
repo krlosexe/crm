@@ -224,7 +224,7 @@
 
 								<div class="col-md-4">
 									<div class="form-group">
-										<label for="to_prp"><b>Solo los que usan el App</b></label>
+										<label for="use_app"><b>Solo los que usan el App</b></label>
 										<div class="custom-control custom-switch">
 											<input type="checkbox" class="custom-control-input" name="use_app" id="use_app" value="1">
 											<label class="custom-control-label" for="use_app"></label>
