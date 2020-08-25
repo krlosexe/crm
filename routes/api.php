@@ -511,3 +511,24 @@ Route::get('code/phones', function () {
 });
 
 
+
+
+Route::get('sync/auth/app', function () {
+
+    $data = DB::table("auth_users_app")->get();
+
+    foreach($data as $value){
+        
+
+        $user = User::where("id", $value->id_user)->first();
+
+        Clients::where("id_cliente", $user["id_client"])->update(["auth_app" => 1]);
+
+     
+    }
+     return response()->json($data)->setStatusCode(200);
+
+});
+
+
+
