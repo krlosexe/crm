@@ -1448,13 +1448,13 @@ class ClientsController extends Controller
 
                                     ->where(function ($query) use ($date_init) {
                                         if($date_init != 0){
-                                            $query->where("auditoria.fec_regins", ">=", $date_init);
+                                            $query->where("clients_tasks.fecha", ">=", $date_init);
                                         }
                                     }) 
     
                                     ->where(function ($query) use ($date_finish) {
                                         if($date_finish != 0){
-                                            $query->where("auditoria.fec_regins", "<=", $date_finish);
+                                            $query->where("clients_tasks.fecha", "<=", $date_finish);
                                         }
                                     }) 
 
