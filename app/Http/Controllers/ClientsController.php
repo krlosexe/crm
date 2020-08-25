@@ -108,6 +108,15 @@ class ClientsController extends Controller
 
 
 
+            $use_app = 0;
+            if(isset($request["use_app"])){
+                $use_app = $request["use_app"];
+            }
+
+
+
+
+
             $state  = $request["state"];
             $origen = $request["origen"];
 
@@ -425,11 +434,6 @@ class ClientsController extends Controller
 
                                 }) 
 
-
-                               
-
-
-
                                 
                                 ->with("logs")
                                 ->with("phones")
@@ -452,13 +456,19 @@ class ClientsController extends Controller
 
 
 
-            foreach($data as $value){
+            foreach($data as $key => $value){
 
                 $data_user = User::where("id_client",  $value->id_cliente)->first();
                 $user_app  = AuthUsersApp::where("id_user",  $data_user["id"])->first();
 
 
                 $value->auth_app = $user_app ? true : false;
+
+                if(!$user_app && $use_app == 1){
+                    unset($data[$key]);
+                }
+
+               
             }
             
            

@@ -222,6 +222,19 @@
 								</div>
 
 
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="to_prp"><b>Solo los que usan el App</b></label>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" name="use_app" id="use_app" value="1">
+											<label class="custom-control-label" for="use_app"></label>
+										</div>
+									</div>
+								</div>
+
+
+
+
 
 
 							</div>
@@ -492,7 +505,7 @@
 
 
 
-			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter, #city-filter, #procedure-filter, #to_prp").change(function (e) { 
+			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter, #city-filter, #procedure-filter, #to_prp, #use_app").change(function (e) { 
 
 				list("", 1)
 
@@ -564,6 +577,14 @@
 				if($("#to_prp").is(":checked")){
 					to_prp = 1
 				}
+
+
+				var use_app = 0
+				if($("#use_app").is(":checked")){
+					use_app = 1
+				}
+
+
 				
 
 
@@ -595,7 +616,8 @@
 						"code_client"   : code_client,
 						"to_prp"        : to_prp,
 						"have_inital"   : have_inital,
-						"procedure"     : procedure
+						"procedure"     : procedure,
+						"use_app"       : use_app
 					},
 					dataType:'JSON',
 					
