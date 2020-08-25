@@ -438,6 +438,7 @@ class ClientsController extends Controller
 
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+
                                 ->where("auditoria.status", "!=", "0")
 
                               
@@ -447,6 +448,17 @@ class ClientsController extends Controller
 
                                 ->paginate(10);
 
+            }
+
+
+
+            foreach($data as $value){
+
+                $data_user = User::where("id_client",  $value->id_cliente)->first();
+                $user_app  = AuthUsersApp::where("id_user",  $data_user->id)->first();
+
+
+                $value->auth_app = $user_app ? true : false;
             }
             
            
@@ -1578,6 +1590,174 @@ class ClientsController extends Controller
         return response()->json($data)->setStatusCode(200);
         
         
+    }
+
+
+
+
+
+    public function RequestCredit(Request $request){
+
+        $id_line =  $request["id_line"];
+
+        $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                        ->where("users.queue", 0)
+                        ->where("users.id", "!=", 106)
+
+                        ->where(function ($query) use ($id_line) {
+                            if($id_line == "8"){
+                                $query->where("users.id", "!=", 75);
+                            }
+                        })
+
+
+                        ->first();
+
+        if($users){
+
+
+            $client = Clients::where("identificacion", $request["identificacion"])->first();
+            if(($client) && ($request["identificacion"] != "")){
+
+                $data = [
+                    "id_client"       => $client["id_cliente"],
+                    "required_amount" => str_replace(",", "", $request["required_amount"]),
+                    "period"          => $request["period"],
+                    "monthly_fee"     => str_replace(",", "", $request["monthly_fee"])
+                ];
+
+                DB::table("client_request_credit")->insert($data);
+
+                DB::table('clientes')->where("id_cliente", $client["id_cliente"])
+                            ->update(['id_user_asesora' => $users["id"], "id_line" => $request["id_line"]]);
+
+
+                DB::table('auditoria')->where("cod_reg", $client["id_cliente"])
+                            ->where("tabla", "clientes")
+                            ->update(['fec_update' => date("Y-m-d H:i:s")]);
+
+            }else{
+
+                $request["id_user_asesora"] =  $users["id"];
+
+                $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
+                $code                   = substr(str_shuffle($permitted_chars), 0, 4);
+                $request["code_client"] = strtoupper($code);
+                $request["origen"]      = "Formulario Credito";
+
+
+                $cliente = Clients::create($request->all());
+                        
+                $request["id_client"] = $cliente["id_cliente"];
+
+
+
+                $data = [
+                    "id_client"       => $cliente["id_cliente"],
+                    "required_amount" => str_replace(",", "", $request["required_amount"]),
+                    "period"          => $request["period"],
+                    "monthly_fee"     => str_replace(",", "", $request["monthly_fee"])
+                ];
+
+                DB::table("client_request_credit")->insert($data);
+
+
+
+                $id_client = $cliente["id_cliente"];
+                
+                ClientInformationAditionalSurgery::create($request->all());
+                ClientClinicHistory::create($request->all());
+                ClientCreditInformation::create($request->all());
+
+                $auditoria              = new Auditoria;
+                $auditoria->tabla       = "clientes";
+                $auditoria->cod_reg     = $cliente["id_cliente"];
+                $auditoria->status      = 1;
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                $auditoria->fec_update  = date("Y-m-d H:i:s");
+                $auditoria->usr_regins  = $users["id"];
+                $auditoria->save();
+
+
+                $update = User::find($users["id"]);
+                $update->queue = 1;
+                $update->save();
+
+
+                $User =  User::create([
+                    "email"       => $request["email"],
+                    "password"    => md5("123456789"),
+                    "id_rol"      => 19,
+                    "id_client"   => $id_client
+                ]);
+
+                $datos_personales                   = new datosPersonaesModel;
+                $datos_personales->nombres          = $request["nombres"];
+                $datos_personales->apellido_p       = "";
+                $datos_personales->apellido_m       = "afasfa";
+                $datos_personales->n_cedula         = "12412124";
+                $datos_personales->fecha_nacimiento = null;
+                $datos_personales->telefono         = null;
+                $datos_personales->direccion        = null;
+                $datos_personales->id_usuario       = $User->id;
+                $datos_personales->save();
+
+            }
+
+
+
+            $data_adviser   = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
+
+
+            $ConfigNotification = [
+                "tokens" => [$data_adviser["token_notifications"]],
+        
+                "tittle" => "Financiacion",
+                "body"   => "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion",
+                "data"   => ['type' => 'refferers']
+        
+            ];
+        
+            $code = SendNotifications($ConfigNotification);
+
+
+
+
+
+
+            $subject = "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion";
+
+            //$for = $users["email"];
+            $for = "cardenascarlos18@gmail.com";
+
+            $request["msg"]  = "Un Paciente a registrado un Formulario de Credito";
+            $request["apellidos"]        = ".";
+            $request["direccion"]        = ".";
+            $request["fecha_nacimiento"] = date("Y-m-d");
+            Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+
+
+        }else{
+          
+           $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                        ->where("users.queue", 1)
+                        ->update(["queue" => 0]);
+
+            $this->RequestCredit($request);
+       }
+
+
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        return response()->json($data)->setStatusCode(200);
+
+
+        echo json_encode($request->all());
     }
 
 

@@ -319,6 +319,13 @@ Route::get('report/general', 'AdviserController@ReportGeneral');
 
 
 
+Route::post('clients/request/credit', 'ClientsController@RequestCredit');
+
+
+
+
+
+
 
 Route::get('generate/token/chat', function () {
     
