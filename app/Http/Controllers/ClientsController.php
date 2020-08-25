@@ -463,11 +463,6 @@ class ClientsController extends Controller
 
 
                 $value->auth_app = $user_app ? true : false;
-
-                if(!$user_app && $use_app == 1){
-                    unset($data[$key]);
-                }
-
                
             }
             
