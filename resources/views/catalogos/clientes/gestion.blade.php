@@ -690,7 +690,7 @@
 							}
 
 							let authapp = ""
-
+					
 							if(item.auth_app){
 								authapp = '<i class="fab fa-android" style="font-size: 44px; color: #5fce5f"></i>'
 							}
