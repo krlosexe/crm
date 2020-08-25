@@ -455,7 +455,7 @@ class ClientsController extends Controller
             foreach($data as $value){
 
                 $data_user = User::where("id_client",  $value->id_cliente)->first();
-                $user_app  = AuthUsersApp::where("id_user",  $data_user->id)->first();
+                $user_app  = AuthUsersApp::where("id_user",  $data_user["id"])->first();
 
 
                 $value->auth_app = $user_app ? true : false;
