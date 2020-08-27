@@ -2430,6 +2430,10 @@ class ClientsController extends Controller
                 $subject = "Formulario PRP Asesora  Clinica Laser (Financiacion): ".$request["nombres"];
             }
 
+            if(($request["id_line"] == 22)){
+                $subject = "Formulario PRP Asesora  Clínica Especialistas del Poblado (Financiacion): ".$request["nombres"];
+            }
+
 
 
             if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17)){
@@ -2445,6 +2449,8 @@ class ClientsController extends Controller
             if(($request["id_line"] == 20)){
                 $subject = "Formulario PRP Asesora  ".$request["name_line"].": ".$request["nombres"];
             }
+
+
 
 
            // $for = "cardenascarlos18@gmail.com";
