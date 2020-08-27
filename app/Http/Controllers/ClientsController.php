@@ -2205,6 +2205,301 @@ class ClientsController extends Controller
 
 
 
+    public function ClientFormsPrpAdviser(Request $request){
+
+       
+        $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                        ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                        ->where("users.id", $request["adviser"])
+                        ->where("users.id", "!=", 69)
+                        ->first();
+
+
+       if($users){
+
+            $request["name_user"]   = $users["nombres"]." ".$users["apellido_p"];
+
+            $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $code                   = substr(str_shuffle($permitted_chars), 0, 4);
+            $request["code_client"] = strtoupper($code);
+            $request["prp"]         = "Si";
+            $request["created_prp"] = date("Y-m-d");
+ 
+            $request["to_db"]       = "1";
+
+            $request["id_user_asesora"] =  $users["id"];
+            $request["origen"] =  "PRP Asesora ". $request["name_user"];
+
+
+            $client = Clients::where("identificacion", $request["identificacion"])->get();
+        
+
+            if((sizeof($client) > 0) && ($request["identificacion"] != "")){
+
+
+                foreach($client as $value){
+
+
+                    if($value["prp"] == "Si"){
+                        $data = array('mensagge' => "Ya se encuentra registrado en el PRP con el codigo: ".$value["code_client"]);    
+                        return response()->json($data)->setStatusCode(400);
+                    }
+                    $update = array(
+                        "code_client"     => $request["code_client"],
+                        "prp"             => "Si",
+                        "created_prp"     => date("Y-m-d"),
+                        "to_db"           => "1",
+                        "origen"          =>  $request["origen"],
+                        "telefono"        =>  $request["telefono"],
+                        "id_user_asesora" => $request["id_user_asesora"],
+                        "id_line"         => $request["id_line"]
+                    );
+
+                    Clients::find($value["id_cliente"])->update($update);
+                    DB::table('auditoria')->where("cod_reg", $value["id_cliente"])
+                            ->where("tabla", "clientes")
+                            ->update(['fec_update' => date("Y-m-d H:i:s")]);
+                    
+                    $id_client = $value["id_cliente"];
+
+
+
+                    $comment = "<b>FECHA EN LA QUE TE OPERASTE CON NOSOTROS:</b> ".$request["fecha_opero"]."<br>";
+                    $comment .= "<b>¿QUE CIRUGÍA TE PRACTICASTE?:</b> ".$request["surgeri"]."<br>";
+                    $comment .= "<b>¿DESEAS QUE TE PROGRAMEMOS UNA CITA DE CONTROL?:</b> ".$request["radios"]."<br>";
+                    $comment .= "<b>EL PAGO DE LA BONIFICACION PREFIERES QUE SEA:</b> ".$request["radiosPago"]."<br>";
+                    $comment .= "<b>SI ELEGISTE PAGO POR TRANSFERENCIA:</b><br>";
+                    $comment .= "<b>Nombre del Titular:</b> ".$request["name_titular"]."<br>";
+                    $comment .= "<b>Numero de Cedula:</b> ".$request["cedula_titular"]."<br>";
+                    $comment .= "<b>Número de Cuenta:</b> ".$request["cuenta_titular"]."<br>";
+                    $comment .= "<b>¿TIENES ALGUNA SUGERENCIA PARA NUESTRO GRUPO?:</b> ".$request["sugrencias"]."<br>";
+
+                    $data["table"]    = "clients";
+                    $data["id_event"] = $id_client;
+                    $data["id_user"]  = $users["id"];
+                    $data["comment"] = $comment;
+
+                    Comments::create($data);
+                }
+
+            }else{  
+
+
+                $cliente = Clients::create($request->all());
+                    
+                $request["id_client"] = $cliente["id_cliente"];
+                
+                ClientInformationAditionalSurgery::create($request->all());
+                ClientClinicHistory::create($request->all());
+                ClientCreditInformation::create($request->all());
+
+                $auditoria              = new Auditoria;
+                $auditoria->tabla       = "clientes";
+                $auditoria->cod_reg     = $cliente["id_cliente"];
+                $auditoria->status      = 1;
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                $auditoria->fec_update  = date("Y-m-d H:i:s");
+                $auditoria->usr_regins  = $users["id"];
+                $auditoria->save();
+
+
+                $id_client = $cliente["id_cliente"];
+
+
+                $comment = "<b>FECHA EN LA QUE TE OPERASTE CON NOSOTROS:</b> ".$request["fecha_opero"]."<br>";
+                $comment .= "<b>¿QUE CIRUGÍA TE PRACTICASTE?:</b> ".$request["surgeri"]."<br>";
+                $comment .= "<b>¿DESEAS QUE TE PROGRAMEMOS UNA CITA DE CONTROL?:</b> ".$request["radios"]."<br>";
+                $comment .= "<b>EL PAGO DE LA BONIFICACION PREFIERES QUE SEA:</b> ".$request["radiosPago"]."<br>";
+                $comment .= "<b>SI ELEGISTE PAGO POR TRANSFERENCIA:</b><br>";
+                $comment .= "<b>Nombre del Titular:</b> ".$request["name_titular"]."<br>";
+                $comment .= "<b>Numero de Cedula:</b> ".$request["cedula_titular"]."<br>";
+                $comment .= "<b>Número de Cuenta:</b> ".$request["cuenta_titular"]."<br>";
+                $comment .= "<b>¿TIENES ALGUNA SUGERENCIA PARA NUESTRO GRUPO?:</b> ".$request["sugrencias"]."<br>";
+
+                $data["table"]    = "clients";
+                $data["id_event"] = $id_client;
+                $data["id_user"]  = $users["id"];
+                $data["comment"] = $comment;
+
+                Comments::create($data);
+
+                
+
+
+                $User =  User::create([
+                    "email"       => $request["email"],
+                    "password"    => md5("123456789"),
+                    "id_rol"      => 17,
+                    "id_client"   => $id_client
+                ]);
+    
+    
+                $datos_personales                   = new datosPersonaesModel;
+                $datos_personales->nombres          = $request["nombres"];
+                $datos_personales->apellido_p       = "";
+                $datos_personales->apellido_m       = "afasfa";
+                $datos_personales->n_cedula         = "12412124";
+                $datos_personales->fecha_nacimiento = null;
+                $datos_personales->telefono         = null;
+                $datos_personales->direccion        = null;
+                $datos_personales->id_usuario       = $User->id;
+                $datos_personales->save();
+
+
+
+            }
+
+
+
+            
+
+
+
+
+
+           /* $data_user = AuthUsersApp::where("id_user", $users["id"])->first();
+
+            $ConfigNotification = [
+                "tokens" => [$data_user["token_notifications"]],
+        
+                "tittle" => "PRP",
+                "body"   => "Se ah registrado un nuevo Afiliado",
+                "data"   => ['type' => 'affiliates']
+        
+            ];
+            $code = SendNotifications($ConfigNotification);
+
+
+
+            */
+
+            $notification["fecha"]    = date("Y-m-d");
+            $notification["title"]    = "Hoy Ingreso de PRP ".$request["nombres"]." codigo: ".$request["code_client"];
+            $notification["id_user"]  = $users["id"];
+            $notification["id_event"] = $id_client;
+            $notification["type"]     = "prp";
+
+            Notification::insert($notification);
+
+
+
+            if($request["id_line"] == 2){
+                $request["name_line"] = "Clínica Especialistas del Poblado (CEP)";
+            }
+
+            if($request["id_line"] == 3){
+                $request["name_line"] = "CiruCredito";
+            }
+
+            if($request["id_line"] == 17){
+                $request["name_line"] = "Doctor Daniel Correa";
+            }
+            if($request["id_line"] == 16){
+                $request["name_line"] = "Planmed";
+            }
+
+
+
+
+            if($request["id_line"] == 18){
+                $request["name_line"] = "CEP";
+            }
+
+            if($request["id_line"] == 14){
+                $request["name_line"] = "Mas Estetic";
+            }
+
+            if($request["id_line"] == 15){
+                $request["name_line"] = "Global Medical";
+            }
+
+
+            if($request["id_line"] == 20){
+                $request["name_line"] = "Linea de Carlos Cardenas No Tocar :D";
+            }
+
+
+
+
+            if(($request["id_line"] == 9)){
+                $subject = "Formulario PRP Asesora  Clinica Laser: ".$request["nombres"];
+            }
+
+            if(($request["id_line"] == 21)){
+                $subject = "Formulario PRP Asesora  Clinica Laser (Financiacion): ".$request["nombres"];
+            }
+
+
+
+            if(($request["id_line"] == 2) || ($request["id_line"] == 3) || ($request["id_line"] == 17)){
+                $subject = "Formulario PRP Asesora  ".$request["name_line"]." : ".$request["nombres"];
+            }
+
+            if(($request["id_line"] == 18) || ($request["id_line"] == 14) || ($request["id_line"] == 15)  || ($request["id_line"] == 16)){
+                $subject = "Formulario PRP Asesora  ".$request["name_line"].": ".$request["nombres"];
+            }
+
+
+
+            if(($request["id_line"] == 20)){
+                $subject = "Formulario PRP Asesora  ".$request["name_line"].": ".$request["nombres"];
+            }
+
+
+           // $for = "cardenascarlos18@gmail.com";
+            $for = $users["email"];
+           // $for = "cardenascarlos18@gmail.com";
+
+            $request["msg"]  = "Wiiii :D";
+
+            Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
+                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+
+            /*
+                Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
+                    $msj->from("cardenascarlos18@gmail.com","CRM");
+                    $msj->subject($subject);
+                    $msj->to("pdtagenciademedios@gmail.com");
+                });
+            */
+
+
+
+
+
+            $data_user = AuthUsersApp::where("id_user", $users["id"])->first();
+
+
+            $ConfigNotification = [
+                "tokens" => [$data_user["token_notifications"]],
+        
+                "tittle" => "PRP",
+                "body"   => 'Se ha registrado un Afiliado PRP: '.$request["nombres"].' codigo: '.$request["code_client"],
+                "data"   => ['type' => 'refferers']
+        
+            ];
+        
+            $code = SendNotifications($ConfigNotification);
+
+
+
+
+
+       }
+
+
+       $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+       return response()->json($data)->setStatusCode(200);
+
+        
+    }
+    
+
+
     public function ClientFormsPrpAdviserLuisa(Request $request){
 
        
@@ -2227,8 +2522,6 @@ class ClientsController extends Controller
 
             $request["id_user_asesora"] =  $users["id"];
             $request["origen"]          =  "PRP Asesora ". $request["name_user"];
-            $request["created_prp"]     = date("Y-m-d");
-
 
 
             $client = Clients::where("identificacion", $request["identificacion"])->get();
@@ -2242,6 +2535,7 @@ class ClientsController extends Controller
                         return response()->json($data)->setStatusCode(400);
                     }
 
+
                     $update = array(
                         "code_client"     => $request["code_client"],
                         "prp"             => "Si",
@@ -2249,8 +2543,7 @@ class ClientsController extends Controller
                         "origen"          =>  $request["origen"],
                         "telefono"        =>  $request["telefono"],
                         "id_user_asesora" => $request["id_user_asesora"],
-                        "id_line"         => $request["id_line"],
-                        "created_prp"     => date("Y-m-d")
+                        "id_line"         => $request["id_line"]
                     );
 
                     Clients::find($value["id_cliente"])->update($update);
@@ -2409,8 +2702,6 @@ class ClientsController extends Controller
         
     }
 
-
-    
 
 
 
