@@ -839,15 +839,15 @@ class ClientsController extends Controller
 
 
 
-                $mensaje = "Bienvenido, tus datos de acceso son: ".$request["email"]." clave: 123456789";
+               // $mensaje = "Bienvenido, tus datos de acceso son: ".$request["email"]." clave: 123456789";
                 
-                $info_email = [
-                    "user_id" => $User->id,
-                    "issue"   => "Bienvenido",
-                    "mensage" => $mensaje,
-                ];
+               // $info_email = [
+                   // "user_id" => $User->id,
+                   // "issue"   => "Bienvenido",
+                   // "mensage" => $mensaje,
+                //];
                 
-                $this->SendEmail($info_email);
+              //  $this->SendEmail($info_email);
 
 
 
