@@ -2522,6 +2522,7 @@ class ClientsController extends Controller
 
             $request["id_user_asesora"] =  $users["id"];
             $request["origen"]          =  "PRP Asesora ". $request["name_user"];
+            $request["created_prp"] = date("Y-m-d");
 
 
             $client = Clients::where("identificacion", $request["identificacion"])->get();
@@ -2542,8 +2543,9 @@ class ClientsController extends Controller
                         "to_db"           => "1",
                         "origen"          =>  $request["origen"],
                         "telefono"        =>  $request["telefono"],
-                        "id_user_asesora" => $request["id_user_asesora"],
-                        "id_line"         => $request["id_line"]
+                        "id_user_asesora" =>  $request["id_user_asesora"],
+                        "id_line"         =>  $request["id_line"],
+                        "created_prp"     => date("Y-m-d")
                     );
 
                     Clients::find($value["id_cliente"])->update($update);
