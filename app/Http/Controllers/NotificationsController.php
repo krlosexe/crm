@@ -385,8 +385,6 @@ class NotificationsController extends Controller
         }
 
 
-
-
         $ConfigNotification = [
             "tokens" => $tokens,
 

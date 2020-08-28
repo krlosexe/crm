@@ -984,10 +984,7 @@ class ClientsController extends Controller
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
         
-            $data = Clients::select("state", "clinic", "id_line", "id_user_asesora", "prp")->find($id_cliente);
-
-           
-
+            $data = Clients::select("state", "clinic", "id_line", "id_user_asesora", "prp", "id_affiliate")->find($id_cliente);
 
 
             if($data->prp == null || $data->prp == "No"){
@@ -997,12 +994,56 @@ class ClientsController extends Controller
                 
             }
 
+
+            $users_affiliate = Clients::selectRaw("auth_users_app.token_notifications")
+                                    ->join("users", "users.id_client", "=", "clientes.id_cliente")
+                                    ->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
+                                    ->where("clientes.id_cliente", $data->id_affiliate)
+                                    ->first();
+
+
+            $users_adviser = User::selectRaw("auth_users_app.token_notifications")->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
+                                    ->where("users.id", $data->id_user_asesora)
+                                    ->first();
+
+
+            $tokens = [];
+            if($users_affiliate){
+                $tokens[] = $users_affiliate["token_notifications"];
+            }
+
+
+            if($users_adviser){
+                $tokens[] = $users_adviser["token_notifications"];
+            }
+
+
+
+            $ConfigNotification = [
+                "tokens" => $tokens,
+    
+                "tittle" => "Tu Paciente fue actualizado",
+                "body"   => "Paciente: ".$request["nombres"]." se  actualizo el estado de: ".$data->state." a ".$request['state'],
+                "data"   => ['type' => 'post']
+    
+            ];
+
+
+
+          
+    
+
             if($data->state != $request["state"]){
                 $version["id_user"]   = $request["id_user"];
                 $version["id_client"] = $id_cliente;
                 $version["event"]     = "Actualizo el estado de: ".$data->state." a ".$request['state'];
 
                 LogsClients::create($version);
+
+                if(sizeof($tokens) > 0){
+                    $code = SendNotifications($ConfigNotification);
+                }
+                
             }
 
            
