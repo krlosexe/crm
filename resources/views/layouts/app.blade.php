@@ -152,7 +152,7 @@
 
 
 
-  <script src="<?= url('/') ?>/js/funciones.js"></script>
+  <script src="<?= url('/') ?>/js/funciones.js?v=<?= rand(1, 100000) ?>"></script>
   
 
   <script>
