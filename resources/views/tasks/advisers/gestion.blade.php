@@ -462,6 +462,11 @@
 				eliminar("#table tbody", table)
 
 
+				if(id_rol == 21){
+					$(".dt-buttons").remove()
+				}
+
+
 			}
 
 
