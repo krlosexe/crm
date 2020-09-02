@@ -8,6 +8,7 @@ use App\Modulos;
 use App\funciones;
 use App\AuthUsers;
 use App\AuthUsersApp;
+use App\AuthUserAppFinancing;
 use App\LogsSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -74,6 +75,87 @@ class Login extends Controller
 
 
     }
+
+
+
+
+
+
+
+    public function AuthAppFinacing(request $request)
+    {	
+
+        if($request["email"] == "" || $request["password"] == ""){
+            return response()->json("El Email y Contraseña son Requeridos")->setStatusCode(400);
+        }
+
+        $users = User::join("datos_personales", "datos_personales.id_usuario", "users.id")
+                         ->where("users.email", $request["email"])
+                         ->where("users.password", md5($request["password"]))
+	    				 ->get();
+
+        if (sizeof($users) > 0) {
+            
+            $token = bin2hex(random_bytes(64));
+
+
+            $token_user  = AuthUserAppFinancing::where("id_user", $users[0]->id)->get();
+
+            foreach ($token_user as $key => $value) {
+                $value->delete();
+            }
+
+            $AuthUsers                       = new AuthUserAppFinancing;
+            $AuthUsers->id_user              = $users[0]->id;
+            $AuthUsers->token                = $token;
+            $AuthUsers->token_notifications  = $request["fcmToken"];
+            $AuthUsers->save();
+            
+            $id_line = null;
+            $code    = null;
+
+           
+            if($users[0]->id_rol == 17){
+
+                $name_rol = "Afiliado";
+
+                $line = DB::table("users")
+                            ->select("clientes.id_line")
+                            ->join("clientes", "clientes.id_cliente", "=", "users.id_client")
+                            ->where("users.id", $users[0]->id)
+                            ->first();
+
+                $id_line = $line->id_line;
+
+
+
+                $client = DB::table("clientes")->where("id_cliente", $users[0]->id_client)->first();
+                $code   = $client->code_client;
+            }
+
+
+            $data = array('user_id'   => $users[0]->id,
+                          'email'     => $users[0]->email,
+                          'nombres'   => $users[0]->nombres." ".$users[0]->apellido_p,
+                          'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/".$users[0]->img_profile,
+                          'token'     => $token,
+                          'code'      => $code,
+                          'line'      => $id_line,
+                          'id_client' => $users[0]->id_client,
+                          'mensagge'  => "Ha iniciado sesion exitosamente",
+                          "type_user" => $name_rol
+                );
+                
+
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("Usuario o contrasena invalida")->setStatusCode(400);
+	    }
+    }
+
+
+
+
 
 
 

@@ -554,6 +554,9 @@
 			function list(cuadro = "", page = 1){
 
 
+			
+
+
 				var url=document.getElementById('ruta').value;
 
 				cuadros(cuadro, "#cuadro1");

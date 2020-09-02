@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Mail;
 use App\AuthUsersApp;
+use App\AuthUserAppFinancing;
 use App\Clients;
 use App\Auditoria;
 use App\ClientClinicHistory;
@@ -1645,6 +1646,36 @@ class ClientsController extends Controller
 
 
 
+    public function GetRequestCredit($id_client){
+
+        $data = DB::table("client_request_credit")->where("id_client", $id_client)->first();
+
+        $data->required_amount = number_format($data->required_amount, 2, ',', '.');
+        $data->monthly_fee     = number_format($data->monthly_fee, 2, ',', '.');
+
+        if($data){
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json([])->setStatusCode(204);
+        }
+        
+    }
+
+
+
+    public function AppRequestCredit(Request $request){
+
+        $request["monthly_fee"] = str_replace(",", "", $request["monthly_fee"]);
+
+        DB::table("client_request_credit")->insert($request->all());
+
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        return response()->json($data)->setStatusCode(200);
+
+    }
+
+
+
 
 
     public function RequestCredit(Request $request){
@@ -1736,10 +1767,11 @@ class ClientsController extends Controller
                 $update->save();
 
 
+                isset($request["password"]) ? $request["password"] = md5($request["password"]) : $request["password"] = md5("123456789");
                 $User =  User::create([
                     "email"       => $request["email"],
-                    "password"    => md5("123456789"),
-                    "id_rol"      => 19,
+                    "password"    => $request["password"],
+                    "id_rol"      => 17,
                     "id_client"   => $id_client
                 ]);
 
@@ -1810,6 +1842,277 @@ class ClientsController extends Controller
 
         echo json_encode($request->all());
     }
+
+
+
+
+
+
+    public function AppStoreRequestCredit(Request $request){
+
+        $id_line =  $request["id_line"];
+
+        $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                      //  ->where("users.queue", 0)
+                        ->where("users.id", "!=", 106)
+
+                        ->where(function ($query) use ($id_line) {
+                            if($id_line == "8"){
+                                $query->where("users.id", "!=", 75);
+                            }
+                        })
+
+
+                        ->inRandomOrder()
+
+
+                        ->first();
+       
+        if($users){ 
+
+
+            $client = Clients::where("identificacion", $request["identificacion"])->first();
+            if(($client) && ($request["identificacion"] != "")){
+
+                DB::table('clientes')->where("id_cliente", $client["id_cliente"])
+                            ->update(['id_user_asesora' => $users["id"], "id_line" => $request["id_line"]]);
+
+
+                DB::table('auditoria')->where("cod_reg", $client["id_cliente"])
+                            ->where("tabla", "clientes")
+                            ->update(['fec_update' => date("Y-m-d H:i:s")]);
+
+
+
+                $User = User::where("id_client", $client["id_cliente"])->first();
+
+                isset($request["password"]) ? $request["password"] = md5($request["password"]) : $request["password"] = md5("123456789");
+
+
+                if(!$User){
+
+                    echo "No existe usesr";
+
+                   $User =  User::create([
+                        "email"       => $request["email"],
+                        "password"    => $request["password"],
+                        "id_rol"      => 17,
+                        "id_client"   => $client["id_cliente"]
+                    ]);
+
+                    $datos_personales                   = new datosPersonaesModel;
+                    $datos_personales->nombres          = $request["nombres"];
+                    $datos_personales->apellido_p       = "";
+                    $datos_personales->apellido_m       = "afasfa";
+                    $datos_personales->n_cedula         = "12412124";
+                    $datos_personales->fecha_nacimiento = null;
+                    $datos_personales->telefono         = null;
+                    $datos_personales->direccion        = null;
+                    $datos_personales->id_usuario       = $User->id;
+                    $datos_personales->save();
+
+                }
+
+                $token_user  = AuthUserAppFinancing::where("id_user", $User->id)->get();
+
+                foreach ($token_user as $key => $value) {
+                    $value->delete();
+                }
+
+                $token = bin2hex(random_bytes(64));
+
+
+    
+                $AuthUsers                       = new AuthUserAppFinancing;
+                $AuthUsers->id_user              = $User->id;
+                $AuthUsers->token                = $token;
+                $AuthUsers->token_notifications  = $request["fcmToken"];
+                $AuthUsers->save();
+
+                
+                $data = array('user_id'   => $User->id,
+                          'email'     => $User->email,
+                          'nombres'   => $request["nombres"],
+                          'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/",
+                          'token'     => $token,
+                          'line'      => 3,
+                          'id_client' => $User->id_client,
+                          'mensagge'  => "Ha iniciado sesion exitosamente",
+                          "type_user" => "Afiliado"
+                );
+
+                $User = User::where("id_client", $client["id_cliente"])->update(["email" => $request["email"], "password" => $request["password"]]);
+
+
+                return response()->json($data)->setStatusCode(200);
+
+
+
+
+
+            }else{
+
+                $request["id_user_asesora"] =  $users["id"];
+
+                $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
+                $code                   = substr(str_shuffle($permitted_chars), 0, 4);
+                $request["code_client"] = strtoupper($code);
+                $request["origen"]      = "Formulario Credito";
+
+
+                $cliente = Clients::create($request->all());
+                        
+                $request["id_client"] = $cliente["id_cliente"];
+
+
+
+                $id_client = $cliente["id_cliente"];
+                
+                ClientInformationAditionalSurgery::create($request->all());
+                ClientClinicHistory::create($request->all());
+                ClientCreditInformation::create($request->all());
+
+                $auditoria              = new Auditoria;
+                $auditoria->tabla       = "clientes";
+                $auditoria->cod_reg     = $cliente["id_cliente"];
+                $auditoria->status      = 1;
+                $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                $auditoria->fec_update  = date("Y-m-d H:i:s");
+                $auditoria->usr_regins  = $users["id"];
+                $auditoria->save();
+
+
+                $update = User::find($users["id"]);
+                $update->queue = 1;
+                $update->save();
+
+
+                isset($request["password"]) ? $request["password"] = md5($request["password"]) : $request["password"] = md5("123456789");
+                $User =  User::create([
+                    "email"       => $request["email"],
+                    "password"    => $request["password"],
+                    "id_rol"      => 17,
+                    "id_client"   => $id_client
+                ]);
+
+                $datos_personales                   = new datosPersonaesModel;
+                $datos_personales->nombres          = $request["nombres"];
+                $datos_personales->apellido_p       = "";
+                $datos_personales->apellido_m       = "afasfa";
+                $datos_personales->n_cedula         = "12412124";
+                $datos_personales->fecha_nacimiento = null;
+                $datos_personales->telefono         = null;
+                $datos_personales->direccion        = null;
+                $datos_personales->id_usuario       = $User->id;
+                $datos_personales->save();
+
+
+
+
+                $token_user  = AuthUserAppFinancing::where("id_user", $User->id)->get();
+
+                foreach ($token_user as $key => $value) {
+                    $value->delete();
+                }
+
+                $token = bin2hex(random_bytes(64));
+
+                $AuthUsers                       = new AuthUserAppFinancing;
+                $AuthUsers->id_user              = $User->id;
+                $AuthUsers->token                = $token;
+                $AuthUsers->token_notifications  = $request["fcmToken"];
+                $AuthUsers->save();
+
+
+
+
+                $data = array('user_id'   => $User->id,
+                          'email'     => $User->email,
+                          'nombres'   => $request["nombres"],
+                          'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/",
+                          'token'     => $token,
+                          'line'      => 3,
+                          'id_client' => $User->id_client,
+                          'mensagge'  => "Ha iniciado sesion exitosamente",
+                          "type_user" => "Afiliado"
+                );
+
+
+                return response()->json($data)->setStatusCode(200);
+
+            }
+
+
+            
+            $data_adviser   = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
+
+
+            $ConfigNotification = [
+                "tokens" => [$data_adviser["token_notifications"]],
+        
+                "tittle" => "Financiacion",
+                "body"   => "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion",
+                "data"   => ['type' => 'refferers']
+        
+            ];
+        
+            $code = SendNotifications($ConfigNotification);
+
+
+
+
+
+
+            $subject = "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion";
+
+            //$for = $users["email"];
+            $for = "cardenascarlos18@gmail.com";
+
+            $request["msg"]  = "Un Paciente a registrado un Formulario de Credito";
+            $request["apellidos"]        = ".";
+            $request["direccion"]        = ".";
+            $request["fecha_nacimiento"] = date("Y-m-d");
+            Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+
+
+           
+
+
+
+        }else{
+          
+           $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                        ->where("users_line_business.id_line", $request["id_line"])
+                        ->where("users.queue", 1)
+                        ->update(["queue" => 0]);
+
+            $this->AppStoreRequestCredit($request);
+
+            $data = array('user_id'   => $User->id,
+                          'email'     => $User->email,
+                          'nombres'   => $request["nombres"],
+                          'avatar'    => "http://pdtclientsolutions.com/crm-public/img/usuarios/profile/",
+                          'token'     => $token,
+                          'line'      => 3,
+                          'id_client' => $User->id_client,
+                          'mensagge'  => "Ha iniciado sesion exitosamente",
+                          "type_user" => "Afiliado"
+                );
+
+
+                return response()->json($data)->setStatusCode(200);
+
+       }
+
+    }
+
+
+
 
 
     public function ClientForms(Request $request){
@@ -1883,7 +2186,7 @@ class ClientsController extends Controller
             $User =  User::create([
                 "email"       => $request["email"],
                 "password"    => md5("123456789"),
-                "id_rol"      => 19,
+                "id_rol"      => 17,
                 "id_client"   => $id_client
             ]);
 

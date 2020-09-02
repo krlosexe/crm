@@ -320,6 +320,17 @@ Route::get('report/general', 'AdviserController@ReportGeneral');
 
 
 Route::post('clients/request/credit', 'ClientsController@RequestCredit');
+Route::post('app/clients/request/credit', 'ClientsController@AppStoreRequestCredit');
+Route::post('app/request/credit', 'ClientsController@AppRequestCredit');
+
+
+Route::get('get/client/request/{id_client}', 'ClientsController@GetRequestCredit');
+
+
+
+
+Route::post('auth/app/financing', 'Login@AuthAppFinacing');
+
 
 
 

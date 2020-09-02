@@ -45,6 +45,12 @@
 
         GetNotifications();
 
+
+        if(id_rol == 21){
+          $(".dt-buttons").remove()
+        }
+
+
       });
     </script>
 
@@ -152,6 +158,13 @@
   <script>
     var user_id = localStorage.getItem('user_id');
     $("#logout").attr("href", "logout/"+user_id)
+
+
+
+    
+
+
+
   </script>
 
 
