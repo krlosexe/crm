@@ -1813,8 +1813,8 @@ class ClientsController extends Controller
 
             $subject = "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion";
 
-            //$for = $users["email"];
-            $for = "cardenascarlos18@gmail.com";
+            $for = $users["email"];
+            //$for = "cardenascarlos18@gmail.com";
 
             $request["msg"]  = "Un Paciente a registrado un Formulario de Credito";
             $request["apellidos"]        = ".";
