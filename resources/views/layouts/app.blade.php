@@ -145,7 +145,7 @@
     <script src="<?= url('/') ?>/vendor/select2-4.0.11/dist/js/select2.min.js"></script>
 
 
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 
 

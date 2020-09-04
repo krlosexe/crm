@@ -1706,7 +1706,8 @@ class ClientsController extends Controller
                     "id_client"       => $client["id_cliente"],
                     "required_amount" => str_replace(",", "", $request["required_amount"]),
                     "period"          => $request["period"],
-                    "monthly_fee"     => str_replace(",", "", $request["monthly_fee"])
+                    "monthly_fee"     => str_replace(",", "", $request["monthly_fee"]),
+                    "interest_rate"   => $request["interest_rate"]
                 ];
 
                 DB::table("client_request_credit")->insert($data);
@@ -1739,7 +1740,8 @@ class ClientsController extends Controller
                     "id_client"       => $cliente["id_cliente"],
                     "required_amount" => str_replace(",", "", $request["required_amount"]),
                     "period"          => $request["period"],
-                    "monthly_fee"     => str_replace(",", "", $request["monthly_fee"])
+                    "monthly_fee"     => str_replace(",", "", $request["monthly_fee"]),
+                    "interest_rate"   => $request["interest_rate"]
                 ];
 
                 DB::table("client_request_credit")->insert($data);

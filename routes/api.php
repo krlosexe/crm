@@ -324,6 +324,18 @@ Route::post('app/clients/request/credit', 'ClientsController@AppStoreRequestCred
 Route::post('app/request/credit', 'ClientsController@AppRequestCredit');
 
 
+
+Route::get('clients/request/financing', 'FinacingController@GetRequestFinancing');
+
+Route::put('clients/request/financing/{id}', 'FinacingController@UpdateRequestFinancing');
+
+Route::get('clients/plan/payments/{id_client}', 'FinacingController@GetPlanPayments');
+
+
+
+
+
+
 Route::get('get/client/request/{id_client}', 'ClientsController@GetRequestCredit');
 
 

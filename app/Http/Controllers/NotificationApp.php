@@ -9,9 +9,10 @@ class NotificationApp extends Controller
 {
     public function index(){
 
+
       $ConfigNotification = [
         "tokens" => [
-            "fem_jxiMamA:APA91bFez7UPh6XCPLjmGIuYx4myvxjLHs-PEL80Ct615XMMA7oOtyWMKDSIAX7G7I831_DJMXoAgbzCJ0W0Vz8e3acs_jns4une2f3sCyL4pwQjQ3oATw46rYJZEiNnkKw6uQf_8ZwV"
+            "dhjvnRDHQNiIFQX0mWmmE_:APA91bEHSAjSRFWruOUXUU1XPV9vofFftrxTTvkQ2XkuJZvfr3tQ8NvVpGGjKWeNSBrgz_lRn0_4FmLu_GYmyPPvU1v2ol0hr1VMli4l-aLIIHjZDDsN2r7knC9kqQLHD9aHfSCjOxdx"
         ],
 
         "tittle" => "Para Leo, de Camila",

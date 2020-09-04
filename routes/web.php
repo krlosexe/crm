@@ -353,6 +353,18 @@ Route::get('califications', function () {
 
 
 
+Route::get('financing', function () {
+    return view('financing.gestion');
+});
+
+
+
+
+
+
+
+
+
 
 
 
