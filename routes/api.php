@@ -66,6 +66,7 @@ Route::get('client/tasks/{id_client}', 'ClientsController@GetTasksByClient');
 Route::get('client/task/status/{id}/{status}', 'ClientsController@TasksStatus');
 
 Route::post('clients/forms', 'ClientsController@ClientForms');
+Route::post('personalizado/clients/forms', 'ClientsController@ClientFormsPersonalizado');
 
 Route::post('clients/forms/prp', 'ClientsController@ClientFormsPrp');
 

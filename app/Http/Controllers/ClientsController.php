@@ -2120,6 +2120,7 @@ class ClientsController extends Controller
     public function ClientForms(Request $request){
 
         $id_line =  $request["id_line"];
+        $id_user =  $request["id_user"];
 
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
@@ -2240,6 +2241,105 @@ class ClientsController extends Controller
 
         
         
+    }
+
+
+    public function ClientFormsPersonalizado(Request $request){
+
+        $id_line =  $request["id_line"];
+        $id_user =  $request["id_user"];
+
+        $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                        
+                        ->where("users.id", $id_user)
+                        ->first();
+        
+        if($users){
+            $client = Clients::where("identificacion", $request["identificacion"])->get();
+            if((sizeof($client) > 0) && ($request["identificacion"] != "")){
+
+                $data = array('mensagge' => "Ya te encuentras registrado en nuestra base de datos");    
+                return response()->json($data)->setStatusCode(200);
+
+            }
+
+
+            $request["id_user_asesora"] =  $users["id"];
+
+            $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $code                   = substr(str_shuffle($permitted_chars), 0, 4);
+            $request["code_client"] = strtoupper($code);
+
+
+            $cliente = Clients::create($request->all());
+                    
+            $request["id_client"] = $cliente["id_cliente"];
+
+
+            
+
+
+            $id_client = $cliente["id_cliente"];
+            
+            ClientInformationAditionalSurgery::create($request->all());
+            ClientClinicHistory::create($request->all());
+            ClientCreditInformation::create($request->all());
+
+            $auditoria              = new Auditoria;
+            $auditoria->tabla       = "clientes";
+            $auditoria->cod_reg     = $cliente["id_cliente"];
+            $auditoria->status      = 1;
+            $auditoria->fec_regins  = date("Y-m-d H:i:s");
+            $auditoria->fec_update  = date("Y-m-d H:i:s");
+            $auditoria->usr_regins  = $users["id"];
+            $auditoria->save();
+
+
+            $update = User::find($users["id"]);
+            $update->queue = 1;
+            $update->save();
+
+
+            $User =  User::create([
+                "email"       => $request["email"],
+                "password"    => md5("123456789"),
+                "id_rol"      => 17,
+                "id_client"   => $id_client
+            ]);
+
+            $datos_personales                   = new datosPersonaesModel;
+            $datos_personales->nombres          = $request["nombres"];
+            $datos_personales->apellido_p       = "";
+            $datos_personales->apellido_m       = "afasfa";
+            $datos_personales->n_cedula         = "12412124";
+            $datos_personales->fecha_nacimiento = null;
+            $datos_personales->telefono         = null;
+            $datos_personales->direccion        = null;
+            $datos_personales->id_usuario       = $User->id;
+            $datos_personales->save();
+
+
+
+
+
+            $subject = "Formulario Web";
+
+            //$for = "cardenascarlos18@gmail.com";
+            $for = $users["email"];
+         //   $for = "cardenascarlos18@gmail.com";
+
+            $request["msg"]  = "Un Paciente a registrado un Formulario Web";
+
+            Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+        }
+
+
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        return response()->json($data)->setStatusCode(200);
     }
 
 
