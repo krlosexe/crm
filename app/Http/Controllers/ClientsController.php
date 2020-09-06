@@ -402,6 +402,7 @@ class ClientsController extends Controller
                                 ->where(function ($query) use ($adviser) {
                                     if($adviser != 0){
                                         $query->whereIn("clientes.id_user_asesora", $adviser);
+                                        $query->Orwhere("valuations.id_asesora_valoracion", $adviser);
                                     }
                                 }) 
 
