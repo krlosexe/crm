@@ -91,8 +91,10 @@
             <td>{{ $value->fecha_valoration }}</td>
             <td>{{ $value->name_surgeon_valoration }}</td>
             <td>{{ $value->way_to_pay }}</td>
+
+            <td>{{ $value->adviser_created }}</td>
             <td>{{ $value->name_asesora_valorations }} {{ $value->apellido_asesora_valorations }}</td>
-            <td>{{ $value->name_asesora_created }} {{ $value->apellido_asesora_created }}</td>
+            
 
 
             <td>{{ $value->name_procedure }}</td>

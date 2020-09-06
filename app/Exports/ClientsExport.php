@@ -48,7 +48,7 @@ class ClientsExport implements FromView
         $use_app       = $this->use_app ;
 
         ini_set('memory_limit', '-1'); 
-        $data = Clients::select( 'state',      'clientes.id_cliente',
+        $data = Clients::select('state',      'clientes.id_cliente',
                                                'clientes.nombres',
                                                'apellidos', 
                                                'identificacion',
@@ -86,8 +86,7 @@ class ClientsExport implements FromView
                                                "dp2.nombres as name_asesora_valorations",
                                                "dp2.apellido_p as apellido_asesora_valorations",
 
-                                               "dp3.nombres as name_asesora_created",
-                                               "dp3.apellido_p as apellido_asesora_created"
+                                               "auditoria.usr_regins as user_register"
                                             )
                                             ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente", "left")
                                             ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora', "left")
@@ -102,15 +101,8 @@ class ClientsExport implements FromView
 
 
 
-                                            ->join("users as us2", "us2.id", "=", "valuations.id_asesora_valoracion")
+                                            ->join("users as us2", "us2.id", "=", "valuations.id_asesora_valoracion", "left")
                                             ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'us2.id', "left")
-
-                                            ->join("auditoria as a2", "a2.cod_reg", "=", "valuations.id_valuations", "left")
-                                            ->where("a2.tabla", "valuations")
-                                            ->join('datos_personales as dp3', 'dp3.id_usuario', '=', 'a2.usr_regins', "left")
-
-
-
 
 
                                             ->join("citys", "citys.id_city", "=", "clientes.city", "left")
@@ -241,6 +233,24 @@ class ClientsExport implements FromView
                                            ->groupBy("clientes.id_cliente")
                                            ->orderBy("auditoria.fec_update", "DESC")
                                             ->get();
+
+
+
+    
+        foreach($data as $value){
+
+
+      
+            $valoration =  DB::table("valuations")->where("id_cliente", $value->id_cliente)->first();
+            if($valoration){
+                $auditoria = DB::table("auditoria")->where("tabla", "valuations")->where("cod_reg", $valoration->id_valuations)->first();
+               
+                $data_user = DB::table("datos_personales")->where("id_usuario", $value->usr_regins)->first();
+
+                $value->adviser_created = $data_user->nombres." ".$data_user->apellido_p;
+            }
+            
+        }
         
         return view('exports.clients', [
             'data' => $data
