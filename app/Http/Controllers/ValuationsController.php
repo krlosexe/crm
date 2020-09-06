@@ -86,6 +86,7 @@ class ValuationsController extends Controller
                                 ->where(function ($query) use ($adviser) {
                                     if($adviser != 0){
                                         $query->whereIn("auditoria.usr_regins", $adviser);
+                                        $query->Orwhere("valuations.id_asesora_valoracion", $adviser);
                                     }
                                 }) 
 
@@ -404,7 +405,6 @@ class ValuationsController extends Controller
 
     public function Clients(Request $request, $client)
     {
-        if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
             $rol     = $request["rol"];
             $id_user = $request["id_user"];
@@ -427,10 +427,8 @@ class ValuationsController extends Controller
                                 ->get();
 
 
-            echo json_encode($valuations);
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
-        }
+            return response()->json($valuations)->setStatusCode(200);
+        
     }
 
 
