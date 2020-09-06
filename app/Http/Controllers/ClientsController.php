@@ -302,7 +302,7 @@ class ClientsController extends Controller
                                        "dp2.nombres as name_update",
                                        "dp2.apellido_p as apellido_update",
                                        "citys.nombre as name_city"
-            )
+                                      )
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
@@ -318,6 +318,8 @@ class ClientsController extends Controller
 
                                 ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'auditoria.usr_update', "left")
                                 ->join('citys', 'citys.id_city', '=', 'clientes.city', "left")
+
+                                ->join("valuations", "valuations.id_cliente", "=", "clientes.id_cliente", "left")
 
 
                                 ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
