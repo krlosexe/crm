@@ -53,7 +53,7 @@ class ClientsExport implements FromView
                                                'apellidos', 
                                                'identificacion',
                                                'clientes.telefono' ,
-                                               'email',
+                                               'clientes.email',
                                                'origen',
                                                'forma_pago',
                                                'clientes.fecha_nacimiento',
@@ -81,7 +81,13 @@ class ClientsExport implements FromView
 
                                                "surgeries.fecha as fecha_surgerie",
                                                "surgeries.surgeon as name_surgeon_cx",
-                                               "sub_category.name as name_procedure"
+                                               "sub_category.name as name_procedure",
+
+                                               "dp2.nombres as name_asesora_valorations",
+                                               "dp2.apellido_p as apellido_asesora_valorations",
+
+                                               "dp3.nombres as name_asesora_created",
+                                               "dp3.apellido_p as apellido_asesora_created"
                                             )
                                             ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente", "left")
                                             ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora', "left")
@@ -93,6 +99,18 @@ class ClientsExport implements FromView
                                             ->join("sub_category", "sub_category.id", "=", "clients_procedures.id_sub_category", "left")
 
                                             ->join("valuations", "valuations.id_cliente", "=", "clientes.id_cliente", "left")
+
+
+
+                                            ->join("users as us2", "us2.id", "=", "valuations.id_asesora_valoracion")
+                                            ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'us2.id', "left")
+
+                                            ->join("auditoria as a2", "a2.cod_reg", "=", "valuations.id_valuations", "left")
+                                            ->where("a2.tabla", "valuations")
+                                            ->join('datos_personales as dp3', 'dp3.id_usuario', '=', 'a2.usr_regins', "left")
+
+
+
 
 
                                             ->join("citys", "citys.id_city", "=", "clientes.city", "left")

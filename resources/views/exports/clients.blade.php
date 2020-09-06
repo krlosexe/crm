@@ -38,6 +38,8 @@
         <th><b>Fecha de Valoracion</b></th>
         <th><b>Cirujano Valoracion</b></th>
         <th><b>Forma de pago Valoracion</b></th>
+        <th><b>Asesora que Agendo</b></th>
+        <th><b>Asesora de Valoracion</b></th>
 
 
         <th><b>Cirugia</b></th>
@@ -89,6 +91,8 @@
             <td>{{ $value->fecha_valoration }}</td>
             <td>{{ $value->name_surgeon_valoration }}</td>
             <td>{{ $value->way_to_pay }}</td>
+            <td>{{ $value->name_asesora_valorations }} {{ $value->apellido_asesora_valorations }}</td>
+            <td>{{ $value->name_asesora_created }} {{ $value->apellido_asesora_created }}</td>
 
 
             <td>{{ $value->name_procedure }}</td>
