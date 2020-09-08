@@ -356,6 +356,12 @@ Route::post('set-shared-post', 'PostController@SaveSahareUser');
 
 
 
+Route::post('prp/make-requests', 'PointsController@RequestExchange');
+
+
+
+
+
 
 
 
