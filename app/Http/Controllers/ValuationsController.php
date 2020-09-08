@@ -751,4 +751,52 @@ class ValuationsController extends Controller
 
 
 
+    public function RequestValoration(Request $request){
+
+
+        $client = DB::table("clientes")->where("id_cliente", $request["id_client"])->first();
+
+
+        $mensaje = "Bienvenido, tus datos de acceso son: ".$request["email"]." clave: 123456789";
+                
+        $info_email = [
+            "user_id" => $User->id,
+            "issue"   => "Bienvenido",
+            "mensage" => $mensaje,
+        ];
+                
+        $this->SendEmail($info_email);
+
+
+
+
+        return response()->json($client)->setStatusCode(200);
+    }
+
+
+
+    public function SendEmail($data){
+    
+        $user = User::find($data["user_id"]);
+        $subject = $data["issue"];
+
+        //$for = "cardenascarlos18@gmail.com";
+        $for = $user["email"];
+
+        $request["msg"] = $data["mensage"];
+
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("cardenascarlos18@gmail.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+        return true;
+
+    }
+
+    
+
+
+
 }

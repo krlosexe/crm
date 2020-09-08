@@ -347,6 +347,19 @@ Route::post('auth/app/financing', 'Login@AuthAppFinacing');
 
 
 
+Route::post('app/client/save/shedule/valoration', 'ValuationsController@RequestValoration');
+
+
+
+
+Route::post('set-shared-post', 'PostController@SaveSahareUser');
+
+
+
+
+
+
+
 
 
 
