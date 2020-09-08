@@ -2869,6 +2869,13 @@ class ClientsController extends Controller
             }
 
 
+            if($request["id_line"] == 24){
+                $request["name_line"] = "Interquirurgica";
+            }
+
+
+
+
 
 
             if(($request["id_line"] == 9)){
@@ -2882,6 +2889,13 @@ class ClientsController extends Controller
             if(($request["id_line"] == 22)){
                 $subject = "Formulario PRP Asesora  Clínica Especialistas del Poblado (Financiacion): ".$request["nombres"];
             }
+
+
+            if(($request["id_line"] == 24)){
+                $subject = "Formulario PRP Asesora Interquirurgica: ".$request["nombres"];
+            }
+
+
 
 
 
