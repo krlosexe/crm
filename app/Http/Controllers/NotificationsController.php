@@ -460,7 +460,7 @@ class NotificationsController extends Controller
         $this->SendEmail2($info_email);
 
 
-       return response()->json(sizeof($data))->setStatusCode(200);
+       return response()->json(sizeof([]))->setStatusCode(200);
 
     }   
 
