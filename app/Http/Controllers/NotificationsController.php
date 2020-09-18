@@ -406,45 +406,40 @@ class NotificationsController extends Controller
 
 
 
-        $data = DB::table("clientes")
-                    ->where("id_line", 17)
-                    ->whereNotNull("email")
-                    ->get();
-
-        return response()->json(sizeof($data))->setStatusCode(200);
+        $data = DB::table("clientes")->where("id_line", 17)->where("email", "!=", "")->where("send_email", 0)->limit(20)->get();
 
 
-        $mensaje = "prueba";
-        $info_email = [
-            "user_id" => 86,
-            "issue"   => "App de Financiacion Px",
-            "mensage" => $mensaje,
-        ];
-                
-        $this->SendEmail2($info_email);
+        foreach($data as $value){
+            $info_email = [
+                "id_cliente" => $value->id_cliente,
+                "issue"      => "¡En el mes de amor y amistad, tenemos una sorpresa para ti!",
+                "name"       => $value->nombres,
+                "for"        => $value->email
+            ];
+            $this->SendEmail2($info_email);
+        }
 
 
-
+       return response()->json(sizeof($data))->setStatusCode(200);
 
     }   
 
 
     public function SendEmail2($data){
-      
     //y=x5~*$Y0~R{
        // $user = User::find($data["user_id"]);
         $subject = $data["issue"];
 
-        $for = "Mariapaulina719@gmail.com";
-       // $for = $user["email"];
+       // $for = "cardenascarlos18@gmail.com";
+        $for = $data["for"];
 
-        $request["msg"] = $data["mensage"];
-
-        Mail::send('emails.masivos',$request, function($msj) use($subject,$for){
-            $msj->from("gestion@danielandrescorreaposadacirujano.com","CRM");
+        $mail_send = Mail::send('emails.masivos',["nombre" =>  $data["name"]], function($msj) use($subject,$for){
+            $msj->from("gestion@danielandrescorreaposadacirujano.com","Cirujano Daniel Correa");
             $msj->subject($subject);
             $msj->to($for);
         });
+
+        DB::table("clientes")->where("id_cliente", $data["id_cliente"])->update(["send_email" => 1]);
 
         return true;
 
