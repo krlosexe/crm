@@ -873,6 +873,31 @@
                     </div>
 
                     <br><br>
+
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="pay_to_study_credit"><b>Pago estudio de credito ?</b></label>
+                            <label class='container-check'>
+                                <input type='checkbox' name='pay_to_study_credit' class='checkitem chk-col-blue' id='pay_to_study_credit' value='1'>
+                                <span class='checkmark'></span>
+                                <label for=''></label>
+                            </label>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label for="average_monthly_income"><b>Metodo de Pago</b></label>
+                            <input type="text" name="payment_method" class="form-control form-control-user"  id="method_pay_study_credit_edit" placeholder="PJ. Transferencia">
+                        </div>
+
+                        <div class="col-md-2">
+                            <label for="average_monthly_income"><b>Fecha de Pago</b></label>
+                            <input type="date" name="date_pay_study_credit" class="form-control form-control-user"  id="date_pay_study_credit_edit">
+                        </div>
+
+                    </div>
+
+                    <br><br>
                     
               </div>
 

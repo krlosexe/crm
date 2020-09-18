@@ -1834,6 +1834,10 @@
 					
 					$("#properties_edit").prop("checked", data.properties ? true : false)
 					$("#vehicle_edit").prop("checked", data.vehicle ? true : false)
+
+
+					$("#pay_to_study_credit").prop("checked", data.pay_to_study_credit ? true : false)
+
 					
 					
 					$("#linea-negocio-edit").val(data.id_line)

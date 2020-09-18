@@ -351,17 +351,27 @@ Route::post('app/client/save/shedule/valoration', 'ValuationsController@RequestV
 
 
 
-
 Route::post('set-shared-post', 'PostController@SaveSahareUser');
 
 
 
 Route::post('prp/make-requests', 'PointsController@RequestExchange');
 
+Route::get('get/pay/study/credit/client/{id_client}', 'FinacingController@GetPayStudyCredit');
+
+Route::post('client/pay/to/study/credit', 'FinacingController@PayStudyCredit');
+
+
+
+Route::get('client/credit/fee/pending/{id_client}', 'FinacingController@GetFeePending');
+
+
+Route::post('client/pay/to/fee', 'FinacingController@PayToFee');
 
 
 
 
+Route::get('correos/masivos', 'NotificationsController@EmailsMasivos');
 
 
 

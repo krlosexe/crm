@@ -988,7 +988,7 @@ class ClientsController extends Controller
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
         
-            $data = Clients::select("state", "clinic", "id_line", "id_user_asesora", "prp", "id_affiliate")->find($id_cliente);
+            $data = Clients::select("state", "clinic", "id_line", "id_user_asesora", "prp", "id_affiliate", "pay_to_study_credit")->find($id_cliente);
 
 
             if($data->prp == null || $data->prp == "No"){
@@ -1126,6 +1126,37 @@ class ClientsController extends Controller
 
 
             $request["nombres"] = $request["nombres"]." ".$request["apellidos"];
+
+
+
+            $request["pay_to_study_credit"] == 1 ? $request["pay_to_study_credit"] = 1 : $request["pay_to_study_credit"] = 0;
+            if($data->pay_to_study_credit == 0){
+
+                DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
+            
+                if($request["pay_to_study_credit"] == 1){
+                    DB::table("clients_pay_to_study_credit")->insert([
+                                                                        "id_client" => $id_cliente, 
+                                                                        "amount" => 70000, 
+                                                                        "payment_method" => $request["payment_method"], 
+                                                                        "created_at" => $request["date_pay_study_credit"]
+                                                                    ]);
+                }
+
+            }else{
+
+                if($request["pay_to_study_credit"] == 0){
+                    DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
+                }
+                
+            }
+            
+
+            
+
+
+
+
 
             $cliente = Clients::find($id_cliente)->update($request->all());
             ClientInformationAditionalSurgery::find($id_cliente)->update($request->all());
@@ -1651,10 +1682,38 @@ class ClientsController extends Controller
 
     public function GetRequestCredit($id_client){
 
-        $data = DB::table("client_request_credit")->where("id_client", $id_client)->first();
+        $data = DB::table("client_request_credit")
+                    ->selectRaw("
+                                client_request_credit.*,
+                                client_request_credit_requirements.working_letter,
+                                client_request_credit_requirements.payment_stubs,
+                                client_request_credit_requirements.copy_of_id,
+                                client_request_credit_requirements.bank_statements,
+                                client_request_credit_requirements.co_debtor,
+                                client_request_credit_requirements.property_tradition,
+                                client_request_credit_requirements.license_plate_copy
+                            ")
+                    ->join("client_request_credit_requirements", "client_request_credit_requirements.id_client", "=", "client_request_credit.id_client", "left")
+                    ->where("client_request_credit.id_client", $id_client)->first();
 
         $data->required_amount = number_format($data->required_amount, 2, ',', '.');
         $data->monthly_fee     = number_format($data->monthly_fee, 2, ',', '.');
+
+
+        $requeriments = [];
+
+        $data->working_letter     == 1 ? $requeriments[] = "Carta Laboral"                  : '';
+        $data->payment_stubs      == 1 ? $requeriments[] = "Ultimas tres colillas de pago"  : '';
+        $data->copy_of_id         == 1 ? $requeriments[] = "Copia de la cedula"             : '';
+        $data->co_debtor          == 1 ? $requeriments[] = "Codeudor"                       : '';
+        $data->license_plate_copy == 1 ? $requeriments[] = "Copia de la matriculas"         : '';
+        $data->bank_statements    == 1 ? $requeriments[] = "Extractos bancarios del ultimo trimestre O Certificación de ingresos por parte de un contador" : '';
+        $data->property_tradition == 1 ? $requeriments[] = "Certificado de libertad y tradicion del inmueble" : '';
+        
+        if($data->co_debtor == 1){
+            $requeriments[] = "El codeudor no debe estar Reportado";
+        }
+        $data->lista_requisitos = $requeriments;
 
         if($data){
             return response()->json($data)->setStatusCode(200);

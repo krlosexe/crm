@@ -491,6 +491,25 @@
 					$("#client").val(data.nombres).attr("readonly", "readonly")
                     $("#required_amount").val(data.required_amount)
                     $("#monthly_fee").val(data.monthly_fee).attr("readonly", "readonly")
+					$("#dependent_independent").val(data.dependent_independent)
+					$("#have_initial").val(data.have_initial)
+					$("#reported").val(data.reported)
+
+
+					$("#pay_to_study_credit").prop("checked", data.pay_to_study_credit ? true : false)
+					$("#payment_method").val(data.payment_method)
+					$("#date_pay_study_credit_edit").val(data.date_pay)
+
+					$("#working_letter").prop("checked", data.working_letter ? true : false)
+					$("#payment_stubs").prop("checked", data.payment_stubs ? true : false)
+					$("#copy_of_id").prop("checked", data.copy_of_id ? true : false)
+					$("#bank_statements").prop("checked", data.bank_statements ? true : false)
+					$("#co_debtor").prop("checked", data.co_debtor ? true : false)
+					$("#property_tradition").prop("checked", data.property_tradition ? true : false)
+					$("#license_plate_copy").prop("checked", data.license_plate_copy ? true : false)
+
+
+
                     $("#status").val(data.status)
 
                     $("#period").val(data.period).trigger("change")

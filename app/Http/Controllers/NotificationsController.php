@@ -398,4 +398,58 @@ class NotificationsController extends Controller
 
         return response()->json($ConfigNotification)->setStatusCode(200);
     }
+
+
+
+
+    public function EmailsMasivos(){
+
+
+
+        $data = DB::table("clientes")
+                    ->where("id_line", 17)
+                    ->whereNotNull("email")
+                    ->get();
+
+        return response()->json(sizeof($data))->setStatusCode(200);
+
+
+        $mensaje = "prueba";
+        $info_email = [
+            "user_id" => 86,
+            "issue"   => "App de Financiacion Px",
+            "mensage" => $mensaje,
+        ];
+                
+        $this->SendEmail2($info_email);
+
+
+
+
+    }   
+
+
+    public function SendEmail2($data){
+      
+    //y=x5~*$Y0~R{
+       // $user = User::find($data["user_id"]);
+        $subject = $data["issue"];
+
+        $for = "Mariapaulina719@gmail.com";
+       // $for = $user["email"];
+
+        $request["msg"] = $data["mensage"];
+
+        Mail::send('emails.masivos',$request, function($msj) use($subject,$for){
+            $msj->from("gestion@danielandrescorreaposadacirujano.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+        return true;
+
+    }
+
+
+
 }

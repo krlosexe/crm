@@ -9,8 +9,12 @@ use App\FollwersEvents;
 use App\ValuationsPhoto;
 use App\LogsClients;
 use DB;
+use Mail;
 use Image;
 use App\User;
+use App\AuthUsersApp;
+
+use App\ClientCreditInformation;
 use Illuminate\Http\Request;
 
 class ValuationsController extends Controller
@@ -306,6 +310,9 @@ class ValuationsController extends Controller
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
 
+            
+
+            
 
             $valid = Valuations::where("fecha", $request["fecha"])
                                 ->where("time_end", ">=", $request["time"])
@@ -389,6 +396,52 @@ class ValuationsController extends Controller
 
 
 
+
+
+
+            $user = DB::table("users")->where("id_client", $request["id_cliente"])->first();
+
+
+
+            $users_client = DB::table("auth_users_app_financing")->selectRaw("auth_users_app_financing.token_notifications")
+                                    ->where("auth_users_app_financing.id_user", $user->id)
+                                    ->first();
+
+
+            if($users_client){
+
+                $FCM_token = $users_client->token_notifications;
+
+                $url = "https://fcm.googleapis.com/fcm/send";
+                $token = $FCM_token;
+                $serverKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+                $title = "Tu cita de valoracion fue Agendada";
+                $body = "Tu cita de Valoracion fue agendada para el dia $request[fecha]";
+                $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default', 'badge' => '1');
+                $arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+                $json = json_encode($arrayToSend);
+                $headers = array();
+                $headers[] = 'Content-Type: application/json';
+                $headers[] = 'Authorization: key='. $serverKey;
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+                curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                //Send the request
+                $response = curl_exec($ch);
+                //Close request
+                if ($response === FALSE) {
+                    die('FCM Send Error: ' . curl_error($ch));
+                }
+                curl_close($ch);
+
+
+            }
+
+
+            
 
 
             if ($store) {
@@ -756,16 +809,48 @@ class ValuationsController extends Controller
 
         $client = DB::table("clientes")->where("id_cliente", $request["id_client"])->first();
 
+        ClientCreditInformation::find($request["id_client"])->update(["have_initial" => $request["have_initial"], "reported" => $request["reported"]]);
 
-        $mensaje = "Bienvenido, tus datos de acceso son: ".$request["email"]." clave: 123456789";
+
+
+
+
+        $mensaje = "El Px $client->nombres codigo : $client->code_client ha solicitado una cita de Valoracion para el dia : $request[date], tiene Inicial ? :  $request[have_initial]";
+
+        $data["table"]    = "clients";
+        $data["id_event"] = $request["id_client"];
+        $data["id_user"]  = $client->id_user_asesora;
+        $data["comment"]  = $mensaje;
+
+        Comments::create($data);
+
+
+
+        $data_user = AuthUsersApp::where("id_user", $client->id_user_asesora)->first();
+
+        $ConfigNotification = [
+            "tokens" => [$data_user["token_notifications"]],
+    
+            "tittle" => "App de Financiacion",
+            "body"   => $mensaje,
+            "data"   => ['type' => 'refferers']
+    
+        ];
+    
+        $code = SendNotifications($ConfigNotification);
+
+
+
+        
                 
         $info_email = [
-            "user_id" => $User->id,
-            "issue"   => "Bienvenido",
+            "user_id" => $client->id_user_asesora,
+            "issue"   => "App de Financiacion Px : $client->nombres",
             "mensage" => $mensaje,
         ];
                 
         $this->SendEmail($info_email);
+
 
 
 
@@ -780,8 +865,8 @@ class ValuationsController extends Controller
         $user = User::find($data["user_id"]);
         $subject = $data["issue"];
 
-        //$for = "cardenascarlos18@gmail.com";
-        $for = $user["email"];
+        $for = "cardenascarlos18@gmail.com";
+       // $for = $user["email"];
 
         $request["msg"] = $data["mensage"];
 

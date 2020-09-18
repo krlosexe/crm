@@ -11,10 +11,9 @@
         
         <div class="row">
 
-           <div class="col-md-12">
-
+           <div class="col-md-6">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for=""><b>Cliente</b></label>
                             <input type="text" name="client" id="client" class="form-control" required>
@@ -22,15 +21,17 @@
                     </div>
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for=""><b>Monto Solicitado</b></label>
                             <input type="text" name="required_amount" id="required_amount" class="form-control" required onkeyup="calcular()">
                         </div>
                     </div>
+                </div>
 
 
-                    <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for=""><b>Cuotas Mensuales</b></label>
                             <input type="text" name="monthly_fee" id="monthly_fee" class="form-control" required>
@@ -38,7 +39,7 @@
                     </div>
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for=""><b>Plazos</b></label>
                             <select name="period" id="period"  class="form-control" required onchange="calcular()">
@@ -51,8 +52,43 @@
                             </select>
                         </div>
                     </div>
-
                 </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>Dependiente o independiente ?</b></label>
+                            <input type="text" name="dependent_independent" id="dependent_independent" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>Tiene Inicial ?</b></label>
+                            <input type="text" name="have_initial" id="have_initial" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>Esta Reportado ?</b></label>
+                            <input type="text" name="reported" id="reported" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+
+
 
 
                 <div class="row">
@@ -64,6 +100,8 @@
                                 <option value="Pendiente">Pendiente</option>
                                 <option value="Aprobado">Aprobado</option>
                                 <option value="Rechazado">Rechazado</option>
+                                <option value="Desembolsado">Desembolsado</option>
+                                
                             </select>
                         </div>
                     </div>
@@ -77,6 +115,159 @@
                     </button>
                 </div>
 
+           </div>
+
+
+           <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="pay_to_study_credit"><b>Pago estudio de credito ?</b></label>
+                        <label class='container-check'>
+                            <input type='checkbox' name='pay_to_study_credit' class='checkitem chk-col-blue' id='pay_to_study_credit' value='1'>
+                            <span class='checkmark'></span>
+                            <label for=''></label>
+                        </label>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="average_monthly_income"><b>Metodo de Pago</b></label>
+                        <input type="text" name="payment_method" id="payment_method" class="form-control form-control-user"  id="method_pay_study_credit_edit" placeholder="PJ. Transferencia">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="average_monthly_income"><b>Fecha de Pago</b></label>
+                        <input type="text" class="form-control form-control-user"  id="date_pay_study_credit_edit">
+                    </div>
+                </div>
+
+                <br><br>
+
+
+                <div class="row">
+                
+                    
+                    <div class="col-md-12">
+                        <h4>Requisitos</h4>
+                        
+                        <div class="row">
+                            <div class="col-6">
+
+                                <br>
+                                <br>
+                                
+                                <div class="row">
+                                    <h5>Dependientes</h5>
+                                </div>
+                                <div class="row">
+                                    <label class='container-check'>
+                                        <input type='checkbox' name='working_letter' class='checkitem chk-col-blue' id='working_letter' value='1'>
+                                        <span class='checkmark'></span>
+                                        <label for="working_letter"><b>Carta Laboral</b></label>
+                                    </label>
+                                </div>
+
+                                <div class="row">
+                                    <label class='container-check'>
+                                        <input type='checkbox' name='payment_stubs' class='checkitem chk-col-blue' id='payment_stubs' value='1'>
+                                        <span class='checkmark'></span>
+                                        <label for="payment_stubs"><b>Ultimas tres colillas de pago</b></label>
+                                    </label>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <label class='container-check'>
+                                        <input type='checkbox' name='copy_of_id' class='checkitem chk-col-blue' id='copy_of_id' value='1'>
+                                        <span class='checkmark'></span>
+                                        <label for="copy_of_id"><b>Copia de la cedula</b></label>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-6">
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <h5>Intependintes</h5>
+                                </div>
+                                <div class="row">
+                                    <label class='container-check'>
+                                        <input type='checkbox' name='bank_statements' class='checkitem chk-col-blue' id='bank_statements' value='1'>
+                                        <span class='checkmark'></span>
+                                        <label for="bank_statements"><b>Extractos bancarios del ultimo trimestre O Certificación de ingresos por parte de un contador</b></label>
+                                    </label>
+                                </div>
+
+                                <div class="row">
+                                    <label class='container-check'>
+                                        <input type='checkbox' name='copy_of_id' class='checkitem chk-col-blue' id='copy_of_id2' value='1'>
+                                        <span class='checkmark'></span>
+                                        <label for="copy_of_id2"><b>Copia de la cedula</b></label>
+                                    </label>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Opcional</h4>
+
+                        <div class="row">
+                            <div class="col-6">
+
+
+
+                                <div class="row">
+                                    <label class='container-check'>
+                                        <input type='checkbox' name='co_debtor' class='checkitem chk-col-blue' id='co_debtor' value='1'>
+                                        <span class='checkmark'></span>
+                                        <label for="co_debtor"><b>Codeudor</b></label>
+                                    </label>
+                                </div>
+
+
+
+                                   
+                                <div class="row">
+                                    <label class='container-check'>
+                                        <input type='checkbox' name='property_tradition' class='checkitem chk-col-blue' id='property_tradition' value='1'>
+                                        <span class='checkmark'></span>
+                                        <label for="property_tradition"><b>Certificado de libertad y tradicion del inmueble</b></label>
+                                    </label>
+                                </div>
+
+                                <div class="row">
+                                    <label class='container-check'>
+                                        <input type='checkbox' name='license_plate_copy' class='checkitem chk-col-blue' id='license_plate_copy' value='1'>
+                                        <span class='checkmark'></span>
+                                        <label for="license_plate_copy"><b>Copia de la matriculas</b></label>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+           </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
                 <br><br>
 
 
@@ -92,12 +283,7 @@
                     <tbody id="tbody_1">
                     </tbody>
                 </table>
-
-
-
-              
-           </div>
-
+            </div>
         </div>
 
 
