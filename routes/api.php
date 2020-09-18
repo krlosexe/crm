@@ -374,6 +374,9 @@ Route::post('client/pay/to/fee', 'FinacingController@PayToFee');
 Route::get('correos/masivos', 'NotificationsController@EmailsMasivos');
 
 
+Route::get('correos/masivos/test', 'NotificationsController@EmailsMasivos');
+
+
 
 
 

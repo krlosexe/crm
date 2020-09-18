@@ -447,4 +447,24 @@ class NotificationsController extends Controller
 
 
 
+
+    public function EmailsMasivosTest(){
+
+
+        $info_email = [
+            "id_cliente" => $value->id_cliente,
+            "issue"      => "¡En el mes de amor y amistad, tenemos una sorpresa para ti!",
+            "name"       => "carlos cardenas",
+            "for"        => "cardenascarlos18@gmail.com"
+        ];
+        $this->SendEmail2($info_email);
+
+
+       return response()->json(sizeof($data))->setStatusCode(200);
+
+    }   
+
+
+
+
 }
