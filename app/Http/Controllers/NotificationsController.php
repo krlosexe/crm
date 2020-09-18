@@ -452,7 +452,7 @@ class NotificationsController extends Controller
 
 
         $info_email = [
-            "id_cliente" => $value->id_cliente,
+            "id_cliente" => 1,
             "issue"      => "¡En el mes de amor y amistad, tenemos una sorpresa para ti!",
             "name"       => "carlos cardenas",
             "for"        => "cardenascarlos18@gmail.com"
