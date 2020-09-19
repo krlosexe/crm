@@ -66,6 +66,12 @@ Route::get('client/tasks/{id_client}', 'ClientsController@GetTasksByClient');
 Route::get('client/task/status/{id}/{status}', 'ClientsController@TasksStatus');
 
 Route::post('clients/forms', 'ClientsController@ClientForms');
+
+Route::post('clients/forms/estetica/vaginal', 'ClientsController@ClientFormsESteticaVaginal');
+
+
+
+
 Route::post('personalizado/clients/forms', 'ClientsController@ClientFormsPersonalizado');
 
 Route::post('clients/forms/prp', 'ClientsController@ClientFormsPrp');
@@ -376,6 +382,8 @@ Route::get('correos/masivos', 'NotificationsController@EmailsMasivos');
 
 Route::get('correos/masivos/test', 'NotificationsController@EmailsMasivosTest');
 
+
+Route::post('uploads/estetica/vaginal', 'ClientsController@uploads');
 
 
 
