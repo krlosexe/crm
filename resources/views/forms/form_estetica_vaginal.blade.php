@@ -200,6 +200,19 @@
           <br>
           <br>
         </div>
+
+
+        <div class="row">
+                <div class="col-md-12">
+                  <div class="pull-left">
+                      <input type="checkbox" class="form-comtrol" name="accept" value="1" id="accept" required="">
+                      <label for="accept">He leído y acepto los </label> <a href="https://pdtclientsolutions.com/crm-public/autorizacion.pdf" target="_blank">términos y condiciones</a>
+                  </div>
+              </div>
+            </div>
+
+
+            
           <center>
             <button id="btn-submit" class="btn btn-primary btn-user">
                 Enviar
