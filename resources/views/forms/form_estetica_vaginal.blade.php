@@ -63,7 +63,7 @@
 
 <div class="card shadow mb-4 " id="cuadro2">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Pide tu Cita de Valoración</h6>
+    <h6 class="m-0 font-weight-bold text-primary">¡Pide tu cita de valoración con el Especialista en Estética Vaginal!</h6>
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="store" enctype="multipart/form-data">
