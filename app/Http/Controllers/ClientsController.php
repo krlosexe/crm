@@ -3565,7 +3565,6 @@ class ClientsController extends Controller
 
 
     public function uploads(Request $request){
-       
 
         if($file = $request->file('file_data')){
         
@@ -3574,8 +3573,6 @@ class ClientsController extends Controller
         }
 
         return response()->json(1)->setStatusCode(200);
-
-        
     }
 
 
