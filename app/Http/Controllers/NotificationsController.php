@@ -426,6 +426,8 @@ class NotificationsController extends Controller
 
 
     public function SendEmail2($data){
+
+        echo $data["id_cliente"],", ";
     //y=x5~*$Y0~R{
        // $user = User::find($data["user_id"]);
         $subject = $data["issue"];

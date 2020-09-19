@@ -133,6 +133,17 @@ Route::get('forms/{id_user}/{id_line}', function ($id_user, $id_line) {
 });
 
 
+
+
+Route::get('forms/estetica/vaginal/{id_user}/{id_line}', function ($id_user, $id_line) {
+    return view('forms.form_estetica_vaginal', ["id_line" => $id_line, "id_user" => $id_user]);
+});
+
+
+
+
+
+
 Route::get('forms/cirufacil/{id_user}/{id_line}', function ($id_user, $id_line) {
     return view('forms_cirufacil.form', ["id_user" => $id_user, "id_line" => $id_line]);
 });
