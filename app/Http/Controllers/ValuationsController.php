@@ -113,7 +113,7 @@ class ValuationsController extends Controller
 
 
 
-                                ->orderBy("valuations.id_valuations", "DESC")
+                                ->orderBy("valuations.fecha", "DESC")
                                 ->get();
 
 
@@ -140,7 +140,7 @@ class ValuationsController extends Controller
                                 ->where("followers_events.id_user", $id_user)
                                 ->where("followers_events.tabla", "valuations")
 
-                                ->orderBy("valuations.id_valuations", "DESC")
+                                ->orderBy("valuations.fecha", "DESC")
                                 ->get();
 
 
