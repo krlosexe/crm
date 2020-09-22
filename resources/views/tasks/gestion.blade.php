@@ -649,6 +649,8 @@
 					$("#observaciones-edit").val(data.observaciones)
 					$("#status_task-edit").val(data.status_task)
 
+					$("#id_cliente_edit").val(data.id_client)
+
 					var followers = []
 					$.each(data.followers, function (key, item) { 
 						followers.push(item.id_follower)

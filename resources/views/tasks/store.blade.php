@@ -87,6 +87,40 @@
                 </div>
               </div>
 
+
+
+              <div class="row">
+                <div class="col-md-6">
+									<div class="form-group">
+										<label for=""><b>Cambiar Estado del Px</b></label>
+										<select name="state_px" id="state-filter" class="form-control select2 disabled">
+											<option value="0">Seleccione</option>
+											<option value="Afiliada">Afiliada</option>
+											<option value="Agendada">Agendada</option>
+											<option value="Aprobada">Aprobada</option>
+											<option value="Aprobada / Descartada">Aprobada / Descartada</option>
+											<option value="Asesorada No Agendada"> Asesorada No Agendada</option>
+											<option value="Asesorado por FB esperando contacto Telefonico">Asesorado por FB esperando contacto Telefonico</option>
+											<option value="Demandada">Demandada</option>
+											<option value="Descartada">Descartada</option>
+											<option value="Llamada no Asesorada">Llamada no Asesorada</option>
+											<option value="No Asistio">No Asistio</option>
+											<option value="No Contactada">No Contactada</option>
+											<option value="No Contesta">No Contesta</option>
+											<option value="Numero Equivocado">Numero Equivocado</option>
+											<option value="Operada">Operada</option>
+											<option value="Programada">Programada</option>
+											<option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
+											<option value="Valorada">Valorada</option>
+											<option value="Valorada / Descartada">Valorada / Descartada</option>
+										</select>
+									</div>
+								</div>
+              </div>
+
+
+              
+
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
