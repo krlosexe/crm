@@ -192,24 +192,25 @@
 
         </div>
 
-       		<input type="hidden" name="state" value="No Contactada">
-			   <input type="hidden" name="origen" value="Formulario Estetica Vaginal">
-			<input type="hidden" name="id_user" id="id_user" value="{{$id_user}}">
-			<input type="hidden" name="id_line" id="id_line" value="{{$id_line}}">
-			<input type="hidden" name="id_user_asesora" value="{{$id_user}}">
+          <input type="hidden" name="state" value="No Contactada">
+          <input type="hidden" name="origen" value="Formulario Estetica Vaginal">
+          <input type="hidden" name="id_user" id="id_user" value="{{$id_user}}">
+          <input type="hidden" name="id_line" id="id_line" value="{{$id_line}}">
+          <input type="hidden" name="id_user_asesora" value="{{$id_user}}">
           <br>
           <br>
         </div>
 
 
-        <div class="row">
+           <div class="row">
                 <div class="col-md-12">
                   <div class="pull-left">
                       <input type="checkbox" class="form-comtrol" name="accept" value="1" id="accept" required="">
-                      <label for="accept">He leído y acepto los </label> <a href="#" target="_blank">términos y condiciones</a>
+                      <label for="accept">He leído y acepto las </label> <a href="<?= url("/") ?>/Políticasdeusoyseguridadfotos.pdf" target="_blank">Politicas de uso y seguridad de fotos</a> y 
+                      <a href="<?= url("/") ?>/Politica_Tratamiento_Personal.pdf" target="_blank">Politicas de Tratamiento de Datos Personales</a>
                   </div>
               </div>
-            </div>
+           </div>
 
 
             
