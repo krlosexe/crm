@@ -8,6 +8,7 @@ use App\Comments;
 use App\FollwersEvents;
 use App\ValuationsPhoto;
 use App\LogsClients;
+use App\Clients;
 use DB;
 use Mail;
 use Image;
@@ -306,7 +307,9 @@ class ValuationsController extends Controller
      */
     public function store(Request $request)
     {
-                    
+
+            $state_px = $request["state_px"];
+     
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
 
@@ -439,7 +442,23 @@ class ValuationsController extends Controller
 
 
             }
+          
+            if($state_px != "0"){
+                $data_client = Clients::select("state")->find($request["id_cliente"]);
 
+                DB::table("clientes")->where("id_cliente", $request["id_cliente"])->update(["state" => $state_px]);
+
+               
+                if($data_client->state != $state_px){
+                    
+                    $version["id_user"]   = $request["id_user"];
+                    $version["id_client"] = $request["id_cliente"];
+                    $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
+    
+                    LogsClients::create($version);
+                }
+
+            }
 
             
 
@@ -519,6 +538,11 @@ class ValuationsController extends Controller
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
+
+
+            $state_px = $request["state_px"];
+
+            
             if($file = $request->file('file')){
                 $destinationPath = 'img/valuations/cotizaciones';
                 $file->move($destinationPath,$file->getClientOriginalName());
@@ -611,6 +635,30 @@ class ValuationsController extends Controller
             $version["event"]     = "Actualizo Cita de Valoracion para el dia $request[fecha] a las $request[time] con el Doctor $request[surgeon] en la clinica ".$name_clinic;
 
             LogsClients::create($version);
+
+
+
+
+            if($state_px != "0"){
+                $data_client = Clients::select("state")->find($valuation->id_cliente);
+
+                DB::table("clientes")->where("id_cliente", $valuation->id_cliente)->update(["state" => $state_px]);
+
+               
+                if($data_client->state != $state_px){
+                    
+                    $version["id_user"]   = $request["id_user"];
+                    $version["id_client"] = $valuation->id_cliente;
+                    $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
+    
+                    LogsClients::create($version);
+                }
+
+            }
+
+
+
+
 
 
 

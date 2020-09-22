@@ -48,6 +48,7 @@ class ClientsExport implements FromView
         $use_app       = $this->use_app ;
 
         ini_set('memory_limit', '-1'); 
+        ini_set('max_execution_time', 360);
         $data = Clients::select('state',      'clientes.id_cliente',
                                                'clientes.nombres',
                                                'apellidos', 
