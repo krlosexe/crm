@@ -9,6 +9,7 @@ use App\Comments;
 use App\FollwersEvents;
 use App\SurgeriesAdditional;
 use App\LogsClients;
+use App\Clients;
 use Illuminate\Http\Request;
 use DB;
 
@@ -246,6 +247,31 @@ class SurgeriesController extends Controller
 
             LogsClients::create($version);
 
+
+
+
+            $state_px = $request["state_px"];
+
+            if($state_px != "0"){
+                $data_client = Clients::select("state")->find($request["id_cliente"]);
+
+                DB::table("clientes")->where("id_cliente", $request["id_cliente"])->update(["state" => $state_px]);
+               
+                if($data_client->state != $state_px){
+                    
+                    $version["id_user"]   = $request["id_user"];
+                    $version["id_client"] = $request["id_cliente"];
+                    $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
+    
+                    LogsClients::create($version);
+                }
+            }
+
+
+
+
+
+
             if ($store) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
                 return response()->json($data)->setStatusCode(200);
@@ -411,6 +437,30 @@ class SurgeriesController extends Controller
             $version["event"]     = "Actualizo Cirugia para el dia $request[fecha] con el Doctor ".$request["surgeon"]." en la clinica ".$name_clinic;
 
             LogsClients::create($version);
+
+
+
+
+            $state_px = $request["state_px"];
+
+            if($state_px != "0"){
+                $data_client = Clients::select("state")->find($cita->id_cliente);
+
+                DB::table("clientes")->where("id_cliente", $cita->id_cliente)->update(["state" => $state_px]);
+               
+                if($data_client->state != $state_px){
+                    
+                    $version["id_user"]   = $request["id_user"];
+                    $version["id_client"] = $cita->id_cliente;
+                    $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
+    
+                    LogsClients::create($version);
+                }
+            }
+
+
+
+
 
 
 
