@@ -1327,7 +1327,6 @@ class ClientsController extends Controller
                 $data_client = Clients::select("state")->find($request["id_client"]);
 
                 DB::table("clientes")->where("id_cliente", $request["id_client"])->update(["state" => $state_px]);
-
                
                 if($data_client->state != $state_px){
                     
@@ -1337,7 +1336,6 @@ class ClientsController extends Controller
     
                     LogsClients::create($version);
                 }
-
             }
 
 
@@ -1378,6 +1376,27 @@ class ClientsController extends Controller
             $update = ClientsTasks::find($id_task)->update($request->all());
 
             ClientsTasksFollowers::where("id_task", $id_task)->delete();
+
+
+            $state_px = $request["state_px"];
+
+            if($state_px != "0"){
+                $data_client = Clients::select("state")->find($request["id_cliente"]);
+
+                DB::table("clientes")->where("id_cliente", $request["id_cliente"])->update(["state" => $state_px]);
+               
+                if($data_client->state != $state_px){
+                    
+                    $version["id_user"]   = $request["id_user"];
+                    $version["id_client"] = $request["id_cliente"];
+                    $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
+    
+                    LogsClients::create($version);
+                }
+            }
+
+
+            
 
 
             if(isset($request->followers)){
