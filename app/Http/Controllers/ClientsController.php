@@ -1313,7 +1313,7 @@ class ClientsController extends Controller
 
             $auditoria              = new Auditoria;
             $auditoria->tabla       = "clients_tasks";
-            $auditoria->cod_reg     = $store["id_client"];
+            $auditoria->cod_reg     = $store["id_clients_tasks"];
             $auditoria->status      = 1;
             $auditoria->fec_regins  = date("Y-m-d H:i:s");
             $auditoria->usr_regins  = $request["id_user"];
@@ -1432,15 +1432,15 @@ class ClientsController extends Controller
             $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
                                    "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis", "clientes.nombres as name_client")
 
-                                    ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
-                                    ->join("users", "users.id", "=", "auditoria.usr_regins")
+                                    ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks","left")
+                                    ->join("users", "users.id", "=", "auditoria.usr_regins","left")
 
-                                    ->join("users as responsable", "responsable.id", "=", "clients_tasks.responsable")
+                                    ->join("users as responsable", "responsable.id", "=", "clients_tasks.responsable","left")
 
-                                    ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client")
+                                    ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client","left")
 
 
-                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
+                                    ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id","left")
 
                                     ->with("followers")
                                     ->with("comments")
