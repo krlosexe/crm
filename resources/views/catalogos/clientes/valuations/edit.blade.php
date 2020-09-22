@@ -234,7 +234,7 @@
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for=""><b>Cambiar Estado del Px</b></label>
-                                <select name="state_px" id="state-filter" class="form-control select2 disabled">
+                                <select name="state_px"  class="form-control select2 disabled">
                                   <option value="0">Seleccione</option>
                                   <option value="Afiliada">Afiliada</option>
                                   <option value="Agendada">Agendada</option>

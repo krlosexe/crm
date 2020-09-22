@@ -1313,11 +1313,35 @@ class ClientsController extends Controller
 
             $auditoria              = new Auditoria;
             $auditoria->tabla       = "clients_tasks";
-            $auditoria->cod_reg     = $store["id_clients_tasks"];
+            $auditoria->cod_reg     = $store["id_client"];
             $auditoria->status      = 1;
             $auditoria->fec_regins  = date("Y-m-d H:i:s");
             $auditoria->usr_regins  = $request["id_user"];
             $auditoria->save();
+
+
+
+            $state_px = $request["state_px"];
+
+            if($state_px != "0"){
+                $data_client = Clients::select("state")->find($request["id_client"]);
+
+                DB::table("clientes")->where("id_cliente", $request["id_client"])->update(["state" => $state_px]);
+
+               
+                if($data_client->state != $state_px){
+                    
+                    $version["id_user"]   = $request["id_user"];
+                    $version["id_client"] = $request["id_client"];
+                    $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
+    
+                    LogsClients::create($version);
+                }
+
+            }
+
+
+
 
 
             $followers = [];
