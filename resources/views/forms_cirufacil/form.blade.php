@@ -147,7 +147,7 @@
             <div class="col-md-12">
               <div class="form-group">
                     <label for=""><b>Promedio de Ingresos Mensuales: *</b></label>
-                    <input type="text" name="average_monthly_income" id="average_monthly_income-store" class="form-control" required >
+                    <input type="number" name="average_monthly_income" id="average_monthly_income-store" class="form-control" required >
                 </div>
             </div>
           </div>
