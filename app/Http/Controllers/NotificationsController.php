@@ -406,7 +406,7 @@ class NotificationsController extends Controller
 
 
 
-        $data = DB::table("clientes")->where("id_line", 17)->where("email", "!=", "")->where("send_email", 0)->limit(20)->get();
+        $data = DB::table("clientes")->where("id_line", 17)->where("email", "!=", "")->where("send_email", 0)->limit(150)->get();
 
 
         foreach($data as $value){
