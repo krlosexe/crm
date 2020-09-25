@@ -116,6 +116,10 @@ class ClientsController extends Controller
 
 
 
+            $cumple = 0;
+            if(isset($request["cumple"])){
+                $cumple = $request["cumple"];
+            }
 
 
             $state  = $request["state"];
@@ -334,6 +338,14 @@ class ClientsController extends Controller
 
 
 
+                                ->where(function ($query) use ($cumple) {
+                                    if($cumple != 0){
+                                        $query->whereRaw("MONTH(clientes.fecha_nacimiento) = $cumple");
+                                    }
+                                }) 
+
+
+
                                 ->where(function ($query) use ($search) {
                                     if($search != "0"){
                                         $query->where("clientes.nombres", 'like', '%'.$search.'%');
@@ -383,10 +395,6 @@ class ClientsController extends Controller
                                         $query->where("clientes.auth_app", 1);
                                     }
                                 }) 
-
-
-
-
 
 
 

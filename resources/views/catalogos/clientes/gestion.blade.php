@@ -222,7 +222,7 @@
 								</div>
 
 
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<div class="form-group">
 										<label for="use_app"><b>Solo los que usan el App</b></label>
 										<div class="custom-control custom-switch">
@@ -231,6 +231,32 @@
 										</div>
 									</div>
 								</div>
+
+
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for="use_app"><b>Cumpleaños del mes</b></label>
+										<select id="cumple" class="form-control">
+											<option value="0">Seleccione</option>
+											<option value="1">Enero</option>
+											<option value="2">Febrero</option>
+											<option value="3">Marzo</option>
+											<option value="4">Abril</option>
+											<option value="5">Mayo</option>
+											<option value="6">Junio</option>
+											<option value="7">Julio</option>
+											<option value="8">Agosto</option>
+											<option value="9">Septiembre</option>
+											<option value="10">Octubre</option>
+											<option value="11">Noviembre</option>
+											<option value="12">Diciembre</option>
+										</select>
+									</div>
+								</div>
+
+
+
 
 
 
@@ -505,7 +531,7 @@
 
 
 
-			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter, #city-filter, #procedure-filter, #to_prp, #use_app").change(function (e) { 
+			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter, #city-filter, #procedure-filter, #to_prp, #use_app, #cumple").change(function (e) { 
 
 				list("", 1)
 
@@ -600,6 +626,15 @@
 
 
 
+				var cumple = 0
+				if($("#cumple").val() != 0){
+					cumple = $("#cumple").val()
+				}
+
+
+
+
+
 
 				$.ajax({
 					url:''+url+'/api/clients/',
@@ -620,7 +655,8 @@
 						"to_prp"        : to_prp,
 						"have_inital"   : have_inital,
 						"procedure"     : procedure,
-						"use_app"       : use_app
+						"use_app"       : use_app,
+						"cumple"        : cumple
 					},
 					dataType:'JSON',
 					
