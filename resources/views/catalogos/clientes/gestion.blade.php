@@ -809,6 +809,7 @@
 
 				var date_init     = $("#date_init").val()
 				var date_finish   = $("#date_finish").val()
+				var cumple        = $("#cumple").val()
 				var search        = $("#search").val()
 				var city          = $("#city-filter").val()
  				var have_inital   = 0
@@ -831,11 +832,6 @@
 				if($("#use_app").is(":checked")){
 					use_app = 1
 				}
-
-
-
-				
-
 
 
 				if(business_line.length == 0){
@@ -861,10 +857,25 @@
 					date_finish = 0
 				}
 
+				if(cumple.length == 0){
+					cumple = 0
+				}
+
+
+
 				
 				if(search.length === 0){
 					search = 5
 				}
+
+
+
+				if(search.length === 0){
+					search = 5
+				}
+
+
+
 
 				$("#xls").remove();
 				$("#view_xls").remove();
@@ -872,7 +883,7 @@
 				var a = '<button id="xls" class="dt-button buttons-excel buttons-html5">Excel</button>';
 				$('.dt-buttons').append(a);
 
-				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'/'+$("#state-filter").val()+'/'+search+'/'+city+'/'+have_inital+'/'+to_prp+'/'+use_app+'" class="dt-button buttons-excel buttons-html5">xls</button>';
+				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'/'+$("#state-filter").val()+'/'+search+'/'+city+'/'+have_inital+'/'+to_prp+'/'+use_app+'/'+cumple+'" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
 				$("#xls").click(function (e) { 

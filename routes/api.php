@@ -185,7 +185,7 @@ Route::get('notifications/generate', 'NotificationsController@Generate');
 Route::get('email/forms', 'NotificationsController@Email');
 Route::post('email/forms', 'NotificationsController@Email');
 
-Route::get('clients/export/excel/{bunisses_line}/{adviser}/{origen}/{date_init}/{date_finish}/{state}/{search}/{city}/{have_initial}/{to_prp}/{use_app}', 'ClientsController@Excel');
+Route::get('clients/export/excel/{bunisses_line}/{adviser}/{origen}/{date_init}/{date_finish}/{state}/{search}/{city}/{have_initial}/{to_prp}/{use_app}/{cumple}', 'ClientsController@Excel');
 
 Route::post('clients/import/', 'ClientsController@Import');
 Route::get('clients/refferes/code/{code}', 'ClientsController@getRefferesClient');

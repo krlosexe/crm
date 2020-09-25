@@ -46,6 +46,7 @@ class ClientsExport implements FromView
         $have_initial  = $this->have_initial ;
         $to_prp        = $this->to_prp ;
         $use_app       = $this->use_app ;
+        $cumple        = $this->cumple ;
 
         ini_set('memory_limit', '-1'); 
         ini_set('max_execution_time', 360);
@@ -126,6 +127,16 @@ class ClientsExport implements FromView
                                                     $query->orWhere("clientes.origen", 'like', '%'.$search.'%');
                                                 }
                                             }) 
+
+
+
+                                            ->where(function ($query) use ($cumple) {
+                                                if($cumple != 0){
+                                                    $query->whereRaw("MONTH(clientes.fecha_nacimiento) = $cumple");
+                                                }
+                                            }) 
+
+                                            
 
 
 
