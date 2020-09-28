@@ -98,8 +98,8 @@
 
               <div class="row">
                   <div class="form-group col-md-12">
-                      <label for=""><b>Facebook</b></label>
-                      <input type="text" name="facebook" class="form-control" id="facebook_edit">
+                      <label for=""><b>FACEBOOK *</b></label>
+                      <input type="text" name="facebook" class="form-control" id="facebook_edit" required>
                   </div>
                   
               </div>
@@ -107,8 +107,8 @@
 
               <div class="row">
                   <div class="form-group col-md-12">
-                      <label for=""><b>Instagram</b></label>
-                      <input type="text" name="instagram" class="form-control" id="instagram_edit">
+                      <label for=""><b>INSTAGRAM</b></label>
+                      <input type="text" name="instagram" class="form-control" id="instagram_edit" required>
                   </div>
               </div>
 
