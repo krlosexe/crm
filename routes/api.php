@@ -389,6 +389,11 @@ Route::post('uploads/estetica/vaginal', 'ClientsController@uploads');
 
 
 
+Route::post('transferir/client', 'TransfeClient@store');
+
+
+
+
 
 
 Route::get('generate/token/chat', function () {
