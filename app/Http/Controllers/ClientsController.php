@@ -1593,7 +1593,7 @@ class ClientsController extends Controller
                                     ->where("auditoria.status", "!=", "0")
                                     ->orderBy("clients_tasks.fecha", "ASC")
                                     ->where("clients_tasks.status_task", "Abierta")
-                                    ->where("clients_tasks.status_task", "En progreso")
+                                    ->whereOr("clients_tasks.status_task", "En progreso")
                                     ->get();
 
 
