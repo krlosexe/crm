@@ -232,6 +232,20 @@
        		<input type="hidden" name="state" value="No Contactada">
 			   <input type="hidden" name="origen" value="Formulario Web">
 			<input type="hidden" name="id_line" id="id_line" value="{{$id_line}}">
+
+
+      <div class="row">
+                <div class="col-md-12">
+                  <div class="pull-left">
+                      <input type="checkbox" class="form-comtrol" name="accept" value="1" id="accept" required="">
+                      <label for="accept">He leído y acepto las </label>
+                      <a href="<?= url("/") ?>/Politica_Tratamiento_Personal.pdf" target="_blank">Politicas de Tratamiento de Datos Personales</a>
+                  </div>
+              </div>
+           </div>
+
+
+           
           <br>
           <br>
         </div>

@@ -189,6 +189,20 @@
           
           <br>
           <br>
+
+
+          <div class="row">
+                <div class="col-md-12">
+                  <div class="pull-left">
+                      <input type="checkbox" class="form-comtrol" name="accept" value="1" id="accept" required="">
+                      <label for="accept">He leído y acepto las </label>
+                      <a href="<?= url("/") ?>/Politica_Tratamiento_Personal.pdf" target="_blank">Politicas de Tratamiento de Datos Personales</a>
+                  </div>
+              </div>
+           </div>
+
+
+           
         </div>
           <center>
             <button id="btn-submit"  class="btn btn-primary btn-user">
