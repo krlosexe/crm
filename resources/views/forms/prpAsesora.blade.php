@@ -107,7 +107,7 @@
 
               <div class="row">
                   <div class="form-group col-md-12">
-                      <label for=""><b>INSTAGRAM</b></label>
+                      <label for=""><b>INSTAGRAM *</b></label>
                       <input type="text" name="instagram" class="form-control" id="instagram_edit" required>
                   </div>
               </div>
