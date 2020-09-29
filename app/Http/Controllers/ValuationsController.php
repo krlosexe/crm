@@ -638,23 +638,25 @@ class ValuationsController extends Controller
 
 
 
-
-            if($state_px != "0"){
-                $data_client = Clients::select("state")->find($valuation->id_cliente);
-
-                DB::table("clientes")->where("id_cliente", $valuation->id_cliente)->update(["state" => $state_px]);
-
-               
-                if($data_client->state != $state_px){
-                    
-                    $version["id_user"]   = $request["id_user"];
-                    $version["id_client"] = $valuation->id_cliente;
-                    $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
+            if(isset($request["state_px"])){
+                if($state_px != "0"){
+                    $data_client = Clients::select("state")->find($valuation->id_cliente);
     
-                    LogsClients::create($version);
+                    DB::table("clientes")->where("id_cliente", $valuation->id_cliente)->update(["state" => $state_px]);
+    
+                   
+                    if($data_client->state != $state_px){
+                        
+                        $version["id_user"]   = $request["id_user"];
+                        $version["id_client"] = $valuation->id_cliente;
+                        $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
+        
+                        LogsClients::create($version);
+                    }
+    
                 }
-
             }
+            
 
 
 
