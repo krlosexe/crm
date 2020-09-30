@@ -200,6 +200,13 @@ Route::get('logs/events/adviser', 'LogsController@EventsAdvisers');
 Route::get('logs/events/clients', 'LogsController@eventsClients');
 
 Route::post('form/credit', 'FormCreditController@store');
+Route::post('form/credit/data/personal', 'FormCreditController@StoreDataPersonal');
+Route::get('form/credit/data/personal/{id_client}', 'FormCreditController@GetFormDataPersonal');
+
+
+
+
+
 
 
 Route::post('form/authorization/studio/credit', 'FormCreditController@storeAutorization');

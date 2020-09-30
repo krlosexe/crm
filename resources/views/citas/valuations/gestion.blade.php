@@ -1053,7 +1053,7 @@
 					var data = table.row( $(this).parents("tr") ).data();
 
 					//getPacientes("#paciente-edit", data.id_cliente)
-
+					$("#form-update")[0].reset()
 					GetClinic2("#clinic-edit", data.id_clinic)
 
 					$("#paciente-edit").val(data.id_cliente)
@@ -1065,6 +1065,13 @@
 					$("#type-edit").val(data.type)
 					$("#observaciones-edit").val(data.observaciones)
 					$("#status-edit").val(data.status_valuations)
+
+
+					$("#state-filter-edit").val()
+					$("#state-filter-edit").trigger("change");
+
+
+
 
 
 					if(data.pay_consultation == 1){

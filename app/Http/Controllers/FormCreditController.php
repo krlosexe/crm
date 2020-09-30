@@ -108,6 +108,12 @@ class FormCreditController extends Controller
     }
 
 
+
+
+
+
+
+
     public function storeAutorization(Request $request){
 
         FormAutorizationStudioCredit::create($request->all());
@@ -175,5 +181,23 @@ class FormCreditController extends Controller
 
         return response()->json("Ok")->setStatusCode(200);
         
+    }
+
+
+
+
+
+    public function StoreDataPersonal(Request $request){
+
+        $form = FormCreditDatosGenerales::create($request->all());
+
+        return response()->json("Ok")->setStatusCode(200);
+
+    }
+
+
+    public function GetFormDataPersonal($id_client){
+        $data = FormCreditDatosGenerales::where("id_client", $id_client)->get();
+        return response()->json(sizeof($data))->setStatusCode(200);
     }
 }

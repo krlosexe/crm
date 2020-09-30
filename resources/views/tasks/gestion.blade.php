@@ -633,7 +633,7 @@
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-
+					$("#form-update")[0].reset()
 					GetUsers("#responsable-edit", data.responsable)
 					GetUsers("#followers-edit", data.responsable)
 					//getPacientes("#paciente-edit", data.id_client)
@@ -650,6 +650,9 @@
 					$("#status_task-edit").val(data.status_task)
 
 					$("#id_cliente_edit").val(data.id_client)
+
+					$("#state-filter-edit").val()
+					$("#state-filter-edit").trigger("change");
 
 					var followers = []
 					$.each(data.followers, function (key, item) { 
