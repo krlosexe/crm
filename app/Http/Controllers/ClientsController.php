@@ -671,7 +671,7 @@ class ClientsController extends Controller
                 $User =  User::create([
                     "email"       => $request["email"],
                     "password"    => md5("123456789"),
-                    "id_rol"      => 19,
+                    "id_rol"      => 17,
                     "id_client"   => $cliente["id_cliente"]
                 ]);
     
