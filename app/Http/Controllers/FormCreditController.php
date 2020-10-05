@@ -196,8 +196,50 @@ class FormCreditController extends Controller
     }
 
 
+    public function StoreActivityEconomic(Request $request){
+
+        $form = FormCreditActividadEconomicaAdress::create($request->all());
+
+        return response()->json($request->all())->setStatusCode(200);
+
+    }
+
+
+
+    public function StoreRelationsActivos(Request $request){
+
+        $form = FormCreditRelacionActivos::create($request->all());
+
+        return response()->json($request->all())->setStatusCode(200);
+
+    }
+
+
+
+
+
+
     public function GetFormDataPersonal($id_client){
         $data = FormCreditDatosGenerales::where("id_client", $id_client)->get();
         return response()->json(sizeof($data))->setStatusCode(200);
     }
+
+
+
+    public function GetActivityEconomic($id_client){
+        $data = FormCreditActividadEconomicaAdress::where("id_client", $id_client)->get();
+        return response()->json(sizeof($data))->setStatusCode(200);
+    }
+
+
+
+    public function GetRelationsActivos($id_client){
+        $data = FormCreditRelacionActivos::where("id_client", $id_client)->get();
+        return response()->json(sizeof($data))->setStatusCode(200);
+    }
+
+
+
+
+
 }

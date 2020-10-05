@@ -328,7 +328,7 @@ class ClientsController extends Controller
 
                                 ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
 
-                                
+                                ->withCount('CountSactficationSuvarvy')
                                 ->where(function ($query) use ($procedure) {
                                     if($procedure != 0){
                                        // $query->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left");

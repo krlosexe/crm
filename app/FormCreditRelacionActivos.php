@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FormCreditRelacionActivos extends Model
 {
     protected $fillable = [
-        'id_form',  'type_apartamento',  'address_bien',  'barrio',  'city',  'valor_comercail',  'hipoteca',  'afectacion_familiar',  'type_vehicule',  
+        'id_form', 'id_client', 'id_line','type_apartamento',  'address_bien',  'barrio',  'city',  'valor_comercail',  'hipoteca',  'afectacion_familiar',  'type_vehicule',  
         'placa',  'transito',  'marca',  'modelo',  'valor_comercial',  'prenda_valor',  'otro_activos'
     ];
 

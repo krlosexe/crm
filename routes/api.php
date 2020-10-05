@@ -203,6 +203,13 @@ Route::post('form/credit', 'FormCreditController@store');
 Route::post('form/credit/data/personal', 'FormCreditController@StoreDataPersonal');
 Route::get('form/credit/data/personal/{id_client}', 'FormCreditController@GetFormDataPersonal');
 
+Route::post('form/credit/activity/economic', 'FormCreditController@StoreActivityEconomic');
+Route::get('form/credit/activity/economic/{id_client}', 'FormCreditController@GetActivityEconomic');
+
+
+Route::post('form/credit/realations/activos', 'FormCreditController@StoreRelationsActivos');
+Route::get('form/credit/realations/activos/{id_client}', 'FormCreditController@GetRelationsActivos');
+
 
 
 
@@ -455,10 +462,7 @@ Route::get('create/users/affiliate', function () {
 
     }
     
-
-
     return response()->json($clients)->setStatusCode(200);
-
 });
 
 
