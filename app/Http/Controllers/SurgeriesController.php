@@ -527,6 +527,25 @@ class SurgeriesController extends Controller
 
     }
 
+    public function DateMonth(Request $request){
+        try {
+
+            $data = DB::table('surgeries')
+            ->select('surgeries.*','clientes.id_cliente','clientes.nombres')
+            ->leftJoin('auditoria','surgeries.id_surgeries','auditoria.cod_reg')
+            ->leftJoin('clientes','surgeries.id_cliente','clientes.id_cliente')
+            ->whereRaw("month(surgeries.fecha) = $request->month")
+            ->where('surgeries.status_surgeries',0)
+            ->when($request->id_user,function($q) use($request){
+                return $q->where('auditoria.usr_regins',$request->id_user);
+            })
+            ->get();
+            return response()->json($data)->setStatusCode(200);
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+
 
 
 

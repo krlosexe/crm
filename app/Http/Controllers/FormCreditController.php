@@ -239,6 +239,11 @@ class FormCreditController extends Controller
     }
 
 
+    public function UploadIdentification(Request $request){
+        return response()->json(sizeof([1]))->setStatusCode(200);
+    }
+
+
 
 
 
