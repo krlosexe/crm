@@ -68,6 +68,9 @@ class Clients extends Model
         return $this->hasMany('App\ClientsTasks', 'id_client');
         
     }
+    public function CountSactficationSuvarvy () {
+        return $this->hasOne('App\SatisfactionSurvey','id_client');
+    }
 
 
 
