@@ -108,9 +108,89 @@
 		          <!-- Content Row -->
 
 		          <div class="row">
+					
+					<!-- prueba-->
+					<div class="col-xl-8 col-lg-7">
+		              <div class="card shadow mb-4">
+		                <!-- Card Header - Dropdown -->
+						<div class="col-auto">
+						<h6 class="m-0 py-3 ml-2 font-weight-bold text-primary">Programadas</h6>
+						<div>
+		                <div class="card-header py-6 flex-row align-items-center justify-content-between">
+						  <h6 class="m-0 font-weight-bold mx-1 text-primary">Mes</h6>
+							<select id="id_date_filter" class="form-control disabled">
+								<option value="1">Enero</option>
+								<option value="2">Febrero</option>
+								<option value="3">Marzo</option>
+								<option value="4">Abril</option>
+								<option value="5">Mayo</option>
+								<option value="6">Junio</option>
+								<option value="7">Julio</option>
+								<option value="8">Agosto</option>
+								<option value="9">Septiembre</option>
+								<option value="10">Octubre</option>
+								<option value="11">Noviembre</option>
+								<option value="12">Diciembre</option>
+							</select>
+
+							<h6 class="m-0 font-weight-bold mx-2 text-primary">Asesor</h6>
+
+							<select name="adviser[]" id="id_asesor_filter" class="form-control select2 disabled">
+								<option value="">Filtrar por Asesor:</option>
+							</select>
+					
+		                </div>
+		                <!-- Card Body -->
+		                <div class="card-body">
+		                  <div id="survey">
+						  	<div class="row">
+								<div class="col-md-12">
+									<ul style="height: 209px;overflow: scroll;" class="list-group" id="list_filter"></ul>
+								</div>
+							</div>
+							</div>
+						  </div>
+		                </div>
+		              </div>
+		            </div>
+		        </div>
+		         <!--fin prueba -->
+				 <div class="col-xl-4 col-lg-5">
+		              <div class="card shadow mb-4">
+		                <!-- Card Header - Dropdown -->
+		                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		                  <h6 class="m-0 font-weight-bold text-primary">Encuestas</h6>
+
+						  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		                 
+						 	
+							<select name="adviser[]" id="id_asesora_filter" class="form-control select2 disabled">
+								<option value="">Filtrar por Asesora:</option>
+							</select>
+					
+								
+		                  
+		                </div>
+		                <!-- Card Body -->
+		                <div class="card-body">
+		                  <div id="survey">
+						  	<div class="row">
+								<div class="col-md-12">
+									<ul style="height: 209px;overflow: scroll;" class="list-group" id="list_followers"></ul>
+								</div>
+							</div>
+
+							<div id="average_general" style="text-align: center;padding: 8%;font-size: 35px;">
+							</div>
+						  </div>
+		                </div>
+		              </div>
+		            </div>
+		          </div>
 
 		            <!-- Area Chart -->
-		            <div class="col-xl-8 col-lg-7">
+		            <div class="col-auto">
+		            <!-- <div class="col-xl-8 col-lg-7"> -->
 		              <div class="card shadow mb-4">
 		                <!-- Card Header - Dropdown -->
 		                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -136,42 +216,8 @@
 		                </div>
 		              </div>
 		            </div>
-
 		            <!-- Pie Chart -->
-		            <div class="col-xl-4 col-lg-5">
-		              <div class="card shadow mb-4">
-		                <!-- Card Header - Dropdown -->
-		                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-		                  <h6 class="m-0 font-weight-bold text-primary">Encuestas</h6>
-
-						  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-		                 
-						 	
-								
-							<select name="adviser[]" id="id_asesora_filter" class="form-control select2 disabled">
-								<option value="">Filtrar por Asesora:</option>
-							</select>
-					
-								
-		                  
-		                </div>
-		                <!-- Card Body -->
-		                <div class="card-body">
-		                  <div id="survey">
-						  	<div class="row">
-								<div class="col-md-12">
-									<ul style="height: 209px;overflow: scroll;" class="list-group" id="list_followers"></ul>
-								</div>
-							</div>
-
-							<div id="average_general" style="text-align: center;padding: 8%;font-size: 35px;">
-							</div>
-						  </div>
-		                </div>
-		              </div>
-		            </div>
-		          </div>
-
+		          
 		          <!-- Content Row -->
 		          <div class="row">
 
@@ -415,11 +461,7 @@
 	@endsection
 
 
-
-
-
 	@section('CustomJs')
-
 
 		<script>
 			$(document).ready(function(){
@@ -430,13 +472,14 @@
 				calificationsGoogle()
 				survey(id_user)
 				GetAsesorasValoracion("#id_asesora_filter")
+				GetAsesorasValoracion("#id_asesor_filter")
+				$("#id_date_filter").val(<?= date("m") ?>)
+				GetSurgeriedate()
 			});
 
 			function login(){
 				enviarFormulario("#login", 'auth', '#cuadro2', true);
 			}
-
-
 
 			$("#id_asesora_filter").change(function (e) { 
 				
@@ -444,7 +487,13 @@
 				
 			});
 
+			$("#id_asesor_filter").change(function (e) { 
+				GetSurgeriedate()
+			});
 
+			$("#id_date_filter").change(function (e){
+				GetSurgeriedate()
+			})
 			function prps(){
 
 				var url=document.getElementById('ruta').value;
@@ -765,6 +814,36 @@
 
 			}
 
+			function GetSurgeriedate(){
+	
+
+			var url=document.getElementById('ruta').value;
+
+			let params = {
+			id_user: $('#id_asesor_filter').val(),
+			month: $('#id_date_filter').val(),
+			}
+			$.ajax({
+			url:''+url+'/api/surgeries/date/month',
+			type: 'POST',
+			data:params,
+			success: function(response){
+
+				let html = ""
+						$.map(response, function (item, key) {
+						item.status_surgeries_name = item.status_surgeries ==0 ? item.status_surgeries_name ='Pendiente' :'' 
+						item.nombres_cliente = item.nombres ? item.nombres :'Sin nombre' 
+							html += "<li class='list-group-item' style='cursor: pointer' onclick='showSurvery("+JSON.stringify(item)+")'>"
+								html += '<b>'+item.status_surgeries_name+'</b><br>'+item.fecha+'<br><b>'+item.nombres_cliente+'</b><br>'
+								
+							html += '</li>'
+						});
+
+						$("#list_filter").html(html)
+
+			}
+			});
+			}
 
 
 
