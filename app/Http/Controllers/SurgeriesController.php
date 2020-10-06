@@ -12,6 +12,7 @@ use App\LogsClients;
 use App\Clients;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 class SurgeriesController extends Controller
 {
@@ -62,8 +63,8 @@ class SurgeriesController extends Controller
 
 
 
-                                
-                                
+
+
                                 ->where(function ($query) use ($rol, $id_user) {
                                     if($rol == "Asesor"){
                                         $query->where("auditoria.usr_regins", $id_user);
@@ -75,22 +76,22 @@ class SurgeriesController extends Controller
                                     if($adviser != 0){
                                         $query->whereIn("auditoria.usr_regins", $adviser);
                                     }
-                                }) 
+                                })
 
-                                
+
 
 
                                 ->where(function ($query) use ($date_init) {
                                     if($date_init != 0){
                                         $query->where("surgeries.fecha", ">=", $date_init);
                                     }
-                                }) 
+                                })
 
                                 ->where(function ($query) use ($date_finish) {
                                     if($date_finish != 0){
                                         $query->where("surgeries.fecha", "<=", $date_finish);
                                     }
-                                }) 
+                                })
 
                                 ->where("auditoria.tabla", "surgeries")
                                 ->where("auditoria.status", "!=", "0")
@@ -156,13 +157,13 @@ class SurgeriesController extends Controller
             //                     ->get();
 
             // if(sizeof($valid) > 0){
-            //     $data = array('mensagge' => "Ya existen cirugias en ese Horario");    
-            //     return response()->json($data)->setStatusCode(400); 
+            //     $data = array('mensagge' => "Ya existen cirugias en ese Horario");
+            //     return response()->json($data)->setStatusCode(400);
             // }
 
             // if($hora_init >= $hora_end){
-            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
-            //     return response()->json($data)->setStatusCode(400); 
+            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");
+            //     return response()->json($data)->setStatusCode(400);
             // }
 
 
@@ -180,7 +181,7 @@ class SurgeriesController extends Controller
 
             $request["table"]    = "surgerie";
             $request["id_event"] = $store["id_surgeries"];
-            
+
             if($request->comment != "<p><br></p>"){
                 Comments::create($request->all());
             }
@@ -206,7 +207,7 @@ class SurgeriesController extends Controller
                     array_push($followers, $array);
                     FollwersEvents::create($array);
                 }
-                
+
             }
 
 
@@ -224,7 +225,7 @@ class SurgeriesController extends Controller
 
                     SurgeriesAdditional::create($array);
                 }
-                
+
             }
 
 
@@ -256,13 +257,13 @@ class SurgeriesController extends Controller
                 $data_client = Clients::select("state")->find($request["id_cliente"]);
 
                 DB::table("clientes")->where("id_cliente", $request["id_cliente"])->update(["state" => $state_px]);
-               
+
                 if($data_client->state != $state_px){
-                    
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $request["id_cliente"];
                     $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
-    
+
                     LogsClients::create($version);
                 }
             }
@@ -273,7 +274,7 @@ class SurgeriesController extends Controller
 
 
             if ($store) {
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -290,7 +291,7 @@ class SurgeriesController extends Controller
      * @param  \App\Surgeries  $valuations
      * @return \Illuminate\Http\Response
      */
-    public function show(Valuations $Surgeries)
+    public function show($Surgeries)
     {
         //
     }
@@ -301,7 +302,7 @@ class SurgeriesController extends Controller
      * @param  \App\Valuations  $valuations
      * @return \Illuminate\Http\Response
      */
-    public function edit(Valuations $surgeries)
+    public function edit($surgeries)
     {
         //
     }
@@ -316,9 +317,9 @@ class SurgeriesController extends Controller
     public function update(Request $request, $surgeries)
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            
+
             $request["attempt"] == 1 ? $request["attempt"] = 1 : $request["attempt"] = 0;
-          
+
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
 
@@ -328,7 +329,7 @@ class SurgeriesController extends Controller
             //                     ->where("time",     "<=", $request["time"])
             //                     ->where("id_surgeries", "!=", $surgeries)
             //                     ->get();
-            
+
             SurgeriesPayments::where('id_surgerie', $surgeries)->delete();
 
             if($request->dates){
@@ -342,9 +343,9 @@ class SurgeriesController extends Controller
 
                     $SurgeriesPayments->way_to_pay   = $request->way_to_pays[$key];
                     $SurgeriesPayments->amount     = $amount;
-                    
+
                     $SurgeriesPayments->save();
-                }    
+                }
             }
 
 
@@ -364,7 +365,7 @@ class SurgeriesController extends Controller
 
                     SurgeriesAdditional::create($array);
                 }
-                
+
             }
 
 
@@ -372,21 +373,21 @@ class SurgeriesController extends Controller
 
 
             // if(sizeof($valid) > 0){
-            //     $data = array('mensagge' => "Ya existen cirugias en ese Horario");    
-            //     return response()->json($data)->setStatusCode(400); 
+            //     $data = array('mensagge' => "Ya existen cirugias en ese Horario");
+            //     return response()->json($data)->setStatusCode(400);
             // }
 
             // if($hora_init >= $hora_end){
-            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
-            //     return response()->json($data)->setStatusCode(400); 
+            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");
+            //     return response()->json($data)->setStatusCode(400);
             // }
 
-            
+
             if(isset($request["amount"])){
                 $request["amount"]          = str_replace('.', '', $request["amount"]);
                 $request["amount"]          = str_replace(',', '.', $request["amount"]);
             }
-            
+
 
             $update = Surgeries::find($surgeries)->update($request->all());
 
@@ -402,7 +403,7 @@ class SurgeriesController extends Controller
                     Comments::insert($array);
                 }
             }
-            
+
 
 
             if(isset($request->followers)){
@@ -416,7 +417,7 @@ class SurgeriesController extends Controller
                     $array["tabla"]       = "surgeries";
                     FollwersEvents::create($array);
                 }
-                
+
             }
 
 
@@ -430,8 +431,8 @@ class SurgeriesController extends Controller
 
             $clinic    = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
             $cita      = DB::table("surgeries")->where("id_surgeries", $surgeries)->first();
-          
-   
+
+
             $version["id_user"]   = $request["id_user"];
             $version["id_client"] = $cita->id_cliente;
             $version["event"]     = "Actualizo Cirugia para el dia $request[fecha] con el Doctor ".$request["surgeon"]." en la clinica ".$name_clinic;
@@ -447,13 +448,13 @@ class SurgeriesController extends Controller
                 $data_client = Clients::select("state")->find($cita->id_cliente);
 
                 DB::table("clientes")->where("id_cliente", $cita->id_cliente)->update(["state" => $state_px]);
-               
+
                 if($data_client->state != $state_px){
-                    
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $cita->id_cliente;
                     $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
-    
+
                     LogsClients::create($version);
                 }
             }
@@ -467,7 +468,7 @@ class SurgeriesController extends Controller
 
 
             if ($update) {
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -481,7 +482,7 @@ class SurgeriesController extends Controller
 
     public function status($id, $status, Request $request)
     {
-        
+
         $auditoria =  Auditoria::where("cod_reg", $id)
                                     ->where("tabla", "surgeries")->first();
         $auditoria->status = $status;
@@ -492,7 +493,7 @@ class SurgeriesController extends Controller
         }
         $auditoria->save();
 
-        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
     }
     /**
@@ -514,7 +515,7 @@ class SurgeriesController extends Controller
 
 
     public function QtyMonth($user_id){
-        
+
         $data = Surgeries::selectRaw("count(id_surgeries) as qty")
                             ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
                             ->where("surgeries.status_surgeries", 1)
@@ -527,7 +528,8 @@ class SurgeriesController extends Controller
 
     }
 
-    public function DateMonth(Request $request){
+    public function DateMonth(Request $request)
+    {
         try {
 
             $data = DB::table('surgeries')
@@ -536,10 +538,39 @@ class SurgeriesController extends Controller
             ->leftJoin('clientes','surgeries.id_cliente','clientes.id_cliente')
             ->whereRaw("month(surgeries.fecha) = $request->month")
             ->where('surgeries.status_surgeries',0)
+            ->where("auditoria.tabla", "surgeries")
             ->when($request->id_user,function($q) use($request){
                 return $q->where('auditoria.usr_regins',$request->id_user);
             })
             ->get();
+            return response()->json($data)->setStatusCode(200);
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+    public function DashboardMonth(Request $request)
+    {
+        try {
+
+            $init = Carbon::now()->subMonths(5)->format('m');
+            $end = Carbon::now()->format('m');
+            $year = Carbon::now()->format('Y');
+
+            $data = DB::table('surgeries')
+                ->select('surgeries.*',
+                DB::raw('SUM(surgeries_additional.price_aditional) as amount_month'),
+                DB::raw('month(surgeries.fecha) as month')
+                )
+                ->where('surgeries.status_surgeries',1)
+                ->leftJoin('auditoria','surgeries.id_surgeries','auditoria.cod_reg')
+                ->leftJoin('surgeries_additional','surgeries.id_surgeries','surgeries_additional.id_surgerie')
+                ->whereRaw("month(surgeries.fecha) >=  $init and month(surgeries.fecha) <= $end and year(surgeries.fecha) =  $year")
+                ->when($request->id_user,function($q) use($request){
+                  return $q->where('auditoria.usr_regins',$request->id_user);
+                })
+            ->groupBy(DB::raw('month(surgeries.fecha)'))
+            ->get();
+            // dd($data);
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;

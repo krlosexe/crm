@@ -13,7 +13,7 @@ use App\FormCreditRelacionActivos;
 use App\FormCreditReferencias;
 
 use Mail;
-
+use DB;
 use App\User;
 use App\FormAutorizationStudioCredit;
 class FormCreditController extends Controller
@@ -240,8 +240,61 @@ class FormCreditController extends Controller
 
 
     public function UploadIdentification(Request $request){
+
+
+
+        $folder = "img/credit/cedulas";
+
+        $img      = str_replace('data:image/png;base64,', '', $request["file_base_64"]);
+        $fileData = base64_decode($img);
+        $fileName = $request["id_client"].'-cedula.png';
+        file_put_contents($folder."/".$fileName, $fileData);
+        
+
+
+        DB::table("form_credit_photo_identification")->insert([
+            "id_client" => $request["id_client"],
+            "photo"     => $fileName
+        ]);
         return response()->json(sizeof([1]))->setStatusCode(200);
     }
+
+
+
+    public function GetPhotoIdentification($id_client){
+        $data = DB::table("form_credit_photo_identification")->where("id_client", $id_client)->get();
+        return response()->json(sizeof($data))->setStatusCode(200);
+    }   
+
+
+
+
+    public function UploadFace(Request $request){
+
+
+
+        $folder = "img/credit/faces";
+
+        $img      = str_replace('data:image/png;base64,', '', $request["file_base_64"]);
+        $fileData = base64_decode($img);
+        $fileName = $request["id_client"].'-face.png';
+        file_put_contents($folder."/".$fileName, $fileData);
+        
+
+
+        DB::table("form_credit_photo_face")->insert([
+            "id_client" => $request["id_client"],
+            "photo"     => $fileName
+        ]);
+        return response()->json(sizeof([1]))->setStatusCode(200);
+    }
+
+
+
+    public function GetPhotoFace($id_client){
+        $data = DB::table("form_credit_photo_face")->where("id_client", $id_client)->get();
+        return response()->json(sizeof($data))->setStatusCode(200);
+    } 
 
 
 
