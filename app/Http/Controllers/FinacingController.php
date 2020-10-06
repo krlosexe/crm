@@ -221,14 +221,17 @@ class FinacingController extends Controller
 
 
 
-        $folder = "img/credit/comprobantes";
+        if(isset($request["photo_recived"])){
+            $folder = "img/credit/comprobantes";
 
-        $img      = str_replace('data:image/png;base64,', '', $request["photo_recived"]);
-        $fileData = base64_decode($img);
-        $fileName = rand(0,100000000).'-comprobante.png';
-        file_put_contents($folder."/".$fileName, $fileData);
+            $img      = str_replace('data:image/png;base64,', '', $request["photo_recived"]);
+            $fileData = base64_decode($img);
+            $fileName = rand(0,100000000).'-comprobante.png';
+            file_put_contents($folder."/".$fileName, $fileData);
 
-        $request["photo_recived"] = $fileName;
+            $request["photo_recived"] = $fileName;
+        }
+
         $store = DB::table("clients_pay_to_study_credit")->insert($request->all());
         return response()->json($request->all())->setStatusCode(200);
     }
@@ -267,11 +270,27 @@ class FinacingController extends Controller
 
     public function PayToFee(Request $request){
 
+
+
+        if(isset($request["photo_recived"])){
+            $folder = "img/credit/comprobantes";
+
+            $img      = str_replace('data:image/png;base64,', '', $request["photo_recived"]);
+            $fileData = base64_decode($img);
+            $fileName = rand(0,100000000).'-comprobante.png';
+            file_put_contents($folder."/".$fileName, $fileData);
+
+            $request["photo_recived"] = $fileName;
+        }
+
+
+
         DB::table("client_request_credit_payment_plan")->where("id", $request->id_fee)->update([
             "status"          => "Pagada",
             "payment_method"  => $request["payment_method"],
             "id_transactions" => $request["id_transactions"],
-            "date_pay"        => date("Y-m-d")
+            "date_pay"        => date("Y-m-d"),
+            "photo_recived"   => $request["photo_recived"]
         ]);
         return response()->json($request->all())->setStatusCode(200);
     }

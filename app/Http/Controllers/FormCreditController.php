@@ -40,7 +40,7 @@ class FormCreditController extends Controller
             }
 
         }
-        
+
 
         FormCreditRelacionActivos::create($request->all());
         FormCreditReferencias::create($request->all());
@@ -66,8 +66,8 @@ class FormCreditController extends Controller
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->get();
 
-        
-        
+
+
 
             foreach($users as $user){
 
@@ -87,7 +87,7 @@ class FormCreditController extends Controller
 
         }
 
-        
+
 
 
 
@@ -135,15 +135,15 @@ class FormCreditController extends Controller
             });
 
         }else{
-            
+
             $users = User::join("users_line_business", "users_line_business.id_user" , "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->get();
 
-        
-        
+
+
             foreach($users as $user){
-            
+
                 $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS ". $request["names"]." ".$request["last_names"];
                 //$for = "cardenascarlos18@gmail.com";
                 $for = $user["email"];
@@ -160,7 +160,7 @@ class FormCreditController extends Controller
         }
 
 
-        
+
 
 
             $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS ".$request["names"]." ".$request["last_names"];
@@ -180,7 +180,7 @@ class FormCreditController extends Controller
 
 
         return response()->json("Ok")->setStatusCode(200);
-        
+
     }
 
 
@@ -249,7 +249,7 @@ class FormCreditController extends Controller
         $fileData = base64_decode($img);
         $fileName = $request["id_client"].'-cedula.png';
         file_put_contents($folder."/".$fileName, $fileData);
-        
+
 
 
         DB::table("form_credit_photo_identification")->insert([
@@ -264,7 +264,7 @@ class FormCreditController extends Controller
     public function GetPhotoIdentification($id_client){
         $data = DB::table("form_credit_photo_identification")->where("id_client", $id_client)->get();
         return response()->json(sizeof($data))->setStatusCode(200);
-    }   
+    }
 
 
 
@@ -279,7 +279,7 @@ class FormCreditController extends Controller
         $fileData = base64_decode($img);
         $fileName = $request["id_client"].'-face.png';
         file_put_contents($folder."/".$fileName, $fileData);
-        
+
 
 
         DB::table("form_credit_photo_face")->insert([
@@ -294,7 +294,7 @@ class FormCreditController extends Controller
     public function GetPhotoFace($id_client){
         $data = DB::table("form_credit_photo_face")->where("id_client", $id_client)->get();
         return response()->json(sizeof($data))->setStatusCode(200);
-    } 
+    }
 
 
 
