@@ -10,17 +10,17 @@ use Illuminate\Http\Request;
 class FinacingController extends Controller
 {
     public function GetRequestFinancing(){
-        
-        
+
+
         $data = DB::table("client_request_credit")
-                        ->selectRaw("client_request_credit.*, clientes.nombres, clientes.pay_to_study_credit, 
+                        ->selectRaw("client_request_credit.*, clientes.nombres, clientes.pay_to_study_credit,
 
 
-                                    clientc_credit_information.dependent_independent, 
-                                    clientc_credit_information.have_initial, 
-                                    clientc_credit_information.reported, 
+                                    clientc_credit_information.dependent_independent,
+                                    clientc_credit_information.have_initial,
+                                    clientc_credit_information.reported,
 
-                                    clients_pay_to_study_credit.payment_method, 
+                                    clients_pay_to_study_credit.payment_method,
                                     clients_pay_to_study_credit.created_at as date_pay,
 
                                     client_request_credit_requirements.working_letter,
@@ -61,7 +61,7 @@ class FinacingController extends Controller
                           ->join("auth_users_app_financing", "auth_users_app_financing.id_user", "=", "users.id")
                           ->where("id_client", $data->id_client)->first();
 
-            
+
             $FCM_token = $data_user->token_notifications;
 
 
@@ -81,7 +81,7 @@ class FinacingController extends Controller
             if(($request["status"] == "Desembolsado")){
                 $notification_text = "Felicitaciones tu credito ha sido Desembolsado";
             }
-        
+
             $url = "https://fcm.googleapis.com/fcm/send";
             $token = $FCM_token;
             $serverKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
@@ -110,7 +110,7 @@ class FinacingController extends Controller
 
             $date = date("Y-m-d");
             if(($request["status"] == "Aprobado") || ($request["status"] == "Desembolsado")){
-                
+
                 DB::table("client_request_credit_payment_plan")->where("id_request_credit", $id)->delete();
                 foreach($request["number"] as $key => $value){
 
@@ -123,13 +123,13 @@ class FinacingController extends Controller
                     $array["credit_to_capital"]  = str_replace(",", "", $request["credit_to_capital"][$key]);
                     $array["monthly_fees"]       = str_replace(",", "", $request["monthly_fees"][$key]);
                     $array["balance"]            = str_replace(",", "", $request["balance"][$key]);
-                    $array["date"]               = $date; 
-                    
-        
+                    $array["date"]               = $date;
+
+
                     DB::table("client_request_credit_payment_plan")->insert($array);
 
                 }
-                
+
             }
 
         }
@@ -138,18 +138,18 @@ class FinacingController extends Controller
 
         $data = Clients::select("pay_to_study_credit")->find($id_client);
         $request["pay_to_study_credit"] == 1 ? $request["pay_to_study_credit"] = 1 : $request["pay_to_study_credit"] = 0;
-       
+
         $client = Clients::find($id_client)->update(["pay_to_study_credit" => $request["pay_to_study_credit"]]);
 
         if($data->pay_to_study_credit == 0){
 
             DB::table("clients_pay_to_study_credit")->where("id_client", $id_client)->delete();
-        
+
             if($request["pay_to_study_credit"] == 1){
                 DB::table("clients_pay_to_study_credit")->insert([
-                                                                    "id_client" => $id_client, 
-                                                                    "amount" => 70000, 
-                                                                    "payment_method" => $request["payment_method"], 
+                                                                    "id_client" => $id_client,
+                                                                    "amount" => 70000,
+                                                                    "payment_method" => $request["payment_method"],
                                                                     "created_at" => $request["date_pay_study_credit"]
                                                                 ]);
             }
@@ -159,7 +159,7 @@ class FinacingController extends Controller
             if($request["pay_to_study_credit"] == 0){
                 DB::table("clients_pay_to_study_credit")->where("id_client", $id_client)->delete();
             }
-            
+
         }
 
 
@@ -188,8 +188,8 @@ class FinacingController extends Controller
             ]
         );
 
-        $response = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
-        
+        $response = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+
         return response()->json($response)->setStatusCode(200);
     }
 
@@ -202,7 +202,7 @@ class FinacingController extends Controller
                     ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
                     ->where("client_request_credit.id_client", $id_client)
                     ->paginate(10);
-        
+
         return response()->json($data)->setStatusCode(200);
     }
 
@@ -218,6 +218,17 @@ class FinacingController extends Controller
     public function PayStudyCredit(Request $request){
 
         $store = DB::table("clientes")->where("id_cliente", $request["id_client"])->update(["pay_to_study_credit" => 1]);
+
+
+
+        $folder = "img/credit/comprobantes";
+
+        $img      = str_replace('data:image/png;base64,', '', $request["photo_recived"]);
+        $fileData = base64_decode($img);
+        $fileName = rand(0,100000000).'-comprobante.png';
+        file_put_contents($folder."/".$fileName, $fileData);
+
+        $request["photo_recived"] = $fileName;
         $store = DB::table("clients_pay_to_study_credit")->insert($request->all());
         return response()->json($request->all())->setStatusCode(200);
     }
@@ -236,7 +247,7 @@ class FinacingController extends Controller
                     ->first();
 
 
-        
+
         $history = DB::table("client_request_credit_payment_plan")
 
                     ->selectRaw("client_request_credit_payment_plan.*")

@@ -539,6 +539,7 @@ class SurgeriesController extends Controller
             ->whereRaw("month(surgeries.fecha) = $request->month")
             ->where('surgeries.status_surgeries',0)
             ->where("auditoria.tabla", "surgeries")
+            ->where("auditoria.status",1)
             ->when($request->id_user,function($q) use($request){
                 return $q->where('auditoria.usr_regins',$request->id_user);
             })
@@ -557,7 +558,7 @@ class SurgeriesController extends Controller
             $year = Carbon::now()->format('Y');
 
             $data = DB::table('surgeries')
-                ->select('surgeries.*',
+                ->select('surgeries.*','auditoria.usr_regins',
                 DB::raw('SUM(surgeries_additional.price_aditional) as amount_month'),
                 DB::raw('month(surgeries.fecha) as month')
                 )

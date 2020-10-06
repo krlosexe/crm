@@ -1,4 +1,4 @@
-@extends('layouts.app')
+<!-- @extends('layouts.app')
 
 	@section('content')
 	     <!-- Page Wrapper -->
@@ -144,15 +144,28 @@
 		                  <div id="survey">
 						  	<div class="row">
 								<div class="col-md-12">
-									<ul style="height: 209px;overflow: scroll;" class="list-group" id="list_filter"></ul>
-								</div>
-							</div>
-							</div>
-						  </div>
-		                </div>
-		              </div>
-		            </div>
-		        </div>
+									<!-- <ul style="height: 209px;overflow: scroll;" class="list-group" id="list_filter"></ul> -->
+					<table class="table table-bordered " id="list_filter" width="100%" cellspacing="0">
+					    <thead>
+							<tr>
+
+								<th>Estado</th>
+								<th>Fecha de Cirugia</th>
+								<th style="width: 150px;">Cliente</th>
+							</tr>
+					    </thead>
+					        <tbody>
+
+					        </tbody>
+                    </table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
 		         <!--fin prueba -->
 				 <div class="col-xl-4 col-lg-5">
 		              <div class="card shadow mb-4">
@@ -194,23 +207,37 @@
 		                <!-- Card Header - Dropdown -->
 		                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 		                  <h6 class="m-0 font-weight-bold text-primary">Ingreso Mensuales</h6>
-		                  <div class="dropdown no-arrow">
+		                  
+						  <h6 class="m-0 ml-auto mx-3 font-weight-bold text-primary">Asesor</h6>
+						<div class="dropdown no-arrow">
+						  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+							<select name="adviser[]" id="id_asesor_filter_dashboard" class="form-control select2 disabled">
+								<option value="">Filtrar por Asesora:</option>
+							</select>
+		                 </div>
+		                </div>
+		                  <!-- <div class="dropdown no-arrow">
 		                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
 		                    </a>
-		                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+							<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between"> -->
+		                    <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
 		                      <div class="dropdown-header">Dropdown Header:</div>
 		                      <a class="dropdown-item" href="#">Action</a>
 		                      <a class="dropdown-item" href="#">Another action</a>
 		                      <div class="dropdown-divider"></div>
 		                      <a class="dropdown-item" href="#">Something else here</a>
-		                    </div>
+		                    </div> -->
 		                  </div>
 		                </div>
 		                <!-- Card Body -->
 		                <div class="card-body">
 		                  <div class="chart-area">
 		                    <canvas id="mychart"></canvas>
+						  <div id="mensaje">
+
+						  </div>
 		                  </div>
 		                </div>
 		              </div>
@@ -464,6 +491,7 @@
 
 		<script>
 			$(document).ready(function(){
+				$.fn.dataTable.ext.errMode = 'none';
 				login()
 				prps()
 				valorations()
@@ -472,10 +500,11 @@
 				survey(id_user)
 				GetAsesorasValoracion("#id_asesora_filter")
 				GetAsesorasValoracion("#id_asesor_filter")
+				GetAsesorasValoracion("#id_asesor_filter_dashboard")
 				$("#id_date_filter").val(<?= date("m") ?>)
 				GetSurgeriedate()
 				GetSurgerieDasboard()
-				GetDashboard()
+				GetDashboard(month=null,amount_month= null)
 			});
 
 			function login(){
@@ -490,6 +519,10 @@
 
 			$("#id_asesor_filter").change(function (e) { 
 				GetSurgeriedate()
+			});
+
+			$("#id_asesor_filter_dashboard").change(function (e) { 
+				GetSurgerieDasboard()
 			});
 
 			$("#id_date_filter").change(function (e){
@@ -822,34 +855,57 @@
 			id_user: $('#id_asesor_filter').val(),
 			month: $('#id_date_filter').val(),
 			}
-			$.ajax({
-			url:''+url+'/api/surgeries/date/month',
-			type: 'POST',
-			data:params,
-			success: function(response){
 
-				let html = ""
-						$.map(response, function (item, key) {
-						item.status_surgeries_name = item.status_surgeries ==0 ? item.status_surgeries_name ='Pendiente' :'' 
-						item.nombres_cliente = item.nombres ? item.nombres :'Sin nombre' 
-							html += "<li class='list-group-item' style='cursor: pointer' onclick='showSurvery("+JSON.stringify(item)+")'>"
-								html += '<b>'+item.status_surgeries_name+'</b><br>'+item.fecha+'<br><b>'+item.nombres_cliente+'</b><br>'
-								
-							html += '</li>'
-						});
 
-						$("#list_filter").html(html)
 
-			}
-			});
+
+
+
+			var table=$("#list_filter").DataTable({
+					"destroy":true,
+					"stateSave": true,
+					"serverSide":false,
+					"ajax":{
+						"method":"POST",
+						 "url" :`${url}/api/surgeries/date/month`,
+						 "data":params,
+						"dataSrc":""
+					},
+					"columns":[
+						{"data": "status_surgeries", 
+							render : function(data, type, row) {
+								return row.status_surgeries_name = row.status_surgeries ==0 ? row.status_surgeries_name ='Pendiente' :'' ;
+							}
+						},
+						{"data": "fecha",
+							render : function(data, type, row) {
+								return row.fecha;
+							}
+						},
+						{"data": "nombres",
+							render : function(data, type, row) {
+								return row.nombres_cliente = row.nombres ? row.nombres :'Sin nombre' ;
+							}
+						}
+						
+					],
+					"language": idioma_espanol,
+					"dom": 'Bfrtip',
+					"responsive": true,
+					"buttons":[
+						'copy', 'csv', 'excel', 'pdf', 'print'
+					]
+				});
+
+				// return false
+
 			}
 			function GetSurgerieDasboard(){
 	
 			var url=document.getElementById('ruta').value;
 
 			 let params = {
-			 id_user: $('#id_asesor_filter').val(),
-			 month: $('#id_date_filter').val(),
+			 id_user: $('#id_asesor_filter_dashboard').val(),
 			}
 			$.ajax({
 			url:''+url+'/api/surgeries/dashboard/amount/month',
@@ -911,9 +967,12 @@
 							default:
 								break;
 						}
-						 month.push(element.month_name);
-						 amount_month.push(element.amount_month ? element.amount_month : 0);
+				
+						month.push(element.month_name);
+						amount_month.push(element.amount_month ? element.amount_month : 0);
+					
 					});
+
 					GetDashboard(month,amount_month)
 				
 			}
@@ -922,22 +981,23 @@
 	function GetDashboard(label,month){
 		try {
 			let ctx = document.getElementById("mychart");
+			
 				let myLineChart = new Chart(ctx, {
 				type: 'line',
 				data: {
 					labels: label,
 					datasets: [{
 					label: "Monto",
-					lineTension: 0.3,
+					// lineTension: 0.3,
 					backgroundColor: "rgba(78, 115, 223, 0.05)",
 					borderColor: "rgba(78, 115, 223, 1)",
 					pointRadius: 3,
 					pointBackgroundColor: "rgba(78, 115, 223, 1)",
 					pointBorderColor: "rgba(78, 115, 223, 1)",
-					pointHoverRadius: 3,
+					// pointHoverRadius: 3,
 					pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
 					pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-					pointHitRadius: 10,
+					// pointHitRadius: 10,
 					pointBorderWidth: 2,
 					data: month,
 					}],
@@ -977,7 +1037,7 @@
 						gridLines: {
 						color: "rgb(234, 236, 244)",
 						zeroLineColor: "rgb(234, 236, 244)",
-						drawBorder: false,
+						// drawBorder: false,
 						borderDash: [2],
 						zeroLineBorderDash: [2]
 						}
@@ -997,7 +1057,7 @@
 					xPadding: 15,
 					yPadding: 15,
 					displayColors: false,
-					intersect: false,
+					// intersect: true,
 					mode: 'index',
 					caretPadding: 10,
 					callbacks: {
@@ -1009,6 +1069,7 @@
 					}
 				}
 				});
+				
 		} catch (e) {
 			console.log(e)
 		}
@@ -1019,4 +1080,4 @@
 
 	@endsection
 
-
+ -->
