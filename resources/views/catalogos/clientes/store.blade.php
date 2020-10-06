@@ -54,7 +54,7 @@
 			  <div class="tab-pane fade show active tab_content0-0" id="init" role="tabpanel" aria-labelledby="patient_record">
 
                 <div class="row">
-        
+
                     <div class="col-md-6">
 
                         <div class="row">
@@ -81,6 +81,8 @@
                                         <option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
                                         <option value="Valorada">Valorada</option>
                                         <option value="Valorada / Descartada">Valorada / Descartada</option>
+                                        <option value="En mora">En mora</option>
+                                        <option value="Al Dia">Al Dia</option>
                                     </select>
                                 </div>
                             </div>
@@ -116,7 +118,7 @@
                                     <input type="text" name="nombres" class="form-control form-control-user disabled" id="nombre" placeholder="PJ. Carlos Javier Cardenas" required>
                                 </div>
                             </div>
-                        
+
                           <!--<div class="col-md-6">
                                 <div class="form-group">
                                     <label for=""><b>Apellidos</b></label>
@@ -126,7 +128,7 @@
 
                         </div>
 
-                        
+
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">
@@ -179,7 +181,7 @@
                                 <button type="button" id="add_phone" class="btn btn-primary"><i class="fa fa-plus"></i></button>
                             </div>
 
-                            
+
                         </div>
 
                         <div id="add_phone_content" class="row">
@@ -204,7 +206,7 @@
                                 <button type="button" id="add_email" class="btn btn-primary"><i class="fa fa-plus"></i></button>
                             </div>
 
-                            
+
                         </div>
 
                         <div id="add_email_content" class="row">
@@ -429,12 +431,12 @@
                                             <label for=""><b>Estatus</b></label>
                                             <select name="status_task" id="status_task-store" class="form-control" required>
                                                 <option value="Abierta">Abierta</option>
-                                                
+
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
 
                         </div>
@@ -477,7 +479,7 @@
                                 </div>
 
 
-                                
+
                                 <div class="row">
 
                                     <div class="col-md-6">
@@ -501,7 +503,7 @@
 
 
 
-                                
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for=""><b>Seguidores</b></label>
@@ -521,7 +523,7 @@
                                     </div>
 
 
-                                    
+
                                 </div>
 
 
@@ -564,7 +566,7 @@
                                 </div>
 
 
-                                    
+
 
 
 
@@ -586,7 +588,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="row" id="content_acquittance" style="display: none">
-                                            <div class="col-sm-12 text-center"> 
+                                            <div class="col-sm-12 text-center">
                                                     <label for=""><b>Adjuntar recibo</b></label>
                                                     <div>
                                                         <div class="file-loading">
@@ -605,7 +607,7 @@
 
 
 
-                              
+
                             </div>
 
                         </div>
@@ -614,7 +616,7 @@
 
 
 
-                        
+
                     </div>
 
                 </div>
@@ -641,7 +643,7 @@
                                         <select name="id_category" class="form-control" id="category"></select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-4">
                                     <label for=""><b>Sub Categoria</b></label>
                                     <div class="form-group valid-required">
@@ -659,7 +661,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-12"> 
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for=""><b>Observaciones adicionales</b></label>
                                         <textarea class="form-control" name="observations" id="observations"></textarea>
@@ -683,7 +685,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -704,7 +706,7 @@
                                 <input type="text" name="current_size" class="form-control form-control-user" id="current_size" placeholder="PJ. 12">
                             </div>
                         </div>
-                    
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""><b>Talla en que quiere quedar</b></label>
@@ -721,7 +723,7 @@
                                 <input type="text" name="implant_volumem" class="form-control form-control-user" id="implant_volumem" placeholder="PJ. 11">
                             </div>
                         </div>
-                        
+
                     </div>
               </div>
 
@@ -731,7 +733,7 @@
 
 
               <div class="tab-pane fade tab_content1" id="init-history" role="tabpanel" aria-labelledby="patient_record">
-              
+
                     <div class="row">
 
                         <div class="col-md-7">
@@ -743,7 +745,7 @@
                                         <input type="text" name="eps" class="form-control form-control-user" id="eps" placeholder="PJ. EPS SURAMERICANA S.A.">
                                     </div>
                                 </div>
-                            
+
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for=""><b>Estatura</b></label>
@@ -781,7 +783,7 @@
                         <div class="col-md-5">
                             <div class="row">
 
-                              
+
                                 <div class="col-md-6">
                                     <label for="alcohol"><b>Alcohol</b></label>
                                     <label class='container-check'>
@@ -796,7 +798,7 @@
                                     <label for="smoke"><b>Fuma</b></label>
                                     <label class='container-check'>
                                         <input type='checkbox' name='smoke' class='checkitem chk-col-blue' id='smoke' value='1'>
-                                        
+
                                         <span class='checkmark'></span>
                                         <label for=''></label>
                                     </label>
@@ -877,7 +879,7 @@
 
                     <br><br>
 
-                    
+
               </div>
 
 
@@ -890,7 +892,7 @@
 
 
               <div class="tab-pane fade tab_content1-0" id="info-credit-patient" role="tabpanel" aria-labelledby="patient_record">
-              
+
                     <div class="row">
 
                         <div class="col-md-4">
@@ -967,13 +969,13 @@
                     </div>
 
                     <br><br>
-                    
+
               </div>
 
 
 
               <div class="tab-pane fade tab_content1-0" id="info-valuations-store" role="tabpanel" aria-labelledby="patient_record">
-                
+
                 <div class="embed-responsive embed-responsive-16by9">
 
                     <iframe class="embed-responsive-item " id="iframeValuationsStore" allowfullscreen="">
@@ -981,9 +983,9 @@
                     </iframe>
 
                 </div>
-                   
+
                     <br><br>
-                    
+
               </div>
 
 
@@ -1029,7 +1031,7 @@
 
         </div>
 
-        
+
 
         <input type="hidden" name="id_user" class="id_user">
         <input type="hidden" name="token" class="token">
@@ -1050,6 +1052,6 @@
           <br>
           <br>
       </form>
-      
+
     </div>
 

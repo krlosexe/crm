@@ -95,6 +95,8 @@
                                         <option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
                                         <option value="Valorada">Valorada</option>
                                         <option value="Valorada / Descartada">Valorada / Descartada</option>
+                                        <option value="En mora">En mora</option>
+                                        <option value="Al Dia">Al Dia</option>
                                     </select>
                                 </div>
                             </div>
@@ -109,7 +111,7 @@
                                     <input type="text" name="nombres" class="form-control form-control-user" id="nombre_edit" placeholder="PJ. Carlos Javier" required>
                                 </div>
                             </div>
-                        
+
                           <!--  <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for=""><b>Apellidos</b></label>
@@ -181,7 +183,7 @@
 
 
 
-                        
+
                         <div class="row">
                             <div class="col-sm-10">
                                     <div class="form-group">
@@ -229,7 +231,7 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                
+
 
                                 <div class="form-group">
                                     <label for=""><b>Linea de Negocio</b></label>
@@ -340,19 +342,19 @@
                                         <h3 id="code-edit"></h3>
                                     </div>
                                     <div class="col-md-2">
-                                        <span onclick="copyToClipboard('#code-edit')" class='consultar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-copy  ' style='margin-bottom:5px'></i></span> 
+                                        <span onclick="copyToClipboard('#code-edit')" class='consultar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-copy  ' style='margin-bottom:5px'></i></span>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
 
 
                             <br><br>
-                      <!--  
+                      <!--
                         <div class="row">
                             <div class="col-md-2">
-                              
+
                             </div>
                             <div class="col-md-3">
                                 <label for="testimony"><b>Testimonio</b></label>
@@ -372,7 +374,7 @@
 
                         <div class="row">
                             <div class="col-md-2">
-                              
+
                               </div>
                             <div class="col-md-3">
                                 <label for="before_and_after"><b>Fotos Antes y Despues</b></label>
@@ -393,7 +395,7 @@
 <!--
                         <div class="row">
                              <div class="col-md-2">
-                              
+
                               </div>
                             <div class="col-md-3">
                                 <label for="califications"><b>Calificaciones de Google</b></label>
@@ -414,7 +416,7 @@
 
                         <div class="row">
                             <div class="col-md-2">
-                              
+
                             </div>
                             <div class="col-md-3">
                                 <label for="survey"><b>Encuesta Asesora</b></label>
@@ -450,7 +452,7 @@
                         </div>
 
 
-                        
+
 
 
 
@@ -483,10 +485,10 @@
                         <div class="row">
 
                            <div class="col-md-2"></div>
-                                
+
                            <div class="col-md-10">
                                 <div class="form-group">
-                                   
+
                                     <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
                                     <textarea id="summernote_edit" name="comment"></textarea>
                                 </div>
@@ -498,7 +500,7 @@
                           <div class="row">
 
                               <div class="col-md-2">
-                                    
+
                               </div>
 
                               <div class="col-md-10">
@@ -506,7 +508,7 @@
                                   Comentar
                                 </button>
                               </div>
-                            
+
                           </div>
 
 
@@ -540,7 +542,7 @@
                                         </div>
                                 </div>
 
-                                
+
                                 <div class="col-md-4">
                                     <label for=""><b>Sub Categoria</b></label>
                                         <div class="form-group valid-required">
@@ -560,7 +562,7 @@
 
 
                             <div class="row">
-                                <div class="col-md-12"> 
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for=""><b>Observaciones adicionales</b></label>
                                         <textarea class="form-control" name="observations" id="observations_edit"></textarea>
@@ -585,7 +587,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -595,10 +597,10 @@
                     </div>
 
 
-                    
 
 
-                    
+
+
 
 
                     <br><br>
@@ -611,7 +613,7 @@
                                 <input type="text" name="current_size" class="form-control form-control-user" id="current_size_edit" placeholder="PJ. 12">
                             </div>
                         </div>
-                    
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""><b>Talla en que quiere quedar</b></label>
@@ -633,7 +635,7 @@
 
 
               <div class="tab-pane fade tab_content1" id="init-history-edit" role="tabpanel" aria-labelledby="patient_record">
-              
+
                 <div class="row">
 
                     <div class="col-md-7">
@@ -645,7 +647,7 @@
                                     <input type="text" name="eps" class="form-control form-control-user" id="eps_edit" placeholder="PJ. EPS SURAMERICANA S.A.">
                                 </div>
                             </div>
-                        
+
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <label for=""><b>Estatura</b></label>
@@ -683,7 +685,7 @@
                     <div class="col-md-5">
                         <div class="row">
 
-                            
+
                             <div class="col-md-6">
                                 <label for="alcohol_edit"><b>Alcohol</b></label>
                                 <label class='container-check'>
@@ -698,7 +700,7 @@
                                 <label for="smoke_edit"><b>Fuma</b></label>
                                 <label class='container-check'>
                                     <input type='checkbox' name='smoke' class='checkitem chk-col-blue' id='smoke_edit' value='1'>
-                                    
+
                                     <span class='checkmark'></span>
                                     <label for=''></label>
                                 </label>
@@ -778,7 +780,7 @@
                 </div>
 
                 <br><br>
-                
+
             </div>
 
 
@@ -788,7 +790,7 @@
 
 
                  <div class="tab-pane fade tab_content1-0" id="info-credit-patient-edit" role="tabpanel" aria-labelledby="patient_record">
-              
+
                     <div class="row">
 
                         <div class="col-md-4">
@@ -898,12 +900,12 @@
                     </div>
 
                     <br><br>
-                    
+
               </div>
 
 
               <div class="tab-pane fade tab_content1-0" id="info-valuations-edit" role="tabpanel" aria-labelledby="patient_record">
-              
+
                 <div class="embed-responsive embed-responsive-16by9">
 
                     <iframe class="embed-responsive-item " id="iframeValuationsEdit" allowfullscreen="">
@@ -911,9 +913,9 @@
                     </iframe>
 
                 </div>
-                   
+
                     <br><br>
-                    
+
               </div>
 
 
@@ -981,13 +983,13 @@
 
 
 
-              
+
 
 
 
         </div>
 
-        
+
 
 
 
@@ -1009,6 +1011,6 @@
           <br>
           <br>
       </form>
-      
+
     </div>
 
