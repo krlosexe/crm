@@ -136,6 +136,8 @@
 											<option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
 											<option value="Valorada">Valorada</option>
 											<option value="Valorada / Descartada">Valorada / Descartada</option>
+											<option value="En mora">En mora</option>
+                                            <option value="Al Dia">Al Dia</option>
 										</select>
 									</div>
 								</div>
