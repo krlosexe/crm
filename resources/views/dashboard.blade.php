@@ -1,4 +1,4 @@
-@extends('layouts.app')
+<!-- @extends('layouts.app')
 
 	@section('content')
 	     <!-- Page Wrapper -->
@@ -144,15 +144,28 @@
 		                  <div id="survey">
 						  	<div class="row">
 								<div class="col-md-12">
-									<ul style="height: 209px;overflow: scroll;" class="list-group" id="list_filter"></ul>
-								</div>
-							</div>
-							</div>
-						  </div>
-		                </div>
-		              </div>
-		            </div>
-		        </div>
+									<!-- <ul style="height: 209px;overflow: scroll;" class="list-group" id="list_filter"></ul> -->
+					<table class="table table-bordered " id="list_filter" width="100%" cellspacing="0">
+					    <thead>
+							<tr>
+
+								<th>Estado</th>
+								<th>Fecha de Cirugia</th>
+								<th style="width: 150px;">Cliente</th>
+							</tr>
+					    </thead>
+					        <tbody>
+
+					        </tbody>
+                    </table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
 		         <!--fin prueba -->
 				 <div class="col-xl-4 col-lg-5">
 		              <div class="card shadow mb-4">
@@ -478,6 +491,7 @@
 
 		<script>
 			$(document).ready(function(){
+				$.fn.dataTable.ext.errMode = 'none';
 				login()
 				prps()
 				valorations()
@@ -841,40 +855,50 @@
 			id_user: $('#id_asesor_filter').val(),
 			month: $('#id_date_filter').val(),
 			}
-			$.ajax({
-			url:''+url+'/api/surgeries/date/month',
-			type: 'POST',
-			data:params,
-			success: function(response){
 
-				let html = ""
-						$.map(response, function (item, key) {
-						item.status_surgeries_name = item.status_surgeries ==0 ? item.status_surgeries_name ='Pendiente' :'' 
-						item.nombres_cliente = item.nombres ? item.nombres :'Sin nombre' 
-							html += "<li class='list-group-item' style='cursor: pointer' onclick='showSurvery("+JSON.stringify(item)+")'>"
-								html += '<b>'+item.status_surgeries_name+'</b><br>'+item.fecha+'<br><b>'+item.nombres_cliente+'</b><br>'
-								
-							html += '</li>'
-						});
 
-						<table class="table table-bordered " id="table" width="100%" cellspacing="0">
-                            <div class="dt-buttons"></div>
-						        <thead>
-			                        <tr>
-										<th style="width: 150px;">Estado</th>
-										<th style="width: 150px;">Fecha de registro</th>
-										<th style="width: 150px;">Cliente</th>
-			                       </tr>
-			                    </thead>
-									<tbody>
-										
-									</tbody>
-			            </table>
 
-						$("#list_filter").html(html)
 
-			}
-			});
+
+
+			var table=$("#list_filter").DataTable({
+					"destroy":true,
+					"stateSave": true,
+					"serverSide":false,
+					"ajax":{
+						"method":"POST",
+						 "url" :`${url}/api/surgeries/date/month`,
+						 "data":params,
+						"dataSrc":""
+					},
+					"columns":[
+						{"data": "status_surgeries", 
+							render : function(data, type, row) {
+								return row.status_surgeries_name = row.status_surgeries ==0 ? row.status_surgeries_name ='Pendiente' :'' ;
+							}
+						},
+						{"data": "fecha",
+							render : function(data, type, row) {
+								return row.fecha;
+							}
+						},
+						{"data": "nombres",
+							render : function(data, type, row) {
+								return row.nombres_cliente = row.nombres ? row.nombres :'Sin nombre' ;
+							}
+						}
+						
+					],
+					"language": idioma_espanol,
+					"dom": 'Bfrtip',
+					"responsive": true,
+					"buttons":[
+						'copy', 'csv', 'excel', 'pdf', 'print'
+					]
+				});
+
+				// return false
+
 			}
 			function GetSurgerieDasboard(){
 	
@@ -943,18 +967,13 @@
 							default:
 								break;
 						}
-						if(response){
-
-							month.push(element.month_name);
-							amount_month.push(element.amount_month ? element.amount_month : 0);
-						}else{
-							$("#mensaje").text('no tiene registros');
-						}
+				
+						month.push(element.month_name);
+						amount_month.push(element.amount_month ? element.amount_month : 0);
+					
 					});
 
-
-					$("#mychart").html("asdasd")
-						GetDashboard(month,amount_month)
+					GetDashboard(month,amount_month)
 				
 			}
 			});
@@ -1061,4 +1080,4 @@
 
 	@endsection
 
-
+ -->
