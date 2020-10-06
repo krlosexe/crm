@@ -194,23 +194,37 @@
 		                <!-- Card Header - Dropdown -->
 		                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 		                  <h6 class="m-0 font-weight-bold text-primary">Ingreso Mensuales</h6>
-		                  <div class="dropdown no-arrow">
+		                  
+						  <h6 class="m-0 ml-auto mx-3 font-weight-bold text-primary">Asesor</h6>
+						<div class="dropdown no-arrow">
+						  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+							<select name="adviser[]" id="id_asesor_filter_dashboard" class="form-control select2 disabled">
+								<option value="">Filtrar por Asesora:</option>
+							</select>
+		                 </div>
+		                </div>
+		                  <!-- <div class="dropdown no-arrow">
 		                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
 		                    </a>
-		                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+							<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between"> -->
+		                    <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
 		                      <div class="dropdown-header">Dropdown Header:</div>
 		                      <a class="dropdown-item" href="#">Action</a>
 		                      <a class="dropdown-item" href="#">Another action</a>
 		                      <div class="dropdown-divider"></div>
 		                      <a class="dropdown-item" href="#">Something else here</a>
-		                    </div>
+		                    </div> -->
 		                  </div>
 		                </div>
 		                <!-- Card Body -->
 		                <div class="card-body">
 		                  <div class="chart-area">
 		                    <canvas id="mychart"></canvas>
+						  <div id="mensaje">
+
+						  </div>
 		                  </div>
 		                </div>
 		              </div>
@@ -472,10 +486,11 @@
 				survey(id_user)
 				GetAsesorasValoracion("#id_asesora_filter")
 				GetAsesorasValoracion("#id_asesor_filter")
+				GetAsesorasValoracion("#id_asesor_filter_dashboard")
 				$("#id_date_filter").val(<?= date("m") ?>)
 				GetSurgeriedate()
 				GetSurgerieDasboard()
-				GetDashboard()
+				GetDashboard(month=null,amount_month= null)
 			});
 
 			function login(){
@@ -490,6 +505,10 @@
 
 			$("#id_asesor_filter").change(function (e) { 
 				GetSurgeriedate()
+			});
+
+			$("#id_asesor_filter_dashboard").change(function (e) { 
+				GetSurgerieDasboard()
 			});
 
 			$("#id_date_filter").change(function (e){
@@ -848,8 +867,7 @@
 			var url=document.getElementById('ruta').value;
 
 			 let params = {
-			 id_user: $('#id_asesor_filter').val(),
-			 month: $('#id_date_filter').val(),
+			 id_user: $('#id_asesor_filter_dashboard').val(),
 			}
 			$.ajax({
 			url:''+url+'/api/surgeries/dashboard/amount/month',
@@ -911,10 +929,18 @@
 							default:
 								break;
 						}
-						 month.push(element.month_name);
-						 amount_month.push(element.amount_month ? element.amount_month : 0);
+						if(response){
+
+							month.push(element.month_name);
+							amount_month.push(element.amount_month ? element.amount_month : 0);
+						}else{
+							$("#mensaje").text('no tiene registros');
+						}
 					});
-					GetDashboard(month,amount_month)
+
+
+					$("#mychart").html("asdasd")
+						GetDashboard(month,amount_month)
 				
 			}
 			});
@@ -922,22 +948,23 @@
 	function GetDashboard(label,month){
 		try {
 			let ctx = document.getElementById("mychart");
+			
 				let myLineChart = new Chart(ctx, {
 				type: 'line',
 				data: {
 					labels: label,
 					datasets: [{
 					label: "Monto",
-					lineTension: 0.3,
+					// lineTension: 0.3,
 					backgroundColor: "rgba(78, 115, 223, 0.05)",
 					borderColor: "rgba(78, 115, 223, 1)",
 					pointRadius: 3,
 					pointBackgroundColor: "rgba(78, 115, 223, 1)",
 					pointBorderColor: "rgba(78, 115, 223, 1)",
-					pointHoverRadius: 3,
+					// pointHoverRadius: 3,
 					pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
 					pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-					pointHitRadius: 10,
+					// pointHitRadius: 10,
 					pointBorderWidth: 2,
 					data: month,
 					}],
@@ -977,7 +1004,7 @@
 						gridLines: {
 						color: "rgb(234, 236, 244)",
 						zeroLineColor: "rgb(234, 236, 244)",
-						drawBorder: false,
+						// drawBorder: false,
 						borderDash: [2],
 						zeroLineBorderDash: [2]
 						}
@@ -997,7 +1024,7 @@
 					xPadding: 15,
 					yPadding: 15,
 					displayColors: false,
-					intersect: false,
+					// intersect: true,
 					mode: 'index',
 					caretPadding: 10,
 					callbacks: {
@@ -1009,6 +1036,7 @@
 					}
 				}
 				});
+				
 		} catch (e) {
 			console.log(e)
 		}
