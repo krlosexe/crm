@@ -857,6 +857,20 @@
 							html += '</li>'
 						});
 
+						<table class="table table-bordered " id="table" width="100%" cellspacing="0">
+                            <div class="dt-buttons"></div>
+						        <thead>
+			                        <tr>
+										<th style="width: 150px;">Estado</th>
+										<th style="width: 150px;">Fecha de registro</th>
+										<th style="width: 150px;">Cliente</th>
+			                       </tr>
+			                    </thead>
+									<tbody>
+										
+									</tbody>
+			            </table>
+
 						$("#list_filter").html(html)
 
 			}
