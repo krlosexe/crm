@@ -12,6 +12,7 @@ use App\LogsClients;
 use App\Clients;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 class SurgeriesController extends Controller
 {
@@ -290,7 +291,7 @@ class SurgeriesController extends Controller
      * @param  \App\Surgeries  $valuations
      * @return \Illuminate\Http\Response
      */
-    public function show(Valuations $Surgeries)
+    public function show($Surgeries)
     {
         //
     }
@@ -301,7 +302,7 @@ class SurgeriesController extends Controller
      * @param  \App\Valuations  $valuations
      * @return \Illuminate\Http\Response
      */
-    public function edit(Valuations $surgeries)
+    public function edit($surgeries)
     {
         //
     }
@@ -527,7 +528,8 @@ class SurgeriesController extends Controller
 
     }
 
-    public function DateMonth(Request $request){
+    public function DateMonth(Request $request)
+    {
         try {
 
             $data = DB::table('surgeries')
@@ -536,10 +538,39 @@ class SurgeriesController extends Controller
             ->leftJoin('clientes','surgeries.id_cliente','clientes.id_cliente')
             ->whereRaw("month(surgeries.fecha) = $request->month")
             ->where('surgeries.status_surgeries',0)
+            ->where("auditoria.tabla", "surgeries")
             ->when($request->id_user,function($q) use($request){
                 return $q->where('auditoria.usr_regins',$request->id_user);
             })
             ->get();
+            return response()->json($data)->setStatusCode(200);
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+    public function DashboardMonth(Request $request)
+    {
+        try {
+
+            $init = Carbon::now()->subMonths(5)->format('m');
+            $end = Carbon::now()->format('m');
+            $year = Carbon::now()->format('Y');
+
+            $data = DB::table('surgeries')
+                ->select('surgeries.*',
+                DB::raw('SUM(surgeries_additional.price_aditional) as amount_month'),
+                DB::raw('month(surgeries.fecha) as month')
+                )
+                ->where('surgeries.status_surgeries',1)
+                ->leftJoin('auditoria','surgeries.id_surgeries','auditoria.cod_reg')
+                ->leftJoin('surgeries_additional','surgeries.id_surgeries','surgeries_additional.id_surgerie')
+                ->whereRaw("month(surgeries.fecha) >=  $init and month(surgeries.fecha) <= $end and year(surgeries.fecha) =  $year")
+                ->when($request->id_user,function($q) use($request){
+                  return $q->where('auditoria.usr_regins',$request->id_user);
+                })
+            ->groupBy(DB::raw('month(surgeries.fecha)'))
+            ->get();
+            // dd($data);
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
             return $th;

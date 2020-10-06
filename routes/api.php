@@ -138,6 +138,7 @@ Route::get('surgeries/client/{id_client}', 'SurgeriesController@Clients');
 Route::get('surgeries/status/{id}/{status}', 'SurgeriesController@status');
 Route::get('surgeries/qty/month/{user_id}', 'SurgeriesController@QtyMonth');
 Route::post('surgeries/date/month','SurgeriesController@DateMonth');
+Route::post('surgeries/dashboard/amount/month','SurgeriesController@DashboardMonth');
 
 
 
@@ -210,7 +211,16 @@ Route::get('form/credit/activity/economic/{id_client}', 'FormCreditController@Ge
 
 Route::post('form/credit/realations/activos', 'FormCreditController@StoreRelationsActivos');
 Route::get('form/credit/realations/activos/{id_client}', 'FormCreditController@GetRelationsActivos');
-Route::post('form/credit/updaload/identification', 'FormCreditController@UploadIdentification');
+
+
+
+Route::post('form/credit/upload/identification', 'FormCreditController@UploadIdentification');
+Route::get('form/credit/photo/identification/{id_client}', 'FormCreditController@GetPhotoIdentification');
+
+
+
+Route::post('form/credit/upload/face', 'FormCreditController@UploadFace');
+Route::get('form/credit/photo/face/{id_client}', 'FormCreditController@GetPhotoFace');
 
 
 
