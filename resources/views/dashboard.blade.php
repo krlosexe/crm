@@ -969,7 +969,7 @@
 						}
 				
 						month.push(element.month_name);
-						amount_month.push(element.amount_month ? element.amount_month : 0);
+						amount_month.push(element.amount_month ? element.amount_month : element.amount);
 					
 					});
 
