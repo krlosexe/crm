@@ -35,6 +35,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Orchestra\Parser\Xml\Facade as XmlParser;
 
 use DB;
+use DateTime;
 class ClientsController extends Controller
 {
     /**
@@ -49,7 +50,7 @@ class ClientsController extends Controller
 
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-        
+
             $business_line = 0;
             if(isset($request["business_line"])){
                 $business_line = $request["business_line"];
@@ -99,7 +100,7 @@ class ClientsController extends Controller
 
 
 
-           
+
 
 
             $procedure = 0;
@@ -125,16 +126,16 @@ class ClientsController extends Controller
             $state  = $request["state"];
             $origen = $request["origen"];
 
-            ini_set('memory_limit', '-1'); 
+            ini_set('memory_limit', '-1');
 
 
 
             if($procedure != 0){
 
 
-                $data = Clients::select("clientes.*", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
+                $data = Clients::select("clientes.*", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.*" , "client_clinic_history.*",
                                        "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
-                                       "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line", 
+                                       "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line",
                                        "dp2.nombres as name_update",
                                        "dp2.apellido_p as apellido_update",
                                        "citys.nombre as name_city"
@@ -153,7 +154,7 @@ class ClientsController extends Controller
 
 
 
-                               
+
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
 
                                 ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'auditoria.usr_update', "left")
@@ -162,8 +163,8 @@ class ClientsController extends Controller
 
                                 ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
 
-                                
-                                
+
+
 
 
                                 ->where(function ($query) use ($search) {
@@ -175,26 +176,26 @@ class ClientsController extends Controller
                                         $query->orWhere("clientes.origen", 'like', '%'.$search.'%');
                                     }
 
-                                }) 
+                                })
 
 
                                 ->where(function ($query) use ($state) {
                                     if($state != "0"){
                                         $query->where("clientes.state", $state);
                                     }
-                                }) 
+                                })
 
 
                                 ->where(function ($query) use ($city) {
                                     if($city != 0){
                                         $query->where("clientes.city", $city);
                                     }
-                                }) 
+                                })
 
 
 
 
-                                
+
 
 
 
@@ -205,12 +206,12 @@ class ClientsController extends Controller
                                         $query->whereNotNull("clientc_credit_information.have_initial");
                                         $query->whereRaw('clientc_credit_information.have_initial LIKE "%si%"');
                                     }
-                                }) 
+                                })
 
 
 
 
-                                
+
 
 
 
@@ -221,7 +222,7 @@ class ClientsController extends Controller
                                     if($procedure != 0){
                                         $query->where("clients_procedures.id_sub_category", $procedure);
                                     }
-                                }) 
+                                })
 
 
                                 ->where(function ($query) use ($business_line) {
@@ -236,7 +237,7 @@ class ClientsController extends Controller
                                     if($adviser != 0){
                                         $query->whereIn("clientes.id_user_asesora", $adviser);
                                     }
-                                }) 
+                                })
 
 
 
@@ -253,11 +254,11 @@ class ClientsController extends Controller
                                         $query->where("clientes.pauta", 0);
                                         $query->where("clientes.origen", "!=","Formulario Web");
                                         $query->OrwhereNull('clientes.origen');
-                                        
-                                        
+
+
                                     }
 
-                                }) 
+                                })
 
 
 
@@ -265,7 +266,7 @@ class ClientsController extends Controller
                                     if($date_init != 0){
                                         $query->where("auditoria.fec_update", ">=", $date_init." 00:00:00");
                                     }
-                                }) 
+                                })
 
 
 
@@ -274,7 +275,7 @@ class ClientsController extends Controller
                                     if($date_finish != 0){
                                         $query->where("auditoria.fec_update", "<=", $date_finish." 23:59:59");
                                     }
-                                }) 
+                                })
 
 
                                 ->with("logs")
@@ -286,7 +287,7 @@ class ClientsController extends Controller
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.status", "!=", "0")
 
-                              
+
                               //  ->orderBy("clientes.id_cliente", "DESC")
                                 //->orderBy("auditoria.fec_regins", "DESC")
                                 ->orderBy("auditoria.fec_update", "DESC")
@@ -295,14 +296,14 @@ class ClientsController extends Controller
 
 
 
-                    
+
 
             }else{
 
 
-                $data = Clients::select("clientes.*", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
+                $data = Clients::select("clientes.*", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.*" , "client_clinic_history.*",
                                        "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
-                                       "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line", 
+                                       "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line",
                                        "dp2.nombres as name_update",
                                        "dp2.apellido_p as apellido_update",
                                        "citys.nombre as name_city"
@@ -317,7 +318,7 @@ class ClientsController extends Controller
                                 //->join("clients_tasks_adsviser", "clients_tasks_adsviser.id_client", "=", "clientes.id_cliente", "left")
                                 //->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
 
-                               
+
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
 
                                 ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'auditoria.usr_update', "left")
@@ -334,7 +335,7 @@ class ClientsController extends Controller
                                        // $query->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left");
                                         //$query->where("clients_procedures.id_sub_category", $procedure);
                                     }
-                                }) 
+                                })
 
 
 
@@ -342,7 +343,7 @@ class ClientsController extends Controller
                                     if($cumple != 0){
                                         $query->whereRaw("MONTH(clientes.fecha_nacimiento) = $cumple");
                                     }
-                                }) 
+                                })
 
 
 
@@ -355,21 +356,21 @@ class ClientsController extends Controller
                                         $query->orWhere("clientes.origen", 'like', '%'.$search.'%');
                                     }
 
-                                }) 
+                                })
 
 
                                 ->where(function ($query) use ($state) {
                                     if($state != "0"){
                                         $query->where("clientes.state", $state);
                                     }
-                                }) 
+                                })
 
 
                                 ->where(function ($query) use ($city) {
                                     if($city != 0){
                                         $query->where("clientes.city", $city);
                                     }
-                                }) 
+                                })
 
 
 
@@ -378,7 +379,7 @@ class ClientsController extends Controller
                                         $query->whereNotNull("clientc_credit_information.have_initial");
                                         $query->whereRaw('clientc_credit_information.have_initial LIKE "%si%"');
                                     }
-                                }) 
+                                })
 
 
 
@@ -387,14 +388,14 @@ class ClientsController extends Controller
                                     if($to_prp == 1){
                                         $query->where("clientes.prp", "Si");
                                     }
-                                }) 
+                                })
 
 
                                 ->where(function ($query) use ($use_app) {
                                     if($use_app == 1){
                                         $query->where("clientes.auth_app", 1);
                                     }
-                                }) 
+                                })
 
 
 
@@ -412,7 +413,7 @@ class ClientsController extends Controller
                                         $query->whereIn("clientes.id_user_asesora", $adviser);
                                         $query->Orwhere("valuations.id_asesora_valoracion", $adviser);
                                     }
-                                }) 
+                                })
 
 
 
@@ -429,11 +430,11 @@ class ClientsController extends Controller
                                         $query->where("clientes.pauta", 0);
                                         $query->where("clientes.origen", "!=","Formulario Web");
                                         $query->OrwhereNull('clientes.origen');
-                                        
-                                        
+
+
                                     }
 
-                                }) 
+                                })
 
 
 
@@ -445,7 +446,7 @@ class ClientsController extends Controller
                                     if($date_init != 0 && $to_prp == 1){
                                         $query->where("clientes.created_prp", ">=", $date_init);
                                     }
-                                }) 
+                                })
 
 
 
@@ -460,9 +461,9 @@ class ClientsController extends Controller
                                     }
 
 
-                                }) 
+                                })
 
-                                
+
                                 ->with("logs")
                                 ->with("phones")
                                 ->with("emails")
@@ -473,7 +474,7 @@ class ClientsController extends Controller
 
                                 ->where("auditoria.status", "!=", "0")
 
-                              
+
                               //  ->orderBy("clientes.id_cliente", "DESC")
                                 //->orderBy("auditoria.fec_regins", "DESC")
                                 ->orderBy("auditoria.fec_update", "DESC")
@@ -482,7 +483,7 @@ class ClientsController extends Controller
 
             }
 
-           
+
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
@@ -500,14 +501,14 @@ class ClientsController extends Controller
     public function getRefferesClient($code_client)
     {
 
-        ini_set('memory_limit', '-1'); 
+        ini_set('memory_limit', '-1');
 
 
         $affiliate = Clients::where("code_client", $code_client)->first();
-        
-        $data = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*", 
+
+        $data = Clients::select("clientes.*", "client_information_aditional_surgery.*" , "client_clinic_history.*",
                                     "clientc_credit_information.*", "auditoria.*", "user_registro.email as email_regis", "datos_personales.nombres as name_register",
-                                    "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line", 
+                                    "datos_personales.apellido_p as apellido_register", "lines_business.nombre_line",
                                     "dp2.nombres as name_update",
                                     "dp2.apellido_p as apellido_update",
                                     "citys.nombre as name_city"
@@ -540,10 +541,10 @@ class ClientsController extends Controller
                             ->paginate(10);
 
 
-            
-        
+
+
         return response()->json($data)->setStatusCode(200);
-        
+
     }
 
 
@@ -554,7 +555,7 @@ class ClientsController extends Controller
     public function List(Request $request){
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
-          //  ini_set('memory_limit', '-1'); 
+          //  ini_set('memory_limit', '-1');
 
 
             $data = Clients::select("clientes.id_cliente","clientes.nombres", "auditoria.status"
@@ -563,25 +564,25 @@ class ClientsController extends Controller
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
 
                                 ->where("auditoria.tabla", "clientes")
-                               
+
                                 ->where("auditoria.status", "!=", "0")
 
                                 ->orderBy("clientes.id_cliente", "DESC")
 
                                 ->get();
-           
+
             return response()->json($data)->setStatusCode(200);
         }
     }
     public function GetByIdentification($identification){
         $data = Clients::where("identificacion", $identification)->first();
-        
+
         if($data){
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json($data)->setStatusCode(400);
         }
-        
+
     }
 
     /**
@@ -591,7 +592,7 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -630,7 +631,7 @@ class ClientsController extends Controller
             $request["identificacion_verify"] == 1 ? $request["identificacion_verify"] = 1 : $request["identificacion_verify"] = 0;
             $validator = Validator::make($request->all(), [
                 'nombres'         => 'required'
-            ], $messages);  
+            ], $messages);
 
 
             if ($validator->fails()) {
@@ -646,9 +647,9 @@ class ClientsController extends Controller
                 $request["nombres"] = $request["nombres"]." ".$request["apellidos"];
 
                 $cliente = Clients::create($request->all());
-                
+
                 $request["id_client"] = $cliente["id_cliente"];
-                
+
                 ClientInformationAditionalSurgery::create($request->all());
                 ClientClinicHistory::create($request->all());
                 ClientCreditInformation::create($request->all());
@@ -665,7 +666,7 @@ class ClientsController extends Controller
                     }
 
                 }
-                
+
 
 
                 $User =  User::create([
@@ -674,7 +675,7 @@ class ClientsController extends Controller
                     "id_rol"      => 17,
                     "id_client"   => $cliente["id_cliente"]
                 ]);
-    
+
                 $datos_personales                   = new datosPersonaesModel;
                 $datos_personales->nombres          = $request["nombres"];
                 $datos_personales->apellido_p       = "";
@@ -688,8 +689,8 @@ class ClientsController extends Controller
 
 
 
-                
-    
+
+
 
 
 
@@ -697,13 +698,13 @@ class ClientsController extends Controller
 
                 if(isset($request["telefono2"])){
                     foreach($request["telefono2"] as $value){
-                       
+
                         DB::table('clients_phone_aditional')->insert([
                             'id_cliente' => $cliente["id_cliente"],
                             'phone' => $value
                         ]);
 
-                    }   
+                    }
                 }
 
 
@@ -711,13 +712,13 @@ class ClientsController extends Controller
 
                 if(isset($request["email2"])){
                     foreach($request["email2"] as $value){
-                       
+
                         DB::table('clients_email_aditional')->insert([
                             'id_cliente' => $cliente["id_cliente"],
                             'email' => $value
                         ]);
 
-                    }   
+                    }
                 }
 
 
@@ -746,7 +747,7 @@ class ClientsController extends Controller
 
 
                 if(isset($request["create_task_client"]) && ($request["create_task_client"] == 1)){
-                    
+
                     $request["id_client"] = $cliente["id_cliente"];
                     $store_task = ClientsTasks::create($request->all());
 
@@ -768,7 +769,7 @@ class ClientsController extends Controller
                     }
 
                     ClientsTasksFollowers::insert($followers);
-                }   
+                }
 
 
 
@@ -789,29 +790,29 @@ class ClientsController extends Controller
                         "way_to_pay"       => $request["way_to_pay"],
                         "status"           => 0
                     ];
-        
-        
+
+
                     $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
                     $code = substr(str_shuffle($permitted_chars), 0, 4);
-        
+
                     $valoration["code"] = $code;
-        
+
                     $request["pay_consultation"] == 1 ? $valoration["pay_consultation"] = 1 : $valoration["pay_consultation"] = 0;
-        
+
                     if($file = $request->file('acquittance_file')){
                         $destinationPath = 'img/valuations/acquittance';
                         $file->move($destinationPath,$file->getClientOriginalName());
                         $valoration["acquittance"] = $file->getClientOriginalName();
                     }
-        
-                    
+
+
                     $valoration = Valuations::create($valoration);
 
 
                     $request["table"]    = "valuations";
                     $request["id_event"] = $valoration["id_valuations"];
                     $request["comment"]  = $request->comment_valorations;
-            
+
                     if($request->comment_valorations != "<p><br></p>"){
                         Comments::create($request->all());
                     }
@@ -828,7 +829,7 @@ class ClientsController extends Controller
                             array_push($followers, $array);
                             FollwersEvents::create($array);
                         }
-                        
+
                     }
 
 
@@ -852,19 +853,19 @@ class ClientsController extends Controller
 
 
                // $mensaje = "Bienvenido, tus datos de acceso son: ".$request["email"]." clave: 123456789";
-                
+
                // $info_email = [
                    // "user_id" => $User->id,
                    // "issue"   => "Bienvenido",
                    // "mensage" => $mensaje,
                 //];
-                
+
               //  $this->SendEmail($info_email);
 
 
 
                 if ($cliente) {
-                    $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                    $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                     return response()->json($data)->setStatusCode(200);
                 }else{
                     return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -875,13 +876,13 @@ class ClientsController extends Controller
         //     return response()->json("No esta autorizado")->setStatusCode(400);
         // }
 
-        
+
     }
 
 
 
     public function SendEmail($data){
-    
+
         $user = User::find($data["user_id"]);
         $subject = $data["issue"];
 
@@ -912,8 +913,8 @@ class ClientsController extends Controller
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
-           
-            $data = Clients::select("clientes.*","client_clinic_history.*", 
+
+            $data = Clients::select("clientes.*","client_clinic_history.*",
                                     "clientc_credit_information.*", "lines_business.nombre_line", "client_information_aditional_surgery.*"
                                      )
 
@@ -922,17 +923,17 @@ class ClientsController extends Controller
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
                                 ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line", "left")
-                               
-                               
+
+
                                 ->with("logs")
                                 ->with("phones")
                                 ->with("emails")
                                 ->with("procedures")
 
                                 ->where("clientes.id_cliente", $clients)
-                               
+
                                 ->first();
-           
+
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
@@ -955,7 +956,7 @@ class ClientsController extends Controller
                             ->join("users", "users.id_client", "=", "clientes.id_cliente")
 
                             ->where("clientes.code_client", $code)
-                            
+
                             ->first();
 
         if($data){
@@ -963,9 +964,9 @@ class ClientsController extends Controller
         }else{
             return response()->json([])->setStatusCode(204);
         }
-        
-        
-       
+
+
+
     }
 
 
@@ -992,10 +993,10 @@ class ClientsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id_cliente)
-    {   
+    {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
-        
+
             $data = Clients::select("state", "clinic", "id_line", "id_user_asesora", "prp", "id_affiliate", "pay_to_study_credit")->find($id_cliente);
 
 
@@ -1003,7 +1004,7 @@ class ClientsController extends Controller
                 if($request["prp"] == "Si"){
                     $request["created_prp"] = date("Y-m-d");
                 }
-                
+
             }
 
 
@@ -1033,17 +1034,17 @@ class ClientsController extends Controller
 
             $ConfigNotification = [
                 "tokens" => $tokens,
-    
+
                 "tittle" => "Tu Paciente fue actualizado",
                 "body"   => "Paciente: ".$request["nombres"]." se  actualizo el estado de: ".$data->state." a ".$request['state'],
                 "data"   => ['type' => 'post']
-    
+
             ];
 
 
 
-          
-    
+
+
 
             if($data->state != $request["state"]){
                 $version["id_user"]   = $request["id_user"];
@@ -1055,10 +1056,10 @@ class ClientsController extends Controller
                 if(sizeof($tokens) > 0){
                     $code = SendNotifications($ConfigNotification);
                 }
-                
+
             }
 
-           
+
 
             if($data->clinic != $request["clinic"]){
 
@@ -1141,12 +1142,12 @@ class ClientsController extends Controller
             if($data->pay_to_study_credit == 0){
 
                 DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
-            
+
                 if($request["pay_to_study_credit"] == 1){
                     DB::table("clients_pay_to_study_credit")->insert([
-                                                                        "id_client" => $id_cliente, 
-                                                                        "amount" => 70000, 
-                                                                        "payment_method" => $request["payment_method"], 
+                                                                        "id_client" => $id_cliente,
+                                                                        "amount" => 70000,
+                                                                        "payment_method" => $request["payment_method"],
                                                                         "created_at" => $request["date_pay_study_credit"]
                                                                     ]);
                 }
@@ -1156,11 +1157,11 @@ class ClientsController extends Controller
                 if($request["pay_to_study_credit"] == 0){
                     DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
                 }
-                
-            }
-            
 
-            
+            }
+
+
+
 
 
 
@@ -1177,27 +1178,27 @@ class ClientsController extends Controller
             DB::table('clients_phone_aditional')->where("id_cliente", $id_cliente)->delete();
             if(isset($request["telefono2"])){
                 foreach($request["telefono2"] as $value){
-                   
+
                     DB::table('clients_phone_aditional')->insert([
                         'id_cliente' => $id_cliente,
                         'phone' => $value
                     ]);
 
-                }   
-                
+                }
+
             }
 
 
             DB::table('clients_email_aditional')->where("id_cliente", $id_cliente)->delete();
             if(isset($request["email2"])){
                 foreach($request["email2"] as $value){
-                   
+
                     DB::table('clients_email_aditional')->insert([
                         'id_cliente' => $id_cliente,
                         'email' => $value
                     ]);
 
-                }   
+                }
             }
 
 
@@ -1227,7 +1228,7 @@ class ClientsController extends Controller
                 $array["comment"]    = $request->comment;
                 Comments::insert($array);
             }
-            
+
 
 
             if($request["sub_category"]){
@@ -1275,7 +1276,7 @@ class ClientsController extends Controller
 
 
             if ($cliente) {
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -1302,7 +1303,7 @@ class ClientsController extends Controller
             }
             $auditoria->save();
 
-            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
       //  }else{
            //return response()->json("No esta autorizado")->setStatusCode(400);
@@ -1313,7 +1314,7 @@ class ClientsController extends Controller
 
 
     public function Tasks(Request $request){
-        
+
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
           //  $request["responsable"] = $request["id_user"];
             $store = ClientsTasks::create($request->all());
@@ -1335,13 +1336,13 @@ class ClientsController extends Controller
                 $data_client = Clients::select("state")->find($request["id_client"]);
 
                 DB::table("clientes")->where("id_cliente", $request["id_client"])->update(["state" => $state_px]);
-               
+
                 if($data_client->state != $state_px){
-                    
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $request["id_client"];
                     $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
-    
+
                     LogsClients::create($version);
                 }
             }
@@ -1366,7 +1367,7 @@ class ClientsController extends Controller
             }
 
 
-            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
@@ -1376,11 +1377,11 @@ class ClientsController extends Controller
 
 
     public function TasksUpdate(Request $request, $id_task){
-        
-        
+
+
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            
+
             $update = ClientsTasks::find($id_task)->update($request->all());
 
             ClientsTasksFollowers::where("id_task", $id_task)->delete();
@@ -1394,20 +1395,20 @@ class ClientsController extends Controller
                     $data_client = Clients::select("state")->find($request["id_cliente"]);
 
                     DB::table("clientes")->where("id_cliente", $request["id_cliente"])->update(["state" => $state_px]);
-                
+
                     if($data_client->state != $state_px){
-                        
+
                         $version["id_user"]   = $request["id_user"];
                         $version["id_client"] = $request["id_cliente"];
                         $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
-        
+
                         LogsClients::create($version);
                     }
                 }
             }
 
 
-            
+
 
 
             if(isset($request->followers)){
@@ -1421,7 +1422,7 @@ class ClientsController extends Controller
 
                 ClientsTasksFollowers::insert($followers);
             }
-            
+
             if($request->comments != "<p><br></p>"){
                 $array = [];
                 $array["id_task"]     = $id_task;
@@ -1429,12 +1430,12 @@ class ClientsController extends Controller
                 $array["comments"] = $request->comments;
 
                 ClientsTasksComments::insert($array);
-                
+
             }
 
 
             if ($update) {
-                $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -1456,10 +1457,10 @@ class ClientsController extends Controller
 
 
 
-            ini_set('memory_limit', '-1'); 
+            ini_set('memory_limit', '-1');
 
-            
-            $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
+
+            $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable",
                                    "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis", "clientes.nombres as name_client")
 
                                     ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks","left")
@@ -1487,14 +1488,14 @@ class ClientsController extends Controller
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
         }
-    }   
+    }
 
 
 
 
     public function GetTasks(Request $request){
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            
+
 
             $rol     = $request["rol"];
             $id_user = $request["id_user"];
@@ -1519,8 +1520,8 @@ class ClientsController extends Controller
             if(isset($request["date_init"]) && $request["date_init"] != ""){
                 $date_init = $request["date_init"];
             }
-    
-    
+
+
             $date_finish = 0;
             if(isset($request["date_finish"]) && $request["date_finish"] != ""){
                 $date_finish = $request["date_finish"];
@@ -1530,9 +1531,9 @@ class ClientsController extends Controller
 
 
 
-            ini_set('memory_limit', '-1'); 
+            ini_set('memory_limit', '-1');
 
-            $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable", 
+            $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable",
                                    "datos_personales.apellido_p as last_name_responsable", "auditoria.*", "users.email as email_regis", "clientes.nombres as name_client")
 
                                     ->join("auditoria", "auditoria.cod_reg", "=", "clients_tasks.id_clients_tasks")
@@ -1572,7 +1573,7 @@ class ClientsController extends Controller
                                         if($adviser != 0){
                                             $query->whereIn("clients_tasks.responsable", $adviser);
                                         }
-                                    }) 
+                                    })
 
 
 
@@ -1580,13 +1581,13 @@ class ClientsController extends Controller
                                         if($date_init != 0){
                                             $query->where("clients_tasks.fecha", ">=", $date_init);
                                         }
-                                    }) 
-    
+                                    })
+
                                     ->where(function ($query) use ($date_finish) {
                                         if($date_finish != 0){
                                             $query->where("clients_tasks.fecha", "<=", $date_finish);
                                         }
-                                    }) 
+                                    })
 
 
 
@@ -1604,18 +1605,18 @@ class ClientsController extends Controller
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
         }
-    } 
+    }
 
 
 
 
     public function GetCommentsTasks($id){
 
-        $data = DB::table("clients_tasks_comments")->select('clients_tasks_comments.*', 'users.email', 'users.img_profile', "datos_personales.nombres as name_user", 
+        $data = DB::table("clients_tasks_comments")->select('clients_tasks_comments.*', 'users.email', 'users.img_profile', "datos_personales.nombres as name_user",
                                                             "datos_personales.apellido_p as last_name_user")
-                  
-                    ->join('users', 'users.id', '=', 'clients_tasks_comments.id_user')  
-                    ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clients_tasks_comments.id_user')     
+
+                    ->join('users', 'users.id', '=', 'clients_tasks_comments.id_user')
+                    ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clients_tasks_comments.id_user')
                     ->where("id_task", $id)
                     ->get();
 
@@ -1626,7 +1627,7 @@ class ClientsController extends Controller
 
     public function TasksStatus($id_cliente, $status, Request $request)
     {
-       
+
         $auditoria =  Auditoria::where("cod_reg", $id_cliente)
                                     ->where("tabla", "clients_tasks")->first();
 
@@ -1638,9 +1639,9 @@ class ClientsController extends Controller
         }
         $auditoria->save();
 
-        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
-     
+
     }
 
 
@@ -1675,7 +1676,7 @@ class ClientsController extends Controller
         $xls->use_app       = $use_app;
         $xls->cumple        = $cumple;
 
-        
+
         return Excel::download($xls, 'ClientExport.xlsx');
     }
 
@@ -1688,15 +1689,15 @@ class ClientsController extends Controller
         $file->move($destinationPath,$name_file);
 
         $xmldata = simplexml_load_file("import_csv/".$name_file) or die("Failed to load");
-       
+
         $fila = 0;
 
         $data = [];
-       
-        foreach($xmldata->Worksheet->Table->Row as $key => $data) {   
+
+        foreach($xmldata->Worksheet->Table->Row as $key => $data) {
 
             if($fila != 0){
-               
+
                 $array = [];
                 $array["origen"]          = "Pauta ".(string) $data->Cell[1]->{'Data'};
                 $array["nombres"]         = (string) $data->Cell[2]->{'Data'};
@@ -1711,7 +1712,7 @@ class ClientsController extends Controller
                 $cliente = Clients::create($array);
 
                 $array["id_client"]   = $cliente["id_cliente"];
-                
+
                 ClientInformationAditionalSurgery::create($array);
                 ClientClinicHistory::create($array);
                 ClientCreditInformation::create($array);
@@ -1729,10 +1730,10 @@ class ClientsController extends Controller
             $fila++;
         }
 
-        $data = array('mensagge' => "Se importaron ".$fila." contactos");    
+        $data = array('mensagge' => "Se importaron ".$fila." contactos");
         return response()->json($data)->setStatusCode(200);
-        
-        
+
+
     }
 
 
@@ -1766,18 +1767,28 @@ class ClientsController extends Controller
         $data->license_plate_copy == 1 ? $requeriments[] = "Copia de la matriculas"         : '';
         $data->bank_statements    == 1 ? $requeriments[] = "Extractos bancarios del ultimo trimestre O Certificación de ingresos por parte de un contador" : '';
         $data->property_tradition == 1 ? $requeriments[] = "Certificado de libertad y tradicion del inmueble" : '';
-        
+
         if($data->co_debtor == 1){
             $requeriments[] = "El codeudor no debe estar Reportado";
         }
         $data->lista_requisitos = $requeriments;
+
+
+        $date1 = new DateTime($data->date_aproved);
+        $date2 = new DateTime(date("Y-m-d"));
+        $diff = $date1->diff($date2);
+
+        $data->days_limit = $data->days_limit -  $diff->days;
+
+
+
 
         if($data){
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json([])->setStatusCode(204);
         }
-        
+
     }
 
 
@@ -1788,7 +1799,7 @@ class ClientsController extends Controller
 
         DB::table("client_request_credit")->insert($request->all());
 
-        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
 
     }
@@ -1850,7 +1861,7 @@ class ClientsController extends Controller
 
 
                 $cliente = Clients::create($request->all());
-                        
+
                 $request["id_client"] = $cliente["id_cliente"];
 
 
@@ -1868,7 +1879,7 @@ class ClientsController extends Controller
 
 
                 $id_client = $cliente["id_cliente"];
-                
+
                 ClientInformationAditionalSurgery::create($request->all());
                 ClientClinicHistory::create($request->all());
                 ClientCreditInformation::create($request->all());
@@ -1916,13 +1927,13 @@ class ClientsController extends Controller
 
             $ConfigNotification = [
                 "tokens" => [$data_adviser["token_notifications"]],
-        
+
                 "tittle" => "Financiacion",
                 "body"   => "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion",
                 "data"   => ['type' => 'refferers']
-        
+
             ];
-        
+
             $code = SendNotifications($ConfigNotification);
 
 
@@ -1947,7 +1958,7 @@ class ClientsController extends Controller
 
 
         }else{
-          
+
            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->where("users.queue", 1)
@@ -1957,7 +1968,7 @@ class ClientsController extends Controller
        }
 
 
-        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
 
 
@@ -1989,8 +2000,8 @@ class ClientsController extends Controller
 
 
                         ->first();
-       
-        if($users){ 
+
+        if($users){
 
 
             $client = Clients::where("identificacion", $request["identificacion"])->first();
@@ -2044,14 +2055,14 @@ class ClientsController extends Controller
                 $token = bin2hex(random_bytes(64));
 
 
-    
+
                 $AuthUsers                       = new AuthUserAppFinancing;
                 $AuthUsers->id_user              = $User->id;
                 $AuthUsers->token                = $token;
                 $AuthUsers->token_notifications  = $request["fcmToken"];
                 $AuthUsers->save();
 
-                
+
                 $data = array('user_id'   => $User->id,
                           'email'     => $User->email,
                           'nombres'   => $request["nombres"],
@@ -2083,13 +2094,13 @@ class ClientsController extends Controller
 
 
                 $cliente = Clients::create($request->all());
-                        
+
                 $request["id_client"] = $cliente["id_cliente"];
 
 
 
                 $id_client = $cliente["id_cliente"];
-                
+
                 ClientInformationAditionalSurgery::create($request->all());
                 ClientClinicHistory::create($request->all());
                 ClientCreditInformation::create($request->all());
@@ -2165,19 +2176,19 @@ class ClientsController extends Controller
             }
 
 
-            
+
             $data_adviser   = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
 
 
             $ConfigNotification = [
                 "tokens" => [$data_adviser["token_notifications"]],
-        
+
                 "tittle" => "Financiacion",
                 "body"   => "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion",
                 "data"   => ['type' => 'refferers']
-        
+
             ];
-        
+
             $code = SendNotifications($ConfigNotification);
 
 
@@ -2201,12 +2212,12 @@ class ClientsController extends Controller
             });
 
 
-           
+
 
 
 
         }else{
-          
+
            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->where("users.queue", 1)
@@ -2254,8 +2265,8 @@ class ClientsController extends Controller
 
 
                         ->first();
-        
-       
+
+
        if($users){
 
 
@@ -2263,7 +2274,7 @@ class ClientsController extends Controller
             $client = Clients::where("identificacion", $request["identificacion"])->get();
             if((sizeof($client) > 0) && ($request["identificacion"] != "")){
 
-                $data = array('mensagge' => "Ya te encuentras registrado en nuestra base de datos");    
+                $data = array('mensagge' => "Ya te encuentras registrado en nuestra base de datos");
                 return response()->json($data)->setStatusCode(200);
 
             }
@@ -2277,15 +2288,15 @@ class ClientsController extends Controller
 
 
             $cliente = Clients::create($request->all());
-                    
+
             $request["id_client"] = $cliente["id_cliente"];
 
 
-            
+
 
 
             $id_client = $cliente["id_cliente"];
-            
+
             ClientInformationAditionalSurgery::create($request->all());
             ClientClinicHistory::create($request->all());
             ClientCreditInformation::create($request->all());
@@ -2340,11 +2351,11 @@ class ClientsController extends Controller
                 $msj->subject($subject);
                 $msj->to($for);
             });
-           
-            
+
+
 
        }else{
-          
+
            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->where("users.queue", 1)
@@ -2354,12 +2365,12 @@ class ClientsController extends Controller
        }
 
 
-        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
 
 
-        
-        
+
+
     }
 
 
@@ -2369,15 +2380,15 @@ class ClientsController extends Controller
         $id_user =  $request["id_user"];
 
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
-                        
+
                         ->where("users.id", $id_user)
                         ->first();
-        
+
         if($users){
             $client = Clients::where("identificacion", $request["identificacion"])->get();
             if((sizeof($client) > 0) && ($request["identificacion"] != "")){
 
-                $data = array('mensagge' => "Ya te encuentras registrado en nuestra base de datos");    
+                $data = array('mensagge' => "Ya te encuentras registrado en nuestra base de datos");
                 return response()->json($data)->setStatusCode(200);
 
             }
@@ -2391,15 +2402,15 @@ class ClientsController extends Controller
 
 
             $cliente = Clients::create($request->all());
-                    
+
             $request["id_client"] = $cliente["id_cliente"];
 
 
-            
+
 
 
             $id_client = $cliente["id_cliente"];
-            
+
             ClientInformationAditionalSurgery::create($request->all());
             ClientClinicHistory::create($request->all());
             ClientCreditInformation::create($request->all());
@@ -2457,7 +2468,7 @@ class ClientsController extends Controller
         }
 
 
-        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
     }
 
@@ -2488,13 +2499,13 @@ class ClientsController extends Controller
 
             $client = Clients::where("identificacion", $request["identificacion"])->get();
 
-          
+
             if((sizeof($client) > 0) && ($request["identificacion"] != "")){
 
                 foreach($client as $value){
 
                     if($value["prp"] == "Si"){
-                        $data = array('mensagge' => "Ya se encuentra registrado en el PRP con el codigo: ".$value["code_client"]);    
+                        $data = array('mensagge' => "Ya se encuentra registrado en el PRP con el codigo: ".$value["code_client"]);
                         return response()->json($data)->setStatusCode(400);
                     }
 
@@ -2534,21 +2545,21 @@ class ClientsController extends Controller
                     $data["comments"] = $comment;
 
                     Comments::create($data);
-                   
+
 
                 }
-                
+
 
             }else{
                 $request["state"] = "Afiliada";
                 $cliente = Clients::create($request->all());
-                    
+
                 $request["id_client"] = $cliente["id_cliente"];
-                
+
                 ClientInformationAditionalSurgery::create($request->all());
                 ClientClinicHistory::create($request->all());
                 ClientCreditInformation::create($request->all());
-    
+
                 $auditoria              = new Auditoria;
                 $auditoria->tabla       = "clientes";
                 $auditoria->cod_reg     = $cliente["id_cliente"];
@@ -2557,7 +2568,7 @@ class ClientsController extends Controller
                 $auditoria->fec_update  = date("Y-m-d H:i:s");
                 $auditoria->usr_regins  = $users["id"];
                 $auditoria->save();
-    
+
                 $update            = User::find($users["id"]);
                 $update->queue_prp = 1;
                 $update->save();
@@ -2595,9 +2606,9 @@ class ClientsController extends Controller
                     "id_rol"      => 17,
                     "id_client"   => $id_client
                 ]);
-        
-        
-        
+
+
+
                 $datos_personales                   = new datosPersonaesModel;
                 $datos_personales->nombres          = $request["nombres"];
                 $datos_personales->apellido_p       = "";
@@ -2612,10 +2623,10 @@ class ClientsController extends Controller
 
 
             }
-            
 
 
-            
+
+
 
 
 
@@ -2632,7 +2643,7 @@ class ClientsController extends Controller
 
 
 
-            
+
 
 
             if($request["id_line"] == 2){
@@ -2738,18 +2749,18 @@ class ClientsController extends Controller
 
             $ConfigNotification = [
                 "tokens" => [$data_adviser["token_notifications"]],
-        
+
                 "tittle" => "PRP",
                 "body"   => 'Se ha registrado un Afiliado PRP: '.$request["nombres"].'codigo: '.$request["code_client"],
                 "data"   => ['type' => 'refferers']
-        
+
             ];
-        
+
             $code = SendNotifications($ConfigNotification);
-            
+
 
        }else{
-          
+
            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->where("users.queue_prp", 1)
@@ -2759,10 +2770,10 @@ class ClientsController extends Controller
        }
 
 
-       $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente.");    
+       $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente.");
         return response()->json($data)->setStatusCode(200);
-        
-        
+
+
     }
 
 
@@ -2772,7 +2783,7 @@ class ClientsController extends Controller
 
     public function ClientFormsPrpAdviser(Request $request){
 
-       
+
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
@@ -2790,7 +2801,7 @@ class ClientsController extends Controller
             $request["code_client"] = strtoupper($code);
             $request["prp"]         = "Si";
             $request["created_prp"] = date("Y-m-d");
- 
+
             $request["to_db"]       = "1";
 
             $request["id_user_asesora"] =  $users["id"];
@@ -2798,7 +2809,7 @@ class ClientsController extends Controller
 
 
             $client = Clients::where("identificacion", $request["identificacion"])->get();
-        
+
 
             if((sizeof($client) > 0) && ($request["identificacion"] != "")){
 
@@ -2807,7 +2818,7 @@ class ClientsController extends Controller
 
 
                     if($value["prp"] == "Si"){
-                        $data = array('mensagge' => "Ya se encuentra registrado en el PRP con el codigo: ".$value["code_client"]);    
+                        $data = array('mensagge' => "Ya se encuentra registrado en el PRP con el codigo: ".$value["code_client"]);
                         return response()->json($data)->setStatusCode(400);
                     }
                     $update = array(
@@ -2825,7 +2836,7 @@ class ClientsController extends Controller
                     DB::table('auditoria')->where("cod_reg", $value["id_cliente"])
                             ->where("tabla", "clientes")
                             ->update(['fec_update' => date("Y-m-d H:i:s")]);
-                    
+
                     $id_client = $value["id_cliente"];
 
 
@@ -2848,13 +2859,13 @@ class ClientsController extends Controller
                     Comments::create($data);
                 }
 
-            }else{  
+            }else{
 
 
                 $cliente = Clients::create($request->all());
-                    
+
                 $request["id_client"] = $cliente["id_cliente"];
-                
+
                 ClientInformationAditionalSurgery::create($request->all());
                 ClientClinicHistory::create($request->all());
                 ClientCreditInformation::create($request->all());
@@ -2889,7 +2900,7 @@ class ClientsController extends Controller
 
                 Comments::create($data);
 
-                
+
 
 
                 $User =  User::create([
@@ -2898,8 +2909,8 @@ class ClientsController extends Controller
                     "id_rol"      => 17,
                     "id_client"   => $id_client
                 ]);
-    
-    
+
+
                 $datos_personales                   = new datosPersonaesModel;
                 $datos_personales->nombres          = $request["nombres"];
                 $datos_personales->apellido_p       = "";
@@ -2917,7 +2928,7 @@ class ClientsController extends Controller
 
 
 
-            
+
 
 
 
@@ -2927,11 +2938,11 @@ class ClientsController extends Controller
 
             $ConfigNotification = [
                 "tokens" => [$data_user["token_notifications"]],
-        
+
                 "tittle" => "PRP",
                 "body"   => "Se ah registrado un nuevo Afiliado",
                 "data"   => ['type' => 'affiliates']
-        
+
             ];
             $code = SendNotifications($ConfigNotification);
 
@@ -3061,13 +3072,13 @@ class ClientsController extends Controller
 
             $ConfigNotification = [
                 "tokens" => [$data_user["token_notifications"]],
-        
+
                 "tittle" => "PRP",
                 "body"   => 'Se ha registrado un Afiliado PRP: '.$request["nombres"].' codigo: '.$request["code_client"],
                 "data"   => ['type' => 'refferers']
-        
+
             ];
-        
+
             $code = SendNotifications($ConfigNotification);
 
 
@@ -3077,17 +3088,17 @@ class ClientsController extends Controller
        }
 
 
-       $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+       $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
        return response()->json($data)->setStatusCode(200);
 
-        
+
     }
-    
+
 
 
     public function ClientFormsPrpAdviserLuisa(Request $request){
 
-       
+
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
@@ -3117,7 +3128,7 @@ class ClientsController extends Controller
                 foreach($client as $value){
 
                     if($value["prp"] == "Si"){
-                        $data = array('mensagge' => "Ya se encuentra registrado en el PRP con el codigo: ".$value["code_client"]);    
+                        $data = array('mensagge' => "Ya se encuentra registrado en el PRP con el codigo: ".$value["code_client"]);
                         return response()->json($data)->setStatusCode(400);
                     }
 
@@ -3137,7 +3148,7 @@ class ClientsController extends Controller
                     DB::table('auditoria')->where("cod_reg", $value["id_cliente"])
                             ->where("tabla", "clientes")
                             ->update(['fec_update' => date("Y-m-d H:i:s")]);
-                    
+
                     $id_client = $value["id_cliente"];
 
 
@@ -3160,14 +3171,14 @@ class ClientsController extends Controller
                     Comments::create($data);
 
 
-                    
+
                 }
 
             }else{
                 $cliente = Clients::create($request->all());
-                    
+
                 $request["id_client"] = $cliente["id_cliente"];
-                
+
                 ClientInformationAditionalSurgery::create($request->all());
                 ClientClinicHistory::create($request->all());
                 ClientCreditInformation::create($request->all());
@@ -3210,9 +3221,9 @@ class ClientsController extends Controller
                     "id_rol"      => 17,
                     "id_client"   => $id_client
                 ]);
-        
-        
-        
+
+
+
                 $datos_personales                   = new datosPersonaesModel;
                 $datos_personales->nombres          = $request["nombres"];
                 $datos_personales->apellido_p       = "";
@@ -3225,14 +3236,14 @@ class ClientsController extends Controller
                 $datos_personales->save();
 
 
-                
+
 
             }
-            
 
 
 
-            
+
+
 
 
 
@@ -3281,12 +3292,12 @@ class ClientsController extends Controller
        }
 
 
-       $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+       $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
        return response()->json($data)->setStatusCode(200);
 
 
-        
-        
+
+
     }
 
 
@@ -3325,9 +3336,9 @@ class ClientsController extends Controller
            echo $code."<br><br>";
 
         }
-        
 
-       
+
+
     }
 
 
@@ -3335,8 +3346,8 @@ class ClientsController extends Controller
 
         $data = Comments::select('comments.*', 'users.email', 'users.img_profile', "datos_personales.nombres as name_user", "datos_personales.apellido_p as last_name_user")
                             ->where("id_event", $id_client)
-                            ->join('users', 'users.id', '=', 'comments.id_user')  
-                            ->join('datos_personales', 'datos_personales.id_usuario', '=', 'comments.id_user')     
+                            ->join('users', 'users.id', '=', 'comments.id_user')
+                            ->join('datos_personales', 'datos_personales.id_usuario', '=', 'comments.id_user')
                             ->where("table", "clients")
                             ->get();
 
@@ -3394,7 +3405,7 @@ class ClientsController extends Controller
 
 
     public function CreateUserPrp(){
-       
+
         $where = array(
             "prp" => "Si"
         );
@@ -3419,7 +3430,7 @@ class ClientsController extends Controller
             $datos_personales->nombres          = $client["nombres"];
             $datos_personales->apellido_p       = "";
             $datos_personales->apellido_m       = "";
-            $datos_personales->n_cedula         = $client["identificacion"];;   
+            $datos_personales->n_cedula         = $client["identificacion"];;
             $datos_personales->fecha_nacimiento = $client["fecha_nacimiento"];
             $datos_personales->telefono         = $client["telefono"];
             $datos_personales->direccion        = $client["direccion"];
@@ -3442,31 +3453,31 @@ class ClientsController extends Controller
 
 
 
-    
+
 
 
 
     public function GetTestimonials($client, $limit)
-    {   
+    {
 
         $client     = ClientInformationAditionalSurgery::where("id_client", $client)->first();
         $procedures = DB::table("clients_procedures")->where("id_client", $client->id_client)->get();
         $id_category     = $client->id_category;
         $id_sub_category = $client->id_sub_category;
-       
+
 
         $sub_categorys = [];
 
         foreach($procedures as $procedure){
             $sub_categorys[] = $procedure->id_sub_category;
         }
-   
+
        $data = GalleryImage::select("gallery_photos.*")
                               ->whereIn("gallery_photos.id_sub_category", $sub_categorys)
                               ->orderBy("gallery_photos.id", "DESC")
                               ->limit($limit)
                               ->get();
-        
+
         if($data){
             $response = [
                 "path_gallery" => "img/gallery/",
@@ -3476,7 +3487,7 @@ class ClientsController extends Controller
         }else{
             return response()->json([])->setStatusCode(200);
         }
-        
+
     }
 
 
@@ -3516,14 +3527,14 @@ class ClientsController extends Controller
 
 
                         ->first();
-        
-       
+
+
        if($users){
 
             $client = Clients::where("identificacion", $request["identificacion"])->get();
             if((sizeof($client) > 0) && ($request["identificacion"] != "")){
 
-                $data = array('mensagge' => "Ya te encuentras registrado en nuestra base de datos");    
+                $data = array('mensagge' => "Ya te encuentras registrado en nuestra base de datos");
                 return response()->json($data)->setStatusCode(200);
 
             }
@@ -3537,15 +3548,15 @@ class ClientsController extends Controller
 
 
             $cliente = Clients::create($request->all());
-                    
+
             $request["id_client"] = $cliente["id_cliente"];
 
 
-            
+
 
 
             $id_client = $cliente["id_cliente"];
-            
+
             ClientInformationAditionalSurgery::create($request->all());
             ClientClinicHistory::create($request->all());
             ClientCreditInformation::create($request->all());
@@ -3601,11 +3612,11 @@ class ClientsController extends Controller
                 $msj->subject($subject);
                 $msj->to($for);
             });
-           
-            
+
+
 
        }else{
-          
+
            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->where("users.queue", 1)
@@ -3615,16 +3626,16 @@ class ClientsController extends Controller
        }
 
 
-        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
-    }   
+    }
 
 
 
     public function uploads(Request $request){
 
         if($file = $request->file('file_data')){
-        
+
             $destinationPath = 'img/estetica_vaginal';
             $file->move($destinationPath,$file->getClientOriginalName());
         }

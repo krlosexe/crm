@@ -27,7 +27,7 @@ class NotificationsController extends Controller
                             ->get();
         echo json_encode($data);
     }
-    
+
 
     public function Tasks(){
 
@@ -39,7 +39,7 @@ class NotificationsController extends Controller
         $this->SaveNotificationTasks($data_today, 1);
         $this->SaveNotificationTasks($data_tomorrow, 2);
         $this->SaveNotificationTasks($data_thre_day, 3);
-        
+
     }
 
 
@@ -59,7 +59,7 @@ class NotificationsController extends Controller
             $array["type"]     = "task";
             array_push($notification, $array);
         }
-        
+
         Notification::insert($notification);
 
     }
@@ -81,12 +81,12 @@ class NotificationsController extends Controller
         $data_thre_day = Queries::whereRaw("fecha = DATE_FORMAT(date_add(NOW(), INTERVAL 3 DAY),'%Y-%m-%d')")
                                   ->join("clientes", "clientes.id_cliente", "=", "queries.id_cliente")
                                   ->get();
-                             
+
 
         $this->SaveNotificationQueries($data_today, 1);
         $this->SaveNotificationQueries($data_tomorrow, 2);
         $this->SaveNotificationQueries($data_thre_day, 3);
-        
+
     }
 
 
@@ -115,7 +115,7 @@ class NotificationsController extends Controller
 
 
 
-    
+
     public function Valuations(){
 
 
@@ -130,12 +130,12 @@ class NotificationsController extends Controller
         $data_thre_day = Valuations::whereRaw("fecha = DATE_FORMAT(date_add(NOW(), INTERVAL 3 DAY),'%Y-%m-%d')")
                                     ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
                                     ->get();
-        
+
 
         $this->SaveNotificationValuations($data_today, 1);
         $this->SaveNotificationValuations($data_tomorrow, 2);
         $this->SaveNotificationValuations($data_thre_day, 3);
-        
+
     }
 
     public function SaveNotificationValuations($data, $day){
@@ -177,12 +177,12 @@ class NotificationsController extends Controller
         $data_thre_day = Preanesthesia::whereRaw("fecha = DATE_FORMAT(date_add(NOW(), INTERVAL 3 DAY),'%Y-%m-%d')")
                                     ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente")
                                     ->get();
-        
-      
+
+
        $this->SaveNotificationPreAnestesia($data_today, 1);
        $this->SaveNotificationPreAnestesia($data_tomorrow, 2);
        $this->SaveNotificationPreAnestesia($data_thre_day, 3);
-        
+
     }
 
     public function SaveNotificationPreAnestesia($data, $day){
@@ -228,11 +228,11 @@ class NotificationsController extends Controller
         $data_thre_day = Surgeries::whereRaw("fecha = DATE_FORMAT(date_add(NOW(), INTERVAL 3 DAY),'%Y-%m-%d')")
                                     ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente")
                                     ->get();
-        
+
         $this->SaveNotificationSurgeries($data_today, 1);
         $this->SaveNotificationSurgeries($data_tomorrow, 2);
         $this->SaveNotificationSurgeries($data_thre_day, 3);
-        
+
     }
 
     public function SaveNotificationSurgeries($data, $day){
@@ -258,7 +258,7 @@ class NotificationsController extends Controller
 
 
 
-    
+
     public function Revision(){
 
         $data_today  = AppointmentsAgenda::where("fecha", date("Y-m-d"))
@@ -271,7 +271,7 @@ class NotificationsController extends Controller
                                             ->join("revision_appointment", "revision_appointment.id_revision", "=", "appointments_agenda.id_revision")
                                             ->join("clientes", "clientes.id_cliente", "=", "revision_appointment.id_paciente")
                                             ->get();
-        
+
 
         $data_thre_day  = AppointmentsAgenda::whereRaw("fecha = DATE_FORMAT(date_add(NOW(), INTERVAL 3 DAY),'%Y-%m-%d')")
                                             ->join("revision_appointment", "revision_appointment.id_revision", "=", "appointments_agenda.id_revision")
@@ -281,7 +281,7 @@ class NotificationsController extends Controller
         $this->SaveNotificationRevision($data_today, 1);
         $this->SaveNotificationRevision($data_tomorrow, 2);
         $this->SaveNotificationRevision($data_thre_day, 3);
-       
+
     }
 
 
@@ -322,7 +322,7 @@ class NotificationsController extends Controller
 
         Notification::where("id_user", $request["id_user"])->update(["view" => "Si"]);
 
-        $data = array('mensagge' => "Exito"); 
+        $data = array('mensagge' => "Exito");
 
         return response()->json($data)->setStatusCode(200);
 
@@ -355,8 +355,8 @@ class NotificationsController extends Controller
 
     public function NotificationsPost(Request $request){
 
-        
-        
+
+
         $users = Clients::selectRaw("clientes.nombres, users.id as user_id, auth_users_app.token_notifications")
                           ->join("users", "users.id_client", "=", "clientes.id_cliente")
                           ->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
@@ -393,7 +393,7 @@ class NotificationsController extends Controller
             "data"   => ['type' => 'post']
 
         ];
-        
+
        $code = SendNotifications($ConfigNotification);
 
         return response()->json($ConfigNotification)->setStatusCode(200);
@@ -404,9 +404,14 @@ class NotificationsController extends Controller
 
     public function EmailsMasivos(){
 
-
-
-        $data = DB::table("clientes")->where("id_line", 17)->where("email", "!=", "")->where("send_email", 0)->limit(150)->get();
+        $data = DB::table("clientes")
+                    ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
+                    ->whereRaw('client_information_aditional_surgery.name_surgery like "%mamo%"')
+                    ->OrWhereRaw('client_information_aditional_surgery.name_surgery like "%pexia%"')
+                    ->where("clientes.send_email", 0)
+                    ->where("id_line", 17)->where("email", "!=", "")
+                   // ->limit(10)
+                    ->get();
 
 
         foreach($data as $value){
@@ -416,18 +421,17 @@ class NotificationsController extends Controller
                 "name"       => $value->nombres,
                 "for"        => $value->email
             ];
-            $this->SendEmail2($info_email);
+            //$this->SendEmail2($info_email);
         }
 
 
        return response()->json(sizeof($data))->setStatusCode(200);
 
-    }   
+    }
 
 
     public function SendEmail2($data){
 
-        echo $data["id_cliente"],", ";
     //y=x5~*$Y0~R{
        // $user = User::find($data["user_id"]);
         $subject = $data["issue"];
@@ -441,7 +445,7 @@ class NotificationsController extends Controller
             $msj->to($for);
         });
 
-        DB::table("clientes")->where("id_cliente", $data["id_cliente"])->update(["send_email" => 1]);
+       // DB::table("clientes")->where("id_cliente", $data["id_cliente"])->update(["send_email" => 1]);
 
         return true;
 
@@ -455,16 +459,16 @@ class NotificationsController extends Controller
 
         $info_email = [
             "id_cliente" => 1,
-            "issue"      => "¡En el mes de amor y amistad, tenemos una sorpresa para ti!",
+            "issue"      => "Octubre, mes de sensibilización sobre el Cáncer de Mama",
             "name"       => "carlos cardenas",
-            "for"        => "cardenascarlos18@gmail.com"
+            "for"        => "mariapaulina719@gmail.com"
         ];
         $this->SendEmail2($info_email);
 
 
        return response()->json(sizeof([]))->setStatusCode(200);
 
-    }   
+    }
 
 
 
