@@ -407,11 +407,13 @@ class NotificationsController extends Controller
         $data = DB::table("clientes")
                     ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
                     ->whereRaw('client_information_aditional_surgery.name_surgery like "%mamo%"')
-                    ->OrWhereRaw('client_information_aditional_surgery.name_surgery like "%pexia%"')
+                   // ->OrWhereRaw('client_information_aditional_surgery.name_surgery like "%pexia%"')
                     ->where("clientes.send_email", 0)
                     ->where("id_line", 17)->where("email", "!=", "")
                     ->limit(10)
                     ->get();
+
+
 
 
         foreach($data as $value){
