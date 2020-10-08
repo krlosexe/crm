@@ -132,6 +132,14 @@ class FinacingController extends Controller
 
             }
 
+
+
+            if($request["status"] == "Aprobado"){
+                $data = DB::table("client_request_credit")->where("id", $id)->update([
+                    "date_aproved" => date("Y-m-d"),
+                ]);
+            }
+
         }
 
 
@@ -169,6 +177,7 @@ class FinacingController extends Controller
             "required_amount" => str_replace(",", "", $request["required_amount"]),
             "period"          => $request["period"],
             "monthly_fee"     => str_replace(",", "", $request["monthly_fee"]),
+            "days_limit"      => $request["days_limit"],
             "status"          => $request["status"],
         ]);
 
@@ -221,14 +230,24 @@ class FinacingController extends Controller
 
 
 
-        $folder = "img/credit/comprobantes";
+        if(isset($request["photo_recived"])){
+            $folder = "img/credit/comprobantes";
 
-        $img      = str_replace('data:image/png;base64,', '', $request["photo_recived"]);
-        $fileData = base64_decode($img);
-        $fileName = rand(0,100000000).'-comprobante.png';
-        file_put_contents($folder."/".$fileName, $fileData);
+            $img      = str_replace('data:image/png;base64,', '', $request["photo_recived"]);
+            $fileData = base64_decode($img);
+            $fileName = rand(0,100000000).'-comprobante.png';
+            file_put_contents($folder."/".$fileName, $fileData);
 
-        $request["photo_recived"] = $fileName;
+            $request["photo_recived"] = $fileName;
+        }
+
+
+        if($request["payment_method"] == "OTHER"){
+            $request["status"] = "Pendiente";
+        }else{
+            $request["status"] = "Procesado";
+        }
+
         $store = DB::table("clients_pay_to_study_credit")->insert($request->all());
         return response()->json($request->all())->setStatusCode(200);
     }
@@ -241,7 +260,8 @@ class FinacingController extends Controller
                     ->selectRaw("client_request_credit_payment_plan.*")
                     ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
                     ->where("client_request_credit.id_client", $id_client)
-                    ->where("client_request_credit_payment_plan.status", "!=", "Pagada")
+                    ->where("client_request_credit_payment_plan.status", "Pendiente")
+                    ->Orwhere("client_request_credit_payment_plan.status", "Verificando")
                     ->orderBy("client_request_credit_payment_plan.number", "ASC")
 
                     ->first();
@@ -267,11 +287,35 @@ class FinacingController extends Controller
 
     public function PayToFee(Request $request){
 
+
+
+        if(isset($request["photo_recived"])){
+            $folder = "img/credit/comprobantes";
+
+            $img      = str_replace('data:image/png;base64,', '', $request["photo_recived"]);
+            $fileData = base64_decode($img);
+            $fileName = rand(0,100000000).'-comprobante.png';
+            file_put_contents($folder."/".$fileName, $fileData);
+
+            $request["photo_recived"] = $fileName;
+        }
+
+
+
+        if($request["payment_method"] == "OTHER"){
+            $request["status"] = "Verificando";
+        }else{
+            $request["status"] = "Pagada";
+        }
+
+
+
         DB::table("client_request_credit_payment_plan")->where("id", $request->id_fee)->update([
-            "status"          => "Pagada",
+            "status"          => $request["status"],
             "payment_method"  => $request["payment_method"],
             "id_transactions" => $request["id_transactions"],
-            "date_pay"        => date("Y-m-d")
+            "date_pay"        => date("Y-m-d"),
+            "photo_recived"   => $request["photo_recived"]
         ]);
         return response()->json($request->all())->setStatusCode(200);
     }

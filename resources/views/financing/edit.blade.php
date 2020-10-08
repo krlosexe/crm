@@ -4,11 +4,11 @@
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="form-update" enctype="multipart/form-data">
-      
+
         @csrf
 
         <input type="hidden" name="_method" value="put">
-        
+
         <div class="row">
 
            <div class="col-md-6">
@@ -70,7 +70,7 @@
                             <input type="text" name="have_initial" id="have_initial" class="form-control" required>
                         </div>
                     </div>
-                    
+
                 </div>
 
 
@@ -83,7 +83,19 @@
                             <input type="text" name="reported" id="reported" class="form-control" required>
                         </div>
                     </div>
-                    
+
+
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for=""><b>Dias para Tomar el Credito</b></label>
+                            <input type="number" name="days_limit" id="days_limit" class="form-control" value="1">
+                        </div>
+                    </div>
+
+
+
+
                 </div>
 
 
@@ -101,7 +113,7 @@
                                 <option value="Aprobado">Aprobado</option>
                                 <option value="Rechazado">Rechazado</option>
                                 <option value="Desembolsado">Desembolsado</option>
-                                
+
                             </select>
                         </div>
                     </div>
@@ -146,17 +158,17 @@
 
 
                 <div class="row">
-                
-                    
+
+
                     <div class="col-md-12">
                         <h4>Requisitos</h4>
-                        
+
                         <div class="row">
                             <div class="col-6">
 
                                 <br>
                                 <br>
-                                
+
                                 <div class="row">
                                     <h5>Dependientes</h5>
                                 </div>
@@ -238,7 +250,7 @@
 
 
 
-                                   
+
                                 <div class="row">
                                     <label class='container-check'>
                                         <input type='checkbox' name='property_tradition' class='checkitem chk-col-blue' id='property_tradition' value='1'>
@@ -310,6 +322,6 @@
           <br>
           <br>
       </form>
-      
+
     </div>
 
