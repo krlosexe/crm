@@ -414,6 +414,8 @@ class NotificationsController extends Controller
                     ->get();
 
 
+
+
         foreach($data as $value){
             $info_email = [
                 "id_cliente" => $value->id_cliente,
