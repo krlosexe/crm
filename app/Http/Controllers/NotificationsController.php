@@ -410,18 +410,19 @@ class NotificationsController extends Controller
                     ->OrWhereRaw('client_information_aditional_surgery.name_surgery like "%pexia%"')
                     ->where("clientes.send_email", 0)
                     ->where("id_line", 17)->where("email", "!=", "")
-                   // ->limit(10)
+                    ->limit(10)
                     ->get();
 
 
         foreach($data as $value){
             $info_email = [
                 "id_cliente" => $value->id_cliente,
-                "issue"      => "¡En el mes de amor y amistad, tenemos una sorpresa para ti!",
+                "issue"      => "Octubre, mes de sensibilización sobre el Cáncer de Mama",
                 "name"       => $value->nombres,
                 "for"        => $value->email
             ];
-            //$this->SendEmail2($info_email);
+
+            $this->SendEmail2($info_email);
         }
 
 
@@ -432,7 +433,6 @@ class NotificationsController extends Controller
 
     public function SendEmail2($data){
 
-    //y=x5~*$Y0~R{
        // $user = User::find($data["user_id"]);
         $subject = $data["issue"];
 
@@ -440,12 +440,12 @@ class NotificationsController extends Controller
         $for = $data["for"];
 
         $mail_send = Mail::send('emails.masivos',["nombre" =>  $data["name"]], function($msj) use($subject,$for){
-            $msj->from("gestion@danielandrescorreaposadacirujano.com","Cirujano Daniel Correa");
+            $msj->from("comercial@pdtagencia.com","Cirujano Daniel Correa");
             $msj->subject($subject);
             $msj->to($for);
         });
 
-       // DB::table("clientes")->where("id_cliente", $data["id_cliente"])->update(["send_email" => 1]);
+        DB::table("clientes")->where("id_cliente", $data["id_cliente"])->update(["send_email" => 1]);
 
         return true;
 
@@ -461,7 +461,7 @@ class NotificationsController extends Controller
             "id_cliente" => 1,
             "issue"      => "Octubre, mes de sensibilización sobre el Cáncer de Mama",
             "name"       => "carlos cardenas",
-            "for"        => "mariapaulina719@gmail.com"
+            "for"        => "cardenascarlos18@gmail.com"
         ];
         $this->SendEmail2($info_email);
 
