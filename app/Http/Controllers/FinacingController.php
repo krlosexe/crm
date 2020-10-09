@@ -9,11 +9,11 @@ use Illuminate\Http\Request;
 
 class FinacingController extends Controller
 {
-    public function GetRequestFinancing(){
-
+    public function GetRequestFinancing()
+    {
 
         $data = DB::table("client_request_credit")
-                        ->selectRaw("client_request_credit.*, clientes.nombres, clientes.pay_to_study_credit,
+            ->selectRaw("client_request_credit.*, clientes.nombres, clientes.pay_to_study_credit,
 
 
                                     clientc_credit_information.dependent_independent,
@@ -22,6 +22,7 @@ class FinacingController extends Controller
 
                                     clients_pay_to_study_credit.payment_method,
                                     clients_pay_to_study_credit.created_at as date_pay,
+                                    clients_pay_to_study_credit.photo_recived,
 
                                     client_request_credit_requirements.working_letter,
                                     client_request_credit_requirements.payment_stubs,
@@ -29,24 +30,21 @@ class FinacingController extends Controller
                                     client_request_credit_requirements.bank_statements,
                                     client_request_credit_requirements.co_debtor,
                                     client_request_credit_requirements.property_tradition,
-                                    client_request_credit_requirements.license_plate_copy"
-                        )
+                                    client_request_credit_requirements.license_plate_copy")
 
 
-                        ->join("clientes", "clientes.id_cliente", "=", "client_request_credit.id_client")
-                        ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "client_request_credit.id_client")
-                        ->join("clients_pay_to_study_credit", "clients_pay_to_study_credit.id_client", "=", "client_request_credit.id_client", "left")
-                        ->join("client_request_credit_requirements", "client_request_credit_requirements.id_client", "=", "client_request_credit.id_client", "left")
-                        ->orderBy("client_request_credit.created_at", "DESC")
-                        ->get();
+            ->join("clientes", "clientes.id_cliente", "=", "client_request_credit.id_client")
+            ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "client_request_credit.id_client")
+            ->join("clients_pay_to_study_credit", "clients_pay_to_study_credit.id_client", "=", "client_request_credit.id_client", "left")
+            ->join("client_request_credit_requirements", "client_request_credit_requirements.id_client", "=", "client_request_credit.id_client", "left")
+            ->orderBy("client_request_credit.created_at", "DESC")
+            ->get();
 
         return response()->json($data)->setStatusCode(200);
-
     }
 
-
-
-    public function UpdateRequestFinancing(Request $request, $id){
+    public function UpdateRequestFinancing(Request $request, $id)
+    {
 
 
         $data = DB::table("client_request_credit")->where("id", $id)->first();
@@ -54,31 +52,31 @@ class FinacingController extends Controller
         $id_client = $data->id_client;
 
 
-        if($request["status"] != $data->status){
+        if ($request["status"] != $data->status) {
 
             $data_user = DB::table("users")
-                          ->select("auth_users_app_financing.token_notifications", "users.id")
-                          ->join("auth_users_app_financing", "auth_users_app_financing.id_user", "=", "users.id")
-                          ->where("id_client", $data->id_client)->first();
+                ->select("auth_users_app_financing.token_notifications", "users.id")
+                ->join("auth_users_app_financing", "auth_users_app_financing.id_user", "=", "users.id")
+                ->where("id_client", $data->id_client)->first();
 
 
             $FCM_token = $data_user->token_notifications;
 
 
-            if(($request["status"] == "Rechazado")){
+            if (($request["status"] == "Rechazado")) {
                 $notification_text = "Tu solicitud de credito ha sido rechazada";
             }
 
-            if(($request["status"] == "Pendiente")){
+            if (($request["status"] == "Pendiente")) {
                 $notification_text = "Tu solicitud de credito esta pendiente";
             }
 
 
-            if(($request["status"] == "Aprobado")){
+            if (($request["status"] == "Aprobado")) {
                 $notification_text = "Felicitaciones tu credito ha sido Aprobado, verifica los requisitos para desembolsar tu credito";
             }
 
-            if(($request["status"] == "Desembolsado")){
+            if (($request["status"] == "Desembolsado")) {
                 $notification_text = "Felicitaciones tu credito ha sido Desembolsado";
             }
 
@@ -87,17 +85,17 @@ class FinacingController extends Controller
             $serverKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
             $title = "Informacion sobre tu crédito:";
             $body = $notification_text;
-            $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default', 'badge' => '1');
-            $arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+            $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');
+            $arrayToSend = array('to' => $token, 'notification' => $notification, 'priority' => 'high');
             $json = json_encode($arrayToSend);
             $headers = array();
             $headers[] = 'Content-Type: application/json';
-            $headers[] = 'Authorization: key='. $serverKey;
+            $headers[] = 'Authorization: key=' . $serverKey;
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-            curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             //Send the request
             $response = curl_exec($ch);
@@ -109,12 +107,12 @@ class FinacingController extends Controller
 
 
             $date = date("Y-m-d");
-            if(($request["status"] == "Aprobado") || ($request["status"] == "Desembolsado")){
+            if (($request["status"] == "Aprobado") || ($request["status"] == "Desembolsado")) {
 
                 DB::table("client_request_credit_payment_plan")->where("id_request_credit", $id)->delete();
-                foreach($request["number"] as $key => $value){
+                foreach ($request["number"] as $key => $value) {
 
-                    $date  = date("Y-m-d",strtotime($date."+ 1 month"));
+                    $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
 
                     $array = [];
                     $array["id_request_credit"]  = $id;
@@ -127,19 +125,16 @@ class FinacingController extends Controller
 
 
                     DB::table("client_request_credit_payment_plan")->insert($array);
-
                 }
-
             }
 
 
 
-            if($request["status"] == "Aprobado"){
+            if ($request["status"] == "Aprobado") {
                 $data = DB::table("client_request_credit")->where("id", $id)->update([
                     "date_aproved" => date("Y-m-d"),
                 ]);
             }
-
         }
 
 
@@ -149,25 +144,23 @@ class FinacingController extends Controller
 
         $client = Clients::find($id_client)->update(["pay_to_study_credit" => $request["pay_to_study_credit"]]);
 
-        if($data->pay_to_study_credit == 0){
+        if ($data->pay_to_study_credit == 0) {
 
             DB::table("clients_pay_to_study_credit")->where("id_client", $id_client)->delete();
 
-            if($request["pay_to_study_credit"] == 1){
+            if ($request["pay_to_study_credit"] == 1) {
                 DB::table("clients_pay_to_study_credit")->insert([
-                                                                    "id_client" => $id_client,
-                                                                    "amount" => 70000,
-                                                                    "payment_method" => $request["payment_method"],
-                                                                    "created_at" => $request["date_pay_study_credit"]
-                                                                ]);
+                    "id_client" => $id_client,
+                    "amount" => 70000,
+                    "payment_method" => $request["payment_method"],
+                    "created_at" => $request["date_pay_study_credit"]
+                ]);
             }
+        } else {
 
-        }else{
-
-            if($request["pay_to_study_credit"] == 0){
+            if ($request["pay_to_study_credit"] == 0) {
                 DB::table("clients_pay_to_study_credit")->where("id_client", $id_client)->delete();
             }
-
         }
 
 
@@ -204,19 +197,21 @@ class FinacingController extends Controller
 
 
 
-    public function GetPlanPayments($id_client){
+    public function GetPlanPayments($id_client)
+    {
 
         $data = DB::table("client_request_credit_payment_plan")
-                    ->select("client_request_credit_payment_plan.*")
-                    ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
-                    ->where("client_request_credit.id_client", $id_client)
-                    ->paginate(10);
+            ->select("client_request_credit_payment_plan.*")
+            ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
+            ->where("client_request_credit.id_client", $id_client)
+            ->paginate(10);
 
         return response()->json($data)->setStatusCode(200);
     }
 
 
-    public function GetPayStudyCredit($id_client){
+    public function GetPayStudyCredit($id_client)
+    {
 
         $data = DB::table("clients_pay_to_study_credit")->where("id_client", $id_client)->get();
         return response()->json($data)->setStatusCode(200);
@@ -224,27 +219,28 @@ class FinacingController extends Controller
 
 
 
-    public function PayStudyCredit(Request $request){
+    public function PayStudyCredit(Request $request)
+    {
 
         $store = DB::table("clientes")->where("id_cliente", $request["id_client"])->update(["pay_to_study_credit" => 1]);
 
 
 
-        if(isset($request["photo_recived"])){
+        if (isset($request["photo_recived"])) {
             $folder = "img/credit/comprobantes";
 
             $img      = str_replace('data:image/png;base64,', '', $request["photo_recived"]);
             $fileData = base64_decode($img);
-            $fileName = rand(0,100000000).'-comprobante.png';
-            file_put_contents($folder."/".$fileName, $fileData);
+            $fileName = rand(0, 100000000) . '-comprobante.png';
+            file_put_contents($folder . "/" . $fileName, $fileData);
 
             $request["photo_recived"] = $fileName;
         }
 
 
-        if($request["payment_method"] == "OTHER"){
+        if ($request["payment_method"] == "OTHER") {
             $request["status"] = "Pendiente";
-        }else{
+        } else {
             $request["status"] = "Procesado";
         }
 
@@ -253,30 +249,30 @@ class FinacingController extends Controller
     }
 
 
-    public function GetFeePending($id_client){
+    public function GetFeePending($id_client)
+    {
 
         $fee = DB::table("client_request_credit_payment_plan")
 
-                    ->selectRaw("client_request_credit_payment_plan.*")
-                    ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
-                    ->where("client_request_credit.id_client", $id_client)
-                    ->where("client_request_credit_payment_plan.status", "Pendiente")
-                    ->Orwhere("client_request_credit_payment_plan.status", "Verificando")
-                    ->orderBy("client_request_credit_payment_plan.number", "ASC")
+            ->selectRaw("client_request_credit_payment_plan.*")
+            ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
+            ->where("client_request_credit.id_client", $id_client)
+            ->where("client_request_credit_payment_plan.status", "Pendiente")
+            ->Orwhere("client_request_credit_payment_plan.status", "Verificando")
+            ->orderBy("client_request_credit_payment_plan.number", "ASC")
 
-                    ->first();
-
+            ->first();
 
 
         $history = DB::table("client_request_credit_payment_plan")
 
-                    ->selectRaw("client_request_credit_payment_plan.*")
-                    ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
-                    ->where("client_request_credit.id_client", $id_client)
-                    ->where("client_request_credit_payment_plan.status", "=", "Pagada")
-                    ->orderBy("client_request_credit_payment_plan.number", "ASC")
+            ->selectRaw("client_request_credit_payment_plan.*")
+            ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
+            ->where("client_request_credit.id_client", $id_client)
+            ->where("client_request_credit_payment_plan.status", "=", "Pagada")
+            ->orderBy("client_request_credit_payment_plan.number", "ASC")
 
-                    ->get();
+            ->get();
 
 
         $data["fee_pending"] = $fee;
@@ -284,31 +280,25 @@ class FinacingController extends Controller
         return response()->json($data)->setStatusCode(200);
     }
 
+    public function PayToFee(Request $request)
+    {
 
-    public function PayToFee(Request $request){
-
-
-
-        if(isset($request["photo_recived"])){
+        if (isset($request["photo_recived"])) {
             $folder = "img/credit/comprobantes";
 
             $img      = str_replace('data:image/png;base64,', '', $request["photo_recived"]);
             $fileData = base64_decode($img);
-            $fileName = rand(0,100000000).'-comprobante.png';
-            file_put_contents($folder."/".$fileName, $fileData);
+            $fileName = rand(0, 100000000) . '-comprobante.png';
+            file_put_contents($folder . "/" . $fileName, $fileData);
 
             $request["photo_recived"] = $fileName;
         }
 
-
-
-        if($request["payment_method"] == "OTHER"){
+        if ($request["payment_method"] == "OTHER") {
             $request["status"] = "Verificando";
-        }else{
+        } else {
             $request["status"] = "Pagada";
         }
-
-
 
         DB::table("client_request_credit_payment_plan")->where("id", $request->id_fee)->update([
             "status"          => $request["status"],
@@ -318,5 +308,21 @@ class FinacingController extends Controller
             "photo_recived"   => $request["photo_recived"]
         ]);
         return response()->json($request->all())->setStatusCode(200);
+    }
+
+    public function UpdatePersondataFinancing($id)
+    {
+        try {
+            $data = DB::table('clientes')
+                ->select('form_credit_datos_generales.*', 'form_credit_photo_identification.photo as photo_identf', 'form_credit_photo_face.photo as photo_face')
+                ->join('form_credit_datos_generales', 'clientes.id_cliente', 'form_credit_datos_generales.id_client')
+                ->join('form_credit_photo_identification', 'clientes.id_cliente', 'form_credit_photo_identification.id_client')
+                ->join('form_credit_photo_face', 'clientes.id_cliente', 'form_credit_photo_face.id_client')
+                ->where('clientes.id_cliente', $id)
+                ->first();
+            return response()->json($data)->setStatusCode(200);
+        } catch (\Throwable $th) {
+            return  $th;
+        }
     }
 }
