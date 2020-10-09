@@ -298,8 +298,6 @@
                 </div>
             </div>
 
-
-
             </div>
             <div class="tab-pane" id="account">
                 <div class="row">
@@ -410,13 +408,11 @@
                   
               </div>
             </div>
-            <div class="tab-pane" id="address">
+             <div class="tab-pane" id="address">
                     <div class="col-sm-12">
                        
                     </div>
                     
-
-
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
@@ -573,7 +569,7 @@
                     <div class="row">
                         <div class="col-md-2">
                           <div class="form-group">
-                                <label for=""><b>Telefono <small>Trabajo</small> </b></label>
+                                <label for=""chmod -R 775 bootstrap/cache><b>Telefono <small>Trabajo</small> </b></label>
                                 <input type="text" name="phone_worck_client" id="phone_worck_client" class="form-control" >
                             </div>
                         </div>
@@ -586,7 +582,7 @@
                         </div>
 
                         <div class="col-md-2">
-                          <div class="form-group">
+                          <div class="form-grchmod -R 775 bootstrap/cacheoup">
                                 <label for=""><b>Fax </b></label>
                                 <input type="text" name="fax_phone_worck_client" id="fax_phone_worck_client" class="form-control" >
                             </div>
