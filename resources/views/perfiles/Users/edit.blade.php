@@ -19,70 +19,65 @@
 
 			<br><br>
 			<div class="tab-content" id="myTabContent">
-			  <div class="tab-pane fade show active tab_content1-0" id="home-edit" role="tabpanel" aria-labelledby="home-tab">
-				
-				<div class="row">
-					<div class="col-md-6">
-						<div class="row">
-							<div class="col-sm-12 text-center">
-					            <div class="kv-avatar">
-					                <div class="file-loading">
-					                    <input id="avatar-edit" name="img-profile" type="file">
-					                </div>
-					            </div>
-					            <div class="kv-avatar-hintss">
-					                <small>Seleccione una foto</small>
-					            </div>
-					        </div>
-						</div>
-					</div>
-
-
-					<div class="col-md-6">
-			            <div class="form-group valid-required">
-                          <label for=""><b>Email</b></label>
-			              <input type="email" name="email" class="form-control form-control-user" id="email-edit" placeholder="Email" required>
-			            </div>
-
-
-                        <div class="form-group row">
-			              <div class="col-sm-6 mb-3 mb-sm-0 valid-required">
-						  	<label for=""><b>Contraseña</b></label>
-			                <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Contraseña">
-			              </div>
-			              <div class="col-sm-6 valid-required">
-						  	<label for=""><b>Repita Contraseña</b></label>
-			                <input type="password" name="repeat-password" class="form-control form-control-user" id="RepeatPassword" placeholder="Repita Contraseña">
-			              </div>
-			            </div>
-			            
-			              <div class="row">
-							<div class="col-sm-6 mb-3 mb-sm-0 valid-required">
-								<label for=""><b>Rol</b></label>
-								<select class="form-control" name="rol" id="rol-edit" required>
-									<option value="">Seleccione un Rol</option>
-									<option value="1">op1</option>
-								</select>
+			    <div class="tab-pane fade show active tab_content1-0" id="home-edit" role="tabpanel" aria-labelledby="home-tab">
+					<div class="row">
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-sm-12 text-center">
+										<div class="kv-avatar">
+											<div class="file-loading">
+												<input id="avatar-edit" name="img-profile" type="file">
+											</div>
+										</div>
+										<div class="kv-avatar-hintss">
+											<small>Seleccione una foto</small>
+										</div>
+									</div>
+								</div>
 							</div>
 
-							<div class="col-sm-6 mb-3 mb-sm-0 valid-required">
+
+					    <div class="col-md-6">
+							<div class="form-group valid-required">
+								<label for=""><b>Email</b></label>
+								<input type="email" name="email" class="form-control form-control-user" id="email-edit" placeholder="Email" required>
+							</div>
+
+
+							<div class="form-group row">
+								<div class="col-sm-6 mb-3 mb-sm-0 valid-required">
+									<label for=""><b>Contraseña</b></label>
+									<input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Contraseña">
+								</div>
+							<div class="col-sm-6 valid-required">
+								<label for=""><b>Repita Contraseña</b></label>
+								<input type="password" name="repeat-password" class="form-control form-control-user" id="RepeatPassword" placeholder="Repita Contraseña">
+							</div>
+					    </div>
+			            
+			                <div class="row">
+							    <div class="col-sm-6 mb-3 mb-sm-0 valid-required">
+								    <label for=""><b>Rol</b></label>
+									<select class="form-control" name="rol" id="rol-edit" required>
+										<option value="">Seleccione un Rol</option>
+										<option value="1">op1</option>
+									</select>
+							    </div>
+
+							    <div class="col-sm-6 mb-3 mb-sm-0 valid-required">
 									<label for=""><b>Linea de Negocio</b></label>
 									<select name="id_lines[]" id="linea-negocio-edit" class="form-control select2" multiple required>
 										<option value="">Seleccione</option>
 									</select>
-							</div>
-						  </div>
-
-
-			        </div>
-					
-				</div>
-
-			  </div>
+							    </div>
+						   </div>
+			           </div>
+				   </div>
+			    </div>
 
 
 
-			  <div class="tab-pane fade tab_content2-1" id="profile-edit" role="tabpanel" aria-labelledby="profile-tab">
+			    <div class="tab-pane fade tab_content2-1" id="profile-edit" role="tabpanel" aria-labelledby="profile-tab">
 
 			  		<div class="row">
 			  			<div class="col-sm-4 valid-required">
@@ -101,33 +96,23 @@
 				        </div>
 			  		</div>
 
-
 			  		<br>
 
-
 			  		<div class="row">
-
 				        <div class="col-sm-4 valid-required">
                             <label for=""><b>Numero de Cedula</b></label>
 				            <input type="text" name="n_cedula" class="form-control form-control-user" id="n_cedula-edit" placeholder="Numero de Cedula" required>
 				        </div>
-
 				        <div class="col-sm-4 valid-required">
 				        	<label for=""><b>Fecha de Nacimiento</b></label>
 				            <input type="date" name="fecha_nacimiento" class="form-control form-control-user" id="fecha_nacimiento-edit" required>
 				        </div>
-
 			  			<div class="col-sm-4 valid-required">
                           <label for=""><b>Numero de Telefono</b></label>
 				            <input type="text" name="telefono" class="form-control form-control-user" id="telefono-edit" placeholder="Numero de Telefono" required>
 				        </div>
-
 			  		</div>
-
                       <br>
-
-
-
 			  		<div class="row">
 			  			<div class="col-sm-12 valid-required">
                             <label for=""><b>Direccion</b></label>
@@ -141,9 +126,8 @@
 
                     <input type="hidden" name="id_user_edit" id="id_edit">
 			  		<br>
-
 			  		<br>
-			  </div>
+			    </div>
 			  
 
             <center>

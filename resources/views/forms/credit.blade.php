@@ -296,10 +296,6 @@
                         <input type="text" name="phone_lessor" id="phone_lessor" class="form-control"  >
                     </div>
                 </div>
-
-
-
-
             </div>
 
 
