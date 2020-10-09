@@ -154,6 +154,17 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="average_monthly_income"><b>Soporte de Pago</b></label>
+                        <div>
+                        <img src="" alt="">
+                        </div>
+                        <!-- <input type="text" class="form-control form-control-user"  id="date_pay_study_credit_edit"> -->
+                    </div>
+                </div>
+
+
                 <br><br>
 
 
