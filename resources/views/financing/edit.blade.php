@@ -134,7 +134,7 @@
                                 <div class="col-md-5">
                                     <label for="average_monthly_income"><b>Soporte de Pago</b></label>
                                     <div>
-                                        <img src="" id="load_img" alt="">
+                                        <img src="" id="load_img" alt="" width="250px" height="200px">
                                     </div>
                                 </div>
                             </div>
@@ -452,13 +452,13 @@
                     <div class="col-md-5">
                         <label for="average_monthly_income"><b>Foto de Cara</b></label>
                         <div>
-                            <img class="mr-5" src="" id="photo_face" alt="">
+                            <img class="mr-5" src="" id="photo_face" alt="" width="250px" height="200px" >
                         </div>
                     </div>
                     <div class="col-md-5">
                         <label for="average_monthly_income"><b>Foto Identificación</b></label>
                         <div>
-                            <img class="ml-5" src="" id="photo_identf" alt="">
+                            <img class="ml-5" src="" id="photo_identf" alt="" width="250px" height="200px">
                         </div>
                     </div>
                 </div>
