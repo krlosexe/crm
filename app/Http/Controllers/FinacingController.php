@@ -6,6 +6,7 @@ use DB;
 use App\Clients;
 use App\ClientsRequirementsCredit;
 use Illuminate\Http\Request;
+use App\ClientPayToStudyCredit;
 
 class FinacingController extends Controller
 {
@@ -23,6 +24,7 @@ class FinacingController extends Controller
                                     clients_pay_to_study_credit.payment_method,
                                     clients_pay_to_study_credit.created_at as date_pay,
                                     clients_pay_to_study_credit.photo_recived,
+                                    clients_pay_to_study_credit.status as status_credit,
 
                                     client_request_credit_requirements.working_letter,
                                     client_request_credit_requirements.payment_stubs,
@@ -347,6 +349,26 @@ class FinacingController extends Controller
                 ->where('clientes.id_cliente', $id)
                 ->first();
                 return response()->json($query)->setStatusCode(200);
+        } catch (\Throwable $th) {
+            return  $th;
+        }
+    }
+    public function UpdateStatus(Request $request)
+    {
+        try {
+
+            return DB::transaction(function () use($request) {
+               
+                $query = ClientPayToStudyCredit::where('id_client', $request->id)->first();
+                
+                if($query->status == 'Pendiente'){
+               
+                    ClientPayToStudyCredit::where('id_client', $request->id)
+                        ->update([
+                            'status' => 'Procesado'
+                        ]);
+                }
+            },5);
         } catch (\Throwable $th) {
             return  $th;
         }
