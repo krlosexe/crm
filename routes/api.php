@@ -360,7 +360,9 @@ Route::post('app/request/credit', 'ClientsController@AppRequestCredit');
 Route::get('clients/request/financing', 'FinacingController@GetRequestFinancing');
 
 Route::put('clients/request/financing/{id}', 'FinacingController@UpdateRequestFinancing');
-Route::get('clients/request/financing/persons/data/{id}', 'FinacingController@UpdatePersondataFinancing');
+Route::get('clients/request/financing/persons/data/{id}', 'FinacingController@GetPersondataFinancing');
+Route::get('clients/request/financing/activity/economic/{id}', 'FinacingController@GetActivyEcominic');
+Route::get('clients/request/financing/bienes/{id}', 'FinacingController@GetBienes');
 
 Route::get('clients/plan/payments/{id_client}', 'FinacingController@GetPlanPayments');
 

@@ -310,19 +310,46 @@ class FinacingController extends Controller
         return response()->json($request->all())->setStatusCode(200);
     }
 
-    public function UpdatePersondataFinancing($id)
+    public function GetPersondataFinancing($id)
     {
         try {
-            $data = DB::table('clientes')
+            $query = DB::table('clientes')
                 ->select('form_credit_datos_generales.*', 'form_credit_photo_identification.photo as photo_identf', 'form_credit_photo_face.photo as photo_face')
                 ->join('form_credit_datos_generales', 'clientes.id_cliente', 'form_credit_datos_generales.id_client')
                 ->join('form_credit_photo_identification', 'clientes.id_cliente', 'form_credit_photo_identification.id_client')
                 ->join('form_credit_photo_face', 'clientes.id_cliente', 'form_credit_photo_face.id_client')
                 ->where('clientes.id_cliente', $id)
                 ->first();
-            return response()->json($data)->setStatusCode(200);
+            return response()->json($query)->setStatusCode(200);
         } catch (\Throwable $th) {
             return  $th;
         }
     }
+    public function GetActivyEcominic($id)
+    {
+        try {
+            $query = DB::table('clientes')
+            ->select('form_credit_actividad_economica_address_client.*')
+                ->join('form_credit_actividad_economica_address_client', 'clientes.id_cliente', 'form_credit_actividad_economica_address_client.id_client')
+                ->where('clientes.id_cliente', $id)
+                ->first();
+                return response()->json($query)->setStatusCode(200);
+        } catch (\Throwable $th) {
+            return  $th;
+        }
+    }
+    public function GetBienes($id)
+    {
+        try {
+            $query = DB::table('clientes')
+            ->select('form_credit_relacion_activo.*')
+                ->join('form_credit_relacion_activo', 'clientes.id_cliente', 'form_credit_relacion_activo.id_client')
+                ->where('clientes.id_cliente', $id)
+                ->first();
+                return response()->json($query)->setStatusCode(200);
+        } catch (\Throwable $th) {
+            return  $th;
+        }
+    }
+
 }
