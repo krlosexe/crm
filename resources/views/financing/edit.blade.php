@@ -144,6 +144,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <button class="btn btn-primary btn-user" id="process_status">
+                                Procesar
+                            </button>
+                            <br><br>
                             <br><br>
                             <div class="row">
                                 <div class="col-md-12">
