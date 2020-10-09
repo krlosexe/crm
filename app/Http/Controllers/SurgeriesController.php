@@ -538,6 +538,7 @@ class SurgeriesController extends Controller
             ->leftJoin('clientes','surgeries.id_cliente','clientes.id_cliente')
             ->whereRaw("month(surgeries.fecha) = $request->month")
             ->where('surgeries.status_surgeries',0)
+            ->where('surgeries.attempt',0)
             ->where("auditoria.tabla", "surgeries")
             ->where("auditoria.status",1)
             ->when($request->id_user,function($q) use($request){
