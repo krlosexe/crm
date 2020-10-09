@@ -766,7 +766,7 @@
 				var html = ""
 
 				html += "<div class='col-md-6'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-				html += "<div class='col-md-6'><input type='text' class='form-control monto_formato_decimales' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+				html += "<div class='col-md-6'><input type='number' class='form-control' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
 				html += "<br><br>"
 
 
@@ -805,7 +805,7 @@
 
 				html += "<div class='col-md-2'></div>"
 				html += "<div class='col-md-6'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-				html += "<div class='col-md-4'><input type='text' class='form-control monto_formato_decimales' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+				html += "<div class='col-md-4'><input type='number' class='form-control' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
 				html += "<br><br>"
 
 
