@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="form-update" enctype="multipart/form-data">
-      
+
         @csrf
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -20,7 +20,7 @@
         <br><br>
 
         <input type="hidden" name="_method" value="put">
-        
+
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active tab_content0-0" id="init" role="tabpanel" aria-labelledby="data_general">
 
@@ -113,7 +113,7 @@
                   </div>
 
 
-                 
+
                   <div class="row">
 
 
@@ -140,12 +140,12 @@
                     </div>
                   </div>
 
-                  
+
               </div>
 
 
               <div class="col-md-7">
-  
+
                   <br><br>
 
                   <div class="row" id="comments_edit">
@@ -165,7 +165,7 @@
                   <div class="row">
 
                       <div class="col-md-2"></div>
-                          
+
                       <div class="col-md-10">
                           <div class="form-group">
                               <label for=""><b>Comentarios</b></label>
@@ -180,7 +180,7 @@
                   <div class="row">
 
                       <div class="col-md-2">
-                            
+
                       </div>
 
                       <div class="col-md-10">
@@ -188,7 +188,7 @@
                           Comentar
                         </button>
                       </div>
-                    
+
                   </div>
 
 
@@ -199,7 +199,7 @@
                 <div class="row">
 
                     <div class="col-md-2">
-                            
+
                     </div>
                     <div class="col-md-8">
                         <div class="form-group">
@@ -230,7 +230,7 @@
                 </div>
 
 
-                  
+
 
                   <br><br>
 
@@ -238,13 +238,13 @@
 
                   <div class="row">
                     <div class="col-md-2">
-                            
+
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="form-group">
                             <label for=""><b>Monto de la Cirugia</b></label>
-                            <input type="text" name="amount" id="amount-edit" class="monto_formato_decimales form-control" required>
+                            <input type="text" name="amount" id="amount-edit" class="monto_formato_decimales form-control" onkeydown="noPuntoComa( event )" required>
                         </div>
                         </div>
                     </div>
@@ -260,7 +260,7 @@
                 </div>
 
                 <div class="row" id="additional_edit">
-                  
+
                 </div>
 
 
@@ -327,7 +327,7 @@
           </div>
 
         </div>
-        
+
 
         <input type="hidden" name="inicial" id="inicial">
         <input type="hidden" name="id_user" class="id_user">
@@ -352,6 +352,6 @@
           <br>
           <br>
       </form>
-      
+
     </div>
 
