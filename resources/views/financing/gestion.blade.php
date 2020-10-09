@@ -1117,8 +1117,8 @@
 					$("#housing_type").val(data ? data.housing_type : '')
 					$("#name_lessor").val(data ? data.name_lessor : '')
 					$("#phone_lessor").val(data ? data.phone_lessor : '')
-					$("#photo_face").attr('src', data ? `img/credit/comprobantes/${data.photo_face}` :'') 
-					$("#photo_identf").attr('src', data ? `img/credit/comprobantes/${data.photo_identf}`: '') 
+					$("#photo_face").attr('src', data ? `img/credit/faces/${data.photo_face}` :'') 
+					$("#photo_identf").attr('src', data ? `img/credit/cedulas/${data.photo_identf}`: '') 
 				}
 			});
 		} catch (e) {
