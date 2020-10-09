@@ -483,7 +483,11 @@
 			$("#dependent_independent").val(data.dependent_independent)
 			$("#have_initial").val(data.have_initial)
 			$("#reported").val(data.reported)
-			data.photo_recived ? $("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`) : ''
+			if(data.photo_recived){
+						$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`) 
+					}else{
+						$("#load_img").attr('src', ``) 
+					}
 			$("#pay_to_study_credit").prop("checked", data.pay_to_study_credit ? true : false)
 			$("#payment_method").val(data.payment_method)
 			$("#date_pay_study_credit_edit").val(data.date_pay)
@@ -1117,8 +1121,17 @@
 					$("#housing_type").val(data ? data.housing_type : '')
 					$("#name_lessor").val(data ? data.name_lessor : '')
 					$("#phone_lessor").val(data ? data.phone_lessor : '')
-					$("#photo_face").attr('src', data ? `img/credit/faces/${data.photo_face}` :'') 
-					$("#photo_identf").attr('src', data ? `img/credit/cedulas/${data.photo_identf}`: '') 
+					if(data.photo_face){
+						$("#photo_face").attr('src',`img/credit/faces/${data.photo_face}`) 
+					}else{
+						$("#photo_face").attr('src', ``) 
+					}
+
+					if(data.photo_identf){
+						$("#photo_identf").attr('src', `img/credit/cedulas/${data.photo_identf}`) 
+					}else{
+						$("#photo_identf").attr('src', ``) 
+					}
 				}
 			});
 		} catch (e) {
