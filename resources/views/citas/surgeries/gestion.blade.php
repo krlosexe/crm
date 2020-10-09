@@ -1,5 +1,5 @@
 @extends('layouts.app')
-	
+
 
 	@section('CustomCss')
 
@@ -34,7 +34,7 @@
 				left: 0;
 				z-index: 3000;
 				display: none;
-				
+
 				/* background-color: rgba(0,0,0,.4); */
 				transform: translateZ(0);
 				-webkit-transform: translateZ(0);
@@ -82,7 +82,7 @@
 				-ms-transition: 3s;
 				-o-transition: 3s;
 				transition: 3s;
-				
+
 			}
 
 
@@ -95,7 +95,7 @@
 				display: block;
 				width: calc(100% - 300px);
 				background: #fff;
-				
+
 				transform: translateX(100%);
 				 -webkit-transition: 3s;
 					-moz-transition: 3s;
@@ -113,7 +113,7 @@
 				-ms-transform: translateX(0%);
 				-o-transform: translateX(0%);
 				transform: translateX(0%);
-			
+
 			}
 
 
@@ -198,8 +198,8 @@
 		      <!-- Main Content -->
 		      <div id="content">
 
-				@include('layouts.topBar') 
-		       
+				@include('layouts.topBar')
+
 
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
@@ -249,7 +249,7 @@
 										<label for=""><b>Fecha hasta</b></label>
 										<input type="date" class="form-control" id="date_finish">
 									</div>
-								</div>  
+								</div>
 							</div>
 
 			                <table class="table table-bordered" id="table" width="100%" cellspacing="0">
@@ -286,7 +286,7 @@
 		      <!-- End of Main Content -->
 
 			 	 <div id="slide">
-					
+
 					<div class="side-panel-container">
 
 
@@ -405,11 +405,11 @@
 				enviarFormulario("#store", 'api/surgeries', '#cuadro2');
 			}
 
-			$("#date_init, #date_finish").change(function (e) { 
+			$("#date_init, #date_finish").change(function (e) {
 				list();
 			});
 
-			$("#id_asesora_valoracion-filter").change(function (e) { 
+			$("#id_asesora_valoracion-filter").change(function (e) {
 				list();
 			});
 
@@ -418,7 +418,7 @@
 				var data = {
 					"id_user": id_user,
 					"token"  : tokens,
-				};	
+				};
 
 				const adviser = $("#id_asesora_valoracion-filter").val()
 
@@ -428,12 +428,12 @@
 
 				$("#div-input-edit").css("display", "none")
 				$('#table tbody').off('click');
-				var url=document.getElementById('ruta').value; 
+				var url=document.getElementById('ruta').value;
 				cuadros(cuadro, "#cuadro1");
 
 				var table=$("#table").DataTable({
 					"destroy":true,
-					
+
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
@@ -466,7 +466,7 @@
 								return botones;
 							}
 						},
-						{"data":"nombres", 
+						{"data":"nombres",
 							render : function(data, type, row) {
 
 								if(row.surgerie_rental == 1){
@@ -474,13 +474,13 @@
 								}else{
 									return "<a href='javascript:void(0)' onclick='ViewClient("+row.id_cliente+")'>"+data+"</a>"
 								}
-								
+
 							}
 						},
 						{"data": "fecha"},
 						{"data": null,
 							render : function(data, type, row) {
-								
+
 								var string = ""
 								$.map(row.procedures, function (item, key) {
 									string += item.name+", "
@@ -493,12 +493,12 @@
 
 						{"data": null,
 							render : function(data, type, row) {
-								
+
 								var html = ""
-								$.each(row.followers, function (key, item) { 
+								$.each(row.followers, function (key, item) {
 									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_user+" "+item.name_user+"'>"
 								});
-								
+
 								return html
 							}
 						},
@@ -525,7 +525,7 @@
 
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
-						
+
 					],
 					"language": idioma_espanol,
 					"dom": 'Bfrtip',
@@ -552,7 +552,7 @@
 					$(".dt-buttons").remove()
 				}
 
-				
+
 
 
 			}
@@ -575,7 +575,7 @@
 				$("#paciente").css("display", "block")
 
 
-				
+
 				getPacientes("#paciente-store")
 				cuadros("#cuadro1", "#cuadro2");
 			}
@@ -596,7 +596,7 @@
 					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
 					},
 					error: function (data) {
-					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');
 					},
 					success: function(data){
 					$(select+" option").remove();
@@ -621,8 +621,8 @@
 			}
 
 
-			$("#surgerie_rental").change(function (e) { 
-				
+			$("#surgerie_rental").change(function (e) {
+
 				if($(this).prop("checked") == true){
 					$("#paciente_alquiler").css("display", "block")
 					$("#name_paciente-store").focus()
@@ -632,11 +632,11 @@
 					$("#paciente_alquiler").css("display", "none")
 					$("#paciente").css("display", "block")
 				}
-				
+
 			});
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function ver(tbody, table){
@@ -672,17 +672,17 @@
 
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
-			
+
 			function edit(tbody, table){
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-					
+
 				//	getPacientes("#paciente-edit", data.id_cliente)
-					
+
 
 					if(data.surgerie_rental == 1){
 						data.nombres =  data.name_paciente
@@ -724,11 +724,11 @@
 
 
 					var followers = []
-					$.each(data.followers, function (key, item) { 
+					$.each(data.followers, function (key, item) {
 						followers.push(item.id_user)
 					});
 
-			
+
 					$("#followers-edit").val(followers)
 					$("#followers-edit").trigger("change");
 
@@ -748,7 +748,7 @@
 					$("#additional_edit").html(html)
 
 
-					
+
 
 
 
@@ -778,7 +778,7 @@
 					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
 					},
 					error: function (data) {
-					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');
 					},
 					success: function(data){
 					$(select+" option").remove();
@@ -802,7 +802,7 @@
 				}
 							function SubmitComment(id, api, table, btn, summer){
 
-				$(btn).unbind().click(function (e) { 
+				$(btn).unbind().click(function (e) {
 
 					var html = ""
 
@@ -832,7 +832,7 @@
 							"token"   : tokens,
 							"id"      : id,
 							"comment" : $(summer).val(),
-							
+
 						},
 						dataType:'JSON',
 						beforeSend: function(){
@@ -849,7 +849,7 @@
 
 
 
-					
+
 				});
 
 			}
@@ -857,20 +857,20 @@
 
 			function GetComments(comment_content, id, observaciones){
 				$(comment_content).html("Cargando...")
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/comments/surgerie/'+id,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 					},
 					error: function (data) {
 					},
 					success: function(result){
-						
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 
@@ -878,7 +878,7 @@
 							html += '<div class="col-md-12" style="margin-bottom: 15px">'
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+observaciones+'</div>'
@@ -888,13 +888,13 @@
 						}
 						$(comment_content).html(html)
 
-						
+
 						$.map(result, function (item, key) {
 							html += '<div class="col-md-12" style="margin-bottom: 15px">'
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.comment+'</div>'
@@ -905,17 +905,17 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
-						
+
 						$(comment_content).html(html)
 					}
 				});
 			}
 
 			function SelectClinic(select_pacient, select_clinic){
-				$(select_pacient).change(function (e) { 
+				$(select_pacient).change(function (e) {
 
 					var id_client = $(this).val()
 					var url       = document.getElementById('ruta').value;
@@ -935,7 +935,7 @@
 								width: '100%'
 							});
 						}
-					});					
+					});
 				});
 			}
 
@@ -961,15 +961,15 @@
 					html += "<td>"+amount+"<input type='hidden' name='amounts[]' class='amount' value='"+amount+"'></td>"
 					html += "<td><button type='button' class='btn btn-danger waves-effect' onclick='eliminarTr(\"" + "#tr" + fecha + "\")'>Eliminar</button></td></tr>";
 				html += "</tr>"
-				
+
 				$(tabla+" tbody").append(html)
-				
+
 			}
 
 			function ShowPayments(table, data, option){
 
 				var html = "";
-				$.each(data, function (key, item) { 
+				$.each(data, function (key, item) {
 
 					html += "<tr id='tr"+item.date+"'>"
 						html += "<td>"+item.date+"<input type='hidden' name='dates[]' class='fecha' value='"+item.date+"'></td>"
@@ -980,17 +980,17 @@
 						}else{
 							html += "<td></tr>";
 						}
-						
+
 					html += "</tr>"
 
 				});
 
 				$(table+" tbody").html(html)
-				
+
 			}
 
 
-					
+
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -1032,7 +1032,7 @@
 
 
 			function ViewClient(id_paciente){
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/clients/'+id_paciente,
 					type:'GET',
@@ -1041,7 +1041,7 @@
 						"id_user": id_user,
 						"token"  : tokens,
 					},
-					
+
 					beforeSend: function(){
 
 					},
@@ -1069,7 +1069,7 @@
 						GetAsesorasValoracion("#id_asesora_valoracion-edit")
 
 
-				
+
 
 						$("#id_asesora_valoracion-edit").val(data.id_asesora_valoracion)
 						$("#code-edit").text(data.code_client)
@@ -1083,7 +1083,7 @@
 						$("#email_edit").val(data.email)
 						$("#direccion_edit").val(data.direccion)
 						$("#fecha_nacimiento_edit").val(data.fecha_nacimiento)
-						
+
 						$("#origen_edit").val(data.origen)
 						$("#forma_pago_edit").val(data.forma_pago)
 
@@ -1143,11 +1143,11 @@
 						$("#previous_credits_edit").val(data.previous_credits)
 						$("#reported_edit").val(data.reported)
 						$("#bank_account_edit").val(data.bank_account)
-					
+
 						$("#properties_edit").prop("checked", data.properties ? true : false)
 						$("#vehicle_edit").prop("checked", data.vehicle ? true : false)
-						
-						
+
+
 						$("#linea-negocio-edit").val(data.id_line)
 						$("#linea-negocio-edit").trigger("change");
 
@@ -1162,15 +1162,15 @@
 						$("#id_edit").val(data.id_cliente)
 
 
-				
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 						$.map(data.logs, function (item, key) {
 							html += '<div class="col-md-12" style="margin-bottom: 15px">'
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.event+'</div>'
@@ -1181,7 +1181,7 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
 						$("#logs_edit").html(html)
@@ -1199,18 +1199,18 @@
 								html += '</div>'
 							html += '</div>'
 
-							
+
 							html += '<div class="col-md-2 phone_add_edit_'+count_phone+'"">'
 							html += '<br>'
 								html += '<button type="button" id="add_phone" onclick="deletePhoneEdit('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 							html += '</div>'
 
-					
+
 						});
 
 						$("#phone_add_content_edit").html(html)
 
-					
+
 
 
 						var html = ""
@@ -1224,13 +1224,13 @@
 								html += '</div>'
 							html += '</div>'
 
-							
+
 							html += '<div class="col-md-2 email_add_edit_'+count_email+'"">'
 							html += '<br>'
 								html += '<button type="button" id="add_email" onclick="deleteemailEdit('+count_email+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 							html += '</div>'
 
-					
+
 						});
 
 						$("#email_add_content_edit").html(html)
@@ -1238,19 +1238,19 @@
 
 
 
-			
+
 						$('#summernote_edit').summernote('reset');
 						$('#summernote_edit').summernote({
 							'height' : 200
 						});
-						var url=document.getElementById('ruta').value; 
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 
-					
+
 
 					//	GetComments("#comments_edit", data.id_cliente)
-				
+
 						GetCommentsClients("#comments_edit_client", data.id_cliente)
 
 						valuations("#btrx_tab4_edit", "#iframeValuationsEdit", data)
@@ -1265,19 +1265,19 @@
 
 
 
-			
 
 
-			
+
+
 
 			function GetClinic(city, select){
-				$(city).unbind().change(function (e) { 
+				$(city).unbind().change(function (e) {
 					GetClinicByCity(select, $(this).val())
 				});
 			}
 
 			function Children(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1289,7 +1289,7 @@
 
 
 			function Surgery(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1301,7 +1301,7 @@
 
 
 			function Disease(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1312,7 +1312,7 @@
 
 
 			function Medication(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1322,7 +1322,7 @@
 			}
 
 			function Allergic(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1331,52 +1331,52 @@
 				});
 			}
 
-			
+
 
 
 
 			function tasks(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 
 			function revisiones(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function surgeries(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function valuations(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function preanestesias(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
@@ -1384,20 +1384,20 @@
 
 
 			function GetCommentsClients(comment_content, id_client){
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/clients/comments/'+id_client,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 					},
 					error: function (data) {
 					},
 					success: function(result){
-						
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 						$.map(result, function (item, key) {
@@ -1405,7 +1405,7 @@
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.comment+'</div>'
@@ -1416,14 +1416,14 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
-						
+
 						$(comment_content).html(html)
 					}
 				});
-			}	
+			}
 
 
 
@@ -1431,49 +1431,73 @@
 
 
 			$("#additional").html("")
-			$("#add-additional").click(function (e) { 
-				
+			$("#add-additional").click(function (e) {
+
 				var html = ""
-				
+
 				html += "<div class='col-md-6'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-				html += "<div class='col-md-6'><input type='text' class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+				html += "<div class='col-md-6'><input type='text' class='form-control monto_formato_decimales' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
 				html += "<br><br>"
-				
+
 
 				$("#additional").append(html)
 
 
-				$(".monto_formato_decimales").change(function() {   
+				$(".monto_formato_decimales").change(function() {
 
-					if($(this).val() != ""){  
-						$(this).val(number_format($(this).val(), 2));   
-					}       
+					if($(this).val() != ""){
+						$(this).val(number_format($(this).val(), 2));
+					}
 				});
-				
+
+
+                function noPuntoComa( event ) {
+
+                    var e = event || window.event;
+                    var key = e.keyCode || e.which;
+                    console.log(key)
+                    if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229  || key === 50) {
+
+                        e.preventDefault();
+                    }
+                    }
+
 			});
 
 
 
-			$("#add-additional_edit").click(function (e) { 
-				
+			$("#add-additional_edit").click(function (e) {
+
 				var html = ""
-				
+
 				html += "<div class='col-md-2'></div>"
 				html += "<div class='col-md-6'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-				html += "<div class='col-md-4'><input type='text' class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+				html += "<div class='col-md-4'><input type='text' class='form-control monto_formato_decimales' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
 				html += "<br><br>"
-				
+
 
 				$("#additional_edit").append(html)
 
 
-				$(".monto_formato_decimales").change(function() {   
+				$(".monto_formato_decimales").change(function() {
 
-					if($(this).val() != ""){  
-						$(this).val(number_format($(this).val(), 2));   
-					}       
+					if($(this).val() != ""){
+						$(this).val(number_format($(this).val(), 2));
+					}
 				});
-				
+
+
+                function noPuntoComa( event ) {
+
+                    var e = event || window.event;
+                    var key = e.keyCode || e.which;
+                    console.log(key)
+                    if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229  || key === 50) {
+
+                        e.preventDefault();
+                    }
+                    }
+
 			});
 
 
@@ -1486,8 +1510,26 @@
 			}
 
 
+
+
+
+
+
+
+            function noPuntoComa( event ) {
+
+                var e = event || window.event;
+                var key = e.keyCode || e.which;
+
+                if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229  || key === 50) {
+
+                    e.preventDefault();
+                }
+                }
+
+
 		</script>
-		
+
 
 
 

@@ -33,14 +33,14 @@
   <link href="<?= url('/') ?>/vendor/select2-4.0.11/dist/css/select2.min.css" rel="stylesheet" />
   <link href="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.css" rel="stylesheet">
     <script src="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.js"></script>
-  
+
   @if(Request::path() != '/')
 
     <script>
       $(document).ready(function(){
 
 		var url = $(location).attr('href').split("/").splice(-4);
-		
+
         validAuth(false, url[0]);
 
         GetNotifications();
@@ -141,7 +141,7 @@
 
 		      </div>
 		      <!-- End of Main Content -->
-				
+
 
 
 				<!-- Logout Modal-->
@@ -192,7 +192,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?= url('/') ?>/js/sb-admin-2.min.js"></script>
-  
+
 
 
    <!-- Page level plugins -->
@@ -202,7 +202,7 @@
   <script src="<?= url('/') ?>/js/demo/chart-area-demo.js"></script>
   <script src="<?= url('/') ?>/js/demo/chart-pie-demo.js"></script>
 
-  
+
 
 
  <!-- Page level plugins -->
@@ -212,7 +212,7 @@
     <!-- Page level custom scripts -->
     <script src="<?= url('/') ?>/js/demo/datatables-demo.js"></script>
 
-  
+
 
 
     <script src="<?= url('/') ?>/vendor/bootstrap-fileinput/js/plugins/piexif.js" type="text/javascript"></script>
@@ -234,7 +234,7 @@
 
 
   <script src="<?= url('/') ?>/js/funciones.js"></script>
-  
+
 
   <script>
     var user_id = localStorage.getItem('user_id');
@@ -306,7 +306,7 @@
 					}
 				});
 			}
-			
+
 			function GetUsersTasksclient2(select, select_default){
 
 				var url=document.getElementById('ruta').value;
@@ -375,12 +375,12 @@
 
 				$("#div-input-edit").css("display", "none")
 				$('#table tbody').off('click');
-				var url=document.getElementById('ruta').value; 
+				var url=document.getElementById('ruta').value;
 				cuadros(cuadro, "#cuadro1");
 
 				var table=$("#table").DataTable({
 					"destroy":true,
-					
+
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
@@ -410,7 +410,7 @@
 								return botones;
 							}
 						},
-						{"data":"nombres", 
+						{"data":"nombres",
 							render : function(data, type, row) {
 								return data+" "+row.apellidos;
 							}
@@ -421,12 +421,12 @@
 
 						{"data": null,
 							render : function(data, type, row) {
-								
+
 								var html = ""
-								$.each(row.followers, function (key, item) { 
+								$.each(row.followers, function (key, item) {
 									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_user+" "+item.name_user+"'>"
 								});
-								
+
 								return html
 							}
 						},
@@ -445,7 +445,7 @@
 				table
 				.search("").draw()
 
-				
+
 				ver("#table tbody", table)
 				edit("#table tbody", table)
 				activar("#table tbody", table)
@@ -469,7 +469,7 @@
 			}
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function ver(tbody, table){
@@ -504,10 +504,10 @@
 
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
-			
+
 			function edit(tbody, table){
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
@@ -540,11 +540,11 @@
 
 
 					var followers = []
-					$.each(data.followers, function (key, item) { 
+					$.each(data.followers, function (key, item) {
 						followers.push(item.id_user)
 					});
 
-			
+
 					$("#followers-edit").val(followers)
 					$("#followers-edit").trigger("change");
 
@@ -573,7 +573,7 @@
 
 			function SubmitComment(id, api, table, btn, summer){
 
-				$(btn).unbind().click(function (e) { 
+				$(btn).unbind().click(function (e) {
 
 					var html = ""
 
@@ -603,7 +603,7 @@
 							"token"   : tokens,
 							"id"      : id,
 							"comment" : $(summer).val(),
-							
+
 						},
 						dataType:'JSON',
 						beforeSend: function(){
@@ -620,7 +620,7 @@
 
 
 
-					
+
 				});
 
 			}
@@ -628,20 +628,20 @@
 
 			function GetComments(comment_content, id, observaciones){
 				$(comment_content).html("Cargando...")
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/comments/surgerie/'+id,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 					},
 					error: function (data) {
 					},
 					success: function(result){
-						
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 
@@ -649,7 +649,7 @@
 							html += '<div class="col-md-12" style="margin-bottom: 15px">'
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;overflow: scroll">'
 										html += '<div>'+observaciones+'</div>'
@@ -664,7 +664,7 @@
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;overflow: scroll">'
 										html += '<div>'+item.comment+'</div>'
@@ -675,17 +675,17 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
-						
+
 						$(comment_content).html(html)
 					}
 				});
 			}
 
 			function SelectClinic(select_pacient, select_clinic){
-				$(select_pacient).change(function (e) { 
+				$(select_pacient).change(function (e) {
 
 					var id_client = $(this).val()
 					var url       = document.getElementById('ruta').value;
@@ -705,7 +705,7 @@
 								width: '100%'
 							});
 						}
-					});					
+					});
 				});
 			}
 
@@ -731,15 +731,15 @@
 					html += "<td>"+amount+"<input type='hidden' name='amounts[]' class='amount' value='"+amount+"'></td>"
 					html += "<td><button type='button' class='btn btn-danger waves-effect' onclick='eliminarTr(\"" + "#tr" + fecha + "\")'>Eliminar</button></td></tr>";
 				html += "</tr>"
-				
+
 				$(tabla+" tbody").append(html)
-				
+
 			}
 
 			function ShowPayments(table, data, option){
 
 				var html = "";
-				$.each(data, function (key, item) { 
+				$.each(data, function (key, item) {
 
 					html += "<tr id='tr"+item.date+"'>"
 						html += "<td>"+item.date+"<input type='hidden' name='dates[]' class='fecha' value='"+item.date+"'></td>"
@@ -750,67 +750,96 @@
 						}else{
 							html += "<td></tr>";
 						}
-						
+
 					html += "</tr>"
 
 				});
 
 				$(table+" tbody").html(html)
-				
+
 			}
 
 
 			$("#additional").html("")
-			$("#add-additional").click(function (e) { 
-				
+			$("#add-additional").click(function (e) {
+
 				var html = ""
-				
+
 				html += "<div class='col-md-6'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-				html += "<div class='col-md-6'><input type='text' class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+				html += "<div class='col-md-6'><input type='text' class='form-control monto_formato_decimales' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
 				html += "<br><br>"
-				
+
 
 				$("#additional").append(html)
 
 
-				$(".monto_formato_decimales").change(function() {   
+				$(".monto_formato_decimales").change(function() {
 
-					if($(this).val() != ""){  
-						$(this).val(number_format($(this).val(), 2));   
-					}       
+					if($(this).val() != ""){
+						$(this).val(number_format($(this).val(), 2));
+					}
 				});
-				
+
+
+                function noPuntoComa( event ) {
+
+                    var e = event || window.event;
+                    var key = e.keyCode || e.which;
+                    console.log(key)
+                    if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229  || key === 50) {
+
+                        e.preventDefault();
+                    }
+                    }
+
+
+
+
 			});
 
 
 
-			$("#add-additional_edit").click(function (e) { 
-				
+			$("#add-additional_edit").click(function (e) {
+
 				var html = ""
-				
+
 				html += "<div class='col-md-2'></div>"
 				html += "<div class='col-md-6'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-				html += "<div class='col-md-4'><input type='text' class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+				html += "<div class='col-md-4'><input type='text' class='form-control monto_formato_decimales' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
 				html += "<br><br>"
-				
+
 
 				$("#additional_edit").append(html)
 
 
-				$(".monto_formato_decimales").change(function() {   
+				$(".monto_formato_decimales").change(function() {
 
-					if($(this).val() != ""){  
-						$(this).val(number_format($(this).val(), 2));   
-					}       
+					if($(this).val() != ""){
+						$(this).val(number_format($(this).val(), 2));
+					}
 				});
-				
+
+
+                function noPuntoComa( event ) {
+
+                    var e = event || window.event;
+                    var key = e.keyCode || e.which;
+
+                    if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229  || key === 50) {
+
+                        e.preventDefault();
+                    }
+                }
+
+
+
 			});
 
 
 
 
 
-					
+
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -844,10 +873,26 @@
 				});
 			}
 
-		</script>
-  
 
-  
+
+            function noPuntoComa( event ) {
+
+                var e = event || window.event;
+                var key = e.keyCode || e.which;
+                console.log(key)
+                if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229  || key === 50) {
+
+                    e.preventDefault();
+                }
+                }
+
+
+
+
+		</script>
+
+
+
 
 </body>
 
