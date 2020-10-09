@@ -1092,6 +1092,15 @@
 		PersonData()
 	});
 
+	$("#tab3-1").click(function(e) {
+		ActivityEconomic()
+	});
+
+	$("#tab4-1").click(function(e) {
+		Getbienes()
+	});
+
+	//personas datos personales
 	function PersonData() {
 		try {
 			var url = document.getElementById('ruta').value;
@@ -1132,6 +1141,79 @@
 					}else{
 						$("#photo_identf").attr('src', ``) 
 					}
+				}
+			});
+		} catch (e) {
+			console.log(e)
+		}
+	}
+	//actividad economica
+	function ActivityEconomic() {
+		try {
+			var url = document.getElementById('ruta').value;
+			$.ajax({
+				url: '' + url + '/api/clients/request/financing/activity/economic/' + $("#id_cliente").val(),
+				type: 'GET',
+				dataType: 'JSON',
+				beforeSend: function() {},
+				error: function(data) {},
+				success: function(data) {
+
+					$("#adress_client").val(data ? data.adress_client : '')
+					$("#city_client").val(data ? data.adress_client : '')
+					$("#phone_client").val(data ? data.phone_client : '')
+					$("#mobil_client").val(data ? data.mobil_client : '')
+					$("#email_client").val(data ? data.email_client : '')
+					$("#number_document").val(data ? data.number_document_spouse : '')
+					$("#mailing").val(data ? data.mailing : '')
+					$("#address_mailing").val(data ? data.address_mailing : '')
+					$("#city_mailing").val(data ? data.city_mailing : '')
+					$("#phone_mailing").val(data ? data.phone_mailing : '')
+					$("#type_activity_client").val(data ? data.type_activity_client : '')
+					$("#oter_activity_client").val(data ? data.oter_activity_client : '')
+					$("#name_company_client").val(data ? data.name_company_client : '')
+					$("#addres_worck_client").val(data ? data.addres_worck_client : '')
+					$("#city_worck_clirnt").val(data ? data.city_worck_clirnt : '')
+					$("#phone_worck_client").val(data ? data.phone_worck_client : '')
+					$("#ext_phone_worck_client").val(data ? data.ext_phone_worck_client : '')
+					$("#fax_phone_worck_client").val(data ? data.fax_phone_worck_client : '')
+					$("#dependency_area").val(data ? data.dependency_area : '')
+					$("#charge_company").val(data ? data.charge_company : '')
+					$("#type_contrato").val(data ? data.type_contrato : '')
+					$("#date_vinculacion").val(data ? data.date_vinculacion : '')
+				}
+			});
+		} catch (e) {
+			console.log(e)
+		}
+	}
+	//bienes
+	function Getbienes() {
+		try {
+			var url = document.getElementById('ruta').value;
+			$.ajax({
+				url: '' + url + '/api/clients/request/financing/bienes/'+$("#id_cliente").val(),
+				type: 'GET',
+				dataType: 'JSON',
+				beforeSend: function() {},
+				error: function(data) {},
+				success: function(data) {
+					
+					$("#type_apartamento").val(data ? data.type_apartamento : '')
+					$("#address_bien").val(data ? data.address_bien : '')
+					$("#barrio").val(data ? data.barrio : '')
+					$("#city").val(data ? data.city : '')
+					$("#valor_comercail").val(data ? data.valor_comercial : '')
+					$("#hipoteca").val(data ? data.hipoteca : '')
+					$("#afectacion_familiar").val(data ? data.afectacion_familiar : '')
+					$("#type_vehicule").val(data ? data.type_vehicule : '')
+					$("#placa").val(data ? data.placa : '')
+					$("#transito").val(data ? data.transito : '')
+					$("#marca").val(data ? data.marca : '')
+					$("#modelo").val(data ? data.modelo : '')
+					$("#valor_comercial").val(data ? data.valor_comercail : '')
+					$("#prenda_valor").val(data ? data.prenda_valor : '')
+					$("#otro_activos").val(data ? data.otro_activos : '')
 				}
 			});
 		} catch (e) {

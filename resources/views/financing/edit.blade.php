@@ -7,6 +7,12 @@
         <li class="nav-item">
             <a id="tab2-1" class="nav-link" data-toggle="tab" href="#person-data-edit" role="tab" aria-controls="profile" aria-selected="false">Datos Personales</a>
         </li>
+        <li class="nav-item">
+            <a id="tab3-1" class="nav-link" data-toggle="tab" href="#activity-data-economic" role="tab" aria-controls="profile" aria-selected="false">Actividad Economica</a>
+        </li>
+        <li class="nav-item">
+            <a id="tab4-1" class="nav-link" data-toggle="tab" href="#bienes-data" role="tab" aria-controls="profile" aria-selected="false">Bienes</a>
+        </li>
     </ul>
 
     <div class="tab-content" id="myTabContent">
@@ -273,19 +279,19 @@
                     <br>
                     <br>
             </div>
-             <center>
-            <button type="button" class="btn btn-danger btn-user" onclick="prev('#cuadro4')">
-                Cancelar
-            </button>
-            <button class="btn btn-primary btn-user">
-                Guardar
-            </button>
-        </center>
-        <br>
-        <br>
-        </form>
+            <center>
+                <button type="button" class="btn btn-danger btn-user" onclick="prev('#cuadro4')">
+                    Cancelar
+                </button>
+                <button class="btn btn-primary btn-user">
+                    Guardar
+                </button>
+            </center>
+            <br>
+            <br>
+            </form>
         </div>
-
+        <!--datos personales-->
         <div class="tab-pane fade tab_content2-1 p-4" id="person-data-edit" role="tabpanel" aria-labelledby="profile-tab">
             <div class="row">
                 <div class="col-md-3">
@@ -421,7 +427,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for=""><b>Nº De Hijos:*</b></label>
-                        <input type="number" disabled  name="number_children" id="number_children" class="form-control" required>
+                        <input type="number" disabled name="number_children" id="number_children" class="form-control" required>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -452,7 +458,7 @@
                     <div class="col-md-5">
                         <label for="average_monthly_income"><b>Foto de Cara</b></label>
                         <div>
-                            <img class="mr-5" src="" id="photo_face" alt="" width="250px" height="200px" >
+                            <img class="mr-5" src="" id="photo_face" alt="" width="250px" height="200px">
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -462,7 +468,348 @@
                         </div>
                     </div>
                 </div>
-                
+
+            </div>
+        </div>
+
+        <!--actividad economica-->
+        <div class="tab-pane fade tab_content2-1 p-4" id="activity-data-economic" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for=""><b>Direccion de residencia: <small>espeficique Nº casa o apartamento</small> *</b></label>
+                        <input type="text" disabled name="adress_client" id="adress_client" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for=""><b>Barrio/ciudad*</b></label>
+                        <input type="text" disabled name="city_client" id="city_client" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Telefono residencia*</b></label>
+                        <input type="text" disabled name="phone_client" id="phone_client" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Celular*</b></label>
+                        <input type="text" disabled name="mobil_client" id="mobil_client" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>E-Mail*</b></label>
+                        <input type="text" disabled name="email_client" id="email_client" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Envio de Correspondencia:*</b></label>
+                        <select  name="mailing" disabled id="mailing" class="form-control" required>
+                            <option value="">Seleccione</option>
+                            <option value="Recidencia">Residencia</option>
+                            <option value="E-Mail">E-Mail</option>
+                            <option value="Trabajo">Trabajo</option>
+                            <option value="Otra">Otra</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Direccion <small>(Correspondencia)</small> *</b></label>
+                        <input type="text" disabled name="address_mailing" id="address_mailing" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Barrio/Ciudad <small>(Correspondencia)</small>*</b></label>
+                        <input type="text" disabled name="city_mailing" id="city_mailing" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Telefono <small>(Correspondencia)</small> </b></label>
+                        <input type="text" disabled name="phone_mailing" id="phone_mailing" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Tipo de Actividad Economica:*</b></label>
+                        <select disabled name="type_activity_client" id="type_activity_client" class="form-control" required>
+                            <option value="">Seleccione</option>
+                            <option value="Empleado">Empleado</option>
+                            <option value="Independiente">Independiente</option>
+                            <option value="Ama de Casa">Ama de Casa</option>
+                            <option value="Empresario(a)">Empresario(a)</option>
+                            <option value="Estudiante">Estudiante</option>
+                            <option value="Pensionado">Pensionado</option>
+                            <option value="Rentista de Capital">Rentista de Capital</option>
+                            <option value="Trabajador(a)">Trabajador(a)</option>
+                            <option value="Administrador(a)">Administrador(a)</option>
+                            <option value="Independiente">Independiente</option>
+                            <option value="Otra">Otra</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>¿Cual? <small>(Otra Actividad Economica)</small> </b></label>
+                        <input type="text" disabled name="oter_activity_client" id="oter_activity_client" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Nombre de la Empresa </b></label>
+                        <input type="text" disabled name="name_company_client" id="name_company_client" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Direccion Trabajo</b></label>
+                        <input type="text" disabled name="addres_worck_client" id="addres_worck_client" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Barrio/Ciudad*</b></label>
+                        <input type="text" disabled name="city_worck_clirnt" id="city_worck_clirnt" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="" chmod -R 775 bootstrap/cache> <b>Telefono <small>Trabajo</small> </b></label>
+                        <input type="text" disabled name="phone_worck_client" id="phone_worck_client" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for=""><b>Ext </b></label>
+                        <input type="text" disabled name="ext_phone_worck_client" id="ext_phone_worck_client" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-grchmod -R 775 bootstrap/cacheoup">
+                        <label for=""><b>Fax </b></label>
+                        <input type="text" disabled name="fax_phone_worck_client" id="fax_phone_worck_client" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Dependencia/Area</b></label>
+                        <input type="text" disabled name="dependency_area" id="dependency_area" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Cargo</b></label>
+                        <input type="text" disabled name="charge_company" id="charge_company" class="form-control">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Tipo de Contrato:*</b></label>
+                        <select disabled name="type_contrato" id="type_contrato" class="form-control" required>
+                            <option value="">Seleccione</option>
+                            <option value="Empleado">Empleado</option>
+                            <option value="Independiente">Independiente</option>
+                            <option value="Ama de Casa">Ama de Casa</option>
+                            <option value="Termino Fijo">Termino Fijo</option>
+                            <option value="Obra o labor">Obra o labor</option>
+                            <option value="Por Servicios">Por Servicios</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Fecha de Vinculacion</b></label>
+                        <input disabled type="date" name="date_vinculacion" id="date_vinculacion" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- bienes y raices-->
+        <div class="tab-pane fade tab_content2-1 p-4" id="bienes-data" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>BIENES RAICES</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Tipo de Apartamento:*</b></label>
+                                <select disabled name="type_apartamento" id="type_apartamento" class="form-control">
+                                    <option value="">Seleccione</option>
+                                    <option value="Local">Local</option>
+                                    <option value="Casa">Casa</option>
+                                    <option value="Lote">Lote</option>
+                                    <option value="Finca">Finca</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Direccion del Bien</b></label>
+                                <input type="text" disabled name="address_bien" id="address_bien" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Barrio</b></label>
+                                <input type="text" disabled name="barrio" id="barrio" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>ciudad</b></label>
+                                <input type="text" disabled name="city" id="city" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Valor Comercail</b></label>
+                                <input type="text" disabled name="valor_comercail" id="valor_comercail" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Hipoteca a favor de:</b></label>
+                                <input type="text" disabled name="hipoteca" id="hipoteca" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Afectacion Familiar:*</b></label>
+                                <select disabled name="afectacion_familiar" id="afectacion_familiar" class="form-control">
+                                    <option value="">Seleccione</option>
+                                    <option value="Si">Si</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>VEHICULO</h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Tipo:*</b></label>
+                                <select disabled name="type_vehicule" id="type_vehicule" class="form-control">
+                                    <option value="">Seleccione</option>
+                                    <option value="Particular">Particular</option>
+                                    <option value="Publico">Publico</option>
+                                    <option value="Moto">Moto</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Placa</b></label>
+                                <input type="text" disabled name="placa" id="placa" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Transito De</b></label>
+                                <input type="text" disabled name="transito" id="transito" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Marca</b></label>
+                                <input type="text" disabled name="marca" id="marca" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Modelo</b></label>
+                                <input type="text" disabled name="modelo" id="modelo" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Valor Comercial</b></label>
+                                <input type="text" disabled name="valor_comercial" id="valor_comercial" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Prenda a Valor de </b></label>
+                                <input type="text" disabled name="prenda_valor" id="prenda_valor" class="form-control">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for=""><b>Otro: Cuales ?</b></label>
+                                <input type="text" disabled name="otro_activos" id="otro_activos" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
