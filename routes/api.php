@@ -363,6 +363,7 @@ Route::put('clients/request/financing/{id}', 'FinacingController@UpdateRequestFi
 Route::get('clients/request/financing/persons/data/{id}', 'FinacingController@GetPersondataFinancing');
 Route::get('clients/request/financing/activity/economic/{id}', 'FinacingController@GetActivyEcominic');
 Route::get('clients/request/financing/bienes/{id}', 'FinacingController@GetBienes');
+Route::post('clients/request/financing/updated/status/', 'FinacingController@UpdateStatus');
 
 Route::get('clients/plan/payments/{id_client}', 'FinacingController@GetPlanPayments');
 
