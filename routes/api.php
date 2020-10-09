@@ -137,8 +137,8 @@ Route::resource('surgeries', 'SurgeriesController');
 Route::get('surgeries/client/{id_client}', 'SurgeriesController@Clients');
 Route::get('surgeries/status/{id}/{status}', 'SurgeriesController@status');
 Route::get('surgeries/qty/month/{user_id}', 'SurgeriesController@QtyMonth');
-Route::post('surgeries/date/month','SurgeriesController@DateMonth');
-Route::post('surgeries/dashboard/amount/month','SurgeriesController@DashboardMonth');
+Route::post('surgeries/date/month', 'SurgeriesController@DateMonth');
+Route::post('surgeries/dashboard/amount/month', 'SurgeriesController@DashboardMonth');
 
 
 
@@ -360,6 +360,7 @@ Route::post('app/request/credit', 'ClientsController@AppRequestCredit');
 Route::get('clients/request/financing', 'FinacingController@GetRequestFinancing');
 
 Route::put('clients/request/financing/{id}', 'FinacingController@UpdateRequestFinancing');
+Route::get('clients/request/financing/persons/data/{id}', 'FinacingController@UpdatePersondataFinancing');
 
 Route::get('clients/plan/payments/{id_client}', 'FinacingController@GetPlanPayments');
 
@@ -429,7 +430,6 @@ Route::get('generate/token/chat', function () {
     //UPDATE users SET sync_token = Right( MD5(created_at), 20 )
 
     return response()->json($users)->setStatusCode(200);
-
 });
 
 
@@ -444,11 +444,11 @@ Route::get('create/users/affiliate', function () {
 
     $clients = Clients::where("prp", "Si")->get();
 
-    foreach($clients as $client){
+    foreach ($clients as $client) {
 
-        if(!User::where("id_client", $client["id_cliente"])->first()){
+        if (!User::where("id_client", $client["id_cliente"])->first()) {
 
-            if(!User::where("email", $client["email"])->first()){
+            if (!User::where("email", $client["email"])->first()) {
 
                 $User =  User::create([
                     "email"       => $client["email"],
@@ -469,42 +469,35 @@ Route::get('create/users/affiliate', function () {
                 $datos_personales->id_usuario       = $User->id;
                 $datos_personales->save();
             }
-
         }
-
     }
 
     return response()->json($clients)->setStatusCode(200);
 });
 
 
-
-
-
-
-
 Route::get('create/users/reffers', function () {
 
     $clients = Clients::select("clientes.*", "users.id")
-                        // ->where("prp", "=", "No")
-                        ->join("users", "users.id_client", "=", "clientes.id_cliente", "left")
-                        ->whereNull("clientes.prp")
-                        ->whereNotNull("clientes.email")
-                        ->whereNull("users.id")
-                        ->where("clientes.email", "!=", "")
+        // ->where("prp", "=", "No")
+        ->join("users", "users.id_client", "=", "clientes.id_cliente", "left")
+        ->whereNull("clientes.prp")
+        ->whereNotNull("clientes.email")
+        ->whereNull("users.id")
+        ->where("clientes.email", "!=", "")
 
-                        ->where("clientes.id_cliente", ">", 49571)
-                        ->limit(1000)
-                        ->get();
-
-
-
-    foreach($clients as $client){
-
-        if(!User::where("id_client", $client["id_cliente"])->first()){
+        ->where("clientes.id_cliente", ">", 49571)
+        ->limit(1000)
+        ->get();
 
 
-            if(!User::where("email", $client["email"])->first()){
+
+    foreach ($clients as $client) {
+
+        if (!User::where("id_client", $client["id_cliente"])->first()) {
+
+
+            if (!User::where("email", $client["email"])->first()) {
 
                 $User =  User::create([
                     "email"       => $client["email"],
@@ -524,103 +517,72 @@ Route::get('create/users/reffers', function () {
                 $datos_personales->direccion        = null;
                 $datos_personales->id_usuario       = $User->id;
                 $datos_personales->save();
-
             }
-
-
         }
-
     }
 
     return response()->json($clients)->setStatusCode(200);
-
-
-
 });
-
-
-
-
 
 
 Route::get('sync/reffered/affiliate', function () {
 
     $clients = Clients::select("clientes.*")
-                        ->where("origen", "!=", "Chat")
-                        ->where("origen", "!=", "face")
-                        ->where("origen", "!=", "cep")
-                        ->whereRaw("length(origen) = 4")
-                        ->whereNull('id_affiliate')
-                        ->get();
+        ->where("origen", "!=", "Chat")
+        ->where("origen", "!=", "face")
+        ->where("origen", "!=", "cep")
+        ->whereRaw("length(origen) = 4")
+        ->whereNull('id_affiliate')
+        ->get();
 
 
-    foreach($clients as $client){
-       //echo json_encode($client["origen"])."<br>";
+    foreach ($clients as $client) {
+        //echo json_encode($client["origen"])."<br>";
 
         $affiliate = Clients::where("code_client", $client["origen"])->first();
 
-        echo json_encode($affiliate["id_cliente"])."<br>";
+        echo json_encode($affiliate["id_cliente"]) . "<br>";
 
         Clients::where("id_cliente", $client["id_cliente"])->update(["id_affiliate" => $affiliate["id_cliente"]]);
-
     }
-  // return response()->json($clients)->setStatusCode(200);
+    // return response()->json($clients)->setStatusCode(200);
 
 });
-
-
-
 
 
 Route::get('sync/reffered/affiliate/restore', function () {
 
     $clients = Clients::select("clientes.*")
-                        ->where("origen", "Referido PRP")
-                        ->get();
+        ->where("origen", "Referido PRP")
+        ->get();
 
-    foreach($clients as $client){
+    foreach ($clients as $client) {
         $affiliate = Clients::where("id_cliente", $client["id_affiliate"])->first();
         Clients::where("id_cliente", $client["id_cliente"])->update(["origen" => $affiliate["code_client"]]);
-        echo json_encode($affiliate["code_client"])."<br><br>";
+        echo json_encode($affiliate["code_client"]) . "<br><br>";
     }
-
 });
-
-
-
-
-
 
 Route::get('code/phones', function () {
 
     $data = DB::table("clientes")->whereRaw('telefono not like "%+57%"')->limit(1000)->get();
 
-    foreach($data as $value){
-        Clients::where("id_cliente", $value->id_cliente)->update(["telefono" => "+57".$value->telefono]);
+    foreach ($data as $value) {
+        Clients::where("id_cliente", $value->id_cliente)->update(["telefono" => "+57" . $value->telefono]);
     }
     return response()->json($data)->setStatusCode(200);
-
 });
-
-
-
 
 Route::get('sync/auth/app', function () {
 
     $data = DB::table("auth_users_app")->get();
 
-    foreach($data as $value){
+    foreach ($data as $value) {
 
 
         $user = User::where("id", $value->id_user)->first();
 
         Clients::where("id_cliente", $user["id_client"])->update(["auth_app" => 1]);
-
-
     }
-     return response()->json($data)->setStatusCode(200);
-
+    return response()->json($data)->setStatusCode(200);
 });
-
-
-
