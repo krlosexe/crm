@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Mail;
 use App\User;
 use App\Modulos;
 use App\funciones;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 class Login extends Controller
 {
     public function Auth(request $request)
-    {	
+    {
     	$messages = [
 		    'required' => 'El Campo :attribute es requirdo.',
 		];
@@ -54,7 +55,7 @@ class Login extends Controller
 		        $AuthUsers->id_user = $users[0]->id;
 		        $AuthUsers->token   = $token;
                 $AuthUsers->save();
-                
+
 
 
                 LogsSession::create(["id_user" => $users[0]->id, "date_login" => date("Y-m-d G:i:s")]);
@@ -83,7 +84,7 @@ class Login extends Controller
 
 
     public function AuthAppFinacing(request $request)
-    {	
+    {
 
         if($request["email"] == "" || $request["password"] == ""){
             return response()->json("El Email y Contraseña son Requeridos")->setStatusCode(400);
@@ -95,7 +96,7 @@ class Login extends Controller
 	    				 ->get();
 
         if (sizeof($users) > 0) {
-            
+
             $token = bin2hex(random_bytes(64));
 
 
@@ -110,11 +111,11 @@ class Login extends Controller
             $AuthUsers->token                = $token;
             $AuthUsers->token_notifications  = $request["fcmToken"];
             $AuthUsers->save();
-            
+
             $id_line = null;
             $code    = null;
 
-           
+
             if($users[0]->id_rol == 17){
 
                 $name_rol = "Afiliado";
@@ -145,7 +146,7 @@ class Login extends Controller
                           'mensagge'  => "Ha iniciado sesion exitosamente",
                           "type_user" => $name_rol
                 );
-                
+
 
             return response()->json($data)->setStatusCode(200);
         }else{
@@ -166,7 +167,7 @@ class Login extends Controller
 
 
     public function AuthApp(request $request)
-    {	
+    {
 
         if($request["email"] == "" || $request["password"] == ""){
 
@@ -182,7 +183,7 @@ class Login extends Controller
 	    				 ->get();
 
         if (sizeof($users) > 0) {
-            
+
             $token = bin2hex(random_bytes(64));
 
 
@@ -197,7 +198,7 @@ class Login extends Controller
             $AuthUsers->token                = $token;
             $AuthUsers->token_notifications  = $request["fcmToken"];
             $AuthUsers->save();
-            
+
             $id_line = null;
             $code    = null;
             if($users[0]->id_rol == 6 || $users[0]->id_rol == 9){
@@ -213,7 +214,7 @@ class Login extends Controller
 
             }
 
-           
+
             if($users[0]->id_rol == 17){
                 $name_rol = "Afiliado";
 
@@ -244,7 +245,7 @@ class Login extends Controller
 
                 $id_line = $line->id_line;
 
-                
+
             }
 
 
@@ -264,7 +265,7 @@ class Login extends Controller
                           'mensagge'  => "Ha iniciado sesion exitosamente",
                           "type_user" => $name_rol
                 );
-                
+
             if($users[0]->id_rol == 19){
                 $data["id_client"] = $users[0]->id_client;
             }
@@ -284,7 +285,7 @@ class Login extends Controller
 
 
     public function AuthDoc(request $request)
-    {	
+    {
 
         if($request["email"] == "" || $request["password"] == ""){
 
@@ -302,7 +303,7 @@ class Login extends Controller
 	    				 ->get();
 
         if (sizeof($users) > 0) {
-            
+
             $token = bin2hex(random_bytes(64));
 
 
@@ -317,7 +318,7 @@ class Login extends Controller
             $AuthUsers->token                = $token;
             $AuthUsers->token_notifications  = $request["fcmToken"];
             $AuthUsers->save();
-            
+
             if($users[0]->id_rol == 6 || $users[0]->id_rol == 9){
                 $name_rol = "Asesor";
             }
@@ -351,7 +352,7 @@ class Login extends Controller
 
 
     public function authValoration(request $request)
-    {	
+    {
 
         if($request["email"] == "" || $request["password"] == ""){
 
@@ -365,7 +366,7 @@ class Login extends Controller
 	    				 ->get();
 
         if (sizeof($users) > 0) {
-            
+
             $token = bin2hex(random_bytes(64));
 
 
@@ -380,7 +381,7 @@ class Login extends Controller
             $AuthUsers->token                = $token;
             $AuthUsers->token_notifications  = $request["fcmToken"];
             $AuthUsers->save();
-            
+
             if($users[0]->id_rol == 6 || $users[0]->id_rol == 9){
                 $name_rol = "Asesor";
             }
@@ -428,7 +429,7 @@ class Login extends Controller
     	$AuthUsers = AuthUsers::where("token", $request["token"])
                                 ->where("id_user", $request["user_id"])
                                 ->get();
-        
+
         if (sizeof($AuthUsers) > 0) {
 
             $modulos = Modulos::join("auditoria", "auditoria.cod_reg", "=", "modulos.id_modulo")
@@ -443,7 +444,7 @@ class Login extends Controller
                                 ->join("rol_operaciones", "rol_operaciones.id_rol", "=", "roles.id_rol")
                                 ->join("funciones", "funciones.id_funciones", "=", "rol_operaciones.id_funciones")
                                 ->join("auditoria", "auditoria.cod_reg", "=", "roles.id_rol")
-                                
+
                                 ->where("id", $request["user_id"])
                                 ->where("auditoria.tabla", "roles")
                                 ->where("funciones.visibilidad", 1)
@@ -469,7 +470,7 @@ class Login extends Controller
 
             $modulos_disponibles = $this->control($modulos, $funciones);
 
-        	$data = array('mensagge'            => "ok", 
+        	$data = array('mensagge'            => "ok",
                           'data'                => $AuthUsers[0],
                           'data_user'           => $data_user[0],
                           'modulos_disponibles' => $modulos_disponibles,
@@ -481,7 +482,7 @@ class Login extends Controller
         }else{
         	$data = array('mensagge' => "error");
     		return response()->json($data)->setStatusCode(500);
-        }                                
+        }
     }
 
 
@@ -502,7 +503,7 @@ class Login extends Controller
             foreach ($ids as $value) {
 
                 $data['modulos_enconctrados'][] = $this->modulosbyid($value);
-            } 
+            }
 
             $oneDim = array();
             foreach($data['modulos_enconctrados'] as $i) {
@@ -514,6 +515,59 @@ class Login extends Controller
         }
 
     }
+
+
+    public function RecoveryAccount(Request $request){
+
+        $data = DB::table("clientes")
+                    ->select("users.email", "users.id")
+                    ->where("identificacion", $request["identificacion"])
+                    ->join("users", "users.id_client", "=", "clientes.id_cliente")
+                    ->first();
+
+        User::find($data->id)->update(["password" => md5(123456789)]);
+
+
+         $mensaje = "Bienvenido, tus datos de acceso son: ".$data->email." clave: 123456789";
+
+        $info_email = [
+            "user_id" => $data->id,
+            "issue"   => "Recuperar Contraseña",
+            "mensage" => $mensaje,
+        ];
+
+       $this->SendEmail($info_email);
+
+
+
+        return response()->json($data->id)->setStatusCode(200);
+    }
+
+
+
+    public function SendEmail($data){
+
+        $user = User::find($data["user_id"]);
+        $subject = $data["issue"];
+
+        $for = "cardenascarlos18@gmail.com";
+        //$for = $user["email"];
+
+        $request["msg"] = $data["mensage"];
+
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("cardenascarlos18@gmail.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+        return true;
+
+    }
+
+
+
+
 
 
     public function modulosbyid($id)
@@ -539,7 +593,7 @@ class Login extends Controller
                        ->join("funciones", "funciones.id_funciones", "=", "rol_operaciones.id_funciones")
                             ->where("funciones.route", $request["route"])
                         ->get();
-                         
+
 
         return response()->json($users[0])->setStatusCode(200);
     }
@@ -552,7 +606,7 @@ class Login extends Controller
 		foreach ($token_user as $key => $value) {
 			$value->delete();
         }
-        
+
 
         LogsSession::create(["id_user" => $user_id, "date_logout" => date("Y-m-d G:i:s")]);
 

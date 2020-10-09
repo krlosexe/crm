@@ -375,6 +375,7 @@ Route::get('get/client/request/{id_client}', 'ClientsController@GetRequestCredit
 
 Route::post('auth/app/financing', 'Login@AuthAppFinacing');
 
+Route::post('auth/app/financing/recovery/account', 'Login@RecoveryAccount');
 
 
 
@@ -422,7 +423,7 @@ Route::post('transferir/client', 'TransfeClient@store');
 
 
 Route::get('generate/token/chat', function () {
-    
+
     $users = User::get();
 
     //UPDATE users SET sync_token = Right( MD5(created_at), 20 )
@@ -440,7 +441,7 @@ Route::get('generate/token/sync', function () {
 
 
 Route::get('create/users/affiliate', function () {
-    
+
     $clients = Clients::where("prp", "Si")->get();
 
     foreach($clients as $client){
@@ -448,15 +449,15 @@ Route::get('create/users/affiliate', function () {
         if(!User::where("id_client", $client["id_cliente"])->first()){
 
             if(!User::where("email", $client["email"])->first()){
-                
+
                 $User =  User::create([
                     "email"       => $client["email"],
                     "password"    => md5("123456789"),
                     "id_rol"      => 17,
                     "id_client"   => $client["id_cliente"]
                 ]);
-            
-            
+
+
                 $datos_personales                   = new datosPersonaesModel;
                 $datos_personales->nombres          = $client["nombres"];
                 $datos_personales->apellido_p       = "";
@@ -472,7 +473,7 @@ Route::get('create/users/affiliate', function () {
         }
 
     }
-    
+
     return response()->json($clients)->setStatusCode(200);
 });
 
@@ -483,9 +484,9 @@ Route::get('create/users/affiliate', function () {
 
 
 Route::get('create/users/reffers', function () {
-    
+
     $clients = Clients::select("clientes.*", "users.id")
-                        // ->where("prp", "=", "No") 
+                        // ->where("prp", "=", "No")
                         ->join("users", "users.id_client", "=", "clientes.id_cliente", "left")
                         ->whereNull("clientes.prp")
                         ->whereNotNull("clientes.email")
@@ -495,24 +496,24 @@ Route::get('create/users/reffers', function () {
                         ->where("clientes.id_cliente", ">", 49571)
                         ->limit(1000)
                         ->get();
-    
-    
-    
+
+
+
     foreach($clients as $client){
 
         if(!User::where("id_client", $client["id_cliente"])->first()){
 
 
             if(!User::where("email", $client["email"])->first()){
-                
+
                 $User =  User::create([
                     "email"       => $client["email"],
                     "password"    => md5("123456789"),
                     "id_rol"      => 19,
                     "id_client"   => $client["id_cliente"]
                 ]);
-            
-            
+
+
                 $datos_personales                   = new datosPersonaesModel;
                 $datos_personales->nombres          = $client["nombres"];
                 $datos_personales->apellido_p       = "";
@@ -530,10 +531,10 @@ Route::get('create/users/reffers', function () {
         }
 
     }
-    
+
     return response()->json($clients)->setStatusCode(200);
 
-    
+
 
 });
 
@@ -543,7 +544,7 @@ Route::get('create/users/reffers', function () {
 
 
 Route::get('sync/reffered/affiliate', function () {
-    
+
     $clients = Clients::select("clientes.*")
                         ->where("origen", "!=", "Chat")
                         ->where("origen", "!=", "face")
@@ -551,8 +552,8 @@ Route::get('sync/reffered/affiliate', function () {
                         ->whereRaw("length(origen) = 4")
                         ->whereNull('id_affiliate')
                         ->get();
-    
-    
+
+
     foreach($clients as $client){
        //echo json_encode($client["origen"])."<br>";
 
@@ -561,8 +562,8 @@ Route::get('sync/reffered/affiliate', function () {
         echo json_encode($affiliate["id_cliente"])."<br>";
 
         Clients::where("id_cliente", $client["id_cliente"])->update(["id_affiliate" => $affiliate["id_cliente"]]);
-        
-    }                        
+
+    }
   // return response()->json($clients)->setStatusCode(200);
 
 });
@@ -572,17 +573,17 @@ Route::get('sync/reffered/affiliate', function () {
 
 
 Route::get('sync/reffered/affiliate/restore', function () {
-    
+
     $clients = Clients::select("clientes.*")
                         ->where("origen", "Referido PRP")
                         ->get();
-    
+
     foreach($clients as $client){
         $affiliate = Clients::where("id_cliente", $client["id_affiliate"])->first();
         Clients::where("id_cliente", $client["id_cliente"])->update(["origen" => $affiliate["code_client"]]);
         echo json_encode($affiliate["code_client"])."<br><br>";
     }
-    
+
 });
 
 
@@ -609,13 +610,13 @@ Route::get('sync/auth/app', function () {
     $data = DB::table("auth_users_app")->get();
 
     foreach($data as $value){
-        
+
 
         $user = User::where("id", $value->id_user)->first();
 
         Clients::where("id_cliente", $user["id_client"])->update(["auth_app" => 1]);
 
-     
+
     }
      return response()->json($data)->setStatusCode(200);
 
