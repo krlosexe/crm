@@ -188,7 +188,7 @@
                     <div class="form-group">
                         <div class="form-group">
                         <label for=""><b>Monto de la Cirugia</b></label>
-                        <input type="number" name="amount" id="amount-store" class="monto_formato_decimales form-control" onkeydown="noPuntoComa( event )" required>
+                        <input type="number" name="amount" id="amount-store" class="form-control" onkeydown="noPuntoComa( event )" required>
                     </div>
                     </div>
                 </div>
