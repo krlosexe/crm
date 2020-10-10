@@ -373,5 +373,15 @@ class FinacingController extends Controller
             return  $th;
         }
     }
+    public function StatusCredit($id)
+    {
+        try {
+            $query = ClientPayToStudyCredit::where('id_client',$id)->first();
+            return response()->json($query)->setStatusCode(200);
+
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
 
 }
