@@ -144,9 +144,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-user" id="process_status">
+                            <!-- <button class="btn btn-primary btn-user" id="process_status">
                                 Procesar
-                            </button>
+                            </button> -->
                             <br><br>
                             <br><br>
                             <div class="row">
