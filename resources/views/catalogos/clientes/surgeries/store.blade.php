@@ -141,9 +141,7 @@
                 </div>
               </div>
 
-
               <br><br>
-
 
 
                 <div class="row">
@@ -174,8 +172,6 @@
                         </div>
                     </div>
                 </div>
-
-
 
 
               <div class="row">
