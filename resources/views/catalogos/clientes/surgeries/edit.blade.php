@@ -231,10 +231,7 @@
 
 
 
-
-                  <br><br>
-
-
+                  <br>
 
                   <div class="row">
                     <div class="col-md-2">
@@ -244,7 +241,7 @@
                         <div class="form-group">
                             <div class="form-group">
                             <label for=""><b>Monto de la Cirugia</b></label>
-                            <input type="number" name="amount" id="amount-edit" class="monto_formato_decimales form-control" onkeydown="noPuntoComa( event )" required>
+                            <input type="number" name="amount" id="amount-edit" class="form-control" onkeydown="noPuntoComa( event )" required>
                         </div>
                         </div>
                     </div>
