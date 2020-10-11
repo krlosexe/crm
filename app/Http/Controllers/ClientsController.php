@@ -2021,17 +2021,30 @@ class ClientsController extends Controller
 
                 isset($request["password"]) ? $request["password"] = md5($request["password"]) : $request["password"] = md5("123456789");
 
-
                 if(!$User){
 
-                    echo "No existe usesr";
+                  // echo "No existe usesr";
 
-                   $User =  User::create([
-                        "email"       => $request["email"],
-                        "password"    => $request["password"],
-                        "id_rol"      => 17,
-                        "id_client"   => $client["id_cliente"]
-                    ]);
+                    //    $User =  User::create([
+                    //         "email"       => $request["email"],
+                    //         "password"    => $request["password"],
+                    //         "id_rol"      => 17,
+                    //         "id_client"   => $client["id_cliente"]
+                    //     ]);
+
+
+
+                    $User = User::updateOrCreate(
+                        ["email" => $request["email"]],
+                        [
+                            "password"    => $request["password"],
+                            "id_rol"      => 17,
+                            "id_client"   => $client["id_cliente"]
+                        ]
+                    );
+
+
+
 
                     $datos_personales                   = new datosPersonaesModel;
                     $datos_personales->nombres          = $request["nombres"];
@@ -2074,8 +2087,16 @@ class ClientsController extends Controller
                           "type_user" => "Afiliado"
                 );
 
-                $User = User::where("id_client", $client["id_cliente"])->update(["email" => $request["email"], "password" => $request["password"]]);
+                $User = User::updateOrCreate(
+                    ["email" => $request["email"]],
+                    [
+                        "password"    => $request["password"],
+                        "id_rol"      => 17,
+                        "id_client"   => $client["id_cliente"]
+                    ]
+                );
 
+                // $User = User::where("id_client", $client["id_cliente"])->update(["email" => $request["email"], "password" => $request["password"]]);
 
                 return response()->json($data)->setStatusCode(200);
 
@@ -2121,12 +2142,24 @@ class ClientsController extends Controller
 
 
                 isset($request["password"]) ? $request["password"] = md5($request["password"]) : $request["password"] = md5("123456789");
-                $User =  User::create([
-                    "email"       => $request["email"],
-                    "password"    => $request["password"],
-                    "id_rol"      => 17,
-                    "id_client"   => $id_client
-                ]);
+
+
+                // $User =  User::create([
+                //     "email"       => $request["email"],
+                //     "password"    => $request["password"],
+                //     "id_rol"      => 17,
+                //     "id_client"   => $id_client
+                // ]);
+
+                $User = User::updateOrCreate(
+                    ["email" => $request["email"]],
+                    [
+                        "password"    => $request["password"],
+                        "id_rol"      => 17,
+                        "id_client"   => $id_client
+                    ]
+                );
+
 
                 $datos_personales                   = new datosPersonaesModel;
                 $datos_personales->nombres          = $request["nombres"];
