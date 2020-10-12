@@ -30,7 +30,7 @@ class UsuariosController extends Controller
                           ->where("auditoria.status", "!=", "0")
                           ->orderBy("users.id", "desc")
                           ->get();
-            
+
             return response()->json($User)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
@@ -41,7 +41,7 @@ class UsuariosController extends Controller
 
     public function GetAsesoras(Request $request)
     {
-      
+
         if ($this->VerifyLogin($request["id_user"],$request["token"])) {
             $User = User::select("users.*", "datos_personales.*", "roles.nombre_rol", "auditoria.status", "auditoria.fec_regins", "user_registro.email as user_registro")
                           ->join('datos_personales', 'datos_personales.id_usuario', '=', 'users.id')
@@ -53,7 +53,7 @@ class UsuariosController extends Controller
                           ->where("auditoria.status", "!=", "0")
                           ->orderBy("users.id", "desc")
                           ->get();
-            
+
             return response()->json($User)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
@@ -63,7 +63,7 @@ class UsuariosController extends Controller
 
 
     public function GetAsesorasByBusinessLine($id_line, Request $request)
-    {   
+    {
         if ($this->VerifyLogin($request["id_user"],$request["token"])) {
             $User = User::select("users.*", "datos_personales.*", "roles.nombre_rol", "auditoria.status", "auditoria.fec_regins", "user_registro.email as user_registro")
                           ->join('datos_personales', 'datos_personales.id_usuario', '=', 'users.id')
@@ -81,7 +81,7 @@ class UsuariosController extends Controller
                          // ->where("users.id_line", "=", $id_line)
                           ->orderBy("users.id", "desc")
                           ->get();
-            
+
             return response()->json($User)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
@@ -91,48 +91,45 @@ class UsuariosController extends Controller
 
 
     public function GetAsesorasByBusinessLineArray(Request $request)
-    {   
-        if ($this->VerifyLogin($request["id_user"],$request["token"])) {
+    {
 
 
-            $business_line = 0;
-            if(isset($request["array_line"])){
-                $business_line = $request["array_line"];
-            }
-
-            
-          
-            $User = User::select("users.*", "datos_personales.*", "roles.nombre_rol", "auditoria.status", "auditoria.fec_regins", "user_registro.email as user_registro")
-                          ->join('datos_personales', 'datos_personales.id_usuario', '=', 'users.id')
-                          ->join("auditoria", "auditoria.cod_reg", "=", "users.id")
-                          ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
-                          ->join("roles", "roles.id_rol", "=", "users.id_rol")
-
-                          ->join('users_line_business', 'users_line_business.id_user', '=', 'users.id')
-
-                          //->where("users_line_business.id_line", $id_line)
-
-                          ->where(function ($query) use ($business_line) {
-                                if($business_line != 0){
-                                    $query->whereIn("users_line_business.id_line", $business_line);
-                                }
-                            })
-
-
-                         // ->where("roles.nombre_rol", "Asesor")
-                          ->where("auditoria.tabla", "users")
-                          ->where("auditoria.status", "!=", "0")
-                         // ->where("users.id_line", "=", $id_line)
-                        
-                          ->orderBy("users.id", "desc")
-
-
-                          ->get();
-            
-           return response()->json($User)->setStatusCode(200);
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
+        $business_line = 0;
+        if(isset($request["array_line"])){
+            $business_line = $request["array_line"];
         }
+
+
+
+        $User = User::select("users.*", "datos_personales.*", "roles.nombre_rol", "auditoria.status", "auditoria.fec_regins", "user_registro.email as user_registro")
+                        ->join('datos_personales', 'datos_personales.id_usuario', '=', 'users.id')
+                        ->join("auditoria", "auditoria.cod_reg", "=", "users.id")
+                        ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                        ->join("roles", "roles.id_rol", "=", "users.id_rol")
+
+                        ->join('users_line_business', 'users_line_business.id_user', '=', 'users.id')
+
+                        //->where("users_line_business.id_line", $id_line)
+
+                        ->where(function ($query) use ($business_line) {
+                            if($business_line != 0){
+                                $query->whereIn("users_line_business.id_line", $business_line);
+                            }
+                        })
+
+
+                        // ->where("roles.nombre_rol", "Asesor")
+                        ->where("auditoria.tabla", "users")
+                        ->where("auditoria.status", "!=", "0")
+                        // ->where("users.id_line", "=", $id_line)
+
+                        ->orderBy("users.id", "desc")
+
+
+                        ->get();
+
+        return response()->json($User)->setStatusCode(200);
+
     }
 
     /**
@@ -153,7 +150,7 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
- 
+
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $messages = [
                 'required' => 'El Campo :attribute es requirdo.',
@@ -168,7 +165,7 @@ class UsuariosController extends Controller
                 'repeat-password' => 'required',
                 'rol'             => 'required'
 
-            ], $messages);  
+            ], $messages);
 
 
             if ($request["password"] != $request["repeat-password"]) {
@@ -186,7 +183,7 @@ class UsuariosController extends Controller
                 $file->move($destinationPath,$file->getClientOriginalName());
                 $request["img_profile"] = " asdasdasd asdas"; //add request
 
-               
+
                 $User              = new User;
                 $User->email       = $request["email"];
                 $User->password    = md5($request["password"]);
@@ -194,7 +191,7 @@ class UsuariosController extends Controller
                 $User->id_rol      = $request["rol"];
                // $auditoria->fec_regins  = date("Y-m-d H:i:s");
                 $User->id_line     = $request["id_line"];
-                
+
                 $User->save();
 
                 $datos_personales                   = new datosPersonaesModel;
@@ -224,7 +221,7 @@ class UsuariosController extends Controller
                 }
 
                 if ($User) {
-                    $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                    $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                     return response()->json($data)->setStatusCode(200);
                 }else{
                     return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -270,7 +267,7 @@ class UsuariosController extends Controller
     {
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            
+
             $messages = [
                 'required' => 'El Campo :attribute es requirdo.',
                 'unique'   => 'El Campo :attribute ya se encuentra en uso.'
@@ -281,8 +278,8 @@ class UsuariosController extends Controller
                 //'email'           => 'required|unique:users',
                 'rol'             => 'required'
 
-            ], $messages); 
-            
+            ], $messages);
+
 
             if($request["password"] != "" || $request["repeat-password"] != ""){
 
@@ -291,16 +288,16 @@ class UsuariosController extends Controller
                 }
 
             }
-            
+
 
             if ($validator->fails()) {
                 return response()->json($validator->errors())->setStatusCode(400);
             }else{
 
                $file = $request->file('img-profile');
-              
-               
-               
+
+
+
                 $User = User::find($id);
 
                 $User->email   = $request["email"];
@@ -345,7 +342,7 @@ class UsuariosController extends Controller
                 }
 
 
-                $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
 
             }
@@ -353,7 +350,7 @@ class UsuariosController extends Controller
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
         }
-        
+
     }
 
 
@@ -372,7 +369,7 @@ class UsuariosController extends Controller
 
             $auditoria->save();
 
-            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
