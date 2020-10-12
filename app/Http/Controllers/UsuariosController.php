@@ -64,28 +64,26 @@ class UsuariosController extends Controller
 
     public function GetAsesorasByBusinessLine($id_line, Request $request)
     {
-        if ($this->VerifyLogin($request["id_user"],$request["token"])) {
-            $User = User::select("users.*", "datos_personales.*", "roles.nombre_rol", "auditoria.status", "auditoria.fec_regins", "user_registro.email as user_registro")
-                          ->join('datos_personales', 'datos_personales.id_usuario', '=', 'users.id')
-                          ->join("auditoria", "auditoria.cod_reg", "=", "users.id")
-                          ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
-                          ->join("roles", "roles.id_rol", "=", "users.id_rol")
 
-                          ->join('users_line_business', 'users_line_business.id_user', '=', 'users.id')
+        $User = User::select("users.*", "datos_personales.*", "roles.nombre_rol", "auditoria.status", "auditoria.fec_regins", "user_registro.email as user_registro")
+                        ->join('datos_personales', 'datos_personales.id_usuario', '=', 'users.id')
+                        ->join("auditoria", "auditoria.cod_reg", "=", "users.id")
+                        ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                        ->join("roles", "roles.id_rol", "=", "users.id_rol")
 
-                          ->where("users_line_business.id_line", $id_line)
+                        ->join('users_line_business', 'users_line_business.id_user', '=', 'users.id')
 
-                         // ->where("roles.nombre_rol", "Asesor")
-                          ->where("auditoria.tabla", "users")
-                          ->where("auditoria.status", "!=", "0")
-                         // ->where("users.id_line", "=", $id_line)
-                          ->orderBy("users.id", "desc")
-                          ->get();
+                        ->where("users_line_business.id_line", $id_line)
 
-            return response()->json($User)->setStatusCode(200);
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
-        }
+                        // ->where("roles.nombre_rol", "Asesor")
+                        ->where("auditoria.tabla", "users")
+                        ->where("auditoria.status", "!=", "0")
+                        // ->where("users.id_line", "=", $id_line)
+                        ->orderBy("users.id", "desc")
+                        ->get();
+
+        return response()->json($User)->setStatusCode(200);
+
     }
 
 
