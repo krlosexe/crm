@@ -1097,7 +1097,7 @@
 	});
 
 	$("#tab5-1").click(function(e) {
-		GetCuotas()
+		GetQuotas()
 	});
 
 	//personas datos personales
@@ -1293,9 +1293,7 @@
 		try {
 			$(tbody).on("click", "span.detalle", function() {
 				$("#modal-detail").modal("show")
-
 				let data = table.row($(this).parents("tr")).data();
-				console.log(data)
 				$("#number").text(data.number ? data.number : '')
 				$("#payment_method_quota").text(data.payment_method ? data.payment_method : 'sin metodo de pago')
 				if (data.photo_recived && data.payment_method == 'OTHER') {
