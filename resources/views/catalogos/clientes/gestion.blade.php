@@ -367,6 +367,8 @@
 
 				getProcedures("#procedure-filter");
 
+				// getStatus()
+
 			});
 
 
@@ -1495,6 +1497,7 @@
 			/* 
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
+			let iden = null;
 			function ver(tbody, table){
 				$(tbody).unbind().on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
@@ -1507,8 +1510,10 @@
 					GetAsesorasbyBusisnessLine("#linea-negocio-view", "#asesora-view");
 
 					GetAsesorasValoracion("#id_asesora_valoracion-view")
-
 					GetComments("#comments", data.id_cliente)
+					
+					
+					
 
 					$("#id_asesora_valoracion-view").val(data.id_asesora_valoracion).attr("disabled", "disabled")
 
@@ -1888,7 +1893,7 @@
 
 					$("#asesora-edit").val(data.id_user_asesora)
 
-
+					getStatus(data.id_cliente)
 					cuadros('#cuadro1', '#cuadro4');
 
 
@@ -2415,6 +2420,7 @@
 			$(select).change(function (e) { 
 				
 				$.ajax({
+					
 					url: ''+document.getElementById('ruta').value+'/api/category/sub/'+$(select).val(),
 					type:'GET',
 					data: {
@@ -2457,8 +2463,6 @@
 		}
 
 
-		 
-
 		var count = 0
 		$("#btn-add-surgerie").click(function (e) { 
 			count++
@@ -2485,9 +2489,6 @@
 			$("#tablecx_edit tbody").append(html);
 
 		});
-
-
-
 
 
 		$("#pay_consultation").change(function (e) { 
@@ -2517,16 +2518,57 @@
 			}
 
 		});
-
-
-
-
-
-		</script>
+		$("#process_status").click(function(e) {
+		ProcesStatus()
+	     });
 		
+		 function getStatus(id_cliente){
+			try {
+				console.log($("#id_edit").val())
+				var url = document.getElementById('ruta').value;
+				$.ajax({
+					url: '' + url + '/api/clients/request/financing/status/credit/'+id_cliente,
+					type:'GET',
+					dataType:'JSON',
+					error: function() {},
+					success: function(data){
+						$("#id_cliente").val(data.id_client)
+						if(data.status == 'Pendiente'){
+							$("#process_status").css('display','block')
+						}else{
+							$("#process_status").css('display','none')
+						}
+						if(data.photo_recived){
+						$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`) 
+						}else{
+						$("#load_img").attr('src', ``) 
+						}
+					}
+				});
+			} catch (e) {
+				console.log(e)
+			}
+		}
+		function ProcesStatus() {
+		try {
+			var url = document.getElementById('ruta').value;
+			$.ajax({
+				url: '' + url + '/api/clients/request/financing/updated/status',
+				type: 'POST',
+				data:{ id:$("#id_cliente").val() },
+				error: function() {},
+					success: function(data){
+						alert("La solicitud fue procesada correctamente");
+						$("#process_status").css('display','none')
+					}
+			});
+		} catch (e) {
+			console.log(e)
+		}
+	}
 
-
-
+	</script>
+		
 	@endsection
 
 
