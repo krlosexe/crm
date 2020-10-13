@@ -522,7 +522,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for=""><b>Envio de Correspondencia:*</b></label>
-                        <select  name="mailing" disabled id="mailing" class="form-control" required>
+                        <select name="mailing" disabled id="mailing" class="form-control" required>
                             <option value="">Seleccione</option>
                             <option value="Recidencia">Residencia</option>
                             <option value="E-Mail">E-Mail</option>
@@ -820,7 +820,69 @@
             </div>
         </div>
         <div class="tab-pane fade tab_content2-1 p-4" id="cuotas-data" role="tabpanel" aria-labelledby="profile-tab">
-            <p>hola desde cuotas</p>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="table-cuota" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Acciones</th>
+                            <th>Número</th>
+                            <th>Valor de la cuota</th>
+                            <th>fecha</th>
+                            <th>Estatus</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <input type="hidden" name="inicial" id="inicial">
+            <input type="hidden" name="id_user" class="id_user">
+            <input type="hidden" id="id_cliente">
+            <input type="hidden" name="token" class="token">
+
+            <input type="hidden" name="id_user_edit" id="id_edit">
+
+            <br>
+            <br>
+        </div>
+
+        <div class="modal fade bd-example-modal-lg" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="padding: 4%;">
+                                Detalle de la Cuota
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="average_monthly_income"><b>Numero:</b></label>
+                                    <div>
+                                        <div id="number"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="average_monthly_income"><b>Metodo de pago:</b></label>
+                                    <div>
+                                        <div id="payment_method"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mr-5 ml-5 py-2">
+                                <div class="col-md-5 pt-3 mx-auto">
+                                    <label for="average_monthly_income"><b>Soporte de Pago</b></label>
+                                    <div>
+                                        <img src="" id="load_img" alt="" width="250px" height="200px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

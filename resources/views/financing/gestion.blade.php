@@ -476,18 +476,17 @@
 		$(tbody).on("click", "span.editar", function() {
 			$("#alertas").css("display", "none");
 			var data = table.row($(this).parents("tr")).data();
-
 			$("#client").val(data.nombres).attr("readonly", "readonly")
 			$("#required_amount").val(data.required_amount)
 			$("#monthly_fee").val(data.monthly_fee).attr("readonly", "readonly")
 			$("#dependent_independent").val(data.dependent_independent)
 			$("#have_initial").val(data.have_initial)
 			$("#reported").val(data.reported)
-			if(data.photo_recived){
-						$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`) 
-					}else{
-						$("#load_img").attr('src', ``) 
-					}
+			if (data.photo_recived) {
+				$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`)
+			} else {
+				$("#load_img").attr('src', ``)
+			}
 			$("#pay_to_study_credit").prop("checked", data.pay_to_study_credit ? true : false)
 			$("#payment_method").val(data.payment_method)
 			$("#date_pay_study_credit_edit").val(data.date_pay)
@@ -506,11 +505,6 @@
 
 			$("#id_cliente").val(data.id_client)
 			$("#id_edit").val(data.id)
-			// if(data.status_credit == 'Pendiente'){
-			// 	$("#process_status").css('display','block')
-			// }else{
-			// 	$("#process_status").css('display','none')
-			// }
 			cuadros('#cuadro1', '#cuadro4');
 		});
 	}
@@ -561,9 +555,6 @@
 					$(summer).summernote("reset");
 				}
 			});
-
-
-
 
 		});
 
@@ -1105,9 +1096,9 @@
 		Getbienes()
 	});
 
-	// $("#process_status").click(function(e) {
-	// 	ProcesStatus()
-	// });
+	$("#tab5-1").click(function(e) {
+		GetCuotas()
+	});
 
 	//personas datos personales
 	function PersonData() {
@@ -1139,16 +1130,16 @@
 					$("#housing_type").val(data ? data.housing_type : '')
 					$("#name_lessor").val(data ? data.name_lessor : '')
 					$("#phone_lessor").val(data ? data.phone_lessor : '')
-					if(data.photo_face){
-						$("#photo_face").attr('src',`img/credit/faces/${data.photo_face}`) 
-					}else{
-						$("#photo_face").attr('src', ``) 
+					if (data.photo_face) {
+						$("#photo_face").attr('src', `img/credit/faces/${data.photo_face}`)
+					} else {
+						$("#photo_face").attr('src', ``)
 					}
 
-					if(data.photo_identf){
-						$("#photo_identf").attr('src', `img/credit/cedulas/${data.photo_identf}`) 
-					}else{
-						$("#photo_identf").attr('src', ``) 
+					if (data.photo_identf) {
+						$("#photo_identf").attr('src', `img/credit/cedulas/${data.photo_identf}`)
+					} else {
+						$("#photo_identf").attr('src', ``)
 					}
 				}
 			});
@@ -1201,13 +1192,13 @@
 		try {
 			var url = document.getElementById('ruta').value;
 			$.ajax({
-				url: '' + url + '/api/clients/request/financing/bienes/'+$("#id_cliente").val(),
+				url: '' + url + '/api/clients/request/financing/bienes/' + $("#id_cliente").val(),
 				type: 'GET',
 				dataType: 'JSON',
 				beforeSend: function() {},
 				error: function(data) {},
 				success: function(data) {
-					
+
 					$("#type_apartamento").val(data ? data.type_apartamento : '')
 					$("#address_bien").val(data ? data.address_bien : '')
 					$("#barrio").val(data ? data.barrio : '')
@@ -1230,15 +1221,115 @@
 		}
 	}
 
-	function GetCuotas()
-	{
+	function GetCuotas() {
 		try {
-			
+			var data = {
+				"id_user": id_user,
+				"token": tokens,
+			};
+			$('#table-cuota tbody').off('click');
+			var url = document.getElementById('ruta').value;
+			var table = $("#table-cuota").DataTable({
+				"destroy": true,
+				"stateSave": true,
+				"serverSide": false,
+				"ajax": {
+					"method": "GET",
+					"url": '' + url + '/api/clients/request/financing/get/quotas/' + $("#id_cliente").val(),
+					"dataSrc": ""
+				},
+				"columns": [{
+						"data": null,
+						render: function(data, type, row) {
+
+							let botones = "";
+							if (consultar == 1)
+								if (actualizar == 1)
+									botones += "<span class='detalle btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Ver Detalles'><i class='far fa-images' style='margin-bottom:5px'></i></span> ";
+							if (row.status == 'Pendiente')
+								botones += "<span class='verificar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Verificar'><i class='fa fa-user-check' style='margin-bottom:5px'></i></span> ";
+							return botones;
+						}
+					},
+					{
+						"data": "number"
+					},
+					{
+						"data": "balance",
+						render: (data, type, rowedit) => {
+							return number_format(data, 2)
+						}
+					},
+					// {
+					// 	"data": "monthly_fees"
+					// 	// ,
+					// 	// render: (data, type, row) => {
+					// 	// 	return number_format(data, 2)
+					// 	// }
+					// },
+					{
+						"data": "date"
+					},
+					{
+						"data": "status"
+					},
+				],
+				"language": idioma_espanol,
+				"dom": 'Bfrtip',
+				"responsive": true,
+				"buttons": [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			});
+			showModal("#table-cuota tbody", table)
+			ProcesStatus("#table-cuota tbody", table)
+		} catch (e) {
+			console.log(e)
+		}
+
+	}
+
+	function showModal(tbody, table) {
+		try {
+			$(tbody).on("click", "span.detalle", function() {
+				$("#modal-detail").modal("show")
+
+				let data = table.row($(this).parents("tr")).data();
+				console.log(data)
+				$("#number").text(data.number ? data.number : '')
+				$("#payment_method").text(data.payment_method ? data.payment_method : '')
+				if (data.photo_recived && data.payment_method == 'OTHER') {
+					$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`)
+				} else {
+					$("#load_img").attr('src', ``)
+				}
+			});
 		} catch (e) {
 			console.log(e)
 		}
 	}
 
+	function ProcesStatus(tbody, table) {
+		try {
+			$(tbody).on("click", "span.verificar", function() {
+				let data = table.row($(this).parents("tr")).data();
+				let url = document.getElementById('ruta').value;
+				$.ajax({
+					url: '' + url + '/api/clients/request/financing/updated/status/quota',
+					type: 'POST',
+					data: {
+						id: data.id
+					},
+					error: function() {},
+					success: function(data) {
+						alert("La solicitud fue Procesada Correctamente");
+					}
+				});
+			});
+		} catch (e) {
+			console.log(e)
+		}
+	}
 </script>
 
 @endsection

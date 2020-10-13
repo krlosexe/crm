@@ -7,6 +7,8 @@ use App\Clients;
 use App\ClientsRequirementsCredit;
 use Illuminate\Http\Request;
 use App\ClientPayToStudyCredit;
+use App\ClientRequestCreditPaymentPlan;
+use App\ClientRequestCredit;
 
 class FinacingController extends Controller
 {
@@ -419,6 +421,74 @@ class FinacingController extends Controller
         } catch (\Throwable $th) {
             return $th;
         }
+    }
+
+    public function GetQuota($id)
+    {
+        try {
+            $data = DB::table('client_request_credit')
+            ->select('client_request_credit_payment_plan.*')
+            ->leftJoin('client_request_credit_payment_plan','client_request_credit.id','client_request_credit_payment_plan.id_request_credit')
+            ->where("client_request_credit.id_client", $id)->get();
+
+            return response()->json($data)->setStatusCode(200);
+
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+
+    public function UpdateStatusQuota(Request $request)
+    {
+        try {
+            $query = ClientRequestCreditPaymentPlan::where('id', $request->id)->first();
+            if($query->status == 'Pendiente'){
+                ClientRequestCreditPaymentPlan::where('id', $request->id)
+                ->update([
+                    'status' => 'Verificando'
+                    ]);
+                    $credit = ClientRequestCredit::where('id', $query->id_request_credit)->first();
+                    $data_user = DB::table("users")
+                    ->select("auth_users_app_financing.token_notifications", "users.id")
+                    ->join("auth_users_app_financing","auth_users_app_financing.id_user","users.id")
+                    ->where("id_client", $credit->id_client)->first();
+
+                    $FCM_token = $data_user->token_notifications;
+
+                    $url = "https://fcm.googleapis.com/fcm/send";
+                    $token = $FCM_token;
+                    $serverKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+                    $title = "Informacion sobre tu Pago:";
+                    $body = "Hemos Procesado el pago de tu Cuota";
+                    $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');
+                    $arrayToSend = array('to' => $token, 'notification' => $notification, 'priority' => 'high');
+                    $json = json_encode($arrayToSend);
+                    $headers = array();
+                    $headers[] = 'Content-Type: application/json';
+                    $headers[] = 'Authorization: key=' . $serverKey;
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                    //Send the request
+                    $response = curl_exec($ch);
+                    //Close request
+                    if ($response === FALSE) {
+                        die('FCM Send Error: ' . curl_error($ch));
+                    }
+                    curl_close($ch);
+
+                }
+                return response()->json("Ok")->setStatusCode(200);
+
+        } catch (\Throwable $th) {
+            return  $th;
+        }
+
+
+
     }
 
 }
