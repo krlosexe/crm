@@ -892,7 +892,7 @@ class ClientsController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("cardenascarlos18@gmail.com","CRM");
+            $msj->from("comercial@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -1951,7 +1951,7 @@ class ClientsController extends Controller
             $request["direccion"]        = ".";
             $request["fecha_nacimiento"] = date("Y-m-d");
             Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
-                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->from("comercial@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });
@@ -2231,15 +2231,15 @@ class ClientsController extends Controller
 
             $subject = "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion";
 
-            //$for = $users["email"];
-            $for = "cardenascarlos18@gmail.com";
+            $for = $users["email"];
+           // $for = "cardenascarlos18@gmail.com";
 
             $request["msg"]  = "Un Paciente a registrado un Formulario de Credito";
             $request["apellidos"]        = ".";
             $request["direccion"]        = ".";
             $request["fecha_nacimiento"] = date("Y-m-d");
             Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
-                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->from("comercial@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });
@@ -2380,7 +2380,7 @@ class ClientsController extends Controller
             $request["msg"]  = "Un Paciente a registrado un Formulario Web";
 
             Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
-                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->from("comercial@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });
@@ -2494,7 +2494,7 @@ class ClientsController extends Controller
             $request["msg"]  = "Un Paciente a registrado un Formulario Web";
 
             Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
-                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->from("comercial@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });
@@ -2757,14 +2757,14 @@ class ClientsController extends Controller
             $request["msg"]  = "Wiiii :D";
 
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
-                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->from("comercial@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });
 
 
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
-                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->from("comercial@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to("pdtagenciademedios@gmail.com");
             });
@@ -3083,7 +3083,7 @@ class ClientsController extends Controller
             $request["msg"]  = "Wiiii :D";
 
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
-                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->from("comercial@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });
@@ -3310,14 +3310,14 @@ class ClientsController extends Controller
             $request["msg"]  = "..";
 
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
-                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->from("comercial@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });
 
 
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for2){
-                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->from("comercial@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for2);
             });
@@ -3641,7 +3641,7 @@ class ClientsController extends Controller
             $request["msg"]  = "Un Paciente a registrado un Formulario Web";
 
             Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
-                $msj->from("cardenascarlos18@gmail.com","CRM");
+                $msj->from("comercial@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });

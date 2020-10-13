@@ -46,7 +46,7 @@ class JobsController extends Controller
         }
 
         return response()->json($data)->setStatusCode(200);
-        
+
     }
 
 
@@ -82,7 +82,7 @@ class JobsController extends Controller
         }
 
         return response()->json($data)->setStatusCode(200);
-        
+
     }
 
 
@@ -128,7 +128,7 @@ class JobsController extends Controller
         }
 
         return response()->json($data)->setStatusCode(200);
-        
+
     }
 
 
@@ -142,13 +142,13 @@ class JobsController extends Controller
         $user = User::find($data["user_id"]);
         $subject = $data["issue"];
 
-        $for = "cardenascarlos18@gmail.com";
-        //$for = $user["email"];
+        //$for = "cardenascarlos18@gmail.com";
+        $for = $user["email"];
 
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("cardenascarlos18@gmail.com","CRM");
+            $msj->from("comercial@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });

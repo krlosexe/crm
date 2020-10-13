@@ -341,7 +341,7 @@ class NotificationsController extends Controller
         $request["msg"]  = "Un Paciente a registrado un Formulario Web";
 
         Mail::send('emails.forms_authorizatio',$request->all(), function($msj) use($subject,$for){
-            $msj->from("cardenascarlos18@gmail.com","CRM");
+            $msj->from("comercial@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
