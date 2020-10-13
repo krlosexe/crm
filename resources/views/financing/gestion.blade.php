@@ -1299,9 +1299,9 @@
 				$("#number").text(data.number ? data.number : '')
 				$("#payment_method").text(data.payment_method ? data.payment_method : 'sin metodo de pago')
 				if (data.photo_recived && data.payment_method == 'OTHER') {
-					$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`)
+					$("#load_img_quota").attr('src', `img/credit/comprobantes/${data.photo_recived}`)
 				} else {
-					$("#load_img").attr('src', ``)
+					$("#load_img_quota").attr('src', ``)
 				}
 			});
 		} catch (e) {

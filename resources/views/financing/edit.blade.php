@@ -875,7 +875,7 @@
                                 <div class="col-md-5 pt-3 mx-auto">
                                     <label for="average_monthly_income"><b>Soporte de Pago</b></label>
                                     <div>
-                                        <img src="" id="load_img" alt="" width="250px" height="200px">
+                                        <img src="" id="load_img_quota" alt="" width="250px" height="200px">
                                     </div>
                                 </div>
                             </div>
