@@ -21,22 +21,11 @@ class TransfeClient extends Controller
 {
     public function store(Request $request){
 
-        $id_line =  $request["id_line"];
 
-        $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
-                        ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
-                        ->where("users_line_business.id_line", $request["id_line"])
-                        ->where("users.queue", 0)
-                        ->where("users.id", "!=", 106)
-
-                        ->where(function ($query) use ($id_line) {
-                            if($id_line == "8"){
-                                $query->where("users.id", "!=", 75);
-                            }
-                        })
-
+        $users = User::join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+                        ->where("users.id", $request["id_adviser"])
                         ->first();
-       
+
        if($users){
 
             $client = Clients::where("identificacion", $request["identificacion"])->get();
@@ -52,7 +41,7 @@ class TransfeClient extends Controller
                         "id_user_asesora" =>  $users["id"],
                         "id_line"         =>  $request["id_line"]
                     );
-                 
+
                     Clients::find($value["id_cliente"])->update($update);
                     DB::table('auditoria')->where("cod_reg", $value["id_cliente"])
                             ->where("tabla", "clientes")
@@ -71,7 +60,7 @@ class TransfeClient extends Controller
 
 
                     $subject = "Reemision Locales Comerciales";
-                  
+
                     $for = $users["email"];
                     $request["msg"]  = $request["origen"];
 
@@ -86,7 +75,7 @@ class TransfeClient extends Controller
 
 
 
-                   
+
                 }
 
             }else{
@@ -100,15 +89,15 @@ class TransfeClient extends Controller
 
 
                 $cliente = Clients::create($request->all());
-                        
+
                 $request["id_client"] = $cliente["id_cliente"];
 
 
-                
+
 
 
                 $id_client = $cliente["id_cliente"];
-                
+
                 ClientInformationAditionalSurgery::create($request->all());
                 ClientClinicHistory::create($request->all());
                 ClientCreditInformation::create($request->all());
@@ -179,22 +168,13 @@ class TransfeClient extends Controller
                     $msj->subject($subject);
                     $msj->to($for);
                 });
-           
+
             }
 
-        
-       }else{
-          
-           $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
-                        ->where("users_line_business.id_line", $request["id_line"])
-                        ->where("users.queue", 1)
-                        ->update(["queue" => 0]);
-
-            $this->store($request);
        }
 
 
-        $data = array('mensagge' => "El paciente fue reemitido a la Asesora ".$users["nombres"]. " ".$users["apellido_p"]);    
+        $data = array('mensagge' => "El paciente fue reemitido a la Asesora ".$users["nombres"]. " ".$users["apellido_p"]);
         return response()->json($data)->setStatusCode(200);
     }
 }

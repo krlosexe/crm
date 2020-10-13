@@ -356,13 +356,10 @@ class FinacingController extends Controller
     public function UpdateStatus(Request $request)
     {
         try {
+            $query = ClientPayToStudyCredit::where('id_client', $request->id)->first();
 
-            return DB::transaction(function () use($request) {
-               
-                $query = ClientPayToStudyCredit::where('id_client', $request->id)->first();
-                
                 if($query->status == 'Pendiente'){
-               
+
                     ClientPayToStudyCredit::where('id_client', $request->id)
                         ->update([
                             'status' => 'Procesado'
@@ -380,7 +377,7 @@ class FinacingController extends Controller
                     $token = $FCM_token;
                     $serverKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
                     $title = "Informacion sobre tu crédito:";
-                    $body = "Felicitaciones tu credito ha sido Aprobado, verifica los requisitos para desembolsar tu credito";
+                    $body = "Hemos Aprobado el pago de tu estudio de Crédito";
                     $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');
                     $arrayToSend = array('to' => $token, 'notification' => $notification, 'priority' => 'high');
                     $json = json_encode($arrayToSend);
@@ -400,13 +397,18 @@ class FinacingController extends Controller
                         die('FCM Send Error: ' . curl_error($ch));
                     }
                     curl_close($ch);
-                    
+
 
                 }
-            },5);
+
+                return response()->json("Ok")->setStatusCode(200);
+
         } catch (\Throwable $th) {
             return  $th;
         }
+
+
+
     }
     public function StatusCredit($id)
     {
