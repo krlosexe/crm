@@ -365,6 +365,8 @@ Route::get('clients/request/financing/activity/economic/{id}', 'FinacingControll
 Route::get('clients/request/financing/bienes/{id}', 'FinacingController@GetBienes');
 Route::post('clients/request/financing/updated/status/', 'FinacingController@UpdateStatus');
 Route::get('clients/request/financing/status/credit/{id}', 'FinacingController@StatusCredit');
+Route::get('clients/request/financing/get/quotas/{id}', 'FinacingController@GetQuota');
+Route::post('clients/request/financing/updated/status/quota', 'FinacingController@UpdateStatusQuota');
 
 Route::get('clients/plan/payments/{id_client}', 'FinacingController@GetPlanPayments');
 
