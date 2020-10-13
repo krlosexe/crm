@@ -376,13 +376,11 @@ class FinacingController extends Controller
 
                     $FCM_token = $data_user->token_notifications;
 
-                    $notification_text = "Felicitaciones tu credito ha sido Aprobado, verifica los requisitos para desembolsar tu credito";
-
                     $url = "https://fcm.googleapis.com/fcm/send";
                     $token = $FCM_token;
                     $serverKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
                     $title = "Informacion sobre tu crédito:";
-                    $body = $notification_text;
+                    $body = "Felicitaciones tu credito ha sido Aprobado, verifica los requisitos para desembolsar tu credito";
                     $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');
                     $arrayToSend = array('to' => $token, 'notification' => $notification, 'priority' => 'high');
                     $json = json_encode($arrayToSend);
