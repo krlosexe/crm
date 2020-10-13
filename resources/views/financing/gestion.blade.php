@@ -1323,6 +1323,7 @@
 					error: function() {},
 					success: function(data) {
 						alert("La solicitud fue Procesada Correctamente");
+						// $("span.verificar").css("display", "none")
 					}
 				});
 			});
