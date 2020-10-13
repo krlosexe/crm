@@ -1221,7 +1221,7 @@
 		}
 	}
 
-	function GetCuotas() {
+	function GetQuotas() {
 		try {
 			var data = {
 				"id_user": id_user,
@@ -1281,7 +1281,7 @@
 					'copy', 'csv', 'excel', 'pdf', 'print'
 				]
 			});
-			showModal("#table-cuota tbody", table)
+			ShowModal("#table-cuota tbody", table)
 			ProcesStatus("#table-cuota tbody", table)
 		} catch (e) {
 			console.log(e)
@@ -1289,7 +1289,7 @@
 
 	}
 
-	function showModal(tbody, table) {
+	function ShowModal(tbody, table) {
 		try {
 			$(tbody).on("click", "span.detalle", function() {
 				$("#modal-detail").modal("show")
@@ -1324,7 +1324,7 @@
 					error: function() {},
 					success: function(data) {
 						alert("La solicitud fue Procesada Correctamente");
-						GetCuotas()
+						GetQuotas()
 					}
 				});
 			});
