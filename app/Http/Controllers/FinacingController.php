@@ -442,10 +442,10 @@ class FinacingController extends Controller
     {
         try {
             $query = ClientRequestCreditPaymentPlan::where('id', $request->id)->first();
-            if($query->status == 'Pendiente'){
+            if($query->status == 'Verificando'){
                 ClientRequestCreditPaymentPlan::where('id', $request->id)
                 ->update([
-                    'status' => 'Verificando'
+                    'status' => 'Procesado'
                     ]);
                     $credit = ClientRequestCredit::where('id', $query->id_request_credit)->first();
                     $data_user = DB::table("users")
