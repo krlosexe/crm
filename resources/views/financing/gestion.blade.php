@@ -1320,6 +1320,7 @@
 					data: {
 						id: data.id
 					},
+					async: false,
 					error: function() {},
 					success: function(data) {
 						alert("La solicitud fue Procesada Correctamente");
