@@ -867,7 +867,7 @@
                                 <div class="col-md-5">
                                     <label for="average_monthly_income"><b>Metodo de pago:</b></label>
                                     <div>
-                                        <div id="payment_method"></div>
+                                        <div id="payment_method_quota"></div>
                                     </div>
                                 </div>
                             </div>

@@ -1297,7 +1297,7 @@
 				let data = table.row($(this).parents("tr")).data();
 				console.log(data)
 				$("#number").text(data.number ? data.number : '')
-				$("#payment_method").text(data.payment_method ? data.payment_method : 'sin metodo de pago')
+				$("#payment_method_quota").text(data.payment_method ? data.payment_method : 'sin metodo de pago')
 				if (data.photo_recived && data.payment_method == 'OTHER') {
 					$("#load_img_quota").attr('src', `img/credit/comprobantes/${data.photo_recived}`)
 				} else {
