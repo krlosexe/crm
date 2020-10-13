@@ -1256,7 +1256,7 @@
 					},
 					{
 						"data": "balance",
-						render: (data, type, rowedit) => {
+						render: (data, type, row) => {
 							return number_format(data, 2)
 						}
 					},
@@ -1268,7 +1268,10 @@
 					// 	// }
 					// },
 					{
-						"data": "date"
+						"data": "date",
+						render: (data, type, row)=>{
+                            return row.date.split("-").reverse().join("-");
+						}
 					},
 					{
 						"data": "status"
