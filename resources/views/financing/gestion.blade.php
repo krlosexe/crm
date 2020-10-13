@@ -1230,40 +1230,15 @@
 		}
 	}
 
-	// function ProcesStatus() {
-	// 	try {
-	// 		var url = document.getElementById('ruta').value;
-	// 		$.ajax({
-	// 			url: '' + url + '/api/clients/request/financing/updated/status',
-	// 			type: 'POST',
-	// 			// dataType: 'JSON',
-	// 			data:{ id:$("#id_cliente").val() },
+	function GetCuotas()
+	{
+		try {
+			
+		} catch (e) {
+			console.log(e)
+		}
+	}
 
-	// 			// beforeSend: function() {},
-	// 			// error: function(data) {},
-	// 			// success: function(data) {
-					
-	// 			// 	$("#type_apartamento").val(data ? data.type_apartamento : '')
-	// 			// 	$("#address_bien").val(data ? data.address_bien : '')
-	// 			// 	$("#barrio").val(data ? data.barrio : '')
-	// 			// 	$("#city").val(data ? data.city : '')
-	// 			// 	$("#valor_comercail").val(data ? data.valor_comercial : '')
-	// 			// 	$("#hipoteca").val(data ? data.hipoteca : '')
-	// 			// 	$("#afectacion_familiar").val(data ? data.afectacion_familiar : '')
-	// 			// 	$("#type_vehicule").val(data ? data.type_vehicule : '')
-	// 			// 	$("#placa").val(data ? data.placa : '')
-	// 			// 	$("#transito").val(data ? data.transito : '')
-	// 			// 	$("#marca").val(data ? data.marca : '')
-	// 			// 	$("#modelo").val(data ? data.modelo : '')
-	// 			// 	$("#valor_comercial").val(data ? data.valor_comercail : '')
-	// 			// 	$("#prenda_valor").val(data ? data.prenda_valor : '')
-	// 			// 	$("#otro_activos").val(data ? data.otro_activos : '')
-	// 			// }
-	// 		});
-	// 	} catch (e) {
-	// 		console.log(e)
-	// 	}
-	// }
 </script>
 
 @endsection

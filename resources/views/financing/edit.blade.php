@@ -13,6 +13,9 @@
         <li class="nav-item">
             <a id="tab4-1" class="nav-link" data-toggle="tab" href="#bienes-data" role="tab" aria-controls="profile" aria-selected="false">Bienes</a>
         </li>
+        <li class="nav-item">
+            <a id="tab5-1" class="nav-link" data-toggle="tab" href="#cuotas-data" role="tab" aria-controls="profile" aria-selected="false">Coutas</a>
+        </li>
     </ul>
 
     <div class="tab-content" id="myTabContent">
@@ -815,6 +818,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="tab-pane fade tab_content2-1 p-4" id="cuotas-data" role="tabpanel" aria-labelledby="profile-tab">
+            <p>hola desde cuotas</p>
         </div>
     </div>
 </div>
