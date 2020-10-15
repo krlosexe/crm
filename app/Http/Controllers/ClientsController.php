@@ -2229,12 +2229,12 @@ class ClientsController extends Controller
 
 
 
-            $subject = "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion";
+            $subject = "App Cirucredito : ".$request["nombres"]."  Interesado en Financiacion";
 
             $for = $users["email"];
            // $for = "cardenascarlos18@gmail.com";
 
-            $request["msg"]  = "Un Paciente a registrado un Formulario de Credito";
+            $request["msg"]  = "Un Paciente se ha registrado por el App";
             $request["apellidos"]        = ".";
             $request["direccion"]        = ".";
             $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2243,6 +2243,25 @@ class ClientsController extends Controller
                 $msj->subject($subject);
                 $msj->to($for);
             });
+
+
+
+
+            //$for = $users["email"];
+           $for = "cardenascarlos18@gmail.com";
+
+            $request["msg"]  = "Un Paciente se ha registrado por el App";
+            $request["apellidos"]        = ".";
+            $request["direccion"]        = ".";
+            $request["fecha_nacimiento"] = date("Y-m-d");
+            Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                $msj->from("comercial@pdtagencia.com","CRM");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+
+
+
 
 
 
