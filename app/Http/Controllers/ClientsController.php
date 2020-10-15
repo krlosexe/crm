@@ -2098,6 +2098,65 @@ class ClientsController extends Controller
 
                 // $User = User::where("id_client", $client["id_cliente"])->update(["email" => $request["email"], "password" => $request["password"]]);
 
+
+
+
+
+
+                    $data_adviser   = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
+
+
+                    $ConfigNotification = [
+                        "tokens" => [$data_adviser["token_notifications"]],
+
+                        "tittle" => "Financiacion",
+                        "body"   => "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion",
+                        "data"   => ['type' => 'refferers']
+
+                    ];
+
+                    $code = SendNotifications($ConfigNotification);
+
+
+
+
+
+
+                    $subject = "App Cirucredito : ".$request["nombres"]."  Interesado en Financiacion";
+
+                    $for = $users["email"];
+                // $for = "cardenascarlos18@gmail.com";
+
+                    $request["msg"]  = "Un Paciente se ha registrado por el App";
+                    $request["apellidos"]        = ".";
+                    $request["direccion"]        = ".";
+                    $request["fecha_nacimiento"] = date("Y-m-d");
+                    Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                        $msj->from("comercial@pdtagencia.com","CRM");
+                        $msj->subject($subject);
+                        $msj->to($for);
+                    });
+
+
+
+
+                    //$for = $users["email"];
+                $for = "cardenascarlos18@gmail.com";
+
+                    $request["msg"]  = "Un Paciente se ha registrado por el App";
+                    $request["apellidos"]        = ".";
+                    $request["direccion"]        = ".";
+                    $request["fecha_nacimiento"] = date("Y-m-d");
+                    Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                        $msj->from("comercial@pdtagencia.com","CRM");
+                        $msj->subject($subject);
+                        $msj->to($for);
+                    });
+
+
+
+
+
                 return response()->json($data)->setStatusCode(200);
 
 
@@ -2204,66 +2263,63 @@ class ClientsController extends Controller
                 );
 
 
+
+
+
+                $data_adviser   = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
+
+
+                $ConfigNotification = [
+                    "tokens" => [$data_adviser["token_notifications"]],
+
+                    "tittle" => "Financiacion",
+                    "body"   => "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion",
+                    "data"   => ['type' => 'refferers']
+
+                ];
+
+                $code = SendNotifications($ConfigNotification);
+
+
+
+
+
+
+                $subject = "App Cirucredito : ".$request["nombres"]."  Interesado en Financiacion";
+
+                $for = $users["email"];
+            // $for = "cardenascarlos18@gmail.com";
+
+                $request["msg"]  = "Un Paciente se ha registrado por el App";
+                $request["apellidos"]        = ".";
+                $request["direccion"]        = ".";
+                $request["fecha_nacimiento"] = date("Y-m-d");
+                Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                    $msj->from("comercial@pdtagencia.com","CRM");
+                    $msj->subject($subject);
+                    $msj->to($for);
+                });
+
+
+
+
+                //$for = $users["email"];
+            $for = "cardenascarlos18@gmail.com";
+
+                $request["msg"]  = "Un Paciente se ha registrado por el App";
+                $request["apellidos"]        = ".";
+                $request["direccion"]        = ".";
+                $request["fecha_nacimiento"] = date("Y-m-d");
+                Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                    $msj->from("comercial@pdtagencia.com","CRM");
+                    $msj->subject($subject);
+                    $msj->to($for);
+                });
+
+
                 return response()->json($data)->setStatusCode(200);
 
             }
-
-
-
-            $data_adviser   = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
-
-
-            $ConfigNotification = [
-                "tokens" => [$data_adviser["token_notifications"]],
-
-                "tittle" => "Financiacion",
-                "body"   => "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion",
-                "data"   => ['type' => 'refferers']
-
-            ];
-
-            $code = SendNotifications($ConfigNotification);
-
-
-
-
-
-
-            $subject = "App Cirucredito : ".$request["nombres"]."  Interesado en Financiacion";
-
-            $for = $users["email"];
-           // $for = "cardenascarlos18@gmail.com";
-
-            $request["msg"]  = "Un Paciente se ha registrado por el App";
-            $request["apellidos"]        = ".";
-            $request["direccion"]        = ".";
-            $request["fecha_nacimiento"] = date("Y-m-d");
-            Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
-                $msj->from("comercial@pdtagencia.com","CRM");
-                $msj->subject($subject);
-                $msj->to($for);
-            });
-
-
-
-
-            //$for = $users["email"];
-           $for = "cardenascarlos18@gmail.com";
-
-            $request["msg"]  = "Un Paciente se ha registrado por el App";
-            $request["apellidos"]        = ".";
-            $request["direccion"]        = ".";
-            $request["fecha_nacimiento"] = date("Y-m-d");
-            Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
-                $msj->from("comercial@pdtagencia.com","CRM");
-                $msj->subject($subject);
-                $msj->to($for);
-            });
-
-
-
-
-
 
 
 
