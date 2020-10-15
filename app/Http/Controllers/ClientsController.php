@@ -2111,7 +2111,7 @@ class ClientsController extends Controller
                 $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
                 $code                   = substr(str_shuffle($permitted_chars), 0, 4);
                 $request["code_client"] = strtoupper($code);
-                $request["origen"]      = "Formulario Credito";
+                $request["origen"]      = "App Cirucredito";
 
 
                 $cliente = Clients::create($request->all());
