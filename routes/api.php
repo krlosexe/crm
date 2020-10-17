@@ -426,6 +426,10 @@ Route::post('transferir/client', 'TransfeClient@store');
 
 
 
+Route::get('client/number/indentification/{cedula}', 'ClientsController@GetIdentification');
+
+
+
 
 
 
