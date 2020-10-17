@@ -1995,10 +1995,7 @@ class ClientsController extends Controller
                             }
                         })
 
-
                         ->inRandomOrder()
-
-
                         ->first();
 
         if($users){
