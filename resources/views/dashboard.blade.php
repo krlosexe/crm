@@ -741,15 +741,6 @@
 
 		$("#question5").html(html)
 
-
-
-
-
-
-
-
-
-
 		var html = ""
 		for (var i = 0; i < data.question6; i++) {
 			html += "<i class='fa fa-star' style='color: #feba03'></i>";

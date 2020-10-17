@@ -22,6 +22,7 @@ use App\Notification;
 use App\Valuations;
 use App\GalleryImage;
 use App\FollwersEvents;
+use App\Category;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -36,6 +37,8 @@ use Orchestra\Parser\Xml\Facade as XmlParser;
 
 use DB;
 use DateTime;
+use PhpParser\Node\Stmt\TryCatch;
+
 class ClientsController extends Controller
 {
     /**
@@ -3754,5 +3757,23 @@ class ClientsController extends Controller
     public function destroy(Clients $clients)
     {
         //
+    }
+
+    public function GetIdentification($id){
+        try {
+            $data = Clients::select(
+                'id_cliente',
+                'nombres as nombre',
+                'apellidos as apellido',
+                'email'
+                )
+            ->where('identificacion',$id)
+            ->with('procedures')
+            ->first();
+
+            return response()->json($data)->setStatusCode(200);
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 }

@@ -72,6 +72,14 @@ class Clients extends Model
         return $this->hasOne('App\SatisfactionSurvey','id_client');
     }
 
+    public function procedures_r(){
+        
+        return $this->hasMany('App\ClientsProcedure', 'id_client');
+                    // ->join('sub_category', 'sub_category.id', '=', 'clients_procedures.id_sub_category')  
+                    // ->select(array('clients_procedures.*', 'sub_category.name'));
+        
+    }
+
 
 
 
