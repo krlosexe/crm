@@ -748,11 +748,6 @@
 					$("#additional_edit").html(html)
 
 
-
-
-
-
-
 					cuadros('#cuadro1', '#cuadro4');
 					$("#id_edit").val(data.id_surgeries)
 					cuadros('#cuadro1', '#cuadro4');
