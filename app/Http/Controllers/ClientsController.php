@@ -1998,10 +1998,7 @@ class ClientsController extends Controller
                             }
                         })
 
-
                         ->inRandomOrder()
-
-
                         ->first();
 
         if($users){
@@ -2101,10 +2098,64 @@ class ClientsController extends Controller
 
                 // $User = User::where("id_client", $client["id_cliente"])->update(["email" => $request["email"], "password" => $request["password"]]);
 
+
+
+
+
+
+                    $data_adviser   = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
+
+
+                    $ConfigNotification = [
+                        "tokens" => [$data_adviser["token_notifications"]],
+
+                        "tittle" => "Financiacion",
+                        "body"   => "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion",
+                        "data"   => ['type' => 'refferers']
+
+                    ];
+
+                    $code = SendNotifications($ConfigNotification);
+
+
+
+
+
+
+                    $subject = "App Financiacion : ".$request["nombres"]."  Interesado en Financiacion";
+
+                    $for = $users["email"];
+                // $for = "cardenascarlos18@gmail.com";
+
+                    $request["msg"]  = "Un Paciente se ha registrado por el App";
+                    $request["apellidos"]        = ".";
+                    $request["direccion"]        = ".";
+                    $request["fecha_nacimiento"] = date("Y-m-d");
+                    Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                        $msj->from("comercial@pdtagencia.com","CRM");
+                        $msj->subject($subject);
+                        $msj->to($for);
+                    });
+
+
+
+
+                    //$for = $users["email"];
+                $for = "cardenascarlos18@gmail.com";
+
+                    $request["msg"]  = "Un Paciente se ha registrado por el App";
+                    $request["apellidos"]        = ".";
+                    $request["direccion"]        = ".";
+                    $request["fecha_nacimiento"] = date("Y-m-d");
+                    Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                        $msj->from("comercial@pdtagencia.com","CRM");
+                        $msj->subject($subject);
+                        $msj->to($for);
+                    });
+
+
+
                 return response()->json($data)->setStatusCode(200);
-
-
-
 
 
             }else{
@@ -2114,7 +2165,7 @@ class ClientsController extends Controller
                 $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
                 $code                   = substr(str_shuffle($permitted_chars), 0, 4);
                 $request["code_client"] = strtoupper($code);
-                $request["origen"]      = "Formulario Credito";
+                $request["origen"]      = "App Financiacion";
 
 
                 $cliente = Clients::create($request->all());
@@ -2207,47 +2258,63 @@ class ClientsController extends Controller
                 );
 
 
+
+
+
+                $data_adviser   = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
+
+
+                $ConfigNotification = [
+                    "tokens" => [$data_adviser["token_notifications"]],
+
+                    "tittle" => "Financiacion",
+                    "body"   => "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion",
+                    "data"   => ['type' => 'refferers']
+
+                ];
+
+                $code = SendNotifications($ConfigNotification);
+
+
+
+
+
+
+                $subject = "App Financiacion : ".$request["nombres"]."  Interesado en Financiacion";
+
+                $for = $users["email"];
+            // $for = "cardenascarlos18@gmail.com";
+
+                $request["msg"]  = "Un Paciente se ha registrado por el App";
+                $request["apellidos"]        = ".";
+                $request["direccion"]        = ".";
+                $request["fecha_nacimiento"] = date("Y-m-d");
+                Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                    $msj->from("comercial@pdtagencia.com","CRM");
+                    $msj->subject($subject);
+                    $msj->to($for);
+                });
+
+
+
+
+                //$for = $users["email"];
+            $for = "cardenascarlos18@gmail.com";
+
+                $request["msg"]  = "Un Paciente se ha registrado por el App";
+                $request["apellidos"]        = ".";
+                $request["direccion"]        = ".";
+                $request["fecha_nacimiento"] = date("Y-m-d");
+                Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                    $msj->from("comercial@pdtagencia.com","CRM");
+                    $msj->subject($subject);
+                    $msj->to($for);
+                });
+
+
                 return response()->json($data)->setStatusCode(200);
 
             }
-
-
-
-            $data_adviser   = AuthUsersApp::where("id_user", $request["id_user_asesora"])->first();
-
-
-            $ConfigNotification = [
-                "tokens" => [$data_adviser["token_notifications"]],
-
-                "tittle" => "Financiacion",
-                "body"   => "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion",
-                "data"   => ['type' => 'refferers']
-
-            ];
-
-            $code = SendNotifications($ConfigNotification);
-
-
-
-
-
-
-            $subject = "Formulario Contacto : ".$request["nombres"]."  Interesado en Financiacion";
-
-            $for = $users["email"];
-           // $for = "cardenascarlos18@gmail.com";
-
-            $request["msg"]  = "Un Paciente a registrado un Formulario de Credito";
-            $request["apellidos"]        = ".";
-            $request["direccion"]        = ".";
-            $request["fecha_nacimiento"] = date("Y-m-d");
-            Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
-                $msj->from("comercial@pdtagencia.com","CRM");
-                $msj->subject($subject);
-                $msj->to($for);
-            });
-
-
 
 
 

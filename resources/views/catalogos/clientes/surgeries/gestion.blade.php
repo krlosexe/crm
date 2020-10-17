@@ -549,12 +549,12 @@
 					$("#followers-edit").trigger("change");
 
 
-					$("#amount-edit").val(number_format(data.amount))
+					$("#amount-edit").val(data.amount)
 					var html = ""
 					$.map(data.aditionals, function (item, key) {
 						html += "<div class='col-md-2'></div>"
 						html += "<div class='col-md-6'><input type='text' value='"+item.description+"' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-						html += "<div class='col-md-4'><input type='text' value='"+number_format(item.price_aditional ,2)+"'  class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+						html += "<div class='col-md-4'><input type='text' value='"+item.price_aditional+"'  class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
 						html += "<br><br>"
 					});
 
