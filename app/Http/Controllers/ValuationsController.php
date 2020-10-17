@@ -73,7 +73,7 @@ class ValuationsController extends Controller
 
                                 ->with("followers")
                                 ->with("photos")
-                                
+
                                 ->where(function ($query) use ($rol, $id_user) {
                                     if($rol == "Asesor"){
                                         $query->where("clientes.id_user_asesora", $id_user);
@@ -93,7 +93,7 @@ class ValuationsController extends Controller
                                         $query->whereIn("auditoria.usr_regins", $adviser);
                                         $query->Orwhere("valuations.id_asesora_valoracion", $adviser);
                                     }
-                                }) 
+                                })
 
 
 
@@ -101,13 +101,13 @@ class ValuationsController extends Controller
                                     if($date_init != 0){
                                         $query->where("valuations.fecha", ">=", $date_init);
                                     }
-                                }) 
+                                })
 
                                 ->where(function ($query) use ($date_finish) {
                                     if($date_finish != 0){
                                         $query->where("valuations.fecha", "<=", $date_finish);
                                     }
-                                }) 
+                                })
 
 
 
@@ -132,10 +132,10 @@ class ValuationsController extends Controller
 
                                 ->join("followers_events", "followers_events.id_event", "=", "valuations.id_valuations")
 
-                                
+
                                 ->with("followers")
                                 ->with("photos")
-                        
+
 
                                 ->where("followers_events.id_user", $id_user)
                                 ->where("followers_events.tabla", "valuations")
@@ -158,7 +158,7 @@ class ValuationsController extends Controller
 
 
     public function getToday(){
-       
+
         $valuations = Valuations::selectRaw("valuations.fecha, valuations.time, valuations.code as valoration_code, clientes.id_cliente as id_client,clientes.nombres as name_client, CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as name_adviser, u2.id as user_id, auditoria.usr_regins as user_asesora")
 
                 ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
@@ -192,7 +192,7 @@ class ValuationsController extends Controller
         if($user["id_rol"] == 9 || $user["id_rol"] == 6){
 
 
-            $valuations = Valuations::selectRaw("valuations.fecha, valuations.time, valuations.code as valoration_code, 
+            $valuations = Valuations::selectRaw("valuations.fecha, valuations.time, valuations.code as valoration_code,
                                                 clientes.id_cliente as id_client,clientes.nombres as name_client,
                                                  CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as name_adviser, auditoria.usr_regins as user_id")
 
@@ -243,36 +243,36 @@ class ValuationsController extends Controller
             if($valuations){
 
                 $data = DB::table("valuations_photo")->where("code", $valuations["valoration_code"])->get();
-    
+
                 if(sizeof($data) > 0){
                     $valuations["photos"] = 1;
                 }else{
                     $valuations["photos"] = 0;
                 }
-    
-    
+
+
                 $data_hc = DB::table("client_clinic_history")
                                 ->where("id_client", $valuations["id_client"])
                                 ->whereNotNull("eps")
                                 ->get();
-    
-    
+
+
                 if(sizeof($data_hc) > 0){
                     $valuations["history_clinic"] = 1;
                 }else{
                     $valuations["history_clinic"] = 0;
                 }
-    
-    
-    
+
+
+
                 if($valuations["fecha"] == date("Y-m-d")){
                     $valuations["is_today"] = 1;
                 }else{
                     $valuations["is_today"] = 0;
                 }
-    
+
                 return response()->json($valuations)->setStatusCode(200);
-    
+
             }else{
                 return response()->json([])->setStatusCode(200);
             }
@@ -281,8 +281,8 @@ class ValuationsController extends Controller
         }
 
 
-        
-    
+
+
 
     }
 
@@ -309,13 +309,13 @@ class ValuationsController extends Controller
     {
 
             $state_px = $request["state_px"];
-     
+
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
 
-            
 
-            
+
+
 
             $valid = Valuations::where("fecha", $request["fecha"])
                                 ->where("time_end", ">=", $request["time"])
@@ -324,8 +324,8 @@ class ValuationsController extends Controller
 
 
             if($hora_init >= $hora_end){
-                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
-                return response()->json($data)->setStatusCode(400); 
+                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");
+                return response()->json($data)->setStatusCode(400);
             }
 
 
@@ -340,7 +340,7 @@ class ValuationsController extends Controller
 
             $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
             $code = substr(str_shuffle($permitted_chars), 0, 4);
-            
+
             $request["code"] = strtoupper($code);
             $store = Valuations::create($request->all());
 
@@ -350,7 +350,7 @@ class ValuationsController extends Controller
             $request["table"]    = "valuations";
             $request["id_event"] = $store["id_valuations"];
 
-            
+
             if($request->comment != "<p><br></p>"){
                 Comments::create($request->all());
             }
@@ -376,7 +376,7 @@ class ValuationsController extends Controller
                     array_push($followers, $array);
                     FollwersEvents::create($array);
                 }
-                
+
             }
 
 
@@ -388,7 +388,7 @@ class ValuationsController extends Controller
 
 
 
-            
+
             $clinic = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
 
             $version["id_user"]   = $request["id_user"];
@@ -442,29 +442,29 @@ class ValuationsController extends Controller
 
 
             }
-          
+
             if($state_px != "0"){
                 $data_client = Clients::select("state")->find($request["id_cliente"]);
 
                 DB::table("clientes")->where("id_cliente", $request["id_cliente"])->update(["state" => $state_px]);
 
-               
+
                 if($data_client->state != $state_px){
-                    
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $request["id_cliente"];
                     $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
-    
+
                     LogsClients::create($version);
                 }
 
             }
 
-            
+
 
 
             if ($store) {
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -494,13 +494,13 @@ class ValuationsController extends Controller
                                 ->with("comments")
                                 ->with("photos")
                                 ->with("followers")
-                                
+
                                 ->orderBy("valuations.id_valuations", "DESC")
                                 ->get();
 
 
             return response()->json($valuations)->setStatusCode(200);
-        
+
     }
 
 
@@ -542,7 +542,7 @@ class ValuationsController extends Controller
 
             $state_px = $request["state_px"];
 
-            
+
             if($file = $request->file('file')){
                 $destinationPath = 'img/valuations/cotizaciones';
                 $file->move($destinationPath,$file->getClientOriginalName());
@@ -556,8 +556,8 @@ class ValuationsController extends Controller
                                 ->get();
 
             // if(sizeof($valid) > 0){
-            //     $data = array('mensagge' => "Ya existen valoraciones en ese Horario");    
-            //     return response()->json($data)->setStatusCode(400); 
+            //     $data = array('mensagge' => "Ya existen valoraciones en ese Horario");
+            //     return response()->json($data)->setStatusCode(400);
             // }
 
 
@@ -567,8 +567,8 @@ class ValuationsController extends Controller
 
             if($hora_init >= $hora_end){
 
-                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
-                return response()->json($data)->setStatusCode(400); 
+                $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");
+                return response()->json($data)->setStatusCode(400);
             }
 
 
@@ -587,7 +587,7 @@ class ValuationsController extends Controller
 
             $queries = Valuations::find($valuations)->update($request->all());
 
-            
+
             if(isset($request->comment)){
                 if($request->comment != "<p><br></p>"){
 
@@ -599,10 +599,10 @@ class ValuationsController extends Controller
                     Comments::insert($array);
                 }
             }
-            
 
 
-            
+
+
 
 
             if(isset($request->followers)){
@@ -616,7 +616,7 @@ class ValuationsController extends Controller
                     $array["tabla"]       = "valuations";
                     FollwersEvents::create($array);
                 }
-                
+
             }
 
 
@@ -626,10 +626,10 @@ class ValuationsController extends Controller
             }else{
                 $name_clinic = "";
             }
-            
+
             $valuation = DB::table("valuations")->where("id_valuations", $valuations)->first();
-          
-   
+
+
             $version["id_user"]   = $request["id_user"];
             $version["id_client"] = $valuation->id_cliente;
             $version["event"]     = "Actualizo Cita de Valoracion para el dia $request[fecha] a las $request[time] con el Doctor $request[surgeon] en la clinica ".$name_clinic;
@@ -641,25 +641,25 @@ class ValuationsController extends Controller
             if(isset($request["state_px"])){
                 if($state_px != "0"){
                     $data_client = Clients::select("state")->find($valuation->id_cliente);
-    
+
                     DB::table("clientes")->where("id_cliente", $valuation->id_cliente)->update(["state" => $state_px]);
-    
-                   
+
+
                     if($data_client->state != $state_px){
-                        
+
                         $version["id_user"]   = $request["id_user"];
                         $version["id_client"] = $valuation->id_cliente;
                         $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
-        
+
                         LogsClients::create($version);
                     }
-    
+
                 }
             }
-            
+
 
             if ($queries) {
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -673,7 +673,7 @@ class ValuationsController extends Controller
 
     public function status($id, $status, Request $request)
     {
-       
+
         $auditoria =  Auditoria::where("cod_reg", $id)
                                     ->where("tabla", "valuations")->first();
         $auditoria->status = $status;
@@ -684,16 +684,16 @@ class ValuationsController extends Controller
         }
         $auditoria->save();
 
-        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
-       
+
     }
 
 
 
     public function ValidateCode($code){
 
-        $data = Valuations::select("valuations.*", "clientes.nombres", "clientes.apellidos", 
+        $data = Valuations::select("valuations.*", "clientes.nombres", "clientes.apellidos",
 
                                     "client_clinic_history.eps",
                                     "client_clinic_history.height",
@@ -722,9 +722,9 @@ class ValuationsController extends Controller
 
             sleep(2);
             return response()->json("Codigo Invalido")->setStatusCode(400);
-            
+
         }
-        
+
 
     }
 
@@ -751,7 +751,7 @@ class ValuationsController extends Controller
             $fileName = 'original.png';
             file_put_contents($folder_photos."/".$fileName, $fileData);
 
-            
+
             $imageResize = Image::make($folder_photos."/".$fileName);
             $imageResize->orientate()
             ->fit(75, 75, function ($constraint) {
@@ -790,7 +790,7 @@ class ValuationsController extends Controller
             "path"   => "img/valuations/$code",
             "photos" => $photos
         ];
-        
+
         return response()->json($data)->setStatusCode(200);
 
     }
@@ -815,7 +815,7 @@ class ValuationsController extends Controller
 
 
     public function QtyMonth($user_id){
-        
+
         $data = Valuations::selectRaw("count(id_valuations) as qty")
                             ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                             ->where("auditoria.tabla", "valuations")
@@ -830,7 +830,7 @@ class ValuationsController extends Controller
 
 
     public function QtyMonthList($user_id){
-        
+
         $data = Valuations::select("valuations.*")
                             ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                             ->where("auditoria.tabla", "valuations")
@@ -871,25 +871,25 @@ class ValuationsController extends Controller
 
         $ConfigNotification = [
             "tokens" => [$data_user["token_notifications"]],
-    
+
             "tittle" => "App de Financiacion",
             "body"   => $mensaje,
             "data"   => ['type' => 'refferers']
-    
+
         ];
-    
+
         $code = SendNotifications($ConfigNotification);
 
 
 
-        
-                
+
+
         $info_email = [
             "user_id" => $client->id_user_asesora,
             "issue"   => "App de Financiacion Px : $client->nombres",
             "mensage" => $mensaje,
         ];
-                
+
         $this->SendEmail($info_email);
 
 
@@ -902,7 +902,7 @@ class ValuationsController extends Controller
 
 
     public function SendEmail($data){
-    
+
         $user = User::find($data["user_id"]);
         $subject = $data["issue"];
 
@@ -912,7 +912,7 @@ class ValuationsController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("cardenascarlos18@gmail.com","CRM");
+            $msj->from("comercial@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -921,7 +921,7 @@ class ValuationsController extends Controller
 
     }
 
-    
+
 
 
 

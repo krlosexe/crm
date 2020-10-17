@@ -60,7 +60,7 @@ class NotificationsTasksCiruCredito extends Command
 
         foreach($data as $task){
             $this->comment("Tarea ".$task->id_clients_tasks." esta vencida: ".$task->issue." Responsable: ". $task->responsable);
-           
+
             $notification             = [];
             $notification["fecha"]    = $task->fecha;
             $notification["title"]    = "Tarea ".$task->id_clients_tasks." esta vencida: ".$task->issue;
@@ -95,7 +95,7 @@ class NotificationsTasksCiruCredito extends Command
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("cardenascarlos18@gmail.com","CRM");
+            $msj->from("comercial@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -106,5 +106,5 @@ class NotificationsTasksCiruCredito extends Command
 
 
 
-    
+
 }

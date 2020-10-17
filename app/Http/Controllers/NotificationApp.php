@@ -12,7 +12,7 @@ class NotificationApp extends Controller
 
       $ConfigNotification = [
         "tokens" => [
-            "efIvCVVqQJePFigMkveF3N:APA91bGMhunmS19JIWEZzoT3jTPARyk1lNWRVmjOZXHxPHE9SlXtu42YVu7h8LKCAhQYHkV9txvqUclyNTRuiOPw-77eilj5GpY30YdxxyZm-VTpR-GjOXn7_1FJGA6hnTRJFYSHIIj0"
+            "fRKK6URySv-gpuAT4xmQvc:APA91bEZU4ewWcK8SB7ZfONszCZM1A6ODlQoJ5zFFlCOwaEIldyjUUlnS6UuOSdT1y2DgM9T7fPUdXxQ1vpDmPOGz5DvKnscC8g046WxRxQy2WMwwxLDKRpRSar4rdy1FaoQH0qu7TyT"
         ],
 
         "tittle" => "Para Leo, de Camila",

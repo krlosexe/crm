@@ -98,7 +98,7 @@ class NotificationsValorationsPlanmed extends Command
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("cardenascarlos18@gmail.com","CRM");
+            $msj->from("comercial@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -109,5 +109,5 @@ class NotificationsValorationsPlanmed extends Command
 
 
 
-    
+
 }
