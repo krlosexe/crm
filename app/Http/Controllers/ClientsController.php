@@ -2122,7 +2122,7 @@ class ClientsController extends Controller
 
 
 
-                    $subject = "App Cirucredito : ".$request["nombres"]."  Interesado en Financiacion";
+                    $subject = "App Financiacion : ".$request["nombres"]."  Interesado en Financiacion";
 
                     $for = $users["email"];
                 // $for = "cardenascarlos18@gmail.com";
@@ -2165,7 +2165,7 @@ class ClientsController extends Controller
                 $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
                 $code                   = substr(str_shuffle($permitted_chars), 0, 4);
                 $request["code_client"] = strtoupper($code);
-                $request["origen"]      = "App Cirucredito";
+                $request["origen"]      = "App Financiacion";
 
 
                 $cliente = Clients::create($request->all());
@@ -2280,7 +2280,7 @@ class ClientsController extends Controller
 
 
 
-                $subject = "App Cirucredito : ".$request["nombres"]."  Interesado en Financiacion";
+                $subject = "App Financiacion : ".$request["nombres"]."  Interesado en Financiacion";
 
                 $for = $users["email"];
             // $for = "cardenascarlos18@gmail.com";
