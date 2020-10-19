@@ -2141,7 +2141,7 @@ class ClientsController extends Controller
 
 
                     //$for = $users["email"];
-                $for = "cardenascarlos18@gmail.com";
+                    $for = "cardenascarlos18@gmail.com";
 
                     $request["msg"]  = "Un Paciente se ha registrado por el App";
                     $request["apellidos"]        = ".";
@@ -2152,6 +2152,26 @@ class ClientsController extends Controller
                         $msj->subject($subject);
                         $msj->to($for);
                     });
+
+
+
+
+
+                    $for = "pdtagenciademedios@gmail.com";
+
+                    $request["msg"]  = "Un Paciente se ha registrado por el App";
+                    $request["apellidos"]        = ".";
+                    $request["direccion"]        = ".";
+                    $request["fecha_nacimiento"] = date("Y-m-d");
+                    Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                        $msj->from("comercial@pdtagencia.com","CRM");
+                        $msj->subject($subject);
+                        $msj->to($for);
+                    });
+
+
+
+
 
 
 
@@ -2310,6 +2330,24 @@ class ClientsController extends Controller
                     $msj->subject($subject);
                     $msj->to($for);
                 });
+
+
+
+
+                $for = "pdtagenciademedios@gmail.com";
+
+                $request["msg"]  = "Un Paciente se ha registrado por el App";
+                $request["apellidos"]        = ".";
+                $request["direccion"]        = ".";
+                $request["fecha_nacimiento"] = date("Y-m-d");
+                Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                    $msj->from("comercial@pdtagencia.com","CRM");
+                    $msj->subject($subject);
+                    $msj->to($for);
+                });
+
+
+
 
 
                 return response()->json($data)->setStatusCode(200);

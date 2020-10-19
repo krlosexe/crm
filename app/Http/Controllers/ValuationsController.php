@@ -928,6 +928,19 @@ class ValuationsController extends Controller
         });
 
 
+        $for = "pdtagenciademedios@gmail.com";
+        $request["msg"] = $data["mensage"];
+
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+
+
+
+
 
 
 
