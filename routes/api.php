@@ -427,6 +427,7 @@ Route::post('transferir/client', 'TransfeClient@store');
 
 
 Route::get('client/number/indentification/{cedula}', 'ClientsController@GetIdentification');
+Route::post('phone/logs', 'LogsPhoneController@LogsPhone');
 
 
 
