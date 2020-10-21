@@ -997,11 +997,11 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id_cliente)
     {
+        // dd($request->all());
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
 
             $data = Clients::select("state", "clinic", "id_line", "id_user_asesora", "prp", "id_affiliate", "pay_to_study_credit")->find($id_cliente);
-
 
             if($data->prp == null || $data->prp == "No"){
                 if($request["prp"] == "Si"){
@@ -1010,30 +1010,24 @@ class ClientsController extends Controller
 
             }
 
-
             $users_affiliate = Clients::selectRaw("auth_users_app.token_notifications")
                                     ->join("users", "users.id_client", "=", "clientes.id_cliente")
                                     ->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
                                     ->where("clientes.id_cliente", $data->id_affiliate)
                                     ->first();
 
-
             $users_adviser = User::selectRaw("auth_users_app.token_notifications")->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
                                     ->where("users.id", $data->id_user_asesora)
                                     ->first();
-
 
             $tokens = [];
             if($users_affiliate){
                 $tokens[] = $users_affiliate["token_notifications"];
             }
 
-
             if($users_adviser){
                 $tokens[] = $users_adviser["token_notifications"];
             }
-
-
 
             $ConfigNotification = [
                 "tokens" => $tokens,
@@ -1043,11 +1037,6 @@ class ClientsController extends Controller
                 "data"   => ['type' => 'post']
 
             ];
-
-
-
-
-
 
             if($data->state != $request["state"]){
                 $version["id_user"]   = $request["id_user"];
@@ -1062,8 +1051,6 @@ class ClientsController extends Controller
 
             }
 
-
-
             if($data->clinic != $request["clinic"]){
 
                 $clinic_from = DB::table("clinic")->where("id_clinic", $data->clinic)->first();
@@ -1074,7 +1061,6 @@ class ClientsController extends Controller
                     $name_clinic = $clinic_from->nombre;
                }
 
-
                 $clinic_to   = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
 
                 $version["id_user"]   = $request["id_user"];
@@ -1083,7 +1069,6 @@ class ClientsController extends Controller
 
                 LogsClients::create($version);
             }
-
 
             if($data->id_line != $request["id_line"]){
 
@@ -1095,8 +1080,6 @@ class ClientsController extends Controller
                 }else{
                     $name_line = $line_from->nombre_line;
                 }
-
-
 
                 $line_to   = DB::table("lines_business")->where("id_line", $request["id_line"])->first();
 
@@ -1120,7 +1103,6 @@ class ClientsController extends Controller
                 LogsClients::create($version);
             }
 
-
             $request["identificacion_verify"] == 1 ? $request["identificacion_verify"] = 1 : $request["identificacion_verify"] = 0;
 
             $request["children"]   == 1 ? $request["children"]   = 1 : $request["children"]   = 0;
@@ -1135,10 +1117,7 @@ class ClientsController extends Controller
             $request["vehicle"]    == 1 ? $request["vehicle"]    = 1 : $request["vehicle"]    = 0;
 
 
-
-
             $request["nombres"] = $request["nombres"]." ".$request["apellidos"];
-
 
 
             $request["pay_to_study_credit"] == 1 ? $request["pay_to_study_credit"] = 1 : $request["pay_to_study_credit"] = 0;
@@ -1163,20 +1142,10 @@ class ClientsController extends Controller
 
             }
 
-
-
-
-
-
-
-
             $cliente = Clients::find($id_cliente)->update($request->all());
             ClientInformationAditionalSurgery::find($id_cliente)->update($request->all());
             ClientClinicHistory::find($id_cliente)->update($request->all());
             ClientCreditInformation::find($id_cliente)->update($request->all());
-
-
-
 
             DB::table('clients_phone_aditional')->where("id_cliente", $id_cliente)->delete();
             if(isset($request["telefono2"])){
@@ -1191,7 +1160,6 @@ class ClientsController extends Controller
 
             }
 
-
             DB::table('clients_email_aditional')->where("id_cliente", $id_cliente)->delete();
             if(isset($request["email2"])){
                 foreach($request["email2"] as $value){
@@ -1204,13 +1172,8 @@ class ClientsController extends Controller
                 }
             }
 
-
-
-
-
-
-
             $data = Clients::select("state")->find($id_cliente);
+
 
             if($data->state != $request["state"]){
                 $version["id_user"]   = $request["id_user"];
@@ -1219,8 +1182,6 @@ class ClientsController extends Controller
 
                 LogsClients::create($version);
             }
-
-
 
             if($request->comment != "<p><br></p>"){
 
@@ -1231,8 +1192,6 @@ class ClientsController extends Controller
                 $array["comment"]    = $request->comment;
                 Comments::insert($array);
             }
-
-
 
             if($request["sub_category"]){
                 ClientsProcedure::where("id_client", $id_cliente)->delete();
@@ -1245,7 +1204,6 @@ class ClientsController extends Controller
                 }
             }
 
-
             $data_tasks_advisers = [
 
                 "testimony"              => $request["testimony"]               == 1 ? $request["testimony"]        = 1 : $request["testimony"]        = 0,
@@ -1257,7 +1215,11 @@ class ClientsController extends Controller
                 "survey"                 => $request["survey"]                  == 1 ? $request["survey"]           = 1 : $request["survey"]           = 0
 
             ];
-
+            
+                    User::updateOrCreate(
+                        ["id_client" => $id_cliente],
+                        ["email" => $request->email]
+                    );
 
             if(DB::table('clients_tasks_adsviser')->where("id_client", $id_cliente)->first()){
 
@@ -1270,13 +1232,9 @@ class ClientsController extends Controller
 
             }
 
-
-
             DB::table('auditoria')->where("cod_reg", $id_cliente)->where("tabla", "clientes")
 
             ->update(['usr_update' => $request["id_user"],'fec_update' => date("Y-m-d H:i:s")]);
-
-
 
             if ($cliente) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
@@ -2007,8 +1965,8 @@ class ClientsController extends Controller
             $client = Clients::where("identificacion", $request["identificacion"])->first();
             if(($client) && ($request["identificacion"] != "")){
 
-                DB::table('clientes')->where("id_cliente", $client["id_cliente"])
-                            ->update(['id_user_asesora' => $users["id"], "id_line" => $request["id_line"]]);
+                // DB::table('clientes')->where("id_cliente", $client["id_clinete"])
+                //             ->update(['id_user_asesora' => $users["id"], "id_line" => $request["id_line"]]);
 
 
                 DB::table('auditoria')->where("cod_reg", $client["id_cliente"])
@@ -3762,11 +3720,13 @@ class ClientsController extends Controller
     public function GetIdentification($id){
         try {
             $data = Clients::select(
-                'id_cliente',
-                'nombres as nombre',
-                'apellidos as apellido',
-                'email'
+                'clientes.id_cliente',
+                'clientes.nombres as nombre',
+                'clientes.apellidos as apellido',
+                'clientes.email',
+                'valuations.cotizacion'
                 )
+            ->join('valuations','clientes.id_cliente','valuations.id_cliente')
             ->where('identificacion',$id)
             ->with('procedures')
             ->first();
