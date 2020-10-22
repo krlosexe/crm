@@ -11,10 +11,12 @@ class LogsPhoneController extends Controller
     {
         try {
             LogsPhone::updateOrCreate(
-                
-                ["name_app" => $request->name_app],
-                ["name_file" => $request->name_file],
-                ["id_user" => $request->id_user],
+
+                [
+                    "name_app"  => $request->name_app,
+                    "name_file" => $request->name_file,
+                    "id_user"   => $request->id_user
+                ],
 
                 ["content" => $request->content]
             );
