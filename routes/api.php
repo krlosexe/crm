@@ -258,6 +258,7 @@ Route::post('register/referred', 'ReferredController@store');
 
 
 Route::post('authApp', 'Login@AuthApp');
+Route::post('authAppLaserAdviser', 'Login@AuthAppLaserAdviser');
 
 Route::post('authDoc', 'Login@AuthDoc');
 Route::post('authValoration', 'Login@authValoration');
