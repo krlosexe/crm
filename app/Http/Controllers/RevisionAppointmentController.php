@@ -54,20 +54,20 @@ class RevisionAppointmentController extends Controller
                                         if($date_init != 0){
                                             $query->where("appointments_agenda.fecha", ">=", $date_init);
                                         }
-                                    }) 
-    
+                                    })
+
                                     ->where(function ($query) use ($date_finish) {
                                         if($date_finish != 0){
                                             $query->where("appointments_agenda.fecha", "<=", $date_finish);
                                         }
-                                    }) 
+                                    })
 
 
 
 
                                     ->with('agenda')
 
-
+                                    ->with('comments')
 
                                     ->where("auditoria.tabla", "revision_appointment")
                                     ->where("auditoria.status", "!=", "0")
@@ -79,7 +79,7 @@ class RevisionAppointmentController extends Controller
                                     ->get();
 
         return response()->json($data)->setStatusCode(200);
-     
+
     }
 
 
@@ -87,7 +87,7 @@ class RevisionAppointmentController extends Controller
 
     public function Clients($id_client)
     {
-       
+
         $queries = RevisionAppointment::select("revision_appointment.*", "clientes.nombres as name_client","clientes.id_user_asesora", "clientes.apellidos as last_name_client", "clinic.nombre as name_clinic","auditoria.*", "users.email as email_regis")
 
                                         ->join("clientes", "clientes.id_cliente", "revision_appointment.id_paciente")
@@ -104,7 +104,7 @@ class RevisionAppointmentController extends Controller
                                         ->orderBy("revision_appointment.id_revision", "DESC")
                                         ->get();
         echo json_encode($queries);
-        
+
     }
 
 
@@ -139,7 +139,7 @@ class RevisionAppointmentController extends Controller
                 //'numero_contrato'  => 'required',
                 //'cirugia'          => 'required',
                 'clinica'          => 'required'
-            ], $messages);  
+            ], $messages);
 
 
             if ($validator->fails()) {
@@ -158,9 +158,9 @@ class RevisionAppointmentController extends Controller
                         $AppointmentsAgenda->cirujano     = $request->cirujano[$key];
                         $AppointmentsAgenda->enfermera    = $request->enfermera[$key];
                         $AppointmentsAgenda->descripcion  = $request->descripcion[$key];
-                        
+
                         $AppointmentsAgenda->save();
-                    }    
+                    }
                 }
 
                 $auditoria              = new Auditoria;
@@ -174,7 +174,7 @@ class RevisionAppointmentController extends Controller
 
                 $request["table"]    = "revision_appointment";
                 $request["id_event"] = $store["id_revision"];
-                
+
                 if($request->comment != "<p><br></p>"){
                     Comments::create($request->all());
                 }
@@ -182,7 +182,7 @@ class RevisionAppointmentController extends Controller
 
 
                 if ($store) {
-                    $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                    $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                     return response()->json($data)->setStatusCode(200);
                 }else{
                     return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -232,7 +232,7 @@ class RevisionAppointmentController extends Controller
             AppointmentsAgenda::where('id_revision', $revisionAppointment)->delete();
 
 
-          
+
 
             if($request->fecha){
                 foreach ($request->fecha as $key => $value) {
@@ -244,9 +244,9 @@ class RevisionAppointmentController extends Controller
                     $AppointmentsAgenda->cirujano     = $request->cirujano[$key];
                     $AppointmentsAgenda->enfermera    = $request->enfermera[$key];
                     $AppointmentsAgenda->descripcion  = $request->descripcion[$key];
-                    
+
                     $AppointmentsAgenda->save();
-                }    
+                }
             }
 
 
@@ -261,9 +261,9 @@ class RevisionAppointmentController extends Controller
                     Comments::insert($array);
                 }
             }
-            
+
             if ($update) {
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -289,7 +289,7 @@ class RevisionAppointmentController extends Controller
             }
             $auditoria->save();
 
-            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);

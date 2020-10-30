@@ -371,6 +371,33 @@
 
 
 
+                        <br><br>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                    <h4>Comentarios Revision</h4>
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <div class="row" id="comments_revision_client">
+                            <div class="col-md-12">
+                              <div class="row">
+                                  <div class="col-md-2">
+                                    Foto
+                                  </div>
+                                  <div class="col-md-10">
+                                    Text
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
                     </div>
 
                 </div>
