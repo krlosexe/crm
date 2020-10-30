@@ -1253,6 +1253,11 @@
 						surgeries("#btrx_tab6_edit", "#iframepCirugiaEdit", data)
 						revisiones("#btrx_tab7_edit", "#iframepRevisionEdit", data)
 						tasks("#btrx_tab8_edit", "#iframepTracingEdit", data)
+
+
+                        masajes("#btrx_tab5", "#iframepMsajesEdit", data)
+
+
 					}
 				});
 			}
@@ -1375,6 +1380,16 @@
 				});
 			}
 
+
+
+
+            function masajes(tab, iframe, data){
+				$(tab).click(function (e) {
+					var url = document.getElementById('ruta').value+"/masajes/client/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+
+				});
+			}
 
 
 
