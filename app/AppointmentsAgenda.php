@@ -14,6 +14,14 @@ class AppointmentsAgenda extends Model
         return $this->hasMany('App\AppointmentsAgenda', 'id_revision', 'id_revision');
     }
 
+    public function comments(){
+        return $this->hasMany('App\Comments', 'id_event', 'id_revision')
+                    ->where("comments.table", "revision_appointment")
+                    ->select(array('comments.*'));
+    }
+
+
+
 
 
 }
