@@ -357,7 +357,7 @@ Route::get('form_satisfaction_survey/{id_client}', function ($id_client) {
                     ->join("clinic", "clinic.id_clinic", "=", "clientes.clinic", 'left')
                     ->where("id_cliente", $id_client)->first();
 
-  
+
 
     return view('satisfaction_survey.form', ["data_client" => $client]);
 });
@@ -375,6 +375,16 @@ Route::get('califications', function () {
 Route::get('financing', function () {
     return view('financing.gestion');
 });
+
+
+
+Route::get('register-app-ios', function () {
+    return view('ios.gestion');
+});
+
+
+
+
 
 
 

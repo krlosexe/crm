@@ -1,6 +1,6 @@
 <div class="card shadow mb-4" id="cuadro4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Datos del pacientes</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Datos del pacientessss</h6>
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="form-update" enctype="multipart/form-data">
@@ -35,7 +35,7 @@
             </li>
 
             <li  class="nav-item" id="btrx_tab6_edit">
-                <a id="btrx_tab4" class="nav-link"  data-toggle="tab" href="#info-cirugia-edit" role="tab" aria-controls="info-add" aria-selected="false">Cirugias</a>
+                <a id="btrx_tab4" class="nav-link"  data-toggle="tab" href="#info-cirugia-edit" role="tab" aria-controls="info-add" aria-selected="false">Procedimientos</a>
             </li>
 
             <li  class="nav-item" id="btrx_tab7_edit">
@@ -46,6 +46,15 @@
             <li  class="nav-item" id="btrx_tab8_edit">
                 <a id="btrx_tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-edit" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
             </li>
+
+
+
+            <li class="nav-item" id="tab9_edit">
+                <a id="btrx_tab5" class="nav-link" data-toggle="tab" href="#info-masajes-edit" role="tab" aria-controls="info-add" aria-selected="false">Masajes</a>
+            </li>
+
+
+
 
         </ul>
 
@@ -98,7 +107,7 @@
                                     <input type="text" name="nombres" class="form-control form-control-user" id="nombre_edit" placeholder="PJ. Carlos Javier" required>
                                 </div>
                             </div>
-                        
+
                           <!--  <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for=""><b>Apellidos</b></label>
@@ -170,7 +179,7 @@
 
 
 
-                        
+
                         <div class="row">
                             <div class="col-sm-10">
                                     <div class="form-group">
@@ -218,7 +227,7 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                
+
 
                                 <div class="form-group">
                                     <label for=""><b>Linea de Negocio</b></label>
@@ -333,7 +342,7 @@
                         </div>
 
 
-                        
+
 
 
 
@@ -359,7 +368,7 @@
                               </div>
                             </div>
                         </div>
-                  
+
 
 
                     </div>
@@ -381,7 +390,7 @@
             <div class="tab-pane fade tab_content1" id="info-add-edit" role="tabpanel" aria-labelledby="patient_record">
 
 
-                    
+
 
 
                     <div class="row">
@@ -397,7 +406,7 @@
                                 <input type="text" name="current_size" class="form-control form-control-user" id="current_size_edit" placeholder="PJ. 12">
                             </div>
                         </div>
-                    
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""><b>Talla en que quiere quedar</b></label>
@@ -421,7 +430,7 @@
 
 
               <div class="tab-pane fade tab_content1" id="init-history-edit" role="tabpanel" aria-labelledby="patient_record">
-              
+
                 <div class="row">
 
                     <div class="col-md-7">
@@ -433,7 +442,7 @@
                                     <input type="text" name="eps" class="form-control form-control-user" id="eps_edit" placeholder="PJ. EPS SURAMERICANA S.A.">
                                 </div>
                             </div>
-                        
+
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <label for=""><b>Estatura</b></label>
@@ -471,7 +480,7 @@
                     <div class="col-md-5">
                         <div class="row">
 
-                            
+
                             <div class="col-md-6">
                                 <label for="alcohol_edit"><b>Alcohol</b></label>
                                 <label class='container-check'>
@@ -486,7 +495,7 @@
                                 <label for="smoke_edit"><b>Fuma</b></label>
                                 <label class='container-check'>
                                     <input type='checkbox' name='smoke' class='checkitem chk-col-blue' id='smoke_edit' value='1'>
-                                    
+
                                     <span class='checkmark'></span>
                                     <label for=''></label>
                                 </label>
@@ -566,7 +575,7 @@
                 </div>
 
                 <br><br>
-                
+
             </div>
 
 
@@ -576,7 +585,7 @@
 
 
                  <div class="tab-pane fade tab_content1-0" id="info-credit-patient-edit" role="tabpanel" aria-labelledby="patient_record">
-              
+
                     <div class="row">
 
                         <div class="col-md-4">
@@ -653,12 +662,12 @@
                     </div>
 
                     <br><br>
-                    
+
               </div>
 
 
               <div class="tab-pane fade tab_content1-0" id="info-valuations-edit" role="tabpanel" aria-labelledby="patient_record">
-              
+
                 <div class="embed-responsive embed-responsive-16by9">
 
                     <iframe class="embed-responsive-item " id="iframeValuationsEdit" allowfullscreen="">
@@ -666,9 +675,9 @@
                     </iframe>
 
                 </div>
-                   
+
                     <br><br>
-                    
+
               </div>
 
 
@@ -703,8 +712,6 @@
 
 
 
-
-
               <div class="tab-pane fade tab_content1-0" id="info-tracing-edit" role="tabpanel" aria-labelledby="patient_record">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item " id="iframepTracingEdit" allowfullscreen="">
@@ -713,9 +720,21 @@
                 <br><br>
               </div>
 
+
+              <div class="tab-pane fade tab_content1-0" id="info-masajes-edit" role="tabpanel" aria-labelledby="patient_record">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item " id="iframepMsajesEdit" allowfullscreen="">
+                    </iframe>
+                </div>
+                <br><br>
+            </div>
+
+
+
+
         </div>
 
-        
+
 
 
 
@@ -727,5 +746,5 @@
           <br>
           <br>
       </form>
-      
+
     </div>
