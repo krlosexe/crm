@@ -257,7 +257,7 @@
 								  <th>Paciente</th>
 								  <th>Clinica</th>
                                   <th>Fecha de Revision</th>
-                                  <th>Comentario</th>
+                                  <th>Comentarios</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
