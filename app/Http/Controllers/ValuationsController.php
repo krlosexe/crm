@@ -405,10 +405,11 @@ class ValuationsController extends Controller
             $user = DB::table("users")->where("id_client", $request["id_cliente"])->first();
 
 
-
-            $users_client = DB::table("auth_users_app_financing")->selectRaw("auth_users_app_financing.token_notifications")
+            if($user){
+                $users_client = DB::table("auth_users_app_financing")->selectRaw("auth_users_app_financing.token_notifications")
                                     ->where("auth_users_app_financing.id_user", $user->id)
                                     ->first();
+            }
 
 
             if($users_client){
@@ -936,13 +937,6 @@ class ValuationsController extends Controller
             $msj->subject($subject);
             $msj->to($for);
         });
-
-
-
-
-
-
-
 
         return true;
 
