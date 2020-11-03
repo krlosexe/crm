@@ -1,5 +1,5 @@
 @extends('layouts.app')
-	
+
 
 	@section('CustomCss')
 
@@ -37,7 +37,7 @@
 				left: 0;
 				z-index: 3000;
 				display: none;
-				
+
 				/* background-color: rgba(0,0,0,.4); */
 				transform: translateZ(0);
 				-webkit-transform: translateZ(0);
@@ -85,7 +85,7 @@
 				-ms-transition: 3s;
 				-o-transition: 3s;
 				transition: 3s;
-				
+
 			}
 
 
@@ -98,7 +98,7 @@
 				display: block;
 				width: calc(100% - 300px);
 				background: #fff;
-				
+
 				transform: translateX(100%);
 				 -webkit-transition: 3s;
 					-moz-transition: 3s;
@@ -116,7 +116,7 @@
 				-ms-transform: translateX(0%);
 				-o-transform: translateX(0%);
 				transform: translateX(0%);
-			
+
 			}
 
 
@@ -204,8 +204,8 @@
 		      <!-- Main Content -->
 		      <div id="content">
 
-				@include('layouts.topBar') 
-		       
+				@include('layouts.topBar')
+
 
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
@@ -246,7 +246,7 @@
 										<label for=""><b>Fecha hasta</b></label>
 										<input type="date" class="form-control" id="date_finish">
 									</div>
-								</div>  
+								</div>
 							</div>
 
 
@@ -256,7 +256,8 @@
 								  <th>Acciones</th>
 								  <th>Paciente</th>
 								  <th>Clinica</th>
-								  <th>Fecha de Revision</th>
+                                  <th>Fecha de Revision</th>
+                                  <th>Comentarios</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
 			                    </tr>
@@ -281,7 +282,7 @@
 
 
 			   <div id="slide">
-					
+
 					<div class="side-panel-container">
 
 
@@ -346,13 +347,13 @@
 			function update(){
 				enviarFormularioPut("#form-update", 'api/revision/appointment', '#cuadro4', false, "#avatar-edit");
 			}
-			
 
-			$("#date_init, #date_finish").change(function (e) { 
+
+			$("#date_init, #date_finish").change(function (e) {
 				list();
 			});
 
-			
+
 
 
 			function list(cuadro) {
@@ -362,12 +363,12 @@
 				const date_finish = $("#date_finish").val()
 
 				$('#table tbody').off('click');
-				var url=document.getElementById('ruta').value; 
+				var url=document.getElementById('ruta').value;
 				cuadros(cuadro, "#cuadro1");
 
 				var table=$("#table").DataTable({
 					"destroy":true,
-					
+
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
@@ -399,16 +400,26 @@
 								return botones;
 							}
 						},
-						{"data":"name_client", 
+						{"data":"name_client",
 							render: function(data, type, row){
 								return "<a href='javascript:void(0)' onclick='ViewClient("+row.id_paciente+")'>"+ row.name_client+"</a>"
 							}
 						},
 						{"data": "name_clinic"},
 						{"data": "fecha"},
+                        {"data": "fecha",
+                            render: function(data, type, row){
+
+                                var text = ""
+                                $.map(row.comments, function (item, key) {
+                                    text += item.comment+"<br>"
+                                });
+								return text
+							}
+                        },
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
-						
+
 					],
 					"language": idioma_espanol,
 					"dom": 'Bfrtip',
@@ -433,7 +444,7 @@
 					$(".dt-buttons").remove()
 				}
 
-				
+
 
 
 			}
@@ -448,7 +459,7 @@
 
 				$("#paciente-store option").remove();
 
-				
+
 				getPacientes("#paciente-store")
 				GetClinic2("#clinica-store")
 				GetAsesoras("#asesora-store")
@@ -477,7 +488,7 @@
 					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
 					},
 					error: function (data) {
-					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');
 					},
 					success: function(data){
 					$(select+" option").remove();
@@ -500,10 +511,10 @@
 					}
 				});
 			}
-			
-			function SelectClinic(select_cliente, select_clinica) {  
 
-				$(select_cliente).change(function (e) { 
+			function SelectClinic(select_cliente, select_clinica) {
+
+				$(select_cliente).change(function (e) {
 
 					var id_client = $(this).val()
 					var url       = document.getElementById('ruta').value;
@@ -529,8 +540,8 @@
 
 
 
-			function SelectAsesora(select_cliente, select_asesora) {  
-				$(select_cliente).change(function (e) { 
+			function SelectAsesora(select_cliente, select_asesora) {
+				$(select_cliente).change(function (e) {
 
 					var id_client = $(this).val()
 					var url       = document.getElementById('ruta').value;
@@ -557,7 +568,7 @@
 
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function ver(tbody, table){
@@ -578,7 +589,7 @@
 
 					$("#numero_contrato-view").val(data.numero_contrato).attr("disabled", "disabled")
 					$("#cirugia-view").val(data.cirugia).attr("disabled", "disabled")
-					
+
 					$("#clinica-view").val(data.clinica).attr("disabled", "disabled")
 
 					showSchedule(data.agenda, "#tableView", "view")
@@ -589,7 +600,7 @@
 
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function edit(tbody, table){
@@ -611,7 +622,7 @@
 
 					$("#numero_contrato-edit").val(data.numero_contrato)
 					$("#cirugia-edit").val(data.cirugia)
-					
+
 					showSchedule(data.agenda, "#tableEdit", "edit")
 
 
@@ -633,7 +644,7 @@
 
 			function SubmitComment(id, api, table, btn, summer){
 
-				$(btn).unbind().click(function (e) { 
+				$(btn).unbind().click(function (e) {
 
 					var html = ""
 
@@ -663,7 +674,7 @@
 							"token"   : tokens,
 							"id"      : id,
 							"comment" : $(summer).val(),
-							
+
 						},
 						dataType:'JSON',
 						beforeSend: function(){
@@ -680,7 +691,7 @@
 
 
 
-					
+
 				});
 
 			}
@@ -688,28 +699,28 @@
 
 			function GetComments(comment_content, id){
 				$(comment_content).html("Cargando...")
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/comments/revision_appointment/'+id,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 					},
 					error: function (data) {
 					},
 					success: function(result){
-						
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
-						
+
 						$.map(result, function (item, key) {
 							html += '<div class="col-md-12" style="margin-bottom: 15px">'
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.comment+'</div>'
@@ -720,10 +731,10 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
-						
+
 						$(comment_content).html(html)
 					}
 				});
@@ -733,7 +744,7 @@
 			function showSchedule(schedule, table, option){
 
 				var html = "";
-				$.each(schedule, function (key, item) { 
+				$.each(schedule, function (key, item) {
 
 					var btn = option == "view" ? '' : "<button type='button' class='btn btn-danger waves-effect' onclick='eliminarTr(\"" + "#tr2_" + item.id_appointments_agenda + "\")'>Eliminar</button>"
 
@@ -752,7 +763,7 @@
 
 			}
 
-					
+
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -802,7 +813,7 @@
 				var valid = true
 
 				$(tabla+" tbody tr").each(function(){
-					
+
 					if($(this).find('.fecha').val() == fecha){
 						valid =  false;
 					}
@@ -820,7 +831,7 @@
 						html += "<td>"+enfermera+"<input type='hidden' name='enfermera[]' value='"+enfermera+"'></td>"
 						html += "<td><button type='button' class='btn btn-danger waves-effect' onclick='eliminarTr(\"" + "#tr" + fecha + "\")'>Eliminar</button></td></tr>";
 					html += "</tr>"
-					
+
 					$(tabla+" tbody").append(html)
 				}else{
 					warning("La fecha ya esta registrada")
@@ -833,9 +844,9 @@
 
 
 
-			
+
 			function ViewClient(id_paciente){
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/clients/'+id_paciente,
 					type:'GET',
@@ -844,7 +855,7 @@
 						"id_user": id_user,
 						"token"  : tokens,
 					},
-					
+
 					beforeSend: function(){
 
 					},
@@ -872,7 +883,7 @@
 						GetAsesorasValoracion("#id_asesora_valoracion-edit")
 
 
-				
+
 
 						$("#id_asesora_valoracion-edit").val(data.id_asesora_valoracion)
 						$("#code-edit").text(data.code_client)
@@ -886,7 +897,7 @@
 						$("#email_edit").val(data.email)
 						$("#direccion_edit").val(data.direccion)
 						$("#fecha_nacimiento_edit").val(data.fecha_nacimiento)
-						
+
 						$("#origen_edit").val(data.origen)
 						$("#forma_pago_edit").val(data.forma_pago)
 
@@ -946,11 +957,11 @@
 						$("#previous_credits_edit").val(data.previous_credits)
 						$("#reported_edit").val(data.reported)
 						$("#bank_account_edit").val(data.bank_account)
-					
+
 						$("#properties_edit").prop("checked", data.properties ? true : false)
 						$("#vehicle_edit").prop("checked", data.vehicle ? true : false)
-						
-						
+
+
 						$("#linea-negocio-edit").val(data.id_line)
 						$("#linea-negocio-edit").trigger("change");
 
@@ -965,15 +976,15 @@
 						$("#id_edit").val(data.id_cliente)
 
 
-				
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 						$.map(data.logs, function (item, key) {
 							html += '<div class="col-md-12" style="margin-bottom: 15px">'
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.event+'</div>'
@@ -984,7 +995,7 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
 						$("#logs_edit").html(html)
@@ -1002,18 +1013,18 @@
 								html += '</div>'
 							html += '</div>'
 
-							
+
 							html += '<div class="col-md-2 phone_add_edit_'+count_phone+'"">'
 							html += '<br>'
 								html += '<button type="button" id="add_phone" onclick="deletePhoneEdit('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 							html += '</div>'
 
-					
+
 						});
 
 						$("#phone_add_content_edit").html(html)
 
-					
+
 
 
 						var html = ""
@@ -1027,13 +1038,13 @@
 								html += '</div>'
 							html += '</div>'
 
-							
+
 							html += '<div class="col-md-2 email_add_edit_'+count_email+'"">'
 							html += '<br>'
 								html += '<button type="button" id="add_email" onclick="deleteemailEdit('+count_email+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 							html += '</div>'
 
-					
+
 						});
 
 						$("#email_add_content_edit").html(html)
@@ -1041,19 +1052,19 @@
 
 
 
-			
+
 						$('#summernote_edit').summernote('reset');
 						$('#summernote_edit').summernote({
 							'height' : 200
 						});
-						var url=document.getElementById('ruta').value; 
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 
-					
+
 
 					//	GetComments("#comments_edit", data.id_cliente)
-				
+
 						GetCommentsClients("#comments_edit_client", data.id_cliente)
 
 						valuations("#btrx_tab4_edit", "#iframeValuationsEdit", data)
@@ -1068,19 +1079,19 @@
 
 
 
-			
 
 
-			
+
+
 
 			function GetClinic(city, select){
-				$(city).unbind().change(function (e) { 
+				$(city).unbind().change(function (e) {
 					GetClinicByCity(select, $(this).val())
 				});
 			}
 
 			function Children(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1092,7 +1103,7 @@
 
 
 			function Surgery(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1104,7 +1115,7 @@
 
 
 			function Disease(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1115,7 +1126,7 @@
 
 
 			function Medication(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1125,7 +1136,7 @@
 			}
 
 			function Allergic(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1134,52 +1145,52 @@
 				});
 			}
 
-			
+
 
 
 
 			function tasks(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 
 			function revisiones(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function surgeries(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function valuations(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function preanestesias(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
@@ -1187,20 +1198,20 @@
 
 
 			function GetCommentsClients(comment_content, id_client){
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/clients/comments/'+id_client,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 					},
 					error: function (data) {
 					},
 					success: function(result){
-						
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 						$.map(result, function (item, key) {
@@ -1208,7 +1219,7 @@
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.comment+'</div>'
@@ -1219,14 +1230,14 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
-						
+
 						$(comment_content).html(html)
 					}
 				});
-			}	
+			}
 
 
 
@@ -1240,10 +1251,10 @@
 			}
 
 
-			
+
 
 		</script>
-		
+
 
 
 

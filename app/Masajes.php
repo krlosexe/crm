@@ -13,4 +13,15 @@ class Masajes extends Model
     protected $table         = 'masajes';
     public    $timestamps    = false;
     protected $primaryKey    = 'id_masajes';
+
+
+
+    public function comments(){
+        return $this->hasMany('App\Comments', 'id_event', 'id_masajes')
+                    ->where("comments.table", "masajes")
+                    ->select(array('comments.*'));
+    }
+
+
+
 }

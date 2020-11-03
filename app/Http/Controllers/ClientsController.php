@@ -1215,7 +1215,7 @@ class ClientsController extends Controller
                 "survey"                 => $request["survey"]                  == 1 ? $request["survey"]           = 1 : $request["survey"]           = 0
 
             ];
-            
+
                     User::updateOrCreate(
                         ["id_client" => $id_cliente],
                         ["email" => $request->email]
