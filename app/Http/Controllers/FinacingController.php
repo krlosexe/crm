@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\ClientPayToStudyCredit;
 use App\ClientRequestCreditPaymentPlan;
 use App\ClientRequestCredit;
+use App\User;
+use Mail;
 
 class FinacingController extends Controller
 {
@@ -248,9 +250,76 @@ class FinacingController extends Controller
             $request["status"] = "Procesado";
         }
 
+
+        $client = DB::table("clientes")->where("id_cliente", $request["id_client"])->first();
+
+
+
+        $mensaje = "Pago Estudio de Credito, Monto : $request[amount], Metodo de Pago: $request[payment_method],  ID Transaccion : ".$request["id_transactions"];
+
+        $info_email = [
+            "user_id" => $client->id_user_asesora,
+            "issue"   => "Pago Estudio de Credito Px :". $client->nombres,
+            "mensage" => $mensaje,
+        ];
+
+        $this->SendEmail($info_email);
+
+
         $store = DB::table("clients_pay_to_study_credit")->insert($request->all());
         return response()->json($request->all())->setStatusCode(200);
     }
+
+
+
+    public function SendEmail($data){
+
+
+
+        $user = User::find($data["user_id"]);
+        $subject = $data["issue"];
+
+        //$for = "cardenascarlos18@gmail.com";
+        $for = $user["email"];
+        $request["msg"] = $data["mensage"];
+
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+
+
+
+
+        $for = "cardenascarlos18@gmail.com";
+        $request["msg"] = $data["mensage"];
+
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+
+
+        $for = "getionfinanmed@gmail.com";
+        $request["msg"] = $data["mensage"];
+
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+
+        return true;
+
+    }
+
+
+
 
 
     public function GetFeePending($id_client)

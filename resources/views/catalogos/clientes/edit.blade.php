@@ -124,7 +124,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for=""><b>Numero de identificacion</b></label>
-                                        <input type="number" name="identificacion" class="form-control form-control-user" id="identificacion_edit" placeholder="PJ. 23559081154">
+                                        <input type="text" name="identificacion" class="form-control form-control-user" id="identificacion_edit" placeholder="PJ. 23559081154">
                                     </div>
                                 </div>
 
@@ -881,6 +881,13 @@
                             </label>
                         </div>
 
+
+                        <div class="col-md-2">
+                            <label for="average_monthly_income"><b>ID de Transaccion</b></label>
+                            <input type="text"  class="form-control form-control-user" id="id_transaccion" placeholder="PJ. Transferencia">
+                        </div>
+
+
                         <div class="col-md-2">
                             <label for="average_monthly_income"><b>Metodo de Pago</b></label>
                             <input type="text" name="payment_method" class="form-control form-control-user" id="method_pay_study_credit_edit" placeholder="PJ. Transferencia">
@@ -888,7 +895,7 @@
 
                         <div class="col-md-2">
                             <label for="average_monthly_income"><b>Fecha de Pago</b></label>
-                            <input type="date" name="date_pay_study_credit" class="form-control form-control-user" id="date_pay_study_credit_edit">
+                            <input type="datetime" name="date_pay_study_credit" class="form-control form-control-user" id="date_pay_study_credit_edit">
                         </div>
 
                     </div>

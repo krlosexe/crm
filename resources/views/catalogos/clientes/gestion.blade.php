@@ -1,5 +1,5 @@
 @extends('layouts.app')
-	
+
 
 	@section('CustomCss')
 
@@ -50,8 +50,8 @@
 		      <!-- Main Content -->
 		      <div id="content">
 
-				@include('layouts.topBar') 
-		       
+				@include('layouts.topBar')
+
 
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
@@ -78,7 +78,7 @@
 			            <div class="card-body">
 
 							<div class="row">
-							
+
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for=""><b>Filtrar por : Linea de Negocio</b></label>
@@ -267,7 +267,7 @@
 
 							</div>
 			              <div class="table-responsive dataTables_wrapper dt-bootstrap4 no-footer">
-						  	
+
 			                <table class="table table-bordered " id="table" width="100%" cellspacing="0">
 
 							<div class="dt-buttons"></div>
@@ -276,7 +276,7 @@
 								<input type="search" id="search" class="form-control form-control-sm" placeholder="" aria-controls="table"></label>
 							</div>
 
-							
+
 			                  <thead>
 			                    <tr>
 								  <th>Acciones</th>
@@ -291,7 +291,7 @@
 			                    </tr>
 			                  </thead>
 			                  <tbody>
-			                    
+
 			                  </tbody>
 			                </table>
 
@@ -301,7 +301,7 @@
 							<div class="dataTables_paginate paging_simple_numbers">
 								<ul class="pagination"></ul>
 							</div>
-							
+
 			              </div>
 			            </div>
 			          </div>
@@ -342,7 +342,7 @@
 	@section('CustomJs')
 
 		<script>
-		
+
 			$(document).ready(function(){
 				store();
 	 		//	list();
@@ -358,7 +358,7 @@
 
 
 				GetAsesorasbyBusisnessLine2("#linea-negocio-filter", "#id_asesora_valoracion-filter");
-				
+
 
 				verifyPersmisos(id_user, tokens, "clients");
 
@@ -400,14 +400,14 @@
 						text : "Seleccione"
 						}));
 						$.each(data, function(i, item){
-							
+
 							$(select).append($('<option>',
 							{
 							value: item.id,
 							text : item.name,
 							selected : select_default == item.id ? true : false
 							}));
-							
+
 						});
 
 
@@ -478,8 +478,8 @@
 
 			function GetAsesorasbyBusisnessLine2(line_business, asesoras){
 
-				$(line_business).change(function (e) { 
-				
+				$(line_business).change(function (e) {
+
 					var id_line_business = $(this).val()
 					var url=document.getElementById('ruta').value;
 					$.ajax({
@@ -496,7 +496,7 @@
 						// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
 						},
 						error: function (data) {
-						//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+						//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');
 						},
 						success: function(data){
 							$(asesoras+" option").remove();
@@ -505,15 +505,15 @@
 								value: "",
 								text : "Seleccione"
 							}));
-						
+
 							$.each(data, function(i, item){
 								if (item.status == 1) {
-								
+
 								$(asesoras).append($('<option>',
 								{
 									value: item.id,
 									text : item.nombres+" "+item.apellido_p+" "+item.apellido_m,
-									
+
 								}));
 
 								if(item.id == id_user){
@@ -535,26 +535,26 @@
 
 
 
-			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter, #city-filter, #procedure-filter, #to_prp, #use_app, #cumple").change(function (e) { 
+			$("#linea-negocio-filter, #id_asesora_valoracion-filter, #origen-filter, #date_init, #date_finish, #state-filter, #city-filter, #procedure-filter, #to_prp, #use_app, #cumple").change(function (e) {
 
 				list("", 1)
 
 			});
 
 
-			$("#search").keyup(function (e) { 
+			$("#search").keyup(function (e) {
 				list("", 1)
 			});
 
 
-			$("#have_initial").change(function (e) { 
+			$("#have_initial").change(function (e) {
 				list("", 1)
-				
+
 			});
 
 
 			var code_client = 0
-			$("#search_reffered").click(function (e) { 
+			$("#search_reffered").click(function (e) {
 				code_client = $("#code_affiliate").val()
 				if(code_client.length < 4){
 
@@ -565,7 +565,7 @@
 				}else{
 					listRefferers("", 1)
 				}
-				
+
 			});
 
 
@@ -584,14 +584,14 @@
 			function list(cuadro = "", page = 1){
 
 
-			
+
 
 
 				var url=document.getElementById('ruta').value;
 
 				cuadros(cuadro, "#cuadro1");
 
-				
+
 
 				if($("#search").val() != ""){
 
@@ -618,7 +618,7 @@
 				}
 
 
-				
+
 
 
 
@@ -663,7 +663,7 @@
 						"cumple"        : cumple
 					},
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 						var html = ""
@@ -701,7 +701,7 @@
 								botones += "<span data='"+JSON.stringify(item)+"' class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
 							else if(item.status == 2 && actualizar == 1)
 								botones += "<span data='"+JSON.stringify(item)+"' class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
-							
+
 							if((item.id_user_asesora == id_user) || borrar == 1)
 								botones += "<span data='"+JSON.stringify(item)+"' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 						//	return botones;
@@ -733,7 +733,7 @@
 							}
 
 							let authapp = ""
-					
+
 							if(item.auth_app){
 								authapp = '<i class="fab fa-android" style="font-size: 44px; color: #5fce5f"></i>'
 							}
@@ -742,7 +742,7 @@
 
 
 							let link = item.count_sactfication_suvarvy_count == 1 ? 'Encuesta Diligenciada':"<i class='fa fa-link'></i> <a href='"+url+"/form_satisfaction_survey/intro/"+item.id_cliente+"' target='_blank'> Link de Encuesta</a>"
-						
+
 							html += "<tr>"
 								html += "<td>"+botones+"</td>"
 								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+"<br>  "+authapp+"  <br>   "+refer+" <br> "+have_initial+"<br>"+link+"</td>"
@@ -775,7 +775,7 @@
 							var prev = 1;
 							var className = 'disabled'
 						}
-						
+
 
 						var li = ""
 						li  += '<li class="paginate_button page-item previous '+className+'" onclick="list(\'\', '+prev+')" id="table_previous"><a href="javascript:void(0)" aria-controls="table" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a></li>'
@@ -786,7 +786,7 @@
 
 
 						$("#table_info").text("Mostrando registros del "+result.from+" al  "+result.to+" de un total de "+result.total+" registros")
-					
+
 					}
 				});
 
@@ -861,7 +861,7 @@
 
 
 
-				
+
 				if(search.length === 0){
 					search = 5
 				}
@@ -884,7 +884,7 @@
 				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'/'+$("#state-filter").val()+'/'+search+'/'+city+'/'+have_inital+'/'+to_prp+'/'+use_app+'/'+cumple+'" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
-				$("#xls").click(function (e) { 
+				$("#xls").click(function (e) {
 					url = $("#view_xls").attr("href");
 
 					console.log(url)
@@ -898,7 +898,7 @@
 
 
 
-			$("#create_task_client").change(function (e) { 
+			$("#create_task_client").change(function (e) {
 
 				if($('#create_task_client').is(':checked') ) {
 					$("#content_create_task").css("display", "block")
@@ -911,7 +911,7 @@
 
 
 
-			$("#create_valorations_client").change(function (e) { 
+			$("#create_valorations_client").change(function (e) {
 
 				if($('#create_valorations_client').is(':checked') ) {
 					$("#content_create_valoration").css("display", "block")
@@ -937,7 +937,7 @@
 
 				cuadros(cuadro, "#cuadro1");
 
-				
+
 
 				if($("#search").val() != ""){
 
@@ -952,7 +952,7 @@
 					url:''+url+'/api/clients/refferes/code/'+code_client,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 						var html = ""
@@ -990,7 +990,7 @@
 								botones += "<span data='"+JSON.stringify(item)+"' class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
 							else if(item.status == 2 && actualizar == 1)
 								botones += "<span data='"+JSON.stringify(item)+"' class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
-							
+
 							if((item.id_user_asesora == id_user) || borrar == 1)
 								botones += "<span data='"+JSON.stringify(item)+"' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 						//	return botones;
@@ -1010,7 +1010,7 @@
 								var name_update = ""
 							}
 
-						
+
 							html += "<tr>"
 								html += "<td>"+botones+"</td>"
 								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+" </td>"
@@ -1043,7 +1043,7 @@
 							var prev = 1;
 							var className = 'disabled'
 						}
-						
+
 
 						var li = ""
 						li  += '<li class="paginate_button page-item previous '+className+'" onclick="list(\'\', '+prev+')" id="table_previous"><a href="javascript:void(0)" aria-controls="table" data-dt-idx="0" tabindex="0" class="page-link">Anterior</a></li>'
@@ -1054,7 +1054,7 @@
 
 
 						$("#table_info").text("Mostrando registros del "+result.from+" al  "+result.to+" de un total de "+result.total+" registros")
-					
+
 					}
 				});
 
@@ -1102,7 +1102,7 @@
 					date_finish = 0
 				}
 
-				
+
 				if(search.length === 0){
 					search = 5
 				}
@@ -1116,7 +1116,7 @@
 				var b = '<button id="view_xls" target="_blank" style="opacity: 0" href="api/clients/export/excel/'+business_line+'/'+adviser+'/'+origen+'/'+date_init+'/'+date_finish+'/'+$("#state-filter").val()+'/'+search+'/'+city+'" class="dt-button buttons-excel buttons-html5">xls</button>';
 				$('.dt-buttons').append(b);
 
-				$("#xls").click(function (e) { 
+				$("#xls").click(function (e) {
 					url = $("#view_xls").attr("href");
 
 					console.log(url)
@@ -1127,20 +1127,20 @@
 
 
 			function GetComments(comment_content, id_client){
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/clients/comments/'+id_client,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 					},
 					error: function (data) {
 					},
 					success: function(result){
-						
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 						$.map(result, function (item, key) {
@@ -1148,7 +1148,7 @@
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;overflow: scroll">'
 										html += '<div>'+item.comment+'</div>'
@@ -1159,22 +1159,22 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
-						
+
 						$(comment_content).html(html)
 					}
 				});
-			}	
-			
+			}
+
 
 
 
 
 			function SubmitComment(id, api, table, btn, summer){
 
-				$(btn).unbind().click(function (e) { 
+				$(btn).unbind().click(function (e) {
 
 					var html = ""
 
@@ -1204,7 +1204,7 @@
 							"token"   : tokens,
 							"id"      : id,
 							"comment" : $(summer).val(),
-							
+
 						},
 						dataType:'JSON',
 						beforeSend: function(){
@@ -1221,7 +1221,7 @@
 
 
 
-					
+
 				});
 
 			}
@@ -1274,7 +1274,7 @@
 					removeTitle: 'Cancel or reset changes',
 					elErrorContainer: '#kv-avatar-errors-1',
 					msgErrorClass: 'alert alert-block alert-danger',
-					
+
 					layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 					allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "pdf", "docs"],
 				});
@@ -1312,7 +1312,7 @@
 					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
 					},
 					error: function (data) {
-						//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+						//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');
 					},
 					success: function(data){
 						$(select+" option").remove();
@@ -1340,7 +1340,7 @@
 
 
 			var count_phone = 0
-			$("#add_phone").click(function (e) { 
+			$("#add_phone").click(function (e) {
 				e.preventDefault();
 
 				count_phone++
@@ -1355,7 +1355,7 @@
 					html += '</div>'
 				html += '</div>'
 
-				
+
 				html += '<div class="col-md-2 phone_add_'+count_phone+'"">'
 				html += '<br>'
 					html += '<button type="button" id="add_phone" onclick="deletePhone('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
@@ -1371,7 +1371,7 @@
 
 
 			var count_phone_edit = 0
-			$("#add_phone_edit").click(function (e) { 
+			$("#add_phone_edit").click(function (e) {
 				e.preventDefault();
 
 				count_phone_edit++
@@ -1386,7 +1386,7 @@
 					html += '</div>'
 				html += '</div>'
 
-				
+
 				html += '<div class="col-md-2 phone_add_'+count_phone_edit+'"">'
 				html += '<br>'
 					html += '<button type="button" id="add_phone" onclick="deletePhone('+count_phone_edit+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
@@ -1421,7 +1421,7 @@
 
 
 			var count_emal = 0
-			$("#add_email").click(function (e) { 
+			$("#add_email").click(function (e) {
 				e.preventDefault();
 
 				count_emal++
@@ -1436,7 +1436,7 @@
 					html += '</div>'
 				html += '</div>'
 
-				
+
 				html += '<div class="col-md-2 email_add_'+count_emal+'"">'
 				html += '<br>'
 					html += '<button type="button" id="add_email" onclick="deleteemail('+count_emal+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
@@ -1452,7 +1452,7 @@
 
 
 			var count_email_edit = 0
-			$("#add_email_edit").click(function (e) { 
+			$("#add_email_edit").click(function (e) {
 				e.preventDefault();
 
 				count_email_edit++
@@ -1467,7 +1467,7 @@
 					html += '</div>'
 				html += '</div>'
 
-				
+
 				html += '<div class="col-md-2 email_add_'+count_email_edit+'"">'
 				html += '<br>'
 					html += '<button type="button" id="add_email" onclick="deleteemail('+count_email_edit+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
@@ -1494,7 +1494,7 @@
 
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			let iden = null;
@@ -1502,8 +1502,8 @@
 				$(tbody).unbind().on("click", "span.consultar", function(){
 					$("#alertas").css("display", "none");
 
-					var data = JSON.parse($(this).attr("data")) 
-				    
+					var data = JSON.parse($(this).attr("data"))
+
 					GetCity("#city_view");
 					GetClinic("#city_view", "#clinic_view")
 					GetBusinessLine("#linea-negocio-view");
@@ -1511,9 +1511,9 @@
 
 					GetAsesorasValoracion("#id_asesora_valoracion-view")
 					GetComments("#comments", data.id_cliente)
-					
-					
-					
+
+
+
 
 					$("#id_asesora_valoracion-view").val(data.id_asesora_valoracion).attr("disabled", "disabled")
 
@@ -1580,24 +1580,24 @@
 					$("#previous_credits_view").val(data.previous_credits).attr("disabled", "disabled")
 					$("#reported_view").val(data.reported).attr("disabled", "disabled")
 					$("#bank_account_view").val(data.bank_account).attr("disabled", "disabled")
-					
+
 					$("#properties_view").prop("checked", data.properties ? true : false)
 					$("#vehicle_view").prop("checked", data.vehicle ? true : false)
-					
-					
+
+
 					$("#linea-negocio-view").val(data.id_line).attr("disabled", "disabled")
 					$("#linea-negocio-view").trigger("change");
 					$("#asesora-view").val(data.id_user_asesora).attr("disabled", "disabled")
 
 
-					var url=document.getElementById('ruta').value; 
+					var url=document.getElementById('ruta').value;
 					var html = "";
 					$.map(data.logs, function (item, key) {
 						html += '<div class="col-md-12" style="margin-bottom: 15px">'
 							html += '<div class="row">'
 								html += '<div class="col-md-2">'
 									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-									
+
 								html += '</div>'
 								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;overflow: scroll">'
 									html += '<div>'+item.event+'</div>'
@@ -1608,7 +1608,7 @@
 								html += '</div>'
 							html += '</div>'
 						html += '</div>'
-						
+
 					});
 
 					$("#logs_view").html(html)
@@ -1626,13 +1626,13 @@
 							html += '</div>'
 						html += '</div>'
 
-						
+
 						html += '<div class="col-md-2 phone_add_'+count_phone+'"">'
 						html += '<br>'
 						//	html += '<button type="button" id="add_phone" onclick="deletePhone('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 						html += '</div>'
 
-				
+
 					});
 
 					$("#phone_add_content_view").html(html)
@@ -1651,20 +1651,20 @@
 							html += '</div>'
 						html += '</div>'
 
-						
+
 						html += '<div class="col-md-2 email_add_'+count_email+'"">'
 						html += '<br>'
 						//	html += '<button type="button" id="add_email" onclick="deleteemail('+count_email+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 						html += '</div>'
 
-				
+
 					});
 
 					$("#email_add_content_view").html(html)
 
 
 
-					
+
 
 
 
@@ -1722,7 +1722,7 @@
 					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
 					},
 					error: function (data) {
-					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');
 					},
 					success: function(data){
 					$(select+" option").remove();
@@ -1731,10 +1731,10 @@
 						value: "",
 						text : "Seleccione"
 					}));
-				
+
 					$.each(data, function(i, item){
 						if (item.status == 1) {
-						
+
 							$(select).append($('<option>',
 							{
 								value: item.id,
@@ -1749,17 +1749,17 @@
 				});
 			}
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function edit(tbody){
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
-					
-					
-					var data = JSON.parse($(this).attr("data")) 
 
-					
+
+					var data = JSON.parse($(this).attr("data"))
+
+
 					GetCity("#city_edit");
 					GetClinic("#city_edit", "#clinic_edit")
 				//	GetAsesorasbyBusisnessLine("#linea-negocio-edit", "#asesora-edit");
@@ -1790,7 +1790,7 @@
 					var html, count
 					$("#tablecx_edit tbody").html("");
 					$.map(data.procedures, function (item, key) {
-						
+
 						count++
 						html += "<tr id='tr_procedure_edit_"+count+"'>"
 							html += "<td>"+item.name+"<input type='hidden' name='sub_category[]' value='"+item.id_sub_category+"'></td>"
@@ -1799,9 +1799,9 @@
 
 						$("#tablecx_edit tbody").html(html);
 					});
-					
 
-			
+
+
 
 					$("#id_asesora_valoracion-edit").val(data.id_asesora_valoracion)
 					$("#code-edit").text(data.code_client)
@@ -1815,7 +1815,7 @@
 					$("#email_edit").val(data.email)
 					$("#direccion_edit").val(data.direccion)
 					$("#fecha_nacimiento_edit").val(data.fecha_nacimiento)
-					
+
 					$("#origen_edit").val(data.origen)
 					$("#forma_pago_edit").val(data.forma_pago)
 
@@ -1831,7 +1831,7 @@
 
 					$("#name_surgery_edit").val(data.name_surgery)
 					$("#observations_edit").val(data.observations)
-					
+
 					$("#current_size_edit").val(data.current_size)
 					$("#desired_size_edit").val(data.desired_size)
 					$("#implant_volumem_edit").val(data.implant_volumem)
@@ -1879,15 +1879,15 @@
 					$("#reported_edit").val(data.reported)
 					$("#bank_account_edit").val(data.bank_account)
 					$("#have_initial_edit").val(data.have_initial)
-					
+
 					$("#properties_edit").prop("checked", data.properties ? true : false)
 					$("#vehicle_edit").prop("checked", data.vehicle ? true : false)
 
 
 					$("#pay_to_study_credit").prop("checked", data.pay_to_study_credit ? true : false)
+                    $("#method_pay_study_credit_edit").val(data.payment_method)
 
-					
-					
+
 					$("#linea-negocio-edit").val(data.id_line)
 					$("#linea-negocio-edit").trigger("change");
 
@@ -1906,15 +1906,15 @@
 					$("#id_edit").val(data.id_cliente)
 
 
-				
-					var url=document.getElementById('ruta').value; 
+
+					var url=document.getElementById('ruta').value;
 					var html = "";
 					$.map(data.logs, function (item, key) {
 						html += '<div class="col-md-12" style="margin-bottom: 15px">'
 							html += '<div class="row">'
 								html += '<div class="col-md-2">'
 									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-									
+
 								html += '</div>'
 								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;overflow: scroll">'
 									html += '<div>'+item.event+'</div>'
@@ -1925,7 +1925,7 @@
 								html += '</div>'
 							html += '</div>'
 						html += '</div>'
-						
+
 					});
 
 					$("#logs_edit").html(html)
@@ -1946,18 +1946,18 @@
 							html += '</div>'
 						html += '</div>'
 
-						
+
 						html += '<div class="col-md-2 phone_add_edit_'+count_phone+'"">'
 						html += '<br>'
 							html += '<button type="button" id="add_phone" onclick="deletePhoneEdit('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 						html += '</div>'
 
-				
+
 					});
 
 					$("#phone_add_content_edit").html(html)
 
-					
+
 
 
 					var html = ""
@@ -1971,13 +1971,13 @@
 							html += '</div>'
 						html += '</div>'
 
-						
+
 						html += '<div class="col-md-2 email_add_edit_'+count_email+'"">'
 						html += '<br>'
 							html += '<button type="button" id="add_email" onclick="deleteemailEdit('+count_email+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 						html += '</div>'
 
-				
+
 					});
 
 					$("#email_add_content_edit").html(html)
@@ -1985,16 +1985,16 @@
 
 
 
-		
+
 					$('#summernote_edit').summernote('reset');
 					$('#summernote_edit').summernote({
 						'height' : 200
 					});
-					var url=document.getElementById('ruta').value; 
+					var url=document.getElementById('ruta').value;
 					var html = "";
 
 
-				
+
 
 					GetComments("#comments_edit", data.id_cliente)
 
@@ -2012,7 +2012,7 @@
 
 
 
-					
+
 					cuadros('#cuadro1', '#cuadro4');
 
 
@@ -2032,7 +2032,7 @@
 					url:''+url+'/api/clients/tasks/advisers/'+id_client,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					success: function(data){
 						//$("#testimony").prop("checked", data.testimony ? true : false)
 						//$("#testimony_date").val(data.testimony_date)
@@ -2050,68 +2050,68 @@
 
 			}
 
-			
+
 			function tasks(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 
 			function revisiones(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function surgeries(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function valuations(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function preanestesias(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 
 			function masajes(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/masajes/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function reffered(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/clients/reffereds/"+data.id_cliente+""
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
@@ -2139,7 +2139,7 @@
 
 
 
-			$("#add-comments").click(function (e) { 
+			$("#add-comments").click(function (e) {
 				/*
 				var html = ""
 
@@ -2149,7 +2149,7 @@
 					html += '<div class="row">'
 						html += '<div class="col-md-2">'
 							//html += "<img class='rounded' src='/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-							
+
 						html += '</div>'
 						html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 							html += '<div>'+$("#summernote_edit").val()+'</div>'
@@ -2165,22 +2165,22 @@
 				$('#summernote_edit').summernote('reset');
 
 				*/
-			});	
+			});
 
 
 
-			
+
 
 
 
 			function GetClinic(city, select){
-				$(city).unbind().change(function (e) { 
+				$(city).unbind().change(function (e) {
 					GetClinicByCity(select, $(this).val())
 				});
 			}
 
 			function Children(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -2192,7 +2192,7 @@
 
 
 			function Surgery(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -2204,7 +2204,7 @@
 
 
 			function Disease(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -2215,7 +2215,7 @@
 
 
 			function Medication(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -2225,7 +2225,7 @@
 			}
 
 			function Allergic(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -2234,10 +2234,10 @@
 				});
 			}
 
-			
 
 
-			$("#identificacion").change(function (e) { 
+
+			$("#identificacion").change(function (e) {
 
 				var url=document.getElementById('ruta').value;
 				$.ajax({
@@ -2248,7 +2248,7 @@
 						"token"  : tokens,
 					},
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
 					},
@@ -2267,7 +2267,7 @@
 
 					},
 					success: function(data){
-						
+
 						$(".disabled").attr("disabled", "disabled")
 
 						$("#state").val(data.state).trigger("change")
@@ -2278,7 +2278,7 @@
 						$("#email").val(data.email)
 						$("#direccion").val(data.direccion)
 						$("#fecha_nacimiento").val(data.fecha_nacimiento)
-						
+
 						$("#origen").val(data.origen)
 						$("#forma_pago").val(data.forma_pago)
 
@@ -2319,7 +2319,7 @@
 
 						var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/0"
 						$('#iframepRevisionStore').attr('src', url);
-						
+
 					}
 				});
 			});
@@ -2333,7 +2333,7 @@
 			*/
 			function desactivar(tbody, table){
 				$(tbody).on("click", "span.desactivar", function(){
-					var data = JSON.parse($(this).attr("data")) 
+					var data = JSON.parse($(this).attr("data"))
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
 				});
 			}
@@ -2345,7 +2345,7 @@
 			*/
 			function activar(tbody, table){
 				$(tbody).on("click", "span.activar", function(){
-					var data = JSON.parse($(this).attr("data")) 
+					var data = JSON.parse($(this).attr("data"))
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
 				});
 			}
@@ -2355,19 +2355,19 @@
 
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
-					var data = JSON.parse($(this).attr("data")) 
+					var data = JSON.parse($(this).attr("data"))
 					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
 			}
 
 
 
-		  $("#fecha_nacimiento").change(function (e) { 
+		  $("#fecha_nacimiento").change(function (e) {
 			  $("#year").val(calcularEdad($(this).val()))
 		  });
 
 
-		  $("#fecha_nacimiento_edit").change(function (e) { 
+		  $("#fecha_nacimiento_edit").change(function (e) {
 			  $("#year_edit").val(calcularEdad($(this).val()))
 		  });
 
@@ -2375,7 +2375,7 @@
 
 
 		  function getCategory(select, select_default = false){
-			
+
 			$.ajax({
 				url: ''+document.getElementById('ruta').value+'/api/category',
 				type:'GET',
@@ -2386,7 +2386,7 @@
 				dataType:'JSON',
 				async: false,
 				error: function() {
-					
+
 				},
 				success: function(data){
 					$(select+" option").remove();
@@ -2395,32 +2395,32 @@
 						value: "",
 						text : "Seleccione"
 					}));
-				
+
 					$.each(data, function(i, item){
-						
-						
+
+
 						$(select).append($('<option>',
 						{
 							value: item.id,
 							text : item.name,
 							selected : select_default == item.id ? true : false
-							
+
 						}));
 
-						
+
 					});
 
 				}
-			
+
 			});
 		}
 
 
 		function ChangeCategory(select, select_sub, select_default = false){
-			$(select).change(function (e) { 
-				
+			$(select).change(function (e) {
+
 				$.ajax({
-					
+
 					url: ''+document.getElementById('ruta').value+'/api/category/sub/'+$(select).val(),
 					type:'GET',
 					data: {
@@ -2430,7 +2430,7 @@
 					dataType:'JSON',
 					async: false,
 					error: function() {
-						
+
 					},
 					success: function(data){
 						console.log(data)
@@ -2440,58 +2440,58 @@
 							value: "",
 							text : "Seleccione"
 						}));
-					
+
 						$.each(data, function(i, item){
-							
-							
+
+
 							$(select_sub).append($('<option>',
 							{
 								value: item.id,
 								text : item.name,
 								selected : select_default == item.id ? true : false
-								
+
 							}));
 
-							
+
 						});
 
 					}
-				
+
 				});
-				
+
 			});
 		}
 
 
 		var count = 0
-		$("#btn-add-surgerie").click(function (e) { 
+		$("#btn-add-surgerie").click(function (e) {
 			count++
 			var html
 			html += "<tr id='tr_procedure_"+count+"'>"
 				html += "<td>"+$("#sub_category option:selected").text()+"<input type='hidden' name='sub_category[]' value='"+$("#sub_category").val()+"'></td>"
 				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_'+count+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
-			
+
 			$("#tablecx tbody").append(html);
 
 		});
 
 
 		var count2 = 0
-		$("#btn-add-surgerie-edit").click(function (e) { 
+		$("#btn-add-surgerie-edit").click(function (e) {
 			count2++
 			var html
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td>"+$("#sub_category_edit option:selected").text()+"<input type='hidden' name='sub_category[]' value='"+$("#sub_category_edit").val()+"'></td>"
 				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
-			
+
 			$("#tablecx_edit tbody").append(html);
 
 		});
 
 
-		$("#pay_consultation").change(function (e) { 
+		$("#pay_consultation").change(function (e) {
 
 			if(!$('#pay_consultation').is(':checked') ) {
 				$("#code_prp-store").removeAttr("disabled").focus()
@@ -2507,7 +2507,7 @@
 
 
 
-			$("#way_to_pay-store").change(function (e) { 
+			$("#way_to_pay-store").change(function (e) {
 
 			if($(this).val() == "Transferencia"){
 				$("#content_acquittance").css("display", "block")
@@ -2519,12 +2519,11 @@
 
 		});
 		$("#process_status").click(function(e) {
-		ProcesStatus()
+		    ProcesStatus()
 	     });
-		
+
 		 function getStatus(id_cliente){
 			try {
-				console.log($("#id_edit").val())
 				var url = document.getElementById('ruta').value;
 				$.ajax({
 					url: '' + url + '/api/clients/request/financing/status/credit/'+id_cliente,
@@ -2532,16 +2531,23 @@
 					dataType:'JSON',
 					error: function() {},
 					success: function(data){
+                        console.log(data, "CREDIT")
 						$("#id_cliente").val(data.id_client)
 						if(data.status == 'Pendiente'){
 							$("#process_status").css('display','block')
 						}else{
 							$("#process_status").css('display','none')
 						}
+
+                        $("#method_pay_study_credit_edit").val(data.payment_method)
+                        $("#date_pay_study_credit_edit").val(data.created_at)
+                        $("#id_transaccion").val(data.id_transactions)
+
+
 						if(data.photo_recived){
-						$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`) 
+						    $("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`)
 						}else{
-						$("#load_img").attr('src', ``) 
+						$("#load_img").attr('src', ``)
 						}
 					}
 				});
@@ -2568,7 +2574,7 @@
 	}
 
 	</script>
-		
+
 	@endsection
 
 

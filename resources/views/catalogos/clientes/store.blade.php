@@ -94,7 +94,7 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for=""><b>Numero de identificacion</b></label>
-                                    <input type="number" name="identificacion" class="form-control form-control-user" id="identificacion" placeholder="PJ. 23559081154">
+                                    <input type="text" name="identificacion" class="form-control form-control-user" id="identificacion" placeholder="PJ. 23559081154">
                                 </div>
                             </div>
 
