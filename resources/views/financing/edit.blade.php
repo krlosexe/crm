@@ -472,6 +472,10 @@
                         <label for="average_monthly_income"><b>Foto Identificación</b></label>
                         <div>
                             <img class="ml-5" src="" id="photo_identf" alt="" width="250px" height="200px">
+
+                            <img class="ml-5" src="" id="photo_identf_rear" alt="" width="250px" height="200px">
+
+
                         </div>
                     </div>
                 </div>
@@ -651,7 +655,7 @@
                         <label for=""><b>Tipo de Contrato:*</b></label>
                         <select disabled name="type_contrato" id="type_contrato" class="form-control" required>
                             <option value="">Seleccione</option>
-                            <option value="Empleado">Empleado</option>
+                            <option value="Indefinido">Indefinido</option>
                             <option value="Independiente">Independiente</option>
                             <option value="Ama de Casa">Ama de Casa</option>
                             <option value="Termino Fijo">Termino Fijo</option>
@@ -660,6 +664,16 @@
                         </select>
                     </div>
                 </div>
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for=""><b>Salario</b></label>
+                        <input type="text" disabled name="salary" id="salary" class="form-control">
+                    </div>
+                </div>
+
+
 
                 <div class="col-md-3">
                     <div class="form-group">
@@ -679,6 +693,17 @@
                         </div>
                     </div>
                     <div class="row">
+
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for=""><b>Ingresos</b></label>
+                                <input type="text" disabled name="income" id="income" class="form-control">
+                            </div>
+                        </div>
+
+
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for=""><b>Tipo de Apartamento:*</b></label>

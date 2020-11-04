@@ -468,7 +468,7 @@
 	}
 
 	/* ------------------------------------------------------------------------------- */
-	/* 
+	/*
 		Funcion que muestra el cuadro3 para la consulta del banco.
 	*/
 
@@ -1136,11 +1136,25 @@
 						$("#photo_face").attr('src', ``)
 					}
 
+
+
 					if (data.photo_identf) {
 						$("#photo_identf").attr('src', `img/credit/cedulas/${data.photo_identf}`)
 					} else {
 						$("#photo_identf").attr('src', ``)
 					}
+
+
+                    if (data.photo_identf_rear) {
+						$("#photo_identf_rear").attr('src', `img/credit/cedulas/${data.photo_identf_rear}`)
+					} else {
+						$("#photo_identf_rear").attr('src', ``)
+					}
+
+
+
+
+
 				}
 			});
 		} catch (e) {
@@ -1180,6 +1194,8 @@
 					$("#dependency_area").val(data ? data.dependency_area : '')
 					$("#charge_company").val(data ? data.charge_company : '')
 					$("#type_contrato").val(data ? data.type_contrato : '')
+                    $("#salary").val(data ? data.salary : '')
+
 					$("#date_vinculacion").val(data ? data.date_vinculacion : '')
 				}
 			});
@@ -1214,6 +1230,7 @@
 					$("#valor_comercial").val(data ? data.valor_comercail : '')
 					$("#prenda_valor").val(data ? data.prenda_valor : '')
 					$("#otro_activos").val(data ? data.otro_activos : '')
+                    $("#income").val(data ? data.income : '')
 				}
 			});
 		} catch (e) {

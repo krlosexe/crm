@@ -49,10 +49,10 @@
         @csrf
 
         <div class="row">
-			
-			
+
+
            <div class="col-md-12">
-              
+
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -97,8 +97,12 @@
 			  <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                        <label for=""><b>Ciudad *</b></label>
-                        <input type="text" name="direccion" id="direccion" class="form-control" required >
+                        <label for=""><b>Ciudad donde se opera *</b></label>
+                        <select name="city" id="city" class="form-control" required>
+                            <option value="">Seleccione</option>
+                            <option value="3">Medellin</option>
+                            <option value="5">Cali</option>
+                        </select>
                     </div>
                 </div>
               </div>
@@ -183,9 +187,9 @@
 
        		<input type="hidden" name="state" value="No Contactada">
 			    <input type="hidden" name="origen" value="Formulario Web">
-          
+
           <input type="hidden" name="id_line" id="id_line" value="{{$id_line}}">
-          
+
           <br>
           <br>
 
@@ -200,7 +204,7 @@
               </div>
            </div>
 
-           
+
         </div>
           <center>
             <button id="btn-submit"  class="btn btn-primary btn-user">
@@ -211,11 +215,11 @@
           <br>
           <br>
       </form>
-      
+
     </div>
 
-	
-		  
+
+
 	<input type="hidden" id="ruta" value="<?= url('/') ?>">
 
 
@@ -228,7 +232,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?= url('/') ?>/js/sb-admin-2.min.js"></script>
-  
+
 
 
    <!-- Page level plugins -->
@@ -238,7 +242,7 @@
   <script src="<?= url('/') ?>/js/demo/chart-area-demo.js"></script>
   <script src="<?= url('/') ?>/js/demo/chart-pie-demo.js"></script>
 
-  
+
 
 
  <!-- Page level plugins -->
@@ -248,7 +252,7 @@
     <!-- Page level custom scripts -->
     <script src="<?= url('/') ?>/js/demo/datatables-demo.js"></script>
 
-  
+
 
 
     <script src="<?= url('/') ?>/vendor/bootstrap-fileinput/js/plugins/piexif.js" type="text/javascript"></script>
@@ -270,11 +274,11 @@
 
 
   <script src="<?= url('/') ?>/js/funciones.js"></script>
-  
+
 
   <script>
     //var user_id = localStorage.getItem('user_id');
-	
+
 
 	$(document).ready(function(){
 		store();
@@ -320,10 +324,10 @@
                       mensajes('danger', errores);
                       warning(respuesta.errores)
                               }else{
-                      mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
+                      mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");
                       warning("Ha ocurrido un error, por favor intentelo de nuevo.")
 					}
-					   
+
                 },
                  success: function(respuesta){
                      $('#btn-submit').removeAttr('disabled'); //activa el input submit
@@ -331,7 +335,7 @@
                   warning(respuesta.mensagge)
                   $("#store")[0].reset();
                 //  enviarEmail()
-                }	
+                }
 
             });
         });
@@ -339,7 +343,7 @@
 
 
     function enviarEmail(){
-        
+
         var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable
         $('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
         $.ajax({
@@ -366,26 +370,26 @@
                 mensajes('danger', errores);
                 warning(respuesta.errores)
                         }else{
-                mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
+                mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");
                 warning("Ha ocurrido un error, por favor intentelo de nuevo.")
               }
-          
+
             },
               success: function(respuesta){
-                
-              
-            }	
+
+
+            }
 
         });
-       
+
     }
 
 
   </script>
 
-  
 
-  
+
+
 
 </body>
 

@@ -36,13 +36,17 @@ class FinacingController extends Controller
                                     client_request_credit_requirements.bank_statements,
                                     client_request_credit_requirements.co_debtor,
                                     client_request_credit_requirements.property_tradition,
-                                    client_request_credit_requirements.license_plate_copy")
+                                    client_request_credit_requirements.license_plate_copy,
+                                    valuations.cotizacion
+                "
+            )
 
 
             ->join("clientes", "clientes.id_cliente", "=", "client_request_credit.id_client")
             ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "client_request_credit.id_client")
             ->join("clients_pay_to_study_credit", "clients_pay_to_study_credit.id_client", "=", "client_request_credit.id_client", "left")
             ->join("client_request_credit_requirements", "client_request_credit_requirements.id_client", "=", "client_request_credit.id_client", "left")
+            ->join("valuations", "valuations.id_cliente", "=", "client_request_credit.id_client", "left")
             ->orderBy("client_request_credit.created_at", "DESC")
             ->get();
 
@@ -387,9 +391,10 @@ class FinacingController extends Controller
     {
         try {
             $query = DB::table('clientes')
-                ->select('form_credit_datos_generales.*', 'form_credit_photo_identification.photo as photo_identf', 'form_credit_photo_face.photo as photo_face')
+                ->select('form_credit_datos_generales.*', 'form_credit_photo_identification.photo as photo_identf', 'form_credit_photo_identification_rear.photo as photo_identf_rear', 'form_credit_photo_face.photo as photo_face')
                 ->join('form_credit_datos_generales', 'clientes.id_cliente', 'form_credit_datos_generales.id_client')
                 ->join('form_credit_photo_identification', 'clientes.id_cliente', 'form_credit_photo_identification.id_client')
+                ->join('form_credit_photo_identification_rear', 'clientes.id_cliente', 'form_credit_photo_identification_rear.id_client')
                 ->join('form_credit_photo_face', 'clientes.id_cliente', 'form_credit_photo_face.id_client')
                 ->where('clientes.id_cliente', $id)
                 ->first();
