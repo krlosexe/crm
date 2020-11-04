@@ -91,6 +91,25 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="row">
+                                        <div class="col-sm-12 text-center">
+                                            <label for=""><b>Adjuntar Cotizacion</b></label>
+                                            <div>
+                                                <div class="file-loading">
+                                                    <input id="file-input-edit" name="file" type="file">
+                                                </div>
+                                            </div>
+                                            <div class="kv-avatar-hintss">
+                                                <small>Seleccione una foto</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">

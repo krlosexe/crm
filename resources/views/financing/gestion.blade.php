@@ -504,6 +504,53 @@
 			$("#period").val(data.period).trigger("change")
 
 			$("#id_cliente").val(data.id_client)
+
+
+            var url_imagen = 'img/valuations/cotizaciones/'
+            var url        = document.getElementById('ruta').value;
+
+            if((data.cotizacion != "" ) &&  (data.cotizacion != null)){
+                var ext = data.cotizacion.split('.');
+                if (ext[1] == "pdf") {
+                    img = '<embed class="kv-preview-data file-preview-pdf" src="'+url_imagen+data.cotizacion+'" type="application/pdf" style="width:213px;height:160px;" internalinstanceid="174">'
+                }else{
+                    img = '<img src="'+url_imagen+data.cotizacion+'" class="file-preview-image kv-preview-data">'
+                }
+
+            }else{img = ""}
+
+
+            $("#file-input-edit").fileinput('destroy');
+            $("#file-input-edit").fileinput({
+                theme: "fas",
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                browseLabel: '',
+                removeLabel: '',
+                browseIcon: '<i class="fa fa-folder-open"></i>',
+                removeIcon: '<i class="fas fa-trash-alt"></i>',
+                previewFileIcon: '<i class="fas fa-file"></i>',
+                removeTitle: 'Cancel or reset changes',
+                    elErrorContainer: '#kv-avatar-errors-1',
+                    msgErrorClass: 'alert alert-block alert-danger',
+
+                    layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+                    allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
+                    initialPreview: [
+                        img
+                    ],
+
+                    initialPreviewConfig: [
+                        {caption: data.cotizacion , downloadUrl: url_imagen+data.cotizacion  ,url: url+"uploads/delete", key: data.cotizacion}
+                    ],
+                });
+
+
+
+
+
 			$("#id_edit").val(data.id)
 			cuadros('#cuadro1', '#cuadro4');
 		});
