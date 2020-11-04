@@ -37,7 +37,10 @@ class FinacingController extends Controller
                                     client_request_credit_requirements.co_debtor,
                                     client_request_credit_requirements.property_tradition,
                                     client_request_credit_requirements.license_plate_copy,
-                                    valuations.cotizacion
+                                    valuations.cotizacion,
+                                    users.email,
+                                    datos_personales.nombres as name_adviser,
+                                    datos_personales.apellido_p as last_name_adviser
                 "
             )
 
@@ -47,6 +50,8 @@ class FinacingController extends Controller
             ->join("clients_pay_to_study_credit", "clients_pay_to_study_credit.id_client", "=", "client_request_credit.id_client", "left")
             ->join("client_request_credit_requirements", "client_request_credit_requirements.id_client", "=", "client_request_credit.id_client", "left")
             ->join("valuations", "valuations.id_cliente", "=", "client_request_credit.id_client", "left")
+            ->join("users", "users.id", "=", "clientes.id_user_asesora", "left")
+            ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id", "left")
             ->orderBy("client_request_credit.created_at", "DESC")
             ->get();
 
