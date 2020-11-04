@@ -218,6 +218,12 @@ Route::post('form/credit/upload/identification', 'FormCreditController@UploadIde
 Route::get('form/credit/photo/identification/{id_client}', 'FormCreditController@GetPhotoIdentification');
 
 
+Route::post('form/credit/upload/identification/rear', 'FormCreditController@UploadIdentificationRear');
+Route::get('form/credit/photo/identification/rear/{id_client}', 'FormCreditController@GetPhotoIdentificationRear');
+
+
+
+
 
 Route::post('form/credit/upload/face', 'FormCreditController@UploadFace');
 Route::get('form/credit/photo/face/{id_client}', 'FormCreditController@GetPhotoFace');

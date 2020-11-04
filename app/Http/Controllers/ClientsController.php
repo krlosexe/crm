@@ -1760,10 +1760,69 @@ class ClientsController extends Controller
 
         DB::table("client_request_credit")->insert($request->all());
 
+
+
+
+
+        $client = DB::table("clientes")->where("id_cliente", $request["id_client"])->first();
+        $mensaje = "Px: $client->nombres acaba de realizar la solicutid de Credito por la Aplicacion, codigo del Px: $client->code_client";
+        $info_email = [
+            "user_id" => $client->id_user_asesora,
+            "issue"   => "App de Financiacion, Solicitud de Credito Px : $client->nombres, codigo del Px: $client->code_client",
+            "mensage" => $mensaje,
+        ];
+
+        $this->SendEmail2($info_email);
+
+
         $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
 
     }
+
+
+    public function SendEmail2($data){
+
+        $user = User::find($data["user_id"]);
+        $subject = $data["issue"];
+
+        //$for = "cardenascarlos18@gmail.com";
+        $for = $user["email"];
+        $request["msg"] = $data["mensage"];
+
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+
+
+        $for = "cardenascarlos18@gmail.com";
+        $request["msg"] = $data["mensage"];
+
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+
+        $for = "getionfinanmed@gmail.com";
+        $request["msg"] = $data["mensage"];
+
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+        return true;
+
+    }
+
+
+
 
 
 
@@ -2444,6 +2503,8 @@ class ClientsController extends Controller
          //   $for = "cardenascarlos18@gmail.com";
 
             $request["msg"]  = "Un Paciente a registrado un Formulario Web";
+
+            $request["direccion"] = ($request["city"] == 3 )? "Medellin" : "Cali";
 
             Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
                 $msj->from("comercial@pdtagencia.com","CRM");
