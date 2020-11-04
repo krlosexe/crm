@@ -222,7 +222,7 @@
 					<div class="card-body">
 
 						<div class="row">
-
+                           <!--
 							<div class="col-md-3">
 								<div class="form-group">
 									<label for=""><b>Filtrar por : Tipo</b></label>
@@ -255,7 +255,7 @@
 									<label for=""><b>Fecha hasta</b></label>
 									<input type="date" class="form-control" id="date_finish">
 								</div>
-							</div>
+							</div>-->
 
 						</div>
 
@@ -268,7 +268,8 @@
 										<th>Monto Solicitado</th>
 										<th>Cuotas Mensuales</th>
 										<th>Plazos</th>
-										<th>Estatus</th>
+                                        <th>Estatus</th>
+                                        <th>Asesora Responsable</th>
 										<th>Fecha de registro</th>
 									</tr>
 								</thead>
@@ -429,6 +430,13 @@
 				{
 					"data": "status"
 				},
+                {
+					"data": "email",
+					render: (data, type, row) => {
+						return row.name_adviser+" "+row.last_name_adviser
+					}
+				},
+
 				{
 					"data": "created_at"
 				}
