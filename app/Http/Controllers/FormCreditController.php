@@ -269,6 +269,36 @@ class FormCreditController extends Controller
 
 
 
+
+
+    public function UploadIdentificationRear(Request $request){
+
+        $folder = "img/credit/cedulas";
+
+        $img      = str_replace('data:image/png;base64,', '', $request["file_base_64"]);
+        $fileData = base64_decode($img);
+        $fileName = $request["id_client"].'-cedula-rear.png';
+        file_put_contents($folder."/".$fileName, $fileData);
+
+
+
+        DB::table("form_credit_photo_identification_rear")->insert([
+            "id_client" => $request["id_client"],
+            "photo"     => $fileName
+        ]);
+        return response()->json(sizeof([1]))->setStatusCode(200);
+    }
+
+
+
+    public function GetPhotoIdentificationRear($id_client){
+        $data = DB::table("form_credit_photo_identification_rear")->where("id_client", $id_client)->get();
+        return response()->json(sizeof($data))->setStatusCode(200);
+    }
+
+
+
+
     public function UploadFace(Request $request){
 
 
