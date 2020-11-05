@@ -378,14 +378,6 @@
 					$(`#email${edit}`).val(data ? data.email : data.email = 'sin email')
 					$(`#telefono${edit}`).val(data ? data.telefono : data.telefono = 'sin telefono')
 
-					// let html = ""
-					// let iden = [];
-					// $.map(data.procedures, function(item, key) {
-					// 	iden.push(item.id_sub_category)
-					// 	html += "<li>" + item.name + "</li><input type='hidden' class='qty' name='id_procedure[]' value='" + item.id_sub_category + "' >"
-					// });
-					// $("#ul").html(html)
-					// GetProcedureProductos("#table_procedure_products", iden)
 				}
 			});
 
