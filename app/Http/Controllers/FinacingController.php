@@ -37,6 +37,15 @@ class FinacingController extends Controller
                                     client_request_credit_requirements.co_debtor,
                                     client_request_credit_requirements.property_tradition,
                                     client_request_credit_requirements.license_plate_copy,
+                                    client_request_credit_requirements.extractos_bancarios_dependiente,
+                                    client_request_credit_requirements.rut_chamber_of_commerce,
+                                    client_request_credit_requirements.declaracion_renta,
+                                    client_request_credit_requirements.cedula_codeudor,
+                                    client_request_credit_requirements.rut_camara_comercio_codeudor,
+                                    client_request_credit_requirements.extractos_bancarios_codeudor,
+                                    client_request_credit_requirements.declaracion_renta_codeudor,
+                                    client_request_credit_requirements.carta_laboral_codeudor,
+                                    client_request_credit_requirements.colillas_nomina_codeudor,
                                     valuations.cotizacion,
                                     users.email,
                                     datos_personales.nombres as name_adviser,
@@ -88,7 +97,7 @@ class FinacingController extends Controller
 
 
             if (($request["status"] == "Aprobado")) {
-                $notification_text = "Felicitaciones tu credito ha sido Aprobado, verifica los requisitos para desembolsar tu credito";
+                $notification_text = "Felicitaciones tu credito ha sido Aprobado con una inicial de $request[initial], verifica los requisitos para desembolsar tu credito";
             }
 
             if (($request["status"] == "Desembolsado")) {
@@ -187,21 +196,30 @@ class FinacingController extends Controller
             "monthly_fee"     => str_replace(",", "", $request["monthly_fee"]),
             "days_limit"      => $request["days_limit"],
             "status"          => $request["status"],
+            "initial"         => $request["initial"],
         ]);
-
 
 
 
         ClientsRequirementsCredit::updateOrCreate(
             ["id_client" => $id_client,],
             [
-                "working_letter"     => $request["working_letter"],
-                "payment_stubs"      => $request["payment_stubs"],
-                "copy_of_id"         => $request["copy_of_id"],
-                "bank_statements"    => $request["bank_statements"],
-                "co_debtor"          => $request["co_debtor"],
-                "property_tradition" => $request["property_tradition"],
-                "license_plate_copy" => $request["license_plate_copy"]
+                "working_letter"                   => $request["working_letter"],
+                "payment_stubs"                    => $request["payment_stubs"],
+                "copy_of_id"                       => $request["copy_of_id"],
+                "bank_statements"                  => $request["bank_statements"],
+                "co_debtor"                        => $request["co_debtor"],
+                "property_tradition"               => $request["property_tradition"],
+                "license_plate_copy"               => $request["license_plate_copy"],
+                "extractos_bancarios_dependiente"  => $request["extractos_bancarios_dependiente"],
+                "rut_chamber_of_commerce"          => $request["rut_chamber_of_commerce"],
+                "declaracion_renta"                => $request["declaracion_renta"],
+                "cedula_codeudor"                  => $request["cedula_codeudor"],
+                "rut_camara_comercio_codeudor"     => $request["rut_camara_comercio_codeudor"],
+                "extractos_bancarios_codeudor"     => $request["extractos_bancarios_codeudor"],
+                "declaracion_renta_codeudor"       => $request["declaracion_renta_codeudor"],
+                "carta_laboral_codeudor"           => $request["carta_laboral_codeudor"],
+                "colillas_nomina_codeudor"         => $request["colillas_nomina_codeudor"],
             ]
         );
 

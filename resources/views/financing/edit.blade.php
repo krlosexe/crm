@@ -97,7 +97,7 @@
 
                                     <div class="row">
                                         <div class="col-sm-12 text-center">
-                                            <label for=""><b>Adjuntar Cotizacion</b></label>
+                                            <label for=""><b>Cotizacion</b></label>
                                             <div>
                                                 <div class="file-loading">
                                                     <input id="file-input-edit" name="file" type="file">
@@ -176,6 +176,13 @@
                                     <h4>Requisitos</h4>
 
                                     <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="average_monthly_income"><b>Con Incial de</b></label>
+                                            <input type="text" class="form-control form-control-user" name="initial" id="initial">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
                                         <div class="col-6">
 
                                             <br>
@@ -201,11 +208,22 @@
                                             </div>
                                             <div class="row">
                                                 <label class='container-check'>
+                                                    <input type='checkbox' name='extractos_bancarios_dependiente' class='checkitem chk-col-blue' id='extractos_bancarios_dependiente' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="extractos_bancarios_dependiente"><b>Extractos bancarios último trimestre                                                    </b></label>
+                                                </label>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <label class='container-check'>
                                                     <input type='checkbox' name='copy_of_id' class='checkitem chk-col-blue' id='copy_of_id' value='1'>
                                                     <span class='checkmark'></span>
                                                     <label for="copy_of_id"><b>Copia de la cedula</b></label>
                                                 </label>
                                             </div>
+
+
 
                                         </div>
                                         <div class="col-6">
@@ -214,13 +232,7 @@
                                             <div class="row">
                                                 <h5>Intependintes</h5>
                                             </div>
-                                            <div class="row">
-                                                <label class='container-check'>
-                                                    <input type='checkbox' name='bank_statements' class='checkitem chk-col-blue' id='bank_statements' value='1'>
-                                                    <span class='checkmark'></span>
-                                                    <label for="bank_statements"><b>Extractos bancarios del ultimo trimestre O Certificación de ingresos por parte de un contador</b></label>
-                                                </label>
-                                            </div>
+
 
                                             <div class="row">
                                                 <label class='container-check'>
@@ -229,13 +241,48 @@
                                                     <label for="copy_of_id2"><b>Copia de la cedula</b></label>
                                                 </label>
                                             </div>
+
+
+                                            <div class="row">
+                                                <label class='container-check'>
+                                                    <input type='checkbox' name='bank_statements' class='checkitem chk-col-blue' id='bank_statements' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="bank_statements"><b>Extractos bancarios del ultimo trimestre O Certificación de ingresos por parte de un contador</b></label>
+                                                </label>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <label class='container-check'>
+                                                    <input type='checkbox' name='rut_chamber_of_commerce' class='checkitem chk-col-blue' id='rut_chamber_of_commerce' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="rut_chamber_of_commerce"><b>Rut o cámara de comercio
+                                                    </b></label>
+                                                </label>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <label class='container-check'>
+                                                    <input type='checkbox' name='declaracion_renta' class='checkitem chk-col-blue' id='declaracion_renta' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="declaracion_renta"><b>Declaración de Renta (si no declara, presentar una carta de un contador con la tarjeta profesional, certificando los ingresos)
+                                                    </b></label>
+                                                </label>
+                                            </div>
+
+
+
+
+
+
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <h4>Opcional</h4>
 
                                     <div class="row">
@@ -267,10 +314,116 @@
                                         </div>
 
                                     </div>
+                                </div>
 
 
+                                <div class="col-md-6">
+                                    <h4>Codeudor Independiente</h4>
+
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <div class="row">
+                                                <label class='container-check'>
+                                                    <input type='checkbox' name='cedula_codeudor' class='checkitem chk-col-blue' id='cedula_codeudor' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="cedula_codeudor"><b>Fotocopia de la cedula</b></label>
+                                                </label>
+                                            </div>
+
+                                            <div class="row">
+                                                <label class='container-check'>
+                                                    <input type='checkbox' name='rut_camara_comercio_codeudor' class='checkitem chk-col-blue' id='rut_camara_comercio_codeudor' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="rut_camara_comercio_codeudor"><b>Rut o cámara de comercio
+                                                    </b></label>
+                                                </label>
+                                            </div>
+
+                                            <div class="row">
+                                                <label class='container-check'>
+                                                    <input type='checkbox' name='extractos_bancarios_codeudor' class='checkitem chk-col-blue' id='extractos_bancarios_codeudor' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="extractos_bancarios_codeudor"><b>Extractos bancarios último trimestre
+                                                    </b></label>
+                                                </label>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <label class='container-check'>
+                                                    <input type='checkbox' name='declaracion_renta_codeudor' class='checkitem chk-col-blue' id='declaracion_renta_codeudor' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="declaracion_renta_codeudor"><b>Declaración de renta (si no declara renta, presentar una carta de un contador con la tarjeta profesional, certificando los ingresos)
+
+                                                    </b></label>
+                                                </label>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Codeudor Empleado</h4>
+
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <div class="row">
+                                                <label class='container-check'>
+                                                    <input type='checkbox' name='cedula_codeudor' class='checkitem chk-col-blue' id='cedula_codeudor2' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="cedula_codeudor2"><b>Fotocopia de la cedula</b></label>
+                                                </label>
+                                            </div>
+
+                                            <div class="row">
+                                                <label class='container-check'>
+                                                    <input type='checkbox' name='carta_laboral_codeudor' class='checkitem chk-col-blue' id='carta_laboral_codeudor' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="carta_laboral_codeudor"><b>Carta Laboral
+                                                    </b></label>
+                                                </label>
+                                            </div>
+
+                                            <div class="row">
+                                                <label class='container-check'>
+                                                    <input type='checkbox' name='extractos_bancarios_codeudor' class='checkitem chk-col-blue' id='extractos_bancarios_codeudor2' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="extractos_bancarios_codeudor2"><b>Extractos bancarios último trimestre
+                                                    </b></label>
+                                                </label>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <label class='container-check'>
+                                                    <input type='checkbox' name='colillas_nomina_codeudor' class='checkitem chk-col-blue' id='colillas_nomina_codeudor' value='1'>
+                                                    <span class='checkmark'></span>
+                                                    <label for="colillas_nomina_codeudor"><b>Colillas de los últimos tres (3) desprendibles de pago de nomina
+
+
+                                                    </b></label>
+                                                </label>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
+
+
+
+
                         </div>
 
                     </div>
