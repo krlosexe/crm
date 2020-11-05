@@ -490,6 +490,7 @@
 			$("#dependent_independent").val(data.dependent_independent)
 			$("#have_initial").val(data.have_initial)
 			$("#reported").val(data.reported)
+            $("#initial").val(data.initial)
 			if (data.photo_recived) {
 				$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`)
 			} else {
@@ -506,6 +507,15 @@
 			$("#co_debtor").prop("checked", data.co_debtor ? true : false)
 			$("#property_tradition").prop("checked", data.property_tradition ? true : false)
 			$("#license_plate_copy").prop("checked", data.license_plate_copy ? true : false)
+            $("#extractos_bancarios_dependiente").prop("checked", data.extractos_bancarios_dependiente ? true : false)
+            $("#rut_chamber_of_commerce").prop("checked", data.rut_chamber_of_commerce ? true : false)
+            $("#declaracion_renta").prop("checked", data.declaracion_renta ? true : false)
+            $("#cedula_codeudor").prop("checked", data.cedula_codeudor ? true : false)
+            $("#rut_camara_comercio_codeudor").prop("checked", data.rut_camara_comercio_codeudor ? true : false)
+            $("#extractos_bancarios_codeudor").prop("checked", data.extractos_bancarios_codeudor ? true : false)
+            $("#declaracion_renta_codeudor").prop("checked", data.declaracion_renta_codeudor ? true : false)
+            $("#carta_laboral_codeudor").prop("checked", data.carta_laboral_codeudor ? true : false)
+            $("#colillas_nomina_codeudor").prop("checked", data.colillas_nomina_codeudor ? true : false)
 
 			$("#status").val(data.status)
 
