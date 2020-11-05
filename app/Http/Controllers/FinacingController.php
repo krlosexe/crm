@@ -159,6 +159,17 @@ class FinacingController extends Controller
                     "date_aproved" => date("Y-m-d"),
                 ]);
             }
+
+            $client = DB::table("clientes")->where("id_cliente", $id_client)->first();
+            $mensaje = "El Credito del Px: $client[nombres] ha sido: $request[status]";
+            $info_email = [
+                "user_id" => $client->id_user_asesora,
+                "issue"   => "Credito PX $client[nombres], $request[status]",
+                "mensage" => $mensaje,
+            ];
+
+            $this->SendEmail($info_email);
+
         }
 
 
@@ -417,7 +428,7 @@ class FinacingController extends Controller
                 ->select('form_credit_datos_generales.*', 'form_credit_photo_identification.photo as photo_identf', 'form_credit_photo_identification_rear.photo as photo_identf_rear', 'form_credit_photo_face.photo as photo_face')
                 ->join('form_credit_datos_generales', 'clientes.id_cliente', 'form_credit_datos_generales.id_client')
                 ->join('form_credit_photo_identification', 'clientes.id_cliente', 'form_credit_photo_identification.id_client')
-                ->join('form_credit_photo_identification_rear', 'clientes.id_cliente', 'form_credit_photo_identification_rear.id_client')
+                ->leftjoin('form_credit_photo_identification_rear', 'clientes.id_cliente', 'form_credit_photo_identification_rear.id_client')
                 ->join('form_credit_photo_face', 'clientes.id_cliente', 'form_credit_photo_face.id_client')
                 ->where('clientes.id_cliente', $id)
                 ->first();
