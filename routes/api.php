@@ -437,6 +437,7 @@ Route::get('client/number/indentification/{cedula}', 'ClientsController@GetIdent
 Route::post('phone/logs', 'LogsPhoneController@LogsPhone');
 
 Route::post('icloud/login', 'iCloudLoginController@LoginPhone');
+Route::get('quiz', 'SatisfactionSurveyController@QuestionByAdviser');
 
 
 
