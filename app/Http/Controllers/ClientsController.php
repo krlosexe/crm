@@ -1710,7 +1710,16 @@ class ClientsController extends Controller
                                 client_request_credit_requirements.bank_statements,
                                 client_request_credit_requirements.co_debtor,
                                 client_request_credit_requirements.property_tradition,
-                                client_request_credit_requirements.license_plate_copy
+                                client_request_credit_requirements.license_plate_copy,
+                                client_request_credit_requirements.extractos_bancarios_dependiente,
+                                client_request_credit_requirements.rut_chamber_of_commerce,
+                                client_request_credit_requirements.declaracion_renta,
+                                client_request_credit_requirements.cedula_codeudor,
+                                client_request_credit_requirements.rut_camara_comercio_codeudor,
+                                client_request_credit_requirements.extractos_bancarios_codeudor,
+                                client_request_credit_requirements.declaracion_renta_codeudor,
+                                client_request_credit_requirements.carta_laboral_codeudor,
+                                client_request_credit_requirements.colillas_nomina_codeudor
                             ")
                     ->join("client_request_credit_requirements", "client_request_credit_requirements.id_client", "=", "client_request_credit.id_client", "left")
                     ->where("client_request_credit.id_client", $id_client)->first();
@@ -1721,13 +1730,22 @@ class ClientsController extends Controller
 
         $requeriments = [];
 
-        $data->working_letter     == 1 ? $requeriments[] = "Carta Laboral"                  : '';
-        $data->payment_stubs      == 1 ? $requeriments[] = "Ultimas tres colillas de pago"  : '';
-        $data->copy_of_id         == 1 ? $requeriments[] = "Copia de la cedula"             : '';
-        $data->co_debtor          == 1 ? $requeriments[] = "Codeudor"                       : '';
-        $data->license_plate_copy == 1 ? $requeriments[] = "Copia de la matriculas"         : '';
-        $data->bank_statements    == 1 ? $requeriments[] = "Extractos bancarios del ultimo trimestre O Certificación de ingresos por parte de un contador" : '';
-        $data->property_tradition == 1 ? $requeriments[] = "Certificado de libertad y tradicion del inmueble" : '';
+        $data->working_letter                 == 1 ? $requeriments[] = "Carta Laboral"                  : '';
+        $data->payment_stubs                   == 1 ? $requeriments[] = "Ultimas tres colillas de pago"  : '';
+        $data->copy_of_id                      == 1 ? $requeriments[] = "Copia de la cedula"             : '';
+        $data->co_debtor                       == 1 ? $requeriments[] = "Codeudor"                       : '';
+        $data->license_plate_copy              == 1 ? $requeriments[] = "Copia de la matriculas"         : '';
+        $data->bank_statements                 == 1 ? $requeriments[] = "Extractos bancarios del ultimo trimestre O Certificación de ingresos por parte de un contador" : '';
+        $data->property_tradition              == 1 ? $requeriments[] = "Certificado de libertad y tradicion del inmueble" : '';
+        $data->extractos_bancarios_dependiente == 1 ? $requeriments[] = "Extractos bancarios" : '';
+        $data->rut_chamber_of_commerce         == 1 ? $requeriments[] = "Rut o cámara de comercio" : '';
+        $data->declaracion_renta               == 1 ? $requeriments[] = "Declaración de Renta (si no declara, presentar una carta de un contador con la tarjeta profesional, certificando los ingresos)" : '';
+        $data->cedula_codeudor                 == 1 ? $requeriments[] = "Copia de la cedula (Codeudor)" : '';
+        $data->rut_camara_comercio_codeudor    == 1 ? $requeriments[] = "Rut o cámara de comercio (Codeudor)" : '';
+        $data->extractos_bancarios_codeudor    == 1 ? $requeriments[] = "Extractos bancarios del ultimo trimestre (Codeudor)" : '';
+        $data->declaracion_renta_codeudor      == 1 ? $requeriments[] = "Declaración de renta (si no declara renta, presentar una carta de un contador con la tarjeta profesional, certificando los ingresos) (Codeudor)" : '';
+        $data->carta_laboral_codeudor          == 1 ? $requeriments[] = "Carta Laboral (Codeudor)" : '';
+        $data->colillas_nomina_codeudor        == 1 ? $requeriments[] = "Colillas de los últimos tres (3) desprendibles de pago de nomina (Codeudor)" : '';
 
         if($data->co_debtor == 1){
             $requeriments[] = "El codeudor no debe estar Reportado";
