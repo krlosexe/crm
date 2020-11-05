@@ -161,10 +161,10 @@ class FinacingController extends Controller
             }
 
             $client = DB::table("clientes")->where("id_cliente", $id_client)->first();
-            $mensaje = "El Credito del Px: $client[nombres] ha sido: $request[status]";
+            $mensaje = "El Credito del Px: $client->nombres ha sido: $request[status]";
             $info_email = [
                 "user_id" => $client->id_user_asesora,
-                "issue"   => "Credito PX $client[nombres], $request[status]",
+                "issue"   => "Credito PX $client->nombres, $request[status]",
                 "mensage" => $mensaje,
             ];
 
