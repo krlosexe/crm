@@ -44,5 +44,9 @@ class User extends Authenticatable
                       
     }
 
+    public function date_person(){
+        return $this->hasOne(datosPersonaesModel::class,'id_usuario');
+    }
+
 
 }

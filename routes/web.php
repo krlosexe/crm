@@ -116,7 +116,9 @@ Route::get('calendar', function () {
     return view('calendar.general.gestion');
 });
 
-
+Route::get('encuesta', function () {
+    return view('Reports.question.gestion');
+});
 
 
 Route::get('import', 'ImportController@clients');
