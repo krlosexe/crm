@@ -285,7 +285,7 @@
 						</div>
 					</div>
 				</div>
-
+				@include('financing.store')
 				@include('financing.edit')
 
 			</div>
@@ -361,6 +361,36 @@
 	$("#id_asesora_valoracion-filter").change(function(e) {
 		list();
 	});
+
+	function searchClients(select, edit = '') {
+		$(select).click(function(e) {
+			var url = document.getElementById('ruta').value;
+			$.ajax({
+				url: '/api/client/indentification/' + $("#indetification").val(),
+				type: 'GET',
+				dataType: 'JSON',
+				async: false,
+				error: function() {},
+				success: function(data) {
+
+					$(`#name${edit}`).val(data ? data.nombre : data.nombre = 'sin nombre')
+					$(`#lastname${edit}`).val(data ? data.apellido : data.apellido = 'sin apellido')
+					$(`#email${edit}`).val(data ? data.email : data.email = 'sin email')
+					$(`#telefono${edit}`).val(data ? data.telefono : data.telefono = 'sin telefono')
+
+					// let html = ""
+					// let iden = [];
+					// $.map(data.procedures, function(item, key) {
+					// 	iden.push(item.id_sub_category)
+					// 	html += "<li>" + item.name + "</li><input type='hidden' class='qty' name='id_procedure[]' value='" + item.id_sub_category + "' >"
+					// });
+					// $("#ul").html(html)
+					// GetProcedureProductos("#table_procedure_products", iden)
+				}
+			});
+
+		});
+	}
 
 
 	function list(cuadro) {
@@ -472,13 +502,16 @@
 
 
 	}
+	$('input[name="number"]').keyup(function(e) {
+		if (/\D/g.test(this.value)) {
+			this.value = this.value.replace(/\D/g, '');
+		}
+	});
 
 	function nuevo() {
 		$("#alertas").css("display", "none");
-		$("#store")[0].reset();
-
-
-
+		// $("#store")[0].reset();
+		searchClients("#search")
 		cuadros("#cuadro1", "#cuadro2");
 	}
 
@@ -572,10 +605,6 @@
                     ],
                 });
 
-
-
-
-
 			$("#id_edit").val(data.id)
 			cuadros('#cuadro1', '#cuadro4');
 		});
@@ -631,59 +660,6 @@
 		});
 
 	}
-
-	function nuevo() {
-				$("#alertas").css("display", "none");
-				// $("#store")[0].reset();
-
-				GetCity("#city");
-				GetClinic("#city", "#clinic")
-			//	GetAsesorasbyBusisnessLine("#linea-negocio", "#asesora");
-			//	GetAsesorasValoracion("#id_asesora_valoracion")
-				GetBusinessLine("#linea-negocio");
-				Children("#children", "#number_children")
-				Surgery("#surgery", "#previous_surgery")
-				Disease("#disease", "#major_disease")
-				Medication("#medication", "#drink_medication")
-				Allergic("#allergic ", "#allergic_medication")
-				$("#clinic").attr("disabled", "disabled")
-
-
-				$("#tablecx tbody").html("");
-				// getCategory("#category", 124124124)
-				//ChangeCategory("#category", "#sub_category")
-				$("#tablecx tbody").html("");
-
-
-				// $('#summernote, #summernote_valorations').summernote('reset');
-				// $('#summernote, #summernote_valorations').summernote({
-				// 	'height' : 200
-				// });
-
-				$("#acquittance").fileinput('destroy');
-				$("#acquittance").fileinput({
-					theme: "fas",
-					overwriteInitial: true,
-					maxFileSize: 21500,
-					showClose: false,
-					showCaption: false,
-					browseLabel: '',
-					removeLabel: '',
-					browseIcon: '<i class="fa fa-folder-open"></i>',
-					removeIcon: '<i class="fas fa-trash-alt"></i>',
-					previewFileIcon: '<i class="fas fa-file"></i>',
-					removeTitle: 'Cancel or reset changes',
-					elErrorContainer: '#kv-avatar-errors-1',
-					msgErrorClass: 'alert alert-block alert-danger',
-
-					layoutTemplates: {main2: '{preview}  {remove} {browse}'},
-					allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "pdf", "docs"],
-				});
-
-				// GetAsesorasValoracion2("#asesora")
-
-				cuadros("#cuadro1", "#cuadro2");
-			}
 
 	/* ------------------------------------------------------------------------------- */
 	/*

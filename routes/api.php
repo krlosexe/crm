@@ -439,6 +439,8 @@ Route::post('phone/logs', 'LogsPhoneController@LogsPhone');
 Route::post('icloud/login', 'iCloudLoginController@LoginPhone');
 Route::get('quiz', 'SatisfactionSurveyController@QuestionByAdviser');
 
+Route::get('client/indentification/{cedula}', 'ClientsController@Identification');
+
 
 
 

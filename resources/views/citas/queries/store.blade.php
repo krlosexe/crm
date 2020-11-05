@@ -7,7 +7,6 @@
         @csrf
         <div class="row">
            <div class="col-md-6">
-              
               <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -18,7 +17,6 @@
                     </div>
                 </div>
               </div>
-
 
               <div class="row">
                 <div class="col-md-6">
@@ -35,10 +33,7 @@
                     </div>
                 </div>
               </div>
-
-              
            </div>
-
 
            <div class="col-md-6">
               <div class="col-md-12">
@@ -48,7 +43,6 @@
                   </div>
               </div>
            </div>
-
 
            <div class="col-md-6">
               <div class="row">
@@ -62,8 +56,6 @@
                 </div>
               </div>
            </div>
-
-
         </div>
 
         <input type="hidden" name="id_user" class="id_user">
@@ -72,14 +64,12 @@
           <br>
         </div>
           <center>
-
             <button type="button"  class="btn btn-danger btn-user" onclick="prev('#cuadro2')">
                 Cancelar
             </button>
             <button id="send_usuario" class="btn btn-primary btn-user">
                 Registrar
             </button>
-
           </center>
           <br>
           <br>
