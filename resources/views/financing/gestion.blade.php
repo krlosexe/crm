@@ -259,6 +259,13 @@
 
 						</div>
 
+						  <button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
+		                    <span class="icon text-white-50">
+		                      <i class="fas fa-plus"></i>
+		                    </span>
+		                    <span class="text">Nuevo registro</span>
+		                  </button>
+
 						<div class="table-responsive">
 							<table class="table table-bordered" id="table" width="100%" cellspacing="0">
 								<thead>
@@ -624,6 +631,59 @@
 		});
 
 	}
+
+	function nuevo() {
+				$("#alertas").css("display", "none");
+				// $("#store")[0].reset();
+
+				GetCity("#city");
+				GetClinic("#city", "#clinic")
+			//	GetAsesorasbyBusisnessLine("#linea-negocio", "#asesora");
+			//	GetAsesorasValoracion("#id_asesora_valoracion")
+				GetBusinessLine("#linea-negocio");
+				Children("#children", "#number_children")
+				Surgery("#surgery", "#previous_surgery")
+				Disease("#disease", "#major_disease")
+				Medication("#medication", "#drink_medication")
+				Allergic("#allergic ", "#allergic_medication")
+				$("#clinic").attr("disabled", "disabled")
+
+
+				$("#tablecx tbody").html("");
+				// getCategory("#category", 124124124)
+				//ChangeCategory("#category", "#sub_category")
+				$("#tablecx tbody").html("");
+
+
+				// $('#summernote, #summernote_valorations').summernote('reset');
+				// $('#summernote, #summernote_valorations').summernote({
+				// 	'height' : 200
+				// });
+
+				$("#acquittance").fileinput('destroy');
+				$("#acquittance").fileinput({
+					theme: "fas",
+					overwriteInitial: true,
+					maxFileSize: 21500,
+					showClose: false,
+					showCaption: false,
+					browseLabel: '',
+					removeLabel: '',
+					browseIcon: '<i class="fa fa-folder-open"></i>',
+					removeIcon: '<i class="fas fa-trash-alt"></i>',
+					previewFileIcon: '<i class="fas fa-file"></i>',
+					removeTitle: 'Cancel or reset changes',
+					elErrorContainer: '#kv-avatar-errors-1',
+					msgErrorClass: 'alert alert-block alert-danger',
+
+					layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+					allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "pdf", "docs"],
+				});
+
+				// GetAsesorasValoracion2("#asesora")
+
+				cuadros("#cuadro1", "#cuadro2");
+			}
 
 	/* ------------------------------------------------------------------------------- */
 	/*
