@@ -134,7 +134,7 @@ class FinacingController extends Controller
             if (($request["status"] == "Aprobado") || ($request["status"] == "Desembolsado")) {
 
                 DB::table("client_request_credit_payment_plan")->where("id_request_credit", $id)->delete();
-              
+
                 foreach ($request["number"] as $key => $value) {
 
                     $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
@@ -292,8 +292,6 @@ class FinacingController extends Controller
 
         $client = DB::table("clientes")->where("id_cliente", $request["id_client"])->first();
 
-
-
         $mensaje = "Pago Estudio de Credito, Monto : $request[amount], Metodo de Pago: $request[payment_method],  ID Transaccion : ".$request["id_transactions"];
 
         $info_email = [
@@ -419,6 +417,23 @@ class FinacingController extends Controller
             "date_pay"        => date("Y-m-d"),
             "photo_recived"   => $request["photo_recived"]
         ]);
+
+
+
+        $client = DB::table("clientes")->where("id_cliente", $request["id_client"])->first();
+
+        $mensaje = "Pago Cuota de Credito, Monto : $request[amount], Metodo de Pago: $request[payment_method],  ID Transaccion : ".$request["id_transactions"];
+
+        $info_email = [
+            "user_id" => $client->id_user_asesora,
+            "issue"   => "Pago Cuota de Credito Px :". $client->nombres,
+            "mensage" => $mensaje,
+        ];
+
+        $this->SendEmail($info_email);
+
+
+
         return response()->json($request->all())->setStatusCode(200);
     }
 
@@ -613,7 +628,7 @@ class FinacingController extends Controller
 
             $date = date("Y-m-d");
             DB::table("client_request_credit_payment_plan")->where("id_request_credit", $guardar->id)->delete();
-              
+
                 foreach ($request["number"] as $key => $value) {
 
                     $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
