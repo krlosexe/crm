@@ -540,7 +540,7 @@ class FinacingController extends Controller
     {
         try {
             $query = ClientRequestCreditPaymentPlan::where('id', $request->id)->first();
-            if($query->status == 'Verificando'){
+            if($query->status == 'Verificando' || $query->status == 'Pendiente'){
                 ClientRequestCreditPaymentPlan::where('id', $request->id)
                 ->update([
                     'status' => 'Pagada'
@@ -595,7 +595,8 @@ class FinacingController extends Controller
             $guardar->id_client = $request->id_cliente;
             $guardar->required_amount = $request->required_amount;
             $guardar->period = $request->period;
-            $guardar->monthly_fee = $request->monthly_fee;
+            // $guardar->monthly_fee = $request->monthly_fee;
+            $guardar->monthly_fee = str_replace(",", "", $request["monthly_fee"]);
             $guardar->status = "Pendiente";
             $guardar->save();
 
