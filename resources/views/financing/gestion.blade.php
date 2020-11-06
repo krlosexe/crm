@@ -367,7 +367,7 @@
 			var url = document.getElementById('ruta').value;
 			$.ajax({
 				url: 'https://pdtclientsolutions.com/crm-public/api/client/indentification/' + $("#indetification").val(),
-				// url: '/api/client/indentification/' + $("#indetification").val(),
+				//url: '/api/client/indentification/' + $("#indetification").val(),
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
@@ -1125,7 +1125,7 @@
 	function calcularStore() {
 
 		var monto = inNum(document.getElementById("required_amount_new").value)
-		var cuotas = document.getElementById("period").value
+		var cuotas = document.getElementById("period_new").value
 		var tasa = 2.65584
 
 		var periodo = "mensual";
@@ -1367,9 +1367,7 @@
 					$("#address_mailing").val(data ? data.address_mailing : '')
 					$("#city_mailing").val(data ? data.city_mailing : '')
 					$("#phone_mailing").val(data ? data.phone_mailing : '')
-					$("#type_activity_client").val(data ? data.type_activity_client : '')
-					$("#oter_activity_client").val(data ? data.oter_activity_client : '')
-					$("#name_company_client").val(data ? data.name_company_client : '')
+					$("#type_activity_client").val(data ? data.typeVerificandoe_company_client : '')
 					$("#addres_worck_client").val(data ? data.addres_worck_client : '')
 					$("#city_worck_clirnt").val(data ? data.city_worck_clirnt : '')
 					$("#phone_worck_client").val(data ? data.phone_worck_client : '')
@@ -1456,7 +1454,7 @@
 						"data": "number"
 					},
 					{
-						"data": "balance",
+						"data": "monthly_fees",
 						render: (data, type, row) => {
 							return number_format(data, 2)
 						}
