@@ -1219,15 +1219,9 @@
 						}
 					});
 
-
-
-
 				});
 
 			}
-
-
-
 
 			function nuevo() {
 				$("#alertas").css("display", "none");

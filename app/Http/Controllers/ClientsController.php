@@ -3834,7 +3834,8 @@ class ClientsController extends Controller
         //
     }
 
-    public function GetIdentification($id){
+    public function GetIdentification($id)
+    {
         try {
             $data = Clients::select(
                 'clientes.id_cliente',
@@ -3847,6 +3848,18 @@ class ClientsController extends Controller
             ->where('identificacion',$id)
             ->with('procedures')
             ->first();
+
+            return response()->json($data)->setStatusCode(200);
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+
+    public function Identification($id)
+    {
+        // dd($id);
+        try {
+            $data = Clients::where('identificacion',$id)->first();
 
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {
