@@ -1125,7 +1125,7 @@
 	function calcularStore() {
 
 		var monto = inNum(document.getElementById("required_amount_new").value)
-		var cuotas = document.getElementById("period").value
+		var cuotas = document.getElementById("period_new").value
 		var tasa = 2.65584
 
 		var periodo = "mensual";
