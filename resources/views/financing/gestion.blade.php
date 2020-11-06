@@ -1454,7 +1454,7 @@
 						"data": "number"
 					},
 					{
-						"data": "balance",
+						"data": "monthly_fees",
 						render: (data, type, row) => {
 							return number_format(data, 2)
 						}
