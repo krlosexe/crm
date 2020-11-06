@@ -409,40 +409,43 @@ class ValuationsController extends Controller
                 $users_client = DB::table("auth_users_app_financing")->selectRaw("auth_users_app_financing.token_notifications")
                                     ->where("auth_users_app_financing.id_user", $user->id)
                                     ->first();
-            }
 
 
-            if($users_client){
 
-                $FCM_token = $users_client->token_notifications;
+                if($users_client){
 
-                $url = "https://fcm.googleapis.com/fcm/send";
-                $token = $FCM_token;
-                $serverKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
-                $title = "Tu cita de valoracion fue Agendada";
-                $body = "Tu cita de Valoracion fue agendada para el dia $request[fecha]";
-                $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default', 'badge' => '1');
-                $arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
-                $json = json_encode($arrayToSend);
-                $headers = array();
-                $headers[] = 'Content-Type: application/json';
-                $headers[] = 'Authorization: key='. $serverKey;
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-                curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-                //Send the request
-                $response = curl_exec($ch);
-                //Close request
-                if ($response === FALSE) {
-                    die('FCM Send Error: ' . curl_error($ch));
+                    $FCM_token = $users_client->token_notifications;
+
+                    $url = "https://fcm.googleapis.com/fcm/send";
+                    $token = $FCM_token;
+                    $serverKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+                    $title = "Tu cita de valoracion fue Agendada";
+                    $body = "Tu cita de Valoracion fue agendada para el dia $request[fecha]";
+                    $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default', 'badge' => '1');
+                    $arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+                    $json = json_encode($arrayToSend);
+                    $headers = array();
+                    $headers[] = 'Content-Type: application/json';
+                    $headers[] = 'Authorization: key='. $serverKey;
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                    //Send the request
+                    $response = curl_exec($ch);
+                    //Close request
+                    if ($response === FALSE) {
+                        die('FCM Send Error: ' . curl_error($ch));
+                    }
+                    curl_close($ch);
+
+
                 }
-                curl_close($ch);
-
-
             }
+
+
 
             if($state_px != "0"){
                 $data_client = Clients::select("state")->find($request["id_cliente"]);
