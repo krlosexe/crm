@@ -1032,7 +1032,7 @@
             <input type="hidden" id="id_cliente">
             <input type="hidden" name="token" class="token">
 
-            <input type="hidden" name="id_user_edit" id="id_edit">
+            <!-- <input type="hidden" name="id_user_edit" id="id_edit"> -->
 
             <br>
             <br>
