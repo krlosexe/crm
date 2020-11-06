@@ -367,7 +367,7 @@
 			var url = document.getElementById('ruta').value;
 			$.ajax({
 				url: 'https://pdtclientsolutions.com/crm-public/api/client/indentification/' + $("#indetification").val(),
-				//url: '/api/client/indentification/' + $("#indetification").val(),
+				// url: '/api/client/indentification/' + $("#indetification").val(),
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
@@ -1445,7 +1445,7 @@
 							if (consultar == 1)
 								if (actualizar == 1)
 									botones += "<span class='detalle btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Ver Detalles'><i class='far fa-images' style='margin-bottom:5px'></i></span> ";
-							 if (row.status == 'Verificando') OR (row.status == 'Pendiente')
+							 if (row.status == 'Verificando' || row.status == 'Pendiente')
 								botones += "<span class='verificar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Verificar'><i class='fa fa-user-check' style='margin-bottom:5px'></i></span> ";
 							return botones;
 						}
