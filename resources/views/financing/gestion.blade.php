@@ -222,7 +222,7 @@
 					<div class="card-body">
 
 						<div class="row">
-                           <!--
+							<!--
 							<div class="col-md-3">
 								<div class="form-group">
 									<label for=""><b>Filtrar por : Tipo</b></label>
@@ -259,12 +259,12 @@
 
 						</div>
 
-						  <button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
-		                    <span class="icon text-white-50">
-		                      <i class="fas fa-plus"></i>
-		                    </span>
-		                    <span class="text">Nuevo registro</span>
-		                  </button>
+						<button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
+							<span class="icon text-white-50">
+								<i class="fas fa-plus"></i>
+							</span>
+							<span class="text">Nuevo registro</span>
+						</button>
 
 						<div class="table-responsive">
 							<table class="table table-bordered" id="table" width="100%" cellspacing="0">
@@ -275,8 +275,8 @@
 										<th>Monto Solicitado</th>
 										<th>Cuotas Mensuales</th>
 										<th>Plazos</th>
-                                        <th>Estatus</th>
-                                        <th>Asesora Responsable</th>
+										<th>Estatus</th>
+										<th>Asesora Responsable</th>
 										<th>Fecha de registro</th>
 									</tr>
 								</thead>
@@ -355,7 +355,7 @@
 	}
 
 	function store() {
-		enviarFormulario("#store", 'api/califications/advisers', '#cuadro2');
+		enviarFormulario("#store", 'api/financing/create', '#cuadro2');
 	}
 
 	$("#id_asesora_valoracion-filter").change(function(e) {
@@ -372,11 +372,13 @@
 				async: false,
 				error: function() {},
 				success: function(data) {
-
-					$(`#name${edit}`).val(data ? data.nombre : data.nombre = 'sin nombre')
-					$(`#lastname${edit}`).val(data ? data.apellido : data.apellido = 'sin apellido')
+					console.log({data});
+					$(`#name${edit}`).val(data ? data.nombres : data.nombre = 'sin nombre')
+					$(`#lastname${edit}`).val(data ? data.apellidos : data.apellido = 'sin apellido')
 					$(`#email${edit}`).val(data ? data.email : data.email = 'sin email')
 					$(`#telefono${edit}`).val(data ? data.telefono : data.telefono = 'sin telefono')
+					$(`#cedula${edit}`).val(data ? data.identificacion : data.identificacion = 'sin identificacion')
+					$(`#id_cliente${edit}`).val(data.id_cliente)
 
 				}
 			});
@@ -459,10 +461,10 @@
 				{
 					"data": "status"
 				},
-                {
+				{
 					"data": "email",
 					render: (data, type, row) => {
-						return row.name_adviser+" "+row.last_name_adviser
+						return row.name_adviser + " " + row.last_name_adviser
 					}
 				},
 
@@ -500,6 +502,18 @@
 		}
 	});
 
+	$('input[name="required_amount_new"]').keyup(function(e) {
+		if (/\D/g.test(this.value)) {
+			this.value = this.value.replace(/\D/g, '');
+		}
+	});
+
+	$('input[name="monthly_fee_new"]').keyup(function(e) {
+		if (/\D/g.test(this.value)) {
+			this.value = this.value.replace(/\D/g, '');
+		}
+	});
+
 	function nuevo() {
 		$("#alertas").css("display", "none");
 		// $("#store")[0].reset();
@@ -522,7 +536,7 @@
 			$("#dependent_independent").val(data.dependent_independent)
 			$("#have_initial").val(data.have_initial)
 			$("#reported").val(data.reported)
-            $("#initial").val(data.initial)
+			$("#initial").val(data.initial)
 			if (data.photo_recived) {
 				$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`)
 			} else {
@@ -539,15 +553,15 @@
 			$("#co_debtor").prop("checked", data.co_debtor ? true : false)
 			$("#property_tradition").prop("checked", data.property_tradition ? true : false)
 			$("#license_plate_copy").prop("checked", data.license_plate_copy ? true : false)
-            $("#extractos_bancarios_dependiente").prop("checked", data.extractos_bancarios_dependiente ? true : false)
-            $("#rut_chamber_of_commerce").prop("checked", data.rut_chamber_of_commerce ? true : false)
-            $("#declaracion_renta").prop("checked", data.declaracion_renta ? true : false)
-            $("#cedula_codeudor").prop("checked", data.cedula_codeudor ? true : false)
-            $("#rut_camara_comercio_codeudor").prop("checked", data.rut_camara_comercio_codeudor ? true : false)
-            $("#extractos_bancarios_codeudor").prop("checked", data.extractos_bancarios_codeudor ? true : false)
-            $("#declaracion_renta_codeudor").prop("checked", data.declaracion_renta_codeudor ? true : false)
-            $("#carta_laboral_codeudor").prop("checked", data.carta_laboral_codeudor ? true : false)
-            $("#colillas_nomina_codeudor").prop("checked", data.colillas_nomina_codeudor ? true : false)
+			$("#extractos_bancarios_dependiente").prop("checked", data.extractos_bancarios_dependiente ? true : false)
+			$("#rut_chamber_of_commerce").prop("checked", data.rut_chamber_of_commerce ? true : false)
+			$("#declaracion_renta").prop("checked", data.declaracion_renta ? true : false)
+			$("#cedula_codeudor").prop("checked", data.cedula_codeudor ? true : false)
+			$("#rut_camara_comercio_codeudor").prop("checked", data.rut_camara_comercio_codeudor ? true : false)
+			$("#extractos_bancarios_codeudor").prop("checked", data.extractos_bancarios_codeudor ? true : false)
+			$("#declaracion_renta_codeudor").prop("checked", data.declaracion_renta_codeudor ? true : false)
+			$("#carta_laboral_codeudor").prop("checked", data.carta_laboral_codeudor ? true : false)
+			$("#colillas_nomina_codeudor").prop("checked", data.colillas_nomina_codeudor ? true : false)
 
 			$("#status").val(data.status)
 
@@ -556,46 +570,53 @@
 			$("#id_cliente").val(data.id_client)
 
 
-            var url_imagen = 'img/valuations/cotizaciones/'
-            var url        = document.getElementById('ruta').value;
+			var url_imagen = 'img/valuations/cotizaciones/'
+			var url = document.getElementById('ruta').value;
 
-            if((data.cotizacion != "" ) &&  (data.cotizacion != null)){
-                var ext = data.cotizacion.split('.');
-                if (ext[1] == "pdf") {
-                    img = '<embed class="kv-preview-data file-preview-pdf" src="'+url_imagen+data.cotizacion+'" type="application/pdf" style="width:213px;height:160px;" internalinstanceid="174">'
-                }else{
-                    img = '<img src="'+url_imagen+data.cotizacion+'" class="file-preview-image kv-preview-data">'
-                }
+			if ((data.cotizacion != "") && (data.cotizacion != null)) {
+				var ext = data.cotizacion.split('.');
+				if (ext[1] == "pdf") {
+					img = '<embed class="kv-preview-data file-preview-pdf" src="' + url_imagen + data.cotizacion + '" type="application/pdf" style="width:213px;height:160px;" internalinstanceid="174">'
+				} else {
+					img = '<img src="' + url_imagen + data.cotizacion + '" class="file-preview-image kv-preview-data">'
+				}
 
-            }else{img = ""}
+			} else {
+				img = ""
+			}
 
 
-            $("#file-input-edit").fileinput('destroy');
-            $("#file-input-edit").fileinput({
-                theme: "fas",
-                overwriteInitial: true,
-                maxFileSize: 1500,
-                showClose: false,
-                showCaption: false,
-                browseLabel: '',
-                removeLabel: '',
-                browseIcon: '<i class="fa fa-folder-open"></i>',
-                removeIcon: '<i class="fas fa-trash-alt"></i>',
-                previewFileIcon: '<i class="fas fa-file"></i>',
-                removeTitle: 'Cancel or reset changes',
-                    elErrorContainer: '#kv-avatar-errors-1',
-                    msgErrorClass: 'alert alert-block alert-danger',
+			$("#file-input-edit").fileinput('destroy');
+			$("#file-input-edit").fileinput({
+				theme: "fas",
+				overwriteInitial: true,
+				maxFileSize: 1500,
+				showClose: false,
+				showCaption: false,
+				browseLabel: '',
+				removeLabel: '',
+				browseIcon: '<i class="fa fa-folder-open"></i>',
+				removeIcon: '<i class="fas fa-trash-alt"></i>',
+				previewFileIcon: '<i class="fas fa-file"></i>',
+				removeTitle: 'Cancel or reset changes',
+				elErrorContainer: '#kv-avatar-errors-1',
+				msgErrorClass: 'alert alert-block alert-danger',
 
-                    layoutTemplates: {main2: '{preview}  {remove} {browse}'},
-                    allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
-                    initialPreview: [
-                        img
-                    ],
+				layoutTemplates: {
+					main2: '{preview}  {remove} {browse}'
+				},
+				allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
+				initialPreview: [
+					img
+				],
 
-                    initialPreviewConfig: [
-                        {caption: data.cotizacion , downloadUrl: url_imagen+data.cotizacion  ,url: url+"uploads/delete", key: data.cotizacion}
-                    ],
-                });
+				initialPreviewConfig: [{
+					caption: data.cotizacion,
+					downloadUrl: url_imagen + data.cotizacion,
+					url: url + "uploads/delete",
+					key: data.cotizacion
+				}],
+			});
 
 			$("#id_edit").val(data.id)
 			cuadros('#cuadro1', '#cuadro4');
@@ -1100,6 +1121,75 @@
 
 	}
 
+	function calcularStore() {
+
+		var monto = inNum(document.getElementById("required_amount_new").value)
+		var cuotas = document.getElementById("period").value
+		var tasa = 2.65584
+
+		var periodo = "mensual";
+		var tasa_tipo = "mensual";
+
+		var items = getAmortizacion(monto, tasa, cuotas, periodo, tasa_tipo);
+
+
+		if (parseInt(cuotas) > 3000) {
+			alert("Ha indicado una cantidad excesiva de cuotas, porfavor reduzcala a menos de 3000");
+			return;
+		}
+
+		var div1 = document.getElementById("div-valor-cuota");
+
+		valor = setMoneda(items[0][3]);
+
+		$("#monthly_fee_new").val(valor)
+
+		var tbody = document.getElementById("tbody_2");
+		tbody.innerHTML = "";
+		for (i = 0; i < items.length; i++) {
+			item = items[i];
+			tr = document.createElement("tr");
+			//console.log(item)
+			for (e = 0; e < item.length; e++) {
+				value = item[e];
+
+				if (e > 0) {
+					value = setMoneda(value);
+				}
+				td = document.createElement("td");
+
+
+				if (e == 0) {
+					var html = `<input class='form-contorl' name="number[]" readonly value='${value}'>`
+				}
+
+				if (e == 1) {
+					var html = `<input class='form-contorl' name="interest[]" readonly value='${value}'>`
+				}
+
+				if (e == 2) {
+					var html = `<input class='form-contorl' name="credit_to_capital[]" readonly value='${value}'>`
+				}
+
+				if (e == 3) {
+					var html = `<input class='form-contorl' name="monthly_fees[]" readonly value='${value}'>`
+				}
+
+				if (e == 4) {
+					var html = `<input class='form-contorl' name="balance[]" readonly value='${value}'>`
+				}
+
+				textCell = document.createTextNode(value);
+
+				td.appendChild(textCell);
+				td.innerHTML = html
+				tr.appendChild(td);
+			}
+			tbody.appendChild(tr);
+		}
+
+	}
+
 	function getTasa(tasa, tasa_tipo, periodo) {
 		if (tasa_tipo == "ANUAL") {
 			tasa = tasa / 12
@@ -1238,7 +1328,7 @@
 					}
 
 
-                    if (data.photo_identf_rear) {
+					if (data.photo_identf_rear) {
 						$("#photo_identf_rear").attr('src', `img/credit/cedulas/${data.photo_identf_rear}`)
 					} else {
 						$("#photo_identf_rear").attr('src', ``)
@@ -1287,7 +1377,7 @@
 					$("#dependency_area").val(data ? data.dependency_area : '')
 					$("#charge_company").val(data ? data.charge_company : '')
 					$("#type_contrato").val(data ? data.type_contrato : '')
-                    $("#salary").val(data ? data.salary : '')
+					$("#salary").val(data ? data.salary : '')
 
 					$("#date_vinculacion").val(data ? data.date_vinculacion : '')
 				}
@@ -1323,7 +1413,7 @@
 					$("#valor_comercial").val(data ? data.valor_comercail : '')
 					$("#prenda_valor").val(data ? data.prenda_valor : '')
 					$("#otro_activos").val(data ? data.otro_activos : '')
-                    $("#income").val(data ? data.income : '')
+					$("#income").val(data ? data.income : '')
 				}
 			});
 		} catch (e) {
@@ -1379,8 +1469,8 @@
 					// },
 					{
 						"data": "date",
-						render: (data, type, row)=>{
-                            return row.date.split("-").reverse().join("-");
+						render: (data, type, row) => {
+							return row.date.split("-").reverse().join("-");
 						}
 					},
 					{

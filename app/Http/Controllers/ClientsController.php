@@ -3859,16 +3859,7 @@ class ClientsController extends Controller
     {
         // dd($id);
         try {
-            $data = Clients::select(
-                'clientes.id_cliente',
-                'clientes.nombres as nombre',
-                'clientes.apellidos as apellido',
-                'clientes.email',
-                'clientes.telefono'
-                )
-    
-            ->where('identificacion',$id)
-            ->first();
+            $data = Clients::where('identificacion',$id)->first();
 
             return response()->json($data)->setStatusCode(200);
         } catch (\Throwable $th) {

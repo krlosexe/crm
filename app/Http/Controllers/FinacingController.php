@@ -134,6 +134,7 @@ class FinacingController extends Controller
             if (($request["status"] == "Aprobado") || ($request["status"] == "Desembolsado")) {
 
                 DB::table("client_request_credit_payment_plan")->where("id_request_credit", $id)->delete();
+              
                 foreach ($request["number"] as $key => $value) {
 
                     $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
@@ -584,8 +585,48 @@ class FinacingController extends Controller
             return  $th;
         }
 
+    }
+
+    public function createSolicitud(Request $request)
+    {
+        // dd($request->all());
+        try {
+            $guardar = new ClientRequestCredit;
+            $guardar->id_client = $request->id_cliente;
+            $guardar->required_amount = $request->required_amount;
+            $guardar->period = $request->period;
+            $guardar->monthly_fee = $request->monthly_fee;
+            $guardar->status = "Pendiente";
+            $guardar->save();
+
+            $date = date("Y-m-d");
+            DB::table("client_request_credit_payment_plan")->where("id_request_credit", $guardar->id)->delete();
+              
+                foreach ($request["number"] as $key => $value) {
+
+                    $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
+
+                    $array = [];
+                    $array["id_request_credit"]  = $guardar->id;
+                    $array["number"]             = $value;
+                    $array["interest"]           = str_replace(",", "", $request["interest"][$key]);
+                    $array["credit_to_capital"]  = str_replace(",", "", $request["credit_to_capital"][$key]);
+                    $array["monthly_fees"]       = str_replace(",", "", $request["monthly_fees"][$key]);
+                    $array["balance"]            = str_replace(",", "", $request["balance"][$key]);
+                    $array["date"]               = $date;
 
 
+                    DB::table("client_request_credit_payment_plan")->insert($array);
+                }
+
+                $response = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+
+                return response()->json($response)->setStatusCode(200);
+
+
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 
 }
