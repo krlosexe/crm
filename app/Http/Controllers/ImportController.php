@@ -180,7 +180,7 @@ class ImportController extends Controller
                 $client = Clients::where("identificacion", str_replace(".", "", $cedula))->first();
               
                 if($client){   
-
+                         echo $client["id_cliente"];
                         $head = new ClientRequestCredit;
                         $head->id_client          = $client["id_cliente"];
                         $head->required_amount    = $monto_credito;
