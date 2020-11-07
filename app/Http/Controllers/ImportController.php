@@ -15,10 +15,9 @@ use App\{
     ClientInformationAditionalSurgery,
     Tasks,
     ClientClinicHistory,
-    ClientRequestCreditPaymentPlan
+    ClientRequestCreditPaymentPlan,
 };
-use Carbon\Carbon;
-
+use DateTime;
 class ImportController extends Controller
 {
     public function clients()
@@ -169,17 +168,23 @@ class ImportController extends Controller
         $data = [];
         if (($gestor = fopen("credits.csv", "r")) !== FALSE) {
             while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
-              
+
                 $numero         = count($datos);
                 $cedula         = $datos[0];
                 $monto_credito  = $datos[1];
                 $periodo        = $datos[2];
                 $monto_cuota    = $datos[3];
                 $date           = $datos[4];
-                // dd($cedula);
-                $client = Clients::where("identificacion",$cedula)->first();
-                // dd($client);
-                if($client){   
+
+                $client = Clients::where("identificacion", trim($cedula))->first();
+
+                $datetime = $date;
+                $d = DateTime::createFromFormat("d/m/Y", $datetime);
+                $date = $d->format("Y-m-d"); // or any you want
+
+                $date = date("Y-m-d", strtotime($date));
+
+                if($client){
                          echo $client["id_cliente"];
                         $head = new ClientRequestCredit;
                         $head->id_client          = $client["id_cliente"];
@@ -188,20 +193,22 @@ class ImportController extends Controller
                         $head->monthly_fee	      = $monto_cuota;
                         $head->status             = "Desembolsado";
                         $head->save();
-                        
 
-                    $date = Carbon::now($date)->format("Y-m-d");
-                    for ($i=1; $i <= $periodo; $i++) { 
+
+
+
+                    for ($i=1; $i <= $periodo; $i++) {
 
                         $items = new ClientRequestCreditPaymentPlan;
                         $items->id_request_credit  = $head->id;
                         $items->number             = $i;
                         $items->monthly_fees	       = $monto_cuota;
                         $items->balance	           = 0;
+                        $items->monthly_fees	      = $monto_cuota;
                         $items->date	           = $date;
                         $items->status             = "Pendiente";
                         $items->save();
-                     
+
                         $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
                     }
                 }
