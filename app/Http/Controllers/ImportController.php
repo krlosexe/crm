@@ -31,7 +31,7 @@ class ImportController extends Controller
 
                 $numero = count($datos);
                     echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
-                    
+
                 if($fila != 1){
 
                     $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
@@ -52,10 +52,10 @@ class ImportController extends Controller
                         $city = 4;
                     }
 
-                    $date=date_create($datos[3]); 
-  
-                    // using date_format() function to format date 
-                    $datos[3] = date_format($date, "Y-m-d"); 
+                    $date=date_create($datos[3]);
+
+                    // using date_format() function to format date
+                    $datos[3] = date_format($date, "Y-m-d");
 
 
                     $row = array(
@@ -70,13 +70,13 @@ class ImportController extends Controller
                         "email" => isset($datos[9]) ? $datos[9] : null,
                         "id_line" => 2,
                         "id_user_asesora" => 83,
-                        "direccion" => isset($datos[12]) ? $datos[12] : null, 
+                        "direccion" => isset($datos[12]) ? $datos[12] : null,
                         "origen"    => $datos[5],
                         "state"     =>isset($datos[14]) ? $datos[14] != "" ? $datos[14] : null : null,
                         "code_client" => strtoupper($code),
                         "to_db" => 1
                     );
-                    
+
 
                 $data[] = $row;
                 $cliente = Clients::create($row);
@@ -95,7 +95,7 @@ class ImportController extends Controller
                         "id_client"    => $cliente["id_cliente"],
                         "name_surgery" => isset($datos[32]) ? $datos[32] : null
                     );
-                    
+
 
 
                     ClientInformationAditionalSurgery::create($row);
@@ -109,10 +109,10 @@ class ImportController extends Controller
 
             }
            echo json_encode($data);
-                
+
             fclose($gestor);
         }
-        
+
     }
 
 
@@ -146,19 +146,62 @@ class ImportController extends Controller
                 //     "email" => isset($datos[25]) ? $datos[25] : null,
                 //     "id_line" => 11,
                 //     "id_user_asesora" => 69,
-                //     "direccion" => isset($datos[66]) ? $datos[66] : null, 
+                //     "direccion" => isset($datos[66]) ? $datos[66] : null,
                 //     "state"     =>isset($datos[63]) ? $datos[63] != "" ? $datos[63] : null : null,
                 // );
 
                 // $data[] = $row;
                 echo json_encode($datos)."<br><br>";
             }
-           
-                
+
+
             fclose($gestor);
         }
-        
+
     }
+
+
+
+
+    public function ImportCredits()
+    {
+        ini_set("default_charset", "UTF-8");
+        $fila = 1;
+
+        $data = [];
+        if (($gestor = fopen("credits.csv", "r")) !== FALSE) {
+            while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
+                $numero = count($datos);
+             // echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
+              //  echo json_encode(str_replace("C.C. ", "", $datos[1]));
+            //    echo "<br>";
+
+                $client = Clients::where("identificacion", str_replace("C.C. ", "", $datos[1]))->first();
+
+                if(!$client){
+                    echo str_replace("C.C. ", "", $datos[1]);
+                    echo "<br>";
+                    //echo "---";
+                    //echo json_encode($datos[0]);
+                }
+                //echo "<br>";
+                $fila++;
+
+                $row = array(
+                    "responsable"   => 69,
+                   // "issue"         => $datos[1]
+
+                );
+
+            }
+          // echo json_encode($datos);
+           fclose($gestor);
+        }
+
+    }
+
+
+
 
 
 
@@ -193,14 +236,14 @@ class ImportController extends Controller
                 $auditoria->status      = 1;
                 $auditoria->usr_regins  = 69;
                 $auditoria->save();
-                
+
             }
             echo "asd";
            echo json_encode($data);
-                
+
             fclose($gestor);
         }
-        
+
     }
 
 

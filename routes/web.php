@@ -130,6 +130,13 @@ Route::get('import_tasks', 'ImportController@ImportTasks');
 Route::get('import/calendar', 'ImportController@Calendar');
 
 
+
+Route::get('import/credit', 'ImportController@ImportCredits');
+
+
+
+
+
 Route::get('forms/{id_user}/{id_line}', function ($id_user, $id_line) {
     return view('forms.form', ["id_user" => $id_user, "id_line" => $id_line]);
 });
