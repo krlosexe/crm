@@ -176,9 +176,9 @@ class ImportController extends Controller
                 $periodo        = $datos[2];
                 $monto_cuota    = $datos[3];
                 $date           = $datos[4];
-
-                $client = Clients::where("identificacion", str_replace(".", "", $cedula))->first();
-              
+                // dd($cedula);
+                $client = Clients::where("identificacion",$cedula)->first();
+                // dd($client);
                 if($client){   
                          echo $client["id_cliente"];
                         $head = new ClientRequestCredit;
@@ -196,6 +196,7 @@ class ImportController extends Controller
                         $items = new ClientRequestCreditPaymentPlan;
                         $items->id_request_credit  = $head->id;
                         $items->number             = $i;
+                        $items->monthly_fees	       = $monto_cuota;
                         $items->balance	           = 0;
                         $items->date	           = $date;
                         $items->status             = "Pendiente";
