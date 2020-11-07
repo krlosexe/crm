@@ -17,6 +17,7 @@ use App\{
     ClientClinicHistory,
     ClientRequestCreditPaymentPlan
 };
+use Carbon\Carbon;
 
 class ImportController extends Controller
 {
@@ -174,11 +175,12 @@ class ImportController extends Controller
                 $monto_credito  = $datos[1];
                 $periodo        = $datos[2];
                 $monto_cuota    = $datos[3];
+                $date           = $datos[4];
 
                 $client = Clients::where("identificacion", str_replace(".", "", $cedula))->first();
               
                 if($client){   
-
+                         echo $client["id_cliente"];
                         $head = new ClientRequestCredit;
                         $head->id_client          = $client["id_cliente"];
                         $head->required_amount    = $monto_credito;
@@ -186,17 +188,20 @@ class ImportController extends Controller
                         $head->monthly_fee	      = $monto_cuota;
                         $head->status             = "Desembolsado";
                         $head->save();
+                        
 
+                    $date = Carbon::now($date)->format("Y-m-d");
                     for ($i=1; $i <= $periodo; $i++) { 
+
                         $items = new ClientRequestCreditPaymentPlan;
                         $items->id_request_credit  = $head->id;
                         $items->number             = $i;
-                        $items->interest           = 0;
-                        $items->credit_to_capital  = 0;
-                        $items->monthly_fees	   = $monto_cuota;
                         $items->balance	           = 0;
+                        $items->date	           = $date;
                         $items->status             = "Pendiente";
                         $items->save();
+                     
+                        $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
                     }
                 }
                 echo "<br>";
