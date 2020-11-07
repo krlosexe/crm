@@ -7,16 +7,16 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 
-use App\Clients;
-use App\Auditoria;
-use App\ClientClinicHistory;
-use App\ClientCreditInformation;
-use App\ClientInformationAditionalSurgery;
-
-
-
-use App\Tasks;
-
+use App\{
+    Clients,
+    ClientRequestCredit,
+    Auditoria,
+    ClientCreditInformation,
+    ClientInformationAditionalSurgery,
+    Tasks,
+    ClientClinicHistory,
+    ClientRequestCreditPaymentPlan
+};
 
 class ImportController extends Controller
 {
@@ -160,9 +160,6 @@ class ImportController extends Controller
 
     }
 
-
-
-
     public function ImportCredits()
     {
         ini_set("default_charset", "UTF-8");
@@ -170,22 +167,39 @@ class ImportController extends Controller
 
         $data = [];
         if (($gestor = fopen("credits.csv", "r")) !== FALSE) {
-            while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
-                $numero = count($datos);
-             // echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
-              //  echo json_encode(str_replace("C.C. ", "", $datos[1]));
-            //    echo "<br>";
+            while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
+              
+                $numero         = count($datos);
+                $cedula         = $datos[0];
+                $monto_credito  = $datos[1];
+                $periodo        = $datos[2];
+                $monto_cuota    = $datos[3];
 
-                $cedula = str_replace("C.C. ", "", $datos[1]);
                 $client = Clients::where("identificacion", str_replace(".", "", $cedula))->first();
-                if(!$client){
-                   // echo str_replace("C.C. ", "", $datos[1]);
-                   echo json_encode($datos[0]);
-                    echo "<br>";
-                    //echo "---";
-                    //
+              
+                if($client){   
+
+                        $head = new ClientRequestCredit;
+                        $head->id_client          = $client["id_cliente"];
+                        $head->required_amount    = $monto_credito;
+                        $head->period             = $periodo;
+                        $head->monthly_fee	      = $monto_cuota;
+                        $head->status             = "Desembolsado";
+                        $head->save();
+
+                    for ($i=1; $i <= $periodo; $i++) { 
+                        $items = new ClientRequestCreditPaymentPlan;
+                        $items->id_request_credit  = $head->id;
+                        $items->number             = $i;
+                        $items->interest           = 0;
+                        $items->credit_to_capital  = 0;
+                        $items->monthly_fees	   = $monto_cuota;
+                        $items->balance	           = 0;
+                        $items->status             = "Pendiente";
+                        $items->save();
+                    }
                 }
-                //echo "<br>";
+                echo "<br>";
                 $fila++;
 
                 $row = array(
@@ -193,7 +207,6 @@ class ImportController extends Controller
                    // "issue"         => $datos[1]
 
                 );
-
             }
           // echo json_encode($datos);
            fclose($gestor);
