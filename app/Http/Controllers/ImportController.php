@@ -176,13 +176,14 @@ class ImportController extends Controller
               //  echo json_encode(str_replace("C.C. ", "", $datos[1]));
             //    echo "<br>";
 
-                $client = Clients::where("identificacion", str_replace("C.C. ", "", $datos[1]))->first();
-
+                $cedula = str_replace("C.C. ", "", $datos[1]);
+                $client = Clients::where("identificacion", str_replace(".", "", $cedula))->first();
                 if(!$client){
-                    echo str_replace("C.C. ", "", $datos[1]);
+                   // echo str_replace("C.C. ", "", $datos[1]);
+                   echo json_encode($datos[0]);
                     echo "<br>";
                     //echo "---";
-                    //echo json_encode($datos[0]);
+                    //
                 }
                 //echo "<br>";
                 $fila++;
