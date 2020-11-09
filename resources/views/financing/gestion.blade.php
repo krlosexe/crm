@@ -272,6 +272,7 @@
 									<tr>
 										<th>Acciones</th>
 										<th>Cliente</th>
+										<th>Identificaciòn</th>
 										<th>Monto Solicitado</th>
 										<th>Cuotas Mensuales</th>
 										<th>Plazos</th>
@@ -443,6 +444,9 @@
 				},
 				{
 					"data": "nombres"
+				},
+				{
+					"data": "identificacion"
 				},
 				{
 					"data": "required_amount",

@@ -18,7 +18,7 @@ class FinacingController extends Controller
     {
 
         $data = DB::table("client_request_credit")
-            ->selectRaw("client_request_credit.*, clientes.nombres, clientes.pay_to_study_credit,
+            ->selectRaw("client_request_credit.*, clientes.nombres,clientes.identificacion, clientes.pay_to_study_credit,
 
 
                                     clientc_credit_information.dependent_independent,
