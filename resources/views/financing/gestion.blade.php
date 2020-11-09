@@ -335,8 +335,8 @@
 		list();
 		update();
 
-		$("#collapse_Tareas").addClass("show");
-		$("#nav_califications, #modulo_Tareas").addClass("active");
+		$("#collapse_Pacientes").addClass("show");
+		$("#nav_financing, #modulo_Pacientes").addClass("active");
 
 		verifyPersmisos(id_user, tokens, "citys");
 
