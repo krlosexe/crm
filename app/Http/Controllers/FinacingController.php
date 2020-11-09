@@ -615,40 +615,44 @@ class FinacingController extends Controller
 
     public function createSolicitud(Request $request)
     {
-        // dd($request->all());
         try {
+
+            $monto_requerido = str_replace(".", "", $request->required_amount);
+            $monto_requerido = str_replace(",", ".", $monto_requerido);
+
+
+            $cuota = str_replace(".", "", $request["monthly_fee"]);
+            $cuota = str_replace(",", ".", $cuota);
+
             $guardar = new ClientRequestCredit;
             $guardar->id_client = $request->id_cliente;
-            $guardar->required_amount = $request->required_amount;
+            $guardar->required_amount = $monto_requerido;
             $guardar->period = $request->period;
             // $guardar->monthly_fee = $request->monthly_fee;
-            $guardar->monthly_fee = str_replace(",", "", $request["monthly_fee"]);
+            $guardar->monthly_fee = $cuota;
             $guardar->status = "Pendiente";
             $guardar->save();
 
-            $date = date("Y-m-d");
+            $date = $request["date_init"];
             DB::table("client_request_credit_payment_plan")->where("id_request_credit", $guardar->id)->delete();
 
-                foreach ($request["number"] as $key => $value) {
+            $periodo = $request["period"];
+            for ($i=1; $i <= $periodo; $i++) {
 
-                    $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
+                $items = new ClientRequestCreditPaymentPlan;
+                $items->id_request_credit  = $guardar->id;
+                $items->number             = $i;
+                $items->balance	           = 0;
+                $items->monthly_fees	      = $cuota;
+                $items->date	           = $date;
+                $items->status             = "Pendiente";
+                $items->save();
 
-                    $array = [];
-                    $array["id_request_credit"]  = $guardar->id;
-                    $array["number"]             = $value;
-                    $array["interest"]           = str_replace(",", "", $request["interest"][$key]);
-                    $array["credit_to_capital"]  = str_replace(",", "", $request["credit_to_capital"][$key]);
-                    $array["monthly_fees"]       = str_replace(",", "", $request["monthly_fees"][$key]);
-                    $array["balance"]            = str_replace(",", "", $request["balance"][$key]);
-                    $array["date"]               = $date;
+                $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
+            }
 
-
-                    DB::table("client_request_credit_payment_plan")->insert($array);
-                }
-
-                $response = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
-
-                return response()->json($response)->setStatusCode(200);
+            $response = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+            return response()->json($response)->setStatusCode(200);
 
 
         } catch (\Throwable $th) {

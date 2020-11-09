@@ -49,31 +49,37 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for=""><b>Monto Solicitado</b></label>
-                                        <input type="text" name="required_amount" id="required_amount_new" class="form-control" required onkeyup="calcularStore()">
+                                        <input type="text" name="required_amount" id="required_amount_new" class="form-control monto_formato_decimales" required>
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Fecha de inico del Credito</b></label>
+                                        <input type="date" name="date_init" id="date_init_new" class="form-control" required>
+                                    </div>
+                                </div>
+
+
                             </div>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for=""><b>Cuotas Mensuales</b></label>
-                                        <input type="text" name="monthly_fee" id="monthly_fee_new" class="form-control" required>
+                                        <input type="text" name="monthly_fee" id="monthly_fee_new" class="form-control monto_formato_decimales" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for=""><b>Plazos</b></label>
-                                        <select name="period" id="period_new" class="form-control" required onchange="calcularStore()">
-                                            <option value="">Seleccione</option>
-                                            <option value="72">72 meses</option>
-                                            <option value="60">60 meses</option>
-                                            <option value="48">48 meses</option>
-                                            <option value="36">36 meses</option>
-                                            <option value="24">24 meses</option>
-                                        </select>
+                                        <input type="number" name="period" id="period_new" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
+
+
+
                             <!-- <div class="row">
                                 <div class="col-md-6">
                                     <label for="pay_to_study_credit"><b>Pago estudio de credito ?</b></label>
