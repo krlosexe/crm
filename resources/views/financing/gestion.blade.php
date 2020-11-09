@@ -367,8 +367,8 @@
 		$(select).click(function(e) {
 			var url = document.getElementById('ruta').value;
 			$.ajax({
-				// url: 'https://pdtclientsolutions.com/crm-public/api/client/indentification/' + $("#indetification").val(),
-				url: url + '/api/client/indentification/' + $("#indetification").val(),
+				url: 'https://pdtclientsolutions.com/crm-public/api/client/indentification/' + $("#indetification").val(),
+				//url: url + '/api/client/indentification/' + $("#indetification").val(),
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
