@@ -167,25 +167,20 @@ class ImportController extends Controller
 
         $data = [];
         if (($gestor = fopen("credits.csv", "r")) !== FALSE) {
-            while (($datos = fgetcsv($gestor, 1000, ";")) !== FALSE) {
+            while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
 
                 $numero         = count($datos);
-                $cedula         = $datos[0];
-                $monto_credito  = $datos[1];
+                $cedula         = $datos[1];
+                $monto_credito  = str_replace(",", "", $datos[4]);
                 $periodo        = $datos[2];
-                $monto_cuota    = $datos[3];
-                $date           = $datos[4];
+                $monto_cuota    = str_replace(",", "", $datos[3]);
+                $date           = $datos[5];
 
                 $client = Clients::where("identificacion", trim($cedula))->first();
-
-
-
 
                 $datetime = $date;
                 $d = DateTime::createFromFormat("d/m/Y", $datetime);
                 $date = $d->format("Y-m-d"); // or any you want
-
-
 
                 $date = date("Y-m-d", strtotime($date));
 
@@ -198,9 +193,6 @@ class ImportController extends Controller
                         $head->monthly_fee	      = $monto_cuota;
                         $head->status             = "Desembolsado";
                         $head->save();
-
-
-
 
                     for ($i=1; $i <= $periodo; $i++) {
 
@@ -230,6 +222,34 @@ class ImportController extends Controller
         }
 
     }
+
+
+
+    public function ImportCreditsFaltantaes()
+    {
+        ini_set("default_charset", "UTF-8");
+        $fila = 1;
+
+        $data = [];
+        if (($gestor = fopen("credits.csv", "r")) !== FALSE) {
+            while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
+
+               // dd($datos);
+                $cedula         = $datos[1];
+                $client = Clients::where("identificacion", trim($cedula))->first();
+                if(!$client){
+                   echo  $cedula;
+                   echo "<br>";
+                }
+
+            }
+          // echo json_encode($datos);
+           fclose($gestor);
+        }
+
+    }
+
+
 
 
 
