@@ -98,7 +98,7 @@
             <div class="row">
                         <div class="col-md-12">
                             <br><br>
-                            <table id="table-2" style="width: 100%; text-align: right; border: 1px gray solid; border-collapse: collapse; display: none;">
+                            <table id="table-3" style="width: 100%; text-align: right; border: 1px gray solid; border-collapse: collapse; display: none;">
                                 <caption>Tabla de amortización</caption>
                                 <tr>
                                     <th>Número</th>

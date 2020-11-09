@@ -51,14 +51,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for=""><b>Plazos</b></label>
-                                        <select name="period" id="period" class="form-control" required onchange="calcular()">
-                                            <option value="">Seleccione</option>
-                                            <option value="72">72 meses</option>
-                                            <option value="60">60 meses</option>
-                                            <option value="48">48 meses</option>
-                                            <option value="36">36 meses</option>
-                                            <option value="24">24 meses</option>
-                                        </select>
+                                        <input type="number" name="period" id="period" class="form-control" required onchange="calcular()">
                                     </div>
                                 </div>
                             </div>
