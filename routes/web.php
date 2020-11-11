@@ -132,6 +132,7 @@ Route::get('import/calendar', 'ImportController@Calendar');
 
 
 Route::get('import/credit', 'ImportController@ImportCredits');
+Route::get('import/credit/faltantaes', 'ImportController@ImportCreditsFaltantaes');
 
 
 

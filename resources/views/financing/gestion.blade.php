@@ -272,6 +272,7 @@
 									<tr>
 										<th>Acciones</th>
 										<th>Cliente</th>
+										<th>Identificaciòn</th>
 										<th>Monto Solicitado</th>
 										<th>Cuotas Mensuales</th>
 										<th>Plazos</th>
@@ -335,8 +336,8 @@
 		list();
 		update();
 
-		$("#collapse_Tareas").addClass("show");
-		$("#nav_califications, #modulo_Tareas").addClass("active");
+		$("#collapse_Pacientes").addClass("show");
+		$("#nav_financing, #modulo_Pacientes").addClass("active");
 
 		verifyPersmisos(id_user, tokens, "citys");
 
@@ -366,8 +367,8 @@
 		$(select).click(function(e) {
 			var url = document.getElementById('ruta').value;
 			$.ajax({
-				 url: 'https://pdtclientsolutions.com/crm-public/api/client/indentification/' + $("#indetification").val(),
-				//url: '/api/client/indentification/' + $("#indetification").val(),
+				url: 'https://pdtclientsolutions.com/crm-public/api/client/indentification/' + $("#indetification").val(),
+				//url: url + '/api/client/indentification/' + $("#indetification").val(),
 				type: 'GET',
 				dataType: 'JSON',
 				async: false,
@@ -443,6 +444,9 @@
 				},
 				{
 					"data": "nombres"
+				},
+				{
+					"data": "identificacion"
 				},
 				{
 					"data": "required_amount",
@@ -1445,7 +1449,7 @@
 							if (consultar == 1)
 								if (actualizar == 1)
 									botones += "<span class='detalle btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Ver Detalles'><i class='far fa-images' style='margin-bottom:5px'></i></span> ";
-							 if (row.status == 'Verificando' || row.status == 'Pendiente')
+							 if (row.status == 'Verificando')
 								botones += "<span class='verificar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Verificar'><i class='fa fa-user-check' style='margin-bottom:5px'></i></span> ";
 							return botones;
 						}

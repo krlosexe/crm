@@ -68,14 +68,11 @@
 			              </div>
 
 
+						</div>
+						<label for=""><b>Codigo Usuario</b></label>
+						<div class="form-group valid-required">
+			              <input type="text" name="code_user" class="form-control form-control-user col-6" maxlength="4" id="code" placeholder="Codigo" required>
 			            </div>
-
-
-				
-
-
-
-	            
 				  	</div>
 				</div>
 

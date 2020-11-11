@@ -11,14 +11,14 @@ use App\ClientRequestCreditPaymentPlan;
 use App\ClientRequestCredit;
 use App\User;
 use Mail;
-
+use DateTime;
 class FinacingController extends Controller
 {
     public function GetRequestFinancing()
     {
 
         $data = DB::table("client_request_credit")
-            ->selectRaw("client_request_credit.*, clientes.nombres, clientes.pay_to_study_credit,
+            ->selectRaw("client_request_credit.*, clientes.nombres,clientes.identificacion, clientes.pay_to_study_credit,
 
 
                                     clientc_credit_information.dependent_independent,
@@ -566,7 +566,7 @@ class FinacingController extends Controller
     {
         try {
             $query = ClientRequestCreditPaymentPlan::where('id', $request->id)->first();
-            if($query->status == 'Verificando' || $query->status == 'Pendiente'){
+            if($query->status == 'Verificando'){
                 ClientRequestCreditPaymentPlan::where('id', $request->id)
                 ->update([
                     'status' => 'Pagada'
@@ -615,45 +615,99 @@ class FinacingController extends Controller
 
     public function createSolicitud(Request $request)
     {
-        // dd($request->all());
         try {
+
+            $monto_requerido = str_replace(".", "", $request->required_amount);
+            $monto_requerido = str_replace(",", ".", $monto_requerido);
+
+
+            $cuota = str_replace(".", "", $request["monthly_fee"]);
+            $cuota = str_replace(",", ".", $cuota);
+
             $guardar = new ClientRequestCredit;
             $guardar->id_client = $request->id_cliente;
-            $guardar->required_amount = $request->required_amount;
+            $guardar->required_amount = $monto_requerido;
             $guardar->period = $request->period;
             // $guardar->monthly_fee = $request->monthly_fee;
-            $guardar->monthly_fee = str_replace(",", "", $request["monthly_fee"]);
+            $guardar->monthly_fee = $cuota;
             $guardar->status = "Pendiente";
             $guardar->save();
 
-            $date = date("Y-m-d");
+            $date = $request["date_init"];
             DB::table("client_request_credit_payment_plan")->where("id_request_credit", $guardar->id)->delete();
 
-                foreach ($request["number"] as $key => $value) {
-
-                    $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
-
-                    $array = [];
-                    $array["id_request_credit"]  = $guardar->id;
-                    $array["number"]             = $value;
-                    $array["interest"]           = str_replace(",", "", $request["interest"][$key]);
-                    $array["credit_to_capital"]  = str_replace(",", "", $request["credit_to_capital"][$key]);
-                    $array["monthly_fees"]       = str_replace(",", "", $request["monthly_fees"][$key]);
-                    $array["balance"]            = str_replace(",", "", $request["balance"][$key]);
-                    $array["date"]               = $date;
+            $periodo = $request["period"];
 
 
-                    DB::table("client_request_credit_payment_plan")->insert($array);
+
+            $date = explode("-", $date);
+            $day_cobro = $date[2];
+            $date_new= $date[0]."-".$date[1]."-".$day_cobro;
+
+
+
+            for ($i=1; $i <= $periodo; $i++) {
+
+                $items = new ClientRequestCreditPaymentPlan;
+                $items->id_request_credit  = $guardar->id;
+                $items->number             = $i;
+                $items->balance	           = 0;
+                $items->monthly_fees	      = $cuota;
+                $items->date	           = $date_new;
+                $items->status             = "Pendiente";
+                $items->save();
+
+
+
+                $date = explode("-", $date_new);
+                if($date[1] <= 8){
+                    $mes = "0".($date[1] + 1);
+                }else{
+                    $mes =  $date[1] + 1;
                 }
+                $year = $date[0];
+                if($mes == 13){
+                    $mes = "01";
+                    $year = $date[0] + 1;
+                }
+                $date_new = $year."-".$mes."-".$day_cobro;
+                $date_new = $this->newFecha($date_new);
 
-                $response = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
 
-                return response()->json($response)->setStatusCode(200);
+
+               // $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
+            }
+
+            $response = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+            return response()->json($response)->setStatusCode(200);
 
 
         } catch (\Throwable $th) {
             return $th;
         }
     }
+
+
+
+    public function newFecha($date){
+        if($this->validateDate($date, 'Y-m-d')){
+            return $date;
+        }else{
+
+            $date = explode("-", $date);
+            $date_new= $date[0]."-".$date[1]."-".($date[2] - 1);
+            return $this->newFecha($date_new);
+        }
+    }
+
+
+    public function validateDate($date, $format = 'Y-m-d H:i:s'){
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
+    }
+
+
+
+
 
 }
