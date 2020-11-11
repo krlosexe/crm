@@ -479,7 +479,7 @@
 					$("#fecha_nacimiento-edit").val(data.fecha_nacimiento)
 					$("#telefono-edit").val(data.telefono)
 					$("#direccion-edit").val(data.direccion)
-
+					$("#code_edit").val(data.code_user)
 					$("#id_edit").val(data.id)
 
 					var lines = []
@@ -531,7 +531,11 @@
 			}
 
 
-
+			$('input[name="code"]').keyup(function(e) {
+		if (/\D/g.test(this.value)) {
+			this.value = this.value.replace(/\D/g, '');
+		}
+	});
 
 
 
