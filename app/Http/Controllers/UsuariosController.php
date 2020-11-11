@@ -147,7 +147,8 @@ class UsuariosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        // dd($request->all());
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $messages = [
@@ -181,16 +182,20 @@ class UsuariosController extends Controller
                 $file->move($destinationPath,$file->getClientOriginalName());
                 $request["img_profile"] = " asdasdasd asdas"; //add request
 
-
-                $User              = new User;
-                $User->email       = $request["email"];
-                $User->password    = md5($request["password"]);
-                $User->img_profile = $file->getClientOriginalName();
-                $User->id_rol      = $request["rol"];
-               // $auditoria->fec_regins  = date("Y-m-d H:i:s");
-                $User->id_line     = $request["id_line"];
-
-                $User->save();
+                $datos = User::where('code_user',$request->code_user)->exists();
+                if($datos){
+                    return ['mensaje'=>'el codigo que intenta ingresar ya esxiste'];
+                }else{
+                    $User              = new User;
+                    $User->email       = $request["email"];
+                    $User->password    = md5($request["password"]);
+                    $User->img_profile = $file->getClientOriginalName();
+                    $User->id_rol      = $request["rol"];
+                   // $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                    $User->id_line     = $request["id_line"];
+                    $User->code_user = $request->code_user;
+                    $User->save();
+                }
 
                 $datos_personales                   = new datosPersonaesModel;
                 $datos_personales->nombres          = $request["nombres"];
@@ -263,7 +268,7 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        // dd($request->all());
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
             $messages = [
@@ -294,28 +299,32 @@ class UsuariosController extends Controller
 
                $file = $request->file('img-profile');
 
+               $datos = User::where('code_user',$request->code_user)->where('id','!=',$id)->exists();
+               if($datos){
+                   return ['mensaje'=>'el codigo que intenta ingresar ya esxiste'];
+               }else{
+                   $User = User::find($id);
+    
+                   $User->email   = $request["email"];
+                   $User->id_rol  = $request["rol"];
+                   $User->id_line = $request["id_line"];
+    
+                   if($file != null){
+                       $destinationPath = 'img/usuarios/profile';
+                       $file->move($destinationPath,$file->getClientOriginalName());
+                       $User->img_profile = $file->getClientOriginalName();
+                   }
+    
+                   if($request["password"] != "" && $request["repeat-password"] != ""){
+                       $User->password = md5($request["password"]);
+                   }
+
+                   $User->code_user = $request->code_user;
+                   $User->save();
+               }
 
 
-                $User = User::find($id);
 
-                $User->email   = $request["email"];
-                $User->id_rol  = $request["rol"];
-                $User->id_line = $request["id_line"];
-
-                if($file != null){
-                    $destinationPath = 'img/usuarios/profile';
-                    $file->move($destinationPath,$file->getClientOriginalName());
-                    $User->img_profile = $file->getClientOriginalName();
-                }
-
-
-                if($request["password"] != "" && $request["repeat-password"] != ""){
-                    $User->password = md5($request["password"]);
-                }
-
-
-
-                $User->save();
 
                 $datos_personales = datosPersonaesModel::where("id_usuario", $id)->first();
 
