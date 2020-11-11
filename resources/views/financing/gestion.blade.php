@@ -570,7 +570,7 @@
 
 			$("#status").val(data.status)
 
-			$("#period").val(data.period).trigger("change")
+			$("#period").val(data.period)
 
 			$("#id_cliente").val(data.id_client)
 
