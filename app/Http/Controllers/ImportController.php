@@ -179,6 +179,7 @@ class ImportController extends Controller
                 $client = Clients::where("identificacion", trim($cedula))->first();
 
                 $datetime = $date;
+               // dd($this->validateDate('2012-02-30', 'Y-m-d'));
                 $d = DateTime::createFromFormat("d/m/Y", $datetime);
                 $date = $d->format("Y-m-d"); // or any you want
 
@@ -194,6 +195,11 @@ class ImportController extends Controller
                         $head->status             = "Desembolsado";
                         $head->save();
 
+
+                        $date = explode("-", $date);
+                        $day_cobro = $date[2];
+                        $date_new= $date[0]."-".$date[1]."-".$day_cobro;
+
                     for ($i=1; $i <= $periodo; $i++) {
 
                         $items = new ClientRequestCreditPaymentPlan;
@@ -201,13 +207,30 @@ class ImportController extends Controller
                         $items->number             = $i;
                         $items->monthly_fees	       = $monto_cuota;
                         $items->balance	           = 0;
-                        $items->monthly_fees	      = $monto_cuota;
-                        $items->date	           = $date;
+                        $items->monthly_fees	   = $monto_cuota;
+                        $items->date	           = $date_new;
                         $items->status             = "Pendiente";
                         $items->save();
 
-                        $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
+                        $date = explode("-", $date_new);
+
+                        if($date[1] <= 8){
+                            $mes = "0".($date[1] + 1);
+                        }else{
+                           $mes =  $date[1] + 1;
+                        }
+                        $year = $date[0];
+                        if($mes == 13){
+                            $mes = "01";
+                            $year = $date[0] + 1;
+                        }
+                        $date_new = $year."-".$mes."-".$day_cobro;
+                        $date_new = $this->newFecha($date_new);
+                       // dd($this->newFecha($date_new));
+                        //$date_new = date("Y-m-d", strtotime($date . "+ 1 month"));
                     }
+
+                    dd("Carlos");
                 }
                 echo "<br>";
                 $fila++;
@@ -223,6 +246,28 @@ class ImportController extends Controller
         }
 
     }
+
+
+
+    public function newFecha($date){
+        echo $date;
+        if($this->validateDate($date, 'Y-m-d')){
+            return $date;
+        }else{
+
+            $date = explode("-", $date);
+            $date_new= $date[0]."-".$date[1]."-".($date[2] - 1);
+            return $this->newFecha($date_new);
+        }
+    }
+
+
+    public function validateDate($date, $format = 'Y-m-d H:i:s')
+    {
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
+    }
+
 
 
 
