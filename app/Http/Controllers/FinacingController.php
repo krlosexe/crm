@@ -11,7 +11,7 @@ use App\ClientRequestCreditPaymentPlan;
 use App\ClientRequestCredit;
 use App\User;
 use Mail;
-
+use DateTime;
 class FinacingController extends Controller
 {
     public function GetRequestFinancing()
@@ -637,6 +637,15 @@ class FinacingController extends Controller
             DB::table("client_request_credit_payment_plan")->where("id_request_credit", $guardar->id)->delete();
 
             $periodo = $request["period"];
+
+
+
+            $date = explode("-", $date);
+            $day_cobro = $date[2];
+            $date_new= $date[0]."-".$date[1]."-".$day_cobro;
+
+
+
             for ($i=1; $i <= $periodo; $i++) {
 
                 $items = new ClientRequestCreditPaymentPlan;
@@ -644,11 +653,29 @@ class FinacingController extends Controller
                 $items->number             = $i;
                 $items->balance	           = 0;
                 $items->monthly_fees	      = $cuota;
-                $items->date	           = $date;
+                $items->date	           = $date_new;
                 $items->status             = "Pendiente";
                 $items->save();
 
-                $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
+
+
+                $date = explode("-", $date_new);
+                if($date[1] <= 8){
+                    $mes = "0".($date[1] + 1);
+                }else{
+                    $mes =  $date[1] + 1;
+                }
+                $year = $date[0];
+                if($mes == 13){
+                    $mes = "01";
+                    $year = $date[0] + 1;
+                }
+                $date_new = $year."-".$mes."-".$day_cobro;
+                $date_new = $this->newFecha($date_new);
+
+
+
+               // $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
             }
 
             $response = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
@@ -659,5 +686,28 @@ class FinacingController extends Controller
             return $th;
         }
     }
+
+
+
+    public function newFecha($date){
+        if($this->validateDate($date, 'Y-m-d')){
+            return $date;
+        }else{
+
+            $date = explode("-", $date);
+            $date_new= $date[0]."-".$date[1]."-".($date[2] - 1);
+            return $this->newFecha($date_new);
+        }
+    }
+
+
+    public function validateDate($date, $format = 'Y-m-d H:i:s'){
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
+    }
+
+
+
+
 
 }
