@@ -2022,7 +2022,17 @@ class ClientsController extends Controller
 
         $id_line =  $request["id_line"];
 
-        $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+
+        if($request["code_adviser"] != 0){
+            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                            ->where("code_user", $request["code_adviser"])->first();
+            if(!$users){
+                return response()->json("El codigo de descuento no es Valido")->setStatusCode(500);
+               // dd($users);
+            }
+        }else{
+
+            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                       //  ->where("users.queue", 0)
                         ->where("users.id", "!=", 106)
@@ -2035,6 +2045,8 @@ class ClientsController extends Controller
 
                         ->inRandomOrder()
                         ->first();
+
+        }
 
         if($users){
 
@@ -2222,7 +2234,7 @@ class ClientsController extends Controller
                 $request["code_client"] = strtoupper($code);
                 $request["origen"]      = "App Financiacion";
 
-
+                $request["id_line"] = $users->id_line;
                 $cliente = Clients::create($request->all());
 
                 $request["id_client"] = $cliente["id_cliente"];
