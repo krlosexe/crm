@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('login');
@@ -391,6 +391,53 @@ Route::get('financing', function () {
 Route::get('register-app-ios', function () {
     return view('ios.gestion');
 });
+
+
+
+Route::get('calificaciones', function () {
+    $data = DB::table("califications_advisers")->select("califications_advisers.*", "datos_personales.*")
+                ->join("datos_personales", "datos_personales.id_usuario", "=", "califications_advisers.id_user")
+                ->whereRaw("MONTH(califications_advisers.created_at) = 9 OR MONTH(califications_advisers.created_at) = 10")
+                ->orderBy("califications_advisers.created_at", "ASC")
+                ->orderBy("califications_advisers.id_user", "ASC")
+                ->orderBy("califications_advisers.type", "ASC")
+                ->get();
+
+    echo "<style>table, th, td {
+        border: 1px solid black;
+        text-align: center
+      }tr{text-align: center;}</style>";
+
+
+    echo "<table>";
+    echo "<thead>";
+        echo "<th>Asesora</th>";
+        echo "<th>Imagen</th>";
+        echo "<th>Tipo</th>";
+        echo "<th>Descripcion</th>";
+        echo "<th>Fecha de Calificacion</th>";
+        echo "<th>Fecha del registro</th>";
+        echo "<th>Fecha del Archivo</th>";
+    echo "</thead>";
+    foreach($data as $value){
+
+        $nombre_archivo = 'img/califications/'.$value->evidence;
+        $a = file_get_contents($nombre_archivo);
+        echo "<tr>";
+            echo "<td>".$value->nombres." $value->apellido_p"."</td>";
+            echo "<td><img src='img/califications/$value->evidence' width=300></td>";
+            echo "<td>".$value->type."</td>";
+            echo "<td>".$value->description."</td>";
+            echo "<td>".$value->fecha."</td>";
+            echo "<td>".$value->created_at."</td>";
+            echo "<td>".date ("F d Y H:i:s.", filemtime($nombre_archivo))."</td>";
+        echo "</tr>";
+
+    }
+    echo "</table>";
+});
+
+
 
 
 
