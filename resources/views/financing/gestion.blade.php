@@ -571,9 +571,9 @@
 			$("#status").val(data.status)
 
 			$("#period").val(data.period)
+            $("#period").trigger("change");
 
 			$("#id_cliente").val(data.id_client)
-
 
 			var url_imagen = 'img/valuations/cotizaciones/'
 			var url = document.getElementById('ruta').value;
