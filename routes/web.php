@@ -395,25 +395,16 @@ Route::get('register-app-ios', function () {
 
 
 Route::get('calificaciones', function () {
-
     $data = DB::table("califications_advisers")->get();
-
     foreach($data as $value){
         echo "<img src='img/califications/$value->evidence' width=300>";
-
         $nombre_archivo = 'https://pdtclientsolutions.com/crm-public.dev/img/califications/'.$value->evidence;
-
-
-
         $imginfo = getimagesize($nombre_archivo);
         dd($imginfo);
 
         //if (file_exists($nombre_archivo)) {
           //  echo "La última modificación de $nombre_archivo fue: " . date ("F d Y H:i:s.", filemtime($nombre_archivo));
        // }
-
-
-
     }
 
     echo "<h1>AFASF</h1>";
