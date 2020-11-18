@@ -1261,6 +1261,8 @@ class ClientsController extends Controller
             if($status == 0){
                 $auditoria->usr_regmod = $request["id_user"];
                 $auditoria->fec_regmod = date("Y-m-d");
+                User::where('id_client',$id_cliente)->delete();
+                 
             }
             $auditoria->save();
 
