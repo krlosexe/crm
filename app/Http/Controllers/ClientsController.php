@@ -357,6 +357,7 @@ class ClientsController extends Controller
                                         $query->orWhere("clientes.telefono", 'like', '%'.$search.'%');
                                         $query->orWhere("clientes.code_client", 'like', '%'.$search.'%');
                                         $query->orWhere("clientes.origen", 'like', '%'.$search.'%');
+                                        $query->orWhere("clientes.email", 'like', '%'.$search.'%');
                                     }
 
                                 })
