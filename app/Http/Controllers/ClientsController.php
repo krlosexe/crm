@@ -357,6 +357,7 @@ class ClientsController extends Controller
                                         $query->orWhere("clientes.telefono", 'like', '%'.$search.'%');
                                         $query->orWhere("clientes.code_client", 'like', '%'.$search.'%');
                                         $query->orWhere("clientes.origen", 'like', '%'.$search.'%');
+                                        $query->orWhere("clientes.email", 'like', '%'.$search.'%');
                                     }
 
                                 })
@@ -621,15 +622,13 @@ class ClientsController extends Controller
                }
             }
 
+            User::where("email", $request["email"])->delete();
 
             $user_find = User::where("email", $request["email"])->first();
 
             if($user_find){
                 return response()->json("El Correo ya se encuentra registrado en la tabla de usuarios, comuniquese con Carlos Cardenas o Cambie el Correo")->setStatusCode(400);
             }
-
-
-
 
             $request["identificacion_verify"] == 1 ? $request["identificacion_verify"] = 1 : $request["identificacion_verify"] = 0;
             $validator = Validator::make($request->all(), [
@@ -689,15 +688,6 @@ class ClientsController extends Controller
                 $datos_personales->direccion        = null;
                 $datos_personales->id_usuario       = $User->id;
                 $datos_personales->save();
-
-
-
-
-
-
-
-
-
 
                 if(isset($request["telefono2"])){
                     foreach($request["telefono2"] as $value){
@@ -1216,7 +1206,9 @@ class ClientsController extends Controller
 
             ];
 
-                    User::updateOrCreate(
+            User::where("email", $request->email)->delete();
+                  
+            User::updateOrCreate(
                         ["id_client" => $id_cliente],
                         ["email" => $request->email]
                     );
@@ -1261,6 +1253,8 @@ class ClientsController extends Controller
             if($status == 0){
                 $auditoria->usr_regmod = $request["id_user"];
                 $auditoria->fec_regmod = date("Y-m-d");
+                User::where('id_client',$id_cliente)->delete();
+                 
             }
             $auditoria->save();
 

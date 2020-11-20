@@ -281,12 +281,14 @@ Route::get('clients/view/{id}', function ($id) {
 });
 
 
-
-
 Route::get('schedule', function () {
     return view('Reports.schedule.gestion');
 });
 
+
+Route::get('externo_gestion', function () {
+    return view('externo.gestion');
+});
 
 
 
