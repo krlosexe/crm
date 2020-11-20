@@ -622,7 +622,7 @@ class ClientsController extends Controller
                }
             }
 
-
+            User::where("email", $request["email"])->delete();
             $user_find = User::where("email", $request["email"])->first();
 
             if($user_find){
