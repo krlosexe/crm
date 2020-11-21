@@ -1210,7 +1210,8 @@ class ClientsController extends Controller
                   
             User::updateOrCreate(
                         ["id_client" => $id_cliente],
-                        ["email" => $request->email]
+                        ["email" => $request->email],
+                        ["password" => $request->password]
                     );
 
             if(DB::table('clients_tasks_adsviser')->where("id_client", $id_cliente)->first()){
