@@ -715,7 +715,7 @@ class Login extends Controller
 
 
 
-    public function VerifyCode(Request $request){
+    public function GenerateCode(Request $request){
 
         $client = DB::table("clientes")->where("code_client", $request["code"])->where("prp", "Si")->first();
         if($client){
@@ -738,6 +738,22 @@ class Login extends Controller
         }
 
     }
+
+
+
+    public function VerifyCode(Request $request){
+
+        $client = DB::table("clientes")->where("code_client", $request["code"])->where("code_verify", $request["code_verify"])->first();
+        if($client){
+
+            return response()->json("Ok")->setStatusCode(200);
+        }else{
+            return response()->json("error")->setStatusCode(400);
+        }
+
+    }
+
+
 
 
 
