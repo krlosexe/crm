@@ -713,6 +713,47 @@ class Login extends Controller
         return response()->json($users[0])->setStatusCode(200);
     }
 
+
+
+    public function VerifyCode(Request $request){
+
+        $client = DB::table("clientes")->where("code_client", $request["code"])->where("prp", "Si")->first();
+        if($client){
+
+            $code = rand(100000,900000);
+
+            DB::table("clientes")->where("code_client", $request["code"])->update(["code_verify" => $code]);
+
+            $data = [
+               "issue"   => "Código de Acceso Multiestica $code",
+               "message" => "Hola, $client->nombres tu código de acceso a Multiestica es $code",
+               "email"   => $client->email
+            ];
+
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("error")->setStatusCode(400);
+        }
+
+    }
+
+
+
+    public function SendEmail2($data){
+
+        $subject = $data["issue"];
+        $for = $data["email"];
+        $request["msg"] = $data["message"];
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+        return true;
+    }
+
+
+
     public function Logout($user_id)
     {
 
@@ -731,5 +772,9 @@ class Login extends Controller
 		return redirect(url('/'));
 
     }
+
+
+
+
 
 }
