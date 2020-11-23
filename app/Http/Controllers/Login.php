@@ -458,7 +458,7 @@ class Login extends Controller
                           'sync_token' => $users[0]->sync_token,
                           'mensagge'   => "Ha iniciado sesion exitosamente",
                           "type_user"  => $name_rol
-	    		);
+	    	);
 
             return response()->json($data)->setStatusCode(200);
         }else{
@@ -746,7 +746,17 @@ class Login extends Controller
         $client = DB::table("clientes")->where("code_client", $request["code"])->where("code_verify", $request["code_verify"])->first();
         if($client){
 
-            return response()->json("Ok")->setStatusCode(200);
+            $data = array('email'      => $client->email,
+                          'nombres'    => $client->nombres,
+                          'avatar'     => null,
+                          'token'      => "124",
+                          'sync_token' => "14242",
+                          'mensagge'   => "Ha iniciado sesion exitosamente",
+                          "type_user"  => "Afiliado",
+                          "id_client"  => $client->id_cliente
+            );
+
+            return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("error")->setStatusCode(400);
         }
