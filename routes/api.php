@@ -19,13 +19,12 @@ use App\datosPersonaesModel;
 
 
 Route::post('auth', 'Login@Auth');
-
+Route::post('VerifyCode', 'Login@VerifyCode');
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 
 
 
