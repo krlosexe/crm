@@ -1208,13 +1208,31 @@ class ClientsController extends Controller
 
             User::where("email", $request->email)->delete();
                   
-            User::updateOrCreate(
+              $user =   User::updateOrCreate(
                         ["id_client" => $id_cliente],
                         ["email" => $request->email,
                         "password" => md5(123456789),
                         "id_rol" => 17
                         ]
                     );
+
+                    // $User =  User::create([
+                    //     "email"       => $request["email"],
+                    //     "password"    => md5("123456789"),
+                    //     "id_rol"      => 17,
+                    //     "id_client"   => $cliente["id_cliente"]
+                    // ]);
+
+                    $datos_personales                   = new datosPersonaesModel;
+                    $datos_personales->nombres          = $request["nombres"];
+                    $datos_personales->apellido_p       = "";
+                    $datos_personales->apellido_m       = ".";
+                    $datos_personales->n_cedula         = "12412124";
+                    $datos_personales->fecha_nacimiento = null;
+                    $datos_personales->telefono         = null;
+                    $datos_personales->direccion        = null;
+                    $datos_personales->id_usuario       = $user->id;
+                    $datos_personales->save();
 
             if(DB::table('clients_tasks_adsviser')->where("id_client", $id_cliente)->first()){
 
