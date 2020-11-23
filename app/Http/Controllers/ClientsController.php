@@ -1211,7 +1211,8 @@ class ClientsController extends Controller
             User::updateOrCreate(
                         ["id_client" => $id_cliente],
                         ["email" => $request->email,
-                        "password" => md5(123456789)
+                        "password" => md5(123456789),
+                        "id_rol" => 17
                         ]
                     );
 
