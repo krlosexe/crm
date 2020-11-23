@@ -1051,7 +1051,7 @@ class ClientsController extends Controller
                     $name_clinic = $clinic_from->nombre;
                }
 
-                $clinic_to   = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
+                $clinic_to   = DB::tabldatose("clinic")->where("id_clinic", $request["clinic"])->first();
 
                 $version["id_user"]   = $request["id_user"];
                 $version["id_client"] = $id_cliente;
@@ -1205,34 +1205,48 @@ class ClientsController extends Controller
                 "survey"                 => $request["survey"]                  == 1 ? $request["survey"]           = 1 : $request["survey"]           = 0
 
             ];
+            $user_id = User::select('id','password')->where("email", $request->email)->first();
+
+                $password = $user_id ? $user_id->password : md5(123456789);
+                if($user_id){
+                    $validar =  AuthUserAppFinancing::where('id_user',$user_id->id)->first();
+                }else{
+                    $validar = false;
+                }
+
 
             User::where("email", $request->email)->delete();
                   
               $user =   User::updateOrCreate(
                         ["id_client" => $id_cliente],
                         ["email" => $request->email,
-                        "password" => md5(123456789),
+                        "password" =>  $password,
                         "id_rol" => 17
                         ]
                     );
 
-                    // $User =  User::create([
-                    //     "email"       => $request["email"],
-                    //     "password"    => md5("123456789"),
-                    //     "id_rol"      => 17,
-                    //     "id_client"   => $cliente["id_cliente"]
-                    // ]);
+                    if($validar){
+                        AuthUserAppFinancing::where("id_user",$user_id->id)->update(['id_user'=>$user->id]);
+                    
+                    }
+                    if($user_id){
+                    datosPersonaesModel::where("id_usuario",$user_id->id)->update(['id_usuario'=>$user->id]);
+                    }else{
 
-                    $datos_personales                   = new datosPersonaesModel;
-                    $datos_personales->nombres          = $request["nombres"];
-                    $datos_personales->apellido_p       = "";
-                    $datos_personales->apellido_m       = ".";
-                    $datos_personales->n_cedula         = "12412124";
-                    $datos_personales->fecha_nacimiento = null;
-                    $datos_personales->telefono         = null;
-                    $datos_personales->direccion        = null;
-                    $datos_personales->id_usuario       = $user->id;
-                    $datos_personales->save();
+                        $datos_personales                   = new datosPersonaesModel;
+                        $datos_personales->nombres          = $request["nombres"];
+                        $datos_personales->apellido_p       = "";
+                        $datos_personales->apellido_m       = ".";
+                        $datos_personales->n_cedula         = "12412124";
+                        $datos_personales->fecha_nacimiento = null;
+                        $datos_personales->telefono         = null;
+                        $datos_personales->direccion        = null;
+                        $datos_personales->id_usuario       = $user->id;
+                        $datos_personales->save();
+                    }
+
+
+                  
 
             if(DB::table('clients_tasks_adsviser')->where("id_client", $id_cliente)->first()){
 
