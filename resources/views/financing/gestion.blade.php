@@ -1061,7 +1061,7 @@
 
 		var monto = inNum(document.getElementById("required_amount").value)
 		var cuotas = document.getElementById("period").value
-		var tasa = 2.65584
+		var tasa = 2.42
 
 		var periodo = "mensual";
 		var tasa_tipo = "mensual";
@@ -1130,7 +1130,7 @@
 
 		var monto = inNum(document.getElementById("required_amount_new").value)
 		var cuotas = document.getElementById("period_new").value
-		var tasa = 2.65584
+		var tasa = 2.42
 
 		var periodo = "mensual";
 		var tasa_tipo = "mensual";
