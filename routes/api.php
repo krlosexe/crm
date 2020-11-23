@@ -19,6 +19,7 @@ use App\datosPersonaesModel;
 
 
 Route::post('auth', 'Login@Auth');
+Route::post('GenerateCode', 'Login@GenerateCode');
 Route::post('VerifyCode', 'Login@VerifyCode');
 
 
