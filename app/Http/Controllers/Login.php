@@ -746,6 +746,21 @@ class Login extends Controller
         $client = DB::table("clientes")->where("code_client", $request["code"])->where("code_verify", $request["code_verify"])->first();
         if($client){
 
+
+
+            $token_user  = AuthUsersApp::where("id_user", $client->id_cliente)->get();
+
+            foreach ($token_user as $key => $value) {
+                $value->delete();
+            }
+
+            $AuthUsers                       = new AuthUsersApp;
+            $AuthUsers->id_user              = $client->id_cliente;
+            $AuthUsers->token                = "123";
+            $AuthUsers->token_notifications  = $request["fcmToken"];
+            $AuthUsers->save();
+
+
             $data = array('email'      => $client->email,
                           'nombres'    => $client->nombres,
                           'avatar'     => null,
