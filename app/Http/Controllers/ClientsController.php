@@ -1051,7 +1051,7 @@ class ClientsController extends Controller
                     $name_clinic = $clinic_from->nombre;
                }
 
-                $clinic_to   = DB::tabldatose("clinic")->where("id_clinic", $request["clinic"])->first();
+                $clinic_to   = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
 
                 $version["id_user"]   = $request["id_user"];
                 $version["id_client"] = $id_cliente;
