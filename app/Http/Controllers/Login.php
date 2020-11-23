@@ -730,6 +730,8 @@ class Login extends Controller
                "email"   => $client->email
             ];
 
+            $this->SendEmail2($data);
+
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("error")->setStatusCode(400);
