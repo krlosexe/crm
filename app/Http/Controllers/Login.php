@@ -768,6 +768,7 @@ class Login extends Controller
                           'sync_token' => "14242",
                           'mensagge'   => "Ha iniciado sesion exitosamente",
                           "type_user"  => "Afiliado",
+                          "code_client" => $client->code_client,
                           "id_client"  => $client->id_cliente
             );
 
