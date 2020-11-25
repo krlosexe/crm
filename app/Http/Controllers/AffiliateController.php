@@ -48,7 +48,7 @@ class AffiliateController extends Controller
                 foreach($client as $value){
 
                     if($value["prp"] == "Si"){
-                        $data = array('mensagge' => "Ya se encuentra registrado con el codigo: ".$value["code_client"]);
+                        $data = array("Ya se encuentra registrado con el codigo: ".$value["code_client"]);
                         return response()->json($data)->setStatusCode(400);
                     }
                     $update = array(
