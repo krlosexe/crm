@@ -7,7 +7,7 @@
         @csrf
         <div class="row">
            <div class="col-md-6">
-              
+
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -80,7 +80,7 @@
                         </div>
                       </div>
                   </div>
-                  
+
               </div>
 
 
@@ -95,8 +95,8 @@
                     </div>
                 </div>
 
-                
-                  
+
+
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for=""><b>Estatus</b></label>
@@ -123,7 +123,7 @@
 
 
                 <br><br>
-
+<!--
 
                   <div class="row">
                     <div class="col-md-2"></div>
@@ -155,7 +155,7 @@
                     </div>
                   </div>
 
-
+                -->
                   <br>
                   <br>
 
@@ -187,7 +187,7 @@
                    </div>
 
 
-                   
+
 
 
 
@@ -209,7 +209,7 @@
                    <div class="row">
                     <div class="col-md-12">
                         <div class="row" id="content_acquittance" style="display: none">
-                          <div class="col-sm-12 text-center"> 
+                          <div class="col-sm-12 text-center">
                                 <label for=""><b>Adjuntar recibo</b></label>
                                 <div>
                                     <div class="file-loading">
@@ -253,6 +253,6 @@
           <br>
           <br>
       </form>
-      
+
     </div>
 
