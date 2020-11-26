@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="form-update" enctype="multipart/form-data">
-      
+
         @csrf
 
         <input type="hidden" name="_method" value="put">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
 
-                        
+
 
 
 
@@ -115,8 +115,8 @@
                             </div>
                         </div>
                       </div>
-                      
-                      
+
+
 
                       <div class="row">
                         <div class="col-md-12">
@@ -134,7 +134,7 @@
                       <div class="row">
                         <div class="col-md-12">
                           <div class="row">
-                            <div class="col-sm-12 text-center"> 
+                            <div class="col-sm-12 text-center">
                                   <label for=""><b>Adjuntar Cotizacion</b></label>
                                   <div>
                                       <div class="file-loading">
@@ -163,9 +163,9 @@
                                     <h3 id="code-edit"></h3>
                                   </div>
                                   <div class="col-md-2">
-                                    <span onclick="copyToClipboard('#code-edit')" class='consultar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-copy  ' style='margin-bottom:5px'></i></span> 
+                                    <span onclick="copyToClipboard('#code-edit')" class='consultar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-copy  ' style='margin-bottom:5px'></i></span>
                                   </div>
-                                
+
                               </div>
                           </div>
                         </div>
@@ -194,7 +194,7 @@
                         <div class="row">
 
                            <div class="col-md-2"></div>
-                                
+
                            <div class="col-md-10">
                                 <div class="form-group">
                                     <label for=""><b>Comentarios</b></label>
@@ -209,7 +209,7 @@
                           <div class="row">
 
                               <div class="col-md-2">
-                                    
+
                               </div>
 
                               <div class="col-md-10">
@@ -217,7 +217,7 @@
                                   Comentar
                                 </button>
                               </div>
-                            
+
                           </div>
 
 
@@ -228,7 +228,7 @@
 
                           <br><br>
 
-
+                            <!--
                           <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
@@ -257,7 +257,7 @@
                                 </select>
                               </div>
                             </div>
-                          </div>
+                          </div>-->
 
 
                             <br><br>
@@ -275,7 +275,7 @@
                             <br><br>
 
                             <div class="col-md-2">
-                                    
+
                             </div>
 
                             <div class="col-md-10">
@@ -304,7 +304,7 @@
                               </div>
 
 
-                              
+
 
 
 
@@ -327,7 +327,7 @@
 
                                 <div class="col-md-12">
                                     <div class="row" id="content_acquittance-edit" style="display: none">
-                                      <div class="col-sm-12 text-center"> 
+                                      <div class="col-sm-12 text-center">
                                             <label for=""><b>Recibo</b></label>
                                             <div>
                                                 <div class="file-loading">
@@ -346,7 +346,7 @@
                           </div>
 
 
-                          
+
 
                   </div>
 
@@ -367,8 +367,8 @@
         </div>
 
 
-        
-        
+
+
 
         <input type="hidden" name="inicial" id="inicial">
         <input type="hidden" name="id_user" class="id_user">
@@ -393,6 +393,6 @@
           <br>
           <br>
       </form>
-      
+
     </div>
 
