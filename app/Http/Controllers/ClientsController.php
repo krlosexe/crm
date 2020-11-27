@@ -2085,10 +2085,9 @@ class ClientsController extends Controller
 
 
                 if($request["code_adviser"] != 0){
-                    DB::table('clientes')->where("id_cliente", $client["id_clinete"])
+                    Clients::where("id_cliente", $client["id_cliente"])
                     ->update(['id_user_asesora' => $users->id, "id_line" => $users->id_line]);
                 }
-
 
 
                 DB::table('auditoria')->where("cod_reg", $client["id_cliente"])
