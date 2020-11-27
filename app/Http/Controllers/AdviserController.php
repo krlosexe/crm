@@ -102,64 +102,28 @@ class AdviserController extends Controller
 
         }
 
-        if($user["id_rol"] == 17){
-
-            $where = array(
-                "clientes.id_affiliate" => $user["id_client"]
-            );
+        $where = array(
+            "clientes.id_affiliate" => $id_user
+        );
 
 
-            $data = Clients::where($where)
-                ->select("clientes.*", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
-                ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
-                ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate")
+        $data = Clients::where($where)
+            ->select("clientes.*", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
+            ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
+            ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate")
 
 
-                ->where(function ($query) use ($name) {
-                    if($name != "0"){
-                        $query->where("clientes.nombres", 'like', '%'.$name.'%');
-                    }
-                })
+            ->where(function ($query) use ($name) {
+                if($name != "0"){
+                    $query->where("clientes.nombres", 'like', '%'.$name.'%');
+                }
+            })
 
 
-                ->whereNotNull('clientes.id_affiliate')
-                ->orderBy("clientes.id_cliente", "DESC")
+            ->whereNotNull('clientes.id_affiliate')
+            ->orderBy("clientes.id_cliente", "DESC")
 
-                ->get();
-
-        }
-
-
-        if($user["id_rol"] == 19){
-
-            $where = array(
-                "clientes.id_cliente" => $user["id_client"]
-            );
-
-
-           $data_client = Clients::where($where) ->first();
-
-
-
-
-             $data = User::where("users.id",$data_client["id_user_asesora"])
-                            ->selectRaw("users.id as user_id , users.email, CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as nombres, datos_personales.telefono , auth_users_app.token_notifications, users.token_chat")
-                            ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
-                            ->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
-
-
-                            ->where(function ($query) use ($name) {
-                                if($name != "0"){
-                                    $query->where("clientes.nombres", 'like', '%'.$name.'%');
-                                }
-                            })
-
-
-                            ->get();
-
-        }
-
-
+            ->get();
 
 
         return response()->json($data)->setStatusCode(200);
