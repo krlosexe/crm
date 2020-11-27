@@ -209,8 +209,6 @@ class AffiliateController extends Controller
 
     public function Dasboard($id_user){
 
-
-
         $data = [
             "total_refferers" => $this->TotalReffers($id_user),
             "earnings"        => $this->Earnings($id_user),
@@ -251,10 +249,10 @@ class AffiliateController extends Controller
 
 
 
-    public function TotalReffers($id_user){
+    public function TotalReffers($id_client){
 
-        $user = User::where("id", $id_user)->first();
-
+        $user = User::where("id_client", $id_client)->first();
+        /*
         if($user["id_rol"] == 6){
             $where = array(
                 "clientes.id_user_asesora" => $id_user,
@@ -263,13 +261,10 @@ class AffiliateController extends Controller
 
             $total_refferers = Clients::where($where)->selectRaw("clientes.*")
                                                     ->get();
-        }
+        }*/
 
-
-        if($user["id_rol"] == 17){
-            $total_refferers = Clients::where("id_affiliate", $user["id_client"])
-                        ->get();
-        }
+        $total_refferers = Clients::where("id_affiliate", $id_client)
+                          ->get();
 
 
         return sizeof($total_refferers);
