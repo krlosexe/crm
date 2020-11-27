@@ -3148,14 +3148,6 @@ class ClientsController extends Controller
 
             }
 
-
-
-
-
-
-
-
-
            /* $data_user = AuthUsersApp::where("id_user", $users["id"])->first();
 
             $ConfigNotification = [
@@ -3167,8 +3159,6 @@ class ClientsController extends Controller
 
             ];
             $code = SendNotifications($ConfigNotification);
-
-
 
             */
 

@@ -104,9 +104,31 @@ class FinacingController extends Controller
                 $notification_text = "Felicitaciones tu credito ha sido Desembolsado";
             }
 
+            $cliente = Clients::where('id_cliente',$id_client)->first();
+
+            switch ($cliente->id_line) {
+                case 3:
+                   $apiKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+                    break;
+                case 6:
+                    $apiKey = 'AAAAnoQ9XMg:APA91bEjJO50nQJ3Vo8vlQkHKbpzyWbuXkgIgjptlL4SOgxq8Y5vcZhUOr5MIVsV-H-mylQl84P1do1uIAvpKwLvqohe8_04lasgpaGt_hnA2wigCV57QC36sbocBcJuB6pnd6y8I6Dp';
+                    break;
+                case 16:
+                    $apiKey = 'AAAA9NFh0cA:APA91bGQeeeuhxzo2dlh4z6zXfrgCzJfkjN7NvyxbLIL6QQD5a0xpU9ETkhwH4MAhybmfC80q8BEINZy8-O1EyMzuQQuWQ2Ps9azGEh5F7cl5uAFifSGJ1_kyhrclHQ5Jpo3k9hlTm0J';
+                    break;
+                case 27:
+                    $apiKey = 'AAAAG-HAogM:APA91bEJXN2dPp9-8abRiqSaznaTzpU552YvlUjjAXckzKQ9FfYZcCFvayrmVe1WLNpycrpgcckU2nT-mJE99ObPUQykZTeSxT1VukoIBpirbIqdzPfDfj8fQhekWDtBReXVpvi6pr4v';
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+
+
             $url = "https://fcm.googleapis.com/fcm/send";
             $token = $FCM_token;
-            $serverKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+            $serverKey = $apiKey;
             $title = "Informacion sobre tu crédito:";
             $body = $notification_text;
             $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');
@@ -497,9 +519,31 @@ class FinacingController extends Controller
 
                     $FCM_token = $data_user->token_notifications;
 
+                    $cliente = Clients::where('id_cliente',$request->id)->first();
+
+                    switch ($cliente->id_line) {
+                        case 3:
+                           $apiKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+                            break;
+                        case 6:
+                            $apiKey = 'AAAAnoQ9XMg:APA91bEjJO50nQJ3Vo8vlQkHKbpzyWbuXkgIgjptlL4SOgxq8Y5vcZhUOr5MIVsV-H-mylQl84P1do1uIAvpKwLvqohe8_04lasgpaGt_hnA2wigCV57QC36sbocBcJuB6pnd6y8I6Dp';
+                            break;
+                        case 16:
+                            $apiKey = 'AAAA9NFh0cA:APA91bGQeeeuhxzo2dlh4z6zXfrgCzJfkjN7NvyxbLIL6QQD5a0xpU9ETkhwH4MAhybmfC80q8BEINZy8-O1EyMzuQQuWQ2Ps9azGEh5F7cl5uAFifSGJ1_kyhrclHQ5Jpo3k9hlTm0J';
+                            break;
+                        case 27:
+                            $apiKey = 'AAAAG-HAogM:APA91bEJXN2dPp9-8abRiqSaznaTzpU552YvlUjjAXckzKQ9FfYZcCFvayrmVe1WLNpycrpgcckU2nT-mJE99ObPUQykZTeSxT1VukoIBpirbIqdzPfDfj8fQhekWDtBReXVpvi6pr4v';
+                            break;
+                        
+                        default:
+                            # code...
+                            break;
+                    }
+        
+
                     $url = "https://fcm.googleapis.com/fcm/send";
                     $token = $FCM_token;
-                    $serverKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+                    $serverKey = $apiKey;
                     $title = "Informacion sobre tu crédito:";
                     $body = "Hemos Aprobado el pago de tu estudio de Crédito";
                     $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');
@@ -575,11 +619,34 @@ class FinacingController extends Controller
                     ->join("auth_users_app_financing","auth_users_app_financing.id_user","users.id")
                     ->where("id_client", $credit->id_client)->first();
 
+
+                    $cliente = Clients::where('id_cliente',$credit->id_client)->first();
+
+                    switch ($cliente->id_line) {
+                        case 3:
+                           $apiKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+                            break;
+                        case 6:
+                            $apiKey = 'AAAAnoQ9XMg:APA91bEjJO50nQJ3Vo8vlQkHKbpzyWbuXkgIgjptlL4SOgxq8Y5vcZhUOr5MIVsV-H-mylQl84P1do1uIAvpKwLvqohe8_04lasgpaGt_hnA2wigCV57QC36sbocBcJuB6pnd6y8I6Dp';
+                            break;
+                        case 16:
+                            $apiKey = 'AAAA9NFh0cA:APA91bGQeeeuhxzo2dlh4z6zXfrgCzJfkjN7NvyxbLIL6QQD5a0xpU9ETkhwH4MAhybmfC80q8BEINZy8-O1EyMzuQQuWQ2Ps9azGEh5F7cl5uAFifSGJ1_kyhrclHQ5Jpo3k9hlTm0J';
+                            break;
+                        case 27:
+                            $apiKey = 'AAAAG-HAogM:APA91bEJXN2dPp9-8abRiqSaznaTzpU552YvlUjjAXckzKQ9FfYZcCFvayrmVe1WLNpycrpgcckU2nT-mJE99ObPUQykZTeSxT1VukoIBpirbIqdzPfDfj8fQhekWDtBReXVpvi6pr4v';
+                            break;
+                        
+                        default:
+                            # code...
+                            break;
+                    }
+
+
                     $FCM_token = $data_user->token_notifications;
 
                     $url = "https://fcm.googleapis.com/fcm/send";
                     $token = $FCM_token;
-                    $serverKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+                    $serverKey = $apiKey;
                     $title = "Informacion sobre tu Pago:";
                     $body = "Hemos Procesado el pago de tu Cuota";
                     $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');
