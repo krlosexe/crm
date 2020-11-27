@@ -2083,8 +2083,12 @@ class ClientsController extends Controller
             $client = Clients::where("identificacion", $request["identificacion"])->first();
             if(($client) && ($request["identificacion"] != "")){
 
-                // DB::table('clientes')->where("id_cliente", $client["id_clinete"])
-                //             ->update(['id_user_asesora' => $users["id"], "id_line" => $request["id_line"]]);
+
+                if($request["code_adviser"] != 0){
+                    DB::table('clientes')->where("id_cliente", $client["id_clinete"])
+                    ->update(['id_user_asesora' => $users["id"]]);
+                }
+
 
 
                 DB::table('auditoria')->where("cod_reg", $client["id_cliente"])
