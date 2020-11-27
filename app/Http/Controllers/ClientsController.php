@@ -1216,7 +1216,7 @@ class ClientsController extends Controller
 
 
             User::where("email", $request->email)->delete();
-                  
+
               $user =   User::updateOrCreate(
                         ["id_client" => $id_cliente],
                         ["email" => $request->email,
@@ -1227,7 +1227,7 @@ class ClientsController extends Controller
 
                     if($validar){
                         AuthUserAppFinancing::where("id_user",$user_id->id)->update(['id_user'=>$user->id]);
-                    
+
                     }
                     if($user_id){
                     datosPersonaesModel::where("id_usuario",$user_id->id)->update(['id_usuario'=>$user->id]);
@@ -1246,7 +1246,7 @@ class ClientsController extends Controller
                     }
 
 
-                  
+
 
             if(DB::table('clients_tasks_adsviser')->where("id_client", $id_cliente)->first()){
 
@@ -1289,7 +1289,7 @@ class ClientsController extends Controller
                 $auditoria->usr_regmod = $request["id_user"];
                 $auditoria->fec_regmod = date("Y-m-d");
                 User::where('id_client',$id_cliente)->delete();
-                 
+
             }
             $auditoria->save();
 
@@ -3145,14 +3145,6 @@ class ClientsController extends Controller
 
             }
 
-
-
-
-
-
-
-
-
            /* $data_user = AuthUsersApp::where("id_user", $users["id"])->first();
 
             $ConfigNotification = [
@@ -3164,8 +3156,6 @@ class ClientsController extends Controller
 
             ];
             $code = SendNotifications($ConfigNotification);
-
-
 
             */
 

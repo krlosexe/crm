@@ -251,7 +251,7 @@ class SurgeriesController extends Controller
 
 
 
-            $state_px = $request["state_px"];
+           /* $state_px = $request["state_px"];
 
             if($state_px != "0"){
                 $data_client = Clients::select("state")->find($request["id_cliente"]);
@@ -266,7 +266,7 @@ class SurgeriesController extends Controller
 
                     LogsClients::create($version);
                 }
-            }
+            }*/
 
 
 
@@ -442,7 +442,7 @@ class SurgeriesController extends Controller
 
 
 
-            $state_px = $request["state_px"];
+            /*$state_px = $request["state_px"];
 
             if($state_px != "0"){
                 $data_client = Clients::select("state")->find($cita->id_cliente);
@@ -457,7 +457,7 @@ class SurgeriesController extends Controller
 
                     LogsClients::create($version);
                 }
-            }
+            }*/
 
 
 
