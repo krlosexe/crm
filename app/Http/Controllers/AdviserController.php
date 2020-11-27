@@ -42,8 +42,8 @@ class AdviserController extends Controller
 
     public function GetRefferers($id_user, $display, $name = 0){
 
-        $user = User::where("id", $id_user)->first();
-
+        $user = User::where("id_client", $id_user)->first();
+        dd($user);
 
         if($user["id_rol"] == 6 || $user["id_rol"] == 9){
 
