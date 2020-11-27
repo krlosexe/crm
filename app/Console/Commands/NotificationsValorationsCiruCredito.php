@@ -52,7 +52,6 @@ class NotificationsValorationsCiruCredito extends Command
                     ->where("valuations.status", 0)
                     ->where("auditoria.tabla", "valuations")
                     ->where("auditoria.status", 1)
-
                     ->where("clientes.id_line", 3)
 
 
