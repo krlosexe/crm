@@ -14,15 +14,15 @@ use DB;
 class AdviserController extends Controller
 {
     public function GetAffiliates($id_adviser, $name = 0){
-       
+
         $where = array(
             "id_user_asesora" => $id_adviser,
             "prp"             => "Si"
         );
 
-       
 
-       
+
+
         $data = Clients::where($where)
                         ->select("clientes.*", "users.img_profile as avatar", "users.id as user_id")
                         ->join("users", "users.id_client", "clientes.id_cliente")
@@ -31,7 +31,7 @@ class AdviserController extends Controller
                             if($name != "0"){
                                 $query->where("clientes.nombres", 'like', '%'.$name.'%');
                             }
-                        }) 
+                        })
 
 
                         ->orderBy("clientes.id_cliente", "DESC")
@@ -41,8 +41,8 @@ class AdviserController extends Controller
 
 
     public function GetRefferers($id_user, $display, $name = 0){
-        
-        $user = User::where("id", $id_user)->first();
+
+        $user = User::where("id_client", $id_user)->first();
 
 
         if($user["id_rol"] == 6 || $user["id_rol"] == 9){
@@ -66,7 +66,7 @@ class AdviserController extends Controller
                                                 if($name != "0"){
                                                     $query->where("clientes.nombres", 'like', '%'.$name.'%');
                                                     }
-                                                }) 
+                                                })
 
 
 
@@ -91,7 +91,7 @@ class AdviserController extends Controller
                                                 if($name != "0"){
                                                     $query->where("clientes.nombres", 'like', '%'.$name.'%');
                                                 }
-                                             }) 
+                                             })
 
 
                                               ->orderBy("clientes.id_cliente", "DESC")
@@ -107,7 +107,7 @@ class AdviserController extends Controller
             $where = array(
                 "clientes.id_affiliate" => $user["id_client"]
             );
-            
+
 
             $data = Clients::where($where)
                 ->select("clientes.*", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
@@ -119,12 +119,12 @@ class AdviserController extends Controller
                     if($name != "0"){
                         $query->where("clientes.nombres", 'like', '%'.$name.'%');
                     }
-                }) 
+                })
 
 
                 ->whereNotNull('clientes.id_affiliate')
                 ->orderBy("clientes.id_cliente", "DESC")
-                
+
                 ->get();
 
         }
@@ -141,7 +141,7 @@ class AdviserController extends Controller
 
 
 
-        
+
              $data = User::where("users.id",$data_client["id_user_asesora"])
                             ->selectRaw("users.id as user_id , users.email, CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as nombres, datos_personales.telefono , auth_users_app.token_notifications, users.token_chat")
                             ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
@@ -152,7 +152,7 @@ class AdviserController extends Controller
                                 if($name != "0"){
                                     $query->where("clientes.nombres", 'like', '%'.$name.'%');
                                 }
-                            }) 
+                            })
 
 
                             ->get();
@@ -160,16 +160,16 @@ class AdviserController extends Controller
         }
 
 
-        
+
 
         return response()->json($data)->setStatusCode(200);
 
-    }   
+    }
 
 
 
     public function GetProcesses($id_user, $display){
-        
+
 
 
         $user = User::where("id", $id_user)->first();
@@ -228,7 +228,7 @@ class AdviserController extends Controller
             $where = array(
                 "clientes.id_affiliate" => $user["id_client"]
             );
-            
+
 
             $data = Clients::where($where)
                 ->select("clientes.id_cliente","clientes.nombres", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
@@ -242,7 +242,7 @@ class AdviserController extends Controller
                 ->groupBy("client_information_aditional_surgery.name_surgery")
                 ->groupBy("cl2.nombres")
                 ->groupBy("clientes.nombres")
-                
+
                 ->orderBy("clientes.id_cliente", "DESC")
                 ->get();
 
@@ -256,7 +256,7 @@ class AdviserController extends Controller
                 "clientes.id_cliente" => $user["id_client"],
                // "clientes.origen"          => "Referido PRP",
             );
-            
+
 
             $data = Clients::where($where)
                 ->select("clientes.id_cliente","clientes.nombres", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
@@ -270,7 +270,7 @@ class AdviserController extends Controller
                 ->groupBy("client_information_aditional_surgery.name_surgery")
                 ->groupBy("cl2.nombres")
                 ->groupBy("clientes.nombres")
-                
+
                 ->orderBy("clientes.id_cliente", "DESC")
                 ->get();
 
@@ -334,11 +334,11 @@ class AdviserController extends Controller
 
 
     public function GetRefferersClient($id_client){
-        
+
         $where = array(
             "clientes.id_affiliate" => $id_client
         );
-        
+
 
         $data = Clients::where($where)
             ->select("clientes.*", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
@@ -346,10 +346,10 @@ class AdviserController extends Controller
             ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate")
             ->whereNotNull('clientes.id_affiliate')
             ->orderBy("clientes.id_cliente", "DESC")
-            
+
             ->get();
 
-        
+
 
         return response()->json($data)->setStatusCode(200);
 
@@ -361,15 +361,15 @@ class AdviserController extends Controller
 
 
     public function QtyPrpMonth($id_adviser){
-       
+
         $where = array(
             "id_user_asesora" => $id_adviser,
             "prp"             => "Si"
         );
 
-       
 
-       
+
+
         $data = Clients::where($where)
                         ->whereRaw("month(created_prp) = ".date("m")." ")
                         ->selectRaw("count(id_cliente) as qty")
@@ -396,7 +396,7 @@ class AdviserController extends Controller
 
 
     public function QtyMonthValorations($user_id){
-        
+
         $data = Valuations::selectRaw("count(id_valuations) as qty")
                             ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                             ->where("auditoria.tabla", "valuations")
@@ -411,7 +411,7 @@ class AdviserController extends Controller
 
 
     public function QtyMonthSurgeries($user_id){
-        
+
         $data = Surgeries::selectRaw("count(id_surgeries) as qty")
                             ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
                             ->where("surgeries.status_surgeries", 1)
@@ -437,25 +437,25 @@ class AdviserController extends Controller
                             ->join("clientes", "clientes.id_cliente", "=", "satisfaction_survey.id_client")
                             ->get();
 
-        
+
         $total_average = 0;
         foreach($data as $value){
 
-            $total_stars = $value->question1 
-                            + $value->question2 
-                            + $value->question3 
-                            + $value->question4 
-                            + $value->question5 
-                            + $value->question6 
-                            + $value->question7 
-                            + $value->question8 
+            $total_stars = $value->question1
+                            + $value->question2
+                            + $value->question3
+                            + $value->question4
+                            + $value->question5
+                            + $value->question6
+                            + $value->question7
+                            + $value->question8
                             + $value->question9
                             + $value->question10;
 
             $value->average = round($total_stars / 10);
 
             $total_average = $total_average + $value->average;
-            
+
         }
 
         $response["data"] = $data;
@@ -465,8 +465,8 @@ class AdviserController extends Controller
         }else{
             $response["total_average"] = round($total_average / count($data));
         }
-        
-        
+
+
         return response()->json($response)->setStatusCode(200);
     }
 
@@ -511,14 +511,14 @@ class AdviserController extends Controller
 
         $total_aditionals = 0;
         foreach($surgeries as $value){
-           
+
             $data_aditionals = DB::table("surgeries_additional")
                                 ->selectRaw("SUM(price_aditional) as total")
                                 ->where("id_surgerie", $value->id_surgeries)
                                 ->first();
 
             $total_aditionals = $total_aditionals + $data_aditionals->total;
-           
+
 
         }
 
@@ -544,14 +544,14 @@ class AdviserController extends Controller
                         ->get();
         $data = [];
         foreach($advisers as $adviser){
-            
+
             $array_adviser["name"]                 = $adviser->name_adviser;
             $array_adviser["prp"]                  = $this->QtyPrpMonth($adviser->id)->original->qty;
             $array_adviser["califications_google"] = $this->QtyCalificationsGoogle($adviser->id)->original->qty;
             $array_adviser["valorations"]          = $this->QtyMonthValorations($adviser->id)->original->qty;
             $array_adviser["surgeries"]            = $this->QtyMonthSurgeries($adviser->id)->original->qty;
             $array_adviser["income"]               = $this->IcomeMonth($adviser->id);
-            
+
             $array_adviser["income"]               = $this->IcomeMonth($adviser->id);
           //  echo json_encode($array_adviser["income"]."<br><br>");
 
