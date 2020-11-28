@@ -570,10 +570,10 @@
 
 			$("#status").val(data.status)
 
-			$("#period").val(data.period).trigger("change")
+			$("#period").val(data.period)
+            $("#period").trigger("change");
 
 			$("#id_cliente").val(data.id_client)
-
 
 			var url_imagen = 'img/valuations/cotizaciones/'
 			var url = document.getElementById('ruta').value;
@@ -1061,7 +1061,7 @@
 
 		var monto = inNum(document.getElementById("required_amount").value)
 		var cuotas = document.getElementById("period").value
-		var tasa = 2.65584
+		var tasa = 2.42
 
 		var periodo = "mensual";
 		var tasa_tipo = "mensual";
@@ -1130,7 +1130,7 @@
 
 		var monto = inNum(document.getElementById("required_amount_new").value)
 		var cuotas = document.getElementById("period_new").value
-		var tasa = 2.65584
+		var tasa = 2.42
 
 		var periodo = "mensual";
 		var tasa_tipo = "mensual";

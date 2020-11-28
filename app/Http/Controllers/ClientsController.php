@@ -1216,7 +1216,7 @@ class ClientsController extends Controller
 
 
             User::where("email", $request->email)->delete();
-                  
+
               $user =   User::updateOrCreate(
                         ["id_client" => $id_cliente],
                         ["email" => $request->email,
@@ -1227,7 +1227,7 @@ class ClientsController extends Controller
 
                     if($validar){
                         AuthUserAppFinancing::where("id_user",$user_id->id)->update(['id_user'=>$user->id]);
-                    
+
                     }
                     if($user_id){
                     datosPersonaesModel::where("id_usuario",$user_id->id)->update(['id_usuario'=>$user->id]);
@@ -1246,7 +1246,7 @@ class ClientsController extends Controller
                     }
 
 
-                  
+
 
             if(DB::table('clients_tasks_adsviser')->where("id_client", $id_cliente)->first()){
 
@@ -1289,7 +1289,7 @@ class ClientsController extends Controller
                 $auditoria->usr_regmod = $request["id_user"];
                 $auditoria->fec_regmod = date("Y-m-d");
                 User::where('id_client',$id_cliente)->delete();
-                 
+
             }
             $auditoria->save();
 
@@ -2051,7 +2051,17 @@ class ClientsController extends Controller
 
         $id_line =  $request["id_line"];
 
-        $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+
+        if($request["code_adviser"] != 0){
+            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                            ->where("code_user", $request["code_adviser"])->first();
+            if(!$users){
+                return response()->json("El codigo de descuento no es Valido")->setStatusCode(500);
+               // dd($users);
+            }
+        }else{
+
+            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("users_line_business.id_line", $request["id_line"])
                       //  ->where("users.queue", 0)
                         ->where("users.id", "!=", 106)
@@ -2065,14 +2075,19 @@ class ClientsController extends Controller
                         ->inRandomOrder()
                         ->first();
 
+        }
+
         if($users){
 
 
             $client = Clients::where("identificacion", $request["identificacion"])->first();
             if(($client) && ($request["identificacion"] != "")){
 
-                // DB::table('clientes')->where("id_cliente", $client["id_clinete"])
-                //             ->update(['id_user_asesora' => $users["id"], "id_line" => $request["id_line"]]);
+
+                if($request["code_adviser"] != 0){
+                    Clients::where("id_cliente", $client["id_cliente"])
+                    ->update(['id_user_asesora' => $users->id, "id_line" => $users->id_line]);
+                }
 
 
                 DB::table('auditoria')->where("cod_reg", $client["id_cliente"])
@@ -2251,7 +2266,7 @@ class ClientsController extends Controller
                 $request["code_client"] = strtoupper($code);
                 $request["origen"]      = "App Financiacion";
 
-
+                $request["id_line"] = $users->id_line;
                 $cliente = Clients::create($request->all());
 
                 $request["id_client"] = $cliente["id_cliente"];
@@ -3133,14 +3148,6 @@ class ClientsController extends Controller
 
             }
 
-
-
-
-
-
-
-
-
            /* $data_user = AuthUsersApp::where("id_user", $users["id"])->first();
 
             $ConfigNotification = [
@@ -3152,8 +3159,6 @@ class ClientsController extends Controller
 
             ];
             $code = SendNotifications($ConfigNotification);
-
-
 
             */
 

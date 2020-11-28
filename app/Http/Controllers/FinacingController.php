@@ -333,8 +333,6 @@ class FinacingController extends Controller
 
     public function SendEmail($data){
 
-
-
         $user = User::find($data["user_id"]);
         $subject = $data["issue"];
 

@@ -194,7 +194,7 @@
 
                   <br><br>
 
-
+<!--
 
                 <div class="row">
 
@@ -229,7 +229,7 @@
                     </div>
                 </div>
 
-
+            -->
 
                   <br>
 
@@ -293,7 +293,7 @@
                 <div class="col-md-3">
                   <div class="form-group">
                       <label for=""><b>Monto de Pago</b></label>
-                      <input type="text" id="amount-payment-store" class="form-control  form-control-user monto_formato_decimales">
+                      <input type="text" id="amount-payment-store" class="form-control  form-control-user">
                   </div>
                 </div>
 

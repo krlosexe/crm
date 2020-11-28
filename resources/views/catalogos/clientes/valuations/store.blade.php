@@ -7,7 +7,7 @@
         @csrf
         <div class="row">
            <div class="col-md-6">
-              
+
               <input type="hidden"  name="id_cliente" value="{{$id_client}}">
 
               <div class="row">
@@ -34,12 +34,12 @@
                     </div>
                 </div>
 
-                
+
 
               </div>
 
 
-            
+
               <div class="row">
 
                   <div class="col-md-6">
@@ -60,7 +60,7 @@
                   </div>
 
 
-                  
+
 
                   <div class="col-md-6">
                       <div class="form-group">
@@ -76,7 +76,7 @@
 
 
 
-               
+
                   <div class="col-md-12">
                       <div class="form-group">
                             <label for=""><b>Seguidores</b></label>
@@ -85,7 +85,7 @@
                             </select>
                         </div>
                     </div>
-          
+
 
 
 
@@ -102,7 +102,7 @@
 
 
 
-                  
+
               </div>
 
            </div>
@@ -121,7 +121,7 @@
                   </div>
               </div>
 
-
+<!--
               <div class="row">
                 <div class="col-md-6">
 									<div class="form-group">
@@ -150,7 +150,7 @@
 									</div>
 								</div>
               </div>
-
+            -->
 
               <div class="row">
                 <div class="col-md-12">
@@ -191,7 +191,7 @@
                    </div>
 
 
-                   
+
 
 
 
@@ -213,7 +213,7 @@
                    <div class="row">
                     <div class="col-md-12">
                         <div class="row" id="content_acquittance" style="display: none">
-                          <div class="col-sm-12 text-center"> 
+                          <div class="col-sm-12 text-center">
                                 <label for=""><b>Adjuntar recibo</b></label>
                                 <div>
                                     <div class="file-loading">
@@ -230,7 +230,7 @@
 
                 </div>
 
-              
+
 
 
            </div>
@@ -256,6 +256,6 @@
           <br>
           <br>
       </form>
-      
+
     </div>
 

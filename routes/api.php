@@ -19,13 +19,13 @@ use App\datosPersonaesModel;
 
 
 Route::post('auth', 'Login@Auth');
-
+Route::post('GenerateCode', 'Login@GenerateCode');
+Route::post('VerifyCode', 'Login@VerifyCode');
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 
 
 
@@ -442,7 +442,7 @@ Route::get('quiz', 'SatisfactionSurveyController@QuestionByAdviser');
 Route::get('client/indentification/{cedula}', 'ClientsController@Identification');
 Route::post('financing/create', 'FinacingController@createSolicitud');
 
-
+Route::post('register/prp/app', 'AffiliateController@store');
 
 
 
