@@ -51,7 +51,10 @@ class NotificationsTasksGlobal extends Command
         $data = ClientsTasks::where("fecha", "<", date("Y-m-d"))
                     ->where("status_task", "Abierta")
                     ->join("clientes", "clientes.id_cliente", "=", "clients_tasks.id_client")
+                    ->join("auditoria", "auditoria.cod_reg","clients_tasks.id_clients_tasks")
                     ->where("clientes.id_line", 15)
+                    ->where("auditoria.tabla","clients_tasks")
+                    ->where("auditoria.status", 1)
                     ->get();
 
 
