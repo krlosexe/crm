@@ -1113,8 +1113,9 @@ class ClientsController extends Controller
             $request["pay_to_study_credit"] == 1 ? $request["pay_to_study_credit"] = 1 : $request["pay_to_study_credit"] = 0;
             if($data->pay_to_study_credit == 0){
 
-                DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
+               // DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
 
+               /*
                 if($request["pay_to_study_credit"] == 1){
                     DB::table("clients_pay_to_study_credit")->insert([
                                                                         "id_client" => $id_cliente,
@@ -1122,7 +1123,7 @@ class ClientsController extends Controller
                                                                         "payment_method" => $request["payment_method"],
                                                                         "created_at" => $request["date_pay_study_credit"]
                                                                     ]);
-                }
+                }*/
 
             }else{
 
