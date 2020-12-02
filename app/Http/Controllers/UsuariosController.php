@@ -147,7 +147,7 @@ class UsuariosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         // dd($request->all());
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
@@ -304,17 +304,17 @@ class UsuariosController extends Controller
                    return ['mensaje'=>'el codigo que intenta ingresar ya esxiste'];
                }else{
                    $User = User::find($id);
-    
+
                    $User->email   = $request["email"];
                    $User->id_rol  = $request["rol"];
                    $User->id_line = $request["id_line"];
-    
+
                    if($file != null){
                        $destinationPath = 'img/usuarios/profile';
                        $file->move($destinationPath,$file->getClientOriginalName());
                        $User->img_profile = $file->getClientOriginalName();
                    }
-    
+
                    if($request["password"] != "" && $request["repeat-password"] != ""){
                        $User->password = md5($request["password"]);
                    }
@@ -381,6 +381,17 @@ class UsuariosController extends Controller
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
         }
+    }
+
+
+    public function GetCodeAdviser($code){
+
+        $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                        ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+                        ->where("users.code_user", "=", $code)
+                        ->first();
+
+        return response()->json($users)->setStatusCode(200);
     }
 
     /**
