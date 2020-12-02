@@ -184,6 +184,8 @@ class AdviserController extends Controller
 
         }
 
+
+
         $where = array(
             "clientes.id_affiliate" => $id_user
         );
@@ -196,6 +198,8 @@ class AdviserController extends Controller
             ->join("events_client", "events_client.id_client", "=", "clientes.id_cliente")
             ->whereNotNull('clientes.id_affiliate')
 
+            ->orderBy("clientes.id_cliente", "DESC")
+            ->get();
 
             ->groupBy("clientes.id_cliente")
             ->groupBy("client_information_aditional_surgery.name_surgery")
@@ -204,8 +208,6 @@ class AdviserController extends Controller
 
             ->orderBy("clientes.id_cliente", "DESC")
             ->get();
-
-
 
 
         return response()->json($data)->setStatusCode(200);
