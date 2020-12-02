@@ -134,10 +134,7 @@ class AdviserController extends Controller
 
     public function GetProcesses($id_user, $display){
 
-
-
         $user = User::where("id", $id_user)->first();
-
 
         if($user["id_rol"] == 6 || $user["id_rol"] == 9){
 
@@ -201,6 +198,8 @@ class AdviserController extends Controller
             ->join("events_client", "events_client.id_client", "=", "clientes.id_cliente")
             ->whereNotNull('clientes.id_affiliate')
 
+            ->orderBy("clientes.id_cliente", "DESC")
+            ->get();
 
             ->groupBy("clientes.id_cliente")
             ->groupBy("client_information_aditional_surgery.name_surgery")
