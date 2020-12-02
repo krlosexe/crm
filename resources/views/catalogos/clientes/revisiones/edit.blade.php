@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="form-update" enctype="multipart/form-data">
-      
+
         @csrf
 
         <input type="hidden" name="_method" value="put">
@@ -58,10 +58,10 @@
         <br>
 
         <div class="row">
-        
-            <div class="col-md-6">
+
+            <div class="col-md-8">
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <div class="form-group">
                         <label for=""><b>Fecha</b></label>
                         <input type="date" name="fecha" id="fecha-edit" class="form-control  form-control-user"  min="<?= date('Y-m-d')?>">
@@ -69,7 +69,7 @@
                 </div>
 
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for=""><b>Hora desde</b></label>
                         <input type="time" name="time" id="time-edit" class="form-control  form-control-user">
@@ -77,7 +77,7 @@
                 </div>
 
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for=""><b>Hora hasta</b></label>
                         <input type="time" name="time_end" id="time-end-edit" class="form-control  form-control-user">
@@ -89,8 +89,8 @@
               </div>
 
               <div class="row">
-              
-                  <div class="col-md-4">
+
+                  <div class="col-md-6">
                     <div class="form-group">
                         <label for=""><b>Cirujano</b></label>
                         <input type="text" name="cirujano" id="cirujano-edit" class="form-control  form-control-user" >
@@ -98,7 +98,7 @@
                 </div>
 
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for=""><b>Enfermera</b></label>
                         <input type="text" name="enfermera" id="enfermera-edit" class="form-control  form-control-user" >
@@ -106,18 +106,18 @@
                 </div>
 
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for=""><b>Descripcion</b></label>
                         <input type="text" name="descripcion" id="descripcion-edit" class="form-control  form-control-user" >
                     </div>
                 </div>
-              
+
               </div>
 
 
               <div class="row">
-              
+
                 <div class="col-md-12" style="padding-top: 25px;">
                   <button type="button" class="btn btn-primary waves-effect pull-left" onclick="addAppointment('#tableEdit', 'edit')">Agregar</button>
                 </div>
@@ -151,7 +151,7 @@
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-4">
 
 
                  <br><br>
@@ -173,7 +173,7 @@
                   <div class="row">
 
                       <div class="col-md-2"></div>
-                          
+
                       <div class="col-md-10">
                           <div class="form-group">
                               <label for=""><b>Comentarios</b></label>
@@ -188,7 +188,7 @@
                   <div class="row">
 
                       <div class="col-md-2">
-                            
+
                       </div>
 
                       <div class="col-md-10">
@@ -196,12 +196,12 @@
                           Comentar
                         </button>
                       </div>
-                    
+
                   </div>
-            
+
             </div>
         </div>
-        
+
 
         <input type="hidden" name="inicial" id="inicial">
         <input type="hidden" name="id_user" class="id_user">
@@ -226,6 +226,6 @@
           <br>
           <br>
       </form>
-      
+
     </div>
 
