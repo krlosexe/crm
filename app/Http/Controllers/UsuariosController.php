@@ -391,7 +391,12 @@ class UsuariosController extends Controller
                         ->where("users.code_user", "=", $code)
                         ->first();
 
-        return response()->json($users)->setStatusCode(200);
+        if($users){
+            return response()->json($users)->setStatusCode(200);
+        }else{
+            return response()->json("El codigo es incorrecto")->setStatusCode(400);
+        }
+
     }
 
     /**
