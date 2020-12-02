@@ -199,7 +199,6 @@ class AdviserController extends Controller
             ->whereNotNull('clientes.id_affiliate')
 
             ->orderBy("clientes.id_cliente", "DESC")
-            ->get();
 
             ->groupBy("clientes.id_cliente")
             ->groupBy("client_information_aditional_surgery.name_surgery")
