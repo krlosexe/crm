@@ -1113,8 +1113,9 @@ class ClientsController extends Controller
             $request["pay_to_study_credit"] == 1 ? $request["pay_to_study_credit"] = 1 : $request["pay_to_study_credit"] = 0;
             if($data->pay_to_study_credit == 0){
 
-                DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
+               // DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
 
+               /*
                 if($request["pay_to_study_credit"] == 1){
                     DB::table("clients_pay_to_study_credit")->insert([
                                                                         "id_client" => $id_cliente,
@@ -1122,7 +1123,7 @@ class ClientsController extends Controller
                                                                         "payment_method" => $request["payment_method"],
                                                                         "created_at" => $request["date_pay_study_credit"]
                                                                     ]);
-                }
+                }*/
 
             }else{
 
@@ -1216,7 +1217,7 @@ class ClientsController extends Controller
 
 
             User::where("email", $request->email)->delete();
-                  
+
               $user =   User::updateOrCreate(
                         ["id_client" => $id_cliente],
                         ["email" => $request->email,
@@ -1227,7 +1228,7 @@ class ClientsController extends Controller
 
                     if($validar){
                         AuthUserAppFinancing::where("id_user",$user_id->id)->update(['id_user'=>$user->id]);
-                    
+
                     }
                     if($user_id){
                     datosPersonaesModel::where("id_usuario",$user_id->id)->update(['id_usuario'=>$user->id]);
@@ -1246,7 +1247,7 @@ class ClientsController extends Controller
                     }
 
 
-                  
+
 
             if(DB::table('clients_tasks_adsviser')->where("id_client", $id_cliente)->first()){
 
@@ -1289,7 +1290,7 @@ class ClientsController extends Controller
                 $auditoria->usr_regmod = $request["id_user"];
                 $auditoria->fec_regmod = date("Y-m-d");
                 User::where('id_client',$id_cliente)->delete();
-                 
+
             }
             $auditoria->save();
 
@@ -2083,8 +2084,11 @@ class ClientsController extends Controller
             $client = Clients::where("identificacion", $request["identificacion"])->first();
             if(($client) && ($request["identificacion"] != "")){
 
-                // DB::table('clientes')->where("id_cliente", $client["id_clinete"])
-                //             ->update(['id_user_asesora' => $users["id"], "id_line" => $request["id_line"]]);
+
+                if($request["code_adviser"] != 0){
+                    Clients::where("id_cliente", $client["id_cliente"])
+                    ->update(['id_user_asesora' => $users->id, "id_line" => $users->id_line]);
+                }
 
 
                 DB::table('auditoria')->where("cod_reg", $client["id_cliente"])
@@ -3145,14 +3149,6 @@ class ClientsController extends Controller
 
             }
 
-
-
-
-
-
-
-
-
            /* $data_user = AuthUsersApp::where("id_user", $users["id"])->first();
 
             $ConfigNotification = [
@@ -3164,8 +3160,6 @@ class ClientsController extends Controller
 
             ];
             $code = SendNotifications($ConfigNotification);
-
-
 
             */
 
