@@ -444,7 +444,7 @@ Route::post('financing/create', 'FinacingController@createSolicitud');
 
 Route::post('register/prp/app', 'AffiliateController@store');
 
-
+Route::get('get/code/adviser/{code}', 'UsuariosController@GetCodeAdviser');
 
 
 Route::get('generate/token/chat', function () {
