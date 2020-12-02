@@ -727,7 +727,8 @@ class Login extends Controller
             $data = [
                "issue"   => "Código de Acceso Multiestica $code",
                "message" => "Hola, $client->nombres tu código de acceso a Multiestica es $code",
-               "email"   => $client->email
+               "email"   => $client->email,
+               "id_line" => $client->id_line
             ];
 
             $this->SendEmail2($data);
