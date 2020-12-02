@@ -5,7 +5,7 @@
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="store" enctype="multipart/form-data">
         @csrf
-      
+
         <input type="hidden"  name="id_paciente" value="{{$id_client}}">
 
 
@@ -20,7 +20,7 @@
 
           <div class="col-md-3">
               <div class="form-group">
-                  <label for=""><b>Cirugiaaaaa</b></label>
+                  <label for=""><b>Cirugia</b></label>
                   <input type="text" name="cirugia" id="cirugia-store" class="form-control  form-control-user" required>
               </div>
           </div>
@@ -58,35 +58,34 @@
 
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for=""><b>Fecha</b></label>
-                            <input type="date" name="fecha" id="fecha-store" class="form-control  form-control-user" required min="<?= date('Y-m-d')?>">
-                        </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label for=""><b>Fecha</b></label>
+                        <input type="date" name="fecha" id="fecha-store" class="form-control  form-control-user" required min="<?= date('Y-m-d')?>">
                     </div>
+                  </div>
 
 
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for=""><b>Hora desde</b></label>
-                            <input type="time" name="time" id="time-store" class="form-control  form-control-user" required>
-                        </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label for=""><b>Hora desde</b></label>
+                        <input type="time" name="time" id="time-store" class="form-control  form-control-user" required>
                     </div>
+                  </div>
 
 
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for=""><b>Hora hasta</b></label>
-                            <input type="time" name="time_end" id="time-end-store" class="form-control  form-control-user" required>
-                        </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label for=""><b>Hora hasta</b></label>
+                        <input type="time" name="time_end" id="time-end-store" class="form-control  form-control-user" required>
                     </div>
-                </div>
+                  </div>
 
 
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for=""><b>Cirujano</b></label>
                         <input type="text" name="cirujano" id="cirujano-store" class="form-control  form-control-user" required>
@@ -94,7 +93,7 @@
                 </div>
 
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for=""><b>Enfermera</b></label>
                         <input type="text" name="enfermera" id="enfermera-store" class="form-control  form-control-user" required>
@@ -102,7 +101,7 @@
                 </div>
 
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for=""><b>Descripcion</b></label>
                         <input type="text" name="descripcion" id="descripcion-store" class="form-control  form-control-user" required>
@@ -141,7 +140,7 @@
 
 
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="row">
                 <div class="col-md-12">
                    <div class="form-group">
@@ -153,7 +152,7 @@
             </div>
 
         </div>
-        
+
 
         <br>
 
@@ -175,6 +174,6 @@
           <br>
           <br>
       </form>
-      
+
     </div>
 
