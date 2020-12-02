@@ -183,6 +183,7 @@ class AffiliateController extends Controller
                           'mensagge'   => "Ha iniciado sesion exitosamente",
                           "type_user"  => "Afiliado",
                           "code_client" => $request["code_client"],
+                          "line"        => $request["id_line"],
                           "id_client"  => $id_client
             );
 
