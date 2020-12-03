@@ -190,7 +190,6 @@ class AdviserController extends Controller
             "clientes.id_affiliate" => $id_user
         );
 
-
         $data = Clients::where($where)
             ->select("clientes.id_cliente","clientes.nombres", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
             ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
@@ -207,7 +206,6 @@ class AdviserController extends Controller
 
             ->orderBy("clientes.id_cliente", "DESC")
             ->get();
-
 
         return response()->json($data)->setStatusCode(200);
 
