@@ -452,6 +452,7 @@ Route::get('get/code/adviser/{code}', 'UsuariosController@GetCodeAdviser');
 
 
 Route::post('wellezy/register/client', 'WellezyController@RegisterClient');
+Route::post('wellezy/auth', 'WellezyController@Auth');
 
 
 
