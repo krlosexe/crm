@@ -447,6 +447,15 @@ Route::post('register/prp/app', 'AffiliateController@store');
 Route::get('get/code/adviser/{code}', 'UsuariosController@GetCodeAdviser');
 
 
+
+
+
+
+Route::post('wellezy/register/client', 'WellezyController@RegisterClient');
+
+
+
+
 Route::get('generate/token/chat', function () {
 
     $users = User::get();

@@ -2274,9 +2274,6 @@ class ClientsController extends Controller
                 $cliente = Clients::create($request->all());
 
                 $request["id_client"] = $cliente["id_cliente"];
-
-
-
                 $id_client = $cliente["id_cliente"];
 
                 ClientInformationAditionalSurgery::create($request->all());
