@@ -42,4 +42,24 @@ class WellezyController extends Controller
 
         return response()->json($data)->setStatusCode(200);
     }
+
+
+    public function Auth(Request $request){
+
+        $client = Clients::where("email", $request["email"])->where("password", md5($request["password"]))->first();
+
+        if($client){
+
+            $data = array('email'     => $client->email,
+                          'nombres'   => $client->nombres,
+                          'line'      => $client->id_line,
+                          'id_client' => $client->id_client,
+                          'mensagge'  => "Ha iniciado sesion exitosamente"
+            );
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("Email or password was not correct")->setStatusCode(400);
+        }
+
+    }
 }
