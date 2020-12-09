@@ -751,7 +751,7 @@
                                 
                                 <div class="col-md-8">
                                     <label for="drugs_check_edit"><b>Cual/es</b></label>
-                                    <input type="text" name="drugs" class="form-control form-control-user" readonly id="drugs_edit" placeholder="PJ. Clonazepan">
+                                    <input type="text" name="drugs" class="form-control form-control-user" readonly id="drugs_edit" placeholder="PJ. Clonazepam">
                                 </div>
 
                                 <div class="col-md-4">
