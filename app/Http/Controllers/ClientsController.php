@@ -987,7 +987,6 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id_cliente)
     {
-        // dd($request->all());
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
 

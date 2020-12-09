@@ -773,7 +773,7 @@
 
                                 <div class="col-md-5">
                                     <label for="number_children"><b>Numero de Hijos</b></label>
-                                    <input type="number" name="number_children" class="form-control form-control-user" readonly id="number_children" placeholder="PJ. 1">
+                                    <input type="number"  min="1" name="number_children" class="form-control form-control-user" readonly id="number_children" placeholder="PJ. 1">
                                 </div>
 
                             </div>
@@ -835,6 +835,21 @@
                                 <div class="col-md-8">
                                         <label for="major_disease"><b>Cual/es</b></label>
                                     <input type="text" name="major_disease" class="form-control form-control-user" readonly id="major_disease" placeholder="PJ. Asma">
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label for="drugs_check"><b>¿Consume Algun Estupefaciente?</b></label>
+                                    <label class='container-check'>
+                                        <input type='checkbox' name='drugs_check' class='checkitem chk-col-blue' id='drugs_check' value='1'>
+                                        <span class='checkmark'></span>
+                                        <label for=''></label>
+                                    </label>
+                                </div>
+                                
+                                <div class="col-md-8">
+                                    <label for="drugs_check"><b>Cual/es</b></label>
+                                    <input type="text" name="drugs" class="form-control form-control-user" readonly id="drugs" placeholder="PJ. Clonazepan">
                                 </div>
 
 

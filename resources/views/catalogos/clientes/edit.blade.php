@@ -716,6 +716,8 @@
                                     </label>
                                 </div>
 
+                                
+
 
                                 <div class="col-md-8">
                                     <label for="previous_surgery_edit"><b>Cirugías Anteriores</b></label>
@@ -733,13 +735,24 @@
                                     </label>
                                 </div>
 
-
                                 <div class="col-md-8">
                                     <label for="major_disease"><b>Cual/es</b></label>
                                     <input type="text" name="major_disease" class="form-control form-control-user" readonly id="major_disease_edit" placeholder="PJ. Asma">
                                 </div>
 
-
+                                <div class="col-md-4">
+                                    <label for="drugs_check_edit"><b>¿Consume Algun Estupefaciente?</b></label>
+                                    <label class='container-check'>
+                                        <input type='checkbox' name='drugs_check' class='checkitem chk-col-blue' id='drugs_check_edit' value='1'>
+                                        <span class='checkmark'></span>
+                                        <label for=''></label>
+                                    </label>
+                                </div>
+                                
+                                <div class="col-md-8">
+                                    <label for="drugs_check_edit"><b>Cual/es</b></label>
+                                    <input type="text" name="drugs" class="form-control form-control-user" readonly id="drugs_edit" placeholder="PJ. Clonazepan">
+                                </div>
 
                                 <div class="col-md-4">
                                     <label for="medication_edit"><b>¿Toma algún medicamento?</b></label>
