@@ -987,7 +987,6 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id_cliente)
     {
-        // dd($request->all());
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
 
@@ -2088,6 +2087,9 @@ class ClientsController extends Controller
                 if($request["code_adviser"] != 0){
                     Clients::where("id_cliente", $client["id_cliente"])
                     ->update(['id_user_asesora' => $users->id, "id_line" => $users->id_line]);
+                }else{
+                    Clients::where("id_cliente", $client["id_cliente"])
+                    ->update(['id_user_asesora' => $users->id, "id_line" => $users->id_line]);
                 }
 
 
@@ -2271,9 +2273,6 @@ class ClientsController extends Controller
                 $cliente = Clients::create($request->all());
 
                 $request["id_client"] = $cliente["id_cliente"];
-
-
-
                 $id_client = $cliente["id_cliente"];
 
                 ClientInformationAditionalSurgery::create($request->all());

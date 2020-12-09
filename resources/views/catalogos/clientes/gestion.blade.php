@@ -1235,6 +1235,7 @@
 				Children("#children", "#number_children")
 				Surgery("#surgery", "#previous_surgery")
 				Disease("#disease", "#major_disease")
+				Drugs("#drugs_check", "#drugs")
 				Medication("#medication", "#drink_medication")
 				Allergic("#allergic ", "#allergic_medication")
 				$("#clinic").attr("disabled", "disabled")
@@ -1764,6 +1765,7 @@
 					Children("#children_edit", "#number_children_edit")
 					Surgery("#surgery_edit", "#previous_surgery_edit")
 					Disease("#disease_edit", "#major_disease_edit")
+					Drugs("#drugs_check_edit", "#drugs_edit")
 					Medication("#medication_edit", "#drink_medication_edit")
 					Allergic("#allergic_edit ", "#allergic_medication_edit")
 
@@ -1855,12 +1857,14 @@
 					$("#alcohol_edit").prop("checked", data.alcohol ? true : false)
 					$("#surgery_edit").prop("checked", data.surgery ? true : false)
 					$("#disease_edit").prop("checked", data.disease ? true : false)
+					$("#drugs_check").prop("checked", data.drugs_check ? true : false)
 					$("#medication_edit").prop("checked", data.medication ? true : false)
 					$("#allergic_edit").prop("checked", data.allergic ? true : false)
 
 					$("#number_children_edit").val(data.number_children).prop("readonly", data.children ? false : true)
 					$("#previous_surgery_edit").val(data.previous_surgery).prop("readonly", data.surgery ? false : true)
 					$("#major_disease_edit").val(data.major_disease).prop("readonly", data.disease ? false : true)
+					$("#drugs_edit").val(data.drugs).prop("readonly", data.drugs_check ? false : true)
 					$("#drink_medication_edit").val(data.drink_medication).prop("readonly", data.medication ? false : true)
 					$("#allergic_medication_edit").val(data.allergic_medication).prop("readonly", data.allergic ? false : true)
 
@@ -2178,7 +2182,7 @@
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
-						$(input).val("0").attr("readonly", "readonly");
+						$(input).val("").attr("readonly", "readonly");
 					}
 				});
 			}
@@ -2190,7 +2194,7 @@
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
-						$(input).val("0").attr("readonly", "readonly");
+						$(input).val("").attr("readonly", "readonly");
 					}
 				});
 			}
@@ -2202,7 +2206,17 @@
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
-						$(input).val("0").attr("readonly", "readonly");
+						$(input).val("").attr("readonly", "readonly");
+					}
+				});
+			}
+
+			function Drugs(checkbox, input){
+				$(checkbox).change(function (e) {
+					if ($(checkbox).is(':checked')){
+						$(input).removeAttr("readonly").focus();
+					}else{
+						$(input).val("").attr("readonly", "readonly");
 					}
 				});
 			}
@@ -2213,7 +2227,7 @@
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
-						$(input).val("0").attr("readonly", "readonly");
+						$(input).val("").attr("readonly", "readonly");
 					}
 				});
 			}
@@ -2223,7 +2237,7 @@
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
-						$(input).val("0").attr("readonly", "readonly");
+						$(input).val("").attr("readonly", "readonly");
 					}
 				});
 			}
