@@ -302,6 +302,11 @@ Route::resource('category', 'CategoryController');
 Route::get('category/sub/{category}', 'CategoryController@getSubCategory');
 Route::get('procedures/all', 'CategoryController@getSubCategoryAll');
 
+Route::get('subcategory/list', 'CategoryController@ListSubCategory');
+Route::post('subcategory/create', 'CategoryController@crearSubCategoria');
+Route::put('subcategory/edit/{id}', 'CategoryController@updateSubCategoria');
+Route::get('subcategory/eliminar/{id}', 'CategoryController@EliminarSubCategoria');
+
 Route::resource('gallery/image', 'GalleryImageController');
 Route::get('image/gallery', 'GalleryImageController@get');
 
