@@ -689,13 +689,6 @@
 					$('#summernote_edit').summernote("reset");
 					$('#summernote_edit').summernote('code',data.description);
 
-
-						// if($("#use_app_edit").is(":checked")){
-						// 	$("#use_app_edit").val(1)
-						// }else{
-						// 	("#use_app_edit").val(0)
-						// }
-					
 					SubmitComment(data.id_clients_tasks, "api/comment/task/client", "#comments_edit", "#add-comments", "#summernote_edit")
 
 					$('#avatar-edit').fileinput('destroy');
