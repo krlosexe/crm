@@ -214,8 +214,8 @@ class CategoryController extends Controller
         try {
            
             $file = $request->file('img-profile');
-            $file_a = $request->file('img-profile-before');
-            $file_b = $request->file('img-profile-after');
+            $file_b = $request->file('img-profile-before');
+            $file_a = $request->file('img-profile-after');
             
             $category =  SubCategory::find($id);
 
