@@ -299,7 +299,7 @@ Route::post('generate/token/chat', 'UsuariosController@generateTokenChat');
 
 
 Route::resource('category', 'CategoryController');
-Route::get('category/sub/{category}', 'CategoryController@getSubCategory');
+Route::get('category/sub/{category}/{state?}', 'CategoryController@getSubCategory');
 Route::get('procedures/all', 'CategoryController@getSubCategoryAll');
 
 Route::get('subcategory/list', 'CategoryController@ListSubCategory');

@@ -20,9 +20,14 @@ class CategoryController extends Controller
     }
 
 
-    public function getSubCategory($category){
+    public function getSubCategory($category,$state=null){
 
-        $data = DB::table("sub_category")->where("id_category", $category)->get();
+        $data = DB::table("sub_category")
+        ->where("id_category", $category)
+        ->when($state, function ($q) use($state)  {
+            return $q->where("state",$state);
+        })
+        ->get();
         return response()->json($data)->setStatusCode(200);
     }   
 
