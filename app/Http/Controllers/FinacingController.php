@@ -14,9 +14,11 @@ use Mail;
 use DateTime;
 class FinacingController extends Controller
 {
-    public function GetRequestFinancing()
+    public function GetRequestFinancing(Request $request)
     {
-
+        
+        $request->use_app === "0" ? $request->use_app = null :  $request->use_app;
+        
         $data = DB::table("client_request_credit")
             ->selectRaw("client_request_credit.*, clientes.nombres,clientes.identificacion, clientes.pay_to_study_credit,
 
@@ -60,6 +62,17 @@ class FinacingController extends Controller
             ->join("client_request_credit_requirements", "client_request_credit_requirements.id_client", "=", "client_request_credit.id_client", "left")
             ->join("valuations", "valuations.id_cliente", "=", "client_request_credit.id_client", "left")
             ->join("users", "users.id", "=", "clientes.id_user_asesora", "left")
+         
+            ->when($request->adviser, function ($q) use($request)  {
+                return $q->where("clientes.id_user_asesora",$request->adviser);
+            })
+            ->when($request->state, function ($q) use($request)  {
+                return $q->where("client_request_credit.status",$request->state);
+            })
+            ->when($request->use_app, function ($q) {
+                $q->join("users as user_app","user_app.id_client","=","clientes.id_cliente");
+                return $q->join("auth_users_app_financing","auth_users_app_financing.id_user","=","user_app.id");
+            })
             ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id", "left")
             ->orderBy("client_request_credit.created_at", "DESC")
             ->get();
