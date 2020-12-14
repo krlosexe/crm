@@ -447,6 +447,8 @@ Route::post('register/prp/app', 'AffiliateController@store');
 
 
 
+
+
 Route::get('generate/token/chat', function () {
 
     $users = User::get();
