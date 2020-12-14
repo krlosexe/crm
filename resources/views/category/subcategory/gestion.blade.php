@@ -683,8 +683,6 @@
 					$("#cat-ingles-edit").val(data.name_ingles)
 					$("#category-edit").val(data.id_category)
 
-				
-					
 					var stt = data.state ? true : false
 					$('#use_app_edit').prop('checked',stt);
 								
