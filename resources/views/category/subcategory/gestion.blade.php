@@ -230,7 +230,7 @@
 								
 							<div class="row">
 
-								<div class="col-md-3">
+								<!-- <div class="col-md-3">
 									<div class="form-group">
 										<label for=""><b>Filtrar por : Asesora</b></label>
 										<select name="adviser[]" id="id_asesora_valoracion-filter" class="form-control select2 disabled" multiple>
@@ -238,8 +238,6 @@
 										</select>
 									</div>
 								</div>
-
-
 
 								<div class="col-md-3">
 									<div class="form-group">
@@ -251,7 +249,6 @@
 										</select>
 									</div>
 								</div>
-
 
 
 								<div class="col-md-3">
@@ -266,10 +263,9 @@
 										<label for=""><b>Fecha hasta</b></label>
 										<input type="date" class="form-control" id="date_finish">
 									</div>
-								</div>  
+								</div>   -->
 
 							</div>
-
 
 
 			              <div class="table-responsive">
@@ -277,16 +273,8 @@
 			                  <thead>
 			                    <tr>
 								  <th>Acciones</th>
-								  <th>#</th>
-								  <th>Paciente</th>
-								  <th>Responsable</th>
-								  <th>Asunto</th>
-								  <th>Fecha</th>
-								  <th>Hora</th>
-								  <th>Estatus</th>
-								  <th>Seguidores</th>
-			                      <th>Fecha de registro</th>
-								  <th>Registrado por</th>
+								  <th>Categoia</th>
+								  <th>Nombre</th>
 			                    </tr>
 			                  </thead>
 			                  <tbody></tbody>
@@ -312,7 +300,6 @@
 					
 					<div class="side-panel-container">
 
-
 						<div id="content">
 							@include('ficha_paciente')
 						</div>
@@ -323,8 +310,6 @@
 							</div>
 						</div>
 					</div>
-
-
 				</div>
 
 
@@ -344,10 +329,6 @@
 		  </div>
 		  <input type="hidden" id="ruta" value="<?= url('/') ?>">
 	@endsection
-
-
-
-
 
 	@section('CustomJs')
 
@@ -380,14 +361,12 @@
 			});
 
 
-
-
 			function update(){
-				enviarFormularioPut("#form-update", 'api/client/tasks', '#cuadro4', false, "#avatar-edit");
+				enviarFormularioPut("#form-update", 'api/subcategory/edit', '#cuadro4', false, "#avatar-edit");
 			}
 
 			function store(){
-				enviarFormulario("#store", 'api/client/tasks', '#cuadro2');
+				enviarFormulario("#store", 'api/subcategory/create', '#cuadro2');
 			}
 
 			$("#id_asesora_valoracion-filter, #overdue-filter").change(function (e) { 
@@ -414,21 +393,20 @@
 
 				var table=$("#table").DataTable({
 					"destroy":true,
-					
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
 						"method":"GET",
-						 "url":''+url+'/api/client/tasks',
-						 "data": {
-							"rol"     : name_rol,
-							"id_user" : id_user,
-							"token"   : tokens,
-							"adviser" : adviser,
-							"overdue" : overdue,
-							"date_init"   : date_init,
-							"date_finish" : date_finish
-						},
+						 "url":''+url+'/api/subcategory/list',
+						//  "data": {
+						// 	"rol"     : name_rol,
+						// 	"id_user" : id_user,
+						// 	"token"   : tokens,
+						// 	"adviser" : adviser,
+						// 	"overdue" : overdue,
+						// 	"date_init"   : date_init,
+						// 	"date_finish" : date_finish
+						// },
 						"dataSrc":""
 					},
 					"columns":[
@@ -439,50 +417,21 @@
 									//botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
 								if(actualizar == 1)
 									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
-								if(data.status == 1 && actualizar == 1)
-									botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
-								else if(data.status == 2 && actualizar == 1)
-									botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
 								if(borrar == 1)
 									botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 								return botones;
 							}
 						},
-						{"data": "id_clients_tasks"},
-
-
-
-						{"data":"name_client", 
+						{
+							"data":"id_category", 
 							render : function(data, type, row) {
-								return "<a href='javascript:void(0)' onclick='ViewClient("+row.id_client+")'>"+data+"</a>"
+								return row.category.name;
 								
 							}
 						},
-
-
-						{"data":"name_responsable", 
-							render : function(data, type, row) {
-								return data+" "+row.last_name_responsable;
-								
-							}
-						},
-						{"data": "issue"},
-						{"data": "fecha"},
-						{"data": "time"},
-						{"data": "status_task"},
-						{"data": null,
-							render : function(data, type, row) {
-								
-								var html = ""
-								$.each(row.followers, function (key, item) { 
-									html += "<img class='rounded' src='img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-								});
-								
-								return html
-							}
-						},
-						{"data": "fec_regins"},
-						{"data": "email_regis"}
+						{"data": "name"},
+				
+				
 						
 					],
 					"language": idioma_espanol,
@@ -493,13 +442,8 @@
 					]
 				});
 
-
-
 				table
 				.search("").draw()
-
-
-
 				ver("#table tbody", table)
 				edit("#table tbody", table)
 				activar("#table tbody", table)
@@ -511,30 +455,125 @@
 					$(".dt-buttons").remove()
 				}
 
-				
-
-
 			}
-
-
-
 			function nuevo() {
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
 
-				GetUsers("#responsable-store")
-				GetUsers("#followers-store")
-
+				getCategory("#category-store")
 
 				$("#paciente-store option").remove();
 
 				
-				getPacientes("#paciente-store")
+				$("#avatar-1").fileinput({
+					theme: "fas",
+					overwriteInitial: true,
+					maxFileSize: 1500,
+					showClose: false,
+					showCaption: false,
+					browseLabel: '',
+					removeLabel: '',
+					browseIcon: '<i class="fa fa-folder-open"></i>',
+					removeIcon: '<i class="fas fa-trash-alt"></i>',
+					previewFileIcon: '<i class="fas fa-file"></i>',
+					removeTitle: 'Cancel or reset changes',
+					elErrorContainer: '#kv-avatar-errors-1',
+					msgErrorClass: 'alert alert-block alert-danger',
+					defaultPreviewContent: '<img src="img/default-user.png" width="150" alt="Your Avatar">',
+					layoutTemplates: {
+						main2: '{preview}  {remove} {browse}'
+					},
+			allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
+
+		});
+
+		$("#avatar-antes").fileinput({
+					theme: "fas",
+					overwriteInitial: true,
+					maxFileSize: 1500,
+					showClose: false,
+					showCaption: false,
+					browseLabel: '',
+					removeLabel: '',
+					browseIcon: '<i class="fa fa-folder-open"></i>',
+					removeIcon: '<i class="fas fa-trash-alt"></i>',
+					previewFileIcon: '<i class="fas fa-file"></i>',
+					removeTitle: 'Cancel or reset changes',
+					elErrorContainer: '#kv-avatar-errors-1',
+					msgErrorClass: 'alert alert-block alert-danger',
+					defaultPreviewContent: '<img src="img/default-user.png" width="150" alt="Your Avatar">',
+					layoutTemplates: {
+						main2: '{preview}  {remove} {browse}'
+					},
+			allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
+
+		});
+
+		$("#avatar-despues").fileinput({
+					theme: "fas",
+					overwriteInitial: true,
+					maxFileSize: 1500,
+					showClose: false,
+					showCaption: false,
+					browseLabel: '',
+					removeLabel: '',
+					browseIcon: '<i class="fa fa-folder-open"></i>',
+					removeIcon: '<i class="fas fa-trash-alt"></i>',
+					previewFileIcon: '<i class="fas fa-file"></i>',
+					removeTitle: 'Cancel or reset changes',
+					elErrorContainer: '#kv-avatar-errors-1',
+					msgErrorClass: 'alert alert-block alert-danger',
+					defaultPreviewContent: '<img src="img/default-user.png" width="150" alt="Your Avatar">',
+					layoutTemplates: {
+						main2: '{preview}  {remove} {browse}'
+					},
+			allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
+
+		});
 
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
+			function getCategory(select, select_default = false){
+			
+			$.ajax({
+				url: ''+document.getElementById('ruta').value+'/api/category',
+				type:'GET',
+				// data: {
+				// 	"id_user": id_user,
+				// 	"token"  : tokens,
+				// },
+				dataType:'JSON',
+				async: false,
+				error: function() {
+					
+				},
+				success: function(data){
+					$(select+" option").remove();
+					$(select).append($('<option>',
+					{
+						value: "",
+						text : "Seleccione"
+					}));
+				
+					$.each(data, function(i, item){
+						
+						
+						$(select).append($('<option>',
+						{
+							value: item.id,
+							text : item.name,
+							selected : select_default == item.id ? true : false
+							
+						}));
 
+						
+					});
+
+				}
+			
+			});
+		}
 
 			function GetComments(comment_content, id_client){
 				$(comment_content).html("Cargando...")
@@ -633,50 +672,41 @@
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
+					var url=document.getElementById('ruta').value; 
+
 					$("#form-update")[0].reset()
-					GetUsers("#responsable-edit", data.responsable)
-					GetUsers("#followers-edit", data.responsable)
-					//getPacientes("#paciente-edit", data.id_client)
-
-					$("#name_client-edit").val(data.name_client).attr("disabled", "disabled")
 
 
-					$("#responsable-edit").val(data.responsable)
-					$("#paciente-edit").val(data.id_client)
-					$("#issue-edit").val(data.issue)
-					$("#fecha-edit").val(data.fecha)
-					$("#time-edit").val(data.time)
-					$("#observaciones-edit").val(data.observaciones)
-					$("#status_task-edit").val(data.status_task)
+					getCategory("#category-edit")
+	
+					$("#cat-name-edit").val(data.name)
+					$("#cat-ingles-edit").val(data.name_ingles)
+					$("#category-edit").val(data.id_category)
 
-					$("#id_cliente_edit").val(data.id_client)
-
-					$("#state-filter-edit").val()
-					$("#state-filter-edit").trigger("change");
-
-					var followers = []
-					$.each(data.followers, function (key, item) { 
-						followers.push(item.id_follower)
-					});
-
-					$("#followers-edit").val(followers)
-					$("#followers-edit").trigger("change");
+				
 					
+					var stt = data.state ? true : false
+					$('#use_app_edit').prop('checked',stt);
+								
 					$('#summernote_edit').summernote("reset");
-					$('#summernote_edit').summernote();
+					$('#summernote_edit').summernote('code',data.description);
+
+
+						if($("#use_app_edit").is(":checked")){
+							$("#use_app_edit").val(1)
+						}else{
+							("#use_app_edit").val(0)
+						}
 					
-					GetComments("#comments_edit", data.id_clients_tasks)
-
-
 					SubmitComment(data.id_clients_tasks, "api/comment/task/client", "#comments_edit", "#add-comments", "#summernote_edit")
 
 					$('#avatar-edit').fileinput('destroy');
 
-					url_imagen = './img/usuarios/profile/'
+					url_imagen = './img/category/picture/'
 
-					if(data.img_profile != ""){
-						img = '<img src="'+url_imagen+data.img_profile+'" class="file-preview-image kv-preview-data">'
-					}else{rfc2c = ""}
+					if(data.foto != ""){
+						img = '<img src="'+url_imagen+data.foto+'" class="file-preview-image kv-preview-data">'
+					}else{img = ""}
 					
 					$("#avatar-edit").fileinput({
 						theme: "fas",
@@ -700,15 +730,79 @@
 						],
 						initialPreviewConfig: [
 								
-							{caption: data.img_profile , downloadUrl: url_imagen+data.img_profile  ,url: url+"uploads/delete", key: data.img_profile}
+							{caption: data.foto , downloadUrl: url_imagen+data.foto  ,url: url+"uploads/delete", key: data.foto}
 					
 						],
 
 					});
 
+					$('#avatar-edit-before').fileinput('destroy');
+					if(data.foto_before != ""){
+						img = '<img src="'+url_imagen+data.foto_before+'" class="file-preview-image kv-preview-data">'
+					}else{img = ""}
 
+					$("#avatar-edit-antes").fileinput({
+						theme: "fas",
+						overwriteInitial: true,
+						maxFileSize: 1500,
+						showClose: false,
+						showCaption: false,
+						browseLabel: '',
+						removeLabel: '',
+						browseIcon: '<i class="fa fa-folder-open"></i>',
+						removeIcon: '<i class="fas fa-trash-alt"></i>',
+						previewFileIcon: '<i class="fas fa-file"></i>',
+						removeTitle: 'Cancel or reset changes',
+						elErrorContainer: '#kv-avatar-errors-1',
+						msgErrorClass: 'alert alert-block alert-danger',
+						defaultPreviewContent: '<img src="img/default-user.png" width="150" alt="Your Avatar">',
+						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+						allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
+						initialPreview: [ 
+							img
+						],
+						initialPreviewConfig: [
+								
+							{caption: data.foto_before , downloadUrl: url_imagen+data.foto_before  ,url: url+"uploads/delete", key: data.foto_before}
+					
+						],
 
-					$("#id_edit").val(data.id_clients_tasks)
+					});
+
+					$('#avatar-edit-after').fileinput('destroy');
+					if(data.foto_after != ""){
+						img = '<img src="'+url_imagen+data.foto_after+'" class="file-preview-image kv-preview-data">'
+					}else{img = ""}
+
+					$("#avatar-edit-despues").fileinput({
+						theme: "fas",
+						overwriteInitial: true,
+						maxFileSize: 1500,
+						showClose: false,
+						showCaption: false,
+						browseLabel: '',
+						removeLabel: '',
+						browseIcon: '<i class="fa fa-folder-open"></i>',
+						removeIcon: '<i class="fas fa-trash-alt"></i>',
+						previewFileIcon: '<i class="fas fa-file"></i>',
+						removeTitle: 'Cancel or reset changes',
+						elErrorContainer: '#kv-avatar-errors-1',
+						msgErrorClass: 'alert alert-block alert-danger',
+						defaultPreviewContent: '<img src="img/default-user.png" width="150" alt="Your Avatar">',
+						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+						allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
+						initialPreview: [ 
+							img
+						],
+						initialPreviewConfig: [
+								
+							{caption: data.foto_after , downloadUrl: url_imagen+data.foto_after  ,url: url+"uploads/delete", key: data.foto_after}
+					
+						],
+
+					});
+
+					$("#id_edit").val(data.id)
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
@@ -798,7 +892,7 @@
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/tasks/status/'+data.id_clients_tasks+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
+					statusConfirmacion('api/subcategory/eliminar/'+data.id,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
 			}
 
@@ -1035,14 +1129,6 @@
 				});
 			}
 
-
-
-
-			
-
-
-			
-
 			function GetClinic(city, select){
 				$(city).unbind().change(function (e) { 
 					GetClinicByCity(select, $(this).val())
@@ -1197,10 +1283,6 @@
 					}
 				});
 			}	
-
-
-
-
 
 
 

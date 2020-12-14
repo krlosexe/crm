@@ -1,6 +1,6 @@
 <div class="card shadow mb-4 hidden" id="cuadro2">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Registro de Tareas</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Registro de Sub Categorias</h6>
     </div>
     <div class="card-body">
         <form class="user" autocomplete="off" method="post" id="store" enctype="multipart/form-data">
@@ -11,70 +11,76 @@
                 <div class="col-md-6">
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for=""><b>Responsable</b></label>
-                                <select name="responsable" id="responsable-store" class="form-control select2" required>
+                                <label for=""><b>Categorias</b></label>
+                                <select name="categoria" id="category-store" class="form-control select2" required>
                                     <option value="">Seleccione</option>
                                 </select>
                             </div>
                         </div>
+
+                        <!-- <div class="col-md-3"> -->
+								<div class="form-group ml-4">
+										<label for="use_app"><b>Solo los que usan el App</b></label>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" name="use_app" id="use_app" value="1">
+											<label class="custom-control-label" for="use_app"></label>
+										</div>
+									</div>
+								<!-- </div> -->
                     </div>
-
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for=""><b>Paciente</b></label>
-                                <select name="id_client" id="paciente-store" class="form-control select2" required>
-                                    <option value="">Seleccione</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for=""><b>Asunto</b></label>
-                                <input type="text" name="issue" id="issue-store" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for=""><b>Fecha</b></label>
-                                <input type="date" name="fecha" id="fecha-store" class="form-control" required min="<?= date("Y-m-d") ?>">
+                                <label for=""><b>Nombre</b></label>
+                                <input type="text" name="name" id="issue-store" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for=""><b>Nombre en Ingles</b></label>
+                                <input type="text" name="name_ingles" id="issue-store" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <small>Seleccione una foto de portada</small>
+                    <div class="col-md-8">
+                        <div class="kv-avatar">
+                            <div class="file-loading">
+                                <input id="avatar-1" name="img-profile" type="file" required>
+                            </div>
+                        </div>
+                        <div class="kv-avatar-hintss">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <small>Seleccione una foto del antes</small>
+                            <div class="kv-avatar">
+                                <div class="file-loading">
+                                    <input id="avatar-antes" name="img-profile-antes" type="file">
+                                </div>
+                            </div>
+                            <div class="kv-avatar-hintss">
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for=""><b>Hora</b></label>
-                                <input type="time" name="time" id="time-store" class="form-control" required>
+                            <small>Seleccione una foto del despues</small>
+                            <div class="kv-avatar">
+                                <div class="file-loading">
+                                    <input id="avatar-despues" name="img-profile-despues" type="file">
+                                </div>
+                            </div>
+                            <div class="kv-avatar-hintss">
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for=""><b>Estatus</b></label>
-                                <select name="status_task" id="status_task-store" class="form-control" required>
-                                    <option value="Abierta">Abierta</option>
-
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-
 
                 <div class="col-md-6">
                     <div class="row">
@@ -83,46 +89,6 @@
                                 <label for=""><b>Comentarios</b></label>
                                 <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
                                 <textarea id="summernote" name="comments"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for=""><b>Cambiar Estado del Px</b></label>
-                                <select name="state_px" id="state-filter" class="form-control select2 disabled">
-                                    <option value="0">Seleccione</option>
-                                    <option value="Afiliada">Afiliada</option>
-                                    <option value="Agendada">Agendada</option>
-                                    <option value="Aprobada">Aprobada</option>
-                                    <option value="Aprobada / Descartada">Aprobada / Descartada</option>
-                                    <option value="Asesorada No Agendada"> Asesorada No Agendada</option>
-                                    <option value="Asesorado por FB esperando contacto Telefonico">Asesorado por FB esperando contacto Telefonico</option>
-                                    <option value="Demandada">Demandada</option>
-                                    <option value="Descartada">Descartada</option>
-                                    <option value="Llamada no Asesorada">Llamada no Asesorada</option>
-                                    <option value="No Asistio">No Asistio</option>
-                                    <option value="No Contactada">No Contactada</option>
-                                    <option value="No Contesta">No Contesta</option>
-                                    <option value="Numero Equivocado">Numero Equivocado</option>
-                                    <option value="Operada">Operada</option>
-                                    <option value="Programada">Programada</option>
-                                    <option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
-                                    <option value="Valorada">Valorada</option>
-                                    <option value="Valorada / Descartada">Valorada / Descartada</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for=""><b>Seguidores</b></label>
-                                <select name="followers[]" id="followers-store" class="form-control select2" multiple required>
-                                    <option value="">Seleccione</option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -139,7 +105,7 @@
         <button type="button" class="btn btn-danger btn-user" onclick="prev('#cuadro2')">
             Cancelar
         </button>
-        <button id="send_usuario" class="btn btn-primary btn-user">
+        <button type="submit" id="send_usuario" class="btn btn-primary btn-user">
             Registrar
         </button>
 
