@@ -24,10 +24,10 @@
                         </div>
 
                         <div class="form-group ml-4">
-                            <label for="use_app"><b>Solo los que usan el App</b></label>
+                            <label for="use_app_edit"><b>Visible</b></label>
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" name="use_app" id="use_app_edit" value="1">
-                                <label class="custom-control-label" for="use_app"></label>
+                                <label class="custom-control-label" for="use_app_edit"></label>
                             </div>
                         </div>
                     </div>
