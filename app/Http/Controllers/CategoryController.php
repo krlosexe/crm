@@ -50,7 +50,28 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $file = $request->file('img-profile');
+            $destinationPath = 'img/category/picture';
+            $file->move($destinationPath,$file->getClientOriginalName());
+            
+            $request["foto"] = $file->getClientOriginalName(); 
+        
+            $category = new Category;
+            $category->name = $request->name;
+            $category->name_ingles = $request->name_ingles;
+            $category->foto = $request->foto;
+            $category->save();
+        
+            if ($category) {
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+                return response()->json($data)->setStatusCode(200);
+            }else{
+                return response()->json("A ocurrido un error")->setStatusCode(400);
+            }
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 
     /**
@@ -82,9 +103,34 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request,$category)
     {
-        //
+
+        try {
+           
+            $file = $request->file('img-profile');
+            
+            $category =  Category::find($category);
+            $category->name = $request->name;
+            $category->name_ingles = $request->name_ingles;
+
+            if ($file!=null) {
+                $destinationPath = 'img/category/picture';
+                $file->move($destinationPath,$file->getClientOriginalName());
+                $category->foto = $file->getClientOriginalName(); 
+            }
+            $category->save();
+        
+            if ($category) {
+                $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
+                return response()->json($data)->setStatusCode(200);
+            }else{
+                return response()->json("A ocurrido un error")->setStatusCode(400);
+            }
+
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 
     /**
@@ -95,6 +141,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        try {
+            $category =  Category::find($category);
+            $category->delete();
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 }

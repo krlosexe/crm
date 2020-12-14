@@ -457,6 +457,8 @@ Route::post('wellezy/auth', 'WellezyController@Auth');
 
 
 
+
+
 Route::get('generate/token/chat', function () {
 
     $users = User::get();

@@ -120,6 +120,14 @@ Route::get('encuesta', function () {
     return view('Reports.question.gestion');
 });
 
+Route::get('category', function () {
+    return view('category.gestion');
+});
+
+Route::get('sub_category', function () {
+    return view('category.subcategory.gestion');
+});
+
 
 Route::get('import', 'ImportController@clients');
 
