@@ -622,16 +622,14 @@
 
 			$("#issue-edit").val(data.name)
 			$("#issue-edit-english").val(data.name_ingles)
-			
-			$('#avatar-edit').fileinput('destroy');
-			
-
-
-			url_imagen = './img/category/picture/'
+					
+					$('#avatar-edit').fileinput('destroy');
+					
+					url_imagen = './img/category/picture/'
 
 					if(data.foto != ""){
 						img = '<img src="'+url_imagen+data.foto+'" class="file-preview-image kv-preview-data">'
-					}else{rfc2c = ""}
+					}else{img = ""}
 					
 					$("#avatar-edit").fileinput({
 						theme: "fas",
@@ -660,10 +658,6 @@
 						],
 
 					});
-
-
-
-
 
 			$("#id_edit").val(data.id)
 			cuadros('#cuadro1', '#cuadro4');
@@ -755,7 +749,7 @@
 	function eliminar(tbody, table) {
 		$(tbody).on("click", "span.eliminar", function() {
 			var data = table.row($(this).parents("tr")).data();
-			statusConfirmacion('api/category/' + data.id + "¿Esta seguro de eliminar el registro?", 'Eliminar');
+			statusConfirmacion('api/category/' + data.id,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
 
