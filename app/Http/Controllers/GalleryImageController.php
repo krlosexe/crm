@@ -28,8 +28,6 @@ class GalleryImageController extends Controller
 
     }
 
-
-
     public function get()
     {
 

@@ -22,8 +22,6 @@ class CalificationsAdvisersController extends Controller
             $type = $request["type"];
         }
 
-       
-
         $adviser = 0;
         if(isset($request["adviser"])){
             $adviser = $request["adviser"];

@@ -22,7 +22,6 @@ class CommentsController extends Controller
 
     }
 
-
     public function get($table, $id){
         
         $data = Comments::select('comments.*', 'users.email', 'users.img_profile', "datos_personales.nombres as name_user", "datos_personales.apellido_p as last_name_user")
