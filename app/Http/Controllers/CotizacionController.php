@@ -20,6 +20,7 @@ class CotizacionController extends Controller
                 ->with("followers")
                 ->with("procedures")
                 ->with("aditionals")
+                // ->with("aditionals_wallezy")
 
                 ->where("auditoria.tabla", "surgeries")
                 ->where("clientes.wallezy",1)
@@ -36,8 +37,21 @@ class CotizacionController extends Controller
 
     public function CreateCotization(Request $request,$cliente)
     {
-        
+        // dd($request->all());
+
         try {
+
+           $select =  WellezyCotization::where('id_cliente',$request->id_cliente)->exists();
+           
+           if($select){
+            
+            $padre =  WellezyCotization::where('id_cliente',$request->id_cliente)->first();
+            $hijo =  WellezyCotization::where('id',$padre->id)->get();
+
+            $hijo->delete();
+            $padre->delete();
+
+           }
 
         $weleezy = new WellezyCotization;
         $weleezy->id_cliente = $request->id_cliente;
