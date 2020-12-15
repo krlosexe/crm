@@ -151,21 +151,6 @@ class SurgeriesController extends Controller
             $hora_end  = strtotime( $request["time_end"] );
 
 
-            // $valid = Surgeries::where("fecha", $request["fecha"])
-            //                     ->where("time_end", ">=", $request["time"])
-            //                     ->where("time",     "<=", $request["time"])
-            //                     ->get();
-
-            // if(sizeof($valid) > 0){
-            //     $data = array('mensagge' => "Ya existen cirugias en ese Horario");
-            //     return response()->json($data)->setStatusCode(400);
-            // }
-
-            // if($hora_init >= $hora_end){
-            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");
-            //     return response()->json($data)->setStatusCode(400);
-            // }
-
 
             $request["amount"]          = str_replace('.', '', $request["amount"]);
             $request["amount"]          = str_replace(',', '.', $request["amount"]);
@@ -210,8 +195,6 @@ class SurgeriesController extends Controller
 
             }
 
-
-
             if(isset($request->aditional)){
 
                 foreach($request->aditional as $key => $value){
@@ -228,17 +211,11 @@ class SurgeriesController extends Controller
 
             }
 
-
-
-
             DB::table("events_client")->insert([
                 "event"     => "Cirugia",
                 "id_client" => $request["id_cliente"],
                 "id_event"  => $store["id_surgeries"]
             ]);
-
-
-
 
             $clinic = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
 
@@ -247,30 +224,6 @@ class SurgeriesController extends Controller
             $version["event"]     = "Agendo Cirugia para el dia $request[fecha] con el Doctor ".$request["surgeon"]." en la clinica ".$clinic->nombre;
 
             LogsClients::create($version);
-
-
-
-
-           /* $state_px = $request["state_px"];
-
-            if($state_px != "0"){
-                $data_client = Clients::select("state")->find($request["id_cliente"]);
-
-                DB::table("clientes")->where("id_cliente", $request["id_cliente"])->update(["state" => $state_px]);
-
-                if($data_client->state != $state_px){
-
-                    $version["id_user"]   = $request["id_user"];
-                    $version["id_client"] = $request["id_cliente"];
-                    $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
-
-                    LogsClients::create($version);
-                }
-            }*/
-
-
-
-
 
 
             if ($store) {
@@ -369,20 +322,6 @@ class SurgeriesController extends Controller
             }
 
 
-
-
-
-            // if(sizeof($valid) > 0){
-            //     $data = array('mensagge' => "Ya existen cirugias en ese Horario");
-            //     return response()->json($data)->setStatusCode(400);
-            // }
-
-            // if($hora_init >= $hora_end){
-            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");
-            //     return response()->json($data)->setStatusCode(400);
-            // }
-
-
             if(isset($request["amount"])){
                 $request["amount"]          = str_replace('.', '', $request["amount"]);
                 $request["amount"]          = str_replace(',', '.', $request["amount"]);
@@ -403,8 +342,6 @@ class SurgeriesController extends Controller
                     Comments::insert($array);
                 }
             }
-
-
 
             if(isset($request->followers)){
 
@@ -438,33 +375,6 @@ class SurgeriesController extends Controller
             $version["event"]     = "Actualizo Cirugia para el dia $request[fecha] con el Doctor ".$request["surgeon"]." en la clinica ".$name_clinic;
 
             LogsClients::create($version);
-
-
-
-
-            /*$state_px = $request["state_px"];
-
-            if($state_px != "0"){
-                $data_client = Clients::select("state")->find($cita->id_cliente);
-
-                DB::table("clientes")->where("id_cliente", $cita->id_cliente)->update(["state" => $state_px]);
-
-                if($data_client->state != $state_px){
-
-                    $version["id_user"]   = $request["id_user"];
-                    $version["id_client"] = $cita->id_cliente;
-                    $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
-
-                    LogsClients::create($version);
-                }
-            }*/
-
-
-
-
-
-
-
 
 
             if ($update) {

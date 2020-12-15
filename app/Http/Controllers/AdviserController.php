@@ -20,9 +20,6 @@ class AdviserController extends Controller
             "prp"             => "Si"
         );
 
-
-
-
         $data = Clients::where($where)
                         ->select("clientes.*", "users.img_profile as avatar", "users.id as user_id")
                         ->join("users", "users.id_client", "clientes.id_cliente")
@@ -67,9 +64,6 @@ class AdviserController extends Controller
                                                     $query->where("clientes.nombres", 'like', '%'.$name.'%');
                                                     }
                                                 })
-
-
-
 
                                               ->orderBy("clientes.id_cliente", "DESC")
                                               ->get();

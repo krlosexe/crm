@@ -669,8 +669,6 @@ class ClientsController extends Controller
 
                 }
 
-
-
                 $User =  User::create([
                     "email"       => $request["email"],
                     "password"    => md5("123456789"),
@@ -700,9 +698,6 @@ class ClientsController extends Controller
                     }
                 }
 
-
-
-
                 if(isset($request["email2"])){
                     foreach($request["email2"] as $value){
 
@@ -713,9 +708,6 @@ class ClientsController extends Controller
 
                     }
                 }
-
-
-
 
                 $request["table"]    = "clients";
                 $request["id_event"] = $cliente["id_cliente"];

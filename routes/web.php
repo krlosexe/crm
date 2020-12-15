@@ -298,6 +298,9 @@ Route::get('externo_gestion', function () {
     return view('externo.gestion');
 });
 
+Route::get('cotizacion', function () {
+    return view('wellezy.cotizacion.gestion');
+});
 
 
 Route::get('form-covid/{id_line}', function ($id_line) {

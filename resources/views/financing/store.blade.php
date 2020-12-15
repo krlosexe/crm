@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for=""><b>Telefono</b></label>
+                            <label for=""><b>Email</b></label>
                             <div class="form-group valid-required">
                                 <input type="text" class="form-control form-control-user" id="email" disabled>
                             </div>

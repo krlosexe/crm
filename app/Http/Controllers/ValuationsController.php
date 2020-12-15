@@ -566,8 +566,6 @@ class ValuationsController extends Controller
 
 
 
-           /// $state_px = $request["state_px"];
-
 
             if($file = $request->file('file')){
                 $destinationPath = 'img/valuations/cotizaciones';
@@ -581,13 +579,7 @@ class ValuationsController extends Controller
                                 ->where("id_valuations", "!=", $valuations)
                                 ->get();
 
-            // if(sizeof($valid) > 0){
-            //     $data = array('mensagge' => "Ya existen valoraciones en ese Horario");
-            //     return response()->json($data)->setStatusCode(400);
-            // }
-
-
-
+        
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
 
@@ -596,8 +588,6 @@ class ValuationsController extends Controller
                 $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");
                 return response()->json($data)->setStatusCode(400);
             }
-
-
 
 
 
@@ -625,10 +615,6 @@ class ValuationsController extends Controller
                     Comments::insert($array);
                 }
             }
-
-
-
-
 
 
             if(isset($request->followers)){
@@ -662,28 +648,6 @@ class ValuationsController extends Controller
 
             LogsClients::create($version);
 
-
-            /*
-            if(isset($request["state_px"])){
-
-                if($state_px != "0"){
-                    $data_client = Clients::select("state")->find($valuation->id_cliente);
-
-                    DB::table("clientes")->where("id_cliente", $valuation->id_cliente)->update(["state" => $state_px]);
-
-
-                    if($data_client->state != $state_px){
-
-                        $version["id_user"]   = $request["id_user"];
-                        $version["id_client"] = $valuation->id_cliente;
-                        $version["event"]     = "Actualizo el estado de: ".$data_client->state." a ".$request['state_px'];
-
-                        LogsClients::create($version);
-                    }
-
-                }
-            }
-*/
 
             if ($queries) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");

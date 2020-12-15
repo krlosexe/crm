@@ -448,6 +448,9 @@ Route::get('client/indentification/{cedula}', 'ClientsController@Identification'
 Route::post('financing/create', 'FinacingController@createSolicitud');
 
 Route::post('register/prp/app', 'AffiliateController@store');
+Route::get('wellezy/list/cotization', 'CotizacionController@ListCotization');
+Route::put('wellezy/update/cotization/{id}', 'CotizacionController@CreateCotization');
+Route::get('wellezy/list/client/cotization/{cliente}', 'CotizacionController@ListCotizationByClient');
 
 Route::get('get/code/adviser/{code}', 'UsuariosController@GetCodeAdviser');
 
