@@ -20,7 +20,7 @@ class ClientsExport implements FromView
     /**
     * @return \Illuminate\Support\Collection
     */
-    
+
     var $linea_negocio;
     var $asesor;
     var $origen;
@@ -48,11 +48,11 @@ class ClientsExport implements FromView
         $use_app       = $this->use_app ;
         $cumple        = $this->cumple ;
 
-        ini_set('memory_limit', '-1'); 
+        ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 360);
-        $data = Clients::select('state',      'clientes.id_cliente',
+        $data = Clients::select('clientes.id_cliente',
                                                'clientes.nombres',
-                                               'apellidos', 
+                                               'apellidos',
                                                'identificacion',
                                                'clientes.telefono' ,
                                                'clientes.email',
@@ -126,7 +126,7 @@ class ClientsExport implements FromView
                                                     $query->orWhere("clientes.code_client", 'like', '%'.$search.'%');
                                                     $query->orWhere("clientes.origen", 'like', '%'.$search.'%');
                                                 }
-                                            }) 
+                                            })
 
 
 
@@ -134,9 +134,9 @@ class ClientsExport implements FromView
                                                 if($cumple != 0){
                                                     $query->whereRaw("MONTH(clientes.fecha_nacimiento) = $cumple");
                                                 }
-                                            }) 
+                                            })
 
-                                            
+
 
 
 
@@ -151,7 +151,7 @@ class ClientsExport implements FromView
                                                 if($city != 0){
                                                     $query->where("clientes.city", $city);
                                                 }
-                                            }) 
+                                            })
 
 
 
@@ -160,7 +160,7 @@ class ClientsExport implements FromView
                                                     $query->whereNotNull("clientc_credit_information.have_initial");
                                                     $query->whereRaw('clientc_credit_information.have_initial LIKE "%si%"');
                                                 }
-                                            }) 
+                                            })
 
 
 
@@ -168,31 +168,31 @@ class ClientsExport implements FromView
                                                 if($to_prp == 1){
                                                     $query->where("clientes.prp", "Si");
                                                 }
-                                            }) 
+                                            })
 
 
                                             ->where(function ($query) use ($use_app) {
                                                 if($use_app == 1){
                                                     $query->where("clientes.auth_app", 1);
                                                 }
-                                            }) 
+                                            })
 
-                                            
+
 
                                             ->where(function ($query) use ($state) {
                                                 if($state != "0"){
                                                     $query->where("clientes.state", $state);
                                                 }
-                                            }) 
+                                            })
 
 
-                                            
-            
+
+
                                             ->where(function ($query) use ($adviser) {
                                                 if($adviser != 0){
                                                     $query->whereIn("clientes.id_user_asesora", $adviser);
                                                 }
-                                            }) 
+                                            })
 
 
 
@@ -201,17 +201,17 @@ class ClientsExport implements FromView
                                                 if($origen == "Formulario"){
                                                     $query->where("clientes.origen", "Formulario Web");
                                                 }
-            
-            
-            
+
+
+
                                                 if($origen == "Otros"){
                                                     $query->where("clientes.to_db", 0);
                                                     $query->where("clientes.pauta", 0);
                                                     $query->where("clientes.origen", "!=","Formulario Web");
                                                     $query->OrwhereNull('clientes.origen');
                                                 }
-            
-                                            }) 
+
+                                            })
 
 
 
@@ -219,24 +219,24 @@ class ClientsExport implements FromView
                                                 if($date_init != 0 && $to_prp == 0){
                                                     $query->where("auditoria.fec_update", ">=", $date_init." 00:00:00");
                                                 }
-            
+
                                                 if($date_init != 0 && $to_prp == 1){
                                                     $query->where("clientes.created_prp", ">=", $date_init);
                                                 }
-                                            }) 
-            
-            
+                                            })
+
+
                                             ->where(function ($query) use ($date_finish, $to_prp) {
                                                 if($date_finish != 0 && $to_prp == 0){
                                                     $query->where("auditoria.fec_update", "<=", $date_finish." 23:59:59");
                                                 }
-            
+
                                                 if($date_finish != 0 && $to_prp == 1){
                                                     $query->where("clientes.created_prp", "<=", $date_finish);
                                                 }
-            
-            
-                                            }) 
+
+
+                                            })
 
                                             ->with("tasks")
 
@@ -248,22 +248,22 @@ class ClientsExport implements FromView
 
 
 
-    
+
         foreach($data as $value){
 
 
-      
+
             $valoration =  DB::table("valuations")->where("id_cliente", $value->id_cliente)->first();
             if($valoration){
                 $auditoria = DB::table("auditoria")->where("tabla", "valuations")->where("cod_reg", $valoration->id_valuations)->first();
-               
+
                 $data_user = DB::table("datos_personales")->where("id_usuario", $value->usr_regins)->first();
 
                 $value->adviser_created = $data_user->nombres." ".$data_user->apellido_p;
             }
-            
+
         }
-        
+
         return view('exports.clients', [
             'data' => $data
         ]);
@@ -293,7 +293,7 @@ class ClientsExport implements FromView
     public function collection()
     {
         $users = DB::table('clientes')->select('nombres',
-                                               'apellidos', 
+                                               'apellidos',
                                                'identificacion',
                                                'telefono' ,
                                                'email',
