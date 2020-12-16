@@ -87,11 +87,15 @@ class CotizacionController extends Controller
     {
         try {
 
-           $padre =  WellezyCotization::where('id_cliente',$cliente)->first();
-           $hijo  =  WellezyCotization::where('id_padre',$padre->id)->get();
+           $padre =  WellezyCotization::where('id_cliente',$cliente)->get();
 
-           return ['cotization'=>$padre,'detail'=>$hijo];
-           
+            $padre->map(function($item){
+                  $item->detalle  =  WellezyCotization::where('id_padre',$item->id)->get();
+                  return $item;
+            });
+
+
+           return $padre;
         } catch (\Throwable $th) {
             return $th;
         }
