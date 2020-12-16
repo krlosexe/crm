@@ -222,15 +222,8 @@ Route::post('form/credit/upload/identification/rear', 'FormCreditController@Uplo
 Route::get('form/credit/photo/identification/rear/{id_client}', 'FormCreditController@GetPhotoIdentificationRear');
 
 
-
-
-
 Route::post('form/credit/upload/face', 'FormCreditController@UploadFace');
 Route::get('form/credit/photo/face/{id_client}', 'FormCreditController@GetPhotoFace');
-
-
-
-
 
 
 Route::post('form/authorization/studio/credit', 'FormCreditController@storeAutorization');
@@ -247,8 +240,6 @@ Route::get('clients-list', 'ClientsController@List');
 Route::post('clients/update/hc/{id_cliente}', 'ClientsController@UpdateHc');
 
 Route::post('v2/clients/update/hc/{user_id}', 'ClientsController@UpdateHcByUserId');
-
-
 
 Route::post('comment/task/client', 'ClientsController@AddCommentTask');
 
