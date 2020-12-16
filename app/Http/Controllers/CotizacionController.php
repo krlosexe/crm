@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{Surgeries,WellezyCotization};
+use App\{Surgeries,WellezyCotization,WellezyValoration};
 
 class CotizacionController extends Controller
 {
@@ -92,6 +92,21 @@ class CotizacionController extends Controller
 
            return ['cotization'=>$padre,'detail'=>$hijo];
            
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+    public function CreateValoration(Request $request)
+    {
+        try {
+            
+            $res = WellezyValoration::create($request->all());
+            if ($res) {
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+                return response()->json($data)->setStatusCode(200);
+            }else{
+                return response()->json("A ocurrido un error")->setStatusCode(400);
+            }
         } catch (\Throwable $th) {
             return $th;
         }

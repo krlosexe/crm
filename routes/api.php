@@ -451,6 +451,7 @@ Route::post('register/prp/app', 'AffiliateController@store');
 Route::get('wellezy/list/cotization', 'CotizacionController@ListCotization');
 Route::put('wellezy/update/cotization/{id}', 'CotizacionController@CreateCotization');
 Route::get('wellezy/list/client/cotization/{cliente}','CotizacionController@ListCotizationByClient');
+Route::post('wellezy/cotization/create','CotizacionController@CreateValoration');
 
 
 
