@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{Surgeries,WellezyCotization,WellezyValoration};
+use App\{Clients,WellezyCotization,WellezyValoration};
 use DB;
 
 class CotizacionController extends Controller
@@ -11,25 +11,21 @@ class CotizacionController extends Controller
     public function ListCotization()
     {
         try {
-            $valuations = Surgeries::select("surgeries.*", "surgeries.clinic as id_clinic", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
-                ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic")
-                ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
-                ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente", "left")
-                ->join("users", "users.id", "=", "auditoria.usr_regins")
-
-                ->with("payments")
-                ->with("followers")
-                ->with("procedures")
-                ->with("aditionals")
-                // ->with("aditionals_wallezy")
-
-                ->where("auditoria.tabla", "surgeries")
-                ->where("clientes.wallezy",1)
-                ->where("auditoria.status", "!=", "0")
-                ->orderBy("surgeries.fecha", "DESC")
+            $valuations = DB::table('clientes')
+            ->select(
+                'wellezy_cotization.*',
+                'clientes.*',
+            )
+                ->join('wellezy_cotization','clientes.id_cliente','wellezy_cotization.id_cliente')
+                ->whereNull('wellezy_cotization.id_padre')
                 ->get();
 
-            echo json_encode($valuations);
+                $valuations->map(function($item){
+                    $item->detalle  =  WellezyCotization::where('id_padre',$item->id)->get();
+                     return $item;
+                });
+             
+                return $valuations;
 
         } catch (\Throwable $th) {
             return $th;

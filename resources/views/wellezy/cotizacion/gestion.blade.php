@@ -176,8 +176,6 @@
 				content: "";
 			}
 
-
-
 		</style>
 
 	<link href="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.css" rel="stylesheet">
@@ -200,7 +198,6 @@
 
 				@include('layouts.topBar')
 
-
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
 
@@ -215,41 +212,11 @@
 			          <div class="card shadow mb-4" id="cuadro1">
 			            <div class="card-header py-3">
 			              <h6 class="m-0 font-weight-bold text-primary">Gestion de Cotización</h6>
-
-			              <!-- <button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
-		                    <span class="icon text-white-50">
-		                      <i class="fas fa-plus"></i>
-		                    </span>
-		                    <span class="text">Nuevo registro</span>
-		                  </button> -->
 			            </div>
 			            <div class="card-body">
 			              <div class="table-responsive">
 
 						  	<div class="row">
-
-							  <!-- <div class="col-md-3">
-									<div class="form-group">
-										<label for=""><b>Filtrar por : Asesora</b></label>
-										<select name="adviser[]" id="id_asesora_valoracion-filter" class="form-control select2 disabled" multiple>
-											<option value="">Seleccione</option>
-										</select>
-									</div>
-								</div>
-
-							  <div class="col-md-3">
-									<div class="form-group">
-										<label for=""><b>Fecha desde</b></label>
-										<input type="date" class="form-control" id="date_init">
-									</div>
-								</div>
-
-								<div class="col-md-3">
-									<div class="form-group">
-										<label for=""><b>Fecha hasta</b></label>
-										<input type="date" class="form-control" id="date_finish">
-									</div>
-								</div> -->
 							</div>
 
 			                <table class="table table-bordered" id="table" width="100%" cellspacing="0">
@@ -257,14 +224,7 @@
 			                    <tr>
 								  <th>Acciones</th>
 								  <th>Nombres</th>
-								  <th>Fecha</th>
-								  <th>Procedimientos</th>
-								  <th>Cirujano</th>
-								  <th>Clinica</th>
-								  <th>Seguidores</th>
-								  <th>Estatus</th>
-			                      <th>Fecha de registro</th>
-								  <th>Registrado por</th>
+								  <th>Forma Pago</th>
 			                    </tr>
 			                  </thead>
 			                  <tbody></tbody>
@@ -272,7 +232,6 @@
 			              </div>
 			            </div>
 			          </div>
-
 
 			          @include('wellezy.cotizacion.store')
 					  @include('wellezy.cotizacion.view')
@@ -439,28 +398,14 @@
 					"ajax":{
 						"method":"GET",
 						 "url":''+url+'/api/wellezy/list/cotization',
-						//  "data": {
-						// 	"rol"         : name_rol,
-						// 	"id_user"     : id_user,
-						// 	"token"       : tokens,
-						// 	"adviser" : adviser,
-						// 	"date_init"   : date_init,
-						// 	"date_finish" : date_finish
-						// },
 						"dataSrc":""
 					},
 					"columns":[
 						{"data": null,
 							render : function(data, type, row) {
 								var botones = "";
-								if(consultar == 1)
-									//botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
 								if(actualizar == 1)
 									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
-								// if(data.status == 1 && actualizar == 1)
-								// 	botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
-								// else if(data.status == 2 && actualizar == 1)
-								// 	botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
 								if(borrar == 1)
 									botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 								return botones;
@@ -477,54 +422,8 @@
 
 							}
 						},
-						{"data": "fecha"},
-						{"data": null,
-							render : function(data, type, row) {
-
-								var string = ""
-								$.map(row.procedures, function (item, key) {
-									string += item.name+", "
-								});
-								return string
-							}
-						},
-						{"data": "surgeon"},
-						{"data": "name_clinic"},
-
-						{"data": null,
-							render : function(data, type, row) {
-
-								var html = ""
-								$.each(row.followers, function (key, item) {
-									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_user+" "+item.name_user+"'>"
-								});
-
-								return html
-							}
-						},
-
-
-
-						{"data": "status_surgeries",
-							render : function(data, type, row){
-								if(data == 1){
-									return "Procesado"
-								}
-
-								if(data == 0){
-									return "Pendiente"
-								}
-
-								if(data == 2){
-									return "Cancelado"
-								}
-
-							}
-						},
-
-
-						{"data": "fec_regins"},
-						{"data": "email_regis"}
+						{"data": "forma_pago"}
+						
 
 					],
 					"language": idioma_espanol,
@@ -686,7 +585,7 @@
 					$("#name").val(data.nombres);
 					$("#state").val(data.state);
 					$("#identification").val(data.identificacion);
-					$("#country").val(data.country);
+					$("#country").val(data.direccion);
 					$("#email").val(data.email);
 					$("#telefono").val(data.telefono);
 
@@ -745,12 +644,12 @@
 
 
 
-					$("#amount-edit").val(data.amount)
+					$("#amount-edit").val(data.amount_surgery)
 					var html = ""
-					$.map(data.aditionals, function (item, key) {
+					$.map(data.detalle, function (item, key) {
 						html += "<div class='col-md-2'></div>"
-						html += "<div class='col-md-6'><input type='text' value='"+item.description+"' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-						html += "<div class='col-md-4'><input type='text' value='"+item.price_aditional+"' min='1'  class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio adsasdas del adicional'></div>"						
+						html += "<div class='col-md-6'><input type='text' value='"+item.decription_aditional+"' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
+						html += "<div class='col-md-4'><input type='text' value='"+item.price_aditional+"' min='1'  class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio  del adicional'></div>"						
 						html += "<br><br>"
 					});
 
@@ -852,10 +751,6 @@
 							$(summer).summernote("reset");
 						}
 					});
-
-
-
-
 				});
 
 			}
