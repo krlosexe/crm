@@ -682,10 +682,13 @@
 					var data = table.row( $(this).parents("tr") ).data();
 
 					console.log(data);
-					
+
 					$("#name").val(data.nombres);
 					$("#state").val(data.state);
 					$("#identification").val(data.identificacion);
+					$("#country").val(data.country);
+					$("#email").val(data.email);
+					$("#telefono").val(data.telefono);
 
 
 				//	getPacientes("#paciente-edit", data.id_cliente)

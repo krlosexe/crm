@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{Surgeries,WellezyCotization};
+use App\{Surgeries,WellezyCotization,WellezyValoration};
 
 class CotizacionController extends Controller
 {
@@ -20,6 +20,7 @@ class CotizacionController extends Controller
                 ->with("followers")
                 ->with("procedures")
                 ->with("aditionals")
+                // ->with("aditionals_wallezy")
 
                 ->where("auditoria.tabla", "surgeries")
                 ->where("clientes.wallezy",1)
@@ -36,8 +37,21 @@ class CotizacionController extends Controller
 
     public function CreateCotization(Request $request,$cliente)
     {
-        
+        // dd($request->all());
+
         try {
+
+           $select =  WellezyCotization::where('id_cliente',$request->id_cliente)->exists();
+           
+           if($select){
+            
+            $padre =  WellezyCotization::where('id_cliente',$request->id_cliente)->first();
+            $hijo =  WellezyCotization::where('id',$padre->id)->get();
+
+            $hijo->delete();
+            $padre->delete();
+
+           }
 
         $weleezy = new WellezyCotization;
         $weleezy->id_cliente = $request->id_cliente;
@@ -73,11 +87,30 @@ class CotizacionController extends Controller
     {
         try {
 
-           $padre =  WellezyCotization::where('id_cliente',$cliente)->first();
-           $hijo  =  WellezyCotization::where('id_padre',$padre->id)->get();
+           $padre =  WellezyCotization::where('id_cliente',$cliente)->get();
 
-           return ['cotization'=>$padre,'detail'=>$hijo];
-           
+            $padre->map(function($item){
+                  $item->detalle  =  WellezyCotization::where('id_padre',$item->id)->get();
+                  return $item;
+            });
+
+
+           return $padre;
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+    public function CreateValoration(Request $request)
+    {
+        try {
+            
+            $res = WellezyValoration::create($request->all());
+            if ($res) {
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+                return response()->json($data)->setStatusCode(200);
+            }else{
+                return response()->json("A ocurrido un error")->setStatusCode(400);
+            }
         } catch (\Throwable $th) {
             return $th;
         }
