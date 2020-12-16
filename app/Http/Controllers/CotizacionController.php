@@ -53,17 +53,17 @@ class CotizacionController extends Controller
 
            }
 
-        $weleezy = new WellezyCotization;
-        $weleezy->id_cliente = $request->id_cliente;
-        $weleezy->amount_surgery = $request->amount;
+        $wellezy = new WellezyCotization;
+        $wellezy->id_cliente = $request->id_cliente;
+        $wellezy->amount_surgery = $request->amount;
 
-        $weleezy->save();
+        $wellezy->save();
 
-       $query =  WellezyCotization::get()->last();
+        // $query =  WellezyCotization::whereNull('id_padre')->get()->last();
 
        foreach($request->aditional as $key => $value){
         $array = [];
-        $array["id_padre"]     = $query->id;;
+        $array["id_padre"]     = $wellezy->id;;
         $array["decription_aditional"]     = $value;
         $array["price_aditional"] = str_replace('.', '', $request["price_aditional"][$key]);
         $array["price_aditional"] = str_replace(',', '.', $array["price_aditional"]);
