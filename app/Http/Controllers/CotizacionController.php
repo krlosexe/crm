@@ -3,32 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\{Surgeries,WellezyCotization,WellezyValoration};
+use App\{Clients,WellezyCotization,WellezyValoration};
+use DB;
 
 class CotizacionController extends Controller
 {
     public function ListCotization()
     {
         try {
-            $valuations = Surgeries::select("surgeries.*", "surgeries.clinic as id_clinic", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
-                ->join("clinic", "clinic.id_clinic", "=", "surgeries.clinic")
-                ->join("auditoria", "auditoria.cod_reg", "=", "surgeries.id_surgeries")
-                ->join("clientes", "clientes.id_cliente", "=", "surgeries.id_cliente", "left")
-                ->join("users", "users.id", "=", "auditoria.usr_regins")
 
-                ->with("payments")
-                ->with("followers")
-                ->with("procedures")
-                ->with("aditionals")
-                // ->with("aditionals_wallezy")
-
-                ->where("auditoria.tabla", "surgeries")
-                ->where("clientes.wallezy",1)
-                ->where("auditoria.status", "!=", "0")
-                ->orderBy("surgeries.fecha", "DESC")
+            $valuations = DB::table('clientes')
+                ->select(
+                    'wellezy_cotization.*',
+                    'clientes.*',
+                )
+                ->join('wellezy_cotization','clientes.id_cliente','wellezy_cotization.id_cliente')
+                ->whereNull('wellezy_cotization.id_padre')
                 ->get();
 
-            echo json_encode($valuations);
+                $valuations->map(function($item){
+                    $item->detalle  =  WellezyCotization::where('id_padre',$item->id)->get();
+                     return $item;
+                });
+             
+            return $valuations;
 
         } catch (\Throwable $th) {
             return $th;
@@ -37,10 +35,9 @@ class CotizacionController extends Controller
 
     public function CreateCotization(Request $request,$cliente)
     {
-        // dd($request->all());
-
         try {
 
+<<<<<<< HEAD
            $select =  WellezyCotization::where('id_cliente',$request->id_cliente)->exists();
 
            if($select){
@@ -78,6 +75,44 @@ class CotizacionController extends Controller
         return response()->json("A ocurrido un error")->setStatusCode(400);
     }
 
+=======
+            $select =  WellezyCotization::where('id_cliente',$request->id_cliente)->exists();
+           
+                if($select){
+                    
+                    $padre =  WellezyCotization::where('id_cliente',$request->id_cliente)->first();
+                    $hijo =  WellezyCotization::where('id',$padre->id)->get();
+
+                    $hijo->delete();
+                    $padre->delete();
+
+                }
+
+                $wellezy = new WellezyCotization;
+                $wellezy->id_cliente = $request->id_cliente;
+                $wellezy->amount_surgery = $request->amount;
+                $wellezy->save();
+
+                if(count($request->aditional) > 0){
+                        foreach($request->aditional as $key => $value){
+                        $array = [];
+                        $array["id_padre"]     = $wellezy->id;;
+                        $array["decription_aditional"]     = $value;
+                        $array["price_aditional"] = str_replace('.', '', $request["price_aditional"][$key]);
+                        $array["price_aditional"] = str_replace(',', '.', $array["price_aditional"]);
+                
+                        $create =  WellezyCotization::create($array);
+                    }
+                }
+
+                if ($create) {
+                    $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+                    return response()->json($data)->setStatusCode(200);
+                }else{
+                    return response()->json("A ocurrido un error")->setStatusCode(400);
+                }
+           
+>>>>>>> 374333b9f2a57f9b0546fb135e356da5fc3ae6f0
         } catch (\Throwable $th) {
             return $th;
         }
@@ -87,23 +122,39 @@ class CotizacionController extends Controller
     {
         try {
 
-           $padre =  WellezyCotization::where('id_cliente',$cliente)->get();
+            $cotization =  WellezyCotization::where('id_cliente',$cliente)->whereNull('id_padre')->get();
 
-            $padre->map(function($item){
-                  $item->detalle  =  WellezyCotization::where('id_padre',$item->id)->get();
-                  return $item;
-            });
+                $cotization->map(function($item){
+                    $item->detalle  =  WellezyCotization::where('id_padre',$item->id)->get();
+                    $item->solicitud = DB::table('wellezy_valoration')
+                                ->select(
+                                    'wellezy_valoration.*',
+                                    'sub_category.*',
+                                    'sub_category.name as name_sub',
+                                    'sub_category.name_ingles as name_ingles_sub',
+                                    'category.*'
+                                )
+                                ->join('sub_category','wellezy_valoration.id_subcategory','sub_category.id')
+                                ->join('category','sub_category.id_category','category.id')
+                                ->get();
 
+                    return $item;
+                });
 
-           return $padre;
+            return $cotization;
+
         } catch (\Throwable $th) {
             return $th;
         }
     }
     public function CreateValoration(Request $request)
     {
+<<<<<<< HEAD
         try {
 
+=======
+        try {        
+>>>>>>> 374333b9f2a57f9b0546fb135e356da5fc3ae6f0
             $res = WellezyValoration::create($request->all());
             if ($res) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");

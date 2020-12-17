@@ -8,6 +8,6 @@ class WellezyValoration extends Model
 {
     protected $table       = 'wellezy_valoration';
     protected $guarded     = [];
-    public    $timestamps  = false;
+
     
 }
