@@ -42,9 +42,9 @@ class CotizacionController extends Controller
         try {
 
            $select =  WellezyCotization::where('id_cliente',$request->id_cliente)->exists();
-           
+
            if($select){
-            
+
             $padre =  WellezyCotization::where('id_cliente',$request->id_cliente)->first();
             $hijo =  WellezyCotization::where('id',$padre->id)->get();
 
@@ -77,7 +77,7 @@ class CotizacionController extends Controller
     }else{
         return response()->json("A ocurrido un error")->setStatusCode(400);
     }
-           
+
         } catch (\Throwable $th) {
             return $th;
         }
@@ -103,7 +103,7 @@ class CotizacionController extends Controller
     public function CreateValoration(Request $request)
     {
         try {
-            
+
             $res = WellezyValoration::create($request->all());
             if ($res) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");

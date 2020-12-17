@@ -89,7 +89,6 @@ Route::get('status-cliente/{id}/{status}', 'ClientsController@status');
 Route::get('clients/code/{code}', 'ClientsController@ShowByCode');
 
 
-
 Route::resource('city', 'CityController');
 Route::post('status-city/{id}/{status}', 'CityController@status');
 
