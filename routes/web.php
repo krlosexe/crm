@@ -128,6 +128,14 @@ Route::get('sub_category', function () {
     return view('category.subcategory.gestion');
 });
 
+Route::get('services', function () {
+    return view('wellezy.services.gestion');
+});
+
+Route::get('viaticos', function () {
+    return view('wellezy.viaticos.gestion');
+});
+
 
 Route::get('import', 'ImportController@clients');
 

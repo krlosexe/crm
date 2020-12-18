@@ -15,7 +15,7 @@ class CotizacionController extends Controller
             $valuations = DB::table('clientes')
                 ->select(
                     'wellezy_cotization.*',
-                    'clientes.*',
+                    'clientes.*'
                 )
                 ->leftJoin('wellezy_cotization','clientes.id_cliente','wellezy_cotization.id_cliente')
                 ->where('clientes.wallezy',1)
