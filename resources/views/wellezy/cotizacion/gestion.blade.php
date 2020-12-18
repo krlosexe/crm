@@ -658,7 +658,7 @@
 
 
 					cuadros('#cuadro1', '#cuadro4');
-					$("#id_edit").val(data.id_surgeries)
+					$("#id_edit").val(data.id_cliente)
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}

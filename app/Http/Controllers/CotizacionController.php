@@ -17,8 +17,9 @@ class CotizacionController extends Controller
                     'wellezy_cotization.*',
                     'clientes.*',
                 )
-                ->join('wellezy_cotization','clientes.id_cliente','wellezy_cotization.id_cliente')
-                ->whereNull('wellezy_cotization.id_padre')
+                ->leftJoin('wellezy_cotization','clientes.id_cliente','wellezy_cotization.id_cliente')
+                // ->whereNull('wellezy_cotization.id_padre')
+                ->where('clientes.wallezy',1)
                 ->get();
 
                 $valuations->map(function($item){
@@ -42,10 +43,8 @@ class CotizacionController extends Controller
                 if($select){
                     
                     $padre =  WellezyCotization::where('id_cliente',$request->id_cliente)->first();
-                    $hijo =  WellezyCotization::where('id',$padre->id)->get();
-
-                    $hijo->delete();
-                    $padre->delete();
+                    WellezyCotization::where('id_padre',$padre['id'])->delete();
+                    WellezyCotization::where('id_cliente',$request->id_cliente)->delete();
 
                 }
 
