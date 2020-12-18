@@ -211,7 +211,7 @@
 			<div class="container-fluid">
 
 				<!-- Page Heading -->
-				<h1 class="h3 mb-2 text-gray-800">Categorias</h1>
+				<h1 class="h3 mb-2 text-gray-800">Servicios</h1>
 
 				<div id="alertas"></div>
 				<input type="hidden" class="id_user">
@@ -220,7 +220,7 @@
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Gestion de Categorias</h6>
+						<h6 class="m-0 font-weight-bold text-primary">Gestion de Servicios</h6>
 
 						<button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 							<span class="icon text-white-50">
@@ -290,9 +290,9 @@
 				</div>
 
 
-				@include('category.store')
-				@include('category.view')
-				@include('category.edit')
+				@include('wellezy.services.store')
+				@include('wellezy.services.view')
+				@include('wellezy.services.edit')
 
 
 			</div>
