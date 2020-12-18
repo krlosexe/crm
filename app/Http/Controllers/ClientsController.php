@@ -2419,8 +2419,6 @@ class ClientsController extends Controller
 
 
 
-
-
                 return response()->json($data)->setStatusCode(200);
 
             }
