@@ -32,8 +32,6 @@ class CovidController extends Controller
             $request["enfermendades"] = "";
         }
 
-
-
         Mail::send('emails.covid',$request->all(), function($msj) use($subject,$for){
             $msj->from("comercial@pdtagencia.com","CRM");
             $msj->subject($subject);

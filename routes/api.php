@@ -222,15 +222,8 @@ Route::post('form/credit/upload/identification/rear', 'FormCreditController@Uplo
 Route::get('form/credit/photo/identification/rear/{id_client}', 'FormCreditController@GetPhotoIdentificationRear');
 
 
-
-
-
 Route::post('form/credit/upload/face', 'FormCreditController@UploadFace');
 Route::get('form/credit/photo/face/{id_client}', 'FormCreditController@GetPhotoFace');
-
-
-
-
 
 
 Route::post('form/authorization/studio/credit', 'FormCreditController@storeAutorization');
@@ -247,8 +240,6 @@ Route::get('clients-list', 'ClientsController@List');
 Route::post('clients/update/hc/{id_cliente}', 'ClientsController@UpdateHc');
 
 Route::post('v2/clients/update/hc/{user_id}', 'ClientsController@UpdateHcByUserId');
-
-
 
 Route::post('comment/task/client', 'ClientsController@AddCommentTask');
 
@@ -299,8 +290,13 @@ Route::post('generate/token/chat', 'UsuariosController@generateTokenChat');
 
 
 Route::resource('category', 'CategoryController');
-Route::get('category/sub/{category}', 'CategoryController@getSubCategory');
+Route::get('category/sub/{category}/{state?}', 'CategoryController@getSubCategory');
 Route::get('procedures/all', 'CategoryController@getSubCategoryAll');
+
+Route::get('subcategory/list', 'CategoryController@ListSubCategory');
+Route::post('subcategory/create', 'CategoryController@crearSubCategoria');
+Route::put('subcategory/edit/{id}', 'CategoryController@updateSubCategoria');
+Route::get('subcategory/eliminar/{id}', 'CategoryController@EliminarSubCategoria');
 
 Route::resource('gallery/image', 'GalleryImageController');
 Route::get('image/gallery', 'GalleryImageController@get');
@@ -443,6 +439,12 @@ Route::get('client/indentification/{cedula}', 'ClientsController@Identification'
 Route::post('financing/create', 'FinacingController@createSolicitud');
 
 Route::post('register/prp/app', 'AffiliateController@store');
+Route::get('wellezy/list/cotization', 'CotizacionController@ListCotization');
+Route::put('wellezy/update/cotization/{id}', 'CotizacionController@CreateCotization');
+Route::get('wellezy/list/client/cotization/{cliente}','CotizacionController@ListCotizationByClient');
+Route::post('wellezy/cotization/create','CotizacionController@CreateValoration');
+
+
 
 Route::get('get/code/adviser/{code}', 'UsuariosController@GetCodeAdviser');
 

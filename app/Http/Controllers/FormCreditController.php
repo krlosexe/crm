@@ -41,12 +41,8 @@ class FormCreditController extends Controller
 
         }
 
-
         FormCreditRelacionActivos::create($request->all());
         FormCreditReferencias::create($request->all());
-
-
-
 
         if($request["id_line"] == 6){
             $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
@@ -66,9 +62,6 @@ class FormCreditController extends Controller
                         ->where("users_line_business.id_line", $request["id_line"])
                         ->get();
 
-
-
-
             foreach($users as $user){
 
                 $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
@@ -85,8 +78,6 @@ class FormCreditController extends Controller
 
             }
 
-
-
                 $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
                 // $for = "comercial@pdtagencia.com";
                 $for = "getionfinanmed@gmail.com";
@@ -100,12 +91,7 @@ class FormCreditController extends Controller
                 });
 
 
-
-
         }
-
-
-
 
 
         $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
@@ -123,12 +109,6 @@ class FormCreditController extends Controller
 
         return response()->json("Ok")->setStatusCode(200);
     }
-
-
-
-
-
-
 
 
     public function storeAutorization(Request $request){
