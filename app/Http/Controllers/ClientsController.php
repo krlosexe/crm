@@ -2371,7 +2371,7 @@ class ClientsController extends Controller
 
 
 
-                $subject = "App Financiacion : ".$request["nombres"]."  Interesado en Financiacion";
+                $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
 
                 $for = $users["email"];
             // $for = "cardenascarlos18@gmail.com";
@@ -2392,7 +2392,7 @@ class ClientsController extends Controller
                 //$for = $users["email"];
             $for = "cardenascarlos18@gmail.com";
 
-                $request["msg"]  = "Un Paciente se ha registrado por el App";
+            $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
                 $request["apellidos"]        = ".";
                 $request["direccion"]        = ".";
                 $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2407,7 +2407,7 @@ class ClientsController extends Controller
 
                 $for = "pdtagenciademedios@gmail.com";
 
-                $request["msg"]  = "Un Paciente se ha registrado por el App";
+                $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
                 $request["apellidos"]        = ".";
                 $request["direccion"]        = ".";
                 $request["fecha_nacimiento"] = date("Y-m-d");
