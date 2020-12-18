@@ -18,20 +18,25 @@ use DB;
 class ReferredController extends Controller
 {
     public function store(Request $request){
-        
+
 
         $affiliate = Clients::where("code_client", $request["code"])->first();
 
         $request["id_affiliate"]    = $affiliate["id_cliente"];
         $request["id_user_asesora"] = $affiliate["id_user_asesora"];
+        $request["id_line"]         = $affiliate["id_line"];
 
         $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
         $code                   = substr(str_shuffle($permitted_chars), 0, 4);
         $request["code_client"] = strtoupper($code);
 
-
+        $data = Clients::where("identificacion", $request["identificacion"])->first();
+        if($data){
+            $data = array('mensagge' => "El paciente ya se encuentra en la base de datos");
+            return response()->json($data)->setStatusCode(400);
+        }
         $cliente = Clients::create($request->all());
-                
+
         $request["id_client"] = $cliente["id_cliente"];
 
 
@@ -59,21 +64,23 @@ class ReferredController extends Controller
 
         $ConfigNotification = [
             "tokens" => [$data_adviser["token_notifications"], $data_affiliate["token_notifications"]],
-    
+
             "tittle" => "PRP",
             "body"   => "Se ha registrado un Referido",
             "data"   => ['type' => 'refferers']
-    
+
         ];
-    
+
         $code = SendNotifications($ConfigNotification);
 
 
 
+        /*
+
        $User =  User::create([
             "email"       => $request["email"],
             "password"    => md5("123456789"),
-            "id_rol"      => 19,
+            "id_rol"      => 17,
             "id_client"   => $cliente["id_cliente"]
         ]);
 
@@ -89,9 +96,9 @@ class ReferredController extends Controller
         $datos_personales->id_usuario       = $User->id;
         $datos_personales->save();
 
-
-        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+*/
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
-        
+
     }
 }

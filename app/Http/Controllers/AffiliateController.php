@@ -21,10 +21,14 @@ class AffiliateController extends Controller
 
     public function store(Request $request){
 
+
+
         $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
-                        ->where("users.code_user", "=", $request["code_adviser"])
+                        ->where("users.id", "=", $request["user_id"])
                         ->first();
+
+
         if($users){
 
             $request["name_user"]   = $users["nombres"]." ".$users["apellido_p"];
@@ -183,6 +187,7 @@ class AffiliateController extends Controller
                           'mensagge'   => "Ha iniciado sesion exitosamente",
                           "type_user"  => "Afiliado",
                           "code_client" => $request["code_client"],
+                          "line"        => $request["id_line"],
                           "id_client"  => $id_client
             );
 

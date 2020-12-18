@@ -89,7 +89,6 @@ Route::get('status-cliente/{id}/{status}', 'ClientsController@status');
 Route::get('clients/code/{code}', 'ClientsController@ShowByCode');
 
 
-
 Route::resource('city', 'CityController');
 Route::post('status-city/{id}/{status}', 'CityController@status');
 
@@ -443,6 +442,16 @@ Route::get('wellezy/list/cotization', 'CotizacionController@ListCotization');
 Route::put('wellezy/update/cotization/{id}', 'CotizacionController@CreateCotization');
 Route::get('wellezy/list/client/cotization/{cliente}','CotizacionController@ListCotizationByClient');
 Route::post('wellezy/cotization/create','CotizacionController@CreateValoration');
+
+Route::get('get/code/adviser/{code}', 'UsuariosController@GetCodeAdviser');
+
+
+
+
+
+
+Route::post('wellezy/register/client', 'WellezyController@RegisterClient');
+Route::post('wellezy/auth', 'WellezyController@Auth');
 
 
 

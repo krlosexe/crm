@@ -1104,8 +1104,9 @@ class ClientsController extends Controller
             $request["pay_to_study_credit"] == 1 ? $request["pay_to_study_credit"] = 1 : $request["pay_to_study_credit"] = 0;
             if($data->pay_to_study_credit == 0){
 
-                DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
+               // DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
 
+               /*
                 if($request["pay_to_study_credit"] == 1){
                     DB::table("clients_pay_to_study_credit")->insert([
                                                                         "id_client" => $id_cliente,
@@ -1113,7 +1114,7 @@ class ClientsController extends Controller
                                                                         "payment_method" => $request["payment_method"],
                                                                         "created_at" => $request["date_pay_study_credit"]
                                                                     ]);
-                }
+                }*/
 
             }else{
 
@@ -2078,6 +2079,9 @@ class ClientsController extends Controller
                 if($request["code_adviser"] != 0){
                     Clients::where("id_cliente", $client["id_cliente"])
                     ->update(['id_user_asesora' => $users->id, "id_line" => $users->id_line]);
+                }else{
+                    Clients::where("id_cliente", $client["id_cliente"])
+                    ->update(['id_user_asesora' => $users->id, "id_line" => $users->id_line]);
                 }
 
 
@@ -2261,9 +2265,6 @@ class ClientsController extends Controller
                 $cliente = Clients::create($request->all());
 
                 $request["id_client"] = $cliente["id_cliente"];
-
-
-
                 $id_client = $cliente["id_cliente"];
 
                 ClientInformationAditionalSurgery::create($request->all());

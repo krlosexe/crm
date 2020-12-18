@@ -128,10 +128,7 @@ class AdviserController extends Controller
 
     public function GetProcesses($id_user, $display){
 
-
-
         $user = User::where("id", $id_user)->first();
-
 
         if($user["id_rol"] == 6 || $user["id_rol"] == 9){
 
@@ -181,62 +178,28 @@ class AdviserController extends Controller
 
         }
 
-        if($user["id_rol"] == 17){
-
-            $where = array(
-                "clientes.id_affiliate" => $user["id_client"]
-            );
 
 
-            $data = Clients::where($where)
-                ->select("clientes.id_cliente","clientes.nombres", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
-                ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
-                ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate")
-                ->join("events_client", "events_client.id_client", "=", "clientes.id_cliente")
-                ->whereNotNull('clientes.id_affiliate')
+        $where = array(
+            "clientes.id_affiliate" => $id_user
+        );
 
+        $data = Clients::where($where)
+            ->select("clientes.id_cliente","clientes.nombres", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
+            ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
+            ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate")
+            ->join("events_client", "events_client.id_client", "=", "clientes.id_cliente")
+            ->whereNotNull('clientes.id_affiliate')
 
-                ->groupBy("clientes.id_cliente")
-                ->groupBy("client_information_aditional_surgery.name_surgery")
-                ->groupBy("cl2.nombres")
-                ->groupBy("clientes.nombres")
+            ->orderBy("clientes.id_cliente", "DESC")
 
-                ->orderBy("clientes.id_cliente", "DESC")
-                ->get();
+            ->groupBy("clientes.id_cliente")
+            ->groupBy("client_information_aditional_surgery.name_surgery")
+            ->groupBy("cl2.nombres")
+            ->groupBy("clientes.nombres")
 
-        }
-
-
-
-        if($user["id_rol"] == 19){
-
-            $where = array(
-                "clientes.id_cliente" => $user["id_client"],
-               // "clientes.origen"          => "Referido PRP",
-            );
-
-
-            $data = Clients::where($where)
-                ->select("clientes.id_cliente","clientes.nombres", "cl2.nombres as name_affiliate","client_information_aditional_surgery.name_surgery as interes")
-                ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
-                ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate")
-                ->join("events_client", "events_client.id_client", "=", "clientes.id_cliente")
-                ->whereNotNull('clientes.id_affiliate')
-
-
-                ->groupBy("clientes.id_cliente")
-                ->groupBy("client_information_aditional_surgery.name_surgery")
-                ->groupBy("cl2.nombres")
-                ->groupBy("clientes.nombres")
-
-                ->orderBy("clientes.id_cliente", "DESC")
-                ->get();
-
-        }
-
-
-
-
+            ->orderBy("clientes.id_cliente", "DESC")
+            ->get();
 
         return response()->json($data)->setStatusCode(200);
 

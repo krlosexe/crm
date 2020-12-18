@@ -727,7 +727,8 @@ class Login extends Controller
             $data = [
                "issue"   => "Código de Acceso Multiestica $code",
                "message" => "Hola, $client->nombres tu código de acceso a Multiestica es $code",
-               "email"   => $client->email
+               "email"   => $client->email,
+               "id_line" => $client->id_line
             ];
 
             $this->SendEmail2($data);
@@ -768,6 +769,7 @@ class Login extends Controller
                           'sync_token' => "14242",
                           'mensagge'   => "Ha iniciado sesion exitosamente",
                           "type_user"  => "Afiliado",
+                          "line"       => $client->id_line,
                           "code_client" => $client->code_client,
                           "id_client"  => $client->id_cliente
             );

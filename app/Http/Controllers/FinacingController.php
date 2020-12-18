@@ -118,7 +118,7 @@ class FinacingController extends Controller
             }
 
             $cliente = Clients::where('id_cliente',$id_client)->first();
-            
+
             $apiKey = "";
             switch ($cliente->id_line) {
                 case 3:
@@ -197,7 +197,13 @@ class FinacingController extends Controller
             }
 
             $client = DB::table("clientes")->where("id_cliente", $id_client)->first();
-            $mensaje = "El Credito del Px: $client->nombres ha sido: $request[status]";
+
+            if($request["status"] == "Aprobado"){
+                $mensaje = "El Credito del Px: $client->nombres ha sido: $request[status], por un monto de $request[required_amount] y con una inicial de $request[initial]";
+            }else{
+                $mensaje = "El Credito del Px: $client->nombres ha sido: $request[status]";
+            }
+
             $info_email = [
                 "user_id" => $client->id_user_asesora,
                 "issue"   => "Credito PX $client->nombres, $request[status]",
@@ -552,7 +558,7 @@ class FinacingController extends Controller
                            $apiKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
                             break;
                     }
-        
+
 
                     $url = "https://fcm.googleapis.com/fcm/send";
                     $token = $FCM_token;
