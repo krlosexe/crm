@@ -273,8 +273,8 @@
 			                  <thead>
 			                    <tr>
 								  <th>Acciones</th>
-								  <th>Categoia</th>
-								  <th>Nombre</th>
+								  <th>Servicio</th>
+								  <th>Viatico</th>
 			                    </tr>
 			                  </thead>
 			                  <tbody></tbody>
@@ -361,11 +361,11 @@
 
 
 			function update(){
-				enviarFormularioPut("#form-update", 'api/subcategory/edit', '#cuadro4', false, "#avatar-edit");
+				enviarFormularioPut("#form-update", 'api/wellezy/viatico/update', '#cuadro4', false, "#avatar-edit");
 			}
 
 			function store(){
-				enviarFormulario("#store", 'api/subcategory/create', '#cuadro2');
+				enviarFormulario("#store", 'api/wellezy/viatico/create', '#cuadro2');
 			}
 
 			$("#id_asesora_valoracion-filter, #overdue-filter").change(function (e) { 
@@ -396,7 +396,7 @@
 					"serverSide":false,
 					"ajax":{
 						"method":"GET",
-						 "url":''+url+'/api/subcategory/list',
+						 "url":''+url+'/api/wellezy/viatico/list',
 						//  "data": {
 						// 	"rol"     : name_rol,
 						// 	"id_user" : id_user,
@@ -424,11 +424,11 @@
 						{
 							"data":"id_category", 
 							render : function(data, type, row) {
-								return row.category.name;
+								return row.services.name;
 								
 							}
 						},
-						{"data": "name"},
+						{"data": "title"},
 				
 				
 						
@@ -459,7 +459,7 @@
 				$("#alertas").css("display", "none");
 				$("#store")[0].reset();
 
-				getCategory("#category-store")
+				getServices("#services-store")
 
 				$("#paciente-store option").remove();
 
@@ -533,10 +533,10 @@
 				cuadros("#cuadro1", "#cuadro2");
 			}
 
-			function getCategory(select, select_default = false){
+			function getServices(select, select_default = false){
 			
 			$.ajax({
-				url: ''+document.getElementById('ruta').value+'/api/category',
+				url: ''+document.getElementById('ruta').value+'/api/wellezy/service/list',
 				type:'GET',
 				// data: {
 				// 	"id_user": id_user,
@@ -676,14 +676,13 @@
 					$("#form-update")[0].reset()
 
 
-					getCategory("#category-edit")
+					getServices("#services-edit")
 	
-					$("#cat-name-edit").val(data.name)
-					$("#cat-ingles-edit").val(data.name_ingles)
-					$("#category-edit").val(data.id_category)
+					$("#title-edit").val(data.title)
+					$("#services-edit").val(data.id_services)
+					$("#costo-edit").val(data.costo)
 
-					var stt = data.state ? true : false
-					$('#use_app_edit').prop('checked',stt);
+		
 								
 					$('#summernote_edit').summernote("reset");
 					$('#summernote_edit').summernote('code',data.description);
@@ -692,10 +691,10 @@
 
 					$('#avatar-edit').fileinput('destroy');
 
-					url_imagen = './img/category/picture/'
+					url_imagen = './img/wellezy/viaticos/'
 
 					if(data.foto != ""){
-						img = '<img src="'+url_imagen+data.foto+'" class="file-preview-image kv-preview-data">'
+						img = '<img src="'+url_imagen+data.image+'" class="file-preview-image kv-preview-data">'
 					}else{img = ""}
 					
 					$("#avatar-edit").fileinput({
@@ -720,7 +719,7 @@
 						],
 						initialPreviewConfig: [
 								
-							{caption: data.foto , downloadUrl: url_imagen+data.foto  ,url: url+"uploads/delete", key: data.foto}
+							{caption: data.image , downloadUrl: url_imagen+data.image  ,url: url+"uploads/delete", key: data.image}
 					
 						],
 
@@ -882,17 +881,10 @@
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/subcategory/eliminar/'+data.id,"¿Esta seguro de eliminar el registro?", 'Eliminar');
+					statusConfirmacion('api/wellezy/viatico/delete/'+data.id,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
 			}
 
-
-
-
-
-
-
-			
 			function ViewClient(id_paciente){
 				var url=document.getElementById('ruta').value;	
 				$.ajax({

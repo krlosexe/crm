@@ -14,43 +14,34 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for=""><b>Categorias</b></label>
-                                <select name="categoria" id="category-store" class="form-control select2" required>
+                                <select name="services" id="services-store" class="form-control select2" required>
                                     <option value="">Seleccione</option>
                                 </select>
                             </div>
                         </div>
 
-                        <!-- <div class="col-md-3"> -->
-								<div class="form-group ml-4">
-										<label for="use_app"><b>Visible</b></label>
-										<div class="custom-control custom-switch">
-											<input type="checkbox" class="custom-control-input" name="use_app" id="use_app" value="1">
-											<label class="custom-control-label" for="use_app"></label>
-										</div>
-									</div>
-								<!-- </div> -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for=""><b>Titulo</b></label>
+                                <input type="text" name="title" id="title-store" class="form-control" required>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                      <div class="col-md-6">
                             <div class="form-group">
-                                <label for=""><b>Nombre</b></label>
-                                <input type="text" name="name" id="issue-store" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for=""><b>Nombre en Ingles</b></label>
-                                <input type="text" name="name_ingles" id="issue-store" class="form-control" required>
+                                <label for=""><b>Costo</b></label>
+                                <input type="text" name="costo" id="costo-store" class="form-control" required>
                             </div>
                         </div>
                     </div>
                     
-                    <small>Seleccione una foto de portada</small>
+                    <small>Seleccione una foto</small>
                     <div class="col-md-8">
                         <div class="kv-avatar">
                             <div class="file-loading">
-                                <input id="avatar-1" name="img-profile" type="file" required>
+                                <input id="avatar-1" name="img-profile-one" type="file" required>
                             </div>
                         </div>
                         <div class="kv-avatar-hintss">
@@ -59,10 +50,10 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <small>Seleccione una foto del antes</small>
+                            <small>Seleccione una foto</small>
                             <div class="kv-avatar">
                                 <div class="file-loading">
-                                    <input id="avatar-antes" name="img-profile-antes" type="file">
+                                    <input id="avatar-antes" name="img-profile-two" type="file">
                                 </div>
                             </div>
                             <div class="kv-avatar-hintss">
@@ -70,10 +61,10 @@
                         </div>
 
                         <div class="col-md-6">
-                            <small>Seleccione una foto del despues</small>
+                            <small>Seleccione una foto</small>
                             <div class="kv-avatar">
                                 <div class="file-loading">
-                                    <input id="avatar-despues" name="img-profile-despues" type="file">
+                                    <input id="avatar-despues" name="img-profile-three" type="file">
                                 </div>
                             </div>
                             <div class="kv-avatar-hintss">

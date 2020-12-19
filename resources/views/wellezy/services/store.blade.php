@@ -10,17 +10,10 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for=""><b>Nombre</b></label>
-                                <input type="text" name="name" id="issue-store" class="form-control" required>
+                                <label for=""><b>Nombre del Servicio</b></label>
+                                <input type="text" name="name" id="service-name" class="form-control" required>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for=""><b>Nombre en Inlges</b></label>
-                                <input type="text" name="name_ingles" id="issue-store-english" class="form-control" required>
-                            </div>
-                        </div>
-
                         <div class="col-md-8">
                             <div class="kv-avatar">
                                 <div class="file-loading">
