@@ -447,6 +447,7 @@ Route::post('wellezy/service/create','WellezyServicesController@CreateServices')
 Route::get('wellezy/service/list','WellezyServicesController@ListServices');
 Route::put('wellezy/service/update/{id}', 'WellezyServicesController@UpdateServices');
 Route::get('wellezy/service/delete/{id}', 'WellezyServicesController@DeleteServices');
+Route::get('wellezy/service/list/viatico/{id_service}','WellezyServicesController@ListViaticByIdService');
 
 
 Route::post('wellezy/viatico/create','WellezyViaticosController@CreateViaticos');
