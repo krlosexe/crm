@@ -443,6 +443,19 @@ Route::put('wellezy/update/cotization/{id}', 'CotizacionController@CreateCotizat
 Route::get('wellezy/list/client/cotization/{cliente}','CotizacionController@ListCotizationByClient');
 Route::post('wellezy/cotization/create','CotizacionController@CreateValoration');
 
+Route::post('wellezy/service/create','WellezyServicesController@CreateServices');
+Route::get('wellezy/service/list','WellezyServicesController@ListServices');
+Route::put('wellezy/service/update/{id}', 'WellezyServicesController@UpdateServices');
+Route::get('wellezy/service/delete/{id}', 'WellezyServicesController@DeleteServices');
+
+
+Route::post('wellezy/viatico/create','WellezyViaticosController@CreateViaticos');
+Route::get('wellezy/viatico/list','WellezyViaticosController@ListViaticos');
+Route::put('wellezy/viatico/update/{id}', 'WellezyViaticosController@UpdateViaticos');
+Route::get('wellezy/viatico/delete/{id}', 'WellezyViaticosController@DeleteViaticos');
+
+
+
 Route::get('get/code/adviser/{code}', 'UsuariosController@GetCodeAdviser');
 
 

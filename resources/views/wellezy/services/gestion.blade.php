@@ -211,7 +211,7 @@
 			<div class="container-fluid">
 
 				<!-- Page Heading -->
-				<h1 class="h3 mb-2 text-gray-800">Categorias</h1>
+				<h1 class="h3 mb-2 text-gray-800">Servicios</h1>
 
 				<div id="alertas"></div>
 				<input type="hidden" class="id_user">
@@ -220,7 +220,7 @@
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4" id="cuadro1">
 					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Gestion de Categorias</h6>
+						<h6 class="m-0 font-weight-bold text-primary">Gestion de Servicios</h6>
 
 						<button onclick="nuevo()" class="btn btn-primary btn-icon-split" style="float: right;">
 							<span class="icon text-white-50">
@@ -290,9 +290,9 @@
 				</div>
 
 
-				@include('category.store')
-				@include('category.view')
-				@include('category.edit')
+				@include('wellezy.services.store')
+				@include('wellezy.services.view')
+				@include('wellezy.services.edit')
 
 
 			</div>
@@ -339,10 +339,6 @@
 <input type="hidden" id="ruta" value="<?= url('/') ?>">
 @endsection
 
-
-
-
-
 @section('CustomJs')
 
 <script>
@@ -377,11 +373,11 @@
 
 
 	function update() {
-		enviarFormularioPut("#form-update", 'api/category', '#cuadro4', false, "#avatar-edit");
+		enviarFormularioPut("#form-update", 'api/wellezy/service/update', '#cuadro4', false, "#avatar-edit");
 	}
 
 	function store() {
-		enviarFormulario("#store", 'api/category', '#cuadro2');
+		enviarFormulario("#store", 'api/wellezy/service/create', '#cuadro2');
 	}
 
 	$("#id_asesora_valoracion-filter, #overdue-filter").change(function(e) {
@@ -413,7 +409,7 @@
 			"serverSide": false,
 			"ajax": {
 				"method": "GET",
-				"url": '' + url + '/api/category',
+				"url": '' + url + '/api/wellezy/service/list',
 				// "data": {
 				// 	"rol": name_rol,
 				// 	"id_user": id_user,
@@ -471,13 +467,7 @@
 		if (id_rol == 21) {
 			$(".dt-buttons").remove()
 		}
-
-
-
-
 	}
-
-
 
 	function nuevo() {
 		$("#alertas").css("display", "none");
@@ -514,8 +504,6 @@
 
 		});
 
-
-
 		cuadros("#cuadro1", "#cuadro2");
 	}
 
@@ -543,20 +531,15 @@
 					html += '<div class="row">'
 					html += '<div class="col-md-2">'
 					html += "<img class='rounded' src='" + url + "/img/usuarios/profile/" + item.img_profile + "' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='" + item.name_follower + " " + item.last_name_follower + "'>"
-
 					html += '</div>'
 					html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 					html += '<div>' + item.comments + '</div>'
-
 					html += '<div><b>' + item.name_user + " " + item.last_name_user + '</b> <span style="float: right">' + item.create_at + '</span></div>'
-
-
 					html += '</div>'
 					html += '</div>'
 					html += '</div>'
 
 				});
-
 
 				$(comment_content).html(html)
 			}
@@ -621,14 +604,13 @@
 			$("#form-update")[0].reset()
 
 			$("#issue-edit").val(data.name)
-			$("#issue-edit-english").val(data.name_ingles)
 					
 					$('#avatar-edit').fileinput('destroy');
 					
-					url_imagen = './img/category/picture/'
+					url_imagen = './img/wellezy/services/'
 
 					if(data.foto != ""){
-						img = '<img src="'+url_imagen+data.foto+'" class="file-preview-image kv-preview-data">'
+						img = '<img src="'+url_imagen+data.image+'" class="file-preview-image kv-preview-data">'
 					}else{img = ""}
 					
 					$("#avatar-edit").fileinput({
@@ -653,7 +635,7 @@
 						],
 						initialPreviewConfig: [
 								
-							{caption: data.foto , downloadUrl: url_imagen+data.foto  ,url: url+"uploads/delete", key: data.foto}
+							{caption: data.image , downloadUrl: url_imagen+data.image  ,url: url+"uploads/delete", key: data.image}
 					
 						],
 
@@ -713,9 +695,6 @@
 				}
 			});
 
-
-
-
 		});
 
 	}
@@ -749,16 +728,9 @@
 	function eliminar(tbody, table) {
 		$(tbody).on("click", "span.eliminar", function() {
 			var data = table.row($(this).parents("tr")).data();
-			statusConfirmacion('api/category/' + data.id,"¿Esta seguro de eliminar el registro?", 'Eliminar');
+			statusConfirmacion('api/wellezy/service/delete/' + data.id,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
-
-
-
-
-
-
-
 
 	function ViewClient(id_paciente) {
 		var url = document.getElementById('ruta').value;
