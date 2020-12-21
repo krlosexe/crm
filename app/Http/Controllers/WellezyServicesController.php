@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\WellezyService;
+use App\{WellezyService,WellezyViatico};
 
 
 class WellezyServicesController extends Controller
@@ -83,6 +83,24 @@ class WellezyServicesController extends Controller
             }
         } catch (\Throwable $th) {
             return  $th;
+        }
+    }
+
+    public function ListViaticByIdService($id_service)
+    {
+        try {
+
+            $viaticos =  WellezyService::where('id',$id_service)->get();
+
+                $viaticos->map(function($item) use($id_service){
+                    $item->viatico  =  WellezyViatico::where('id_services',$id_service)->get();
+                    return $item;
+                });
+
+            return $viaticos;
+
+        } catch (\Throwable $th) {
+            return $th;
         }
     }
 }
