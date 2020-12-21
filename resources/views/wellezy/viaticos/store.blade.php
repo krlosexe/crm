@@ -48,7 +48,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <small>Seleccione una foto</small>
                             <div class="kv-avatar">
@@ -70,7 +70,7 @@
                             <div class="kv-avatar-hintss">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="col-md-6">
