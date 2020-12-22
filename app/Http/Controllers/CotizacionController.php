@@ -107,16 +107,28 @@ class CotizacionController extends Controller
     }
     public function CreateValoration(Request $request)
     {
-        try {
-            $res = WellezyValoration::create($request->all());
-            if ($res) {
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
-                return response()->json($data)->setStatusCode(200);
-            }else{
-                return response()->json("A ocurrido un error")->setStatusCode(400);
-            }
-        } catch (\Throwable $th) {
-            return $th;
+
+
+
+        foreach($request["photos"] as $value){
+
+
+            $folder = "img/wellezy/valorations";
+
+            $img      = str_replace('data:image/png;base64,', '', $value);
+            $fileData = base64_decode($img);
+            $fileName = rand(0, 100000000) . '-foto-valoration.png';
+            file_put_contents($folder . "/" . $fileName, $fileData);
+
+            $request["photo"] = $fileName;
+
+            $res = WellezyValoration::create([
+                "id_cliente"     => $request["id_cliente"],
+                "id_subcategory" => $request["id_subcategory"],
+                "photo"          => $request["photo"],
+            ]);
         }
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+        return response()->json($data)->setStatusCode(200);
     }
 }
