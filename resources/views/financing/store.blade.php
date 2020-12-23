@@ -59,8 +59,6 @@
                                         <input type="date" name="date_init" id="date_init_new" class="form-control" required>
                                     </div>
                                 </div>
-
-
                             </div>
 
                             <div class="row">
