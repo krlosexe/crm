@@ -84,7 +84,7 @@ class CotizacionController extends Controller
 
                 $cotization->map(function($item){
                     $item->detalle      =  WellezyCotization::where('id_padre',$item->id)->whereRaw("id_service is null")->get();
-                    $item->detalle_add  =  WellezyCotization::select("wellezy_cotization.*", "wellezy_viatico.description", "wellezy_viatico.title", "wellezy_viatico.image")
+                    $item->detalle_add  =  WellezyCotization::select("wellezy_cotization.*", "wellezy_viatico.title", "wellezy_viatico.image")
                                                               ->where('wellezy_cotization.id_padre',$item->id)
                                                               ->join("wellezy_viatico", "wellezy_viatico.id", "=", "wellezy_cotization.id_service")
                                                               ->whereRaw("wellezy_cotization.id_service is not null")
