@@ -5,10 +5,7 @@
     <div class="card-body">
         <form class="user" autocomplete="off" method="post" id="form-update" enctype="multipart/form-data">
             @csrf
-
             <input type="hidden" name="_method" value="put">
-
-
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a id="tab0" class="nav-link active" id="patient_record_edit" data-toggle="tab" href="#init_edit" role="tab" aria-controls="init" aria-selected="true">Ficha</a>
@@ -59,17 +56,13 @@
 
 
             </ul>
-
             <br><br>
-
 
             <div class="tab-content" id="myTabContent">
 
                 <div class="tab-pane fade show active tab_content0" id="init_edit" role="tabpanel" aria-labelledby="patient_record_edit">
-
                     <div class="row">
                         <div class="col-md-5">
-
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -111,13 +104,6 @@
                                         <input type="text" name="nombres" class="form-control form-control-user" id="nombre_edit" placeholder="PJ. Carlos Javier" required>
                                     </div>
                                 </div>
-
-                                <!--  <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for=""><b>Apellidos</b></label>
-                                    <input type="text" name="apellidos" class="form-control form-control-user" id="apellido_edit" placeholder="PJ. Cardenas">
-                                </div>
-                            </div>-->
                             </div>
 
                             <div class="row">
@@ -158,8 +144,6 @@
                                 </div>
                             </div>
 
-
-
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -181,9 +165,6 @@
 
                             </div>
 
-
-
-
                             <div class="row">
                                 <div class="col-sm-10">
                                     <div class="form-group">
@@ -195,17 +176,9 @@
                                     <br>
                                     <button type="button" id="add_phone_edit" class="btn btn-primary"><i class="fa fa-plus"></i></button>
                                 </div>
-
-                            </div>
-
-
-                            <div class="row" id="phone_add_content_edit">
                             </div>
 
                             <hr>
-
-
-
 
                             <div class="row">
                                 <div class="col-sm-10">
@@ -222,12 +195,7 @@
                             </div>
 
 
-
-                            <div class="row" id="email_add_content_edit">
-                            </div>
-
                             <hr>
-
 
                             <div class="row">
                                 <div class="col-sm-12">
@@ -248,13 +216,6 @@
                                         </select>
                                     </div>
 
-                                    <!-- <div class="form-group">
-                                    <label for=""><b>Asesora de Valoracion</b></label>
-                                    <select name="id_asesora_valoracion" id="id_asesora_valoracion-edit" class="form-control select2">
-                                        <option value="">Seleccione</option>
-                                    </select>
-                                </div> -->
-
 
                                     <div class="row">
                                         <div class="form-group col-md-6">
@@ -267,8 +228,6 @@
                                             <input type="text" name="forma_pago" class="form-control form-control-user" id="forma_pago_edit">
                                         </div>
                                     </div>
-
-
 
 
                                     <div class="row">
@@ -306,10 +265,6 @@
                                         </div>
                                     </div>
 
-
-
-
-
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label for=""><b>PRP</b></label>
@@ -319,22 +274,10 @@
                                             </select>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
-
-
-
                         </div>
-
-
-
                         <div class="col-md-7">
-
-
-
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
@@ -348,34 +291,9 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <br><br>
-                            <!--
-                        <div class="row">
-                            <div class="col-md-2">
-
-                            </div>
-                            <div class="col-md-3">
-                                <label for="testimony"><b>Testimonio</b></label>
-                                <label class='container-check'>
-                                    <input type='checkbox' name='testimony' class='checkitem chk-col-blue' id='testimony' value='1'>
-                                    <span class='checkmark'></span>
-                                    <label for=''></label>
-                                </label>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="testimony_date"><b>Fecha</b></label>
-                                <input type="date" class="form-control" name="testimony_date" id="testimony_date">
-                            </div>
-                        </div>-->
-
-
                             <div class="row">
-                                <div class="col-md-2">
-
-                                </div>
+                               
                                 <div class="col-md-3">
                                     <label for="before_and_after"><b>Fotos Antes y Despues</b></label>
                                     <label class='container-check'>
@@ -384,36 +302,11 @@
                                         <label for=''></label>
                                     </label>
                                 </div>
-
                                 <div class="col-md-4">
                                     <label for="before_and_after_date"><b>Fecha</b></label>
                                     <input type="date" class="form-control" name="before_and_after_date" id="before_and_after_date">
                                 </div>
                             </div>
-
-
-                            <!--
-                        <div class="row">
-                             <div class="col-md-2">
-
-                              </div>
-                            <div class="col-md-3">
-                                <label for="califications"><b>Calificaciones de Google</b></label>
-                                <label class='container-check'>
-                                    <input type='checkbox' name='califications' class='checkitem chk-col-blue' id='califications' value='1'>
-                                    <span class='checkmark'></span>
-                                    <label for=''></label>
-                                </label>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="califications_date"><b>Fecha</b></label>
-                                <input type="date" class="form-control" name="califications_date" id="califications_date">
-                            </div>
-                        </div>-->
-
-
-
                             <div class="row">
                                 <div class="col-md-2">
 
@@ -427,45 +320,25 @@
                                     </label>
                                 </div>
                             </div>
-
-
-
-
-
                             <br><br>
-
-
-
-
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <h4>Historial</h4>
                                 </div>
                             </div>
                             <br><br>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div id="logs_edit"></div>
                                 </div>
                             </div>
-
-
-
-
-
-
-
                             <br><br>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <h4>Comentarios</h4>
                                 </div>
                             </div>
                             <br><br>
-
                             <div class="row" id="comments_edit">
                                 <div class="col-md-12">
                                     <div class="row">
@@ -479,42 +352,24 @@
                                 </div>
                             </div>
 
-
-
-
                             <div class="row">
-
                                 <div class="col-md-2"></div>
-
                                 <div class="col-md-10">
                                     <div class="form-group">
-
                                         <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
                                         <textarea id="summernote_edit" name="comment"></textarea>
                                     </div>
                                 </div>
-
                             </div>
 
-
                             <div class="row">
-
-                                <div class="col-md-2">
-
-                                </div>
-
                                 <div class="col-md-10">
                                     <button type="button" id="add-comments" class="btn btn-primary">
                                         Comentar
                                     </button>
                                 </div>
-
                             </div>
-
-
-
                         </div>
-
                     </div>
 
 
@@ -527,11 +382,7 @@
                 </div>
 
 
-
-
                 <div class="tab-pane fade tab_content1" id="info-add-edit" role="tabpanel" aria-labelledby="patient_record">
-
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
@@ -542,14 +393,12 @@
                                     </div>
                                 </div>
 
-
                                 <div class="col-md-4">
                                     <label for=""><b>Sub Categoria</b></label>
                                     <div class="form-group valid-required">
                                         <select name="id_sub_category" class="form-control" id="sub_category_edit"></select>
                                     </div>
                                 </div>
-
 
                                 <div class="col-md-4">
                                     <br>
@@ -560,7 +409,6 @@
                             </div>
 
 
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -569,9 +417,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
 
 
@@ -596,15 +441,7 @@
                         </div>
                     </div>
 
-
-
-
-
-
-
-
                     <br><br>
-
 
                     <div class="row">
                         <div class="col-md-4">
@@ -637,9 +474,7 @@
                 <div class="tab-pane fade tab_content1" id="init-history-edit" role="tabpanel" aria-labelledby="patient_record">
 
                     <div class="row">
-
                         <div class="col-md-7">
-
                             <div class="row">
                                 <div class="col-md-9">
                                     <div class="form-group">
@@ -684,8 +519,6 @@
 
                         <div class="col-md-5">
                             <div class="row">
-
-
                                 <div class="col-md-6">
                                     <label for="alcohol_edit"><b>Alcohol</b></label>
                                     <label class='container-check'>
@@ -716,14 +549,10 @@
                                     </label>
                                 </div>
 
-                                
-
-
                                 <div class="col-md-8">
                                     <label for="previous_surgery_edit"><b>Cirugías Anteriores</b></label>
                                     <input type="text" name="previous_surgery" class="form-control form-control-user" readonly id="previous_surgery_edit" placeholder="PJ. Mamaria">
                                 </div>
-
 
 
                                 <div class="col-md-4">
@@ -763,13 +592,10 @@
                                     </label>
                                 </div>
 
-
                                 <div class="col-md-8">
                                     <label for="drink_medication"><b>Medicamentos que toma</b></label>
                                     <input type="text" name="drink_medication" class="form-control form-control-user" readonly id="drink_medication_edit" placeholder="PJ. Asma">
                                 </div>
-
-
 
                                 <div class="col-md-4">
                                     <label for="allergic_edit"><b>¿Es alegic@ a algún medicamento o sutura?</b></label>
@@ -786,20 +612,15 @@
                                     <input type="text" name="allergic_medication" class="form-control form-control-user" readonly id="allergic_medication_edit" placeholder="PJ. Acetaminofen">
                                 </div>
 
-
                             </div>
                         </div>
-
                     </div>
-
                     <br><br>
-
                 </div>
 
                 <div class="tab-pane fade tab_content1-0" id="info-credit-patient-edit" role="tabpanel" aria-labelledby="patient_record">
 
                     <div class="row">
-
                         <div class="col-md-4">
                             <label for="dependent_independent"><b>Dependiente / independiente</b></label>
                             <input type="text" name="dependent_independent" class="form-control form-control-user" id="dependent_independent_edit" placeholder="PJ. Dependiente">
@@ -810,56 +631,42 @@
                             <input type="text" name="type_contract" class="form-control form-control-user" id="type_contract_edit" placeholder="PJ. Contado">
                         </div>
 
-
                         <div class="col-md-4">
                             <label for="antiquity"><b>Antiguedad</b></label>
                             <input type="text" name="antiquity" class="form-control form-control-user" id="antiquity_edit" placeholder="PJ. 1 Año">
                         </div>
-
                     </div>
 
                     <br><br>
 
                     <div class="row">
-
                         <div class="col-md-4">
                             <label for="average_monthly_income"><b>Promedio de Ingresos Mensuales</b></label>
                             <input type="number" name="average_monthly_income" class="form-control form-control-user" id="average_monthly_income_edit" placeholder="PJ. 1 Año">
                         </div>
-
 
                         <div class="col-md-4">
                             <label for="previous_credits"><b>Créditos Anteriores</b></label>
                             <input type="text" name="previous_credits" class="form-control form-control-user" id="previous_credits_edit" placeholder="PJ. 1 Año">
                         </div>
 
-
                         <div class="col-md-4">
                             <label for="previous_credits"><b>Esta reportado</b></label>
                             <input type="text" name="reported" class="form-control form-control-user" id="reported_edit" placeholder="">
                         </div>
-
                     </div>
 
                     <br><br>
-
-
-
-
                     <div class="row">
-
                         <div class="col-md-4">
                             <label for="average_monthly_income"><b>Cuenta Bancaria</b></label>
                             <input type="text" name="bank_account" class="form-control form-control-user" id="bank_account_edit" placeholder="PJ. 1 Año">
                         </div>
 
-
                         <div class="col-md-4">
                             <label for="average_monthly_income"><b>Inicial</b></label>
                             <input type="text" name="have_initial" class="form-control form-control-user" id="have_initial_edit" placeholder="PJ. 1 Año">
                         </div>
-
-
 
                         <div class="col-md-2">
                             <label for="properties_edit"><b>Propiedades</b></label>
@@ -878,11 +685,9 @@
                                 <label for=''></label>
                             </label>
                         </div>
-
                     </div>
 
                     <br><br>
-
 
                     <div class="row">
                         <div class="col-md-2">
@@ -914,6 +719,7 @@
                     </div>
 
                     <br><br>
+
                     <div class="row">
                         <div class="col-md-5">
                             <label for="average_monthly_income"><b>Soporte de Pago</b></label>
@@ -922,29 +728,21 @@
                             </div>
                         </div>
                     </div>
+
                     <button class="btn btn-primary btn-user" id="process_status">
                         Procesar
                     </button>
                     <br><br>
-
                 </div>
 
 
                 <div class="tab-pane fade tab_content1-0" id="info-valuations-edit" role="tabpanel" aria-labelledby="patient_record">
-
                     <div class="embed-responsive embed-responsive-16by9">
-
                         <iframe class="embed-responsive-item " id="iframeValuationsEdit" allowfullscreen="">
-
                         </iframe>
-
                     </div>
-
                     <br><br>
-
                 </div>
-
-
 
                 <div class="tab-pane fade tab_content1-0" id="info-preanestesia-edit" role="tabpanel" aria-labelledby="patient_record">
                     <div class="embed-responsive embed-responsive-16by9">
@@ -954,9 +752,6 @@
                     <br><br>
                 </div>
 
-
-
-
                 <div class="tab-pane fade tab_content1-0" id="info-cirugia-edit" role="tabpanel" aria-labelledby="patient_record">
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item " id="iframepCirugiaEdit" allowfullscreen="">
@@ -964,7 +759,6 @@
                     </div>
                     <br><br>
                 </div>
-
 
                 <div class="tab-pane fade tab_content1-0" id="info-revision-edit" role="tabpanel" aria-labelledby="patient_record">
                     <div class="embed-responsive embed-responsive-16by9">
@@ -974,10 +768,6 @@
                     <br><br>
                 </div>
 
-
-
-
-
                 <div class="tab-pane fade tab_content1-0" id="info-tracing-edit" role="tabpanel" aria-labelledby="patient_record">
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item " id="iframepTracingEdit" allowfullscreen="">
@@ -985,8 +775,6 @@
                     </div>
                     <br><br>
                 </div>
-
-
 
                 <div class="tab-pane fade tab_content1-0" id="info-masajes-edit" role="tabpanel" aria-labelledby="patient_record">
                     <div class="embed-responsive embed-responsive-16by9">
@@ -996,9 +784,6 @@
                     <br><br>
                 </div>
 
-
-
-
                 <div class="tab-pane fade tab_content1-0" id="info-refferees-edit" role="tabpanel" aria-labelledby="patient_record">
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item " id="iframepRefferedsEdit" allowfullscreen="">
@@ -1006,12 +791,6 @@
                     </div>
                     <br><br>
                 </div>
-
-
-
-
-
-
 
             </div>
 
@@ -1022,18 +801,21 @@
             <input type="hidden" name="id_user_edit" id="id_edit">
             <br>
     </div>
-    <center>
+                <center>
 
-        <button type="button" class="btn btn-danger btn-user" onclick="prev('#cuadro4')">
-            Cancelar
-        </button>
-        <button class="btn btn-primary btn-user">
-            Guardar
-        </button>
+                    <button type="button" class="btn btn-danger btn-user" onclick="prev('#cuadro4')">
+                        Cancelar
+                    </button>
+                    <button class="btn btn-primary btn-user">
+                        Guardar
+                    </button>
 
-    </center>
-    <br>
-    <br>
-    </form>
+                </center>
+            <br>
+            <br>
+        </form>
 
 </div>
+
+
+

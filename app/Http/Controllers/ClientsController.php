@@ -11,6 +11,7 @@ use App\ClientClinicHistory;
 use App\ClientCreditInformation;
 use App\ClientInformationAditionalSurgery;
 use App\ClientsProcedure;
+use App\Surgeries;
 
 use App\ClientsTasks;
 use App\ClientsTasksFollowers;
@@ -1028,6 +1029,17 @@ class ClientsController extends Controller
 
                 if(sizeof($tokens) > 0){
                     $code = SendNotifications($ConfigNotification);
+                }
+
+                if($request["state"] == 'Descartada'){
+                   $valuation = Valuations::where('id_cliente',$id_cliente)->pluck('id_valuations');
+                //    dd($valuation);
+                   DB::table('auditoria')->whereIn("cod_reg", $valuation)->where("tabla", "valuations")->update(['status' => 0]);
+                   
+                 $surgeries = Surgeries::where('id_cliente',$id_cliente)->pluck('id_surgeries');
+                //  dd($surgeries);
+                 DB::table('auditoria')->whereIn("cod_reg", $surgeries)->where("tabla", "surgeries")->update(['status' => 0]);
+
                 }
 
             }
