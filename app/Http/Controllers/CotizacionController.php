@@ -88,8 +88,9 @@ class CotizacionController extends Controller
                                                               ->where('wellezy_cotization.id_padre',$item->id)
                                                               ->join("wellezy_viatico", "wellezy_viatico.id", "=", "wellezy_cotization.id_service")
                                                               ->whereRaw("wellezy_cotization.id_service is not null")
-                                                              ->join()
                                                               ->get();
+
+
                     $item->solicitud = DB::table('wellezy_valoration')
                                 ->select(
                                     'wellezy_valoration.*',
