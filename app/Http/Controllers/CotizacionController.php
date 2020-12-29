@@ -83,7 +83,8 @@ class CotizacionController extends Controller
             $cotization =  WellezyCotization::where('id_cliente',$cliente)->whereNull('id_padre')->get();
 
                 $cotization->map(function($item){
-                    $item->detalle  =  WellezyCotization::where('id_padre',$item->id)->get();
+                    $item->detalle      =  WellezyCotization::where('id_padre',$item->id)->whereRaw("id_service is null")->get();
+                    $item->detalle_add  =  WellezyCotization::where('id_padre',$item->id)->whereRaw("id_service is not null")->get();
                     $item->solicitud = DB::table('wellezy_valoration')
                                 ->select(
                                     'wellezy_valoration.*',
