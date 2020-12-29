@@ -1899,7 +1899,7 @@ class ClientsController extends Controller
                     "interest_rate"   => $request["interest_rate"]
                 ];
 
-                DB::table("client_request_credit")->insert($data);
+              //  DB::table("client_request_credit")->insert($data);
 
                 DB::table('clientes')->where("id_cliente", $client["id_cliente"])
                             ->update(['id_user_asesora' => $users["id"], "id_line" => $request["id_line"]]);
@@ -1933,7 +1933,7 @@ class ClientsController extends Controller
                     "interest_rate"   => $request["interest_rate"]
                 ];
 
-                DB::table("client_request_credit")->insert($data);
+               // DB::table("client_request_credit")->insert($data);
 
 
 
