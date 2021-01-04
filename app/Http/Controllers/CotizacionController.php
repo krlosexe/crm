@@ -90,6 +90,12 @@ class CotizacionController extends Controller
                                                               ->whereRaw("wellezy_cotization.id_service is not null")
                                                               ->get();
 
+                    $item->total_detalle =  WellezyCotization::selectRaw("SUM(wellezy_cotization.price_aditional) as total")->where('id_padre',$item->id)->whereRaw("id_service is null")->first();
+                    $item->total_detalle_add =  WellezyCotization::selectRaw("SUM(wellezy_viatico.costo) as total")
+                                                ->where('wellezy_cotization.id_padre',$item->id)
+                                                ->join("wellezy_viatico", "wellezy_viatico.id", "=", "wellezy_cotization.id_service")
+                                                ->whereRaw("wellezy_cotization.id_service is not null")->first();
+
 
                     $item->solicitud = DB::table('wellezy_valoration')
                                 ->select(
