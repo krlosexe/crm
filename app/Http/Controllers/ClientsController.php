@@ -1035,7 +1035,7 @@ class ClientsController extends Controller
                    $valuation = Valuations::where('id_cliente',$id_cliente)->pluck('id_valuations');
                 //    dd($valuation);
                    DB::table('auditoria')->whereIn("cod_reg", $valuation)->where("tabla", "valuations")->update(['status' => 0]);
-                   
+
                  $surgeries = Surgeries::where('id_cliente',$id_cliente)->pluck('id_surgeries');
                 //  dd($surgeries);
                  DB::table('auditoria')->whereIn("cod_reg", $surgeries)->where("tabla", "surgeries")->update(['status' => 0]);
@@ -2256,6 +2256,21 @@ class ClientsController extends Controller
                     });
 
 
+                    if($id_line == 16){
+                        $for = "comunicacionesmed49@gmail.com";
+
+                        $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+                        $request["apellidos"]        = ".";
+                        $request["direccion"]        = ".";
+                        $request["fecha_nacimiento"] = date("Y-m-d");
+                        Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                            $msj->from("comercial@pdtagencia.com","CRM");
+                            $msj->subject($subject);
+                            $msj->to($for);
+                        });
+                    }
+
+
 
 
 
@@ -2428,6 +2443,25 @@ class ClientsController extends Controller
                     $msj->subject($subject);
                     $msj->to($for);
                 });
+
+
+
+                if($id_line == 16){
+                    $for = "comunicacionesmed49@gmail.com";
+
+                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+                    $request["apellidos"]        = ".";
+                    $request["direccion"]        = ".";
+                    $request["fecha_nacimiento"] = date("Y-m-d");
+                    Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                        $msj->from("comercial@pdtagencia.com","CRM");
+                        $msj->subject($subject);
+                        $msj->to($for);
+                    });
+                }
+
+
+
 
 
 
