@@ -626,8 +626,10 @@ class FinacingController extends Controller
     public function UpdateStatusQuota(Request $request)
     {
         try {
+            // dd($request->all());
             $query = ClientRequestCreditPaymentPlan::where('id', $request->id)->first();
-            if($query->status == 'Verificando'){
+            // dd($query->status);
+            // if($query->status == 'Verificando'){
                 ClientRequestCreditPaymentPlan::where('id', $request->id)
                 ->update([
                     'status' => 'Pagada'
@@ -637,10 +639,7 @@ class FinacingController extends Controller
                     ->select("auth_users_app_financing.token_notifications", "users.id")
                     ->join("auth_users_app_financing","auth_users_app_financing.id_user","users.id")
                     ->where("id_client", $credit->id_client)->first();
-
-
                     $cliente = Clients::where('id_cliente',$credit->id_client)->first();
-
                     $apiKey ="";
                     switch ($cliente->id_line) {
                         case 3:
@@ -659,10 +658,7 @@ class FinacingController extends Controller
                             $apiKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
                             break;
                     }
-
-
                     $FCM_token = $data_user->token_notifications;
-
                     $url = "https://fcm.googleapis.com/fcm/send";
                     $token = $FCM_token;
                     $serverKey = $apiKey;
@@ -687,8 +683,7 @@ class FinacingController extends Controller
                         die('FCM Send Error: ' . curl_error($ch));
                     }
                     curl_close($ch);
-
-                }
+                // }
                 return response()->json("Ok")->setStatusCode(200);
 
         } catch (\Throwable $th) {

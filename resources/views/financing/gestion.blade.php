@@ -1481,7 +1481,7 @@
 							if (consultar == 1)
 								if (actualizar == 1)
 									botones += "<span class='detalle btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Ver Detalles'><i class='far fa-images' style='margin-bottom:5px'></i></span> ";
-							//  if (row.status == 'Verificando')
+							  if (row.status == 'Procesado')
 								botones += "<span class='verificar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Verificar'><i class='fa fa-user-check' style='margin-bottom:5px'></i></span> ";
 							return botones;
 						}
