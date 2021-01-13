@@ -2056,32 +2056,48 @@ class ClientsController extends Controller
         $id_line =  $request["id_line"];
 
 
-        if($request["code_adviser"] != 0){
+        if($request["city"] == 5){
+
             $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
-                            ->where("code_user", $request["code_adviser"])->first();
-            if(!$users){
-                return response()->json("El codigo de descuento no es Valido")->setStatusCode(500);
-               // dd($users);
-            }
+                                ->where("id", 23692)->first();
         }else{
 
-            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
-                        ->where("users_line_business.id_line", $request["id_line"])
-                      //  ->where("users.queue", 0)
-                        ->where("users.id", "!=", 106)
+            if($request["code_adviser"] != 0){
+                $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                                ->where("code_user", $request["code_adviser"])->first();
+                if(!$users){
+                    return response()->json("El codigo de descuento no es Valido")->setStatusCode(500);
+                   // dd($users);
+                }
+            }else{
 
-                        ->where(function ($query) use ($id_line) {
-                            if($id_line == "8"){
-                                $query->where("users.id", "!=", 75);
-                            }
-                        })
+                $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                            ->where("users_line_business.id_line", $request["id_line"])
+                          //  ->where("users.queue", 0)
+                            ->where("users.id", "!=", 106)
 
-                        ->inRandomOrder()
-                        ->first();
+                            ->where(function ($query) use ($id_line) {
+                                if($id_line == "8"){
+                                    $query->where("users.id", "!=", 75);
+                                }
+                            })
 
+                            ->inRandomOrder()
+                            ->first();
+
+            }
         }
 
+
+
         if($users){
+
+            if($request["city"] == 5){
+                $id_line =  $request["id_line"];
+            }else{
+                $id_line =  $users->id_line;
+            }
+
 
 
             $client = Clients::where("identificacion", $request["identificacion"])->first();
@@ -2090,10 +2106,10 @@ class ClientsController extends Controller
 
                 if($request["code_adviser"] != 0){
                     Clients::where("id_cliente", $client["id_cliente"])
-                    ->update(['id_user_asesora' => $users->id, "id_line" => $users->id_line]);
+                    ->update(['id_user_asesora' => $users->id, "id_line" => $id_line]);
                 }else{
                     Clients::where("id_cliente", $client["id_cliente"])
-                    ->update(['id_user_asesora' => $users->id, "id_line" => $users->id_line]);
+                    ->update(['id_user_asesora' => $users->id, "id_line" => $id_line]);
                 }
 
 
@@ -2286,9 +2302,9 @@ class ClientsController extends Controller
                 $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
                 $code                   = substr(str_shuffle($permitted_chars), 0, 4);
                 $request["code_client"] = strtoupper($code);
-                $request["origen"]      = "App Financiacion";
+                $request["origen"]      = "App Financiacion con el codigo ".$request["code_adviser"];
 
-                $request["id_line"] = $users->id_line;
+                $request["id_line"] = $id_line;
                 $cliente = Clients::create($request->all());
 
                 $request["id_client"] = $cliente["id_cliente"];
