@@ -59,6 +59,7 @@ class AffiliateController extends Controller
                         "prp"             => "Si",
                         "created_prp"     => date("Y-m-d"),
                         "to_db"           => "1",
+                        "auth_app"        => "1",
                         "origen"          =>  $request["origen"],
                         "telefono"        =>  $request["telefono"],
                         "id_user_asesora" =>  $request["id_user_asesora"],
