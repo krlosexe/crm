@@ -11,6 +11,7 @@ use App\ClientClinicHistory;
 use App\ClientCreditInformation;
 use App\ClientInformationAditionalSurgery;
 use App\ClientsProcedure;
+use App\Surgeries;
 
 use App\ClientsTasks;
 use App\ClientsTasksFollowers;
@@ -669,8 +670,6 @@ class ClientsController extends Controller
 
                 }
 
-
-
                 $User =  User::create([
                     "email"       => $request["email"],
                     "password"    => md5("123456789"),
@@ -700,9 +699,6 @@ class ClientsController extends Controller
                     }
                 }
 
-
-
-
                 if(isset($request["email2"])){
                     foreach($request["email2"] as $value){
 
@@ -713,9 +709,6 @@ class ClientsController extends Controller
 
                     }
                 }
-
-
-
 
                 $request["table"]    = "clients";
                 $request["id_event"] = $cliente["id_cliente"];
@@ -1000,8 +993,7 @@ class ClientsController extends Controller
             }
 
             $users_affiliate = Clients::selectRaw("auth_users_app.token_notifications")
-                                    ->join("users", "users.id_client", "=", "clientes.id_cliente")
-                                    ->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
+                                    ->join("auth_users_app", "auth_users_app.id_user", "=", "clientes.id_cliente")
                                     ->where("clientes.id_cliente", $data->id_affiliate)
                                     ->first();
 
@@ -1036,6 +1028,17 @@ class ClientsController extends Controller
 
                 if(sizeof($tokens) > 0){
                     $code = SendNotifications($ConfigNotification);
+                }
+
+                if($request["state"] == 'Descartada'){
+                   $valuation = Valuations::where('id_cliente',$id_cliente)->pluck('id_valuations');
+                //    dd($valuation);
+                   DB::table('auditoria')->whereIn("cod_reg", $valuation)->where("tabla", "valuations")->update(['status' => 0]);
+
+                 $surgeries = Surgeries::where('id_cliente',$id_cliente)->pluck('id_surgeries');
+                //  dd($surgeries);
+                 DB::table('auditoria')->whereIn("cod_reg", $surgeries)->where("tabla", "surgeries")->update(['status' => 0]);
+
                 }
 
             }
@@ -1907,7 +1910,7 @@ class ClientsController extends Controller
                     "interest_rate"   => $request["interest_rate"]
                 ];
 
-                DB::table("client_request_credit")->insert($data);
+              //  DB::table("client_request_credit")->insert($data);
 
                 DB::table('clientes')->where("id_cliente", $client["id_cliente"])
                             ->update(['id_user_asesora' => $users["id"], "id_line" => $request["id_line"]]);
@@ -1941,7 +1944,7 @@ class ClientsController extends Controller
                     "interest_rate"   => $request["interest_rate"]
                 ];
 
-                DB::table("client_request_credit")->insert($data);
+               // DB::table("client_request_credit")->insert($data);
 
 
 
@@ -2052,32 +2055,48 @@ class ClientsController extends Controller
         $id_line =  $request["id_line"];
 
 
-        if($request["code_adviser"] != 0){
+        if($request["city"] == 5){
+
             $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
-                            ->where("code_user", $request["code_adviser"])->first();
-            if(!$users){
-                return response()->json("El codigo de descuento no es Valido")->setStatusCode(500);
-               // dd($users);
-            }
+                                ->where("id", 23692)->first();
         }else{
 
-            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
-                        ->where("users_line_business.id_line", $request["id_line"])
-                      //  ->where("users.queue", 0)
-                        ->where("users.id", "!=", 106)
+            if($request["code_adviser"] != 0){
+                $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                                ->where("code_user", $request["code_adviser"])->first();
+                if(!$users){
+                    return response()->json("El codigo de descuento no es Valido")->setStatusCode(500);
+                   // dd($users);
+                }
+            }else{
 
-                        ->where(function ($query) use ($id_line) {
-                            if($id_line == "8"){
-                                $query->where("users.id", "!=", 75);
-                            }
-                        })
+                $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                            ->where("users_line_business.id_line", $request["id_line"])
+                          //  ->where("users.queue", 0)
+                            ->where("users.id", "!=", 106)
 
-                        ->inRandomOrder()
-                        ->first();
+                            ->where(function ($query) use ($id_line) {
+                                if($id_line == "8"){
+                                    $query->where("users.id", "!=", 75);
+                                }
+                            })
 
+                            ->inRandomOrder()
+                            ->first();
+
+            }
         }
 
+
+
         if($users){
+
+            if($request["city"] == 5){
+                $id_line =  $request["id_line"];
+            }else{
+                $id_line =  $users->id_line;
+            }
+
 
 
             $client = Clients::where("identificacion", $request["identificacion"])->first();
@@ -2086,10 +2105,10 @@ class ClientsController extends Controller
 
                 if($request["code_adviser"] != 0){
                     Clients::where("id_cliente", $client["id_cliente"])
-                    ->update(['id_user_asesora' => $users->id, "id_line" => $users->id_line]);
+                    ->update(['id_user_asesora' => $users->id, "id_line" => $id_line]);
                 }else{
                     Clients::where("id_cliente", $client["id_cliente"])
-                    ->update(['id_user_asesora' => $users->id, "id_line" => $users->id_line]);
+                    ->update(['id_user_asesora' => $users->id, "id_line" => $id_line]);
                 }
 
 
@@ -2209,7 +2228,7 @@ class ClientsController extends Controller
                     $for = $users["email"];
                 // $for = "cardenascarlos18@gmail.com";
 
-                    $request["msg"]  = "Un Paciente se ha registrado por el App";
+                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
                     $request["apellidos"]        = ".";
                     $request["direccion"]        = ".";
                     $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2225,7 +2244,7 @@ class ClientsController extends Controller
                     //$for = $users["email"];
                     $for = "cardenascarlos18@gmail.com";
 
-                    $request["msg"]  = "Un Paciente se ha registrado por el App";
+                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
                     $request["apellidos"]        = ".";
                     $request["direccion"]        = ".";
                     $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2241,7 +2260,7 @@ class ClientsController extends Controller
 
                     $for = "pdtagenciademedios@gmail.com";
 
-                    $request["msg"]  = "Un Paciente se ha registrado por el App";
+                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
                     $request["apellidos"]        = ".";
                     $request["direccion"]        = ".";
                     $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2250,6 +2269,21 @@ class ClientsController extends Controller
                         $msj->subject($subject);
                         $msj->to($for);
                     });
+
+
+                    if($id_line == 16){
+                        $for = "comunicacionesmed49@gmail.com";
+
+                        $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+                        $request["apellidos"]        = ".";
+                        $request["direccion"]        = ".";
+                        $request["fecha_nacimiento"] = date("Y-m-d");
+                        Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                            $msj->from("comercial@pdtagencia.com","CRM");
+                            $msj->subject($subject);
+                            $msj->to($for);
+                        });
+                    }
 
 
 
@@ -2267,9 +2301,9 @@ class ClientsController extends Controller
                 $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
                 $code                   = substr(str_shuffle($permitted_chars), 0, 4);
                 $request["code_client"] = strtoupper($code);
-                $request["origen"]      = "App Financiacion";
+                $request["origen"]      = "App Financiacion con el codigo ".$request["code_adviser"];
 
-                $request["id_line"] = $users->id_line;
+                $request["id_line"] = $id_line;
                 $cliente = Clients::create($request->all());
 
                 $request["id_client"] = $cliente["id_cliente"];
@@ -2384,7 +2418,7 @@ class ClientsController extends Controller
                 $for = $users["email"];
             // $for = "cardenascarlos18@gmail.com";
 
-                $request["msg"]  = "Un Paciente se ha registrado por el App";
+                $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
                 $request["apellidos"]        = ".";
                 $request["direccion"]        = ".";
                 $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2400,7 +2434,7 @@ class ClientsController extends Controller
                 //$for = $users["email"];
             $for = "cardenascarlos18@gmail.com";
 
-                $request["msg"]  = "Un Paciente se ha registrado por el App";
+            $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
                 $request["apellidos"]        = ".";
                 $request["direccion"]        = ".";
                 $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2415,7 +2449,7 @@ class ClientsController extends Controller
 
                 $for = "pdtagenciademedios@gmail.com";
 
-                $request["msg"]  = "Un Paciente se ha registrado por el App";
+                $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
                 $request["apellidos"]        = ".";
                 $request["direccion"]        = ".";
                 $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2424,6 +2458,23 @@ class ClientsController extends Controller
                     $msj->subject($subject);
                     $msj->to($for);
                 });
+
+
+
+                if($id_line == 16){
+                    $for = "comunicacionesmed49@gmail.com";
+
+                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+                    $request["apellidos"]        = ".";
+                    $request["direccion"]        = ".";
+                    $request["fecha_nacimiento"] = date("Y-m-d");
+                    Mail::send('emails.forms',$request->all(), function($msj) use($subject,$for){
+                        $msj->from("comercial@pdtagencia.com","CRM");
+                        $msj->subject($subject);
+                        $msj->to($for);
+                    });
+                }
+
 
 
 

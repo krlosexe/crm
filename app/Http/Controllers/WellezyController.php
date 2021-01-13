@@ -8,6 +8,7 @@ use App\ClientInformationAditionalSurgery;
 use App\ClientClinicHistory;
 use App\ClientCreditInformation;
 use App\Auditoria;
+use App\WellezyCotization;
 class WellezyController extends Controller
 {
     public function RegisterClient(Request $request){
@@ -53,13 +54,29 @@ class WellezyController extends Controller
             $data = array('email'     => $client->email,
                           'nombres'   => $client->nombres,
                           'line'      => $client->id_line,
-                          'id_client' => $client->id_client,
+                          'id_client' => $client->id_cliente,
                           'mensagge'  => "Ha iniciado sesion exitosamente"
             );
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("Email or password was not correct")->setStatusCode(400);
         }
+
+    }
+
+
+    public function AddService(Request $request){
+
+        WellezyCotization::create([
+            "id_padre"             => $request->id_padre,
+            "id_cliente"           => 0,
+            "amount_surgery"       => 0,
+            "decription_aditional" => "0",
+            "id_service"           => $request->id_service,
+            "price_aditional"      => 0
+        ]);
+
+        return response()->json("ok")->setStatusCode(200);
 
     }
 }

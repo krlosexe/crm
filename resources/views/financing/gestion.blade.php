@@ -232,18 +232,41 @@
 										<option value="Testimonio">Testimonio</option>
 									</select>
 								</div>
-							</div>
+							</div>-->
 
 							<div class="col-md-3">
 								<div class="form-group">
 									<label for=""><b>Filtrar por : Asesora</b></label>
-									<select name="adviser[]" id="id_asesora_valoracion-filter" class="form-control select2 disabled" multiple>
+									<select name="adviser[]" id="id_asesora_valoracion-filter" class="form-control select2 disabled">
 										<option value="">Seleccione</option>
 									</select>
 								</div>
 							</div>
 
 							<div class="col-md-3">
+									<div class="form-group">
+										<label for=""><b>Estado</b></label>
+										<select name="" id="state-filter" class="form-control select2 disabled">
+											<option value="0">Seleccione</option>
+											<option value="Aprobado">Aprobado</option>
+											<option value="Pendiente">Pendiente</option>
+											<option value="Rechazado">Rechazado</option>
+											<option value="Desembolsado">Desembolsado</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-3">
+								<div class="form-group">
+										<label for="use_app"><b>Solo los que usan el App</b></label>
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" name="use_app" id="use_app" value="1">
+											<label class="custom-control-label" for="use_app"></label>
+										</div>
+									</div>
+								</div>
+
+							<!--<div class="col-md-3">
 								<div class="form-group">
 									<label for=""><b>Fecha desde</b></label>
 									<input type="date" class="form-control" id="date_init">
@@ -363,6 +386,13 @@
 		list();
 	});
 
+	$("#state-filter").change(function(e) {
+		list();
+	});
+	$("#use_app").change(function(e) {
+		list();
+	});
+
 	function searchClients(select, edit = '') {
 		$(select).click(function(e) {
 			var url = document.getElementById('ruta').value;
@@ -396,6 +426,11 @@
 		};
 
 		var adviser = $("#id_asesora_valoracion-filter").val()
+		var state = $("#state-filter").val()
+		var use_app = 0
+			if($("#use_app").is(":checked")){
+				use_app = 1
+			}
 		var type = $("#type-filter").val()
 
 		const date_init = $("#date_init").val()
@@ -415,13 +450,10 @@
 				"method": "GET",
 				"url": '' + url + '/api/clients/request/financing',
 				"data": {
-					"rol": name_rol,
-					"id_user": id_user,
-					"token": tokens,
 					"adviser": adviser,
-					"type": type,
-					"date_init": date_init,
-					"date_finish": date_finish
+					"state": state,
+					"use_app": use_app,
+
 				},
 				"dataSrc": ""
 			},
@@ -1444,13 +1476,14 @@
 				"columns": [{
 						"data": null,
 						render: function(data, type, row) {
-
+							console.log(row.status);
 							let botones = "";
 							if (consultar == 1)
 								if (actualizar == 1)
 									botones += "<span class='detalle btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Ver Detalles'><i class='far fa-images' style='margin-bottom:5px'></i></span> ";
-							 if (row.status == 'Verificando')
+							 if (row.status != 'Pagada')
 								botones += "<span class='verificar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Verificar'><i class='fa fa-user-check' style='margin-bottom:5px'></i></span> ";
+							
 							return botones;
 						}
 					},

@@ -4,9 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class WellezyService extends Model
 {
-    protected $table = 'category';
+    protected $table = 'wellezy_services';
     protected $guarded= [];
-    public $timestamps = false;
 }

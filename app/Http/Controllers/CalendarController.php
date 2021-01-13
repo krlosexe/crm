@@ -110,11 +110,6 @@ class CalendarController extends Controller
     }
 
 
-
-
-
-
-
     function getTaskClients(Request $request, $today = false){
         
 

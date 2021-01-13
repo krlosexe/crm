@@ -14,9 +14,11 @@ use Mail;
 use DateTime;
 class FinacingController extends Controller
 {
-    public function GetRequestFinancing()
+    public function GetRequestFinancing(Request $request)
     {
-
+        
+        $request->use_app === "0" ? $request->use_app = null :  $request->use_app;
+        
         $data = DB::table("client_request_credit")
             ->selectRaw("client_request_credit.*, clientes.nombres,clientes.identificacion, clientes.pay_to_study_credit,
 
@@ -60,6 +62,17 @@ class FinacingController extends Controller
             ->join("client_request_credit_requirements", "client_request_credit_requirements.id_client", "=", "client_request_credit.id_client", "left")
             ->join("valuations", "valuations.id_cliente", "=", "client_request_credit.id_client", "left")
             ->join("users", "users.id", "=", "clientes.id_user_asesora", "left")
+         
+            ->when($request->adviser, function ($q) use($request)  {
+                return $q->where("clientes.id_user_asesora",$request->adviser);
+            })
+            ->when($request->state, function ($q) use($request)  {
+                return $q->where("client_request_credit.status",$request->state);
+            })
+            ->when($request->use_app, function ($q) {
+                $q->join("users as user_app","user_app.id_client","=","clientes.id_cliente");
+                return $q->join("auth_users_app_financing","auth_users_app_financing.id_user","=","user_app.id");
+            })
             ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id", "left")
             ->orderBy("client_request_credit.created_at", "DESC")
             ->get();
@@ -613,8 +626,10 @@ class FinacingController extends Controller
     public function UpdateStatusQuota(Request $request)
     {
         try {
+            // dd($request->all());
             $query = ClientRequestCreditPaymentPlan::where('id', $request->id)->first();
-            if($query->status == 'Verificando'){
+            // dd($query->status);
+            // if($query->status == 'Verificando'){
                 ClientRequestCreditPaymentPlan::where('id', $request->id)
                 ->update([
                     'status' => 'Pagada'
@@ -624,10 +639,7 @@ class FinacingController extends Controller
                     ->select("auth_users_app_financing.token_notifications", "users.id")
                     ->join("auth_users_app_financing","auth_users_app_financing.id_user","users.id")
                     ->where("id_client", $credit->id_client)->first();
-
-
                     $cliente = Clients::where('id_cliente',$credit->id_client)->first();
-
                     $apiKey ="";
                     switch ($cliente->id_line) {
                         case 3:
@@ -646,10 +658,7 @@ class FinacingController extends Controller
                             $apiKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
                             break;
                     }
-
-
                     $FCM_token = $data_user->token_notifications;
-
                     $url = "https://fcm.googleapis.com/fcm/send";
                     $token = $FCM_token;
                     $serverKey = $apiKey;
@@ -674,8 +683,7 @@ class FinacingController extends Controller
                         die('FCM Send Error: ' . curl_error($ch));
                     }
                     curl_close($ch);
-
-                }
+                // }
                 return response()->json("Ok")->setStatusCode(200);
 
         } catch (\Throwable $th) {
