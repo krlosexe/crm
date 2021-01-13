@@ -357,12 +357,10 @@ class NotificationsController extends Controller
 
 
 
-        $users = Clients::selectRaw("clientes.nombres, users.id as user_id, auth_users_app.token_notifications")
-                          ->join("users", "users.id_client", "=", "clientes.id_cliente")
-                          ->join("auth_users_app", "auth_users_app.id_user", "=", "users.id")
+        $users = Clients::selectRaw("clientes.nombres, auth_users_app.token_notifications")
+                          ->join("auth_users_app", "auth_users_app.id_user", "=", "clientes.id_cliente")
                           ->whereIn("clientes.id_line", $request["lines"])
                           ->where("clientes.PRP", "Si")
-                          ->where("users.id_rol", 17)
                           ->get();
 
 
