@@ -785,9 +785,8 @@
 
                     var e = event || window.event;
                     var key = e.keyCode || e.which;
-                    console.log(key)
-                    if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229  || key === 50) {
-
+                    console.log(key, "HOLA")
+                    if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229) {
                         e.preventDefault();
                     }
                     }
@@ -825,7 +824,7 @@
                     var e = event || window.event;
                     var key = e.keyCode || e.which;
 
-                    if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229  || key === 50) {
+                    if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229 ) {
 
                         e.preventDefault();
                     }
@@ -880,7 +879,7 @@
                 var e = event || window.event;
                 var key = e.keyCode || e.which;
                 console.log(key)
-                if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229  || key === 50) {
+                if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229) {
 
                     e.preventDefault();
                 }
