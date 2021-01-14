@@ -392,7 +392,6 @@
 	$("#use_app").change(function(e) {
 		list();
 	});
-
 	function searchClients(select, edit = '') {
 		$(select).click(function(e) {
 			var url = document.getElementById('ruta').value;
@@ -411,14 +410,11 @@
 					$(`#telefono${edit}`).val(data ? data.telefono : data.telefono = 'sin telefono')
 					$(`#cedula${edit}`).val(data ? data.identificacion : data.identificacion = 'sin identificacion')
 					$(`#id_cliente${edit}`).val(data.id_cliente)
-
 				}
 			});
 
 		});
 	}
-
-
 	function list(cuadro) {
 		var data = {
 			"id_user": id_user,
@@ -1355,26 +1351,16 @@
 					} else {
 						$("#photo_face").attr('src', ``)
 					}
-
-
-
 					if (data.photo_identf) {
 						$("#photo_identf").attr('src', `img/credit/cedulas/${data.photo_identf}`)
 					} else {
 						$("#photo_identf").attr('src', ``)
 					}
-
-
 					if (data.photo_identf_rear) {
 						$("#photo_identf_rear").attr('src', `img/credit/cedulas/${data.photo_identf_rear}`)
 					} else {
 						$("#photo_identf_rear").attr('src', ``)
 					}
-
-
-
-
-
 				}
 			});
 		} catch (e) {
@@ -1392,7 +1378,6 @@
 				beforeSend: function() {},
 				error: function(data) {},
 				success: function(data) {
-
 					$("#adress_client").val(data ? data.adress_client : '')
 					$("#city_client").val(data ? data.adress_client : '')
 					$("#phone_client").val(data ? data.phone_client : '')
@@ -1413,7 +1398,6 @@
 					$("#charge_company").val(data ? data.charge_company : '')
 					$("#type_contrato").val(data ? data.type_contrato : '')
 					$("#salary").val(data ? data.salary : '')
-
 					$("#date_vinculacion").val(data ? data.date_vinculacion : '')
 				}
 			});
@@ -1432,7 +1416,6 @@
 				beforeSend: function() {},
 				error: function(data) {},
 				success: function(data) {
-
 					$("#type_apartamento").val(data ? data.type_apartamento : '')
 					$("#address_bien").val(data ? data.address_bien : '')
 					$("#barrio").val(data ? data.barrio : '')
@@ -1455,7 +1438,6 @@
 			console.log(e)
 		}
 	}
-
 	function GetQuotas() {
 		try {
 			var data = {
@@ -1483,7 +1465,6 @@
 									botones += "<span class='detalle btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Ver Detalles'><i class='far fa-images' style='margin-bottom:5px'></i></span> ";
 							 if (row.status != 'Pagada')
 								botones += "<span class='verificar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Verificar'><i class='fa fa-user-check' style='margin-bottom:5px'></i></span> ";
-							
 							return botones;
 						}
 					},
@@ -1525,9 +1506,7 @@
 		} catch (e) {
 			console.log(e)
 		}
-
 	}
-
 	function ShowModal(tbody, table) {
 		try {
 			$(tbody).on("click", "span.detalle", function() {
@@ -1545,7 +1524,6 @@
 			console.log(e)
 		}
 	}
-
 	function ProcesStatus(tbody, table) {
 		try {
 			$(tbody).on("click", "span.verificar", function() {
