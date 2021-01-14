@@ -755,6 +755,9 @@ class Login extends Controller
                 $value->delete();
             }
 
+
+            DB::table("clientes")->where("id_cliente", $client->id_cliente)->update(["auth_app" => 1]);
+
             $AuthUsers                       = new AuthUsersApp;
             $AuthUsers->id_user              = $client->id_cliente;
             $AuthUsers->token                = "123";
