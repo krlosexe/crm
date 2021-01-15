@@ -21,8 +21,7 @@ class AdviserController extends Controller
         );
 
         $data = Clients::where($where)
-                        ->select("clientes.*", "users.img_profile as avatar", "users.id as user_id")
-                        ->join("users", "users.id_client", "clientes.id_cliente")
+                        ->select("clientes.*")
 
                         ->where(function ($query) use ($name) {
                             if($name != "0"){
@@ -123,6 +122,46 @@ class AdviserController extends Controller
         return response()->json($data)->setStatusCode(200);
 
     }
+
+
+
+
+
+
+
+
+    public function GetRefferersAdviser($id_user, $display, $name = 0){
+
+        $user = User::where("id", $id_user)->first();
+
+        $where = array(
+            "clientes.id_user_asesora" => $id_user
+        );
+
+
+        $data = Clients::where($where)->select("clientes.*", "cl2.nombres as name_affiliate", "client_information_aditional_surgery.name_surgery as interes")
+                                      ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
+                                      ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
+                                      ->whereNotNull('clientes.id_affiliate')
+
+                                      ->where(function ($query) use ($name) {
+                                        if($name != "0"){
+                                            $query->where("clientes.nombres", 'like', '%'.$name.'%');
+                                        }
+                                     })
+
+
+
+                                      ->orderBy("clientes.id_cliente", "DESC")
+                                      ->get();
+
+
+        return response()->json($data)->setStatusCode(200);
+
+    }
+
+
+
 
 
 

@@ -357,7 +357,7 @@
 				GetBusinessLine("#linea-negocio-filter");
 
 
-				GetAsesorasbyBusisnessLine2("#linea-negocio-filter", "#id_asesora_valoracion-filter");
+				//GetAsesorasbyBusisnessLine2("#linea-negocio-filter", "#id_asesora_valoracion-filter");
 
 
 				verifyPersmisos(id_user, tokens, "clients");

@@ -1,1 +1,30 @@
-<div dir="ltr" data-smartmail="gmail_signature"><div dir="ltr"><b>¡En el mes de Octubre tenemos Precios Especiales para ti en todos los procedimientos mamarios!<br></b><br><div><img goomoji="1f516" data-goomoji="1f516" style="margin:0 0.2ex;vertical-align:middle;max-height:24px" alt="🔖" src="https://mail.google.com/mail/e/1f516" data-image-whitelisted="" class="CToWUd">&nbsp;<b>Octubre se viste de rosa en todo el mundo</b>&nbsp;para dar a conocer temas como la educación en torno a la detección precoz del&nbsp;<b>Cáncer de Mama,</b>&nbsp;difundir los signos y síntomas iniciales; y enseñar cómo realizarse el autoexamen o la autoexploración de la mama.&nbsp;<br><br><img goomoji="1f449" data-goomoji="1f449" style="margin:0 0.2ex;vertical-align:middle;max-height:24px" alt="👉" src="https://mail.google.com/mail/e/1f449" data-image-whitelisted="" class="CToWUd">Pregunta por la&nbsp;<b>Técnica de Cuñas y de Puntos Invertidos</b>&nbsp;aplicadas en los procedimientos y los&nbsp;<b>Precios Especiales</b>&nbsp;que tenemos para ti en cirugía mamaria&nbsp;<br><br>•&nbsp;<b>Cambio de Implantes<br>• Mamoplastia de Aumento<br>• Pexia Mamaria<br>• Reducción Mamaria<br></b><br>¡No te quedes sin separar tu cupo y la cita de valoración médica con el&nbsp;<b>Cirujano Daniel Correa&nbsp;</b>en el siguiente enlace!&nbsp;<span style="margin:0px 1px;height:16px;width:16px;display:inline-flex;vertical-align:middle;font-family:&quot;Segoe UI Historic&quot;,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif;color:rgb(5,5,5);font-size:15px;white-space:pre-wrap"><img height="16" width="16" alt="🌐" src="https://ci4.googleusercontent.com/proxy/7Oh10ItAAZyvnZjHtXADnoA-PREpAD-OhWoMG2N5JYwG2fAxwTuHvi6eONC5_wmSrKi70xY_DLDwmMnMJUc7zLFTzzxVrNcQXfH6RsX5Y4ymW5a90Q=s0-d-e1-ft#https://static.xx.fbcdn.net/images/emoji.php/v9/taa/1/16/1f310.png" style="border:0px" class="CToWUd"></span><span style="color:rgb(5,5,5);font-family:&quot;Segoe UI Historic&quot;,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif;font-size:15px;white-space:pre-wrap"> <a href="https://bit.ly/33MMuXt" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://bit.ly/33MMuXt&amp;source=gmail&amp;ust=1602272659735000&amp;usg=AFQjCNFa2LiOLJdVV9FLqBYQa-DLzZglGg">https://bit.ly/33MMuXt&nbsp;&nbsp;</a></span></div><div><br><img goomoji="1f5d3" data-goomoji="1f5d3" style="margin:0 0.2ex;vertical-align:middle;max-height:24px" alt="🗓" src="https://mail.google.com/mail/e/1f5d3" data-image-whitelisted="" class="CToWUd">️ Válido solo por este mes<br><i>*Aplica términos y condiciones</i></div><div><i><br></i></div><div><i><br></i></div><div><br></div><div><div><img src="https://danielandrescorreaposadacirujano.com/wp-content/uploads/2020/08/WhatsApp-Image-2020-10-14-at-15.54.26.jpeg" alt="Correo-masivo1.jpg" width="305" height="542" data-image-whitelisted="" class="CToWUd a6T" tabindex="0"><div class="a6S" dir="ltr" style="opacity: 0.01; left: 217px; top: 903px;"><div id=":15n" class="T-I J-J5-Ji aQv T-I-ax7 L3 a5q" title="Analizando en busca de virus..." role="button" tabindex="0" aria-label="Descargar el archivo adjunto Correo-masivo1.jpg" data-tooltip-class="a1V"><div class="aSK J-J5-Ji aYr"></div></div><div id=":15o" class="T-I J-J5-Ji aQv T-I-ax7 L3 a5q" title="Agregar a Drive" role="button" tabindex="0" aria-label="Guardar el archivo adjunto Correo-masivo1.jpg en Drive" data-tooltip-class="a1V"><div class="wtScjd XG J-J5-Ji aYr"><div class="T-aT4"><div></div><div class="T-aT4-JX"></div></div></div></div></div><br></div></div><div><br></div><div><img goomoji="1f468" data-goomoji="1f468" style="margin:0 0.2ex;vertical-align:middle;max-height:24px" alt="👨" src="https://mail.google.com/mail/e/1f468" data-image-whitelisted="" class="CToWUd">Te invito a que veas el siguiente video y le des Me Gusta&nbsp;<img goomoji="1f44d" data-goomoji="1f44d" style="margin:0 0.2ex;vertical-align:middle;max-height:24px" alt="👍" src="https://mail.google.com/mail/e/1f44d" data-image-whitelisted="" class="CToWUd"><br><br><a href="https://www.youtube.com/watch?v=qkxVUI3WC1s&amp;feature=youtu.be" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.youtube.com/watch?v%3DqkxVUI3WC1s%26feature%3Dyoutu.be&amp;source=gmail&amp;ust=1602272659735000&amp;usg=AFQjCNF1fNXC9RxNEmASDlrUzrCh7QoM_g">https://www.youtube.com/watch?<wbr>v=qkxVUI3WC1s&amp;feature=youtu.be</a></div></div></div>
+<p>
+    ¿TE HICISTE UNA <b>CIRUGÍA CORPORAL</b> Y NO TE GUSTÓ LA CICATRIZ?
+</p>
+<p>
+    ¡Adquiere ahora mismo nuestro paquete <b>RESURLASER SCAR REPAIR</b> que regenera y mejora la luminosidad, el tono y la apariencia de la piel!
+</p>
+<p>📢 <b>TENEMOS PRECIOS DE LANZAMIENTO</b> 📢</p>
+
+<img src="https://danielandrescorreaposadacirujano.com/wp-content/uploads/2020/08/R111-scaled.jpg" alt="">
+
+<img src="https://danielandrescorreaposadacirujano.com/wp-content/uploads/2020/08/Logo-PNG-52-1.png" width="150">
+
+<p>
+    ➡️ Agenda tu cita diligenciando el siguiente formulario web: <a href="https://bit.ly/33MMuXt">https://bit.ly/33MMuXt</a>
+</p>
+<p>
+    Agenda tu cita de valoración médica con una asesora a través de WhatsApp:
+</p>
+<p>
+    📱 <a href="https://bit.ly/3kCbUxP">https://bit.ly/3kCbUxP</a>
+</p>
+<p>
+    📱 <a href="https://bit.ly/3mFq7vA">https://bit.ly/3mFq7vA</a>
+</p>
+
+<p>
+    ☎️ 412 12 30⁣⁣⁣⁣⁣⁣
+</p>
+
+
