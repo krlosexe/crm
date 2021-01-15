@@ -16,9 +16,9 @@ class FinacingController extends Controller
 {
     public function GetRequestFinancing(Request $request)
     {
-        
+
         $request->use_app === "0" ? $request->use_app = null :  $request->use_app;
-        
+
         $data = DB::table("client_request_credit")
             ->selectRaw("client_request_credit.*, clientes.nombres,clientes.identificacion, clientes.pay_to_study_credit,
 
@@ -62,7 +62,7 @@ class FinacingController extends Controller
             ->join("client_request_credit_requirements", "client_request_credit_requirements.id_client", "=", "client_request_credit.id_client", "left")
             ->join("valuations", "valuations.id_cliente", "=", "client_request_credit.id_client", "left")
             ->join("users", "users.id", "=", "clientes.id_user_asesora", "left")
-         
+
             ->when($request->adviser, function ($q) use($request)  {
                 return $q->where("clientes.id_user_asesora",$request->adviser);
             })
@@ -360,7 +360,7 @@ class FinacingController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -373,7 +373,7 @@ class FinacingController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -384,7 +384,7 @@ class FinacingController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });

@@ -741,6 +741,36 @@ class Login extends Controller
     }
 
 
+    public function GenerateCodeAdviser(Request $request){
+
+
+        $user = DB::table("users")
+                    ->where("code_user", $request["code"])
+                    ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+                    ->join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                    ->first();
+
+        if($user){
+            $code = rand(100000,900000);
+            DB::table("users")->where("code_user", $request["code"])->update(["code_verify" => $code]);
+
+            $data = [
+               "issue"   => "Código de Acceso Multiestica $code",
+               "message" => "Hola, $user->nombres tu código de acceso a Multiestica es $code",
+               "email"   => $user->email,
+               "id_line" => $user->id_line
+            ];
+
+            $this->SendEmail2($data);
+
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("error")->setStatusCode(400);
+        }
+
+    }
+
+
 
     public function VerifyCode(Request $request){
 
@@ -784,6 +814,48 @@ class Login extends Controller
 
 
 
+    public function VerifyCodeAdviser(Request $request){
+
+        $client = DB::table("users")
+                    ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
+                    ->join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                    ->where("code_user", $request["code"])
+                    ->where("code_verify", $request["code_verify"])
+
+                    ->first();
+        if($client){
+            $token_user  = AuthUsersApp::where("id_user", $client->id)->get();
+            foreach ($token_user as $key => $value) {
+                $value->delete();
+            }
+
+            $AuthUsers                       = new AuthUsersApp;
+            $AuthUsers->id_user              = $client->id;
+            $AuthUsers->token                = "123";
+            $AuthUsers->token_notifications  = $request["fcmToken"];
+            $AuthUsers->save();
+
+
+            $data = array('email'       => $client->email,
+                          'nombres'     => $client->nombres." ".$client->apellido_p,
+                          'avatar'      => $client->img_profile,
+                          'token'       => "124",
+                          'sync_token'  => "14242",
+                          'mensagge'    => "Ha iniciado sesion exitosamente",
+                          "type_user"   => "Asesor",
+                          "line"        => $client->id_line,
+                          "code_client" => $client->code_user,
+                          "user_id"     => $client->id
+            );
+
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("error")->setStatusCode(400);
+        }
+
+    }
+
+
 
 
     public function SendEmail2($data){
@@ -792,7 +864,7 @@ class Login extends Controller
         $for = $data["email"];
         $request["msg"] = $data["message"];
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });

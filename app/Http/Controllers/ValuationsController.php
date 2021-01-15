@@ -579,7 +579,7 @@ class ValuationsController extends Controller
                                 ->where("id_valuations", "!=", $valuations)
                                 ->get();
 
-        
+
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
 
@@ -902,7 +902,7 @@ class ValuationsController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -913,7 +913,7 @@ class ValuationsController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -923,7 +923,7 @@ class ValuationsController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });

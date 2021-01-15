@@ -145,7 +145,7 @@ class AffiliateController extends Controller
             $request["msg"]  = "Wiiii :D";
 
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
-                $msj->from("comercial@pdtagencia.com","CRM");
+                $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });

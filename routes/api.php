@@ -22,6 +22,9 @@ Route::post('auth', 'Login@Auth');
 Route::post('GenerateCode', 'Login@GenerateCode');
 Route::post('VerifyCode', 'Login@VerifyCode');
 
+Route::post('GenerateCodeAdviser', 'Login@GenerateCodeAdviser');
+Route::post('VerifyCodeAdviser', 'Login@VerifyCodeAdviser');
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -264,6 +267,15 @@ Route::get('adviser/affiliate/{id_adviser}/{names}', 'AdviserController@GetAffil
 Route::get('prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferers');
 Route::get('prp/refferers/{id_user}/{display}/{names}', 'AdviserController@GetRefferers');
 Route::get('prp/client/refferers/{id_client}', 'AdviserController@GetRefferersClient');
+
+
+
+Route::get('adviser/prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferersAdviser');
+Route::get('adviser/prp/refferers/{id_user}/{display}/{names}', 'AdviserController@GetRefferersAdviser');
+
+
+
+
 
 
 Route::get('prp/processes/{id_user}/{display}', 'AdviserController@GetProcesses');
@@ -629,9 +641,9 @@ Route::get('sync/auth/app', function () {
     foreach ($data as $value) {
 
 
-        $user = User::where("id", $value->id_user)->first();
+      //  $user = User::where("id", $value->id_user)->first();
 
-        Clients::where("id_cliente", $user["id_client"])->update(["auth_app" => 1]);
+        Clients::where("id_cliente", $value->id_user)->update(["auth_app" => 1]);
     }
     return response()->json($data)->setStatusCode(200);
 });

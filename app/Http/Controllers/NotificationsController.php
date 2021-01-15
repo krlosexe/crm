@@ -341,7 +341,7 @@ class NotificationsController extends Controller
         $request["msg"]  = "Un Paciente a registrado un Formulario Web";
 
         Mail::send('emails.forms_authorizatio',$request->all(), function($msj) use($subject,$for){
-            $msj->from("comercial@pdtagencia.com","CRM");
+            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -404,26 +404,37 @@ class NotificationsController extends Controller
 
         $data = DB::table("clientes")
                     ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente", "left")
-                    ->whereRaw('client_information_aditional_surgery.name_surgery like "%mamo%"')
-                   // ->OrWhereRaw('client_information_aditional_surgery.name_surgery like "%pexia%"')
-                    ->where("clientes.send_email", 0)
-                    ->where("id_line", 17)->where("email", "!=", "")
+
+
+                    ->where("clientes.id_line", 17)
+                    ->where("clientes.email", "!=", "")
+                    ->whereRaw("clientes.email is not null")
+                    ->where("clientes.send_email", "=", 0)
+
+                    ->where(function ($query){
+                        $query->OrWhereRaw('client_information_aditional_surgery.name_surgery like "%mamo%"');
+                        $query->OrWhereRaw('client_information_aditional_surgery.name_surgery like "%pexia%"');
+                        $query->OrWhereRaw('client_information_aditional_surgery.name_surgery like "%abdomino%"');
+                        $query->OrWhereRaw('client_information_aditional_surgery.name_surgery like "%gluteo%"');
+                    })
+
                     ->limit(10)
                     ->get();
 
 
-
+        //return response()->json($data)->setStatusCode(200);
 
         foreach($data as $value){
             $info_email = [
                 "id_cliente" => $value->id_cliente,
-                "issue"      => "Octubre, mes de sensibilización sobre el Cáncer de Mama",
+                "issue"      => "¡El tratamiento ideal para mejorar TUS CICATRICES!",
                 "name"       => $value->nombres,
                 "for"        => $value->email
             ];
 
             $this->SendEmail2($info_email);
         }
+
 
 
        return response()->json(sizeof($data))->setStatusCode(200);
@@ -438,9 +449,8 @@ class NotificationsController extends Controller
 
        // $for = "cardenascarlos18@gmail.com";
         $for = $data["for"];
-
         $mail_send = Mail::send('emails.masivos',["nombre" =>  $data["name"]], function($msj) use($subject,$for){
-            $msj->from("comercial@pdtagencia.com","Cirujano Daniel Correa");
+            $msj->from("contacto@danielandrescorreaposadacirujano.com","Cirujano Daniel Correa");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -456,10 +466,9 @@ class NotificationsController extends Controller
 
     public function EmailsMasivosTest(){
 
-
         $info_email = [
             "id_cliente" => 1,
-            "issue"      => "Octubre, mes de sensibilización sobre el Cáncer de Mama",
+            "issue"      => "¡El tratamiento ideal para mejorar TUS CICATRICES!",
             "name"       => "carlos cardenas",
             "for"        => "cardenascarlos18@gmail.com"
         ];
