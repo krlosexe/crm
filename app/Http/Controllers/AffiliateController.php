@@ -92,6 +92,7 @@ class AffiliateController extends Controller
                     Comments::create($data);
                 }
             }else{
+                $request["auth_app"] = 1;
                 $cliente = Clients::create($request->all());
                 $request["id_client"] = $cliente["id_cliente"];
                 ClientInformationAditionalSurgery::create($request->all());
