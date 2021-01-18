@@ -17,14 +17,13 @@ use App\datosPersonaesModel;
 |
 */
 
-
 Route::post('auth', 'Login@Auth');
 Route::post('GenerateCode', 'Login@GenerateCode');
+Route::post('CreateCode', 'Login@CreateCode');
 Route::post('VerifyCode', 'Login@VerifyCode');
 
 Route::post('GenerateCodeAdviser', 'Login@GenerateCodeAdviser');
 Route::post('VerifyCodeAdviser', 'Login@VerifyCodeAdviser');
-
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
