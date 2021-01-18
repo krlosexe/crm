@@ -56,6 +56,22 @@ class FormCreditController extends Controller
                 $msj->subject($subject);
                 $msj->to($for);
             });
+
+
+            $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
+            $for = "getionfinanmed@gmail.com";
+            //$for = $user["email"];
+
+            $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Credito";
+
+            Mail::send('emails.form_solicitud_credit',$request->all(), function($msj) use($subject,$for){
+                $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+                $msj->subject($subject);
+                $msj->to($for);
+            });
+
+
+
         }else{
 
             $users = User::join("users_line_business", "users_line_business.id_user" , "=", "users.id")
