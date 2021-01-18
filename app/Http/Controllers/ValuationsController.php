@@ -27,6 +27,12 @@ class ValuationsController extends Controller
      */
     public function index(Request $request)
     {
+
+
+        ini_set('memory_limit', '-1');
+
+
+
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
             $rol     = $request["rol"];
