@@ -739,13 +739,19 @@
 							}
 
 
+                            let code_verify = ""
+                            if(item.code_verify){
+                                code_verify = "Codigo de Seguridad : "+item.code_verify
+                            }
+
+
 
 
 							let link = item.count_sactfication_suvarvy_count == 1 ? 'Encuesta Diligenciada':"<i class='fa fa-link'></i> <a href='"+url+"/form_satisfaction_survey/intro/"+item.id_cliente+"' target='_blank'> Link de Encuesta</a>"
 
 							html += "<tr>"
 								html += "<td>"+botones+"</td>"
-								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+"<br>  "+authapp+"  <br>   "+refer+" <br> "+have_initial+"<br>"+link+"</td>"
+								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+"<br>  "+authapp+"  <br>   "+refer+" <br> "+have_initial+"<br>"+link+"<br>"+code_verify+"</td>"
 								html += "<td>"+item.identificacion+"</td>"
 								html += "<td>"+item.origen+"</td>"
 								html += "<td>"+item.nombre_line+"</td>"
