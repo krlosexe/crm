@@ -580,12 +580,12 @@
 				enviarFormulario("#store", 'api/clients', '#cuadro2');
 			}
 
-
+            var number_page = 1
 			function list(cuadro = "", page = 1){
 
 
 
-
+                number_page = page
 
 				var url=document.getElementById('ruta').value;
 
@@ -931,7 +931,19 @@
 					$("#fecha-store-valoration, #time-store-valoration, #time-end-store, #surgeon-store, #type-store, #clinic_valoration, #way_to_pay-store").removeAttr("required")
 
 				}
-			});
+            });
+
+
+
+
+            function prevClient(cuadroOcultar){
+                console.log(number_page)
+                $(cuadroOcultar).slideUp("slow"); //oculta el cuadro.
+                $("#cuadro1").slideDown("slow"); //muestra el cuadro.
+                list(cuadroOcultar, number_page);
+            }
+
+
 
 
 
