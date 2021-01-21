@@ -293,7 +293,7 @@
                             </div>
                             <br><br>
                             <div class="row">
-                               
+
                                 <div class="col-md-3">
                                     <label for="before_and_after"><b>Fotos Antes y Despues</b></label>
                                     <label class='container-check'>
@@ -577,7 +577,7 @@
                                         <label for=''></label>
                                     </label>
                                 </div>
-                                
+
                                 <div class="col-md-8">
                                     <label for="drugs_check_edit"><b>Cual/es</b></label>
                                     <input type="text" name="drugs" class="form-control form-control-user" readonly id="drugs_edit" placeholder="PJ. Clonazepam">
@@ -803,7 +803,7 @@
     </div>
                 <center>
 
-                    <button type="button" class="btn btn-danger btn-user" onclick="prev('#cuadro4')">
+                    <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
                         Cancelar
                     </button>
                     <button class="btn btn-primary btn-user">
