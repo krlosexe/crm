@@ -596,6 +596,8 @@
 			$("#carta_laboral_codeudor").prop("checked", data.carta_laboral_codeudor ? true : false)
 			$("#colillas_nomina_codeudor").prop("checked", data.colillas_nomina_codeudor ? true : false)
 
+
+            $("#locked").val(data.locked)
 			$("#status").val(data.status)
 
 			$("#period").val(data.period)
