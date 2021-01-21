@@ -20,7 +20,7 @@ class FinacingController extends Controller
         $request->use_app === "0" ? $request->use_app = null :  $request->use_app;
 
         $data = DB::table("client_request_credit")
-            ->selectRaw("client_request_credit.*, clientes.nombres,clientes.identificacion, clientes.pay_to_study_credit,
+            ->selectRaw("client_request_credit.*, clientes.nombres,clientes.identificacion, clientes.pay_to_study_credit, clientes.locked,
 
 
                                     clientc_credit_information.dependent_independent,
@@ -88,6 +88,7 @@ class FinacingController extends Controller
 
         $id_client = $data->id_client;
 
+        $client = DB::table("clientes")->where("id_cliente", $id_client)->update(["locked" => $request["locked"]]);
 
         if ($request["status"] != $data->status) {
 
@@ -424,8 +425,16 @@ class FinacingController extends Controller
             ->get();
 
 
+        $lock = DB::table("clientes")
+                ->selectRaw("clientes.locked")
+                ->where("id_cliente", $id_client)
+                ->first();
+
         $data["fee_pending"] = $fee;
         $data["history"]     = $history;
+        $data["lock"]        = $lock->locked;
+
+
         return response()->json($data)->setStatusCode(200);
     }
 

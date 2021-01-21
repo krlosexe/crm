@@ -128,6 +128,18 @@
                         </div>
 
                         <div class="col-md-6">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="pay_to_study_credit"><b>Paciente Bloqueado ?</b></label>
+                                    <select name="locked" id="locked" class="form-control" required>
+                                        <option value="No">No</option>
+                                        <option value="Si">Si</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <br>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="pay_to_study_credit"><b>Pago estudio de credito ?</b></label>

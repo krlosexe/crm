@@ -743,12 +743,18 @@ class Login extends Controller
 
     public function CreateCode(Request $request){
 
-        $client = DB::table("clientes")->where("code_client", $request["code"])->where("prp", "Si")->first();
+        $client = DB::table("clientes")->where("code_client", $request["code"])->first();
+
+      //  dd($client->code_verify);
         if($client){
 
-            $code = rand(100000,900000);
 
-            DB::table("clientes")->where("code_client", $request["code"])->update(["code_verify" => $code]);
+            if($client->code_verify != null || $client->code_verify != ""){
+                $code = $client->code_verify;
+            }else{
+                $code = rand(100000,900000);
+                DB::table("clientes")->where("code_client", $request["code"])->update(["code_verify" => $code]);
+            }
 
             $data = [
                "issue"   => "Código de Acceso Multiestica $code",
@@ -756,9 +762,7 @@ class Login extends Controller
                "email"   => $client->email,
                "id_line" => $client->id_line
             ];
-
             $this->SendEmail2($data);
-
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("error")->setStatusCode(400);
