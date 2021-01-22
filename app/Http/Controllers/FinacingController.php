@@ -213,6 +213,30 @@ class FinacingController extends Controller
 
             $this->SendEmail($info_email);
 
+        }else{
+
+           // dd($request["number"]);
+           $date = date("Y-m-d");
+           DB::table("client_request_credit_payment_plan")->where("id_request_credit", $id)->delete();
+
+            foreach ($request["number"] as $key => $value) {
+
+                $date  = date("Y-m-d", strtotime($date . "+ 1 month"));
+
+                $array = [];
+                $array["id_request_credit"]  = $id;
+                $array["number"]             = $value;
+                $array["interest"]           = str_replace(",", "", $request["interest"][$key]);
+                $array["credit_to_capital"]  = str_replace(",", "", $request["credit_to_capital"][$key]);
+                $array["monthly_fees"]       = str_replace(",", "", $request["monthly_fees"][$key]);
+                $array["balance"]            = str_replace(",", "", $request["balance"][$key]);
+                $array["date"]               = $date;
+
+
+                DB::table("client_request_credit_payment_plan")->insert($array);
+            }
+
+
         }
 
 

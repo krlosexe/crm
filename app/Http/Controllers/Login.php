@@ -760,6 +760,8 @@ class Login extends Controller
                "issue"   => "Código de Acceso Multiestica $code",
                "message" => "Hola, $client->nombres tu código de acceso a Multiestica es $code",
                "email"   => $client->email,
+               "phone"   => str_replace("+57", "", $client->telefono),
+               "code"    => $code,
                "id_line" => $client->id_line
             ];
             $this->SendEmail2($data);
@@ -769,6 +771,11 @@ class Login extends Controller
         }
     }
 
+
+
+    public function TestTwilo(){
+        dd("HOLA");
+    }
 
     public function GenerateCodeAdviser(Request $request){
 

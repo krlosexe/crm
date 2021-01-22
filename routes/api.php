@@ -483,6 +483,11 @@ Route::post('wellezy/cotization/add', 'WellezyController@AddService');
 
 
 
+
+Route::get('test/twilo', 'Login@TestTwilo');
+
+
+
 Route::get('generate/token/chat', function () {
 
     $users = User::get();

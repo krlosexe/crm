@@ -572,13 +572,73 @@
 
 
 			function update(){
-				enviarFormularioPut("#form-update", 'api/clients', '#cuadro4');
+				enviarFormularioPutClient("#form-update", 'api/clients', '#cuadro4');
 			}
 
 
 			function store(){
 				enviarFormulario("#store", 'api/clients', '#cuadro2');
-			}
+            }
+
+
+
+            function enviarFormularioPutClient(form, controlador, cuadro, auth = false, inputFile){
+                $(form).submit(function(e){
+                    e.preventDefault(); //previene el comportamiento por defecto del formulario al darle click al input submit
+                    var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable
+                    var formData=new FormData($(form)[0]); //obtiene todos los datos de los inputs del formulario pasado por parametros
+
+                    var method = $(this).attr('method'); //obtiene el method del formulario
+                    console.log(method)
+
+
+                    $('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
+                    $.ajax({
+                        url:''+url+'/'+controlador+'/'+$("#id_edit").val(),
+                        type:method,
+                        dataType:'JSON',
+                        data:formData,
+                        cache:false,
+                            contentType:false,
+                            processData:false,
+                        beforeSend: function(){
+                            mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+                        },
+                        error: function (repuesta) {
+                            $('input[type="submit"]').removeAttr('disabled'); //activa el input submit
+                            var errores=repuesta.responseText;
+                            if(errores!="")
+                                mensajes('danger', errores);
+                            else
+                                mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");
+                        },
+                        success: function(respuesta){
+                            if (respuesta.success == false) {
+                                mensajes('danger', respuesta.message);
+                                $('input[type="submit"]').removeAttr('disabled'); //activa el input submit
+                            }else{
+                                $('input[type="submit"]').removeAttr('disabled'); //activa el input submit
+                                mensajes('success', respuesta.mensagge);
+
+                                if (auth) {
+                                localStorage.setItem('token', respuesta.token);
+                                localStorage.setItem('email', respuesta.email);
+                                localStorage.setItem('user_id', respuesta.user_id);
+                                window.location.href = url+"/dashboard";
+                                }else{
+
+                                    list(cuadro, number_page);
+                                }
+
+                            }
+
+                        }
+
+                    });
+                });
+            }
+
+
 
             var number_page = 1
 			function list(cuadro = "", page = 1){
@@ -2382,9 +2442,56 @@
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data = JSON.parse($(this).attr("data"))
-					statusConfirmacion('api/status-cliente/'+data.id_cliente+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
+					statusConfirmacionClient('api/status-cliente/'+data.id_cliente+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
-			}
+            }
+
+
+
+
+            function statusConfirmacionClient(controlador,  title, confirmButton){
+
+                var data = {
+                "id_user": id_user,
+                "token"  : tokens,
+                };
+
+
+                swal({
+                    title: title,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Si, "+confirmButton+"!",
+                    cancelButtonText: "No, Cancelar!",
+                    closeOnConfirm: true,
+                    closeOnCancel: false
+                },
+                function(isConfirm){
+                    if (isConfirm) {
+                        var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable
+                        $.ajax({
+                            url:''+url+'/'+controlador+'/',
+                            type: 'GET',
+                            dataType: 'JSON',
+                        //  data: data,
+                            beforeSend: function(){
+                                mensajes('info', '<span>Guardando cambios, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+                            },
+                            error: function (repuesta) {
+                                var errores=repuesta.responseText;
+                                mensajes('danger', errores);
+                            },
+                            success: function(respuesta){
+                            mensajes('success', respuesta.mensagge);
+                            list('', number_page);
+                            }
+                        });
+                    } else {
+                        swal("Cancelado", "Proceso cancelado", "error");
+                    }
+                });
+            }
 
 
 
