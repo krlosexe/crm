@@ -60,6 +60,7 @@ class ClientsExport implements FromView
                                                'forma_pago',
                                                'clientes.fecha_nacimiento',
                                                'clientes.direccion',
+                                               'clientes.auth_app',
                                                'facebook',
                                                'instagram',
                                                'twitter',
