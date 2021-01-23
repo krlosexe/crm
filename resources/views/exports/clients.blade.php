@@ -18,6 +18,7 @@
         <th><b>Youtube</b></th>
         <th><b>Codigo de Cliente</b></th>
         <th><b>PRP</b></th>
+        <th><b>APP</b></th>
         <th><b>Ingreso al PRP</b></th>
         <th><b>Forma de Pago</b></th>
 
@@ -32,7 +33,7 @@
         <th><b>Cuenta Bancaria</b></th>
 
 
-        
+
         <th><b>Asesora</b></th>
 
         <th><b>Fecha de Valoracion</b></th>
@@ -46,7 +47,7 @@
         <th><b>Cirujano</b></th>
         <th><b>Fecha de Cirugia</b></th>
 
-        <th><b>Tareas</b></th> 
+        <th><b>Tareas</b></th>
 
         <th><b>Fecha de Registro</b></th>
         <th><b>Ultima Modificacion</b></th>
@@ -72,6 +73,13 @@
             <td>{{ $value->youtube }}</td>
             <td>{{ $value->code_client }}</td>
             <td>{{ $value->prp }}</td>
+
+            <td>
+                {{ $value->auth_app == 1 ? 'Si' : 'No'}}
+
+            </td>
+
+
             <td>{{ $value->created_prp }}</td>
             <td>{{ $value->forma_pago }}</td>
 
@@ -85,7 +93,7 @@
             <td>{{ $value->reported }}</td>
             <td>{{ $value->bank_account }}</td>
 
-            
+
             <td>{{ $value->name_register }} {{ $value->apellido_register }}</td>
 
             <td>{{ $value->fecha_valoration }}</td>
@@ -94,7 +102,7 @@
 
             <td>{{ $value->adviser_created }}</td>
             <td>{{ $value->name_asesora_valorations }} {{ $value->apellido_asesora_valorations }}</td>
-            
+
 
 
             <td>{{ $value->name_procedure }}</td>
@@ -107,10 +115,10 @@
                     {{$task->issue}} {{$task->fecha}} <br>
                     @endforeach
                 </b>
-            </th> 
+            </th>
 
 
-            
+
 
 
 
