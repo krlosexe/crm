@@ -1130,7 +1130,7 @@ class ClientsController extends Controller
             }else{
 
                 if($request["pay_to_study_credit"] == 0){
-                    DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
+                   // DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
                 }
 
             }
@@ -2055,6 +2055,9 @@ class ClientsController extends Controller
         $id_line =  $request["id_line"];
 
 
+        $linea      = DB::table("lines_business")->where("id_line", $request["id_line"])->first();
+        $name_lines = $linea->nombre_line;
+
         if($request["city"] == 5){
 
             $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
@@ -2222,13 +2225,13 @@ class ClientsController extends Controller
 
 
 
-
+                    $linea = DB::table("lines_business")->where("id_line", $request["id_line"])->first();
                     $subject = "App Financiacion : ".$request["nombres"]."  Interesado en Financiacion";
 
                     $for = $users["email"];
                 // $for = "cardenascarlos18@gmail.com";
 
-                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"].", Linea: ".$name_lines;
                     $request["apellidos"]        = ".";
                     $request["direccion"]        = ".";
                     $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2244,7 +2247,7 @@ class ClientsController extends Controller
                     //$for = $users["email"];
                     $for = "cardenascarlos18@gmail.com";
 
-                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"].", Linea: ".$name_lines;
                     $request["apellidos"]        = ".";
                     $request["direccion"]        = ".";
                     $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2260,7 +2263,7 @@ class ClientsController extends Controller
 
                     $for = "pdtagenciademedios@gmail.com";
 
-                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"].", Linea: ".$name_lines;
                     $request["apellidos"]        = ".";
                     $request["direccion"]        = ".";
                     $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2274,7 +2277,7 @@ class ClientsController extends Controller
                     if($id_line == 16){
                         $for = "comunicacionesmed49@gmail.com";
 
-                        $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+                        $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"].", Linea: ".$name_lines;
                         $request["apellidos"]        = ".";
                         $request["direccion"]        = ".";
                         $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2411,14 +2414,12 @@ class ClientsController extends Controller
 
 
 
-
-
                 $subject = "App Financiacion : ".$request["nombres"]."  Interesado en Financiacion";
 
                 $for = $users["email"];
             // $for = "cardenascarlos18@gmail.com";
 
-                $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+                $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"]." linea: ".$name_lines;
                 $request["apellidos"]        = ".";
                 $request["direccion"]        = ".";
                 $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2434,7 +2435,7 @@ class ClientsController extends Controller
                 //$for = $users["email"];
             $for = "cardenascarlos18@gmail.com";
 
-            $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+            $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"]." Linea : ".$name_lines;
                 $request["apellidos"]        = ".";
                 $request["direccion"]        = ".";
                 $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2449,7 +2450,7 @@ class ClientsController extends Controller
 
                 $for = "pdtagenciademedios@gmail.com";
 
-                $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+                $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"]." Linea : ".$name_lines;
                 $request["apellidos"]        = ".";
                 $request["direccion"]        = ".";
                 $request["fecha_nacimiento"] = date("Y-m-d");
@@ -2464,7 +2465,7 @@ class ClientsController extends Controller
                 if($id_line == 16){
                     $for = "comunicacionesmed49@gmail.com";
 
-                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"];
+                    $request["msg"]  = "Un Paciente se ha registrado por el App con el codigo ".$request["code_adviser"]." Linea : ".$name_lines;
                     $request["apellidos"]        = ".";
                     $request["direccion"]        = ".";
                     $request["fecha_nacimiento"] = date("Y-m-d");
