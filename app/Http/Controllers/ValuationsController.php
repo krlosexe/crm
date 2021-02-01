@@ -835,6 +835,7 @@ class ValuationsController extends Controller
                             ->where("valuations.status", 1)
                             ->where("auditoria.usr_regins", $user_id)
                             ->whereRaw("month(fecha) = ".date("m")." ")
+                            ->whereRaw("year(fecha) = ".date("Y")." ")
                             ->get();
 
         return response()->json($data)->setStatusCode(200);
