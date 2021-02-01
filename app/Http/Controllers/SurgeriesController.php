@@ -432,6 +432,7 @@ class SurgeriesController extends Controller
                             ->where("auditoria.tabla", "surgeries")
                             ->where("auditoria.usr_regins", $user_id)
                             ->whereRaw("month(fecha) = ".date("m")." ")
+                            ->whereRaw("year(fecha) = ".date("Y")." ")
                             ->first();
 
         return response()->json($data)->setStatusCode(200);

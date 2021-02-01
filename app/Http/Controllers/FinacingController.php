@@ -83,7 +83,6 @@ class FinacingController extends Controller
     public function UpdateRequestFinancing(Request $request, $id)
     {
 
-
         $data = DB::table("client_request_credit")->where("id", $id)->first();
 
         $id_client = $data->id_client;
@@ -166,7 +165,8 @@ class FinacingController extends Controller
             curl_close($ch);
 
 
-            $date = date("Y-m-d");
+            //$date = date("Y-m-d");
+            $date = $request["date_init"];
             if (($request["status"] == "Aprobado") || ($request["status"] == "Desembolsado")) {
 
                 DB::table("client_request_credit_payment_plan")->where("id_request_credit", $id)->delete();
@@ -216,7 +216,8 @@ class FinacingController extends Controller
         }else{
 
            // dd($request["number"]);
-           $date = date("Y-m-d");
+           //$date = date("Y-m-d");
+           $date = $request["date_init"];
            DB::table("client_request_credit_payment_plan")->where("id_request_credit", $id)->delete();
 
             foreach ($request["number"] as $key => $value) {
@@ -275,6 +276,7 @@ class FinacingController extends Controller
             "days_limit"      => $request["days_limit"],
             "status"          => $request["status"],
             "initial"         => $request["initial"],
+            "init_credit"     => $request["date_init"]
         ]);
 
 
@@ -333,9 +335,8 @@ class FinacingController extends Controller
     public function PayStudyCredit(Request $request)
     {
 
-        $store = DB::table("clientes")->where("id_cliente", $request["id_client"])->update(["pay_to_study_credit" => 1]);
-
-
+        $store  = DB::table("clientes")->where("id_cliente", $request["id_client"])->update(["pay_to_study_credit" => 1]);
+        $client = DB::table("clientes")->where("id_cliente", $request["id_client"])->first();
 
         if (isset($request["photo_recived"])) {
             $folder = "img/credit/comprobantes";
@@ -358,7 +359,7 @@ class FinacingController extends Controller
 
         $client = DB::table("clientes")->where("id_cliente", $request["id_client"])->first();
 
-        $mensaje = "Pago Estudio de Credito, Monto : $request[amount], Metodo de Pago: $request[payment_method],  ID Transaccion : ".$request["id_transactions"];
+        $mensaje = "Pago Estudio de Credito, Monto : $request[amount], Metodo de Pago: $request[payment_method],  ID Transaccion : ".$request["id_transactions"]." Cedula del Px: ".$client->identificacion;
 
         $info_email = [
             "user_id" => $client->id_user_asesora,
