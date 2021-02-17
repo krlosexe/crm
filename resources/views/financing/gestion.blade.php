@@ -570,7 +570,7 @@
 			$("#have_initial").val(data.have_initial)
 			$("#reported").val(data.reported)
 			$("#initial").val(data.initial)
-            $("#date_init_edit").val(data.init_credit)
+            //$("#date_init_edit").val(data.init_credit)
 			if (data.photo_recived) {
 				$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`)
 			} else {
