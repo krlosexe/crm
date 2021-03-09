@@ -121,7 +121,7 @@
 											<option value="Afiliada">Afiliada</option>
 											<option value="Agendada">Agendada</option>
 											<option value="Aprobada">Aprobada</option>
-											<option value="Aprobada / Descartada">Aprobada / Descartada</option>
+											<option value="Aprobada - Descartada">Aprobada - Descartada</option>
 											<option value="Asesorada No Agendada"> Asesorada No Agendada</option>
 											<option value="Asesorado por FB esperando contacto Telefonico">Asesorado por FB esperando contacto Telefonico</option>
 											<option value="Demandada">Demandada</option>
@@ -132,6 +132,7 @@
 											<option value="No Contesta">No Contesta</option>
 											<option value="Numero Equivocado">Numero Equivocado</option>
 											<option value="Operada">Operada</option>
+                                            <option value="Procedimiento">Procedimiento</option>
 											<option value="Programada">Programada</option>
 											<option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
 											<option value="Valorada">Valorada</option>

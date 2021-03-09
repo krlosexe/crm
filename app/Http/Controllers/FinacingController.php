@@ -229,6 +229,7 @@ class FinacingController extends Controller
 
 
            if($request["date_init"] != ""){
+
                 DB::table("client_request_credit_payment_plan")->where("id_request_credit", $id)->delete();
 
                 foreach ($request["number"] as $key => $value) {
