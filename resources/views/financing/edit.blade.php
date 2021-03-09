@@ -142,7 +142,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for=""><b>Fecha de inico del Credito</b></label>
-                                        <input type="date" name="date_init" id="date_init_edit" class="form-control" required>
+                                        <input type="date" name="date_init" id="date_init_edit" class="form-control">
                                     </div>
                                 </div>
 
