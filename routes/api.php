@@ -481,6 +481,8 @@ Route::post('wellezy/auth', 'WellezyController@Auth');
 Route::post('wellezy/cotization/add', 'WellezyController@AddService');
 
 
+Route::get('delete/fx/{id}', 'FinacingController@Delete');
+
 
 
 
