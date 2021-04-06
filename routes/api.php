@@ -267,12 +267,14 @@ Route::get('prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferers'
 Route::get('prp/refferers/{id_user}/{display}/{names}', 'AdviserController@GetRefferers');
 Route::get('prp/client/refferers/{id_client}', 'AdviserController@GetRefferersClient');
 
-
+Route::get('get/affiliate/{code}', 'AffiliateController@getAffiliateByCode');
 
 Route::get('adviser/prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferersAdviser');
 Route::get('adviser/prp/refferers/{id_user}/{display}/{names}', 'AdviserController@GetRefferersAdviser');
 
 
+
+Route::post('create/comission', 'AffiliateController@StoreComission');
 
 
 

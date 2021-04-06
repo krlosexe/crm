@@ -18,6 +18,17 @@ class AffiliateController extends Controller
 {
 
 
+    public function getAffiliateByCode($code){
+
+        $data = DB::table("clientes")->where("code_client", $code)->first();
+
+        if($data){
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("El codigo no existe")->setStatusCode(400);
+        }
+        
+    }
 
     public function store(Request $request){
 
@@ -430,6 +441,23 @@ class AffiliateController extends Controller
         return $data;
 
 
+    }
+
+
+    public function StoreComission(Request $request){
+
+        DB::table("comissions")->insert([
+            "id_client"        => $request["id_client"],
+            "amount_procedure" => $request["amount_procedure"],
+            "percentege"       => $request["percentege"],
+            "amount_comission" => $request["amount_comission"]
+
+        ]);
+            
+
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+
+        return response()->json($data)->setStatusCode(200);
     }
 
 }
