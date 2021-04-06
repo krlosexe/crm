@@ -460,4 +460,15 @@ class AffiliateController extends Controller
         return response()->json($data)->setStatusCode(200);
     }
 
+
+    public function GetComissions($id_client){
+
+        $data = DB::table("comissions")
+                    ->selectRaw("SUM(amount_comission) as total")
+                    ->where("id_client", $id_client)
+                    ->first();
+
+        return response()->json($data)->setStatusCode(200);
+    }
+
 }

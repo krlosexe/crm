@@ -275,6 +275,7 @@ Route::get('adviser/prp/refferers/{id_user}/{display}/{names}', 'AdviserControll
 
 
 Route::post('create/comission', 'AffiliateController@StoreComission');
+Route::get('get/stats/{id_client}', 'AffiliateController@GetComissions');
 
 
 
