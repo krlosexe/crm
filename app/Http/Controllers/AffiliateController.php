@@ -463,11 +463,16 @@ class AffiliateController extends Controller
 
     public function GetComissions($id_client){
 
-        $data = DB::table("comissions")
+        $comissions = DB::table("comissions")
                     ->selectRaw("SUM(amount_comission) as total")
                     ->where("id_client", $id_client)
                     ->first();
 
+        $request_exchange = DB::table("request_exchange")
+                    ->selectRaw("SUM(amount) as total")
+                    ->where("user_id", $id_client)
+                    ->first();
+        $data["total"] = $comissions->total - $request_exchange->total;
         return response()->json($data)->setStatusCode(200);
     }
 
