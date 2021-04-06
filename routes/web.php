@@ -308,6 +308,9 @@ Route::get('commissions', function () {
     return view('catalogos.commissions.gestion');
 });
 
+Route::get('charge', function () {
+    return view('catalogos.charge.gestion');
+});
 
 
 

@@ -276,7 +276,7 @@ Route::get('adviser/prp/refferers/{id_user}/{display}/{names}', 'AdviserControll
 
 Route::post('create/comission', 'AffiliateController@StoreComission');
 Route::get('get/stats/{id_client}', 'AffiliateController@GetComissions');
-
+Route::get('get/comissions', 'AffiliateController@GetAllComissions');
 
 
 
@@ -412,6 +412,9 @@ Route::post('set-shared-post', 'PostController@SaveSahareUser');
 
 Route::post('prp/make-requests', 'PointsController@RequestExchange');
 Route::get('prp/get-requests/{id_client}', 'PointsController@GetRequestExchange');
+Route::get('get/request/charge', 'PointsController@GetRequestExchangeAll');
+Route::put('update/request/charge/{id}', 'PointsController@UpdateRequestExchange');
+
 
 Route::get('get/pay/study/credit/client/{id_client}', 'FinacingController@GetPayStudyCredit');
 

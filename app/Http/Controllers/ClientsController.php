@@ -2060,8 +2060,14 @@ class ClientsController extends Controller
 
         if($request["city"] == 5){
 
-            $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+            if($request["code_adviser"] == 5825){
+                $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                                ->where("id", 40060)->first();
+            }else{
+                $users = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
                                 ->where("id", 23692)->first();
+            }
+            
         }else{
 
             if($request["code_adviser"] != 0){

@@ -476,4 +476,13 @@ class AffiliateController extends Controller
         return response()->json($data)->setStatusCode(200);
     }
 
+
+    public function GetAllComissions(){
+        $data = DB::table("comissions")
+                    ->selectRaw("comissions.*, clientes.nombres")
+                    ->join("clientes", "clientes.id_cliente", "=", "comissions.id_client")
+                    ->get();
+        return response()->json($data)->setStatusCode(200);
+    }
+
 }
