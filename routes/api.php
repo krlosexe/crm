@@ -411,6 +411,7 @@ Route::post('set-shared-post', 'PostController@SaveSahareUser');
 
 
 Route::post('prp/make-requests', 'PointsController@RequestExchange');
+Route::post('prp/get-requests', 'PointsController@GetRequestExchange');
 
 Route::get('get/pay/study/credit/client/{id_client}', 'FinacingController@GetPayStudyCredit');
 
