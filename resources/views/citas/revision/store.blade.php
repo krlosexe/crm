@@ -70,7 +70,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for=""><b>Fecha</b></label>
-                      <input type="date" name="fecha" id="fecha-store" class="form-control  form-control-user" required min="<?= date('Y-m-d')?>">
+                      <input type="date" name="fecha" id="fecha-store" class="form-control  form-control-user" required>
                   </div>
                 </div>
 

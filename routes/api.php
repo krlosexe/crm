@@ -496,6 +496,8 @@ Route::get('delete/fx/{id}', 'FinacingController@Delete');
 Route::get('test/twilo', 'Login@TestTwilo');
 
 
+Route::post('register/banck/account', 'AffiliateController@BanckAccounts');
+Route::get('banck/account/{id_client}', 'AffiliateController@GetBanckAccounts');
 
 
 

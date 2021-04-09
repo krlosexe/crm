@@ -14,6 +14,8 @@ use App\Clients;
 use App\User;
 use DB;
 use Mail;
+
+use App\BanckAccounts;
 class AffiliateController extends Controller
 {
 
@@ -484,5 +486,32 @@ class AffiliateController extends Controller
                     ->get();
         return response()->json($data)->setStatusCode(200);
     }
+
+
+
+    public function BanckAccounts(Request $request){
+
+        BanckAccounts::updateOrCreate(
+            ["id_client" => $request["id_client"]],
+            [
+                "number_account"   => $request["number_account"],
+                "type_account"     => $request["type_account"],
+                "name_bank"        => $request["name_bank"],
+                "name"             => $request["name"],
+                "identification"   => $request["identification"]
+                
+            ]
+        );
+
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        return response()->json($data)->setStatusCode(200);
+    }
+
+    public function GetBanckAccounts($id_client){
+        $data = BanckAccounts::where("id_client", $id_client)->first();
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
 
 }

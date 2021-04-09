@@ -65,6 +65,7 @@ class ClientsExport implements FromView
                                                'instagram',
                                                'twitter',
                                                'youtube',
+                                               'clientes.photos_google',
                                                'code_client',
                                                'prp',
                                                'created_prp',
