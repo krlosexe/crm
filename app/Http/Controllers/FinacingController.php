@@ -836,5 +836,13 @@ class FinacingController extends Controller
 
 
 
+    public function Delete($id){
+        DB::table("client_request_credit")->where("id", $id)->delete();
+        $response = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+        return response()->json($response)->setStatusCode(200);
+    }
+
+
+
 
 }

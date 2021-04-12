@@ -263,6 +263,8 @@ Route::get('change_name', 'ClientsController@changeName');
 Route::get('codes', 'ClientsController@GenerateCodes');
 
 
+
+
 Route::get('form-prp/{id_line}', function ($id_line) {
     return view('forms.prp', ["id_line" => $id_line]);
 });
@@ -300,6 +302,16 @@ Route::get('clients/view/{id}', function ($id) {
 Route::get('schedule', function () {
     return view('Reports.schedule.gestion');
 });
+
+
+Route::get('commissions', function () {
+    return view('catalogos.commissions.gestion');
+});
+
+Route::get('charge', function () {
+    return view('catalogos.charge.gestion');
+});
+
 
 
 Route::get('externo_gestion', function () {

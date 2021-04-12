@@ -267,13 +267,16 @@ Route::get('prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferers'
 Route::get('prp/refferers/{id_user}/{display}/{names}', 'AdviserController@GetRefferers');
 Route::get('prp/client/refferers/{id_client}', 'AdviserController@GetRefferersClient');
 
-
+Route::get('get/affiliate/{code}', 'AffiliateController@getAffiliateByCode');
 
 Route::get('adviser/prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferersAdviser');
 Route::get('adviser/prp/refferers/{id_user}/{display}/{names}', 'AdviserController@GetRefferersAdviser');
 
 
 
+Route::post('create/comission', 'AffiliateController@StoreComission');
+Route::get('get/stats/{id_client}', 'AffiliateController@GetComissions');
+Route::get('get/comissions', 'AffiliateController@GetAllComissions');
 
 
 
@@ -408,6 +411,10 @@ Route::post('set-shared-post', 'PostController@SaveSahareUser');
 
 
 Route::post('prp/make-requests', 'PointsController@RequestExchange');
+Route::get('prp/get-requests/{id_client}', 'PointsController@GetRequestExchange');
+Route::get('get/request/charge', 'PointsController@GetRequestExchangeAll');
+Route::put('update/request/charge/{id}', 'PointsController@UpdateRequestExchange');
+
 
 Route::get('get/pay/study/credit/client/{id_client}', 'FinacingController@GetPayStudyCredit');
 
@@ -481,10 +488,16 @@ Route::post('wellezy/auth', 'WellezyController@Auth');
 Route::post('wellezy/cotization/add', 'WellezyController@AddService');
 
 
+Route::get('delete/fx/{id}', 'FinacingController@Delete');
+
 
 
 
 Route::get('test/twilo', 'Login@TestTwilo');
+
+
+Route::post('register/banck/account', 'AffiliateController@BanckAccounts');
+Route::get('banck/account/{id_client}', 'AffiliateController@GetBanckAccounts');
 
 
 

@@ -14,10 +14,23 @@ use App\Clients;
 use App\User;
 use DB;
 use Mail;
+
+use App\BanckAccounts;
 class AffiliateController extends Controller
 {
 
 
+    public function getAffiliateByCode($code){
+
+        $data = DB::table("clientes")->where("code_client", $code)->first();
+
+        if($data){
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("El codigo no existe")->setStatusCode(400);
+        }
+        
+    }
 
     public function store(Request $request){
 
@@ -431,5 +444,74 @@ class AffiliateController extends Controller
 
 
     }
+
+
+    public function StoreComission(Request $request){
+
+        DB::table("comissions")->insert([
+            "id_client"        => $request["id_client"],
+            "amount_procedure" => $request["amount_procedure"],
+            "percentege"       => $request["percentege"],
+            "amount_comission" => $request["amount_comission"]
+
+        ]);
+            
+
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+    public function GetComissions($id_client){
+
+        $comissions = DB::table("comissions")
+                    ->selectRaw("SUM(amount_comission) as total")
+                    ->where("id_client", $id_client)
+                    ->first();
+
+        $request_exchange = DB::table("request_exchange")
+                    ->selectRaw("SUM(amount) as total")
+                    ->where("user_id", $id_client)
+                    ->first();
+        $data["total"] = $comissions->total - $request_exchange->total;
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+    public function GetAllComissions(){
+        $data = DB::table("comissions")
+                    ->selectRaw("comissions.*, clientes.nombres")
+                    ->join("clientes", "clientes.id_cliente", "=", "comissions.id_client")
+                    ->get();
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+
+    public function BanckAccounts(Request $request){
+
+        BanckAccounts::updateOrCreate(
+            ["id_client" => $request["id_client"]],
+            [
+                "number_account"   => $request["number_account"],
+                "type_account"     => $request["type_account"],
+                "name_bank"        => $request["name_bank"],
+                "name"             => $request["name"],
+                "identification"   => $request["identification"]
+                
+            ]
+        );
+
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        return response()->json($data)->setStatusCode(200);
+    }
+
+    public function GetBanckAccounts($id_client){
+        $data = BanckAccounts::where("id_client", $id_client)->first();
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
 
 }
