@@ -279,6 +279,35 @@
                             </div>
                         </div>
                         <div class="col-md-7">
+
+                            <div style="display: none" id="section_procedure">
+                                <div class="row" >
+                                
+                                <div class="col-md-6">
+                                    <label for=""><b>Que procedimiento se realizo?</b></label>
+                                    <select name="procedure_px" id="procedure_px_edit" class="form-control" disabled>
+                                        <option value="">Seleccione</option>
+                                        <option value="ABDOMINOPLASTIA">ABDOMINOPLASTIA</option>
+                                        <option value="BLEFAROPLASTIA">BLEFAROPLASTIA</option>
+                                        <option value="IMPLANTES DE SENOS">IMPLANTES DE SENOS</option>
+                                        <option value="LIPO Y ABDOMINOPLASTIA">LIPO Y ABDOMINOPLASTIA</option>
+                                        <option value="LIPOSUCCIÓN O LIPOTRANSFERENCIA">LIPOSUCCIÓN O LIPOTRANSFERENCIA</option>
+                                        <option value="OTOPLASTIA">OTOPLASTIA</option>
+                                        <option value="PEXIA CON IMPLANTES">PEXIA CON IMPLANTES</option>
+                                        <option value="RINOPLASTIA">RINOPLASTIA</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Que Fecha se Opero ?</b></label>
+                                        <input type="date" name="date_procedure" class="form-control form-control-user" id="date_procedure_edit" disabled>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            </div>
+
+                            <br>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
