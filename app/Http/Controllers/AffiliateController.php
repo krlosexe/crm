@@ -14,11 +14,225 @@ use App\Clients;
 use App\User;
 use DB;
 use Mail;
+
+use App\BanckAccounts;
 class AffiliateController extends Controller
 {
 
 
+    public function getAffiliateByCode($code){
 
+        $data = DB::table("clientes")->where("code_client", $code)->first();
+
+        if($data){
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("El codigo no existe")->setStatusCode(400);
+        }
+        
+    }
+
+
+
+
+    public function StorePrp(Request $request){
+
+
+        $refered = false;
+        $client = Clients::where("identificacion",  $request["identificacion"])->first();
+
+        if($client){
+            return response()->json("Ya te encuentras registrado en nuetra base de datos")->setStatusCode(400);
+        }else{
+
+            if($request["promotion_code"] != null){
+                $user = DB::table("users")->where("code_user", $request["promotion_code"])->first();
+                if($user){
+                    $request["id_user_asesora"] = $user->id;
+                }else{
+                    $client = DB::table("clientes")->where("code_client", $request["promotion_code"])->first();
+                    if($client){
+                        $request["id_user_asesora"] = $client->id_user_asesora;
+                        $request["id_affiliate"]    = $client->id_cliente;
+                        $refered =  true;
+                    }else{
+                        return response()->json("El código de promocion es invalido")->setStatusCode(400);
+                    }
+                }
+            }else{
+                $user = User::join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                                ->where("users_line_business.id_line", $request["id_line"])
+                                ->inRandomOrder()
+                                ->first();
+
+                $request["id_user_asesora"] = $user->id;
+            }
+
+            $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $code                   = substr(str_shuffle($permitted_chars), 0, 4);
+            $request["code_client"] = strtoupper($code);
+
+            $request["password"]    = md5($request["password"]);
+            $request["origen"]      = "PRP Asesora";
+            $request["prp"]         = "Si";
+            $request["to_db"]       = "1";
+            $request["created_prp"] = date("Y-m-d");
+            $request["auth_app"]    = "1";
+            
+
+            $cliente = Clients::create($request->all());
+            $request["id_client"] = $cliente["id_cliente"];
+
+            ClientInformationAditionalSurgery::create($request->all());
+            ClientClinicHistory::create($request->all());
+            ClientCreditInformation::create($request->all());
+
+
+            $auditoria              = new Auditoria;
+            $auditoria->tabla       = "clientes";
+            $auditoria->cod_reg     = $cliente["id_cliente"];
+            $auditoria->status      = 1;
+            $auditoria->fec_regins  = date("Y-m-d H:i:s");
+            $auditoria->fec_update  = date("Y-m-d H:i:s");
+            $auditoria->usr_regins  = $request["id_user_asesora"];
+            $auditoria->save();
+
+
+
+            if ($cliente) {
+                $user_receive = User::where("id", $request["id_user_asesora"])->inRandomOrder()->first();
+         
+                $data["msg"]     = "Ingreso de Px por Aplicacion, Nombre: ".$request["nombres"]." Cedula: ".$request["identificacion"];
+                $data["subject"] = "Ingreso de Px por Aplicacion, Nombre: ".$request["nombres"];
+                $data["for"]     = $user_receive->email;
+                $this->SendEmail($data);
+
+                if($refered){
+                    $url = "https://fcm.googleapis.com/fcm/send";
+                    $token = $client->fcmToken;
+                    $serverKey = "AAAAg-p1HsU:APA91bHJHYE__7tBgvxXHPbMwR2cm7-KyYOknyMz7fAfBYm34YrFMF9QK4FieAEPL54o7EPXilihGevzxoBSf3X4CCHAswTk9NctvFTYY1ftYTYI5hj_-qXVFtCizHHzM060Ojphq62q";
+                    $title = "Se ha registrado un nuevo referido";
+                    $body = "Nombre: ".$request["nombres"]. " Cedula: ".$request["identificacion"];
+                    $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');
+                    $arrayToSend = array('to' => $token, 'notification' => $notification, 'priority' => 'high');
+                    $json = json_encode($arrayToSend);
+                    $headers = array();
+                    $headers[] = 'Content-Type: application/json';
+                    $headers[] = 'Authorization: key=' . $serverKey;
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                    //Send the request
+                    $response = curl_exec($ch);
+                    
+                    curl_close($ch);
+
+
+
+                    $data["msg"]     = "Ingreso de Referido, Nombre: ".$request["nombres"]." Cedula: ".$request["identificacion"];
+                    $data["subject"] = "Ingreso de Referido, Nombre: ".$request["nombres"];
+                    $data["for"]     = $client->email;
+                    $this->SendEmail($data);
+                }
+                return response()->json($cliente)->setStatusCode(200);
+            }else{
+                return response()->json("A ocurrido un error")->setStatusCode(400);
+            }
+
+
+
+
+        }
+
+        return response()->json($request->all())->setStatusCode(200);
+
+    }
+
+
+
+
+    public function Login(Request $request){
+
+        if($request["email"] == "" || $request["password"] == ""){
+            return response()->json("El Email y Contraseña son Requeridos")->setStatusCode(400);
+        }
+
+
+        $users = DB::table("clientes")
+                         ->where("email",    $request["email"])
+                         ->where("password", md5($request["password"]))
+	    				 ->get();
+     
+        if (sizeof($users) > 0) {
+
+            $token = bin2hex(random_bytes(64));
+
+            DB::table("clientes")->where("id_cliente", $users[0]->id_cliente)->update([
+                "fcmToken" => $request["fcmToken"],
+                "auth_app" => 1
+            ]);
+
+            $token_user  = AuthUsersApp::where("id_user", $users[0]->id_cliente)->get();
+
+            foreach ($token_user as $key => $value) {
+                $value->delete();
+            }
+
+            $AuthUsers                       = new AuthUsersApp;
+            $AuthUsers->id_user              = $users[0]->id_cliente;
+            $AuthUsers->token                = $token;
+            $AuthUsers->token_notifications  = $request["fcmToken"];
+            $AuthUsers->save();
+        
+
+            $data = array('id_cliente'   => $users[0]->id_cliente,
+                        'email'     => $users[0]->email,
+                        'nombres'   => $users[0]->nombres,
+                        'telefono'   => $users[0]->telefono,
+                        'avatar'    => null,
+                        'token'     => $token,
+                        'mensagge'  => "Ha iniciado sesion exitosamente"
+            );
+            
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            return response()->json("Usuario o contrasena invalida")->setStatusCode(400);
+        }
+    }
+
+    
+
+
+
+
+    public function SendEmail($data){
+
+        $request["msg"]  = $data["msg"];
+        $subject         = $data["subject"];
+        $for             = $data["for"];
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->subject($subject);
+            $msj->to("cardenascarlos18@gmail.com");
+        });
+
+
+        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
+        return response()->json($data)->setStatusCode(200);
+
+    }
+
+
+    
     public function store(Request $request){
 
 
@@ -431,5 +645,74 @@ class AffiliateController extends Controller
 
 
     }
+
+
+    public function StoreComission(Request $request){
+
+        DB::table("comissions")->insert([
+            "id_client"        => $request["id_client"],
+            "amount_procedure" => $request["amount_procedure"],
+            "percentege"       => $request["percentege"],
+            "amount_comission" => $request["amount_comission"]
+
+        ]);
+            
+
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+    public function GetComissions($id_client){
+
+        $comissions = DB::table("comissions")
+                    ->selectRaw("SUM(amount_comission) as total")
+                    ->where("id_client", $id_client)
+                    ->first();
+
+        $request_exchange = DB::table("request_exchange")
+                    ->selectRaw("SUM(amount) as total")
+                    ->where("user_id", $id_client)
+                    ->first();
+        $data["total"] = $comissions->total - $request_exchange->total;
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+    public function GetAllComissions(){
+        $data = DB::table("comissions")
+                    ->selectRaw("comissions.*, clientes.nombres")
+                    ->join("clientes", "clientes.id_cliente", "=", "comissions.id_client")
+                    ->get();
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+
+    public function BanckAccounts(Request $request){
+
+        BanckAccounts::updateOrCreate(
+            ["id_client" => $request["id_client"]],
+            [
+                "number_account"   => $request["number_account"],
+                "type_account"     => $request["type_account"],
+                "name_bank"        => $request["name_bank"],
+                "name"             => $request["name"],
+                "identification"   => $request["identification"]
+                
+            ]
+        );
+
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        return response()->json($data)->setStatusCode(200);
+    }
+
+    public function GetBanckAccounts($id_client){
+        $data = BanckAccounts::where("id_client", $id_client)->first();
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
 
 }

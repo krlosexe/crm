@@ -16,6 +16,7 @@
         <th><b>Instagram</b></th>
         <th><b>Twitter</b></th>
         <th><b>Youtube</b></th>
+        <th><b>Link de Google</b></th>
         <th><b>Codigo de Cliente</b></th>
         <th><b>PRP</b></th>
         <th><b>APP</b></th>
@@ -71,6 +72,7 @@
             <td>{{ $value->instagram }}</td>
             <td>{{ $value->twitter }}</td>
             <td>{{ $value->youtube }}</td>
+            <td>{{ $value->photos_google }}</td>
             <td>{{ $value->code_client }}</td>
             <td>{{ $value->prp }}</td>
 

@@ -461,12 +461,8 @@
 							//botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
 							if (actualizar == 1)
 								botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
-						if (data.status == 1 && actualizar == 1)
-							botones += "<span class='desactivar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Desactivar'><i class='fa fa-unlock' style='margin-bottom:5px'></i></span> ";
-						else if (data.status == 2 && actualizar == 1)
-							botones += "<span class='activar btn btn-sm btn-warning waves-effect' data-toggle='tooltip' title='Activar'><i class='fa fa-lock' style='margin-bottom:5px'></i></span> ";
 						if (borrar == 1)
-							//botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
+							botones += "<span class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span>";
 							return botones;
 					}
 				},
@@ -570,6 +566,13 @@
 			$("#have_initial").val(data.have_initial)
 			$("#reported").val(data.reported)
 			$("#initial").val(data.initial)
+			$("#origin").val(data.origen_px.replace("App Financiacion con el ", ""))
+
+
+
+			$("#reffered_prp").val("Referido por : "+data.code_affiliate)
+
+
             //$("#date_init_edit").val(data.init_credit)
 			if (data.photo_recived) {
 				$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`)
@@ -737,7 +740,7 @@
 	function eliminar(tbody, table) {
 		$(tbody).on("click", "span.eliminar", function() {
 			var data = table.row($(this).parents("tr")).data();
-			statusConfirmacion('api/tasks/status/' + data.id_clients_tasks + "/" + 0, "¿Esta seguro de eliminar el registro?", 'Eliminar');
+			statusConfirmacion('api/delete/fx/' + data.id , "¿Esta seguro de eliminar el registro?", 'Eliminar');
 		});
 	}
 

@@ -263,6 +263,8 @@ Route::get('change_name', 'ClientsController@changeName');
 Route::get('codes', 'ClientsController@GenerateCodes');
 
 
+
+
 Route::get('form-prp/{id_line}', function ($id_line) {
     return view('forms.prp', ["id_line" => $id_line]);
 });
@@ -302,6 +304,16 @@ Route::get('schedule', function () {
 });
 
 
+Route::get('commissions', function () {
+    return view('catalogos.commissions.gestion');
+});
+
+Route::get('charge', function () {
+    return view('catalogos.charge.gestion');
+});
+
+
+
 Route::get('externo_gestion', function () {
     return view('externo.gestion');
 });
@@ -309,6 +321,15 @@ Route::get('externo_gestion', function () {
 Route::get('cotizacion', function () {
     return view('wellezy.cotizacion.gestion');
 });
+
+
+
+Route::get('products', function () {
+    return view('warehouse.products.gestion');
+});
+
+
+
 
 
 Route::get('form-covid/{id_line}', function ($id_line) {

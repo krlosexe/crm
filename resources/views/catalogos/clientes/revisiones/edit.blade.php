@@ -64,7 +64,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                         <label for=""><b>Fecha</b></label>
-                        <input type="date" name="fecha" id="fecha-edit" class="form-control  form-control-user"  min="<?= date('Y-m-d')?>">
+                        <input type="date" name="fecha" id="fecha-edit" class="form-control  form-control-user">
                     </div>
                 </div>
 

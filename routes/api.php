@@ -267,13 +267,16 @@ Route::get('prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferers'
 Route::get('prp/refferers/{id_user}/{display}/{names}', 'AdviserController@GetRefferers');
 Route::get('prp/client/refferers/{id_client}', 'AdviserController@GetRefferersClient');
 
-
+Route::get('get/affiliate/{code}', 'AffiliateController@getAffiliateByCode');
 
 Route::get('adviser/prp/refferers/{id_user}/{display}', 'AdviserController@GetRefferersAdviser');
 Route::get('adviser/prp/refferers/{id_user}/{display}/{names}', 'AdviserController@GetRefferersAdviser');
 
 
 
+Route::post('create/comission', 'AffiliateController@StoreComission');
+Route::get('get/stats/{id_client}', 'AffiliateController@GetComissions');
+Route::get('get/comissions', 'AffiliateController@GetAllComissions');
 
 
 
@@ -408,6 +411,10 @@ Route::post('set-shared-post', 'PostController@SaveSahareUser');
 
 
 Route::post('prp/make-requests', 'PointsController@RequestExchange');
+Route::get('prp/get-requests/{id_client}', 'PointsController@GetRequestExchange');
+Route::get('get/request/charge', 'PointsController@GetRequestExchangeAll');
+Route::put('update/request/charge/{id}', 'PointsController@UpdateRequestExchange');
+
 
 Route::get('get/pay/study/credit/client/{id_client}', 'FinacingController@GetPayStudyCredit');
 
@@ -481,10 +488,60 @@ Route::post('wellezy/auth', 'WellezyController@Auth');
 Route::post('wellezy/cotization/add', 'WellezyController@AddService');
 
 
+Route::get('delete/fx/{id}', 'FinacingController@Delete');
+
 
 
 
 Route::get('test/twilo', 'Login@TestTwilo');
+
+
+Route::post('register/banck/account', 'AffiliateController@BanckAccounts');
+Route::get('banck/account/{id_client}', 'AffiliateController@GetBanckAccounts');
+
+
+
+
+/*
+    ENDPOINTS NUEVOS PARA PRP
+*/
+
+
+Route::post('v2/prp/register/client', 'AffiliateController@StorePrp');
+Route::post('v2/prp/login', 'AffiliateController@Login');
+Route::resource('venues', 'VenuesController');
+Route::get('get/procedures', 'CategoryController@getProcedures');
+Route::post('request/appointment', 'QueriesController@RequestAppointment');
+Route::get('queries/client/{id_client}', 'QueriesController@QueriesByClient');
+
+Route::post('v2/register/referred', 'ReferredController@storeV2');
+Route::get('v2/prp/refferers/{id}', 'ReferredController@get');
+Route::get('v2/prp/refferers/{id}/{search}', 'ReferredController@get');
+Route::get('v2/prp/refferers/{id}/{search}/{state}', 'ReferredController@get');
+
+
+
+
+Route::resource('products', 'ProductsController');
+Route::get('products/status/{id}/{status}', 'ProductsController@status');
+Route::get('paginate/products', 'ProductsController@Paginates');
+Route::get('paginate/products/{category}', 'ProductsController@Paginates');
+
+
+Route::post('favorites/add', 'FavoritesController@store');
+Route::get('favorites/get/{id_client}', 'FavoritesController@getClient');
+Route::get('favorites/delete/{id}', 'FavoritesController@Delete');
+
+Route::get('categories', 'CategoryController@index');
+
+Route::resource('coupons', 'CouponsController');
+
+Route::resource('order', 'OrdersController');
+
+Route::post('client/edit', 'ClientsController@EditProfileApp');
+
+
+
 
 
 
@@ -651,3 +708,133 @@ Route::get('sync/auth/app', function () {
     }
     return response()->json($data)->setStatusCode(200);
 });
+
+
+
+
+
+
+Route::get('repartir/prp', function () {
+
+    $data = [
+        [
+            "Nombres y Apellidos " => "Dayana Paola Galindo hoyos",
+            "identificacion" => "1127350740"
+        ],
+
+        [
+            "Nombres y Apellidos " => "ANA MILENA HOYOS JIMENEZ",
+            "identificacion" => "1040360527"
+        ],
+        [
+            "Nombres y Apellidos " => "Ayda Patricia Franco Martinez",
+            "identificacion" => "1113516361"
+        ],
+        [
+            "Nombres y Apellidos " => "Yeleni Londoño Rios",
+            "identificacion" => "1214723071"
+        ],
+        [
+            "Nombres y Apellidos " => "LUIS FELIPE BEGAMBRE VASQUEZ",
+            "identificacion" => "1019120800"
+        ],
+        [
+            "Nombres y Apellidos " => "YESICA MILENA ATEHORTUA MARTINEZ Atehortua martinez",
+            "identificacion" => "1128472305"
+        ],
+        [
+            "Nombres y Apellidos " => "Maria Camila Gaviria Gaviria",
+            "identificacion" => "1038337603"
+        ],
+        [
+            "Nombres y Apellidos " => "Mabel Astrid Jaramillo Espinosa",
+            "identificacion" => "43908898"
+        ],
+        [
+            "Nombres y Apellidos " => "luisa maria garcia perdomo",
+            "identificacion" => "1062281389"
+        ],
+        [
+            "Nombres y Apellidos " => "Luisa Maria Rios Galeano",
+            "identificacion" => "1037636397"
+        ],
+        [
+            "Nombres y Apellidos " => "Paola Andrea Escobar Alvarez",
+            "identificacion" => "1020402211"
+        ],
+        [
+            "Nombres y Apellidos " => "isabel cristina Loaiza berrio loaiza berrio",
+            "identificacion" => "1017133283"
+        ],
+        [
+            "Nombres y Apellidos " => "Nubia serna",
+            "identificacion" => "38064313"
+        ],
+        [
+            "Nombres y Apellidos " => "CHICELL DANIELA ARBOLEDA QUINTERO Arboleda",
+            "identificacion" => "1040043238"
+        ],
+        [
+            "Nombres y Apellidos " => "Natalia Gonzalez Tuberquia Gonzalez Tuberquia",
+            "identificacion" => "1020423330"
+        ],
+        [
+            "Nombres y Apellidos " => "VALENTINA MUÑOZ MONSALVE",
+            "identificacion" => "1000896913"
+        ],
+        [
+            "Nombres y Apellidos " => "yiney Natalia alvarez Muñoz",
+            "identificacion" => "1036656578"
+        ],
+        [
+            "Nombres y Apellidos " => "Yesenia Pérez",
+            "identificacion" => "1216722375"
+        ],
+        [
+            "Nombres y Apellidos " => "AIDA LUCIA HOYOS SALAZAR",
+            "identificacion" => "31640203"
+        ],
+        [
+            "Nombres y Apellidos " => "Erika Tatiana Chavez Galindo",
+            "identificacion" => "1144158534"
+        ],
+        [
+            "Nombres y Apellidos " => "LUISA FERNANDA IBARGUEN URREA Ibarguen urrea",
+            "identificacion" => "1143868929"
+        ],
+        [
+            "Nombres y Apellidos " => "JENNY MAGNOLIA RIOS SILVA",
+            "identificacion" => "43599088"
+        ]
+    ];
+
+
+
+    $clientes = DB::table("clientes")
+                    ->where("prp", "Si")
+                    ->where("id_line", 3)
+                    ->where("take", 0)
+                    ->limit(314)
+                    ->get();
+
+
+    foreach($data as $value2){
+       
+        foreach($clientes as $value){
+            if($value2["identificacion"] != $value->identificacion){
+                DB::table("clientes")->where("id_cliente", $value->id_cliente)
+                        ->update([
+                            "take" => 1,
+                            "id_user_asesora" => 73
+                        ]);
+            }
+        }
+    }
+
+
+    return response()->json($data)->setStatusCode(200);
+});
+
+
+
+

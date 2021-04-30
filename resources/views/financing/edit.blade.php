@@ -85,6 +85,29 @@
                                 </div>
                             </div>
 
+
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Origen</b></label>
+                                        <input type="text" id="origin" class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Referido PRP ?</b></label>
+                                        <input type="text"  id="reffered_prp" class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
                             <div class="row">
                                 <div class="col-md-6">
 

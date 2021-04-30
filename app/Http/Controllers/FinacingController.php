@@ -22,7 +22,7 @@ class FinacingController extends Controller
         $data = DB::table("client_request_credit")
             ->selectRaw("client_request_credit.*, clientes.nombres,clientes.identificacion, clientes.pay_to_study_credit, clientes.locked,
 
-
+                                    clientes.origen as origen_px,
                                     clientc_credit_information.dependent_independent,
                                     clientc_credit_information.have_initial,
                                     clientc_credit_information.reported,
@@ -51,7 +51,12 @@ class FinacingController extends Controller
                                     valuations.cotizacion,
                                     users.email,
                                     datos_personales.nombres as name_adviser,
-                                    datos_personales.apellido_p as last_name_adviser
+                                    datos_personales.apellido_p as last_name_adviser,
+
+                                    cl2.nombres as name_affiliate,
+                                    cl2.code_client as code_affiliate
+
+
                 "
             )
 
@@ -60,6 +65,10 @@ class FinacingController extends Controller
             ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "client_request_credit.id_client")
             ->join("clients_pay_to_study_credit", "clients_pay_to_study_credit.id_client", "=", "client_request_credit.id_client", "left")
             ->join("client_request_credit_requirements", "client_request_credit_requirements.id_client", "=", "client_request_credit.id_client", "left")
+
+            ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
+
+
             ->join("valuations", "valuations.id_cliente", "=", "client_request_credit.id_client", "left")
             ->join("users", "users.id", "=", "clientes.id_user_asesora", "left")
 
@@ -833,6 +842,14 @@ class FinacingController extends Controller
         return $d && $d->format($format) == $date;
     }
 
+
+
+
+    public function Delete($id){
+        DB::table("client_request_credit")->where("id", $id)->delete();
+        $response = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+        return response()->json($response)->setStatusCode(200);
+    }
 
 
 
