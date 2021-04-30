@@ -470,8 +470,66 @@ class ValuationsController extends Controller
                     curl_close($ch);
 
 
+
                 }
+
+
             }
+
+
+            $cliente = Clients::where('id_cliente',$request["id_cliente"])->first();
+
+            if($cliente->fcmToken && $cliente->fcmToken != ""){//NUEVA APP DE PRP
+
+                switch ($cliente->id_line) {
+                    case 17:
+                       $apiKey = "AAAAg-p1HsU:APA91bHJHYE__7tBgvxXHPbMwR2cm7-KyYOknyMz7fAfBYm34YrFMF9QK4FieAEPL54o7EPXilihGevzxoBSf3X4CCHAswTk9NctvFTYY1ftYTYI5hj_-qXVFtCizHHzM060Ojphq62q";
+                        break;
+                    case 6:
+                        $apiKey = 'AAAAnoQ9XMg:APA91bEjJO50nQJ3Vo8vlQkHKbpzyWbuXkgIgjptlL4SOgxq8Y5vcZhUOr5MIVsV-H-mylQl84P1do1uIAvpKwLvqohe8_04lasgpaGt_hnA2wigCV57QC36sbocBcJuB6pnd6y8I6Dp';
+                        break;
+                    case 16:
+                        $apiKey = 'AAAA9NFh0cA:APA91bGQeeeuhxzo2dlh4z6zXfrgCzJfkjN7NvyxbLIL6QQD5a0xpU9ETkhwH4MAhybmfC80q8BEINZy8-O1EyMzuQQuWQ2Ps9azGEh5F7cl5uAFifSGJ1_kyhrclHQ5Jpo3k9hlTm0J';
+                        break;
+                    case 27:
+                        $apiKey = 'AAAAG-HAogM:APA91bEJXN2dPp9-8abRiqSaznaTzpU552YvlUjjAXckzKQ9FfYZcCFvayrmVe1WLNpycrpgcckU2nT-mJE99ObPUQykZTeSxT1VukoIBpirbIqdzPfDfj8fQhekWDtBReXVpvi6pr4v';
+                        break;
+                    default:
+                        $apiKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+                        break;
+                }
+
+                $FCM_token = $cliente->fcmToken;
+
+                $url = "https://fcm.googleapis.com/fcm/send";
+                $token = $FCM_token;
+                $serverKey = $apiKey;
+                $title = "Tu cita de valoracion fue Agendada";
+                $body = "Tu cita de Valoracion fue agendada para el dia $request[fecha]";
+                $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default', 'badge' => '1');
+                $arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+                $json = json_encode($arrayToSend);
+                $headers = array();
+                $headers[] = 'Content-Type: application/json';
+                $headers[] = 'Authorization: key='. $serverKey;
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+                curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                //Send the request
+                $response = curl_exec($ch);
+                //Close request
+                if ($response === FALSE) {
+                    die('FCM Send Error: ' . curl_error($ch));
+                }
+                curl_close($ch);
+
+            }
+
+
+
 
 
             /*

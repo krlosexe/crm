@@ -40,6 +40,12 @@ use DB;
 use DateTime;
 use PhpParser\Node\Stmt\TryCatch;
 
+
+use App\RevisionAppointment;
+use App\AppointmentsAgenda;
+
+
+
 class ClientsController extends Controller
 {
     /**
@@ -1277,6 +1283,180 @@ class ClientsController extends Controller
             return response()->json("No esta autorizado")->setStatusCode(400);
         }
     }
+
+
+
+
+
+
+
+    public function ProtocolRevision($procedure, $date_procedure, $id_client){
+
+        $client = DB::table('clientes')->where("id_cliente", $id_client)->first();
+        $procedure_last = 0;
+        if($client->procedure_px != null){
+            $procedure_last = $client->procedure_px;
+        }
+
+
+        if($procedure_last != $procedure){
+            $store = RevisionAppointment::create([
+                "id_paciente" => $id_client,
+                "cirugia"     => $procedure,
+                "clinica"     => $client->clinic
+            ]);
+        
+            $auditoria              = new Auditoria;
+            $auditoria->tabla       = "revision_appointment";
+            $auditoria->cod_reg     = $store["id_revision"];
+            $auditoria->status      = 1;
+            $auditoria->fec_regins  = date("Y-m-d H:i:s");
+            $auditoria->usr_regins  = $client->id_user_asesora;
+            $auditoria->save();
+    
+    
+            $date_revision = $date_procedure;
+    
+            foreach($this->RevisionPeriods($procedure) as $value){
+    
+                if($value != null){
+                    $fecha_actual  = date($date_revision);
+                    $date_revision = date("Y-m-d",strtotime($fecha_actual."+ ".$value." days"));
+    
+                    $AppointmentsAgenda = new AppointmentsAgenda;
+                    $AppointmentsAgenda->id_revision  = $store->id_revision;
+                    $AppointmentsAgenda->fecha        = $date_revision;
+                    $AppointmentsAgenda->descripcion  = $procedure;
+                    $AppointmentsAgenda->save();
+                }
+            }
+        }
+    }
+
+
+    public function RevisionPeriods($procedure){
+        
+        if($procedure == "ABDOMINOPLASTIA"){
+            $data = [
+                "revision_1" => 2,
+                "revision_2" => 5,
+                "revision_3" => 6,
+                "revision_4" => 7,
+                "revision_5" => 15,
+                "revision_6" => null,
+                "revision_7" => null
+            ];
+        }
+
+        if($procedure == "BLEFAROPLASTIA"){
+            $data = [
+                "revision_1" => 2,
+                "revision_2" => 6,
+                "revision_3" => 7,
+                "revision_4" => 15,
+                "revision_5" => 30,
+                "revision_6" => 60,
+                "revision_7" => null
+            ];
+        }
+
+        if($procedure == "IMPLANTES DE SENOS"){
+            $data = [
+                "revision_1" => 2,
+                "revision_2" => 5,
+                "revision_3" => 7,
+                "revision_4" => 8,
+                "revision_5" => 30,
+                "revision_6" => 60,
+                "revision_7" => null
+            ];
+        }
+
+
+        if($procedure == "LIPO Y ABDOMINOPLASTIA"){
+            $data = [
+                "revision_1" => 2,
+                "revision_2" => 5,
+                "revision_3" => 7,
+                "revision_4" => 7,
+                "revision_5" => null,
+                "revision_6" => 30,
+                "revision_7" => null
+            ];
+        }
+
+
+
+        if($procedure == "LIPOSUCCIÓN O LIPOTRANSFERENCIA"){
+            $data = [
+                "revision_1" => 2,
+                "revision_2" => 4,
+                "revision_3" => 7,
+                "revision_4" => null,
+                "revision_5" => 30,
+                "revision_6" => 60,
+                "revision_7" => null
+            ];
+        }
+
+
+        if($procedure == "OTOPLASTIA"){
+            $data = [
+                "revision_1" => 2,
+                "revision_2" => 5,
+                "revision_3" => 7,
+                "revision_4" => 15,
+                "revision_5" => 30,
+                "revision_6" => 60,
+                "revision_7" => null
+            ];
+        }
+
+
+        if($procedure == "PEXIA CON IMPLANTES"){
+            $data = [
+                "revision_1" => 2,
+                "revision_2" => 5,
+                "revision_3" => 7,
+                "revision_4" => 7,
+                "revision_5" => 30,
+                "revision_6" => 60,
+                "revision_7" => null
+            ];
+        }
+
+
+        if($procedure == "RINOPLASTIA"){
+            $data = [
+                "revision_1" => 2,
+                "revision_2" => 4,
+                "revision_3" => 7,
+                "revision_4" => 15,
+                "revision_5" => 30,
+                "revision_6" => 60,
+                "revision_7" => null
+            ];
+        }
+
+
+        if($procedure == "GLUTEOPLASTIA"){
+            $data = [
+                "revision_1" => 2,
+                "revision_2" => 5,
+                "revision_3" => 7,
+                "revision_4" => 15,
+                "revision_5" => 30,
+                "revision_6" => 60,
+                "revision_7" => null
+            ];
+        }
+
+        return $data;
+    }
+
+
+
+    
 
 
 
@@ -3958,4 +4138,19 @@ class ClientsController extends Controller
             return $th;
         }
     }
+
+
+    public function EditProfileApp(Request $request){
+
+        $update_clients = Clients::find($request["id"])->update([
+            "nombres"  => $request["nombres"],
+            "telefono" => $request["telefono"],
+            "email" => $request["email"],
+        ]);
+
+        $data = Clients::SelectRaw("id_cliente, nombres, telefono, email, identificacion")->where("id_cliente", $request["id"])->first();
+        return response()->json($data)->setStatusCode(200);
+
+    }
+
 }

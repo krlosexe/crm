@@ -287,9 +287,7 @@ class Login extends Controller
     {
 
         if($request["email"] == "" || $request["password"] == ""){
-
             return response()->json("El Email y Contraseña son Requeridos")->setStatusCode(400);
-
         }
 
         $users = User::join("datos_personales", "datos_personales.id_usuario", "users.id")

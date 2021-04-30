@@ -323,6 +323,15 @@ Route::get('cotizacion', function () {
 });
 
 
+
+Route::get('products', function () {
+    return view('warehouse.products.gestion');
+});
+
+
+
+
+
 Route::get('form-covid/{id_line}', function ($id_line) {
 
     if($id_line == 2){

@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-       $data = Category::get();
+       $data = Category::where("status", 1)->get();
        return response()->json($data)->setStatusCode(200);
     }
 
@@ -276,5 +276,19 @@ class CategoryController extends Controller
             return $th;
         }
     }
+
+
+
+
+    public function GetProcedures(){
+
+        $categories = Category::select("category.*")
+                               ->with("child")
+                               ->where("category.status", 1)
+                                ->get();
+       
+        return response()->json($categories)->setStatusCode(200);
+    }
+
 
 }
