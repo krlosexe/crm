@@ -287,9 +287,7 @@ class Login extends Controller
     {
 
         if($request["email"] == "" || $request["password"] == ""){
-
             return response()->json("El Email y Contraseña son Requeridos")->setStatusCode(400);
-
         }
 
         $users = User::join("datos_personales", "datos_personales.id_usuario", "users.id")
@@ -900,7 +898,7 @@ class Login extends Controller
         $for = $data["email"];
         $request["msg"] = $data["message"];
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });

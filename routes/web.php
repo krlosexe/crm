@@ -323,6 +323,15 @@ Route::get('cotizacion', function () {
 });
 
 
+
+Route::get('products', function () {
+    return view('warehouse.products.gestion');
+});
+
+
+
+
+
 Route::get('form-covid/{id_line}', function ($id_line) {
 
     if($id_line == 2){
@@ -430,7 +439,8 @@ Route::get('register-app-ios', function () {
 Route::get('calificaciones', function () {
     $data = DB::table("califications_advisers")->select("califications_advisers.*", "datos_personales.*")
                 ->join("datos_personales", "datos_personales.id_usuario", "=", "califications_advisers.id_user")
-                ->whereRaw("MONTH(califications_advisers.created_at) = 9 OR MONTH(califications_advisers.created_at) = 10")
+                ->whereRaw("MONTH(califications_advisers.fecha) = 3")
+                ->where("califications_advisers.id_user", 25430)
                 ->orderBy("califications_advisers.created_at", "ASC")
                 ->orderBy("califications_advisers.id_user", "ASC")
                 ->orderBy("califications_advisers.type", "ASC")

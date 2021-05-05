@@ -2707,6 +2707,22 @@
 		}
 	}
 
+
+
+	$("#state_edit").change(function (e) { 
+		
+		if($(this).val() == "Operada"){
+			$("#section_procedure").css("display", "block")
+			$("#procedure_px_edit").removeAttr("disabled").attr("required", "required")
+			$("#date_procedure_edit").removeAttr("disabled").attr("required", "required")
+		}else{
+			$("#section_procedure").css("display", "none")
+			$("#procedure_px_edit").removeAttr("required").attr("disabled", "disabled")
+			$("#date_procedure_edit").removeAttr("required").attr("disabled", "disabled")
+		}
+		
+	});
+
 	</script>
 
 	@endsection

@@ -69,10 +69,11 @@ class ValuationsController extends Controller
 
             $valuations = Valuations::select("valuations.*", "valuations.id_asesora_valoracion as id_asesora", "valuations.clinic as id_clinic",
                                              "valuations.status as status_valuations*", "auditoria.*", "users.email as email_regis", "clientes.*",
-                                            "valuations.status as status_valuations", "valuations.clinic as id_clinic")
+                                            "valuations.status as status_valuations", "valuations.clinic as id_clinic", "clinic.nombre as name_clinic")
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                                 ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                                ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.tabla", "valuations")
                                 ->where("auditoria.status", "!=", "0")
@@ -470,8 +471,66 @@ class ValuationsController extends Controller
                     curl_close($ch);
 
 
+
                 }
+
+
             }
+
+
+            $cliente = Clients::where('id_cliente',$request["id_cliente"])->first();
+
+            if($cliente->fcmToken && $cliente->fcmToken != ""){//NUEVA APP DE PRP
+
+                switch ($cliente->id_line) {
+                    case 17:
+                       $apiKey = "AAAAg-p1HsU:APA91bHJHYE__7tBgvxXHPbMwR2cm7-KyYOknyMz7fAfBYm34YrFMF9QK4FieAEPL54o7EPXilihGevzxoBSf3X4CCHAswTk9NctvFTYY1ftYTYI5hj_-qXVFtCizHHzM060Ojphq62q";
+                        break;
+                    case 6:
+                        $apiKey = 'AAAAYEG4vHw:APA91bGFWTsV1GsGaNdTZ7zNh4lM7zzTVO6cH-uB6bbjLxoUo3gfYDoIEMtbU6ioIC1BmAKVI3D_btMJg2Jd3urI8l3Pb9noB0FEkU7_6EGKnv7ymZULMwv0dKLCEprIuKwMJNUQDrEe';
+                        break;
+                    case 7:
+                        $apiKey = 'AAAAYEG4vHw:APA91bGFWTsV1GsGaNdTZ7zNh4lM7zzTVO6cH-uB6bbjLxoUo3gfYDoIEMtbU6ioIC1BmAKVI3D_btMJg2Jd3urI8l3Pb9noB0FEkU7_6EGKnv7ymZULMwv0dKLCEprIuKwMJNUQDrEe';
+                        break;
+                    case 8:
+                        $apiKey = 'AAAAYEG4vHw:APA91bGFWTsV1GsGaNdTZ7zNh4lM7zzTVO6cH-uB6bbjLxoUo3gfYDoIEMtbU6ioIC1BmAKVI3D_btMJg2Jd3urI8l3Pb9noB0FEkU7_6EGKnv7ymZULMwv0dKLCEprIuKwMJNUQDrEe';
+                        break;
+                    default:
+                        $apiKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+                        break;
+                }
+
+                $FCM_token = $cliente->fcmToken;
+
+                $url = "https://fcm.googleapis.com/fcm/send";
+                $token = $FCM_token;
+                $serverKey = $apiKey;
+                $title = "Tu cita de valoracion fue Agendada";
+                $body = "Tu cita de Valoracion fue agendada para el dia $request[fecha]";
+                $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default', 'badge' => '1');
+                $arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+                $json = json_encode($arrayToSend);
+                $headers = array();
+                $headers[] = 'Content-Type: application/json';
+                $headers[] = 'Authorization: key='. $serverKey;
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+                curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                //Send the request
+                $response = curl_exec($ch);
+                //Close request
+                if ($response === FALSE) {
+                    die('FCM Send Error: ' . curl_error($ch));
+                }
+                curl_close($ch);
+
+            }
+
+
+
 
 
             /*
@@ -910,7 +969,7 @@ class ValuationsController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -921,7 +980,7 @@ class ValuationsController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -931,7 +990,7 @@ class ValuationsController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });

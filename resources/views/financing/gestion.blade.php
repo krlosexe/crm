@@ -566,6 +566,13 @@
 			$("#have_initial").val(data.have_initial)
 			$("#reported").val(data.reported)
 			$("#initial").val(data.initial)
+			$("#origin").val(data.origen_px.replace("App Financiacion con el ", ""))
+
+
+
+			$("#reffered_prp").val("Referido por : "+data.code_affiliate)
+
+
             //$("#date_init_edit").val(data.init_credit)
 			if (data.photo_recived) {
 				$("#load_img").attr('src', `img/credit/comprobantes/${data.photo_recived}`)

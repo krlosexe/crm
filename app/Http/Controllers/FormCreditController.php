@@ -52,7 +52,7 @@ class FormCreditController extends Controller
             $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Credito";
 
             Mail::send('emails.form_solicitud_credit',$request->all(), function($msj) use($subject,$for){
-                $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+                $msj->from("crm@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });
@@ -65,7 +65,7 @@ class FormCreditController extends Controller
             $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Credito";
 
             Mail::send('emails.form_solicitud_credit',$request->all(), function($msj) use($subject,$for){
-                $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+                $msj->from("crm@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });
@@ -81,13 +81,13 @@ class FormCreditController extends Controller
             foreach($users as $user){
 
                 $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
-            // $for = "contacto@danielandrescorreaposadacirujano.com";
+            // $for = "crm@pdtagencia.com";
                 $for = $user["email"];
 
                 $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Credito";
 
                 Mail::send('emails.form_solicitud_credit',$request->all(), function($msj) use($subject,$for){
-                    $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+                    $msj->from("crm@pdtagencia.com","CRM");
                     $msj->subject($subject);
                     $msj->to($for);
                 });
@@ -95,13 +95,13 @@ class FormCreditController extends Controller
             }
 
                 $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
-                // $for = "contacto@danielandrescorreaposadacirujano.com";
+                // $for = "crm@pdtagencia.com";
                 $for = "getionfinanmed@gmail.com";
 
                 $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Credito";
 
                 Mail::send('emails.form_solicitud_credit',$request->all(), function($msj) use($subject,$for){
-                    $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+                    $msj->from("crm@pdtagencia.com","CRM");
                     $msj->subject($subject);
                     $msj->to($for);
                 });
@@ -111,13 +111,13 @@ class FormCreditController extends Controller
 
 
         $subject = "SOLICITUD DE CREDITO ". $request["first_name"]." ".$request["first_last_name"];
-        $for = "contacto@danielandrescorreaposadacirujano.com";
+        $for = "crm@pdtagencia.com";
         //$for = $user["email"];
 
         $request["msg"]  = "Han diligenciado un Formulario de Solicitud de Credito";
 
         Mail::send('emails.form_solicitud_credit',$request->all(), function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -142,7 +142,7 @@ class FormCreditController extends Controller
             $request["msg"]  = "Un Paciente dio Autroizacion para Consulta y Reporte a Centrales de Bancos de Datos";
 
            Mail::send('emails.forms_authorization',$request->all(), function($msj) use($subject,$for){
-                $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+                $msj->from("crm@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });
@@ -158,13 +158,13 @@ class FormCreditController extends Controller
             foreach($users as $user){
 
                 $subject = "AUTORIZACION PARA CONSULTA Y REPORTE A CENTRALES DE BANCOS DE DATOS ". $request["names"]." ".$request["last_names"];
-                //$for = "contacto@danielandrescorreaposadacirujano.com";
+                //$for = "crm@pdtagencia.com";
                 $for = $user["email"];
 
                 $request["msg"]  = "Un Paciente dio Autroizacion para Consulta y Reporte a Centrales de Bancos de Datos";
 
                 Mail::send('emails.forms_authorization',$request->all(), function($msj) use($subject,$for){
-                    $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+                    $msj->from("crm@pdtagencia.com","CRM");
                     $msj->subject($subject);
                     $msj->to($for);
                 });
@@ -183,7 +183,7 @@ class FormCreditController extends Controller
             $request["msg"]  = "Un Paciente dio Autroizacion para Consulta y Reporte a Centrales de Bancos de Datos";
 
            Mail::send('emails.forms_authorization',$request->all(), function($msj) use($subject,$for){
-                $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+                $msj->from("crm@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });

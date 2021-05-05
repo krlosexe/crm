@@ -1,5 +1,5 @@
 @extends('layouts.app')
-	
+
 
 	@section('CustomCss')
 
@@ -35,7 +35,7 @@
 				left: 0;
 				z-index: 3000;
 				display: none;
-				
+
 				/* background-color: rgba(0,0,0,.4); */
 				transform: translateZ(0);
 				-webkit-transform: translateZ(0);
@@ -83,7 +83,7 @@
 				-ms-transition: 3s;
 				-o-transition: 3s;
 				transition: 3s;
-				
+
 			}
 
 
@@ -96,7 +96,7 @@
 				display: block;
 				width: calc(100% - 300px);
 				background: #fff;
-				
+
 				transform: translateX(100%);
 				 -webkit-transition: 3s;
 					-moz-transition: 3s;
@@ -114,7 +114,7 @@
 				-ms-transform: translateX(0%);
 				-o-transform: translateX(0%);
 				transform: translateX(0%);
-			
+
 			}
 
 
@@ -183,7 +183,7 @@
 		</style>
 
 
-	
+
   	<link href="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.css" rel="stylesheet">
     <script src="<?= url('/') ?>/vendor/summernote-master/dist/summernote.min.js"></script>
 
@@ -202,8 +202,8 @@
 		      <!-- Main Content -->
 		      <div id="content">
 
-				@include('layouts.topBar') 
-		       
+				@include('layouts.topBar')
+
 
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
@@ -265,7 +265,7 @@
 										<label for=""><b>Fecha hasta</b></label>
 										<input type="date" class="form-control" id="date_finish">
 									</div>
-								</div>  
+								</div>
 
 
 
@@ -285,6 +285,7 @@
 								  <th>Hora Desde</th>
 								  <th>Hora Hasta</th>
 								  <th>Tipo</th>
+                                  <th>Clinica</th>
 								  <th>Estatus</th>
 								  <th>Seguidores</th>
 			                      <th>Fecha de registro</th>
@@ -312,7 +313,7 @@
 
 
 			  <div id="slide">
-					
+
 					<div class="side-panel-container">
 
 
@@ -390,12 +391,12 @@
 
 
 
-			$("#id_asesora_valoracion-filter, #overdue-filter").change(function (e) { 
+			$("#id_asesora_valoracion-filter, #overdue-filter").change(function (e) {
 				list();
 			});
 
 
-			$("#date_init, #date_finish").change(function (e) { 
+			$("#date_init, #date_finish").change(function (e) {
 				list();
 			});
 
@@ -423,12 +424,12 @@
 
 				$("#div-input-edit").css("display", "none")
 				$('#table tbody').off('click');
-				var url=document.getElementById('ruta').value; 
+				var url=document.getElementById('ruta').value;
 				cuadros(cuadro, "#cuadro1");
 
 				var table=$("#table").DataTable({
 					"destroy":true,
-					
+
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
@@ -442,7 +443,7 @@
 							"overdue" : overdue,
 							"date_init"   : date_init,
 							"date_finish" : date_finish
-							
+
 						},
 						"dataSrc":""
 					},
@@ -464,7 +465,7 @@
 							}
 						},
 						{"data": "code"},
-						{"data":"nombres", 
+						{"data":"nombres",
 							render : function(data, type, row) {
 								return "<a href='javascript:void(0)' onclick='ViewClient("+row.id_cliente+")'>"+data+"</a>";
 							}
@@ -473,6 +474,7 @@
 						{"data": "time"},
 						{"data": "time_end"},
 						{"data": "type"},
+                        {"data": "name_clinic"},
 						{"data": "status_valuations",
 							render : function(data, type, row){
 								if(data == 1){
@@ -494,12 +496,12 @@
 
 						{"data": null,
 							render : function(data, type, row) {
-								
+
 								var html = ""
-								$.each(row.followers, function (key, item) { 
+								$.each(row.followers, function (key, item) {
 									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 2rem;width: 2rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_user+" "+item.name_user+"'>"
 								});
-								
+
 								return html
 							}
 						},
@@ -507,7 +509,7 @@
 
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
-						
+
 					],
 					"language": idioma_espanol,
 					"dom": 'Bfrtip',
@@ -530,7 +532,7 @@
 				if(id_rol == 21){
 					$(".dt-buttons").remove()
 				}
-	
+
 
 
 
@@ -539,7 +541,7 @@
 
 
 			function ViewClient(id_paciente){
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/clients/'+id_paciente,
 					type:'GET',
@@ -548,7 +550,7 @@
 						"id_user": id_user,
 						"token"  : tokens,
 					},
-					
+
 					beforeSend: function(){
 
 					},
@@ -577,7 +579,7 @@
 						GetAsesorasValoracion("#id_asesora_valoracion-edit")
 
 
-				
+
 
 						$("#id_asesora_valoracion-edit").val(data.id_asesora_valoracion)
 						$("#code-edit").text(data.code_client)
@@ -591,7 +593,7 @@
 						$("#email_edit").val(data.email)
 						$("#direccion_edit").val(data.direccion)
 						$("#fecha_nacimiento_edit").val(data.fecha_nacimiento)
-						
+
 						$("#origen_edit").val(data.origen)
 						$("#forma_pago_edit").val(data.forma_pago)
 
@@ -651,11 +653,11 @@
 						$("#previous_credits_edit").val(data.previous_credits)
 						$("#reported_edit").val(data.reported)
 						$("#bank_account_edit").val(data.bank_account)
-					
+
 						$("#properties_edit").prop("checked", data.properties ? true : false)
 						$("#vehicle_edit").prop("checked", data.vehicle ? true : false)
-						
-						
+
+
 						$("#linea-negocio-edit").val(data.id_line)
 						$("#linea-negocio-edit").trigger("change");
 
@@ -670,15 +672,15 @@
 						$("#id_edit").val(data.id_cliente)
 
 
-				
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 						$.map(data.logs, function (item, key) {
 							html += '<div class="col-md-12" style="margin-bottom: 15px">'
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.event+'</div>'
@@ -689,7 +691,7 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
 						$("#logs_edit").html(html)
@@ -707,18 +709,18 @@
 								html += '</div>'
 							html += '</div>'
 
-							
+
 							html += '<div class="col-md-2 phone_add_edit_'+count_phone+'"">'
 							html += '<br>'
 								html += '<button type="button" id="add_phone" onclick="deletePhoneEdit('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 							html += '</div>'
 
-					
+
 						});
 
 						$("#phone_add_content_edit").html(html)
 
-					
+
 
 
 						var html = ""
@@ -732,13 +734,13 @@
 								html += '</div>'
 							html += '</div>'
 
-							
+
 							html += '<div class="col-md-2 email_add_edit_'+count_email+'"">'
 							html += '<br>'
 								html += '<button type="button" id="add_email" onclick="deleteemailEdit('+count_email+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 							html += '</div>'
 
-					
+
 						});
 
 						$("#email_add_content_edit").html(html)
@@ -746,19 +748,19 @@
 
 
 
-			
+
 						$('#summernote_edit').summernote('reset');
 						$('#summernote_edit').summernote({
 							'height' : 200
 						});
-						var url=document.getElementById('ruta').value; 
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 
-						
+
 
 					//	GetComments("#comments_edit", data.id_cliente)
-				
+
 						GetCommentsClients("#comments_edit_client", data.id_cliente)
 
 						valuations("#btrx_tab4_edit", "#iframeValuationsEdit", data)
@@ -807,14 +809,14 @@
 					removeTitle: 'Cancel or reset changes',
 					elErrorContainer: '#kv-avatar-errors-1',
 					msgErrorClass: 'alert alert-block alert-danger',
-					
+
 					layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 					allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "pdf", "docs"],
 				});
 
 
 
-			
+
 
 				cuadros("#cuadro1", "#cuadro2");
 			}
@@ -834,13 +836,13 @@
 					dataType:'JSON',
 					async: false,
 					beforeSend: function(){
-						
+
 					},
 					error: function (data) {
-						
+
 					},
 					success: function(data){
-						
+
 						$(select+" option").remove();
 						$(select).append($('<option>',
 						{
@@ -882,7 +884,7 @@
 					// mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
 					},
 					error: function (data) {
-					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+					//mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');
 					},
 					success: function(data){
 					$(select+" option").remove();
@@ -907,7 +909,7 @@
 			}
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function ver(tbody, table){
@@ -917,7 +919,7 @@
 
 					getPacientes("#paciente-view", data.id_cliente)
 
-				
+
 
 
 					$("#paciente-view").val(data.id_cliente).attr("disabled", "disabled")
@@ -931,8 +933,8 @@
 
 
 					var url_imagen = 'img/valuations/cotizaciones/'
-					var url        = document.getElementById('ruta').value; 
-					
+					var url        = document.getElementById('ruta').value;
+
 					if((data.cotizacion != "" ) &&  (data.cotizacion != null)){
 						var ext = data.cotizacion.split('.');
 						if (ext[1] == "pdf") {
@@ -940,7 +942,7 @@
 						}else{
 							img = '<img src="'+url_imagen+data.cotizacion+'" class="file-preview-image kv-preview-data">'
 						}
-							
+
 					}else{img = ""}
 
 
@@ -959,10 +961,10 @@
 						removeTitle: 'Cancel or reset changes',
 						elErrorContainer: '#kv-avatar-errors-1',
 						msgErrorClass: 'alert alert-block alert-danger',
-						
+
 						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 						allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
-						initialPreview: [ 
+						initialPreview: [
 							img
 						],
 
@@ -978,24 +980,24 @@
 					$("#photos_view").html("")
 					var count = 0
 					$.map(data.photos, function (item, key) {
-						
+
 						var html  = ""
 						html += "<div class='col-md-4'>"
-							html += "<input type='file' class='photo_valoration' id='photo_view_"+count+"'>" 
+							html += "<input type='file' class='photo_valoration' id='photo_view_"+count+"'>"
 						html += "</div>"
 						count++
 
 						$("#photos_view").append(html)
 					});
 
-					
+
 
 					var count = 0
 					$.map(data.photos, function (item, key) {
-						
-					
+
+
 						var url_imagen = '/img/valuations/'
-						var url        = document.getElementById('ruta').value; 
+						var url        = document.getElementById('ruta').value;
 						img = '<img src="'+url+url_imagen+item.foto+'" class="file-preview-image kv-preview-data">'
 
 						$("#photo_view_"+count).fileinput('destroy');
@@ -1013,10 +1015,10 @@
 							removeTitle: 'Cancel or reset changes',
 							elErrorContainer: '#kv-avatar-errors-1',
 							msgErrorClass: 'alert alert-block alert-danger',
-							
+
 							layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 							allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
-							initialPreview: [ 
+							initialPreview: [
 								img
 							],
 
@@ -1031,7 +1033,7 @@
 
 
 
-					
+
 
 
 
@@ -1043,10 +1045,10 @@
 
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
-			
+
 			function edit(tbody, table){
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
@@ -1094,8 +1096,8 @@
 
 
 					var url_imagen = 'img/valuations/acquittance/'
-					var url        = document.getElementById('ruta').value; 
-					
+					var url        = document.getElementById('ruta').value;
+
 					if((data.acquittance != "" ) &&  (data.acquittance != null)){
 						var ext = data.acquittance.split('.');
 						if (ext[1] == "pdf") {
@@ -1103,7 +1105,7 @@
 						}else{
 							img = '<img src="'+url_imagen+data.acquittance+'" class="file-preview-image kv-preview-data">'
 						}
-							
+
 					}else{img = ""}
 
 
@@ -1122,10 +1124,10 @@
 						removeTitle: 'Cancel or reset changes',
 						elErrorContainer: '#kv-avatar-errors-1',
 						msgErrorClass: 'alert alert-block alert-danger',
-						
+
 						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 						allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "pdf", "docs"],
-						initialPreview: [ 
+						initialPreview: [
 							img
 						],
 
@@ -1136,13 +1138,13 @@
 
 
 
-					
+
 
 
 
 					var url_imagen = 'img/valuations/cotizaciones/'
-					var url        = document.getElementById('ruta').value; 
-					
+					var url        = document.getElementById('ruta').value;
+
 					if((data.cotizacion != "" ) &&  (data.cotizacion != null)){
 						var ext = data.cotizacion.split('.');
 						if (ext[1] == "pdf") {
@@ -1150,7 +1152,7 @@
 						}else{
 							img = '<img src="'+url_imagen+data.cotizacion+'" class="file-preview-image kv-preview-data">'
 						}
-							
+
 					}else{img = ""}
 
 
@@ -1169,10 +1171,10 @@
 						removeTitle: 'Cancel or reset changes',
 						elErrorContainer: '#kv-avatar-errors-1',
 						msgErrorClass: 'alert alert-block alert-danger',
-						
+
 						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 						allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
-						initialPreview: [ 
+						initialPreview: [
 							img
 						],
 
@@ -1189,23 +1191,23 @@
 					$("#photos_view").html("")
 					var count = 0
 					$.map(data.photos, function (item, key) {
-						
+
 						var html  = ""
 						html += "<div class='col-md-4'>"
-							html += "<input type='file' class='photo_valoration' id='photo_view_"+count+"'>" 
+							html += "<input type='file' class='photo_valoration' id='photo_view_"+count+"'>"
 						html += "</div>"
 						count++
 
 						$("#photos_view").append(html)
 					});
 
-					
+
 
 					var count = 0
 					$.map(data.photos, function (item, key) {
-						
+
 						var url_imagen = '/img/valuations123/'+item.code+'/'+item.code_img
-						var url        = document.getElementById('ruta').value; 
+						var url        = document.getElementById('ruta').value;
 						img = '<img src="'+url+url_imagen+'/original.png" class="file-preview-image kv-preview-data">'
 
 						$("#photo_view_"+count).fileinput('destroy');
@@ -1223,10 +1225,10 @@
 							removeTitle: 'Cancel or reset changes',
 							elErrorContainer: '#kv-avatar-errors-1',
 							msgErrorClass: 'alert alert-block alert-danger',
-							
+
 							layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 							allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
-							initialPreview: [ 
+							initialPreview: [
 								img
 							],
 
@@ -1240,11 +1242,11 @@
 					});
 
 					var followers = []
-						$.each(data.followers, function (key, item) { 
+						$.each(data.followers, function (key, item) {
 							followers.push(item.id_user)
 						});
 
-				
+
 						$("#followers-edit").val(followers)
 						$("#followers-edit").trigger("change");
 
@@ -1254,24 +1256,24 @@
 					$("#photos_edit").html("")
 					var count = 0
 					$.map(data.photos, function (item, key) {
-						
+
 						var html  = ""
 						html += "<div class='col-md-4'>"
-							html += "<input type='file' class='photo_valoration' id='photo_edit_"+count+"'>" 
+							html += "<input type='file' class='photo_valoration' id='photo_edit_"+count+"'>"
 						html += "</div>"
 						count++
 
 						$("#photos_edit").append(html)
 					});
 
-					
+
 
 					var count = 0
 					$.map(data.photos, function (item, key) {
-						
-					
+
+
 						var url_imagen = '/img/valuations/'+item.code+'/'+item.code_img
-						var url        = document.getElementById('ruta').value; 
+						var url        = document.getElementById('ruta').value;
 						img = '<img src="'+url+url_imagen+'/original.png" class="file-preview-image kv-preview-data">'
 
 						$("#photo_edit_"+count).fileinput('destroy');
@@ -1289,10 +1291,10 @@
 							removeTitle: 'Cancel or reset changes',
 							elErrorContainer: '#kv-avatar-errors-1',
 							msgErrorClass: 'alert alert-block alert-danger',
-							
+
 							layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 							allowedFileExtensions: ["jpg", "png", "gif", "pdf", "docs"],
-							initialPreview: [ 
+							initialPreview: [
 								img
 							],
 
@@ -1313,7 +1315,7 @@
 
 
 					$('#summernote_edit').summernote("reset");
-					var url=document.getElementById('ruta').value; 
+					var url=document.getElementById('ruta').value;
 					var html = "";
 
 
@@ -1321,7 +1323,7 @@
 						html += '<div class="col-md-12" style="margin-bottom: 15px">'
 							html += '<div class="row">'
 								html += '<div class="col-md-2">'
-									
+
 								html += '</div>'
 								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 									html += '<div>'+data.observaciones+'</div>'
@@ -1347,7 +1349,7 @@
 
 			function SubmitComment(id, api, table, btn, summer){
 
-				$(btn).unbind().click(function (e) { 
+				$(btn).unbind().click(function (e) {
 
 					var html = ""
 
@@ -1377,7 +1379,7 @@
 							"token"   : tokens,
 							"id"      : id,
 							"comment" : $(summer).val(),
-							
+
 						},
 						dataType:'JSON',
 						beforeSend: function(){
@@ -1394,7 +1396,7 @@
 
 
 
-					
+
 				});
 
 			}
@@ -1402,20 +1404,20 @@
 
 			function GetComments(comment_content, id_valuation){
 				$(comment_content).html("Cargando...")
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/comments/valuations/'+id_valuation,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 					},
 					error: function (data) {
 					},
 					success: function(result){
-						
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 						$.map(result, function (item, key) {
@@ -1423,7 +1425,7 @@
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.comment+'</div>'
@@ -1434,10 +1436,10 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
-						
+
 						$(comment_content).html(html)
 					}
 				});
@@ -1445,7 +1447,7 @@
 
 
 
-					
+
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -1485,13 +1487,13 @@
 
 
 			function GetClinic(city, select){
-				$(city).unbind().change(function (e) { 
+				$(city).unbind().change(function (e) {
 					GetClinicByCity(select, $(this).val())
 				});
 			}
 
 			function Children(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1503,7 +1505,7 @@
 
 
 			function Surgery(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1515,7 +1517,7 @@
 
 
 			function Disease(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1526,7 +1528,7 @@
 
 
 			function Medication(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1536,7 +1538,7 @@
 			}
 
 			function Allergic(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1545,52 +1547,52 @@
 				});
 			}
 
-			
+
 
 
 
 			function tasks(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 
 			function revisiones(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function surgeries(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function valuations(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function preanestesias(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
@@ -1598,20 +1600,20 @@
 
 
 			function GetCommentsClients(comment_content, id_client){
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/clients/comments/'+id_client,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 					},
 					error: function (data) {
 					},
 					success: function(result){
-						
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 						$.map(result, function (item, key) {
@@ -1619,7 +1621,7 @@
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.comment+'</div>'
@@ -1630,14 +1632,14 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
-						
+
 						$(comment_content).html(html)
 					}
 				});
-			}	
+			}
 
 
 
@@ -1652,7 +1654,7 @@
 
 
 
-			$("#pay_consultation").change(function (e) { 
+			$("#pay_consultation").change(function (e) {
 
 				if(!$('#pay_consultation').is(':checked') ) {
 					$("#code_prp-store").removeAttr("disabled").focus()
@@ -1663,13 +1665,13 @@
 					$("#code_prp-store").attr("disabled", "disabled")
 					$("#way_to_pay-store").attr("required", "required")
 				}
-				
+
 			});
 
 
 
-			$("#way_to_pay-store").change(function (e) { 
-				
+			$("#way_to_pay-store").change(function (e) {
+
 				if($(this).val() == "Transferencia"){
 					$("#content_acquittance").css("display", "block")
 					$("#acquittance").attr("required", "required")
@@ -1677,11 +1679,11 @@
 					$("#content_acquittance").css("display", "none")
 					$("#acquittance").removeAttr("required")
 				}
-				
+
 			});
 
 		</script>
-		
+
 
 
 

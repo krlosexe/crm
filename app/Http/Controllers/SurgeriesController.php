@@ -226,6 +226,62 @@ class SurgeriesController extends Controller
             LogsClients::create($version);
 
 
+
+
+            $cliente = Clients::where('id_cliente',$request["id_cliente"])->first();
+
+            if($cliente->fcmToken && $cliente->fcmToken != ""){//NUEVA APP DE PRP
+
+                switch ($cliente->id_line) {
+                    case 17:
+                       $apiKey = "AAAAg-p1HsU:APA91bHJHYE__7tBgvxXHPbMwR2cm7-KyYOknyMz7fAfBYm34YrFMF9QK4FieAEPL54o7EPXilihGevzxoBSf3X4CCHAswTk9NctvFTYY1ftYTYI5hj_-qXVFtCizHHzM060Ojphq62q";
+                        break;
+                    case 6:
+                        $apiKey = 'AAAAYEG4vHw:APA91bGFWTsV1GsGaNdTZ7zNh4lM7zzTVO6cH-uB6bbjLxoUo3gfYDoIEMtbU6ioIC1BmAKVI3D_btMJg2Jd3urI8l3Pb9noB0FEkU7_6EGKnv7ymZULMwv0dKLCEprIuKwMJNUQDrEe';
+                        break;
+                    case 7:
+                        $apiKey = 'AAAAYEG4vHw:APA91bGFWTsV1GsGaNdTZ7zNh4lM7zzTVO6cH-uB6bbjLxoUo3gfYDoIEMtbU6ioIC1BmAKVI3D_btMJg2Jd3urI8l3Pb9noB0FEkU7_6EGKnv7ymZULMwv0dKLCEprIuKwMJNUQDrEe';
+                        break;
+                    case 8:
+                        $apiKey = 'AAAAYEG4vHw:APA91bGFWTsV1GsGaNdTZ7zNh4lM7zzTVO6cH-uB6bbjLxoUo3gfYDoIEMtbU6ioIC1BmAKVI3D_btMJg2Jd3urI8l3Pb9noB0FEkU7_6EGKnv7ymZULMwv0dKLCEprIuKwMJNUQDrEe';
+                        break;
+                    default:
+                        $apiKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
+                        break;
+                }
+
+                $FCM_token = $cliente->fcmToken;
+
+                $url = "https://fcm.googleapis.com/fcm/send";
+                $token = $FCM_token;
+                $serverKey = $apiKey;
+                $title = "Tu procedimiento fue Agendado";
+                $body = "Tu procedimiento fue agendado para el dia $request[fecha]";
+                $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default', 'badge' => '1');
+                $arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+                $json = json_encode($arrayToSend);
+                $headers = array();
+                $headers[] = 'Content-Type: application/json';
+                $headers[] = 'Authorization: key='. $serverKey;
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+                curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                //Send the request
+                $response = curl_exec($ch);
+                //Close request
+                if ($response === FALSE) {
+                    die('FCM Send Error: ' . curl_error($ch));
+                }
+                curl_close($ch);
+
+            }
+
+
+
+
             if ($store) {
                 $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
