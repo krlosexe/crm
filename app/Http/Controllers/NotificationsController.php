@@ -341,7 +341,7 @@ class NotificationsController extends Controller
         $request["msg"]  = "Un Paciente a registrado un Formulario Web";
 
         Mail::send('emails.forms_authorizatio',$request->all(), function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -450,7 +450,7 @@ class NotificationsController extends Controller
        // $for = "cardenascarlos18@gmail.com";
         $for = $data["for"];
         $mail_send = Mail::send('emails.masivos',["nombre" =>  $data["name"]], function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","Cirujano Daniel Correa");
+            $msj->from("crm@pdtagencia.com","Cirujano Daniel Correa");
             $msj->subject($subject);
             $msj->to($for);
         });

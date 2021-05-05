@@ -33,7 +33,7 @@ class CovidController extends Controller
         }
 
         Mail::send('emails.covid',$request->all(), function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -72,7 +72,7 @@ class CovidController extends Controller
         }
 
         Mail::send('emails.bioseguridad',$request->all(), function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });

@@ -34,7 +34,7 @@ class ReferredController extends Controller
 
         $data = Clients::where("identificacion", $request["identificacion"])->first();
 
-  
+
 
         if($data){
             $data = array('mensagge' => "El paciente ya se encuentra en la base de datos");
@@ -99,6 +99,7 @@ class ReferredController extends Controller
         $request["id_user_asesora"] = $affiliate["id_user_asesora"];
         $request["id_line"]         = $affiliate["id_line"];
         $request["city"]            = null;
+        $request["origen"]          = $affiliate["code_client"];
 
         $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
         $code                   = substr(str_shuffle($permitted_chars), 0, 4);
@@ -106,7 +107,7 @@ class ReferredController extends Controller
 
         $data = Clients::where("identificacion", $request["identificacion"])->first();
 
-  
+
 
         if($data){
             $data = array('mensagge' => "El paciente ya se encuentra en la base de datos");
@@ -134,9 +135,9 @@ class ReferredController extends Controller
 
 
         $user_receive = DB::table("users")->where("id", $affiliate["id_user_asesora"])->first();
-    
-        $data["msg"]     = "Ingreso de Referido Pielis, Nombre: ".$cliente["nombres"]." Cedula: ".$cliente["identificacion"];
-        $data["subject"] = "Ingreso de Referido Pielis, Nombre: ".$cliente["nombres"];
+
+        $data["msg"]     = "Ingreso de Referido App, Nombre: ".$cliente["nombres"]." Cedula: ".$cliente["identificacion"];
+        $data["subject"] = "Ingreso de Referido App, Nombre: ".$cliente["nombres"];
         $data["for"]     = $user_receive->email;
         $this->SendEmail($data);
 
@@ -153,8 +154,8 @@ class ReferredController extends Controller
 
 
     public function get($id, $name = 0, $state = 0){
-  
-            
+
+
         $afiliada = Clients::where("id_affiliate", $id)
                         ->where(function ($query) use ($name) {
                             if($name != "0"){
@@ -168,7 +169,7 @@ class ReferredController extends Controller
                             }
                         })->where("clientes.state", "Agendada")->get();
 
-        
+
         $Aprobada_Descartada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
@@ -272,7 +273,7 @@ class ReferredController extends Controller
                             }
                         })->where("clientes.state", "Valorada / Descartada")->get();
 
-                        
+
         $data = [
             ["name" => "Afiliada", "child" => $afiliada ],
             ["name" => "Agendada", "child" => $Agendada ],
@@ -302,7 +303,7 @@ class ReferredController extends Controller
         $subject         = $data["subject"];
         $for             = $data["for"];
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -310,7 +311,7 @@ class ReferredController extends Controller
 
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to("cardenascarlos18@gmail.com");
         });
