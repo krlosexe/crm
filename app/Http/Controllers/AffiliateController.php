@@ -46,7 +46,13 @@ class AffiliateController extends Controller
         }else{
 
             if($request["promotion_code"] != null){
-                $user = DB::table("users")->where("code_user", $request["promotion_code"])->first();
+                $user = DB::table("users")
+                        ->join("users_line_business", "users_line_business.id_user", "=", "users.id")
+                        ->where("code_user", $request["promotion_code"])
+                        ->first();
+
+                $request["id_line"] = $user->id_line;
+
                 if($user){
                     $request["id_user_asesora"] = $user->id;
                 }else{
@@ -54,6 +60,7 @@ class AffiliateController extends Controller
                     if($client){
                         $request["id_user_asesora"] = $client->id_user_asesora;
                         $request["id_affiliate"]    = $client->id_cliente;
+                        $request["id_line"]         = $client->id_line;
                         $refered =  true;
                     }else{
                         return response()->json("El código de promocion es invalido")->setStatusCode(400);

@@ -99,6 +99,7 @@ class ReferredController extends Controller
         $request["id_user_asesora"] = $affiliate["id_user_asesora"];
         $request["id_line"]         = $affiliate["id_line"];
         $request["city"]            = null;
+        $request["origen"]          = $affiliate["code_client"];
 
         $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
         $code                   = substr(str_shuffle($permitted_chars), 0, 4);
@@ -135,8 +136,8 @@ class ReferredController extends Controller
 
         $user_receive = DB::table("users")->where("id", $affiliate["id_user_asesora"])->first();
 
-        $data["msg"]     = "Ingreso de Referido Pielis, Nombre: ".$cliente["nombres"]." Cedula: ".$cliente["identificacion"];
-        $data["subject"] = "Ingreso de Referido Pielis, Nombre: ".$cliente["nombres"];
+        $data["msg"]     = "Ingreso de Referido App, Nombre: ".$cliente["nombres"]." Cedula: ".$cliente["identificacion"];
+        $data["subject"] = "Ingreso de Referido App, Nombre: ".$cliente["nombres"];
         $data["for"]     = $user_receive->email;
         $this->SendEmail($data);
 

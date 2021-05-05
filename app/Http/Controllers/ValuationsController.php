@@ -486,13 +486,13 @@ class ValuationsController extends Controller
                        $apiKey = "AAAAg-p1HsU:APA91bHJHYE__7tBgvxXHPbMwR2cm7-KyYOknyMz7fAfBYm34YrFMF9QK4FieAEPL54o7EPXilihGevzxoBSf3X4CCHAswTk9NctvFTYY1ftYTYI5hj_-qXVFtCizHHzM060Ojphq62q";
                         break;
                     case 6:
-                        $apiKey = 'AAAAnoQ9XMg:APA91bEjJO50nQJ3Vo8vlQkHKbpzyWbuXkgIgjptlL4SOgxq8Y5vcZhUOr5MIVsV-H-mylQl84P1do1uIAvpKwLvqohe8_04lasgpaGt_hnA2wigCV57QC36sbocBcJuB6pnd6y8I6Dp';
+                        $apiKey = 'AAAAYEG4vHw:APA91bGFWTsV1GsGaNdTZ7zNh4lM7zzTVO6cH-uB6bbjLxoUo3gfYDoIEMtbU6ioIC1BmAKVI3D_btMJg2Jd3urI8l3Pb9noB0FEkU7_6EGKnv7ymZULMwv0dKLCEprIuKwMJNUQDrEe';
                         break;
-                    case 16:
-                        $apiKey = 'AAAA9NFh0cA:APA91bGQeeeuhxzo2dlh4z6zXfrgCzJfkjN7NvyxbLIL6QQD5a0xpU9ETkhwH4MAhybmfC80q8BEINZy8-O1EyMzuQQuWQ2Ps9azGEh5F7cl5uAFifSGJ1_kyhrclHQ5Jpo3k9hlTm0J';
+                    case 7:
+                        $apiKey = 'AAAAYEG4vHw:APA91bGFWTsV1GsGaNdTZ7zNh4lM7zzTVO6cH-uB6bbjLxoUo3gfYDoIEMtbU6ioIC1BmAKVI3D_btMJg2Jd3urI8l3Pb9noB0FEkU7_6EGKnv7ymZULMwv0dKLCEprIuKwMJNUQDrEe';
                         break;
-                    case 27:
-                        $apiKey = 'AAAAG-HAogM:APA91bEJXN2dPp9-8abRiqSaznaTzpU552YvlUjjAXckzKQ9FfYZcCFvayrmVe1WLNpycrpgcckU2nT-mJE99ObPUQykZTeSxT1VukoIBpirbIqdzPfDfj8fQhekWDtBReXVpvi6pr4v';
+                    case 8:
+                        $apiKey = 'AAAAYEG4vHw:APA91bGFWTsV1GsGaNdTZ7zNh4lM7zzTVO6cH-uB6bbjLxoUo3gfYDoIEMtbU6ioIC1BmAKVI3D_btMJg2Jd3urI8l3Pb9noB0FEkU7_6EGKnv7ymZULMwv0dKLCEprIuKwMJNUQDrEe';
                         break;
                     default:
                         $apiKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
