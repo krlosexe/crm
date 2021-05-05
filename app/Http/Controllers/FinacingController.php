@@ -409,7 +409,7 @@ class FinacingController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -422,7 +422,7 @@ class FinacingController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
@@ -433,7 +433,7 @@ class FinacingController extends Controller
         $request["msg"] = $data["mensage"];
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });

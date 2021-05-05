@@ -66,7 +66,7 @@ class QueriesController extends Controller
                 'id_cliente'    => 'required',
                 'fecha'         => 'required',
                 'observaciones' => 'required'
-            ], $messages);  
+            ], $messages);
 
 
             if ($validator->fails()) {
@@ -84,7 +84,7 @@ class QueriesController extends Controller
                 $auditoria->save();
 
                 if ($queries) {
-                    $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                    $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                     return response()->json($data)->setStatusCode(200);
                 }else{
                     return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -115,7 +115,7 @@ class QueriesController extends Controller
      */
     public function edit($id_queries)
     {
-        
+
     }
 
     /**
@@ -128,20 +128,20 @@ class QueriesController extends Controller
     public function update(Request $request,$id_queries)
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            
+
 
             if($file = $request->file('file')){
                 $destinationPath = 'img/queries/cotizaciones';
                 $file->move($destinationPath,$file->getClientOriginalName());
                 $request["file_cotizacion"] = $file->getClientOriginalName();
             }
-            
-       
+
+
 
             $queries = Queries::find($id_queries)->update($request->all());
 
             if ($queries) {
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -167,7 +167,7 @@ class QueriesController extends Controller
             }
             $auditoria->save();
 
-            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
@@ -189,7 +189,7 @@ class QueriesController extends Controller
 
         $client       = DB::table("clientes")->where("id_cliente", $request["id_client"])->first();
         $user_receive = DB::table("users")->where("id", $client->id_user_asesora)->first();
-    
+
         $data["msg"]     = "Solicitud de Cita,  Nombre: ".$client->nombres." Cedula: ".$client->identificacion;
         $data["subject"] = $client->nombres." ha solicitado una cita";
         $data["for"]     = $user_receive->email;
@@ -199,20 +199,20 @@ class QueriesController extends Controller
         return response()->json("ok")->setStatusCode(200);
     }
 
-   
+
     public function SendEmail($data){
 
         $request["msg"]  = $data["msg"];
         $subject         = $data["subject"];
         $for             = $data["for"];
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to("cardenascarlos18@gmail.com");
         });
@@ -220,7 +220,7 @@ class QueriesController extends Controller
         $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
 
-    }  
+    }
 
 
 
@@ -231,7 +231,7 @@ class QueriesController extends Controller
 
         $queries = DB::table("valuations")
                             ->select("valuations.*", "clinic.nombre as name_comercial")
-                            ->join('clinic', 'clinic.id_clinic', '=', 'valuations.clinic')                    
+                            ->join('clinic', 'clinic.id_clinic', '=', 'valuations.clinic')
                             ->where("id_cliente",$id_client)
                             ->get();
 
@@ -288,7 +288,7 @@ class QueriesController extends Controller
     }
 
 
-    
+
 
     /**
      * Remove the specified resource from storage.

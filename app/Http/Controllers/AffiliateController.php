@@ -29,7 +29,7 @@ class AffiliateController extends Controller
         }else{
             return response()->json("El codigo no existe")->setStatusCode(400);
         }
-        
+
     }
 
 
@@ -78,7 +78,7 @@ class AffiliateController extends Controller
             $request["to_db"]       = "1";
             $request["created_prp"] = date("Y-m-d");
             $request["auth_app"]    = "1";
-            
+
 
             $cliente = Clients::create($request->all());
             $request["id_client"] = $cliente["id_cliente"];
@@ -101,7 +101,7 @@ class AffiliateController extends Controller
 
             if ($cliente) {
                 $user_receive = User::where("id", $request["id_user_asesora"])->inRandomOrder()->first();
-         
+
                 $data["msg"]     = "Ingreso de Px por Aplicacion, Nombre: ".$request["nombres"]." Cedula: ".$request["identificacion"];
                 $data["subject"] = "Ingreso de Px por Aplicacion, Nombre: ".$request["nombres"];
                 $data["for"]     = $user_receive->email;
@@ -127,7 +127,7 @@ class AffiliateController extends Controller
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
                     //Send the request
                     $response = curl_exec($ch);
-                    
+
                     curl_close($ch);
 
 
@@ -165,7 +165,7 @@ class AffiliateController extends Controller
                          ->where("email",    $request["email"])
                          ->where("password", md5($request["password"]))
 	    				 ->get();
-     
+
         if (sizeof($users) > 0) {
 
             $token = bin2hex(random_bytes(64));
@@ -186,7 +186,7 @@ class AffiliateController extends Controller
             $AuthUsers->token                = $token;
             $AuthUsers->token_notifications  = $request["fcmToken"];
             $AuthUsers->save();
-        
+
 
             $data = array('id_cliente'   => $users[0]->id_cliente,
                         'email'     => $users[0]->email,
@@ -196,14 +196,14 @@ class AffiliateController extends Controller
                         'token'     => $token,
                         'mensagge'  => "Ha iniciado sesion exitosamente"
             );
-            
+
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("Usuario o contrasena invalida")->setStatusCode(400);
         }
     }
 
-    
+
 
 
 
@@ -214,13 +214,13 @@ class AffiliateController extends Controller
         $subject         = $data["subject"];
         $for             = $data["for"];
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
 
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to("cardenascarlos18@gmail.com");
         });
@@ -232,7 +232,7 @@ class AffiliateController extends Controller
     }
 
 
-    
+
     public function store(Request $request){
 
 
@@ -360,7 +360,7 @@ class AffiliateController extends Controller
             $request["msg"]  = "Wiiii :D";
 
             Mail::send('emails.formsPrp',$request->all(), function($msj) use($subject,$for){
-                $msj->from("contacto@danielandrescorreaposadacirujano.com","CRM");
+                $msj->from("crm@pdtagencia.com","CRM");
                 $msj->subject($subject);
                 $msj->to($for);
             });
@@ -656,9 +656,9 @@ class AffiliateController extends Controller
             "amount_comission" => $request["amount_comission"]
 
         ]);
-            
 
-        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
 
         return response()->json($data)->setStatusCode(200);
     }
@@ -700,11 +700,11 @@ class AffiliateController extends Controller
                 "name_bank"        => $request["name_bank"],
                 "name"             => $request["name"],
                 "identification"   => $request["identification"]
-                
+
             ]
         );
 
-        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+        $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
         return response()->json($data)->setStatusCode(200);
     }
 
