@@ -538,10 +538,10 @@ class FinacingController extends Controller
         try {
             $query = DB::table('clientes')
                 ->select('form_credit_datos_generales.*', 'form_credit_photo_identification.photo as photo_identf', 'form_credit_photo_identification_rear.photo as photo_identf_rear', 'form_credit_photo_face.photo as photo_face')
-                ->join('form_credit_datos_generales', 'clientes.id_cliente', 'form_credit_datos_generales.id_client')
-                ->join('form_credit_photo_identification', 'clientes.id_cliente', 'form_credit_photo_identification.id_client')
-                ->leftjoin('form_credit_photo_identification_rear', 'clientes.id_cliente', 'form_credit_photo_identification_rear.id_client')
-                ->join('form_credit_photo_face', 'clientes.id_cliente', 'form_credit_photo_face.id_client')
+                ->join('form_credit_datos_generales', 'clientes.id_cliente', 'form_credit_datos_generales.id_client', "left")
+                ->join('form_credit_photo_identification', 'clientes.id_cliente', 'form_credit_photo_identification.id_client', "left")
+                ->leftjoin('form_credit_photo_identification_rear', 'clientes.id_cliente', 'form_credit_photo_identification_rear.id_client', "left")
+                ->join('form_credit_photo_face', 'clientes.id_cliente', 'form_credit_photo_face.id_client', "left")
                 ->where('clientes.id_cliente', $id)
                 ->first();
             return response()->json($query)->setStatusCode(200);
