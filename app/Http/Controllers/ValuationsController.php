@@ -69,7 +69,7 @@ class ValuationsController extends Controller
 
             $valuations = Valuations::select("valuations.*", "valuations.id_asesora_valoracion as id_asesora", "valuations.clinic as id_clinic",
                                              "valuations.status as status_valuations*", "auditoria.*", "users.email as email_regis", "clientes.*",
-                                            "valuations.status as status_valuations", "valuations.clinic as id_clinic", "clinic.nombre as name_clinic")
+                                            "valuations.status as status_valuations", "valuations.clinic as id_clinic", "clinic.nombre as name_clinic", "valuations.clinic")
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                                 ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
@@ -129,10 +129,11 @@ class ValuationsController extends Controller
 
                 $valuations_follow = Valuations::select("valuations.*", "valuations.id_asesora_valoracion as id_asesora", "valuations.clinic as id_clinic",
                                              "valuations.status as status_valuations*", "auditoria.*", "users.email as email_regis", "clientes.*",
-                                            "valuations.status as status_valuations", "valuations.clinic as id_clinic")
+                                            "valuations.status as status_valuations", "valuations.clinic as id_clinic", "clinic.nombre as name_clinic","valuations.clinic")
 
                                 ->join("auditoria", "auditoria.cod_reg", "=", "valuations.id_valuations")
                                 ->join("clientes", "clientes.id_cliente", "=", "valuations.id_cliente")
+                                ->join("clinic", "clinic.id_clinic", "=", "valuations.clinic")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.tabla", "valuations")
                                 ->where("auditoria.status", "!=", "0")

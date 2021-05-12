@@ -1911,7 +1911,7 @@ class ClientsController extends Controller
 
 
 
-    public function GetRequestCredit($id_client){
+    public function GetRequestCredit($id_client, $id_line = 0){
 
         $data = DB::table("client_request_credit")
                     ->selectRaw("
@@ -1934,7 +1934,13 @@ class ClientsController extends Controller
                                 client_request_credit_requirements.colillas_nomina_codeudor
                             ")
                     ->join("client_request_credit_requirements", "client_request_credit_requirements.id_client", "=", "client_request_credit.id_client", "left")
-                    ->where("client_request_credit.id_client", $id_client)->first();
+                    ->where("client_request_credit.id_client", $id_client)
+                    ->where(function ($query) use ($id_line) {
+                        if($id_line != 0){
+                            $query->where("client_request_credit.id_line", $id_line);
+                        }
+                    })
+                    ->first();
 
         $data->required_amount = number_format($data->required_amount, 2, ',', '.');
         $data->monthly_fee     = number_format($data->monthly_fee, 2, ',', '.');

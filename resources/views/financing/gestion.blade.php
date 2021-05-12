@@ -566,7 +566,15 @@
 			$("#have_initial").val(data.have_initial)
 			$("#reported").val(data.reported)
 			$("#initial").val(data.initial)
-			$("#origin").val(data.origen_px.replace("App Financiacion con el ", ""))
+
+            console.log(data.origen_px)
+
+            if(data.origen_px != null){
+                $("#origin").val(data.origen_px.replace("App Financiacion con el ", ""))
+            } else{
+                $("#origin").val("")
+            }
+
 
 
 
