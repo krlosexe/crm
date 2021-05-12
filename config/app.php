@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'fcm2' => env('FCM_PRP'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

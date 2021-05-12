@@ -117,7 +117,7 @@ class AffiliateController extends Controller
                 if($refered){
                     $url = "https://fcm.googleapis.com/fcm/send";
                     $token = $client->fcmToken;
-                    $serverKey = "AAAAg-p1HsU:APA91bHJHYE__7tBgvxXHPbMwR2cm7-KyYOknyMz7fAfBYm34YrFMF9QK4FieAEPL54o7EPXilihGevzxoBSf3X4CCHAswTk9NctvFTYY1ftYTYI5hj_-qXVFtCizHHzM060Ojphq62q";
+                    $serverKey = config("app.fcm2");
                     $title = "Se ha registrado un nuevo referido";
                     $body = "Nombre: ".$request["nombres"]. " Cedula: ".$request["identificacion"];
                     $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');
