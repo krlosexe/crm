@@ -205,27 +205,33 @@ Route::get('logs/events/clients', 'LogsController@eventsClients');
 Route::post('form/credit', 'FormCreditController@store');
 Route::post('form/credit/data/personal', 'FormCreditController@StoreDataPersonal');
 Route::get('form/credit/data/personal/{id_client}', 'FormCreditController@GetFormDataPersonal');
+Route::get('form/credit/data/personal/{id_client}/{id_line}', 'FormCreditController@GetFormDataPersonal');
+
 
 Route::post('form/credit/activity/economic', 'FormCreditController@StoreActivityEconomic');
 Route::get('form/credit/activity/economic/{id_client}', 'FormCreditController@GetActivityEconomic');
-
+Route::get('form/credit/activity/economic/{id_client}/{id_line}', 'FormCreditController@GetActivityEconomic');
 
 Route::post('form/credit/realations/activos', 'FormCreditController@StoreRelationsActivos');
 Route::get('form/credit/realations/activos/{id_client}', 'FormCreditController@GetRelationsActivos');
-
+Route::get('form/credit/realations/activos/{id_client}/{id_line}', 'FormCreditController@GetRelationsActivos');
 
 
 Route::post('form/credit/upload/identification', 'FormCreditController@UploadIdentification');
 Route::get('form/credit/photo/identification/{id_client}', 'FormCreditController@GetPhotoIdentification');
+Route::get('form/credit/photo/identification/{id_client}/{id_line}', 'FormCreditController@GetPhotoIdentification');
 
 
 Route::post('form/credit/upload/identification/rear', 'FormCreditController@UploadIdentificationRear');
 Route::get('form/credit/photo/identification/rear/{id_client}', 'FormCreditController@GetPhotoIdentificationRear');
 
+Route::get('v2/form/credit/photo/identification/rear/{id_client}', 'FormCreditController@GetPhotoIdentificationRear');
+Route::get('v2/form/credit/photo/identification/rear/{id_client}/{id_line}', 'FormCreditController@GetPhotoIdentificationRear');
+
 
 Route::post('form/credit/upload/face', 'FormCreditController@UploadFace');
 Route::get('form/credit/photo/face/{id_client}', 'FormCreditController@GetPhotoFace');
-
+Route::get('form/credit/photo/face/{id_client}/{id_line}', 'FormCreditController@GetPhotoFace');
 
 Route::post('form/authorization/studio/credit', 'FormCreditController@storeAutorization');
 
@@ -392,7 +398,7 @@ Route::get('clients/plan/payments/{id_client}', 'FinacingController@GetPlanPayme
 
 
 Route::get('get/client/request/{id_client}', 'ClientsController@GetRequestCredit');
-
+Route::get('get/client/request/{id_client}/{id_line}', 'ClientsController@GetRequestCredit');
 
 
 
@@ -417,6 +423,8 @@ Route::put('update/request/charge/{id}', 'PointsController@UpdateRequestExchange
 
 
 Route::get('get/pay/study/credit/client/{id_client}', 'FinacingController@GetPayStudyCredit');
+Route::get('get/pay/study/credit/client/{id_client}/{id_line}', 'FinacingController@GetPayStudyCredit');
+
 
 Route::post('client/pay/to/study/credit', 'FinacingController@PayStudyCredit');
 
@@ -819,7 +827,7 @@ Route::get('repartir/prp', function () {
 
 
     foreach($data as $value2){
-       
+
         foreach($clientes as $value){
             if($value2["identificacion"] != $value->identificacion){
                 DB::table("clientes")->where("id_cliente", $value->id_cliente)

@@ -232,22 +232,40 @@ class FormCreditController extends Controller
 
 
 
-    public function GetFormDataPersonal($id_client){
-        $data = FormCreditDatosGenerales::where("id_client", $id_client)->get();
+    public function GetFormDataPersonal($id_client, $id_line = 0){
+        $data = FormCreditDatosGenerales::where("id_client", $id_client)
+                    ->where(function ($query) use ($id_line) {
+                        if($id_line != 0){
+                            $query->where("id_line", $id_line);
+                        }
+                    })
+                    ->get();
         return response()->json(sizeof($data))->setStatusCode(200);
     }
 
 
 
-    public function GetActivityEconomic($id_client){
-        $data = FormCreditActividadEconomicaAdress::where("id_client", $id_client)->get();
+    public function GetActivityEconomic($id_client, $id_line = 0){
+        $data = FormCreditActividadEconomicaAdress::where("id_client", $id_client)
+                    ->where(function ($query) use ($id_line) {
+                        if($id_line != 0){
+                            $query->where("id_line", $id_line);
+                        }
+                    })
+                    ->get();
         return response()->json(sizeof($data))->setStatusCode(200);
     }
 
 
 
-    public function GetRelationsActivos($id_client){
-        $data = FormCreditRelacionActivos::where("id_client", $id_client)->get();
+    public function GetRelationsActivos($id_client, $id_line = 0){
+        $data = FormCreditRelacionActivos::where("id_client", $id_client)
+                    ->where(function ($query) use ($id_line) {
+                        if($id_line != 0){
+                            $query->where("id_line", $id_line);
+                        }
+                    })
+                ->get();
         return response()->json(sizeof($data))->setStatusCode(200);
     }
 
@@ -267,15 +285,23 @@ class FormCreditController extends Controller
 
         DB::table("form_credit_photo_identification")->insert([
             "id_client" => $request["id_client"],
-            "photo"     => $fileName
+            "photo"     => $fileName,
+            "id_line"   => $request["id_line"]
         ]);
         return response()->json(sizeof([1]))->setStatusCode(200);
     }
 
 
 
-    public function GetPhotoIdentification($id_client){
-        $data = DB::table("form_credit_photo_identification")->where("id_client", $id_client)->get();
+    public function GetPhotoIdentification($id_client, $id_line = 0){
+        $data = DB::table("form_credit_photo_identification")
+                ->where("id_client", $id_client)
+                ->where(function ($query) use ($id_line) {
+                    if($id_line != 0){
+                        $query->where("id_line", $id_line);
+                    }
+                })
+                ->get();
         return response()->json(sizeof($data))->setStatusCode(200);
     }
 
@@ -284,7 +310,7 @@ class FormCreditController extends Controller
 
 
 
-    public function UploadIdentificationRear(Request $request){
+    public function UploadIdentificationRear(Request $request, $id_line = 0){
 
         $folder = "img/credit/cedulas";
 
@@ -297,15 +323,22 @@ class FormCreditController extends Controller
 
         DB::table("form_credit_photo_identification_rear")->insert([
             "id_client" => $request["id_client"],
-            "photo"     => $fileName
+            "photo"     => $fileName,
+            "id_line"   => $request["id_line"]
         ]);
         return response()->json(sizeof([1]))->setStatusCode(200);
     }
 
 
 
-    public function GetPhotoIdentificationRear($id_client){
-        $data = DB::table("form_credit_photo_identification_rear")->where("id_client", $id_client)->get();
+    public function GetPhotoIdentificationRear($id_client, $id_line = 0){
+        $data = DB::table("form_credit_photo_identification_rear")->where("id_client", $id_client)
+        ->where(function ($query) use ($id_line) {
+            if($id_line != 0){
+                $query->where("id_line", $id_line);
+            }
+        })
+        ->get();
         return response()->json(sizeof($data))->setStatusCode(200);
     }
 
@@ -327,15 +360,22 @@ class FormCreditController extends Controller
 
         DB::table("form_credit_photo_face")->insert([
             "id_client" => $request["id_client"],
-            "photo"     => $fileName
+            "photo"     => $fileName,
+            "id_line"   => $request["id_line"]
         ]);
         return response()->json(sizeof([1]))->setStatusCode(200);
     }
 
 
 
-    public function GetPhotoFace($id_client){
-        $data = DB::table("form_credit_photo_face")->where("id_client", $id_client)->get();
+    public function GetPhotoFace($id_client, $id_line = 0){
+        $data = DB::table("form_credit_photo_face")->where("id_client", $id_client)
+        ->where(function ($query) use ($id_line) {
+            if($id_line != 0){
+                $query->where("id_line", $id_line);
+            }
+        })
+        ->get();
         return response()->json(sizeof($data))->setStatusCode(200);
     }
 

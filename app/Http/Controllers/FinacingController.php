@@ -346,10 +346,14 @@ class FinacingController extends Controller
     }
 
 
-    public function GetPayStudyCredit($id_client)
+    public function GetPayStudyCredit($id_client, $id_line = 0)
     {
 
-        $data = DB::table("clients_pay_to_study_credit")->where("id_client", $id_client)->get();
+        $data = DB::table("clients_pay_to_study_credit")->where("id_client", $id_client)->where(function ($query) use ($id_line) {
+            if($id_line != 0){
+                $query->where("id_line", $id_line);
+            }
+        })->get();
         return response()->json($data)->setStatusCode(200);
     }
 
