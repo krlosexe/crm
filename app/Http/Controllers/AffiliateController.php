@@ -54,11 +54,12 @@ class AffiliateController extends Controller
                         ->where("code_user", $request["promotion_code"])
                         ->where("code_user", "!=",0)
                         ->first();
-                dd($user);
-                $request["id_line"] = $user->id_line;
+
+
 
                 if($user){
                     $request["id_user_asesora"] = $user->id;
+                    $request["id_line"] = $user->id_line;
                 }else{
                     $client = DB::table("clientes")->where("code_client", $request["promotion_code"])->first();
 
