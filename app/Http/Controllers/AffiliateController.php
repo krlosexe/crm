@@ -46,17 +46,23 @@ class AffiliateController extends Controller
         }else{
 
             if($request["promotion_code"] != null){
+
+
+
                 $user = DB::table("users")
                         ->join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("code_user", $request["promotion_code"])
+                        ->where("code_user", "!=",0)
                         ->first();
-
+                dd($user);
                 $request["id_line"] = $user->id_line;
 
                 if($user){
                     $request["id_user_asesora"] = $user->id;
                 }else{
                     $client = DB::table("clientes")->where("code_client", $request["promotion_code"])->first();
+
+
                     if($client){
                         $request["id_user_asesora"] = $client->id_user_asesora;
                         $request["id_affiliate"]    = $client->id_cliente;
