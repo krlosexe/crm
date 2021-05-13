@@ -496,6 +496,15 @@ class ValuationsController extends Controller
                     case 8:
                         $apiKey = 'AAAAYEG4vHw:APA91bGFWTsV1GsGaNdTZ7zNh4lM7zzTVO6cH-uB6bbjLxoUo3gfYDoIEMtbU6ioIC1BmAKVI3D_btMJg2Jd3urI8l3Pb9noB0FEkU7_6EGKnv7ymZULMwv0dKLCEprIuKwMJNUQDrEe';
                         break;
+
+                    case 9:
+                            $apiKey = 'AAAACnbvohQ:APA91bFxy5YUQlAXGxEF2BjU-bLXp1C13ClaB3kPvAFCwqraIyNRXwXYueJRxNeAGmSfaKCD2SgFyd03HfxgDODR74k630dC3q-Gy56U_EuNea6Fr2ZXeTs_mQ3nK--LqXdQ37zm7dt0';
+                            break;
+
+                    case 21:
+                        $apiKey = 'AAAACnbvohQ:APA91bFxy5YUQlAXGxEF2BjU-bLXp1C13ClaB3kPvAFCwqraIyNRXwXYueJRxNeAGmSfaKCD2SgFyd03HfxgDODR74k630dC3q-Gy56U_EuNea6Fr2ZXeTs_mQ3nK--LqXdQ37zm7dt0';
+                        break;
+
                     default:
                         $apiKey = 'AAAA3cdYfsY:APA91bF1mZUGbz72Z-qZhvT4ZFTwj6IUxAIZn9cchDvBxtmj47oRX6JKK8u8-thLD94GBUiRRGJqVndybDASTjHLwiRTkQlqyYqyCf4Oqt3nTqdeyh246t5KSXcPWUvY9fSp1bbOrg_L';
                         break;

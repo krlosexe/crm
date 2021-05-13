@@ -721,6 +721,16 @@ Route::get('sync/auth/app', function () {
 
 
 
+Route::get('env', function () {
+
+    dd(config("app.fcm2"));
+});
+
+
+
+
+
+
 
 Route::get('repartir/prp', function () {
 

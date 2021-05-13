@@ -46,17 +46,24 @@ class AffiliateController extends Controller
         }else{
 
             if($request["promotion_code"] != null){
+
+
+
                 $user = DB::table("users")
                         ->join("users_line_business", "users_line_business.id_user", "=", "users.id")
                         ->where("code_user", $request["promotion_code"])
+                        ->where("code_user", "!=",0)
                         ->first();
 
-                $request["id_line"] = $user->id_line;
+
 
                 if($user){
                     $request["id_user_asesora"] = $user->id;
+                    $request["id_line"] = $user->id_line;
                 }else{
                     $client = DB::table("clientes")->where("code_client", $request["promotion_code"])->first();
+
+
                     if($client){
                         $request["id_user_asesora"] = $client->id_user_asesora;
                         $request["id_affiliate"]    = $client->id_cliente;
@@ -117,7 +124,7 @@ class AffiliateController extends Controller
                 if($refered){
                     $url = "https://fcm.googleapis.com/fcm/send";
                     $token = $client->fcmToken;
-                    $serverKey = "AAAAg-p1HsU:APA91bHJHYE__7tBgvxXHPbMwR2cm7-KyYOknyMz7fAfBYm34YrFMF9QK4FieAEPL54o7EPXilihGevzxoBSf3X4CCHAswTk9NctvFTYY1ftYTYI5hj_-qXVFtCizHHzM060Ojphq62q";
+                    $serverKey = config("app.fcm2");
                     $title = "Se ha registrado un nuevo referido";
                     $body = "Nombre: ".$request["nombres"]. " Cedula: ".$request["identificacion"];
                     $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');

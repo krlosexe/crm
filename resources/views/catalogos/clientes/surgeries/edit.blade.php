@@ -256,7 +256,7 @@
 
                 </div>
 
-                <div class="row" id="additional_edit">
+                <div id="additional_edit">
 
                 </div>
 
