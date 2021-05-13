@@ -551,11 +551,16 @@
 
 					$("#amount-edit").val(data.amount)
 					var html = ""
+                    conut2 = 0
 					$.map(data.aditionals, function (item, key) {
-						html += "<div class='col-md-2'></div>"
-						html += "<div class='col-md-6'><input type='text' value='"+item.description+"' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-						html += "<div class='col-md-4'><input type='text' value='"+item.price_aditional+"'  class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
-						html += "<br><br>"
+                        conut2++
+						html += `<div class="row" id="tr_additional_2_${conut2}">`
+                            html += "<div class='col-md-2'></div>"
+                            html += "<div class='col-md-4'><input type='text' value='"+item.description+"' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
+                            html += "<div class='col-md-4'><input type='text' value='"+item.price_aditional+"'  class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+                            html += `<div class='col-md-2'><span onclick="eliminarTr('#tr_additional_2_${conut2}')" class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></div>`
+                            html += "<br><br>"
+                        html += "</div>"
 					});
 
 
@@ -761,13 +766,17 @@
 
 
 			$("#additional").html("")
+            var count = 0
 			$("#add-additional").click(function (e) {
-
+                count++
 				var html = ""
+                html += `<div id="tr_additional_${count}" class="row">`
+                    html += "<div class='col-md-4'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
+                    html += "<div class='col-md-4'><input type='number' class='form-control' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+                    html += `<div class='col-md-3'><span onclick="eliminarTr('#tr_additional_${count}')" class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></div>`
+                    html += "<br><br>"
+                html += "</div>"
 
-				html += "<div class='col-md-6'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-				html += "<div class='col-md-6'><input type='number' class='form-control' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
-				html += "<br><br>"
 
 
 				$("#additional").append(html)
@@ -798,13 +807,19 @@
 
 
 
+            function eliminarTr(tr){
+                $(tr).remove()
+            }
+            var conut3 = 0
 			$("#add-additional_edit").click(function (e) {
-
+                conut3++
 				var html = ""
-
+                html += `<div class="row" id="tr_additional_edit_${conut3}">`
 				html += "<div class='col-md-2'></div>"
-				html += "<div class='col-md-6'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
+				html += "<div class='col-md-4'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
 				html += "<div class='col-md-4'><input type='number' class='form-control' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+                html += `<div class='col-md-2'><span onclick="eliminarTr('#tr_additional_edit_${conut3}')" class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></div>`
+                html += `</div>`
 				html += "<br><br>"
 
 
