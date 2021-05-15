@@ -142,6 +142,17 @@ class AffiliateController extends Controller
                     }
 
 
+                    if($request["id_line"] == 2){
+                        $token_fcm = "AAAAJdN9JHM:APA91bEXsAKoXgwiQEDZUeqyxlLnEjyxvIP7rKKOQVV7s0bu5IfzZmPJ6E-iCCjtjUuRa70Xb_IXE8yPBU0crw4U_fPMfLIiP6l-sSohylin9-Jspst0qqBwe6jqP4qQsXkFsU__W5wx";
+                    }
+                    if($request["id_line"] == 18){
+                        $token_fcm = "AAAAJdN9JHM:APA91bEXsAKoXgwiQEDZUeqyxlLnEjyxvIP7rKKOQVV7s0bu5IfzZmPJ6E-iCCjtjUuRa70Xb_IXE8yPBU0crw4U_fPMfLIiP6l-sSohylin9-Jspst0qqBwe6jqP4qQsXkFsU__W5wx";
+                    }
+                    if($request["id_line"] == 22){
+                        $token_fcm = "AAAAJdN9JHM:APA91bEXsAKoXgwiQEDZUeqyxlLnEjyxvIP7rKKOQVV7s0bu5IfzZmPJ6E-iCCjtjUuRa70Xb_IXE8yPBU0crw4U_fPMfLIiP6l-sSohylin9-Jspst0qqBwe6jqP4qQsXkFsU__W5wx";
+                    }
+
+
                     $url = "https://fcm.googleapis.com/fcm/send";
                     $token = $client->fcmToken;
                     $serverKey = $token_fcm;
