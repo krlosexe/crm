@@ -68,6 +68,10 @@ class AffiliateController extends Controller
                         $request["id_user_asesora"] = $client->id_user_asesora;
                         $request["id_affiliate"]    = $client->id_cliente;
                         $request["id_line"]         = $client->id_line;
+
+
+
+
                         $refered =  true;
                     }else{
                         return response()->json("El código de promocion es invalido")->setStatusCode(400);
@@ -92,6 +96,8 @@ class AffiliateController extends Controller
             $request["to_db"]       = "1";
             $request["created_prp"] = date("Y-m-d");
             $request["auth_app"]    = "1";
+
+
 
 
             $cliente = Clients::create($request->all());
@@ -122,9 +128,23 @@ class AffiliateController extends Controller
                 $this->SendEmail($data);
 
                 if($refered){
+
+                    $token_fcm = config("app.fcm2");
+
+                    if($request["id_line"] == 17){
+                        $token_fcm = "AAAAg-p1HsU:APA91bHJHYE__7tBgvxXHPbMwR2cm7-KyYOknyMz7fAfBYm34YrFMF9QK4FieAEPL54o7EPXilihGevzxoBSf3X4CCHAswTk9NctvFTYY1ftYTYI5hj_-qXVFtCizHHzM060Ojphq62q";
+                    }
+                    if($request["id_line"] == 3){
+                        $token_fcm = "AAAADwEmOL8:APA91bGN_99QtWkpjpvLTjByVISmGtM7qZSgvZNixW1o7d1udxNp_hHI8n6Tn-ukuGgmnLAIABuWYo-Kdea253E-jE1tCVBLQmRikVBbdxy2Th-j64BAr80U9FeCpr3gGmPW66W58ZYF";
+                    }
+                    if($request["id_line"] == 16){
+                        $token_fcm = "AAAA5qKc4M8:APA91bG3q9BAo323Bje7_eIs8sGa-G37pRr67n4IgYK8xnoYHsSOx397JPecFVVaWCHfHjcqiaTFOjaZPbEtzXbzakZ2kwWqP_2x9RT3_Z883-lKpbRRgALZSq5MXK51Cb-W6Db5xAQu";
+                    }
+
+
                     $url = "https://fcm.googleapis.com/fcm/send";
                     $token = $client->fcmToken;
-                    $serverKey = config("app.fcm2");
+                    $serverKey = $token_fcm;
                     $title = "Se ha registrado un nuevo referido";
                     $body = "Nombre: ".$request["nombres"]. " Cedula: ".$request["identificacion"];
                     $notification = array('title' => $title, 'body' => $body, 'sound' => 'default', 'badge' => '1');
