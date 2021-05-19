@@ -104,7 +104,7 @@ class UsuariosController extends Controller
             $mensaje = "Bienvenido, tus datos de acceso son: ".$data->email." clave: 123456789";
 
             $info_email = [
-                "user_id"   => $data->id,
+                "user_id"   => $data["id"],
                 "subject"   => "Recuperar Contraseña",
                 "msg"       => $mensaje,
                 "for"       => $data->email,
