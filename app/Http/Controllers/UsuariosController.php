@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\User;
 use App\Auditoria;
 use App\datosPersonaesModel;
