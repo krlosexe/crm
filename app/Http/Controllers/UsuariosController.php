@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use DB;
+use Mail;
 use App\User;
 use App\Auditoria;
 use App\datosPersonaesModel;
@@ -103,8 +104,9 @@ class UsuariosController extends Controller
 
             $mensaje = "Bienvenido, tus datos de acceso son: ".$data->email." clave: 123456789";
 
+
             $info_email = [
-                "user_id"   => $data["id"],
+                "user_id"   => $data->id_cliente,
                 "subject"   => "Recuperar Contraseña",
                 "msg"       => $mensaje,
                 "for"       => $data->email,
@@ -124,7 +126,21 @@ class UsuariosController extends Controller
 
 
 
+    public function SendEmail($data){
 
+        $request["msg"]  = $data["msg"];
+        $subject         = $data["subject"];
+        $for             = $data["for"];
+        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+            $msj->from("web@pielis.com","Pielis Institute");
+            $msj->subject($subject);
+            $msj->to($for);
+        });
+
+        $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
+        return response()->json($data)->setStatusCode(200);
+
+    }
 
 
     public function GetAsesorasByBusinessLineArray(Request $request)
