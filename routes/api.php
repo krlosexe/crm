@@ -548,7 +548,7 @@ Route::resource('order', 'OrdersController');
 
 Route::post('client/edit', 'ClientsController@EditProfileApp');
 
-
+Route::post('client/recovery/account', 'UsuariosController@RecoveryAccount');
 
 
 
