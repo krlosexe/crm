@@ -91,13 +91,13 @@ class UsuariosController extends Controller
     public function RecoveryAccount(Request $request){
 
 
-        $data = DB::table("clients")
+        $data = DB::table("clientes")
                     ->where("identificacion", $request["id"])
                     ->first();
 
         if($data){
 
-            DB::table("clients")
+            DB::table("clientes")
                     ->where("identificacion", $request["id"])
                     ->update(["password" => md5(123456789)]);
 
