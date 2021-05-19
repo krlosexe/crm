@@ -88,6 +88,45 @@ class UsuariosController extends Controller
 
 
 
+    public function RecoveryAccount(Request $request){
+
+
+        $data = DB::table("clients")
+                    ->where("identificacion", $request["id"])
+                    ->first();
+
+        if($data){
+
+            DB::table("clients")
+                    ->where("identificacion", $request["id"])
+                    ->update(["password" => md5(123456789)]);
+
+            $mensaje = "Bienvenido, tus datos de acceso son: ".$data->email." clave: 123456789";
+
+            $info_email = [
+                "user_id"   => $data->id,
+                "subject"   => "Recuperar Contraseña",
+                "msg"       => $mensaje,
+                "for"       => $data->email,
+            ];
+
+            $this->SendEmail($info_email);
+
+            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            $data = array('mensagge' => "Error");
+            return response()->json($data)->setStatusCode(400);
+        }
+
+
+    }
+
+
+
+
+
+
     public function GetAsesorasByBusinessLineArray(Request $request)
     {
 
