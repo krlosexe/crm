@@ -73,7 +73,7 @@ class NotificationsCirugiaPlasticaMedellin extends Command
                 "issue"   => $notification["title"],
                 "mensage" => $notification["title"],
             ];
-            $this->SendEmail($info_email);
+         //   $this->SendEmail($info_email);
 
         }
     }
@@ -82,25 +82,25 @@ class NotificationsCirugiaPlasticaMedellin extends Command
 
 
 
-    public function SendEmail($data){
+    // public function SendEmail($data){
 
-        $user = User::find($data["user_id"]);
-        $subject = $data["issue"];
+    //     $user = User::find($data["user_id"]);
+    //     $subject = $data["issue"];
 
-        //$for = "cardenascarlos18@gmail.com";
-        $for = $user["email"];
+    //     //$for = "cardenascarlos18@gmail.com";
+    //     $for = $user["email"];
 
-        $request["msg"] = $data["mensage"];
+    //     $request["msg"] = $data["mensage"];
 
-        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("comercial@pdtagencia.com","CRM");
-            $msj->subject($subject);
-            $msj->to($for);
-        });
+    //     Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+    //         $msj->from("comercial@pdtagencia.com","CRM");
+    //         $msj->subject($subject);
+    //         $msj->to($for);
+    //     });
 
-        return true;
+    //     return true;
 
-    }
+    // }
 
 
 

@@ -582,7 +582,7 @@ class FinacingController extends Controller
     public function UpdateStatus(Request $request)
     {
         try {
-            $query = ClientPayToStudyCredit::where('id_client', $request->id)->first();
+            $query = ClientPayToStudyCredit::where('id_client', $request->id)->orderBy("id", "desc")->first();
 
                 if($query->status == 'Pendiente'){
 
@@ -661,7 +661,7 @@ class FinacingController extends Controller
     public function StatusCredit($id)
     {
         try {
-            $query = ClientPayToStudyCredit::where('id_client',$id)->first();
+            $query = ClientPayToStudyCredit::where('id_client',$id)->orderBy("id", "desc")->first();
             return response()->json($query)->setStatusCode(200);
 
         } catch (\Throwable $th) {

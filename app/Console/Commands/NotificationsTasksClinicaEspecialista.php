@@ -64,7 +64,7 @@ class NotificationsTasksClinicaEspecialista extends Command
 
         foreach($data as $task){
             $this->comment("Tarea ".$task->id_clients_tasks." esta vencida: ".$task->issue." Responsable: ". $task->responsable);
-           
+
             $notification             = [];
             $notification["fecha"]    = $task->fecha;
             $notification["title"]    = "Tarea ".$task->id_clients_tasks." esta vencida: ".$task->issue;
@@ -80,32 +80,32 @@ class NotificationsTasksClinicaEspecialista extends Command
                 "issue"   => $notification["title"],
                 "mensage" => $notification["title"],
             ];
-            $this->SendEmail($info_email);
+           // $this->SendEmail($info_email);
 
         }
     }
 
 
 
-    public function SendEmail($data){
+    // public function SendEmail($data){
 
-        $user = User::find($data["user_id"]);
-        $subject = $data["issue"];
+    //     $user = User::find($data["user_id"]);
+    //     $subject = $data["issue"];
 
-        //$for = "cardenascarlos18@gmail.com";
-        $for = $user["email"];
+    //     //$for = "cardenascarlos18@gmail.com";
+    //     $for = $user["email"];
 
-        $request["msg"] = $data["mensage"];
+    //     $request["msg"] = $data["mensage"];
 
-        Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("cardenascarlos18@gmail.com","CRM");
-            $msj->subject($subject);
-            $msj->to($for);
-        });
+    //     Mail::send('emails.notification',$request, function($msj) use($subject,$for){
+    //         $msj->from("cardenascarlos18@gmail.com","CRM");
+    //         $msj->subject($subject);
+    //         $msj->to($for);
+    //     });
 
-        return true;
+    //     return true;
 
-    }
+    // }
 
 
 
