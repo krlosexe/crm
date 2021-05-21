@@ -989,6 +989,12 @@ class ClientsController extends Controller
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
 
+
+            if(isset($request["procedure_px"])){
+                $this->ProtocolRevision($request["procedure_px"], $request["date_procedure"], $id_cliente);
+            }
+
+
             $data = Clients::select("state", "clinic", "id_line", "id_user_asesora", "prp", "id_affiliate", "pay_to_study_credit")->find($id_cliente);
 
             if($data->prp == null || $data->prp == "No"){
