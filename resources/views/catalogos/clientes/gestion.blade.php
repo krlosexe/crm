@@ -1970,6 +1970,11 @@
 
 					$("#asesora-edit").val(data.id_user_asesora)
 
+
+
+                    $("#procedure_px_edit").val(data.procedure_px)
+                    $("#date_procedure_edit").val(data.date_procedure)
+
 					getStatus(data.id_cliente)
 					cuadros('#cuadro1', '#cuadro4');
 
@@ -2709,8 +2714,8 @@
 
 
 
-	$("#state_edit").change(function (e) { 
-		
+	$("#state_edit").change(function (e) {
+
 		if($(this).val() == "Operada"){
 			$("#section_procedure").css("display", "block")
 			$("#procedure_px_edit").removeAttr("disabled").attr("required", "required")
@@ -2720,7 +2725,7 @@
 			$("#procedure_px_edit").removeAttr("required").attr("disabled", "disabled")
 			$("#date_procedure_edit").removeAttr("required").attr("disabled", "disabled")
 		}
-		
+
 	});
 
 	</script>
