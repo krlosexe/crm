@@ -328,7 +328,7 @@ class ClientsController extends Controller
                                 //->join("clients_tasks_adsviser", "clients_tasks_adsviser.id_client", "=", "clientes.id_cliente", "left")
                                 //->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
 
-                               // $query->join("valuations", "valuations.id_cliente", "=", "clientes.id_cliente", "left");
+                                ->join("valuations", "valuations.id_cliente", "=", "clientes.id_cliente", "left")
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
 
                                 ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'auditoria.usr_update', "left")
@@ -421,7 +421,7 @@ class ClientsController extends Controller
 
                                 ->where(function ($query) use ($adviser) {
                                     if($adviser != 0){
-                                        $query->join("valuations", "valuations.id_cliente", "=", "clientes.id_cliente", "left");
+                                       // $query->join("valuations", "valuations.id_cliente", "=", "clientes.id_cliente", "left");
                                         $query->whereIn("clientes.id_user_asesora", $adviser);
                                         $query->Orwhere("valuations.id_asesora_valoracion", $adviser);
                                     }
