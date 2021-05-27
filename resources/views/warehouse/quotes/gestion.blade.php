@@ -1,5 +1,5 @@
 @extends('layouts.app')
-	
+
 
 	@section('CustomCss')
 
@@ -41,8 +41,8 @@
 		      <!-- Main Content -->
 		      <div id="content">
 
-				@include('layouts.topBar') 
-		       
+				@include('layouts.topBar')
+
 
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
@@ -82,7 +82,7 @@
 			                    </tr>
 			                  </thead>
 			                  <tbody>
-			                    
+
 			                  </tbody>
 			                </table>
 			              </div>
@@ -153,22 +153,22 @@
 
 
 
-			
+
 
 			function list(cuadro) {
-				
+
 				var data = {
 					"id_user": id_user,
 					"token"  : tokens,
 					"type"   : "Cotizacion"
 				};
 				$('#table tbody').off('click');
-				var url=document.getElementById('ruta').value; 
+				var url=document.getElementById('ruta').value;
 				cuadros(cuadro, "#cuadro1");
 
 				var table=$("#table").DataTable({
 					"destroy":true,
-					
+
 					"stateSave": true,
 					"serverSide":false,
 					"ajax":{
@@ -189,10 +189,10 @@
 									botones += "<span class='consultar btn btn-sm btn-info waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-eye' style='margin-bottom:5px'></i></span> ";
 								if(actualizar == 1)
 									botones += "<span class='editar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Editar'><i class='fas fa-edit' style='margin-bottom:5px'></i></span> ";
-								
+
 								if(actualizar == 1)
 									botones += "<a href='api/invoice/print/"+row.id+"' target='_blank' class='print btn btn-sm btn-success waves-effect' data-toggle='tooltip' title='Imprmir'><i class='fas fa-print' style='margin-bottom:5px'></i></a> ";
-								
+
 								return botones;
 							}
 						},
@@ -203,13 +203,13 @@
 						{"data": "total_invoice",
 							render : function(data, type, row) {
 								var botones = "";
-								
+
 								return number_format(data, 2);
 							}
 						},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
-						
+
 					],
 					"language": idioma_espanol,
 					"dom": 'Bfrtip',
@@ -239,7 +239,7 @@
 
 
 
-				$("#xls").click(function (e) { 
+				$("#xls").click(function (e) {
 					url = $("#view_xls").attr("href");
 
 					console.log(url)
@@ -252,7 +252,7 @@
 
 
 
-			
+
 
 
 
@@ -261,11 +261,11 @@
 				$("#store")[0].reset();
 
 				ProductsGetExistence("#commercial_premises", "#products", "#table_products", '')
-				
+
 				GetComercialPremisesNew("#commercial_premises")
 
 				AddProductos("#add_product", "#products", "#table_products")
-				
+
 
 				getClients("#clients")
 
@@ -286,7 +286,7 @@
 
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function ver(tbody, table){
@@ -311,7 +311,7 @@
 					$("#subtotal_text_view").text(`$ ${number_format(data.subtotal, 2)}`)
 					$("#subtotal_view").val(data.subtotal)
 					$("#subtotal_with_discount_view").val(data.subtotal_with_discount)
-					
+
 
 					$("#vat_total_text_view").text(`$ ${number_format(data.vat_total, 2)}`)
 					$("#vat_total_view").val(data.vat_total)
@@ -339,7 +339,7 @@
 
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function edit(tbody, table){
@@ -355,7 +355,7 @@
 
 
 					ProductsGetExistence("#commercial_premises_edit", "#products_edit", "#table_products_edit", '_edit', data.id_seller)
-				
+
 					GetComercialPremisesNew("#commercial_premises_edit")
 
 					$("#commercial_premises_edit").val(data.commercial_premises).trigger("change")
@@ -363,7 +363,7 @@
 					ShowProdcuts("#table_products_edit", data.products)
 					AddProductosEdit("#add_product_edit", "#products_edit", "#table_products_edit")
 
-					
+
 					if(data.discount_total > 0){
 						$("#apply_discount_edit").prop("checked", true)
 					}else{
@@ -374,7 +374,7 @@
 					$("#subtotal_text_edit").text(`$ ${number_format(data.subtotal, 2)}`)
 					$("#subtotal_edit").val(data.subtotal)
 					$("#subtotal_with_discount_edit").val(data.subtotal_with_discount)
-					
+
 
 					$("#vat_total_text_edit").text(`$ ${number_format(data.vat_total, 2)}`)
 					$("#vat_total_edit").val(data.vat_total)
@@ -389,20 +389,20 @@
 					$("#observations_edit").val(data.observations)
 					$("#content_pay").html("")
 					$("#seller_edit").val(data.id_seller)
-					
+
 					ShowPays(data.pays)
 					$("#id_edit").val(data.id)
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
 
-			$("#print").click(function (e) { 
+			$("#print").click(function (e) {
 
 				window.open(`api/invoice/print/${$("#id_edit").val()}`, "_blank");
 
 			});
 
-					
+
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -438,7 +438,7 @@
 
 
 			function ProductsGetExistence(commercial_premises, product, table, edit, seller = false) {
-				$(commercial_premises).unbind().change(function (e) { 
+				$(commercial_premises).unbind().change(function (e) {
 
 					$(table+" tbody").html("")
 
@@ -453,7 +453,7 @@
 						dataType:'JSON',
 						async: false,
 						error: function() {
-							
+
 						},
 						success: function(data){
 
@@ -466,18 +466,18 @@
 								value: "",
 								text : "-Seleccione"
 							}));
-						
+
 							$.each(data, function(i, item){
-								
-								
+
+
 								$(product).append($('<option>',
 								{
 									value: `${item.id_product}|${item.existence}|${item.price}|${item.presentation}`,
 									text : item.name_product,
-									
+
 								}));
 
-								
+
 							});
 
 
@@ -513,7 +513,7 @@
 						dataType:'JSON',
 						async: false,
 						error: function() {
-							
+
 						},
 						success: function(data2){
 							$(`#seller${edit} option`).remove();
@@ -522,16 +522,16 @@
 								value: "",
 								text : "-Seleccione"
 							}));
-						
+
 							$.each(data2, function(i, item){
-								
+
 								$(`#seller${edit}`).append($('<option>',
 								{
 									value: `${item.id}`,
 									text :`${item.nombres} ${item.apellido_p}`,
 									selected : seller == item.id ? true : false
 								}));
-								
+
 							});
 
 							$(`#seller${edit}`).select2({
@@ -560,14 +560,14 @@
 			}
 
 
-			
+
 
 
 
 
 
 			function getProducts(select, select_default = false){
-			
+
 				$.ajax({
 					url: ''+document.getElementById('ruta').value+'/api/products',
 					type:'GET',
@@ -578,7 +578,7 @@
 					dataType:'JSON',
 					async: false,
 					error: function() {
-						
+
 					},
 					success: function(data){
 						$(select+" option").remove();
@@ -587,19 +587,19 @@
 							value: "",
 							text : "- Seleccione"
 						}));
-					
+
 						$.each(data, function(i, item){
-							
-							
+
+
 							$(select).append($('<option>',
 							{
 								value: item.id,
 								text : item.description,
 								selected : select_default == item.id ? true : false
-								
+
 							}));
 
-							
+
 						});
 
 
@@ -621,7 +621,7 @@
 						});
 
 					}
-				
+
 				});
 			}
 
@@ -629,9 +629,9 @@
 
 
 			function AddProductos(btn, select_product, table){
-				$(btn).unbind().click(function (e) { 
+				$(btn).unbind().click(function (e) {
 
-					
+
 
 					const array_product       = $(select_product).val().split("|")
 					const id_product          = array_product[0]
@@ -640,7 +640,7 @@
 					const presentation    = array_product[3]
 					const description   = $(`${select_product} option:selected`).text()
 
-					var html 
+					var html
 
 					var validaProduct = false
 					$(table + " tbody tr").each(function() {
@@ -649,7 +649,7 @@
 						}
 					});
 
-					if(!validaProduct){ 
+					if(!validaProduct){
 						html += "<tr>"
 							html +="<td>"+description+" <input type='hidden' class='id_product' name='id_product[]' value='"+id_product+"' > </td>"
 							html +="<td>"+presentation+" </td>"
@@ -663,11 +663,11 @@
 					}else{
 						warning('¡La opción seleccionada ya se encuentra agregada!');
 					}
-					
+
 
 
 					$(table+" tbody").append(html)
-					
+
 				});
 			}
 
@@ -677,7 +677,7 @@
 
 
 			function AddProductosEdit(btn, select_product, table){
-				$(btn).unbind().click(function (e) { 
+				$(btn).unbind().click(function (e) {
 
 					const array_product       = $(select_product).val().split("|")
 					const id_product          = array_product[0]
@@ -686,7 +686,7 @@
 					const presentation    = array_product[3]
 					const description   = $(`${select_product} option:selected`).text()
 
-					var html 
+					var html
 
 					var validaProduct = false
 					$(table + " tbody tr").each(function() {
@@ -695,7 +695,7 @@
 						}
 					});
 
-					if(!validaProduct){ 
+					if(!validaProduct){
 						html += "<tr>"
 							html +="<td>"+description+" <input type='hidden' class='id_product' name='id_product[]' value='"+id_product+"' > </td>"
 							html +="<td>"+presentation+" </td>"
@@ -709,11 +709,11 @@
 					}else{
 						warning('¡La opción seleccionada ya se encuentra agregada!');
 					}
-					
+
 
 
 					$(table+" tbody").append(html)
-					
+
 				});
 			}
 
@@ -732,13 +732,13 @@
 
 
 						html +="<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales price_product items_calc' value='"+number_format(item.price_cop, 2)+"'  onkeyup='calcProduc(this, "+'"_edit"'+")' name='price[]' required></td>"
-						
-						
+
+
 						html +="<td><input type='number' class='form-control qty_product items_calc' name='qty[]' value='"+item.qty+"' max="+item.existence+" onchange='calcProduc(this, "+'"_edit"'+")' required><input type='hidden' class='form-control qty_product_hidden items_calc' value='"+item.qty+"' disabled></td>"
 
 						html +="<td><input type='number' class='form-control  items_calc existence' name='existence'  value='"+item.existence+"' disabled><input type='hidden' disabled class='form-control items_calc existence_hidden' value='"+item.existence+"' disabled></td>"
 
-						
+
 						if(item.vat == 1){
 							html +="<td><input type='checkbox' class='form-control vat_product items_calc'checked onchange='calcProduc(this, "+'"_edit"'+")'><input type='hidden' class='vat_hidden' name='vat[]' value='"+item.vat+"'></td>"
 						}else{
@@ -748,22 +748,22 @@
 						html +="<td><input style='text-align: right;width: 142px;' type='text' class='form-control monto_formato_decimales total_product' value='"+number_format(item.total, 2)+"'  name='total[]' readonly required></td>"
 						html +="<td><span onclick='deleteProduct(this, "+'"_edit"'+")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 					html += "</tr>"
-					
+
 
 					$(table+" tbody").append(html)
 					$("#price_edit_"+item.id).val(item.price)
 
 				});
 
-				
 
-				
+
+
 
 
 
 
 			}
-			
+
 
 
 
@@ -783,7 +783,7 @@
 
 
 			function getClients(select, select_default = false){
-			
+
 				$.ajax({
 					url: ''+document.getElementById('ruta').value+'/api/clients',
 					type:'GET',
@@ -794,7 +794,7 @@
 					dataType:'JSON',
 					async: false,
 					error: function() {
-						
+
 					},
 					success: function(data){
 						$(select+" option").remove();
@@ -803,7 +803,7 @@
 							value: "",
 							text : "- Seleccione"
 						}));
-					
+
 						$.each(data, function(i, item){
 
 							if(data.status == 1){
@@ -814,7 +814,7 @@
 								value: item.id,
 								text : item.name,
 								selected : select_default == item.id ? true : false
-								
+
 							}));
 						});
 
@@ -837,7 +837,7 @@
 						});
 
 					}
-				
+
 				});
 			}
 
@@ -855,10 +855,10 @@
 				var qty   = inNum($(element).parent("td").parent("tr").children("td").find(".qty_product").val())
 				var vat   = $(element).parent("td").parent("tr").children("td").find(".vat_product")
 
-				var existence        = $(element).parent("td").parent("tr").children("td").find(".existence") 
-				var existence_hidden = $(element).parent("td").parent("tr").children("td").find(".existence_hidden") 
-				
-				
+				var existence        = $(element).parent("td").parent("tr").children("td").find(".existence")
+				var existence_hidden = $(element).parent("td").parent("tr").children("td").find(".existence_hidden")
+
+
 				if(edit != ''){
 					var qty_hidden   = inNum($(element).parent("td").parent("tr").children("td").find(".qty_product_hidden").val())
 					existence.val((existence_hidden.val() - qty) + qty_hidden)
@@ -885,12 +885,12 @@
 				calcSubTotal(".price_product", edit)
 				calcTotalVat(".vat_product", edit)
 				calTotal(".total_product", edit)
-			
+
 
 			}
 
 
-	
+
 
 			function calcSubTotal(fields, edit = ''){
 				let subtotal = 0
@@ -937,7 +937,7 @@
 				$(`#subtotal_text${edit}`).text(`$ ${number_format(subtotal, 2)}`)
 				$(`#subtotal${edit}`).val(subtotal)
 
-				
+
 
 				let sub_total_with_discount = subtotal - (parseFloat(discount_ammount) + parseFloat(discount_ammount2))
 
@@ -949,7 +949,7 @@
 
 					sub_total_with_discount    = ((sub_total_with_discount - rte_fuete))
 				*/
-				
+
 				$(`#subtotal_with_discount${edit}`).val(sub_total_with_discount)
 
 			}
@@ -986,7 +986,7 @@
 
 				let total_invoice = 0
 
-				
+
 				$.map($(fields), function (item, key) {
 
 					if($(item).val() != ""){
@@ -994,7 +994,7 @@
 					}
 
 				});
-				
+
 
 				const discount  = inNum($(`#discount_total${edit}`).val())
 
@@ -1013,7 +1013,7 @@
 				$(`#total_invoice${edit}`).val(total_invoice)
 
 				$(`#balance${edit}`).val(total_invoice)
-				
+
 				if(edit != ""){
 					CalcBalanceEdit()
 				}else{
@@ -1024,14 +1024,14 @@
 
 
 
-			$("#apply_discount").change(function (e) { 
+			$("#apply_discount").change(function (e) {
 				calcSubTotal(".price_product")
 				calcTotalVat(".vat_product")
 				calTotal(".total_product")
 			});
 
 
-			$("#apply_discount2").change(function (e) { 
+			$("#apply_discount2").change(function (e) {
 				calcSubTotal(".price_product")
 				calcTotalVat(".vat_product")
 				calTotal(".total_product")
@@ -1041,28 +1041,28 @@
 
 
 
-			$("#apply_discount_edit").change(function (e) { 
+			$("#apply_discount_edit").change(function (e) {
 				calcSubTotal(".price_product", '_edit')
 				calcTotalVat(".vat_product", '_edit')
 				calTotal(".total_product", '_edit')
 			});
 
 
-			$("#apply_discount_edit2").change(function (e) { 
+			$("#apply_discount_edit2").change(function (e) {
 				calcSubTotal(".price_product", '_edit')
 				calcTotalVat(".vat_product", '_edit')
 				calTotal(".total_product", '_edit')
 			});
 
 
-			$(".discount").keyup(function (e) { 
+			$(".discount").keyup(function (e) {
 				calcSubTotal(".price_product")
 				calcTotalVat(".vat_product")
 				calTotal(".total_product")
 			});
 
 
-			$(".discount_edit").keyup(function (e) { 
+			$(".discount_edit").keyup(function (e) {
 				calcSubTotal(".price_product", '_edit')
 				calcTotalVat(".vat_product", '_edit')
 				calTotal(".total_product", '_edit')
@@ -1072,7 +1072,7 @@
 
 
 			function GetComercialPremisesNew(select){
-				
+
 				var url=document.getElementById('ruta').value;
 				$.ajax({
 				  url:''+url+'/api/comercial/premises',
@@ -1087,7 +1087,7 @@
 				  // mensajes('info', '<span>Buscando, espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
 				  },
 				  error: function (data) {
-				  //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');         
+				  //mensajes('danger', '<span>Ha ocurrido un error, por favor intentelo de nuevo</span>');
 				  },
 				  success: function(data){
 						$(select+" option").remove();
@@ -1097,13 +1097,13 @@
 							text : "Seleccione"
 						}));
 						$.each(data, function(i, item){
-							
+
 							$(select).append($('<option>',
 							{
 							value: item.id,
 							text : item.name
 							}));
-						
+
 						});
 
 
@@ -1113,7 +1113,7 @@
 						}else{
 							$(select).removeAttr("readonly")
 						}
-				
+
 				  }
 				});
 			}
@@ -1125,8 +1125,8 @@
 			function ShowPays(data){
 
 				$("#content_pay_edit").html("")
-				
-			
+
+
 				$.map(data, function (item, key) {
 					var html = ""
 					html += "<br>"
@@ -1138,7 +1138,7 @@
 								html += "<input type='text' class='form-control amount_pay_edit' required name='amount_pay[]' placeholder = 'Monto' value='"+item.amount+"' onkeyup='CalcBalanceEdit()'>"
 							html += "</div>"
 					html += "</div>"
-					
+
 					$("#content_pay_edit").append(html)
 				});
 
@@ -1149,7 +1149,7 @@
 
 
 
-			$("#add_pay").click(function (e) { 
+			$("#add_pay").click(function (e) {
 				var html = ""
 				html += "<br>"
 				html += "<div class='row'>"
@@ -1162,13 +1162,13 @@
 				html += "</div>"
 
 				$("#content_pay").append(html)
-				
+
 			});
 
 
 			function CalcBalance(){
 				var total = 0
-				$(".amount_pay").map(function(obj, item){ 
+				$(".amount_pay").map(function(obj, item){
 					total = total + inNum($(item).val())
 				});
 
@@ -1181,7 +1181,7 @@
 
 
 
-			$("#add_pay_edit").click(function (e) { 
+			$("#add_pay_edit").click(function (e) {
 				var html = ""
 				html += "<br>"
 				html += "<div class='row'>"
@@ -1194,7 +1194,7 @@
 				html += "</div>"
 
 				$("#content_pay_edit").append(html)
-				
+
 			});
 
 
@@ -1204,7 +1204,7 @@
 
 			function CalcBalanceEdit(){
 				var total = 0
-				$(".amount_pay_edit").map(function(obj, item){ 
+				$(".amount_pay_edit").map(function(obj, item){
 					total = total + inNum($(item).val())
 				});
 
@@ -1218,7 +1218,7 @@
 
 
 		</script>
-		
+
 
 
 

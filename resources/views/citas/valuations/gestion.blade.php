@@ -467,7 +467,7 @@
 						{"data": "code"},
 						{"data":"nombres",
 							render : function(data, type, row) {
-								return "<a href='javascript:void(0)' onclick='ViewClient("+row.id_cliente+")'>"+data+"</a>";
+								return "<a href='javascript:void(0)' onclick='ViewClient("+row.id_cliente+")'>"+data+"</a><br>"+row.telefono+"";
 							}
 						},
 						{"data": "fecha"},
