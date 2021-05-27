@@ -119,6 +119,26 @@ class AffiliateController extends Controller
 
 
 
+            $token_user  = AuthUsersApp::where("id_user", $cliente["id_cliente"])->get();
+
+            foreach ($token_user as $key => $value) {
+                $value->delete();
+            }
+
+
+            $token = bin2hex(random_bytes(64));
+
+            $AuthUsers                       = new AuthUsersApp;
+            $AuthUsers->id_user              = $cliente["id_cliente"];
+            $AuthUsers->token                = $token;
+            $AuthUsers->token_notifications  = $request["fcmToken"];
+            $AuthUsers->save();
+
+
+
+
+
+
             if ($cliente) {
                 $user_receive = User::where("id", $request["id_user_asesora"])->inRandomOrder()->first();
 

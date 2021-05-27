@@ -132,7 +132,7 @@ class UsuariosController extends Controller
         $subject         = $data["subject"];
         $for             = $data["for"];
         Mail::send('emails.notification',$request, function($msj) use($subject,$for){
-            $msj->from("web@pielis.com","Pielis Institute");
+            $msj->from("crm@pdtagencia.com","CRM");
             $msj->subject($subject);
             $msj->to($for);
         });
