@@ -495,6 +495,32 @@ class ClientsController extends Controller
             }
 
 
+
+            $data->map(function($item) {
+                $item->surgeries = DB::table("clients_procedures")
+                                    ->select("sub_category.name")
+                                    ->join("sub_category", "sub_category.id", "=", "clients_procedures.id_sub_category")
+                                    ->where("id_client", $item->id_cliente)->get();
+
+
+                $item->date_surgerie = DB::table("surgeries")
+                                        ->select("fecha")
+                                        ->where("id_cliente", $item->id_cliente)
+                                        ->orderBy("surgeries.id_surgeries", "DESC")
+                                        ->first();
+
+
+                $item->date_valoration = DB::table("valuations")
+                                        ->select("fecha")
+                                        ->where("id_cliente", $item->id_cliente)
+                                        ->orderBy("valuations.id_valuations", "DESC")
+                                        ->first();
+                return $item;
+            });
+
+
+
+
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);

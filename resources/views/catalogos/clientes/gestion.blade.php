@@ -282,6 +282,7 @@
 			                    <tr>
 								  <th>Acciones</th>
 								  <th>Datos</th>
+                                  <th>Info</th>
 								  <th>Identificacion</th>
 								  <th style="width: 150px;">Origen</th>
 								  <th style="width: 150px;">Linea</th>
@@ -810,10 +811,38 @@
 
 							let link = item.count_sactfication_suvarvy_count == 1 ? 'Encuesta Diligenciada':"<i class='fa fa-link'></i> <a href='"+url+"/form_satisfaction_survey/intro/"+item.id_cliente+"' target='_blank'> Link de Encuesta</a>"
 
+                            let surgeries = ""
+                            $.map(item.surgeries, function (surgerie, key) {
+                                surgeries += surgerie.name
+                            });
+
+                            let date_surgerie
+                            if(item.date_surgerie){
+                                 date_surgerie = item.date_surgerie.fecha
+                            }else{
+                                 date_surgerie = ""
+                            }
+
+
+                            let date_valoration
+                            if(item.date_valoration){
+                                 date_valoration = item.date_valoration.fecha
+                            }else{
+                                 date_valoration = ""
+                            }
+
+
 							html += "<tr>"
 								html += "<td>"+botones+"</td>"
 								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+"<br>  "+authapp+"  <br>   "+refer+" <br> "+have_initial+"<br>"+link+"<br>"+code_verify+"</td>"
-								html += "<td>"+item.identificacion+"</td>"
+								html += `<td>
+                                    <b>Nombre de CX:</b> ${surgeries}<br><br>
+                                    <b>Fecha de CX:</b>  ${date_surgerie}<br><br>
+                                    <b>Fecha de VLR:</b>  ${date_valoration}<br><br>
+                                    <b>Instagram:</b>  ${item.instagram}<br><br>
+                                    <b>Forma Pago:</b>  ${item.forma_pago}
+                                </td>`
+                                html += "<td>"+item.identificacion+"</td>"
 								html += "<td>"+item.origen+"</td>"
 								html += "<td>"+item.nombre_line+"</td>"
 								html += "<td>"+item.name_city+"</td>"
