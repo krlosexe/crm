@@ -813,7 +813,7 @@
 
                             let surgeries = ""
                             $.map(item.surgeries, function (surgerie, key) {
-                                surgeries += surgerie.name
+                                surgeries += surgerie.name+"<br>"
                             });
 
                             let date_surgerie
@@ -836,7 +836,7 @@
 								html += "<td>"+botones+"</td>"
 								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+"<br>  "+authapp+"  <br>   "+refer+" <br> "+have_initial+"<br>"+link+"<br>"+code_verify+"</td>"
 								html += `<td>
-                                    <b>Nombre de CX:</b> ${surgeries}<br><br>
+                                    <b>Nombre de CX:</b> ${surgeries}<br>
                                     <b>Fecha de CX:</b>  ${date_surgerie}<br><br>
                                     <b>Fecha de VLR:</b>  ${date_valoration}<br><br>
                                     <b>Instagram:</b>  ${item.instagram}<br><br>
