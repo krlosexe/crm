@@ -813,7 +813,7 @@
 
                             let surgeries = ""
                             $.map(item.surgeries, function (surgerie, key) {
-                                surgeries += surgerie.name
+                                surgeries += surgerie.name+"<br>"
                             });
 
                             let date_surgerie
