@@ -61,6 +61,8 @@ Route::post('status-rol/{id}/{status}', 'RolesController@status');
 
 
 Route::resource('clients', 'ClientsController');
+
+Route::put('update/clients/encuesta/{id_client}', 'ClientsController@updateEncuesta');
 Route::post('client/tasks', 'ClientsController@Tasks');
 Route::get('client/tasks', 'ClientsController@GetTasks');
 Route::put('client/tasks/{id}', 'ClientsController@TasksUpdate');
@@ -344,6 +346,10 @@ Route::get('gallery/testimonials/{client}/{limit}', 'ClientsController@GetTestim
 
 
 Route::post('satisfaction_survey', 'SatisfactionSurveyController@store');
+
+Route::post('satisfaction_survey_vlr', 'SatisfactionSurveyController@storeVlr');
+
+
 
 
 Route::get('schedule', 'CalendarController@GetSchedule');

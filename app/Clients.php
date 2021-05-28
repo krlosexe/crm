@@ -74,6 +74,15 @@ class Clients extends Model
         return $this->hasOne('App\SatisfactionSurvey','id_client');
     }
 
+
+
+    public function CountSactficationSuvarvyVlr () {
+        return $this->hasOne('App\SatisfactionSurveyVlr','id_client');
+    }
+
+
+
+
     public function procedures_r(){
 
         return $this->hasMany('App\ClientsProcedure', 'id_client');
