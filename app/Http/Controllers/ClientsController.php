@@ -340,6 +340,7 @@ class ClientsController extends Controller
                                 ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
 
                                 ->withCount('CountSactficationSuvarvy')
+                                ->withCount('CountSactficationSuvarvyVlr')
                                 ->where(function ($query) use ($procedure) {
                                     if($procedure != 0){
                                        // $query->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left");
@@ -1004,6 +1005,14 @@ class ClientsController extends Controller
         //
     }
 
+
+    public function updateEncuesta(Request $request, $id_client)
+    {
+
+        $cliente = Clients::find($id_client)->update($request->all());
+        return response()->json("Ok")->setStatusCode(200);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -1013,7 +1022,7 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id_cliente)
     {
-        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+        //if ($this->VerifyLogin($request["id_user"],$request["token"])){
 
 
 
@@ -1312,9 +1321,9 @@ class ClientsController extends Controller
                 return response()->json("A ocurrido un error")->setStatusCode(400);
             }
 
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
-        }
+        // }else{
+        //     return response()->json("No esta autorizado")->setStatusCode(400);
+        // }
     }
 
 

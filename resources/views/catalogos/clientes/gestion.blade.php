@@ -809,7 +809,10 @@
 
 
 
-							let link = item.count_sactfication_suvarvy_count == 1 ? 'Encuesta Diligenciada':"<i class='fa fa-link'></i> <a href='"+url+"/form_satisfaction_survey/intro/"+item.id_cliente+"' target='_blank'> Link de Encuesta</a>"
+							let link = item.count_sactfication_suvarvy_count > 0 ? 'Encuesta Diligenciada':"<i class='fa fa-link'></i> <a href='"+url+"/form_satisfaction_survey/intro/"+item.id_cliente+"' target='_blank'> Link de Encuesta</a>"
+
+
+                            let linkVlr = item.count_sactfication_suvarvy_vlr_count > 0 ? 'Encuesta VLR Diligenciada':"<i class='fa fa-link'></i> <a href='"+url+"/form_satisfaction_survey_vlr/intro/"+item.id_cliente+"' target='_blank'> Link de Encuesta VLR</a>"
 
                             let surgeries = ""
                             $.map(item.surgeries, function (surgerie, key) {
@@ -834,7 +837,7 @@
 
 							html += "<tr>"
 								html += "<td>"+botones+"</td>"
-								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+"<br>  "+authapp+"  <br>   "+refer+" <br> "+have_initial+"<br>"+link+"<br>"+code_verify+"</td>"
+								html += "<td><b>"+item.nombres+"</b><br><i class='fa fa-phone'></i> <a href='#'>"+item.telefono+"</a><br><i class='fa fa-envelope'></i> <a href='#'>"+item.email+"</a><br>"+code+"<br>  "+authapp+"  <br>   "+refer+" <br> "+have_initial+"<br>"+link+"<br>"+linkVlr+"<br>"+code_verify+"</td>"
 								html += `<td>
                                     <b>Nombre de CX:</b> ${surgeries}<br>
                                     <b>Fecha de CX:</b>  ${date_surgerie}<br><br>
