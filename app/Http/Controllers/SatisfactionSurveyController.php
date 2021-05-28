@@ -9,12 +9,27 @@ use App\SatisfactionSurvey;
 class SatisfactionSurveyController extends Controller
 {
     public function store(Request $request){
-        
+
         DB::table("satisfaction_survey")->insert($request->all());
 
         return response()->json("Ok")->setStatusCode(200);
 
     }
+
+
+
+    public function storeVlr(Request $request){
+
+        DB::table("satisfaction_survey_vlr")->insert($request->all());
+
+        return response()->json("Ok")->setStatusCode(200);
+
+    }
+
+
+
+
+
     public function QuestionByAdviser(Request $request)
     {
         try {
