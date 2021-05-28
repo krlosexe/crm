@@ -45,6 +45,7 @@
 
 
         <th><b>Cirugia</b></th>
+        <th><b>Fecha Cirugia</b></th>
         <th><b>Cirujano</b></th>
         <th><b>Fecha de Cirugia</b></th>
 
@@ -107,7 +108,21 @@
 
 
 
-            <td>{{ $value->name_procedure }}</td>
+            {{-- <td>{{ $value->name_procedure }}</td> --}}
+
+            <th>
+                <b>
+                    @foreach($value->surgeries as $surgerie)
+                    {{$surgerie->name}}<br><br>
+                    @endforeach
+                </b>
+            </th>
+
+
+            <td>{{ $value->date_surgerie }}</td>
+
+
+
             <td>{{ $value->name_surgeon_cx }}</td>
             <td>{{ $value->fecha_surgerie }}</td>
 

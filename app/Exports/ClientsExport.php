@@ -253,8 +253,6 @@ class ClientsExport implements FromView
 
         foreach($data as $value){
 
-
-
             $valoration =  DB::table("valuations")->where("id_cliente", $value->id_cliente)->first();
             if($valoration){
                 $auditoria = DB::table("auditoria")->where("tabla", "valuations")->where("cod_reg", $valoration->id_valuations)->first();
@@ -266,6 +264,30 @@ class ClientsExport implements FromView
 
         }
 
+
+
+
+
+        $data->map(function($item) {
+            $item->surgeries = DB::table("clients_procedures")
+                                ->select("sub_category.name")
+                                ->join("sub_category", "sub_category.id", "=", "clients_procedures.id_sub_category")
+                                ->where("id_client", $item->id_cliente)->get();
+
+            $surgeries = DB::table("surgeries")
+                                ->select("fecha")
+                                ->where("id_cliente", $item->id_cliente)
+                                ->orderBy("surgeries.id_surgeries", "DESC")
+                                ->get();
+
+            if(sizeof($surgeries) > 0){
+                $item->date_surgerie = $surgeries[0]->fecha;
+            }else{
+                $item->date_surgerie = 0;
+            }
+
+            return $item;
+        });
         return view('exports.clients', [
             'data' => $data
         ]);
