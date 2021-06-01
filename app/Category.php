@@ -14,7 +14,7 @@ class Category extends Model
     public function child(){
         return $this->hasMany('App\SubCategory', 'id_category')
                         ->where("sub_category.state", 1)
-                        ->select(array('sub_category.id', 'sub_category.name', 'sub_category.id_category','sub_category.foto as img', 'sub_category.information'));
+                        ->select(array('sub_category.id', 'sub_category.name', 'sub_category.id_category','sub_category.foto as img', 'sub_category.description', 'sub_category.information'));
     }
 
 
