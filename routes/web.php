@@ -16,6 +16,13 @@ Route::get('/', function () {
     return view('login');
 });
 
+
+Route::get('funcion-x', function () {
+    return view('dashboard');
+});
+
+
+
 Route::post('auth', 'Login@Auth');
 Route::get('logout/{id}', 'Login@Logout');
 
@@ -380,6 +387,13 @@ Route::get('gallery', function () {
 Route::get('gallety-cinic', function () {
     return view('configuracion.gallery.clinic.gestion');
 });
+
+
+
+Route::get('history-clinic', function () {
+    return view('catalogos.history_clinic.gestion');
+});
+
 
 
 
