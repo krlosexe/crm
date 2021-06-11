@@ -11,11 +11,11 @@
                     <a id="tab0" class="nav-link active" id="patient_record_edit" data-toggle="tab" href="#init_edit" role="tab" aria-controls="init" aria-selected="true">CONSULTA PREANESTÉSICA</a>
                 </li>
                 <li class="nav-item">
-                    <a id="tab1" class="nav-link" id="information_aditionals_edit" data-toggle="tab" href="#info-add-edit" role="tab" aria-controls="info-add" aria-selected="false">Info Cirugia</a>
+                    <a id="tab1" class="nav-link" id="information_aditionals_edit" data-toggle="tab" href="#info-add-edit" role="tab" aria-controls="info-add" aria-selected="false">DESCRIPCIÓN QUIRÚRGICA</a>
                 </li>
 
                 <li class="nav-item">
-                    <a id="tab2" class="nav-link" id="init_history_edit" data-toggle="tab" href="#init-history-edit" role="tab" aria-controls="info-add" aria-selected="false">Historial Clinico</a>
+                    <a id="tab2" class="nav-link" id="init_history_edit" data-toggle="tab" href="#init_history_edit" role="tab" aria-controls="info-add" aria-selected="false">HISTORIA CLÍNICA ESTÉTICA</a>
                 </li>
 
                 <li class="nav-item">
@@ -58,7 +58,7 @@
             </ul>
             <br><br>
 
-            <div class="tab-content" id="myTabContent">
+            
 
                 <div class="tab-pane fade show active tab_content0" id="init_edit" role="tabpanel" aria-labelledby="patient_record_edit">
 
@@ -67,7 +67,7 @@
                         <div class="col-md-12">
                             <h3>Datos Personales</h3>
                             <hr>
-                        </div>
+                    </div>
 
                         <br>
 
@@ -151,579 +151,747 @@
 
                     <br>
                     <div class="row">
+                    
 
                         <div class="col-md-12">
                             <h3>ANTECEDENTES</h3>
                             <hr>
                         </div>
-
                         <br>
-
-                    </div>
-
-
-
-
-                    <div class="row">
-                        <div class="col-md-5">
-
-
-
-
-                            <div class="row">
+                        
+                            
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for=""><b>Estado</b></label>
-                                        <select name="state" id="state_edit" class="form-control select2" required>
-                                            <option value="">Seleccione</option>
-                                            <option value="Afiliada">Afiliada</option>
-                                            <option value="Agendada">Agendada</option>
-                                            <option value="Aprobada">Aprobada</option>
-                                            <option value="Aprobada - Descartada">Aprobada - Descartada</option>
-                                            <option value="Asesorada No Agendada"> Asesorada No Agendada</option>
-                                            <option value="Asesorado por FB esperando contacto Telefonico">Asesorado por FB esperando contacto Telefonico</option>
-                                            <option value="Demandada">Demandada</option>
-                                            <option value="Descartada">Descartada</option>
-                                            <option value="Llamada no Asesorada">Llamada no Asesorada</option>
-                                            <option value="No Asistio">No Asistio</option>
-                                            <option value="No Contactada">No Contactada</option>
-                                            <option value="No Contesta">No Contesta</option>
-                                            <option value="Numero Equivocado">Numero Equivocado</option>
-                                            <option value="Operada">Operada</option>
-                                            <option value="Procedimiento">Procedimiento</option>
-                                            <option value="Programada">Programada</option>
-                                            <option value="Re Agendada a Valoracion">Re Agendada a Valoracion</option>
-                                            <option value="Valorada">Valorada</option>
-                                            <option value="Valorada / Descartada">Valorada / Descartada</option>
-                                            <option value="En mora">En mora</option>
-                                            <option value="Al Dia">Al Dia</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="form-group">
-                                        <label for=""><b>Fecha de Nacimiento</b></label>
-                                        <input type="date" name="fecha_nacimiento" class="form-control" id="fecha_nacimiento_edit" placeholder="PJ. Cardenas">
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for=""><b>Ciudad</b></label>
-                                        <select name="city" id="city_edit" class="form-control" required>
-                                            <option value="">Seleccione</option>
-                                        </select>
+                                        <label for=""><b>Anestesicos</b></label>
+                                        <input type="text" name="anestesicos" class="form-control form-control-user" id="anestesicos_edit" >
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for=""><b>Clinica</b></label>
-                                        <select name="clinic" id="clinic_edit" class="form-control" required>
-                                            <option value="">Seleccione</option>
-                                        </select>
+                                        <label for=""><b>Complicaciones</b></label>
+                                        <input type="text" name="Complicaciones" class="form-control form-control-user" id="Complicaciones_edit">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Alergicos</b></label>
+                                        <input type="text" name="Alergicos" class="form-control form-control-user" id="Alergicos_edit" >
+                                    </div>
+                                </div>
+                            
+
+                            
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Farmacologicos</b></label>
+                                        <input type="text" name="Farmacologicos" class="form-control form-control-user" id="Farmacologicos_edit">
+                                    </div>
+                                </div>
+                            
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Hemorragicos</b></label>
+                                        <input type="text" name="Hemorragicos" class="form-control form-control-user" id="Hemorragicos_edit" >
                                     </div>
                                 </div>
 
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Patologicos</b></label>
+                                        <input type="text" name="Patologicos" class="form-control form-control-user" id="Patologicos_edit">
+                                    </div>
+                                </div>
+                            
+
+                            
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Quirurgicos</b></label>
+                                        <input type="text" name="Quirurgicos" class="form-control form-control-user" id="Quirurgicos_edit" >
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Toxicos</b></label>
+                                        <input type="text" name="Toxicos" class="form-control form-control-user" id="Toxicos_edit">
+                                    </div>
+                                </div>
+                            
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Transfuncionales</b></label>
+                                        <input type="text" name="Transfuncionales" class="form-control form-control-user" id="Transfuncionales_edit">
+                                    </div>
+                                </div>
+                            
+
+                            
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""><b>Otros</b></label>
+                                        <input type="text" name="Otros" class="form-control form-control-user" id="Otros_edit">
+                                    </div>
+                                </div>
+                            
+                    </div>   <br><br><br>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>EXAMENES FISICOS</h3>
+                                <hr>
+                            </div>
+                            <br><br>
+
+                            <div class="col-md-12">
+                                <h3>Signos vitales</h3>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for=""><b>Tension Arterial:</b></label>
+                                <input type="text" name="Tarterial" class="form-control form-control-user" id="Tarterial_edit">
                             </div>
 
-                            <div class="row">
-                                <div class="col-sm-10">
-                                    <div class="form-group">
-                                        <label for=""><b>Telefono</b></label>
-                                        <input type="text" name="telefono" class="form-control form-control-user" id="telefono_edit" placeholder="PJ. 315 2077862" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <br>
-                                    <button type="button" id="add_phone_edit" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-                                </div>
+                            <div class="form-group col-md-3">
+                                <label for=""><b>Frecuencia Cardiaca:</b></label>
+                                <input type="text" name="fcardiaca" class="form-control form-control-user" id="fcardiaca_edit">
                             </div>
 
-                            <hr>
-
-                            <div class="row">
-                                <div class="col-sm-10">
-                                    <div class="form-group">
-                                        <label for=""><b>E-mail</b></label>
-                                        <input type="text" name="email" class="form-control form-control-user" id="email_edit" placeholder="PJ. correo@dominio.com" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <br>
-                                    <button type="button" id="add_email_edit" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-                                </div>
-
+                            <div class="form-group col-md-3">
+                                <label for=""><b>Frecuencia Respiratoria:</b></label>
+                                <input type="text" name="Frespiratoria" class="form-control form-control-user" id="Frespiratoria_edit">
                             </div>
 
+                            <div class="form-group col-md-3">
+                                <label for=""><b>Pulsometria:</b></label>
+                                <input type="text" name="Pulsometria" class="form-control form-control-user" id="Pulsometria_edit">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for=""><b>Temperatura:</b></label>
+                                <input type="text" name="Tarterial" class="form-control form-control-user" id="Tarterial_edit">
+                            </div>
 
-                            <hr>
+                            <div class="form-group col-md-3">
+                                <label for=""><b>Peso:</b></label>
+                                <input type="text" name="fcardiaca" class="form-control form-control-user" id="fcardiaca_edit">
+                            </div>
 
-                            <div class="row">
-                                <div class="col-sm-12">
+                            <div class="form-group col-md-3">
+                                <label for=""><b>Talla:</b></label>
+                                <input type="text" name="Frespiratoria" class="form-control form-control-user" id="Frespiratoria_edit">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for=""><b>IMC:</b></label>
+                                <input type="text" name="Pulsometria" class="form-control form-control-user" id="Pulsometria_edit">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for=""><b>Perimetro Abdominal:</b></label>
+                                <input type="text" name="fcardiaca" class="form-control form-control-user" id="fcardiaca_edit">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for=""><b>Interpretación:</b></label>
+                                <input type="text" name="Frespiratoria" class="form-control form-control-user" id="Frespiratoria_edit">
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for=""><b>Lateralidad Dominante:</b></label>
+                                <input type="text" name="Pulsometria" class="form-control form-control-user" id="Pulsometria_edit">
+                            </div>
+                        </div>
 
 
-                                    <div class="form-group">
-                                        <label for=""><b>Linea de Negocio</b></label>
-                                        <select name="id_line" id="linea-negocio-edit" class="form-control" required>
-                                            <option value="">Seleccione</option>
-                                        </select>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for=""><b>Asesora Responsable</b></label>
-                                        <select name="id_user_asesora" id="asesora-edit" class="form-control" required>
-                                            <option value="">Seleccione</option>
-                                        </select>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label for=""><b>Origen</b></label>
-                                            <input type="text" name="origen" class="form-control form-control-user" id="origen_edit">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>TÓRAX</h3>
+                                <hr>
+                            </div>
+                            <br>
+                                
+                                        <div class="form-group col-md-3">
+                                            <label for=""><b>Auscultación pulmonar</b></label>
+                                            <input type="text" name="Auscultación pulmonar" class="form-control form-control-user" id="Auscultación pulmonar_edit">
                                         </div>
 
-                                        <div class="form-group col-md-6">
-                                            <label for=""><b>Forma de pago (Contado/Financiación)</b></label>
-                                            <input type="text" name="forma_pago" class="form-control form-control-user" id="forma_pago_edit">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label for=""><b>Facebook</b></label>
-                                            <input type="text" name="facebook" class="form-control form-control-user" id="facebook_edit">
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <label for=""><b>Instagram</b></label>
-                                            <input type="text" name="instagram" class="form-control form-control-user" id="instagram_edit">
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label for=""><b>Twitter</b></label>
-                                            <input type="text" name="twitter" class="form-control form-control-user" id="twitter_edit">
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <label for=""><b>Youtube</b></label>
+                                        <div class="form-group col-md-3">
+                                            <label for=""><b>Caracteristicas del soplo</b></label>
                                             <input type="text" name="youtube" class="form-control form-control-user" id="youtube_edit">
                                         </div>
-                                    </div>
-
-
-
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            <label for=""><b>Link Fotos de Google</b></label>
-                                            <input type="text" name="photos_google" class="form-control form-control-user" id="photos_google_edit">
+                                
+                                        <div class="form-group col-md-3">
+                                            <label for=""><b>Ruidos cardiacos</b></label>
+                                            <input type="text" name="rcardiacos" class="form-control form-control-user" id="rcardiacos_edit">
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label for=""><b>PRP</b></label>
-                                            <select name="prp" id="prp_edit" class="form-control">
-                                                <option value="No">No</option>
-                                                <option value="Si">Si</option>
-                                            </select>
+                                        <div class="form-group col-md-3">
+                                            <label for=""><b>Soplos</b></label>
+                                            <input type="text" name="Soplos" class="form-control form-control-user" id="Soplos_edit">
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <div class="col-md-7">
 
-                            <div style="display: none" id="section_procedure">
-                                <div class="row" >
 
-                                <div class="col-md-6">
-                                    <label for=""><b>Que procedimiento se realizo?</b></label>
-                                    <select name="procedure_px" id="procedure_px_edit" class="form-control" disabled>
-                                        <option value="">Seleccione</option>
-                                        <option value="ABDOMINOPLASTIA">ABDOMINOPLASTIA</option>
-                                        <option value="BLEFAROPLASTIA">BLEFAROPLASTIA</option>
-                                        <option value="IMPLANTES DE SENOS">IMPLANTES DE SENOS</option>
-                                        <option value="LIPO Y ABDOMINOPLASTIA">LIPO Y ABDOMINOPLASTIA</option>
-                                        <option value="LIPOSUCCIÓN O LIPOTRANSFERENCIA">LIPOSUCCIÓN O LIPOTRANSFERENCIA</option>
-                                        <option value="OTOPLASTIA">OTOPLASTIA</option>
-                                        <option value="PEXIA CON IMPLANTES">PEXIA CON IMPLANTES</option>
-                                        <option value="RINOPLASTIA">RINOPLASTIA</option>
-                                        <option value="GLUTEOPLASTIA">GLUTEOPLASTIA</option>
-
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for=""><b>Que Fecha se Opero ?</b></label>
-                                        <input type="date" name="date_procedure" class="form-control form-control-user" id="date_procedure_edit" disabled>
-                                    </div>
-                                </div>
-
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>CABEZA</h3>
+                                <hr>
                             </div>
-                            </div>
-
                             <br>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <h3 id="code-edit"></h3>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <span onclick="copyToClipboard('#code-edit')" class='consultar btn btn-sm btn-primary waves-effect' data-toggle='tooltip' title='Consultar'><i class='fa fa-copy  ' style='margin-bottom:5px'></i></span>
+                                        <div class="form-group col-md-6">
+                                            <label for=""><b>Apertura</b></label>
+                                            <input type="text" name="Apertura" class="form-control form-control-user" id="Apertura_edit">
                                         </div>
 
-                                    </div>
-                                </div>
-                            </div>
-                            <br><br>
-                            <div class="row">
-
-                                <div class="col-md-3">
-                                    <label for="before_and_after"><b>Fotos Antes y Despues</b></label>
-                                    <label class='container-check'>
-                                        <input type='checkbox' name='before_and_after' class='checkitem chk-col-blue' id='before_and_after' value='1'>
-                                        <span class='checkmark'></span>
-                                        <label for=''></label>
-                                    </label>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="before_and_after_date"><b>Fecha</b></label>
-                                    <input type="date" class="form-control" name="before_and_after_date" id="before_and_after_date">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="survey"><b>Encuesta Asesora</b></label>
-                                    <label class='container-check'>
-                                        <input type='checkbox' name='survey' class='checkitem chk-col-blue' id='survey' value='1' disabled>
-                                        <span class='checkmark'></span>
-                                        <label for=''></label>
-                                    </label>
-                                </div>
-                            </div>
-                            <br><br>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4>Historial</h4>
-                                </div>
-                            </div>
-                            <br><br>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div id="logs_edit"></div>
-                                </div>
-                            </div>
-                            <br><br>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4>Comentarios</h4>
-                                </div>
-                            </div>
-                            <br><br>
-                            <div class="row" id="comments_edit">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            Foto
+                                        <div class="form-group col-md-6">
+                                            <label for=""><b>Cuello normal</b></label>
+                                            <input type="text" name="cnormal" class="form-control form-control-user" id="cnormal_edit">
                                         </div>
-                                        <div class="col-md-10">
-                                            Text
+
+                                        <div class="form-group col-md-6">
+                                            <label for=""><b>Dientes flojos</b></label>
+                                            <input type="text" name="dflojos" class="form-control form-control-user" id="dflojos_edit">
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
-                                        <textarea id="summernote_edit" name="comment"></textarea>
-                                    </div>
-                                </div>
-                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label for=""><b>Lentes de contacto</b></label>
+                                            <input type="text" name="lcontacto" class="form-control form-control-user" id="lcontacto_edit">
+                                        </div>
 
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <button type="button" id="add-comments" class="btn btn-primary">
-                                        Comentar
-                                    </button>
-                                </div>
-                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label for=""><b>Masas</b></label>
+                                            <input type="text" name="masas" class="form-control form-control-user" id="masas_edit">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label for=""><b>Protesis</b></label>
+                                            <input type="text" name="Protesis" class="form-control form-control-user" id="Protesis_edit">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label for=""><b>Pulsos</b></label>
+                                            <input type="text" name="pulsos" class="form-control form-control-user" id="pulsos_edit">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label for=""><b>Removible</b></label>
+                                            <input type="text" name="removible" class="form-control form-control-user" id="removible_edit">
+                                        </div>
                         </div>
-                    </div>
 
 
-                    <div class="row">
-                        <div class="col md-12">
-                            <label for=""><br><b>Direccion</b></label>
-                            <textarea name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion_edit" class="form-control" cols="30" rows="10"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="tab-pane fade tab_content1" id="info-add-edit" role="tabpanel" aria-labelledby="patient_record">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for=""><b>Categoria</b></label>
-                                    <div class="form-group valid-required">
-                                        <select name="id_category" class="form-control" id="category_edit"></select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for=""><b>Sub Categoria</b></label>
-                                    <div class="form-group valid-required">
-                                        <select name="id_sub_category" class="form-control" id="sub_category_edit"></select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
+                            <div class="col-md-4">
+                                    <div class="col-md-12">
                                     <br>
-                                    <button type="button" id="btn-add-surgerie-edit" class="btn btn-primary btn-user">
-                                        Agregar <i class="fa fa-pl"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for=""><b>Observaciones adicionales</b></label>
-                                        <textarea class="form-control" name="observations" id="observations_edit"></textarea>
+                                        <h3>ABDOMEN</h3>
+                                        <hr>
                                     </div>
-                                </div>
+                                        <div class="row">
+                                            <input type="text" name="obsabdomen" class="form-control form-control-user" id="obsabdomen_edit">
+                                        </div>
+                                <br><br>
+                                    <div class="col-md-12">
+                                    <br>
+                                            <h3>EXTREMIDADES</h3>
+                                            
+                                            <hr>
+                                    </div>
+
+                                        <div class="row">
+                                            <input type="text" name="obsextremidades" class="form-control form-control-user" id="obsextremidades_edit">
+                                        </div>
+                                        <br>
+                                    <div class="col-md-12">
+                                    <br><br>
+                                            <h3>OTROS HALLAZGOS</h3>
+                                            <hr>
+                                    </div>
+                                        <div class="row">
+                                            <input type="text" name="obsotros" class="form-control form-control-user" id="obsotros_edit">
+                                        </div>
                             </div>
+                        
+                            <br><br>
+
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                        <br><br>
+                            <h3>EXÁMENES DE LABORATORIO</h3>
+                            <hr>
                         </div>
-
-
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table-bordered" id="tablecx_edit" width="100%" cellspacing="0">
-
-                                        <thead>
-                                            <tr>
-                                                <th>Procedimientos</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
+                        <br>
+                        
+                            <div class="form-group col-md-4">
+                                <label for=""><b>Hematocrito: </b></label>
+                                <input type="text" name="hematocrito" class="form-control form-control-user" id="hematocrito_edit">
                             </div>
-                        </div>
+
+                            <div class="form-group col-md-4">
+                                <label for=""><b>Creatinina:</b></label>
+                                <input type="text" name="creatinina" class="form-control form-control-user" id="creatinina_edit">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for=""><b>Nitrógeno ureico:</b></label>
+                                <input type="text" name="Nitrógeno ureico:" class="form-control form-control-user" id="Nureico_edit">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for=""><b>Glicemia:</b></label>
+                                <input type="text" name="glicemia" class="form-control form-control-user" id="glicemia_edit">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for=""><b>Albúmina:</b></label>
+                                <input type="text" name="albúmina" class="form-control form-control-user" id="albúmina_edit">
+                            </div>
+                                        
+                            <div class="form-group col-md-4">
+                                <label for=""><b>Plaquetas:</b></label>
+                                <input type="text" name="plaquetas" class="form-control form-control-user" id="plaquetas_edit">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for=""><b>TP:</b></label>
+                                <input type="text" name="tp" class="form-control form-control-user" id="tp_edit">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for=""><b>PTT</b></label>
+                                <input type="text" name="ptt" class="form-control form-control-user" id="ptt_edit">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for=""><b>BUN</b></label>
+                                <input type="text" name="BUN" class="form-control form-control-user" id="BUN_edit">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for=""><b>Transaminasas:</b></label>
+                                <input type="text" name="transaminasas" class="form-control form-control-user" id="transaminasas_edit">
+                            </div>
+                                        
+                            <div class="form-group col-md-4">
+                                <label for=""><b>PCR:</b></label>
+                                <input type="text" name="pcr" class="form-control form-control-user" id="pcr_edit">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for=""><b>IGG</b></label>
+                                <input type="text" name="igg1" class="form-control form-control-user" id="igg1_edit">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for=""><b>IGG</b></label>
+                                <input type="text" name="igg2" class="form-control form-control-user" id="igg2_edit">
+                            </div>
+                        
                     </div>
 
-                    <br><br>
 
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for=""><b>Talla Actual</b></label>
-                                <input type="text" name="current_size" class="form-control form-control-user" id="current_size_edit" placeholder="PJ. 12">
-                            </div>
+                        <div class="col-md-12">
+                        <br><br>
+                            <h3>EXÁMENES DE APOYO DIAGNÓSTICO</h3>
+                            <hr>
                         </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for=""><b>Talla en que quiere quedar</b></label>
-                                <input type="text" name="desired_size" class="form-control form-control-user" id="desired_size_edit" placeholder="PJ. 16">
+                        <br>
+                            <div class="form-group col-md-6">
+                                <label for=""><b>Electrocardiograma:</b></label>
+                                <input type="text" name="electrocardiograma" class="form-control form-control-user" id="electrocardiograma_edit">
                             </div>
-                        </div>
-
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for=""><b>Vol Implante</b></label>
-                                <input type="text" name="implant_volumem" class="form-control form-control-user" id="implant_volumem_edit" placeholder="PJ. 11">
+                                        
+                            <div class="form-group col-md-6">
+                            <br>
+                                <input type="date" class="form-control" name="electro_date" id="electro_date">
                             </div>
-                        </div>
+
+                            <div class="form-group col-md-6">
+                                <label for=""><b>Rx de Tórax:</b></label>
+                                <input type="text" name="rtorax" class="form-control form-control-user" id="rtorax_edit">
+                            </div>
+                                        
+                            <div class="form-group col-md-6">
+                            <br>
+                                <input type="date" class="form-control" name="torax_date" id="torax_date">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for=""><b>Otros Estudios:</b></label>
+                                <input type="text" class="form-control form-control-user" name="estudios_date" id="estudios_date">
+                            </div>
+                                        
+                            <div class="form-group col-md-6">
+                            <br>
+                                <input type="date" name="pcr" class="form-control" id="pcr_edit">
+                            </div>
+                        
                     </div>
+                               
+                   
+                            <div class="col-md-4">
+                                    <div class="col-md-12">
+                                    <br>
+                                        <h3>CLASIFICACIÓN ASA</h3>
+                                        <hr>
+                                    </div>
+                                        <div class="row">
+                                            <input type="text" name="obsabdomen" class="form-control form-control-user" id="obsabdomen_edit">
+                                        </div>
+                                <br><br>
+                                    <div class="col-md-12">
+                                    <br>
+                                            <h3>RECOMENDACIONES</h3>
+                                            
+                                            <hr>
+                                    </div>
+
+                                        <div class="row">
+                                            <input type="text" name="obsextremidades" class="form-control form-control-user" id="obsextremidades_edit">
+                                        </div>
+                                        <br>
+                                 
+                            </div>
+                    
+
+                            <center>
+
+                                <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
+                                    Limpiar
+                                </button>
+                                <button class="btn btn-primary btn-user">
+                                    Guardar
+                                </button>
+                            </center>
+
+
+
                 </div>
-
-
-
-
-                <div class="tab-pane fade tab_content1" id="init-history-edit" role="tabpanel" aria-labelledby="patient_record">
+            
+                <div class="tab-pane fade tab_content1-0" id="info-add-edit" role="tabpanel" aria-labelledby="patient_record_edit">
 
                     <div class="row">
-                        <div class="col-md-7">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="form-group">
-                                        <label for=""><b>EPS</b></label>
-                                        <input type="text" name="eps" class="form-control form-control-user" id="eps_edit" placeholder="PJ. EPS SURAMERICANA S.A.">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-9">
-                                    <div class="form-group">
-                                        <label for=""><b>Estatura</b></label>
-                                        <input type="text" name="height" class="form-control form-control-user" id="height_edit" placeholder="PJ. 1.50">
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-9">
-                                    <div class="form-group">
-                                        <label for=""><b>Peso</b></label>
-                                        <input type="text" name="weight" class="form-control form-control-user" id="weight_edit" placeholder="PJ. 50Kg">
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-4">
-                                    <label for="children_edit"><b>¿Tiene hijos?</b></label>
-                                    <label class='container-check'>
-                                        <input type='checkbox' name='children' class='checkitem chk-col-blue' id='children_edit' value='1'>
-                                        <span class='checkmark'></span>
-                                        <label for=''></label>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-5">
-                                    <label for="number_children"><b>Numero de Hijos</b></label>
-                                    <input type="number" name="number_children" class="form-control form-control-user" readonly id="number_children_edit" placeholder="PJ. 1">
-                                </div>
-
-                            </div>
+                        <div class="col-md-12">
+                            <h3>ESPECIFICACIÓN QUIRÚRGICA</h3>
+                            <hr>
+                        </div>
+                    
+                        <br>
+                        <div class="form-group col-md-4">
+                            <label for=""><b>CIE10 </b></label>
+                            <input type="text" class="form-control form-control-user" name="cie10" id="cie10_edit">
                         </div>
 
+                        <div class="form-group col-md-4">
+                            <label for=""><b>DIAGNÓSTICO </b></label>
+                            <input type="text" class="form-control form-control-user" name="diagnostico" id="diagnostico_edit">
+                        </div>
 
-                        <div class="col-md-5">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="alcohol_edit"><b>Alcohol</b></label>
-                                    <label class='container-check'>
-                                        <input type='checkbox' name='alcohol' class='checkitem chk-col-blue' id='alcohol_edit' value='1'>
-                                        <span class='checkmark'></span>
-                                        <label for=''></label>
-                                    </label>
-                                </div>
+                        <div class="form-group col-md-4">
+                            <label for=""><b>TIPO</b></label>
+                            <input type="text" class="form-control form-control-user" name=""tipo" id="tipo_edit">
+                        </div>
 
+                        <div class="form-group col-md-4">
+                            <label for=""><b>Tipo de Anestesia:</b></label>
+                            <input type="text" class="form-control form-control-user" name="tanestesia" id="tanestesia_edit">
+                         </div>
 
-                                <div class="col-md-6">
-                                    <label for="smoke_edit"><b>Fuma</b></label>
-                                    <label class='container-check'>
-                                        <input type='checkbox' name='smoke' class='checkitem chk-col-blue' id='smoke_edit' value='1'>
-
-                                        <span class='checkmark'></span>
-                                        <label for=''></label>
-                                    </label>
-                                </div>
-
-
-                                <div class="col-md-4">
-                                    <label for="surgery_edit"><b>¿Se ha practicado alguna cirugía?</b></label>
-                                    <label class='container-check'>
-                                        <input type='checkbox' name='surgery' class='checkitem chk-col-blue' id='surgery_edit' value='1'>
-                                        <span class='checkmark'></span>
-                                        <label for=''></label>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <label for="previous_surgery_edit"><b>Cirugías Anteriores</b></label>
-                                    <input type="text" name="previous_surgery" class="form-control form-control-user" readonly id="previous_surgery_edit" placeholder="PJ. Mamaria">
-                                </div>
-
-
-                                <div class="col-md-4">
-                                    <label for="disease_edit"><b>¿Sufre alguna enfermedad importante?</b></label>
-                                    <label class='container-check'>
-                                        <input type='checkbox' name='disease' class='checkitem chk-col-blue' id='disease_edit' value='1'>
-                                        <span class='checkmark'></span>
-                                        <label for=''></label>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <label for="major_disease"><b>Cual/es</b></label>
-                                    <input type="text" name="major_disease" class="form-control form-control-user" readonly id="major_disease_edit" placeholder="PJ. Asma">
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="drugs_check_edit"><b>¿Consume Algun Estupefaciente?</b></label>
-                                    <label class='container-check'>
-                                        <input type='checkbox' name='drugs_check' class='checkitem chk-col-blue' id='drugs_check_edit' value='1'>
-                                        <span class='checkmark'></span>
-                                        <label for=''></label>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <label for="drugs_check_edit"><b>Cual/es</b></label>
-                                    <input type="text" name="drugs" class="form-control form-control-user" readonly id="drugs_edit" placeholder="PJ. Clonazepam">
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="medication_edit"><b>¿Toma algún medicamento?</b></label>
-                                    <label class='container-check'>
-                                        <input type='checkbox' name='medication' class='checkitem chk-col-blue' id='medication_edit' value='1'>
-                                        <span class='checkmark'></span>
-                                        <label for=''></label>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <label for="drink_medication"><b>Medicamentos que toma</b></label>
-                                    <input type="text" name="drink_medication" class="form-control form-control-user" readonly id="drink_medication_edit" placeholder="PJ. Asma">
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="allergic_edit"><b>¿Es alegic@ a algún medicamento o sutura?</b></label>
-                                    <label class='container-check'>
-                                        <input type='checkbox' name='allergic' class='checkitem chk-col-blue' id='allergic_edit' value='1'>
-                                        <span class='checkmark'></span>
-                                        <label for=''></label>
-                                    </label>
-                                </div>
-
-
-                                <div class="col-md-8">
-                                    <label for="allergic_medication"><b>A que medicamentos o Suturas es Alergic@?</b></label>
-                                    <input type="text" name="allergic_medication" class="form-control form-control-user" readonly id="allergic_medication_edit" placeholder="PJ. Acetaminofen">
-                                </div>
-
-                            </div>
+                        <div class="form-group col-md-4">
+                            <label for=""><b>Procedimiento Quirúrgico Planeado</b></label>
+                           <input type="text" class="form-control form-control-user" name="pqp" id="pqp_edit">
                         </div>
                     </div>
-                    <br><br>
-                </div>
 
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>PERSONAL QUIRÚRGICO</h3>
+                            <hr>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for=""><b>Cirujano Principal:</b></label>
+                            <input type="text" class="form-control form-control-user" name="cirujano1" id="cirujano1_edit">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for=""><b>Segundo Cirujano::</b></label>
+                            <input type="text" class="form-control form-control-user" name="cirujano2" id="cirujano2_edit">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for=""><b>Anestesiólogo:</b></label>
+                            <input type="text" class="form-control form-control-user" name="anesteciologo" id="anesteciologo_edit">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for=""><b>Primer Ayudante:</b></label>
+                            <input type="text" class="form-control form-control-user" name="ayudante1" id="ayudante1_edit">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for=""><b>Segundo Ayudante:</b></label>
+                            <input type="text" class="form-control form-control-user" name="ayudante2" id="ayudante2_edit">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for=""><b>Instrumentador Quirúrgico:</b></label>
+                            <input type="text" class="form-control form-control-user" name="instrumentador" id="instrumentador_edit">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for=""><b>Auxiliares de Sala</b></label>
+                            <input type="text" name="asa" class="form-control form-control-user" id="asa_edit">
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>DESCRIPCIÓN QUIRÚRGICA</h3>
+                            <hr>
+                        </div>
+                        <br>
+                    </div>
+
+
+                    <div class="form-group col-md-4">
+                        <label for=""><b>Fecha y Hora de Inicio:</b></label>
+                        <input type="date" class="form-control" name="ah_inicio_date" id="ah_inicio_date">
+                    
+                        <div class="form-group col-md-10">
+                            <label for=""><b>Descripción Quirúrgica</b></label>
+                            <input type="text" name="descripcion" class="form-control form-control-user" id="descripcion_edit">
+                        </div>
+                    
+                        <div class="form-group col-md-10">
+                            <label for=""><b>Complicaciones</b></label>
+                            <input type="text" name="complicacion" class="form-control form-control-user" id="complicacion_edit">
+                        </div>
+                    </div>
+
+                    <center>
+
+                        <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
+                            Limpiar
+                        </button>
+                        <button class="btn btn-primary btn-user">
+                            Guardar
+                        </button>
+                    </center>
+
+
+
+
+                </div>
+            
+                <div class="tab-pane fade tab_content1-0" id="init_history_edit" role="tabpanel" aria-labelledby="patient_record">
+
+                
+                    <div class="col-md-12">
+                        <br>
+                        <h3>MOTIVO DE LA CONSULTA</h3>
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <input type="text" name="obsabdomen" class="form-control form-control-user" id="obsabdomen_edit">
+                    </div>
+                     <br><br>
+                    <div class="col-md-12">
+                        <br>
+                        <h3>ENFERMEDAD ACTUAL</h3>
+                        <hr>
+                    </div>
+
+                    <div class="row">
+                        <input type="text" name="obsextremidades" class="form-control form-control-user" id="obsextremidades_edit">
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h3>ANTECEDENTES</h3>
+                            <hr>
+                        </div>
+                    
+                        <br>
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Patologicos</b></label>
+                            <input type="text" class="form-control form-control-user" name="Patologicos" id="Patologicos_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Procedimientos esteticos previos</b></label>
+                            <input type="text" class="form-control form-control-user" name="pep" id="pep_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Quirurgicos</b></label>
+                            <input type="text" class="form-control form-control-user" name="quiruant" id="quiruant_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Hospitalarios</b></label>
+                            <input type="text" class="form-control form-control-user" name="Hospitalarios" id="Hospitalarios">
+                         </div>
+
+                         <div class="form-group col-md-5">
+                            <label for=""><b>Farmacologicos</b></label>
+                           <input type="text" class="form-control form-control-user" name="farmante" id="farmante_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Alergicos</b></label>
+                            <input type="text" class="form-control form-control-user" name="Alergicos" id="Alergicos_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Toxicologicos</b></label>
+                            <input type="text" class="form-control form-control-user" name="Toxicologicos" id="Toxicologicos_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Transfuncionales</b></label>
+                            <input type="text" class="form-control form-control-user" name="Transante" id="Transante_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Habitos</b></label>
+                            <input type="text" class="form-control form-control-user" name="Habitos" id="Habitos_edit">
+                         </div>
+
+                         <div class="form-group col-md-5">
+                            <label for=""><b>Familiares</b></label>
+                           <input type="text" class="form-control form-control-user" name="Familiares" id="Familiares_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Escleroterapia previa</b></label>
+                           <input type="text" class="form-control form-control-user" name="esclero" id="esclero_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Planificación</b></label>
+                            <input type="text" class="form-control form-control-user" name="Planificación" id="Planificación_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Factores agravantes</b></label>
+                            <input type="text" class="form-control form-control-user" name="Factores" id="Factores_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Otros</b></label>
+                            <input type="text" class="form-control form-control-user" name="otrante" id="otrante_edit">
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <br>
+                            <h3>GINECOLÓGICOS</h3>
+                            <hr>
+                        </div>
+                    
+                        <br>
+                        <div class="form-group col-md-2">
+                            <label for=""><b>Gestaciones</b></label>
+                            <input type="text" class="form-control form-control-user" name="Gestaciones" id="Gestaciones_edit">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for=""><b>Partos</b></label>
+                            <input type="text" class="form-control form-control-user" name="partos" id="partos_edit">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for=""><b>Cesareas</b></label>
+                            <input type="text" class="form-control form-control-user" name="cesareas" id="cesareas_edit">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for=""><b>Abortos</b></label>
+                            <input type="text" class="form-control form-control-user" name="abortos" id="abortos_edit">
+                         </div>
+
+                         <div class="form-group col-md-2">
+                            <label for=""><b>Embarazo ectópico</b></label>
+                           <input type="text" class="form-control form-control-user" name="farmante" id="farmante_edit">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for=""><b>Fecha de la ultima mestuación</b></label>
+                            <input type="date" class="form-control" name="Fechamestruacion" id="Fechamestruacion_edit">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for=""><b>Ciclos</b></label>
+                            <input type="text" class="form-control form-control-user" name="ciclos" id="ciclos_edit">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for=""><b>Metodos de planificación</b></label>
+                            <input type="text" class="form-control form-control-user" name="planificacion" id="planificacion_edit">
+                        </div>
+
+                    </div>
+                    
+
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h3>REVISIÓN POR SISTEMAS</h3>
+                            <hr>
+                        </div>
+                    
+                        <br>
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Cardiobascular</b></label>
+                            <input type="text" class="form-control form-control-user" name="Cardio" id="cardio_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Digestivo</b></label>
+                            <input type="text" class="form-control form-control-user" name="digestivo" id="digestivo_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Genitourinario</b></label>
+                            <input type="text" class="form-control form-control-user" name="Genitourinario" id="Genitourinario_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Neurologico</b></label>
+                            <input type="text" class="form-control form-control-user" name="Neurologico" id="Neurologico_edit">
+                         </div>
+
+                         <div class="form-group col-md-5">
+                            <label for=""><b>Ocular</b></label>
+                           <input type="text" class="form-control form-control-user" name="Ocular" id="Ocular_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Osteomuscular</b></label>
+                            <input type="date" class="form-control" name="Osteomuscular" id="Osteomuscular_edit">
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for=""><b>Respiratorio</b></label>
+                            <input type="text" class="form-control form-control-user" name="Respiratorio" id="Respiratorio_edit">
+                        </div>
+
+                    </div>
+                                
+                    <center>
+
+                        <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
+                            Limpiar
+                        </button>
+                       <button class="btn btn-primary btn-user">
+                           Guardar
+                        </button>
+                    </center>
+                </div>
+          
                 <div class="tab-pane fade tab_content1-0" id="info-credit-patient-edit" role="tabpanel" aria-labelledby="patient_record">
 
                     <div class="row">
@@ -839,8 +1007,10 @@
                         Procesar
                     </button>
                     <br><br>
-                </div>
 
+
+                    
+                </div>
 
                 <div class="tab-pane fade tab_content1-0" id="info-valuations-edit" role="tabpanel" aria-labelledby="patient_record">
                     <div class="embed-responsive embed-responsive-16by9">
