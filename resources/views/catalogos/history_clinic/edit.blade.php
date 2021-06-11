@@ -58,10 +58,9 @@
             </ul>
             <br><br>
 
-            
+            <div class="tab-content" id="myTabContent">
 
                 <div class="tab-pane fade show active tab_content0" id="init_edit" role="tabpanel" aria-labelledby="patient_record_edit">
-
 
                     <div class="row">
                         <div class="col-md-12">
@@ -151,15 +150,15 @@
 
                     <br>
                     <div class="row">
-                    
+
 
                         <div class="col-md-12">
                             <h3>ANTECEDENTES</h3>
                             <hr>
                         </div>
                         <br>
-                        
-                            
+
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for=""><b>Anestesicos</b></label>
@@ -179,16 +178,16 @@
                                         <input type="text" name="Alergicos" class="form-control form-control-user" id="Alergicos_edit" >
                                     </div>
                                 </div>
-                            
 
-                            
+
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for=""><b>Farmacologicos</b></label>
                                         <input type="text" name="Farmacologicos" class="form-control form-control-user" id="Farmacologicos_edit">
                                     </div>
                                 </div>
-                            
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for=""><b>Hemorragicos</b></label>
@@ -202,9 +201,9 @@
                                         <input type="text" name="Patologicos" class="form-control form-control-user" id="Patologicos_edit">
                                     </div>
                                 </div>
-                            
 
-                            
+
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for=""><b>Quirurgicos</b></label>
@@ -218,7 +217,7 @@
                                         <input type="text" name="Toxicos" class="form-control form-control-user" id="Toxicos_edit">
                                     </div>
                                 </div>
-                            
+
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -226,18 +225,18 @@
                                         <input type="text" name="Transfuncionales" class="form-control form-control-user" id="Transfuncionales_edit">
                                     </div>
                                 </div>
-                            
 
-                            
+
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for=""><b>Otros</b></label>
                                         <input type="text" name="Otros" class="form-control form-control-user" id="Otros_edit">
                                     </div>
                                 </div>
-                            
+
                     </div>   <br><br><br>
-                        
+
                         <div class="row">
                             <div class="col-md-12">
                                 <h3>EXAMENES FISICOS</h3>
@@ -310,7 +309,7 @@
                                 <hr>
                             </div>
                             <br>
-                                
+
                                         <div class="form-group col-md-3">
                                             <label for=""><b>Auscultación pulmonar</b></label>
                                             <input type="text" name="Auscultación pulmonar" class="form-control form-control-user" id="Auscultación pulmonar_edit">
@@ -320,7 +319,7 @@
                                             <label for=""><b>Caracteristicas del soplo</b></label>
                                             <input type="text" name="youtube" class="form-control form-control-user" id="youtube_edit">
                                         </div>
-                                
+
                                         <div class="form-group col-md-3">
                                             <label for=""><b>Ruidos cardiacos</b></label>
                                             <input type="text" name="rcardiacos" class="form-control form-control-user" id="rcardiacos_edit">
@@ -394,7 +393,7 @@
                                     <div class="col-md-12">
                                     <br>
                                             <h3>EXTREMIDADES</h3>
-                                            
+
                                             <hr>
                                     </div>
 
@@ -411,10 +410,10 @@
                                             <input type="text" name="obsotros" class="form-control form-control-user" id="obsotros_edit">
                                         </div>
                             </div>
-                        
+
                             <br><br>
 
-                    
+
                     <div class="row">
                         <div class="col-md-12">
                         <br><br>
@@ -422,7 +421,7 @@
                             <hr>
                         </div>
                         <br>
-                        
+
                             <div class="form-group col-md-4">
                                 <label for=""><b>Hematocrito: </b></label>
                                 <input type="text" name="hematocrito" class="form-control form-control-user" id="hematocrito_edit">
@@ -447,7 +446,7 @@
                                 <label for=""><b>Albúmina:</b></label>
                                 <input type="text" name="albúmina" class="form-control form-control-user" id="albúmina_edit">
                             </div>
-                                        
+
                             <div class="form-group col-md-4">
                                 <label for=""><b>Plaquetas:</b></label>
                                 <input type="text" name="plaquetas" class="form-control form-control-user" id="plaquetas_edit">
@@ -472,7 +471,7 @@
                                 <label for=""><b>Transaminasas:</b></label>
                                 <input type="text" name="transaminasas" class="form-control form-control-user" id="transaminasas_edit">
                             </div>
-                                        
+
                             <div class="form-group col-md-4">
                                 <label for=""><b>PCR:</b></label>
                                 <input type="text" name="pcr" class="form-control form-control-user" id="pcr_edit">
@@ -487,7 +486,7 @@
                                 <label for=""><b>IGG</b></label>
                                 <input type="text" name="igg2" class="form-control form-control-user" id="igg2_edit">
                             </div>
-                        
+
                     </div>
 
 
@@ -502,7 +501,7 @@
                                 <label for=""><b>Electrocardiograma:</b></label>
                                 <input type="text" name="electrocardiograma" class="form-control form-control-user" id="electrocardiograma_edit">
                             </div>
-                                        
+
                             <div class="form-group col-md-6">
                             <br>
                                 <input type="date" class="form-control" name="electro_date" id="electro_date">
@@ -512,7 +511,7 @@
                                 <label for=""><b>Rx de Tórax:</b></label>
                                 <input type="text" name="rtorax" class="form-control form-control-user" id="rtorax_edit">
                             </div>
-                                        
+
                             <div class="form-group col-md-6">
                             <br>
                                 <input type="date" class="form-control" name="torax_date" id="torax_date">
@@ -522,15 +521,15 @@
                                 <label for=""><b>Otros Estudios:</b></label>
                                 <input type="text" class="form-control form-control-user" name="estudios_date" id="estudios_date">
                             </div>
-                                        
+
                             <div class="form-group col-md-6">
                             <br>
                                 <input type="date" name="pcr" class="form-control" id="pcr_edit">
                             </div>
-                        
+
                     </div>
-                               
-                   
+
+
                             <div class="col-md-4">
                                     <div class="col-md-12">
                                     <br>
@@ -544,7 +543,7 @@
                                     <div class="col-md-12">
                                     <br>
                                             <h3>RECOMENDACIONES</h3>
-                                            
+
                                             <hr>
                                     </div>
 
@@ -552,9 +551,9 @@
                                             <input type="text" name="obsextremidades" class="form-control form-control-user" id="obsextremidades_edit">
                                         </div>
                                         <br>
-                                 
+
                             </div>
-                    
+
 
                             <center>
 
@@ -569,7 +568,7 @@
 
 
                 </div>
-            
+
                 <div class="tab-pane fade tab_content1-0" id="info-add-edit" role="tabpanel" aria-labelledby="patient_record_edit">
 
                     <div class="row">
@@ -577,7 +576,7 @@
                             <h3>ESPECIFICACIÓN QUIRÚRGICA</h3>
                             <hr>
                         </div>
-                    
+
                         <br>
                         <div class="form-group col-md-4">
                             <label for=""><b>CIE10 </b></label>
@@ -657,12 +656,12 @@
                     <div class="form-group col-md-4">
                         <label for=""><b>Fecha y Hora de Inicio:</b></label>
                         <input type="date" class="form-control" name="ah_inicio_date" id="ah_inicio_date">
-                    
+
                         <div class="form-group col-md-10">
                             <label for=""><b>Descripción Quirúrgica</b></label>
                             <input type="text" name="descripcion" class="form-control form-control-user" id="descripcion_edit">
                         </div>
-                    
+
                         <div class="form-group col-md-10">
                             <label for=""><b>Complicaciones</b></label>
                             <input type="text" name="complicacion" class="form-control form-control-user" id="complicacion_edit">
@@ -683,10 +682,10 @@
 
 
                 </div>
-            
+
                 <div class="tab-pane fade tab_content1-0" id="init_history_edit" role="tabpanel" aria-labelledby="patient_record">
 
-                
+
                     <div class="col-md-12">
                         <br>
                         <h3>MOTIVO DE LA CONSULTA</h3>
@@ -712,7 +711,7 @@
                             <h3>ANTECEDENTES</h3>
                             <hr>
                         </div>
-                    
+
                         <br>
                         <div class="form-group col-md-5">
                             <label for=""><b>Patologicos</b></label>
@@ -792,7 +791,7 @@
                             <h3>GINECOLÓGICOS</h3>
                             <hr>
                         </div>
-                    
+
                         <br>
                         <div class="form-group col-md-2">
                             <label for=""><b>Gestaciones</b></label>
@@ -835,14 +834,14 @@
                         </div>
 
                     </div>
-                    
+
 
                     <div class="row">
                         <div class="col-md-10">
                             <h3>REVISIÓN POR SISTEMAS</h3>
                             <hr>
                         </div>
-                    
+
                         <br>
                         <div class="form-group col-md-5">
                             <label for=""><b>Cardiobascular</b></label>
@@ -880,7 +879,7 @@
                         </div>
 
                     </div>
-                                
+
                     <center>
 
                         <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
@@ -891,181 +890,38 @@
                         </button>
                     </center>
                 </div>
-          
+
                 <div class="tab-pane fade tab_content1-0" id="info-credit-patient-edit" role="tabpanel" aria-labelledby="patient_record">
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="dependent_independent"><b>Dependiente / independiente</b></label>
-                            <input type="text" name="dependent_independent" class="form-control form-control-user" id="dependent_independent_edit" placeholder="PJ. Dependiente">
-                        </div>
 
-                        <div class="col-md-4">
-                            <label for="type_contract"><b>Tipo de Contrato</b></label>
-                            <input type="text" name="type_contract" class="form-control form-control-user" id="type_contract_edit" placeholder="PJ. Contado">
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="antiquity"><b>Antiguedad</b></label>
-                            <input type="text" name="antiquity" class="form-control form-control-user" id="antiquity_edit" placeholder="PJ. 1 Año">
-                        </div>
-                    </div>
-
-                    <br><br>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="average_monthly_income"><b>Promedio de Ingresos Mensuales</b></label>
-                            <input type="number" name="average_monthly_income" class="form-control form-control-user" id="average_monthly_income_edit" placeholder="PJ. 1 Año">
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="previous_credits"><b>Créditos Anteriores</b></label>
-                            <input type="text" name="previous_credits" class="form-control form-control-user" id="previous_credits_edit" placeholder="PJ. 1 Año">
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="previous_credits"><b>Esta reportado</b></label>
-                            <input type="text" name="reported" class="form-control form-control-user" id="reported_edit" placeholder="">
-                        </div>
-                    </div>
-
-                    <br><br>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="average_monthly_income"><b>Cuenta Bancaria</b></label>
-                            <input type="text" name="bank_account" class="form-control form-control-user" id="bank_account_edit" placeholder="PJ. 1 Año">
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="average_monthly_income"><b>Inicial</b></label>
-                            <input type="text" name="have_initial" class="form-control form-control-user" id="have_initial_edit" placeholder="PJ. 1 Año">
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="properties_edit"><b>Propiedades</b></label>
-                            <label class='container-check'>
-                                <input type='checkbox' name='properties' class='checkitem chk-col-blue' id='properties_edit' value='1'>
-                                <span class='checkmark'></span>
-                                <label for=''></label>
-                            </label>
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="vehicle_edit"><b>Vehículo</b></label>
-                            <label class='container-check'>
-                                <input type='checkbox' name='vehicle' class='checkitem chk-col-blue' id='vehicle_edit' value='1'>
-                                <span class='checkmark'></span>
-                                <label for=''></label>
-                            </label>
-                        </div>
-                    </div>
-
-                    <br><br>
-
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label for="pay_to_study_credit"><b>Pago estudio de credito ?</b></label>
-                            <label class='container-check'>
-                                <input type='checkbox' name='pay_to_study_credit' class='checkitem chk-col-blue' id='pay_to_study_credit' value='1'>
-                                <span class='checkmark'></span>
-                                <label for=''></label>
-                            </label>
-                        </div>
-
-
-                        <div class="col-md-2">
-                            <label for="average_monthly_income"><b>ID de Transaccion</b></label>
-                            <input type="text"  class="form-control form-control-user" id="id_transaccion" placeholder="PJ. Transferencia">
-                        </div>
-
-
-                        <div class="col-md-2">
-                            <label for="average_monthly_income"><b>Metodo de Pago</b></label>
-                            <input type="text" name="payment_method" class="form-control form-control-user" id="method_pay_study_credit_edit" placeholder="PJ. Transferencia">
-                        </div>
-
-                        <div class="col-md-2">
-                            <label for="average_monthly_income"><b>Fecha de Pago</b></label>
-                            <input type="datetime" name="date_pay_study_credit" class="form-control form-control-user" id="date_pay_study_credit_edit">
-                        </div>
-
-                    </div>
-
-                    <br><br>
-
-                    <div class="row">
-                        <div class="col-md-5">
-                            <label for="average_monthly_income"><b>Soporte de Pago</b></label>
-                            <div>
-                                <img src="" id="load_img" alt="" width="250px" height="200px">
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-primary btn-user" id="process_status">
-                        Procesar
-                    </button>
-                    <br><br>
-
-
-                    
                 </div>
 
                 <div class="tab-pane fade tab_content1-0" id="info-valuations-edit" role="tabpanel" aria-labelledby="patient_record">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item " id="iframeValuationsEdit" allowfullscreen="">
-                        </iframe>
-                    </div>
-                    <br><br>
+
                 </div>
 
                 <div class="tab-pane fade tab_content1-0" id="info-preanestesia-edit" role="tabpanel" aria-labelledby="patient_record">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item " id="iframepPreanestesiaEdit" allowfullscreen="">
-                        </iframe>
-                    </div>
-                    <br><br>
+
                 </div>
 
                 <div class="tab-pane fade tab_content1-0" id="info-cirugia-edit" role="tabpanel" aria-labelledby="patient_record">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item " id="iframepCirugiaEdit" allowfullscreen="">
-                        </iframe>
-                    </div>
-                    <br><br>
+
                 </div>
 
                 <div class="tab-pane fade tab_content1-0" id="info-revision-edit" role="tabpanel" aria-labelledby="patient_record">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item " id="iframepRevisionEdit" allowfullscreen="">
-                        </iframe>
-                    </div>
-                    <br><br>
+
                 </div>
 
                 <div class="tab-pane fade tab_content1-0" id="info-tracing-edit" role="tabpanel" aria-labelledby="patient_record">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item " id="iframepTracingEdit" allowfullscreen="">
-                        </iframe>
-                    </div>
-                    <br><br>
+
                 </div>
 
                 <div class="tab-pane fade tab_content1-0" id="info-masajes-edit" role="tabpanel" aria-labelledby="patient_record">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item " id="iframepMsajesEdit" allowfullscreen="">
-                        </iframe>
-                    </div>
-                    <br><br>
+
                 </div>
 
                 <div class="tab-pane fade tab_content1-0" id="info-refferees-edit" role="tabpanel" aria-labelledby="patient_record">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item " id="iframepRefferedsEdit" allowfullscreen="">
-                        </iframe>
-                    </div>
-                    <br><br>
+
                 </div>
 
             </div>
