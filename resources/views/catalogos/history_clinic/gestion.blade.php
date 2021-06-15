@@ -2408,6 +2408,106 @@
 
 		});
 
+		$("#btn-pre_medicamento").click(function (e) {
+			count2++
+			var html
+			var pre_medicamento = $("#pre_medicamento").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='medicamento[]' value='"+pre_medicamento+"'></td>"			
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#tablprem_edit tbody").append(html);
+
+			$("#pre_medicamento").val("");
+
+		});
+
+		$("#eventos_intraoperatorios").click(function (e) {
+			count2++
+			var html
+			var nevento_edit = $("#nevento_edit").val()
+			var descripcion = $("#descripcion").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='nevento[]' value='"+nevento_edit+"'></td>"	
+				html += "<td><input type='text' name='desc[]' value='"+descripcion+"'></td>"			
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#intraoperatorio tbody").append(html);
+
+			$("#nevento_edit,#descripcion").val("");
+
+		});
+
+		$("#descripcion_enfermeria").click(function (e) {
+			count2++
+			var html
+			var descripcion_enfermeria = $("#descripcion_enfermeria").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='enfe[]' value='"+descripcion_enfermeria+"'></td>"		
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#descripcion_enfermeria tbody").append(html);
+
+			$("#descripcion_enfermeria").val("");
+
+		});
+
+		$("#traslado").click(function (e) {
+			count2++
+			var html
+			var traslado = $("#traslado").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='trasl[]' value='"+traslado+"'></td>"		
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#traslado tbody").append(html);
+
+			$("#traslado").val("");
+
+		});
+
+		
+		$("#btn-monitoria").click(function (e) {
+			count2++
+			var html
+			var monitoria_edit = $("#monitoria_edit").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='monitoria[]' value='"+monitoria_edit+"'></td>"			
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#tablmonito_edit tbody").append(html);
+
+			$("#monitoria_edit").val("");
+
+		});
+
+
+
 		$("#btn-medicamento").click(function (e) {
 			count2++
 			var html

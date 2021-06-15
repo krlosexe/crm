@@ -1,5 +1,4 @@
-<div class="tab-pane fade tab_content1-0" id="info-add-edit" role="tabpanel" aria-labelledby="patient_record_edit">
-
+        <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
                             <h3>ESPECIFICACIÓN QUIRÚRGICA</h3>
@@ -25,7 +24,7 @@
                         <div class="form-group col-md-4">
                             <label for=""><b>Tipo de Anestesia:</b></label>
                             <input type="text" class="form-control form-control-user" name="tanestesia" id="tanestesia_edit">
-                         </div>
+                        </div>
 
                         <div class="form-group col-md-4">
                             <label for=""><b>Procedimiento Quirúrgico Planeado</b></label>
@@ -82,10 +81,12 @@
                     </div>
 
 
-                    <div class="form-group col-md-4">
-                        <label for=""><b>Fecha y Hora de Inicio:</b></label>
-                        <input type="date" class="form-control" name="ah_inicio_date" id="ah_inicio_date">
-
+                    <div class="form-group col-md-12">
+                        <div class="form-group col-md-4">
+                            <label for=""><b>Fecha y Hora de Inicio:</b></label>
+                            <input type="date" class="form-control" name="ah_inicio_date" id="ah_inicio_date">
+                        </div>
+                        
                         <div class="form-group col-md-10">
                             <label for=""><b>Descripción Quirúrgica</b></label>
                             <input type="text" name="descripcion" class="form-control form-control-user" id="descripcion_edit">
@@ -106,8 +107,8 @@
                             Guardar
                         </button>
                     </center>
+        <div>
 
 
 
 
-                </div>

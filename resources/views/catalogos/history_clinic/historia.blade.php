@@ -1,6 +1,5 @@
-<div class="tab-pane fade tab_content1-0" id="init_history_edit" role="tabpanel" aria-labelledby="patient_record">
-
-
+<div class="col-md-12">    
+                <div class="row">
                     <div class="col-md-12">
                         <br>
                         <h3>MOTIVO DE LA CONSULTA</h3>
@@ -9,19 +8,26 @@
                     <div class="row">
                         <input type="text" name="obsabdomen" class="form-control form-control-user" id="obsabdomen_edit">
                     </div>
+                </div>
+
+
+                <div class="row">
                      <br><br>
                     <div class="col-md-12">
                         <br>
                         <h3>ENFERMEDAD ACTUAL</h3>
                         <hr>
                     </div>
-
                     <div class="row">
                         <input type="text" name="obsextremidades" class="form-control form-control-user" id="obsextremidades_edit">
                     </div>
-                    <br>
+                </div>
+
+
+                    <!--antecedentes-->
 
                     <div class="row">
+                    <br><br>
                         <div class="col-md-10">
                             <h3>ANTECEDENTES</h3>
                             <hr>
@@ -100,6 +106,9 @@
 
                     </div>
 
+
+                    <!--ginecologicos-->
+
                     <div class="row">
                         <div class="col-md-12">
                             <br>
@@ -108,48 +117,50 @@
                         </div>
 
                         <br>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-4">
                             <label for=""><b>Gestaciones</b></label>
                             <input type="text" class="form-control form-control-user" name="Gestaciones" id="Gestaciones_edit">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-4">
                             <label for=""><b>Partos</b></label>
                             <input type="text" class="form-control form-control-user" name="partos" id="partos_edit">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-4">
                             <label for=""><b>Cesareas</b></label>
                             <input type="text" class="form-control form-control-user" name="cesareas" id="cesareas_edit">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-4">
                             <label for=""><b>Abortos</b></label>
                             <input type="text" class="form-control form-control-user" name="abortos" id="abortos_edit">
                          </div>
 
-                         <div class="form-group col-md-2">
+                         <div class="form-group col-md-4">
                             <label for=""><b>Embarazo ectópico</b></label>
                            <input type="text" class="form-control form-control-user" name="farmante" id="farmante_edit">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-4">
                             <label for=""><b>Fecha de la ultima mestuación</b></label>
                             <input type="date" class="form-control" name="Fechamestruacion" id="Fechamestruacion_edit">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-4">
                             <label for=""><b>Ciclos</b></label>
                             <input type="text" class="form-control form-control-user" name="ciclos" id="ciclos_edit">
                         </div>
 
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-4">
                             <label for=""><b>Metodos de planificación</b></label>
                             <input type="text" class="form-control form-control-user" name="planificacion" id="planificacion_edit">
                         </div>
 
                     </div>
 
+
+                <!--revision-->
 
                     <div class="row">
                         <div class="col-md-10">
@@ -178,7 +189,7 @@
                             <input type="text" class="form-control form-control-user" name="Neurologico" id="Neurologico_edit">
                          </div>
 
-                         <div class="form-group col-md-5">
+                        <div class="form-group col-md-5">
                             <label for=""><b>Ocular</b></label>
                            <input type="text" class="form-control form-control-user" name="Ocular" id="Ocular_edit">
                         </div>
@@ -194,6 +205,8 @@
                         </div>
 
                     </div>
+
+                <!--examen fisico-->
 
                     <div class="row">
                         <div class="col-md-10">
@@ -220,9 +233,9 @@
                         <div class="form-group col-md-5">
                             <label for=""><b>Cara</b></label>
                             <input type="text" class="form-control form-control-user" name="cara" id="cara_edit">
-                         </div>
+                        </div>
 
-                         <div class="form-group col-md-5">
+                        <div class="form-group col-md-5">
                             <label for=""><b>General</b></label>
                            <input type="text" class="form-control form-control-user" name="general" id="general_edit">
                         </div>
@@ -236,6 +249,7 @@
                             <label for=""><b>Neurologico</b></label>
                             <input type="text" class="form-control form-control-user" name="neurologico" id="neurologico_edit">
                         </div>
+
                         <div class="form-group col-md-5">
                             <label for=""><b>Oidos</b></label>
                             <input type="text" class="form-control form-control-user" name="oidos" id="oidos_edit">
@@ -244,9 +258,9 @@
                         <div class="form-group col-md-5">
                             <label for=""><b>Ojos</b></label>
                             <input type="text" class="form-control form-control-user" name="ojos" id="ojos_edit">
-                         </div>
+                        </div>
 
-                         <div class="form-group col-md-5">
+                        <div class="form-group col-md-5">
                             <label for=""><b>Piel y Faneras</b></label>
                            <input type="text" class="form-control form-control-user" name="piel" id="piel_edit">
                         </div>
@@ -268,6 +282,8 @@
 
                     </div>
 
+                    <!--consultas-->
+
                     <div class="row">
                     
                         <div class="col-md-12">
@@ -277,6 +293,40 @@
                         </div>
                         <br>
                         
+
+                        <div class="row">
+                        
+                                <div class="form-group col-md-3">
+                                    <label for=""><b>Examen Paraclínico y/o Procedimiento</b></label>
+                                    <div class="form-group valid-required">
+                                        <input type="text" class="form-control form-control-user" name="paraclinico" id="paraclinico_edit">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                <br>
+                                    <label for=""><b>Valor</b></label>
+                                    <div class="form-group valid-required">
+                                        <input type="text" class="form-control form-control-user" name="valorp" id="valorp_edit">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                <br>
+                                    <label for=""><b>Resultado</b></label>
+                                    <div class="form-group valid-required">
+                                        <input type="text" class="form-control form-control-user" name="resultadop" id="resultadop_edit">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                <br><br>
+                                    <button type="button" id="btn-consultas" class="btn btn-primary btn-user">
+                                        Agregar <i class="fa fa-pl"></i>
+                                    </button>
+                                </div>
+
+
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-12">
@@ -284,7 +334,7 @@
 
                                         <thead>
                                             <tr>
-                                                <th>Procedimientos</th>
+                                                <th></th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
@@ -298,50 +348,18 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                        
-                                <div class="col-md-4">
-                                    <label for=""><b>Examen Paraclínico y/o Procedimiento</b></label>
-                                    <div class="form-group valid-required">
-                                        <input type="text" class="form-control form-control-user" name="paraclinico" id="paraclinico_edit">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                <br>
-                                    <label for=""><b>Valor</b></label>
-                                    <div class="form-group valid-required">
-                                        <input type="text" class="form-control form-control-user" name="valorp" id="valorp_edit">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                <br>
-                                    <label for=""><b>Resultado</b></label>
-                                    <div class="form-group valid-required">
-                                        <input type="text" class="form-control form-control-user" name="resultadop" id="resultadop_edit">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <br><br>
-                                    <button type="button" id="btn-consultas" class="btn btn-primary btn-user">
-                                        Agregar <i class="fa fa-pl"></i>
-                                    </button>
-                                </div>
-
                         </div>
                     </div>
 
-
-                    
-                    <div class="col-md-4">
+                    <!--CIE-->
+                <div class="row">
+                        <div class="col-md-12">
                         <br>
                             <h3>CIE</h3>
                             <hr>
                         </div>
                         <br>
-                    <div class="form-group col-md-12">
+                    <div class="col-md-12">
 
                         <div class="form-group col-md-3">
                             <label for=""><b>Nombre</b></label>
@@ -364,9 +382,11 @@
                          </div>
 
                     </div>
-
-                    <div class="row">
+                </div>
                     
+                <!--medicamentos-->
+
+            <div class="row">
                     <div class="col-md-12">
                     <br>
                         <h3>ORDEN DE MEDICAMENTOS N° 1</h3>
@@ -374,6 +394,46 @@
                     </div>
                     <br>
                     
+                <div class="row">
+                    
+                            <div class="form-group col-md-2">
+                                <label for=""><b>NOMBRE DEL MEDICAMENTO</b></label>
+                                <div class="form-group valid-required">
+                                    <input type="text" class="form-control form-control-user" name="nomed" id="nomed_edit">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                            <br>
+                                <label for=""><b>POSOLOGIA</b></label>
+                                <div class="form-group valid-required">
+                                    <input type="text" class="form-control form-control-user" name="posologia" id="posologia_edit">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                            <br>
+                                <label for=""><b>CANTIDAD</b></label>
+                                <div class="form-group valid-required">
+                                    <input type="text" class="form-control form-control-user" name="cantidadmed" id="cantidadmed_edit">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                            <br>
+                                <label for=""><b>FECHA CREACIÓN</b></label>
+                                <div class="form-group valid-required">
+                                    <input type="date" class="form-control form-control-user" name="fecha" id="fecha_edit">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <br><br>
+                                <button type="button" id="btn-medicamento" class="btn btn-primary btn-user">
+                                    Agregar <i class="fa fa-pl"></i>
+                                </button>
+                            </div>
+
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-12">
@@ -381,7 +441,7 @@
 
                                     <thead>
                                         <tr>
-                                            <th>Medicamentos</th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -392,55 +452,13 @@
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
+                </div>
+            </div>
+            <!--servicios-->
 
-                    <div class="row">
-                    
-                            <div class="col-md-3">
-                                <label for=""><b>NOMBRE DEL MEDICAMENTO</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="text" class="form-control form-control-user" name="nomed" id="nomed_edit">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                            <br>
-                                <label for=""><b>POSOLOGIA</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="text" class="form-control form-control-user" name="posologia" id="posologia_edit">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                            <br>
-                                <label for=""><b>CANTIDAD</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="text" class="form-control form-control-user" name="cantidadmed" id="cantidadmed_edit">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                            <br>
-                                <label for=""><b>FECHA CREACIÓN</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="date" class="form-control form-control-user" name="fecha" id="fecha_edit">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <br><br>
-                                <button type="button" id="btn-medicamento" class="btn btn-primary btn-user">
-                                    Agregar <i class="fa fa-pl"></i>
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-
+                <div class="row">
                     <br><br>
                     <div class="col-md-12">
                     <br>
@@ -449,38 +467,16 @@
                     </div>
                     <br>
 
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-bordered" id="tableser_edit" width="100%" cellspacing="0">
-
-                                    <thead>
-                                        <tr>
-                                            <th>SERVICIOS</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
-
                         <div class="row">
                     
-                            <div class="col-md-3">
+                            <div class="form-group col-md-2">
                                 <label for=""><b>NOMBRE DEL SERVICIO</b></label>
                                 <div class="form-group valid-required">
                                     <input type="text" class="form-control form-control-user" name="nomser" id="nomser_edit">
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="form-group col-md-2">
                            
                                 <label for=""><b>OBSERVACIONES</b></label>
                                 <div class="form-group valid-required">
@@ -488,7 +484,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="form-group col-md-2">
                             
                                 <label for=""><b>CANTIDAD</b></label>
                                 <div class="form-group valid-required">
@@ -496,7 +492,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="form-group col-md-2">
                             
                                 <label for=""><b>FECHA CREACIÓN</b></label>
                                 <div class="form-group valid-required">
@@ -504,23 +500,79 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
-                                
+                            <div class="form-group col-md-2">
+                            <br><br>
                                 <button type="button" id="btn-servicios" class="btn btn-primary btn-user">
                                     Agregar <i class="fa fa-pl"></i>
                                 </button>
                             </div>
+
+
+                        
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered" id="tableser_edit" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-                
+                </div>
 
+<!--especialista-->
 
-
+                <div class="row">
                     <div class="col-md-12">
                     <br>
                         <h3>ORDEN DE REMISION A ESPECIALISTA N° 0</h3>
                         <hr>
                     </div>
                     <br>
+                    <div class="row">
+                    
+                            <div class="form-group col-md-3">
+                                <label for=""><b>NOMBRE DE LA ESPECIALIDAD</b></label>
+                                <div class="form-group valid-required">
+                                    <input type="text" class="form-control form-control-user" name="nomespe" id="nomespe_edit">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                            <br>
+                                <label for=""><b>MOTIVO DE LA REMISIÓN</b></label>
+                                <div class="form-group valid-required">
+                                    <input type="text" class="form-control form-control-user" name="remision" id="remision_edit">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                            <br>                           
+                                <label for=""><b>FECHA DE CREACIÓN</b></label>
+                                <div class="form-group valid-required">
+                                    <input type="DATE" class="form-control form-control-user" name="fechacreacion" id="fechacreacion_edit">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                            <br><br>
+                                <button type="button" id="btn-especialista" class="btn btn-primary btn-user">
+                                    Agregar <i class="fa fa-pl"></i>
+                                </button>
+                            </div>
 
                     <div class="col-md-6">
                         <div class="row">
@@ -529,7 +581,7 @@
 
                                     <thead>
                                         <tr>
-                                            <th>ESPECIALISTA</th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -539,52 +591,55 @@
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
+                </div>
 
-                        <div class="row">
-                    
-                            <div class="col-md-4">
-                                <label for=""><b>NOMBRE DE LA ESPECIALIDAD</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="text" class="form-control form-control-user" name="nomespe" id="nomespe_edit">
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                            
-                                <label for=""><b>MOTIVO DE LA REMISIÓN</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="text" class="form-control form-control-user" name="remision" id="remision_edit">
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                           
-                                <label for=""><b>FECHA DE CREACIÓN</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="DATE" class="form-control form-control-user" name="fechacreacion" id="fechacreacion_edit">
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-4">
-                                
-                                <button type="button" id="btn-especialista" class="btn btn-primary btn-user">
-                                    Agregar <i class="fa fa-pl"></i>
-                                </button>
-                            </div>
-                        </div>
-                
-
-                    <div class="col-md-6">
+<!--incapacidad-->
+                <div class="row">
                     <div class="col-md-12">
                     <br>
                         <h3>ORDEN DE INCAPACIDAD N° 1</h3>
                         <hr>
                     </div>
                     <br>
+                            <div class="col-md-2">
+                                <label for=""><b>MOTIVO DE LA INCAPACIDAD</b></label>
+                                <div class="form-group valid-required">
+                                    <input type="text" class="form-control form-control-user" name="incapacidad" id="incapacidad_edit">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                            <br>
+                                <label for=""><b>DIAS</b></label>
+                                <div class="form-group valid-required">
+                                    <input type="text" class="form-control form-control-user" name="diasin" id="diasin_edit">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                            <br>
+                                <label for=""><b>TIPO</b></label>
+                                <div class="form-group valid-required">
+                                    <input type="text" class="form-control form-control-user" name="tipoin" id="tipoin_edit">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                            <br>
+                                <label for=""><b>FECHA CREACIÓN</b></label>
+                                <div class="form-group valid-required">
+                                    <input type="date" class="form-control form-control-user" name="fechain" id="fechain_edit">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <br><br>
+                                <button type="button" id="btn-incapacidad" class="btn btn-primary btn-user">
+                                    Agregar <i class="fa fa-pl"></i>
+                                </button>
+                            </div>
 
                     <div class="col-md-6">
                         <div class="row">
@@ -593,7 +648,7 @@
 
                                     <thead>
                                         <tr>
-                                            <th>INCAPACIDAD</th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -604,65 +659,18 @@
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
-
-                        <div class="row">
-                    
-                            <div class="col-md-4">
-                                <label for=""><b>MOTIVO DE LA INCAPACIDAD</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="text" class="form-control form-control-user" name="incapacidad" id="incapacidad_edit">
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                            <br>
-                                <label for=""><b>DIAS</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="text" class="form-control form-control-user" name="diasin" id="diasin_edit">
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                            <br>
-                                <label for=""><b>TIPO</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="text" class="form-control form-control-user" name="tipoin" id="tipoin_edit">
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                            <br>
-                                <label for=""><b>FECHA CREACIÓN</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="date" class="form-control form-control-user" name="fechain" id="fechain_edit">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <br><br>
-                                <button type="button" id="btn-incapacidad" class="btn btn-primary btn-user">
-                                    Agregar <i class="fa fa-pl"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                
-                    </br>
-                
-
-
                     <center>
-
                         <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
                             Limpiar
                         </button>
-                       <button class="btn btn-primary btn-user">
-                           Guardar
+                        <button class="btn btn-primary btn-user">
+                            Guardar
                         </button>
                     </center>
-               
 
-                </div>
+                </div>   
+            
+                    
+</div>
