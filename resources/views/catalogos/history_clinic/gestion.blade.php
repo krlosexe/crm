@@ -2313,18 +2313,224 @@
 
 
 		var count2 = 0
-		$("#btn-add-surgerie-edit").click(function (e) {
+		$("#btn-servicios").click(function (e) {
 			count2++
 			var html
+			var nomser_edit = $("#nomser_edit").val()
+			var obser_edit = $("#obser_edit").val()
+			var cantidadser_edit = $("#cantidadser_edit").val()
+			var fechaser_edit = $("#fechaser_edit").val()
+
+			console.log(fechaser_edit)
+
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
-				html += "<td>"+$("#sub_category_edit option:selected").text()+"<input type='hidden' name='sub_category[]' value='"+$("#sub_category_edit").val()+"'></td>"
+				html += "<td><input type='text' name='nomser[]' value='"+nomser_edit+"'></td>"
+				html += "<td><input type='text' name='obser[]' value='"+obser_edit+"'></td>"
+				html += "<td><input type='number' name='cantidadser[]' value='"+cantidadser_edit+"'></td>"
+				html += "<td><input type='date' name='fechaser[]' value='"+fechaser_edit+"'></td>"
+
 				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 
-			$("#tablecx_edit tbody").append(html);
+			$("#tableser_edit tbody").append(html);
+			$("#fechaser_edit,#cantidadser_edit,#obser_edit,#nomser_edit").val("");
 
 		});
 
+
+		$("#btn-consultas").click(function (e) {
+			count2++
+			var html
+			var paraclinico_edit = $("#paraclinico_edit").val()
+			var valorp_edit = $("#valorp_edit").val()
+			var resultadop_edit = $("#resultadop_edit").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='paraclinico[]' value='"+paraclinico_edit+"'></td>"
+				html += "<td><input type='number' name='valorp[]' value='"+valorp_edit+"'></td>"
+				html += "<td><input type='date' name='resultadop[]' value='"+resultadop_edit+"'></td>"
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#tableconsul_edit tbody").append(html);
+			$("#paraclinico_edit,#valorp_edit,#resultadop_edit").val("");
+
+		});
+
+		$("#btn-especialista").click(function (e) {
+			count2++
+			var html
+			var nomespe_edit = $("#nomespe_edit").val()
+			var remision_edit = $("#remision_edit").val()
+			var fechacreacion_edit = $("#fechacreacion_edit").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='nomespe[]' value='"+nomespe_edit+"'></td>"
+				html += "<td><input type='number' name='remision[]' value='"+remision_edit+"'></td>"
+				html += "<td><input type='date' name='fechacreacion[]' value='"+fechacreacion_edit+"'></td>"
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#tablesp_edit tbody").append(html);
+			$("#fechacreacion_edit,#remision_edit,#nomespe_edit").val("");
+
+		});
+
+
+		$("#btn-incapacidad").click(function (e) {
+			count2++
+			var html
+			var incapacidad_edit = $("#incapacidad_edit").val()
+			var diasin_edit = $("#diasin_edit").val()
+			var tipoin_edit = $("#tipoin_edit").val()
+			var fechain_edit = $("#fechain_edit").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='incapacidad[]' value='"+incapacidad_edit+"'></td>"			
+				html += "<td><input type='text' name='diasin[]' value='"+diasin_edit+"'></td>"
+				html += "<td><input type='number' name='tipoin[]' value='"+tipoin_edit+"'></td>"
+				html += "<td><input type='date' name='fechain[]' value='"+fechain_edit+"'></td>"
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#tablin_edit tbody").append(html);
+
+			$("#incapacidad_edit,#tipoin_edit,#diasin_edit,#fechain_edit").val("");
+
+		});
+
+		$("#btn-pre_medicamento").click(function (e) {
+			count2++
+			var html
+			var pre_medicamento = $("#pre_medicamento").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='medicamento[]' value='"+pre_medicamento+"'></td>"			
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#tablprem_edit tbody").append(html);
+
+			$("#pre_medicamento").val("");
+
+		});
+
+		$("#eventos_intraoperatorios").click(function (e) {
+			count2++
+			var html
+			var nevento_edit = $("#nevento_edit").val()
+			var descripcion = $("#descripcion").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='nevento[]' value='"+nevento_edit+"'></td>"	
+				html += "<td><input type='text' name='desc[]' value='"+descripcion+"'></td>"			
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#intraoperatorio tbody").append(html);
+
+			$("#nevento_edit,#descripcion").val("");
+
+		});
+
+		$("#descripcion_enfermeria").click(function (e) {
+			count2++
+			var html
+			var descripcion_enfermeria = $("#descripcion_enfermeria").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='enfe[]' value='"+descripcion_enfermeria+"'></td>"		
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#descripcion_enfermeria tbody").append(html);
+
+			$("#descripcion_enfermeria").val("");
+
+		});
+
+		$("#traslado").click(function (e) {
+			count2++
+			var html
+			var traslado = $("#traslado").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='trasl[]' value='"+traslado+"'></td>"		
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#traslado tbody").append(html);
+
+			$("#traslado").val("");
+
+		});
+
+		
+		$("#btn-monitoria").click(function (e) {
+			count2++
+			var html
+			var monitoria_edit = $("#monitoria_edit").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='monitoria[]' value='"+monitoria_edit+"'></td>"			
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#tablmonito_edit tbody").append(html);
+
+			$("#monitoria_edit").val("");
+
+		});
+
+
+
+		$("#btn-medicamento").click(function (e) {
+			count2++
+			var html
+			var nommed_edit = $("#nomed_edit").val()
+			var obmed_edit = $("#posologia_edit").val()
+			var cantidadmed_edit = $("#cantidadmed_edit").val()
+			var fechamed_edit = $("#fecha_edit").val()
+
+			console.log(fechaser_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='nommed[]' value='"+nommed_edit+"'></td>"
+				html += "<td><input type='text' name='obmed[]' value='"+obmed_edit+"'></td>"
+				html += "<td><input type='number' name='cantidadmed[]' value='"+cantidadmed_edit+"'></td>"
+				html += "<td><input type='date' name='fechamed[]' value='"+fechamed_edit+"'></td>"
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#tablemed_edit tbody").append(html);
+			$("#fecha_edit,#cantidadmed_edit,#posologia_edit,#nomed_edit").val("");
+
+		});
 
 		$("#pay_consultation").change(function (e) {
 
