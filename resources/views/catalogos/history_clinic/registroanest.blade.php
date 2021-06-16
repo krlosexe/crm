@@ -1,38 +1,42 @@
-        <div class="col-md-12">            
-                <div class="col-md-12">    
+<div class="col-md-12">            
+                <div class="row">    
                     <div class="col-md-12">
                         <br>
                         <h3>PERSONAL</h3>
                         <hr>
                     </div>
-                    <div class="col-md-4">
+                    
+                    <div class="form-group col-md-4">
                         <label for=""><b>Anestesiólogo Principal</b></label>
                         <input type="text" name="anestesiologo_principal" class="form-control form-control-user" id="anestesiologo_principal_edit">
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="form-group form-group col-md-4">
                         <label for=""><b>Anestesiólogo Secundario</b></label>
                         <input type="text" name="anestesiologo_secundario" class="form-control form-control-user" id="anestesiologo_secundario_edit">
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="form-group col-md-4">
                         <label for=""><b>Cirujano Principal</b></label>
                         <input type="text" name="cirujano_principal" class="form-control form-control-user" id="cirujano_principal_edit">
                     </div>
-                    <div class="col-md-4">
+
+                    <div class="form-group col-md-4">
                         <label for=""><b>Segundo Cirujano</b></label>
                         <input type="text" name="segundo_cirujano" class="form-control form-control-user" id="segundo_cirujano_edit">
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="form-group col-md-4">
                         <label for=""><b>Instrumentador</b></label>
                         <input type="text" name="instrumentador" class="form-control form-control-user" id="instrumentador_edit">
                     </div>
-                    <div class="col-md-4">
+
+                    <div class="form-group col-md-4">
                         <label for=""><b>Auxiliar de Sala</b></label>
                         <input type="text" name="aux_sala" class="form-control form-control-user" id="aux_sala_edit">
                     </div>
                 </div>
+
 
                 <div class="row">    
                     <div class="col-md-12">
@@ -40,12 +44,12 @@
                         <h3>REGISTRO INTRAOPERATORIO </h3>
                         <hr>
                     </div>
-                    <div class="col-md-4">
+                    <div class="form-group col-md-4">
                         <label for=""><b>Anestesiólogo Principal</b></label>
                         <input type="text" name="anesteintra_principal" class="form-control form-control-user" id="anesteintra_principal_edit">
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="form-group col-md-4">
                         <label for=""><b>Diagnósticos</b></label>
                         <input type="text" name="diagnóstico" class="form-control form-control-user" id="diagnóstico_edit">
                     </div>
@@ -418,27 +422,27 @@
                         <h3>Eliminados</h3>
                         <hr>
                     </div>
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Deficit</b></label>
                         <input type="text" name="deficit" class="form-control form-control-user" id="deficit_edit">
                     </div>                    
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Pérdidas</b></label>
                         <input type="text" name="perdidas" class="form-control form-control-user" id="perdidas_edit">
                     </div>                    
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Diueresis</b></label>
                         <input type="text" name="diueresis" class="form-control form-control-user" id="diueresis_edit">
                     </div>                    
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Sangrado</b></label>
                         <input type="text" name="sangrado" class="form-control form-control-user" id="Sangrado_edit">
                     </div>                    
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Otros</b></label>
                         <input type="text" name="otros" class="form-control form-control-user" id="otros_edit">
                     </div>                    
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Total</b></label>
                         <input type="text" name="total_eliminados" class="form-control form-control-user" id="total_eliminados_edit">
                     </div>
@@ -451,31 +455,31 @@
                         <h3>Método</h3>
                         <hr>
                     </div>
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Lactato Ringer</b></label>
                         <input type="text" name="ringer" class="form-control form-control-user" id="ringer_edit">
                     </div>                    
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Solución Salina</b></label>
                         <input type="text" name="salinas" class="form-control form-control-user" id="salinas_edit">
                     </div>                    
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Coloides</b></label>
                         <input type="text" name="coloides" class="form-control form-control-user" id="coloides_edit">
                     </div>                    
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Sangre</b></label>
                         <input type="text" name="sangre" class="form-control form-control-user" id="sangre_edit">
                     </div>             
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Glóbulos Rojos</b></label>
                         <input type="text" name="rojos" class="form-control form-control-user" id="rojos_edit">
                     </div>                    
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Otros</b></label>
                         <input type="text" name="Otros" class="form-control form-control-user" id="Otros_edit">
                     </div>
-                    <div class="col-md-12">
+                    <div class="form-group col-md-12">
                         <label for=""><b>Total</b></label>
                         <input type="text" name="total_metodo" class="form-control form-control-user" id="total_metodo_edit">
                     </div>
