@@ -27,6 +27,10 @@
                 <li class="nav-item">
                     <a id="tab3" class="nav-link"  data-toggle="tab" href="#info-credit-patient-edit" role="tab" aria-controls="info-add" aria-selected="false">Monitorias</a>
                 </li>
+
+                <li class="nav-item">
+                    <a id="tab3" class="nav-link"  data-toggle="tab" href="#info-registro-edit" role="tab" aria-controls="info-add" aria-selected="false">Registro Enfermería</a>
+                </li>
             </ul>
             <br><br>
 
@@ -47,7 +51,7 @@
 
                 <div class="tab-pane fade tab_content1-0" id="notas_enfermeria_edit" role="tabpanel" aria-labelledby="patient_record">
 
-                    <div class="col-md-12">
+                    <div class="row">
                         <div class="col-md-12">
                             <br>
                             <h3>NOTAS ENFERMERIA</h3>
@@ -55,15 +59,12 @@
                         </div>
 
                         <div class="col-md-12">
-
                             <div class="col-md-4">
                                 <label for=""><b>Descripcion</b></label>
                                 <div class="form-group valid-required">
                                     <input type="text" class="form-control form-control-user" name="descripcion_enfermeria" id="descripcion_enfermeria">
                                 </div>
                             </div>
-
-
                             <div class="col-md-3">
                             <br>
                                 <button type="button" id="descripcion_enfermeria" class="btn btn-primary btn-user">
@@ -106,9 +107,9 @@
                     @include('catalogos.history_clinic.registroanest')
                 </div>
 
-
-
-
+                <div class="tab-pane fade tab_content1-0" id="info-registro-edit" role="tabpanel" aria-labelledby="patient_record">
+                   <!-- @include('catalogos.history_clinic.registroenfermeria')
+                --></div>
 
             </div>
 
