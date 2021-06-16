@@ -86,7 +86,7 @@
                             <label for=""><b>Fecha y Hora de Inicio:</b></label>
                             <input type="date" class="form-control" name="ah_inicio_date" id="ah_inicio_date">
                         </div>
-                        
+
                         <div class="form-group col-md-10">
                             <label for=""><b>Descripción Quirúrgica</b></label>
                             <input type="text" name="descripcion" class="form-control form-control-user" id="descripcion_edit">
@@ -107,7 +107,7 @@
                             Guardar
                         </button>
                     </center>
-        <div>
+    </div>
 
 
 
