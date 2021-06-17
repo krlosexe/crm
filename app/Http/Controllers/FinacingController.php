@@ -199,7 +199,6 @@ class FinacingController extends Controller
                         $array["balance"]            = str_replace(",", "", $request["balance"][$key]);
                         $array["date"]               = $date;
 
-
                         DB::table("client_request_credit_payment_plan")->insert($array);
                     }
                 }
@@ -213,6 +212,13 @@ class FinacingController extends Controller
                     "date_aproved" => date("Y-m-d"),
                 ]);
             }
+
+            if ($request["status"] == "Desembolsado") {
+                $data = DB::table("client_request_credit")->where("id", $id)->update([
+                    "date_desembolso" => date("Y-m-d"),
+                ]);
+            }
+
 
             $client = DB::table("clientes")->where("id_cliente", $id_client)->first();
 
@@ -857,5 +863,34 @@ class FinacingController extends Controller
 
 
 
+
+
+
+
+
+public function getCreditFeesPaid($id){
+    try{
+        $data = DB::table('client_request_credit_payment_plan')
+        ->select('*')
+        ->where('id_request_credit', $id)
+        ->get();
+        return response()->json($data)->setStatusCode(200);
+    }
+    catch(\Throwable $th){return $th;}
+}
+
+
+
+
+public function updateStatusCredit(Request $request){
+    try{
+        $update= DB::table('client_request_credit')
+        ->where('id', $request['id'])
+        ->update(["status" => $request['status']]);
+        if($update){ $res = true;} else{ $res = false;}
+        return response()->json($res)->setStatusCode(200);
+    }
+    catch(\Throwable $th){return $th;}
+}
 
 }

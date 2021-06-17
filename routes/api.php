@@ -405,6 +405,11 @@ Route::get('clients/plan/payments/{id_client}', 'FinacingController@GetPlanPayme
 
 Route::get('get/client/request/{id_client}', 'ClientsController@GetRequestCredit');
 Route::get('get/client/request/{id_client}/{id_line}', 'ClientsController@GetRequestCredit');
+Route::get('get/credit/fees/paid/{id}','FinacingController@getCreditFeesPaid');
+Route::post('update/credit/status','FinacingController@updateStatusCredit');
+
+
+
 
 
 
