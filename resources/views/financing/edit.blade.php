@@ -136,6 +136,7 @@
                                             <option value="Aprobado">Aprobado</option>
                                             <option value="Rechazado">Rechazado</option>
                                             <option value="Desembolsado">Desembolsado</option>
+                                            <option value="Liquidado">Liquidado</option>
 
                                         </select>
                                     </div>
