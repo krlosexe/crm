@@ -199,7 +199,6 @@ class FinacingController extends Controller
                         $array["balance"]            = str_replace(",", "", $request["balance"][$key]);
                         $array["date"]               = $date;
 
-
                         DB::table("client_request_credit_payment_plan")->insert($array);
                     }
                 }
@@ -213,6 +212,13 @@ class FinacingController extends Controller
                     "date_aproved" => date("Y-m-d"),
                 ]);
             }
+
+            if ($request["status"] == "Desembolsado") {
+                $data = DB::table("client_request_credit")->where("id", $id)->update([
+                    "date_desembolso" => date("Y-m-d"),
+                ]);
+            }
+
 
             $client = DB::table("clientes")->where("id_cliente", $id_client)->first();
 

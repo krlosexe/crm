@@ -300,6 +300,7 @@
 										<th>Cuotas Mensuales</th>
 										<th>Plazos</th>
 										<th>Estatus</th>
+                                        <th>Fecha Desembolso</th>
 										<th>Asesora Responsable</th>
 										<th>Fecha de registro</th>
 									</tr>
@@ -490,6 +491,10 @@
 				{
 					"data": "status"
 				},
+                {
+					"data": "date_desembolso"
+				},
+
 				{
 					"data": "email",
 					render: (data, type, row) => {
