@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for=""><b>Tipo de Anestesia:</b></label>
+                            <label for=""><b>Tipo de Anestesia</b></label>
                             <input type="text" class="form-control form-control-user" name="tanestesia" id="tanestesia_edit">
                         </div>
 
@@ -41,28 +41,28 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for=""><b>Cirujano Principal:</b></label>
+                            <label for=""><b>Cirujano Principal</b></label>
                             <input type="text" class="form-control form-control-user" name="cirujano1" id="cirujano1_edit">
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for=""><b>Segundo Cirujano::</b></label>
+                            <label for=""><b>Segundo Cirujano</b></label>
                             <input type="text" class="form-control form-control-user" name="cirujano2" id="cirujano2_edit">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for=""><b>Anestesiólogo:</b></label>
+                            <label for=""><b>Anestesiólogo</b></label>
                             <input type="text" class="form-control form-control-user" name="anesteciologo" id="anesteciologo_edit">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for=""><b>Primer Ayudante:</b></label>
+                            <label for=""><b>Primer Ayudante</b></label>
                             <input type="text" class="form-control form-control-user" name="ayudante1" id="ayudante1_edit">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for=""><b>Segundo Ayudante:</b></label>
+                            <label for=""><b>Segundo Ayudante</b></label>
                             <input type="text" class="form-control form-control-user" name="ayudante2" id="ayudante2_edit">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for=""><b>Instrumentador Quirúrgico:</b></label>
+                            <label for=""><b>Instrumentador Quirúrgico</b></label>
                             <input type="text" class="form-control form-control-user" name="instrumentador" id="instrumentador_edit">
                         </div>
                         <div class="form-group col-md-4">
@@ -82,17 +82,23 @@
 
 
                     <div class="form-group col-md-12">
+                    <div class="row">
                         <div class="form-group col-md-4">
-                            <label for=""><b>Fecha y Hora de Inicio:</b></label>
+                            <label for=""><b>Fecha de Inicio</b></label>
                             <input type="date" class="form-control" name="ah_inicio_date" id="ah_inicio_date">
                         </div>
                         
-                        <div class="form-group col-md-10">
+                        <div class="form-group col-md-4">
+                            <label for=""><b>Hora de Inicio</b></label>
+                            <input type="time" class="form-control" name="ah_inicio_date" id="ah_inicio_date">
+                        </div>
+                    </div>
+                        <div class="form-group col-md-6">
                             <label for=""><b>Descripción Quirúrgica</b></label>
                             <input type="text" name="descripcion" class="form-control form-control-user" id="descripcion_edit">
                         </div>
 
-                        <div class="form-group col-md-10">
+                        <div class="form-group col-md-6">
                             <label for=""><b>Complicaciones</b></label>
                             <input type="text" name="complicacion" class="form-control form-control-user" id="complicacion_edit">
                         </div>
