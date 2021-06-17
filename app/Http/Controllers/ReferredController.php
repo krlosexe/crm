@@ -273,6 +273,11 @@ class ReferredController extends Controller
                             }
                         })->where("clientes.state", "Valorada / Descartada")->get();
 
+    $Aprobada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+                            if($name != "0"){
+                                $query->where("clients.name", 'like', '%'.$name.'%');
+                            }
+                        })->where("clientes.state", "Aprobada")->get();
 
         $data = [
             ["name" => "Afiliada", "child" => $afiliada ],
@@ -290,7 +295,8 @@ class ReferredController extends Controller
             ["name" => "Programada", "child" => $Programada ],
             ["name" => "Re Agendada a Valoracion", "child" => $Re_Agendada_Valoracion ],
             ["name" => "Valorada", "child" => $Valorada ],
-            ["name" => "Valorada / Descartada", "child" => $Valorada_Descartada ]
+            ["name" => "Valorada / Descartada", "child" => $Valorada_Descartada ],
+            ["name" => "Aprobada", "child" => $Aprobada ]
         ];
         return response()->json($data)->setStatusCode(200);
     }

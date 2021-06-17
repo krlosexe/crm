@@ -87,26 +87,8 @@
                             </div>
 
                             <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for=""><b>Twitter (*)</b></label>
-                                        <input type="text" required class="form-control" id="twitter" name="twitter" value="{{$data_client->twitter}}">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for=""><b>Youtube (*)</b></label>
-                                        <input type="text" required class="form-control" id="youtube" name="youtube" value="{{$data_client->youtube}}">
-                                    </div>
-                                </div>
-                            </div>
-
 
                             <input type="hidden" name="_method" value="put">
-
-
 
                             <br><br>
                             <div class="form-row" style="margin-bottom: 26px; ">
@@ -168,12 +150,10 @@
 
 
             $(".actions a[href$='#finish']").click(function (e) {
-
                 const data = {
                     'id_client'  : $("#id_client").val(),
                     'id_user'    : $("#id_user").val()
                 }
-
 
                 if($("#facebook").val() == "" || $("#instagram").val() == "" || $("#twitter").val() == "" || $("#youtube").val() == ""){
                     alert("Todos los campos son obligatorios")
@@ -185,12 +165,7 @@
 
                 formData.append("facebook", $("#facebook").val())
                 formData.append("instagram", $("#instagram").val())
-                formData.append("twitter", $("#twitter").val())
-                formData.append("youtube", $("#youtube").val())
                 formData.append("_method", "put")
-
-
-
 
                 $.ajax({
                     url:''+url+'/api/update/clients/encuesta/'+$("#id_client").val(),
