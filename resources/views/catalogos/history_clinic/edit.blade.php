@@ -25,7 +25,19 @@
                 </li>
 
                 <li class="nav-item">
-                    <a id="tab3" class="nav-link"  data-toggle="tab" href="#info-credit-patient-edit" role="tab" aria-controls="info-add" aria-selected="false">Monitorias</a>
+                    <a id="tab3" class="nav-link"  data-toggle="tab" href="#info-credit-patient-edit" role="tab" aria-controls="info-add" aria-selected="false">Registros Anestésicos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="tab3" class="nav-link"  data-toggle="tab" href="#info-enfermeria-edit" role="tab" aria-controls="info-add" aria-selected="false">Registro Enfermería</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a id="tab3" class="nav-link"  data-toggle="tab" href="#info-sedacion-edit" role="tab" aria-controls="info-add" aria-selected="false">Sedación</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a id="tab3" class="nav-link"  data-toggle="tab" href="#info-preoperatorio-edit" role="tab" aria-controls="info-add" aria-selected="false">Registro Preoperatorio</a>
                 </li>
             </ul>
             <br><br>
@@ -45,48 +57,46 @@
                 </div>
 
 
-                <div class="tab-pane fade tab_content1-0" id="notas_enfermeria_edit" role="tabpanel" aria-labelledby="patient_record">
+            <div class="tab-pane fade tab_content1-0" id="notas_enfermeria_edit" role="tabpanel" aria-labelledby="patient_record">
 
+                <div class="col-md-12">
                     <div class="col-md-12">
-                        <div class="col-md-12">
-                            <br>
-                            <h3>NOTAS ENFERMERIA</h3>
-                            <hr>
+                    <br>
+                        <h3>Notas Enfermerias</h3>
+                        <hr>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group valid-required">
+                                <input type="text" class="form-control form-control-user" name="descripcion_enfermeria" id="descripcion_enfermeria">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                        <br><br>
+                            <button type="button" id="btn_enfermeria" class="btn btn-primary btn-user">
+                            Agregar <i class="fa fa-pl"></i>
+                            </button>
                         </div>
 
                         <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered" id="table_enfermeria" width="100%" cellspacing="0">
 
-                            <div class="col-md-4">
-                                <label for=""><b>Descripcion</b></label>
-                                <div class="form-group valid-required">
-                                    <input type="text" class="form-control form-control-user" name="descripcion_enfermeria" id="descripcion_enfermeria">
+                                        <thead>
+                                            <tr>
+                                            <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-
-
-                            <div class="col-md-3">
-                            <br>
-                                <button type="button" id="descripcion_enfermeria" class="btn btn-primary btn-user">
-                                    Agregar <i class="fa fa-pl"></i>
-                                </button>
-                            </div>
                         </div>
-
-                            <div class="col-md-12">
-                                <table class="table table-bordered" id="descripcion_enfermeria" width="100%" cellspacing="0">
-
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-
                     </div>
 
                         <center>
@@ -100,15 +110,24 @@
                         </center>
 
                 </div>
-
+            </div>
 
                 <div class="tab-pane fade tab_content1-0" id="info-credit-patient-edit" role="tabpanel" aria-labelledby="patient_record">
                     @include('catalogos.history_clinic.registroanest')
                 </div>
 
+                <div class="tab-pane fade tab_content1-0" id="info-enfermeria-edit" role="tabpanel" aria-labelledby="patient_record">
+                    @include('catalogos.history_clinic.registroenfermeria')
+                </div>
+                
 
-
-
+                <div class="tab-pane fade tab_content1-0" id="info-sedacion-edit" role="tabpanel" aria-labelledby="patient_record">
+                    @include('catalogos.history_clinic.sedacion')
+                </div>
+                
+                <div class="tab-pane fade tab_content1-0" id="info-preoperatorio-edit" role="tabpanel" aria-labelledby="patient_record">
+                    @include('catalogos.history_clinic.registropreoperatorio')
+                </div>
 
             </div>
 
