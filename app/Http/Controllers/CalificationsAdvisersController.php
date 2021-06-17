@@ -17,7 +17,7 @@ class CalificationsAdvisersController extends Controller
 
 
         $type = 0;
-        
+
         if(isset($request["type"])){
             $type = $request["type"];
         }
@@ -40,8 +40,10 @@ class CalificationsAdvisersController extends Controller
         }
 
 
-
-       
+        $id_line = 0;
+        if(isset($request["line"]) && $request["line"] != ""){
+            $id_line = $request["line"];
+        }
 
 
         $data = CalificationsAdvisers::selectRaw("califications_advisers.*, CONCAT(datos_personales.nombres, ' ', datos_personales.apellido_p) as name_adviser")
@@ -49,32 +51,43 @@ class CalificationsAdvisersController extends Controller
                                         ->join("datos_personales", "datos_personales.id_usuario", "=", "users.id")
                                         ->orderBy("califications_advisers.id", "DESC")
 
+                                        ->join("users_line_business", "users_line_business.id_user", "=", "califications_advisers.id_user")
+
                                         ->where(function ($query) use ($type) {
                                             if($type != "0"){
-                                               
+
                                                 $query->where("califications_advisers.type", $type);
                                             }
-                                        }) 
+                                        })
 
                                         ->where(function ($query) use ($adviser) {
                                             if($adviser != 0){
                                                 $query->whereIn("califications_advisers.id_user", $adviser);
                                             }
-                                        }) 
+                                        })
 
 
                                         ->where(function ($query) use ($date_init) {
                                             if($date_init != 0){
                                                 $query->where("califications_advisers.fecha", ">=", $date_init);
                                             }
-                                        }) 
-        
+                                        })
+
                                         ->where(function ($query) use ($date_finish) {
                                             if($date_finish != 0){
                                                 $query->where("califications_advisers.fecha", "<=", $date_finish);
                                             }
-                                        }) 
+                                        })
 
+
+                                        ->where(function ($query) use ($id_line) {
+                                            if($id_line != 0){
+                                                $query->where("users_line_business.id_line", $id_line);
+                                            }
+                                        })
+
+
+                                        ->groupBy("califications_advisers.id")
 
                                         ->get();
         return response()->json($data)->setStatusCode(200);
@@ -111,7 +124,7 @@ class CalificationsAdvisersController extends Controller
         $store = CalificationsAdvisers::create($request->all());
 
         if ($store) {
-            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -164,7 +177,7 @@ class CalificationsAdvisersController extends Controller
         $update = CalificationsAdvisers::find($calificationsAdvisers)->update($request->all());
 
         if ($update) {
-            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("A ocurrido un error")->setStatusCode(400);
