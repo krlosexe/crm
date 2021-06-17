@@ -870,11 +870,16 @@ class FinacingController extends Controller
 
 public function getCreditFeesPaid($id){
     try{
-        $data = DB::table('client_request_credit_payment_plan')
-        ->select('*')
+        $data =  DB::table('client_request_credit_payment_plan')
+        ->selectRaw('SUM(credit_to_capital) AS saldo, id_request_credit')
         ->where('id_request_credit', $id)
-        ->get();
-        return response()->json($data)->setStatusCode(200);
+        ->where('status', 'Pagada')
+        ->first();
+            if($data){
+                $response = number_format($data -> saldo,2);
+            }
+            else{$response = 0;}
+        return response()->json($response)->setStatusCode(200);
     }
     catch(\Throwable $th){return $th;}
 }
