@@ -1,4 +1,4 @@
-<div class="col-md-12">
+
                     <div class="row">
                         <div class="col-md-12">
                             <h3>Datos Personales</h3>
@@ -486,4 +486,3 @@
                                     Guardar
                                 </button>
                             </center>
-</div>

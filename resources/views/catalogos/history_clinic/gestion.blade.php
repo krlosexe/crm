@@ -2321,6 +2321,9 @@
 			var cantidadser_edit = $("#cantidadser_edit").val()
 			var fechaser_edit = $("#fechaser_edit").val()
 
+			console.log(nomser_edit)
+			console.log(obser_edit)
+			console.log(cantidadser_edit)
 			console.log(fechaser_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
@@ -2345,7 +2348,9 @@
 			var valorp_edit = $("#valorp_edit").val()
 			var resultadop_edit = $("#resultadop_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(paraclinico_edit)
+			console.log(valorp_edit)
+			console.log(resultadop_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='paraclinico[]' value='"+paraclinico_edit+"'></td>"
@@ -2367,7 +2372,10 @@
 			var remision_edit = $("#remision_edit").val()
 			var fechacreacion_edit = $("#fechacreacion_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(nomespe_edit)
+			console.log(remision_edit)
+			console.log(fechacreacion_edit)
+		
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='nomespe[]' value='"+nomespe_edit+"'></td>"
@@ -2391,7 +2399,10 @@
 			var tipoin_edit = $("#tipoin_edit").val()
 			var fechain_edit = $("#fechain_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(incapacidad_edit)
+			console.log(diasin_edit)
+			console.log(tipoin_edit)
+			console.log(fechain_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='incapacidad[]' value='"+incapacidad_edit+"'></td>"			
@@ -2413,7 +2424,7 @@
 			var html
 			var pre_medicamento = $("#pre_medicamento").val()
 
-			console.log(fechaser_edit)
+			console.log(pre_medicamento)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='medicamento[]' value='"+pre_medicamento+"'></td>"			
@@ -2433,7 +2444,8 @@
 			var nevento_edit = $("#nevento_edit").val()
 			var descripcion = $("#descripcion").val()
 
-			console.log(fechaser_edit)
+			console.log(nevento_edit)
+			console.log(descripcion)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='nevento[]' value='"+nevento_edit+"'></td>"	
@@ -2459,10 +2471,13 @@
 			var sat02_edit = $("#sat02_edit").val()
 			var ramsay_edit = $("#ramsay_edit").val()
 
-
-
-
-			console.log(fechaser_edit)
+			console.log(time_edit)
+			console.log(Farmaco_edit)
+			console.log(dosis_edit)
+			console.log(ta_edit)
+			console.log(Fc_edit)
+			console.log(sat02_edit)
+			console.log(ramsay_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='time[]' value='"+time_edit+"'></td>"
@@ -2482,13 +2497,39 @@
 
 		});
 
+		$("#btn_consultas").click(function (e) {
+			count2++
+			var html
+			var consultas_edit = $("#consultas_edit").val()
+			var valorconsult_edit = $("#valorconsult_edit").val()
+			var resultadoconsult_edit = $("#resultadoconsult_edit").val()
+
+			console.log(consultas_edit)
+			console.log(valorconsult_edit)
+			console.log(resultadoconsult_edit)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='consultas[]' value='"+consultas_edit+"'></td>"
+				html += "<td><input type='text' name='valorconsult[]' value='"+valorconsult_edit+"'></td>"				
+				html += "<td><input type='text' name='resultadoconsult[]' value='"+resultadoconsult_edit+"'></td>"		
+
+				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+			html += "</tr>"
+
+			$("#table_consultas tbody").append(html);
+
+			$("#consultas_edit,#valorconsult_edit,#resultadoconsult_edit").val("");
+
+		});
+
 		$("#btn_sistema").click(function (e) {
 			count2++
 			var html
 			var sistema_edit = $("#sistema_edit").val()
 			var hallazgo_edit = $("#hallazgo_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(sistema_edit)
+			console.log(hallazgo_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='sistema[]' value='"+sistema_edit+"'></td>"
@@ -2510,7 +2551,8 @@
 			var toxicologicos_edit = $("#toxicologicos_edit").val()
 			var obs_toxico_edit = $("#obs_toxico_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(toxicologicos_edit)
+			console.log(obs_toxico_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='toxicologicos[]' value='"+toxicologicos_edit+"'></td>"
@@ -2532,7 +2574,8 @@
 			var quirurgicos_edit = $("#quirurgicos_edit").val()
 			var quirur_edit = $("#quirur_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(quirurgicos_edit)
+			console.log(quirur_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='quirurgicos[]' value='"+quirurgicos_edit+"'></td>"
@@ -2553,7 +2596,8 @@
 			var patologicos_edit = $("#patologicos_edit").val()
 			var pato_edit = $("#pato_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(patologicos_edit)
+			console.log(pato_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='patologicos[]' value='"+patologicos_edit+"'></td>"
@@ -2574,7 +2618,8 @@
 			var familiares_edit = $("#familiares_edit").val()
 			var fami_edit = $("#fami_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(familiares_edit)
+			console.log(fami_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='familiares[]' value='"+familiares_edit+"'></td>"		
@@ -2595,7 +2640,8 @@
 			var alergicos_edit = $("#alergicos_edit").val()
 			var aler_edit = $("#aler_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(alergicos_edit)
+			console.log(aler_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='alergicos[]' value='"+alergicos_edit+"'></td>"		
@@ -2615,7 +2661,7 @@
 			var html
 			var descripcion_enfermeria = $("#descripcion_enfermeria").val()
 
-			console.log(fechaser_edit)
+			console.log(descripcion_enfermeria)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='enfermeria[]' value='"+descripcion_enfermeria+"'></td>"		
@@ -2634,7 +2680,7 @@
 			var html
 			var traslado_edit = $("#traslado_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(traslado_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='traslado[]' value='"+traslado_edit+"'></td>"		
@@ -2654,7 +2700,7 @@
 			var html
 			var monitoria_edit = $("#monitoria_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(monitoria_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='monitoria[]' value='"+monitoria_edit+"'></td>"			
@@ -2678,7 +2724,10 @@
 			var cantidadmed_edit = $("#cantidadmed_edit").val()
 			var fechamed_edit = $("#fecha_edit").val()
 
-			console.log(fechaser_edit)
+			console.log(nomed_edit)
+			console.log(posologia_edit)
+			console.log(cantidadmed_edit)
+			console.log(fecha_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='nommed[]' value='"+nommed_edit+"'></td>"

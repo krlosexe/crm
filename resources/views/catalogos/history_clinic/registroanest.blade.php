@@ -190,7 +190,7 @@
         <h3>TÉCNICA ANESTÉSICA</h3>
         <hr>
     </div>
-<div class="row">
+    <div class="row">
                         <div class="form-group col-md-12">
                                         <label for=""><b>Anestésia</b></label>
                                         <select name="anestesia" id="anestesia_edit" class="form-control select2" required>
@@ -227,7 +227,7 @@
                             <label for=""><b>Bloqueo</b></label>
                             <input type="text" name="bloqueo" class="form-control form-control-user" id="bloqueo_edit">
                         </div>
-                    </div>
+    </div>
 
 </div>
                     
@@ -239,7 +239,7 @@
             </div>
 
 
-            <div class="row">    
+            <div class="col-md-12">    
                     <div class="col-md-12">
                         <br>
                         <h3>VÍA AEREA</h3>
@@ -304,7 +304,7 @@
                 </div>
 
 
-            <div class="row">    
+            <div class="col-md-12">    
                     <div class="col-md-12">
                         <br>
                         <h3>EVENTOS- DATOS INTRAOPERATORIOS</h3>
@@ -335,23 +335,25 @@
                     </div>
                 
                     <div class="col-md-12">
-                        
-                        <div class="col-md-12">
-                            <table class="table table-bordered" id="intraoperatorio" width="100%" cellspacing="0">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table intraoperatorio" id="table_enfermeria" width="100%" cellspacing="0">
 
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                               </thead>
-                                <tbody>
+                                        <thead>
+                                            <tr>
+                                            <th>N° Evento</th>
+                                            <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                </tbody>
-                            </table>
-                        </div>
-
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                     </div>
+
+                </div>
             </div>    
 
 
@@ -361,43 +363,42 @@
                         <h3>GASES SANGUINEOS</h3>
                         <hr>
                     </div>
-                <div class="row">
-                    <div class="col-md-2">
+                    <div class="form-group col-md-2">
                         <label for=""><b>Fecha de la Toma</b></label>
                         <input type="text" name="fechatoma" class="form-control form-control-user" id="fechatoma_edit">
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="form-group col-md-2">
                         <label for=""><b>pH</b></label>
                         <input type="text" name="ph" class="form-control form-control-user" id="ph_edit">
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="form-group col-md-2">
                         <label for=""><b>pCO2</b></label>
                         <input type="text" name="pco2" class="form-control form-control-user" id="pco2_edit">
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="form-group col-md-2">
                         <label for=""><b>paO2</b></label>
                         <input type="text" name="pao2" class="form-control form-control-user" id="pao2_edit">
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="form-group col-md-2">
                         <label for=""><b>HCO2</b></label>
                         <input type="text" name="hco2" class="form-control form-control-user" id="hco2_edit">
                     </div>
                     
-                    <div class="col-md-2">
+                    <div class="form-group col-md-2">
                         <label for=""><b>SAT</b></label>
                         <input type="text" name="sat" class="form-control form-control-user" id="sat_edit">
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="form-group col-md-2">
                         <label for=""><b>BE</b></label>
                         <input type="text" name="be" class="form-control form-control-user" id="be_edit">
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="form-group col-md-2">
                         <label for=""><b>LACT</b></label>
                         <input type="text" name="lact" class="form-control form-control-user" id="lact_edit">
                     </div>
