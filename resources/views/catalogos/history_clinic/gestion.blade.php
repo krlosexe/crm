@@ -2349,8 +2349,8 @@
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='paraclinico[]' value='"+paraclinico_edit+"'></td>"
-				html += "<td><input type='number' name='valorp[]' value='"+valorp_edit+"'></td>"
-				html += "<td><input type='date' name='resultadop[]' value='"+resultadop_edit+"'></td>"
+				html += "<td><input type='text' name='valorp[]' value='"+valorp_edit+"'></td>"
+				html += "<td><input type='text' name='resultadop[]' value='"+resultadop_edit+"'></td>"
 
 				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
@@ -2629,22 +2629,22 @@
 
 		});
 
-		$("#btn_traslado").click(function (e) {
+		$("#btn-traslado").click(function (e) {
 			count2++
 			var html
-			var descripcion_traslado = $("#descripcion_traslado").val()
+			var traslado_edit = $("#traslado_edit").val()
 
 			console.log(fechaser_edit)
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
-				html += "<td><input type='text' name='traslado[]' value='"+descripcion_traslado+"'></td>"		
+				html += "<td><input type='text' name='traslado[]' value='"+traslado_edit+"'></td>"		
 
 				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 
-			$("#tabla_traslado tbody").append(html);
+			$("#table-traslado tbody").append(html);
 
-			$("#descripcion_traslado").val("");
+			$("#traslado_edit").val("");
 
 		});
 

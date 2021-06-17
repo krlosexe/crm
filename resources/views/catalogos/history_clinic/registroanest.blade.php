@@ -239,7 +239,7 @@
             </div>
 
 
-            <div class="col-md-12">    
+            <div class="row">    
                     <div class="col-md-12">
                         <br>
                         <h3>VÍA AEREA</h3>
@@ -260,25 +260,24 @@
                                             <option value="int">INT</option>
                                             <option value="fobroscopia"> Fibroscopia</option>
                                         </select>
-                                    </div>
+                    </div>
 
-                
-                    <div class="col-md-3">
+                    <div class="form-group col-md-3">
                         <label for=""><b>Neumo</b></label>
                         <input type="text" name="neumo" class="form-control form-control-user" id="neumo_edit">
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="form-group col-md-3">
                         <label for=""><b>N°</b></label>
                         <input type="text" name="nuemon" class="form-control form-control-user" id="neumon_edit">
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="form-group col-md-3">
                         <label for=""><b>Tubo Doble Luz</b></label>
                         <input type="text" name="tdl" class="form-control form-control-user" id="tdl_edit">
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="form-group col-md-3">
                         <label for=""><b>N°</b></label>
                         <input type="text" name="tdln" class="form-control form-control-user" id="tdln_edit">
                     </div>
@@ -286,8 +285,10 @@
                 </div>
             </div>
 
-                <div class="row" id="tablasecuencial">
 
+
+
+                <div class="row" id="tablasecuencial">
 
 
 
@@ -303,7 +304,7 @@
                 </div>
 
 
-            <div class="col-md-12">    
+            <div class="row">    
                     <div class="col-md-12">
                         <br>
                         <h3>EVENTOS- DATOS INTRAOPERATORIOS</h3>
@@ -319,43 +320,42 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="form-group col-md-3">
                         <label for=""><b>Descripcion</b></label>
                         <div class="form-group valid-required">
                             <input type="text" class="form-control form-control-user" name="descripcion" id="descripcion">
                         </div>
                     </div>
-
-
-                    <div class="col-md-3">
+               
+                    <div class="form-group col-md-3">
                     <br>
                         <button type="button" id="eventos_intraoperatorios" class="btn btn-primary btn-user">
                             Agregar <i class="fa fa-pl"></i>
                         </button>
                     </div>
-                </div>
+                
                     <div class="col-md-12">
                         
-                            <div class="col-md-12">
-                                <table class="table table-bordered" id="intraoperatorio" width="100%" cellspacing="0">
+                        <div class="col-md-12">
+                            <table class="table table-bordered" id="intraoperatorio" width="100%" cellspacing="0">
 
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                               </thead>
+                                <tbody>
 
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
             </div>    
 
 
-            <div class="col-md-12">    
+            <div class="row">    
                     <div class="col-md-12">
                         <br>
                         <h3>GASES SANGUINEOS</h3>
@@ -401,8 +401,6 @@
                         <label for=""><b>LACT</b></label>
                         <input type="text" name="lact" class="form-control form-control-user" id="lact_edit">
                     </div>
-
-                </div>
             </div>
 
 
