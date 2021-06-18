@@ -559,6 +559,22 @@ Route::post('client/recovery/account', 'UsuariosController@RecoveryAccount');
 
 
 
+//ROUTES FROM HISTORIAS CLINICAS
+
+Route::post('save/preanestesia', 'HistoriasClinicasController@SaveFormPreanestesia');
+
+Route::post('save/quirurgica', 'HistoriasClinicasController@SaveFormQuirurgica');
+
+Route::post('save/historia', 'HistoriasClinicasController@SaveFormhistoria');
+
+Route::post('save/consulta', 'HistoriasClinicasController@SaveFormconsulta');
+
+
+
+
+
+
+
 Route::get('generate/token/chat', function () {
 
     $users = User::get();

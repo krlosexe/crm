@@ -184,38 +184,38 @@
                                 <input type="text" name="Pulsometria" class="form-control form-control-user" id="Pulsometria_edit">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for=""><b>Temperatura:</b></label>
-                                <input type="text" name="Tarterial" class="form-control form-control-user" id="Tarterial_edit">
+                                <label for=""><b>Temperatura</b></label>
+                                <input type="text" name="Temperatura" class="form-control form-control-user" id="Temperatura_edit">
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for=""><b>Peso:</b></label>
-                                <input type="text" name="fcardiaca" class="form-control form-control-user" id="fcardiaca_edit">
+                                <input type="text" name="peso" class="form-control form-control-user" id="peso_edit">
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for=""><b>Talla:</b></label>
-                                <input type="text" name="Frespiratoria" class="form-control form-control-user" id="Frespiratoria_edit">
+                                <label for=""><b>Talla</b></label>
+                                <input type="text" name="talla" class="form-control form-control-user" id="talla_edit">
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for=""><b>IMC:</b></label>
-                                <input type="text" name="Pulsometria" class="form-control form-control-user" id="Pulsometria_edit">
+                                <label for=""><b>IMC</b></label>
+                                <input type="text" name="imc" class="form-control form-control-user" id="imc_edit">
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for=""><b>Perimetro Abdominal:</b></label>
-                                <input type="text" name="fcardiaca" class="form-control form-control-user" id="fcardiaca_edit">
+                                <label for=""><b>Perimetro Abdominal</b></label>
+                                <input type="text" name="perimetro" class="form-control form-control-user" id="perimetro_edit">
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for=""><b>Interpretación:</b></label>
-                                <input type="text" name="Frespiratoria" class="form-control form-control-user" id="Frespiratoria_edit">
+                                <label for=""><b>Interpretación</b></label>
+                                <input type="text" name="interpretacion" class="form-control form-control-user" id="interpretacion_edit">
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for=""><b>Lateralidad Dominante:</b></label>
-                                <input type="text" name="Pulsometria" class="form-control form-control-user" id="Pulsometria_edit">
+                                <label for=""><b>Lateralidad Dominante</b></label>
+                                <input type="text" name="dominante" class="form-control form-control-user" id="dominante_edit">
                             </div>
                         </div>
 
@@ -229,12 +229,12 @@
 
                                  <div class="form-group col-md-3">
                                     <label for=""><b>Auscultación pulmonar</b></label>
-                                    <input type="text" name="Auscultación pulmonar" class="form-control form-control-user" id="Auscultación pulmonar_edit">
+                                    <input type="text" name="pulmonar" class="form-control form-control-user" id="pulmonar_edit">
                                 </div>
 
                                 <div class="form-group col-md-3">
                                     <label for=""><b>Caracteristicas del soplo</b></label>
-                                    <input type="text" name="youtube" class="form-control form-control-user" id="youtube_edit">
+                                    <input type="text" name="soplo" class="form-control form-control-user" id="soplo_edit">
                                 </div>
 
                                 <div class="form-group col-md-3">
@@ -345,37 +345,37 @@
                         <br>
 
                             <div class="form-group col-md-4">
-                                <label for=""><b>Hematocrito: </b></label>
+                                <label for=""><b>Hematocrito</b></label>
                                 <input type="text" name="hematocrito" class="form-control form-control-user" id="hematocrito_edit">
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for=""><b>Creatinina:</b></label>
+                                <label for=""><b>Creatinina</b></label>
                                 <input type="text" name="creatinina" class="form-control form-control-user" id="creatinina_edit">
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for=""><b>Nitrógeno ureico:</b></label>
+                                <label for=""><b>Nitrógeno ureico</b></label>
                                 <input type="text" name="Nitrógeno ureico:" class="form-control form-control-user" id="Nureico_edit">
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for=""><b>Glicemia:</b></label>
+                                <label for=""><b>Glicemia</b></label>
                                 <input type="text" name="glicemia" class="form-control form-control-user" id="glicemia_edit">
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for=""><b>Albúmina:</b></label>
+                                <label for=""><b>Albúmina</b></label>
                                 <input type="text" name="albúmina" class="form-control form-control-user" id="albúmina_edit">
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for=""><b>Plaquetas:</b></label>
+                                <label for=""><b>Plaquetas</b></label>
                                 <input type="text" name="plaquetas" class="form-control form-control-user" id="plaquetas_edit">
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for=""><b>TP:</b></label>
+                                <label for=""><b>TP</b></label>
                                 <input type="text" name="tp" class="form-control form-control-user" id="tp_edit">
                             </div>
 
@@ -386,16 +386,16 @@
 
                             <div class="form-group col-md-4">
                                 <label for=""><b>BUN</b></label>
-                                <input type="text" name="BUN" class="form-control form-control-user" id="BUN_edit">
+                                <input type="text" name="bun" class="form-control form-control-user" id="bun_edit">
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for=""><b>Transaminasas:</b></label>
+                                <label for=""><b>Transaminasas</b></label>
                                 <input type="text" name="transaminasas" class="form-control form-control-user" id="transaminasas_edit">
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for=""><b>PCR:</b></label>
+                                <label for=""><b>PCR</b></label>
                                 <input type="text" name="pcr" class="form-control form-control-user" id="pcr_edit">
                             </div>
 
@@ -420,7 +420,7 @@
                         </div>
                         <br>
                             <div class="form-group col-md-6">
-                                <label for=""><b>Electrocardiograma:</b></label>
+                                <label for=""><b>Electrocardiograma</b></label>
                                 <input type="text" name="electrocardiograma" class="form-control form-control-user" id="electrocardiograma_edit">
                             </div>
 
@@ -430,7 +430,7 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for=""><b>Rx de Tórax:</b></label>
+                                <label for=""><b>Rx de Tórax</b></label>
                                 <input type="text" name="rtorax" class="form-control form-control-user" id="rtorax_edit">
                             </div>
 
@@ -440,13 +440,13 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for=""><b>Otros Estudios:</b></label>
+                                <label for=""><b>Otros Estudios</b></label>
                                 <input type="text" class="form-control form-control-user" name="estudios_date" id="estudios_date">
                             </div>
 
                             <div class="form-group col-md-6">
                             <br>
-                                <input type="date" name="pcr" class="form-control" id="pcr_edit">
+                                <input type="date" name="otrostudios" class="form-control" id="otrostudios_edit">
                             </div>
 
                     </div>
@@ -459,7 +459,7 @@
                                         <hr>
                                     </div>
                                         <div class="row">
-                                            <input type="text" name="obsabdomen" class="form-control form-control-user" id="obsabdomen_edit">
+                                            <input type="text" name="asa" class="form-control form-control-user" id="asa_edit">
                                         </div>
                                 <br><br>
                                     <div class="col-md-12">
@@ -470,7 +470,7 @@
                                     </div>
 
                                         <div class="row">
-                                            <input type="text" name="obsextremidades" class="form-control form-control-user" id="obsextremidades_edit">
+                                            <input type="text" name="recomendaciones" class="form-control form-control-user" id="recomendaciones_edit">
                                         </div>
                                         <br>
 
@@ -482,7 +482,7 @@
                                 <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
                                     Limpiar
                                 </button>
-                                <button class="btn btn-primary btn-user">
+                                <button  type="button" class="btn btn-primary btn-user" id="btn-preanestesia">
                                     Guardar
                                 </button>
                             </center>

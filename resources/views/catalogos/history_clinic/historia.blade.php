@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col md-12">
-            <input type="text" name="obsabdomen" class="form-control form-control-user" id="obsabdomen_edit">
+            <input type="text" name="motivo" class="form-control form-control-user" id="motivo_edit">
         </div>
     </div>
 </div>
@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <input type="text" name="obsextremidades" class="form-control form-control-user" id="obsextremidades_edit">
+            <input type="text" name="enfermedad" class="form-control form-control-user" id="enfermedad_edit">
         </div>
     </div>
 </div>
@@ -38,9 +38,10 @@
     </div>
 
     <br>
+    
     <div class="form-group col-md-4">
         <label for=""><b>Patologicos</b></label>
-        <input type="text" class="form-control form-control-user" name="Patologicos" id="Patologicos_edit">
+        <input type="text" class="form-control form-control-user" name="Patologicos" id="patologicos_edit">
     </div>
 
     <div class="form-group col-md-4">
@@ -55,7 +56,7 @@
 
     <div class="form-group col-md-4">
         <label for=""><b>Hospitalarios</b></label>
-        <input type="text" class="form-control form-control-user" name="Hospitalarios" id="Hospitalarios">
+        <input type="text" class="form-control form-control-user" name="Hospitalarios" id="hospitalarios">
         </div>
 
         <div class="form-group col-md-4">
@@ -65,7 +66,7 @@
 
     <div class="form-group col-md-4">
         <label for=""><b>Alergicos</b></label>
-        <input type="text" class="form-control form-control-user" name="Alergicos" id="Alergicos_edit">
+        <input type="text" class="form-control form-control-user" name="Alergicos" id="alergicos_edit">
     </div>
 
     <div class="form-group col-md-4">
@@ -144,7 +145,7 @@
 
     <div class="form-group col-md-4">
         <label for=""><b>Embarazo ectópico</b></label>
-        <input type="text" class="form-control form-control-user" name="farmante" id="farmante_edit">
+        <input type="text" class="form-control form-control-user" name="ectopico" id="ectopico_edit">
     </div>
 
     <div class="form-group col-md-4">
@@ -259,7 +260,7 @@
 
     <div class="form-group col-md-2">
         <label for=""><b>Neurologico</b></label>
-        <input type="text" class="form-control form-control-user" name="neurologico" id="neurologico_edit">
+        <input type="text" class="form-control form-control-user" name="neurologico" id="neurologicoexa_edit">
     </div>
 
     <div class="form-group col-md-2">
@@ -279,12 +280,12 @@
 
     <div class="form-group col-md-2">
         <label for=""><b>Sistema musculoesquelético</b></label>
-        <input type="text" class="form-control form-control-user" name="nariz" id="nariz_edit">
+        <input type="text" class="form-control form-control-user" name="nariz" id="musculoesqueletico_edit">
     </div>
 
     <div class="form-group col-md-2">
         <label for=""><b>Sistema vascular periferico</b></label>
-        <input type="text" class="form-control form-control-user" name="neurologico" id="neurologico_edit">
+        <input type="text" class="form-control form-control-user" name="neurologico" id="vascular_edit">
     </div>
 
     <div class="form-group col-md-2">
@@ -318,7 +319,7 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                        <br><br>
+                        
                             <button type="button" id="btn_consultas" class="btn btn-primary btn-user">
                             Agregar <i class="fa fa-pl"></i>
                             </button>
@@ -349,7 +350,7 @@
 
 
 
-        <!--faltasql-->
+
 <div class="row">
     <div class="col-md-12">
         <br>
@@ -375,7 +376,7 @@
 
         <div class="form-group col-md-6">
             <label for=""><b>Resultado</b></label>
-            <input type="text" class="form-control form-control-user" name="tipoant" id="tipoant_edit">
+            <input type="text" class="form-control form-control-user" name="resultado" id="resultado_edit">
         </div>
 </div>
 
@@ -662,7 +663,7 @@
         <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
             Limpiar
         </button>
-        <button class="btn btn-primary btn-user">
+        <button type="button" class="btn btn-primary btn-user" id="btn-historia">
             Guardar
         </button>
     </center>

@@ -2329,7 +2329,7 @@
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='nomser[]' value='"+nomser_edit+"'></td>"
 				html += "<td><input type='text' name='obser[]' value='"+obser_edit+"'></td>"
-				html += "<td><input type='number' name='cantidadser[]' value='"+cantidadser_edit+"'></td>"
+				html += "<td><input type='text' name='cantidadser[]' value='"+cantidadser_edit+"'></td>"
 				html += "<td><input type='date' name='fechaser[]' value='"+fechaser_edit+"'></td>"
 
 				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
@@ -2362,7 +2362,7 @@
 
 			$("#tableconsul_edit tbody").append(html);
 			$("#paraclinico_edit,#valorp_edit,#resultadop_edit").val("");
-
+			
 		});
 
 		$("#btn-especialista").click(function (e) {
@@ -2379,7 +2379,7 @@
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='nomespe[]' value='"+nomespe_edit+"'></td>"
-				html += "<td><input type='number' name='remision[]' value='"+remision_edit+"'></td>"
+				html += "<td><input type='text' name='remision[]' value='"+remision_edit+"'></td>"
 				html += "<td><input type='date' name='fechacreacion[]' value='"+fechacreacion_edit+"'></td>"
 
 				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
@@ -2407,7 +2407,7 @@
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='incapacidad[]' value='"+incapacidad_edit+"'></td>"			
 				html += "<td><input type='text' name='diasin[]' value='"+diasin_edit+"'></td>"
-				html += "<td><input type='number' name='tipoin[]' value='"+tipoin_edit+"'></td>"
+				html += "<td><input type='text' name='tipoin[]' value='"+tipoin_edit+"'></td>"
 				html += "<td><input type='date' name='fechain[]' value='"+fechain_edit+"'></td>"
 
 				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
@@ -2732,7 +2732,7 @@
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='nommed[]' value='"+nommed_edit+"'></td>"
 				html += "<td><input type='text' name='obmed[]' value='"+obmed_edit+"'></td>"
-				html += "<td><input type='number' name='cantidadmed[]' value='"+cantidadmed_edit+"'></td>"
+				html += "<td><input type='text' name='cantidadmed[]' value='"+cantidadmed_edit+"'></td>"
 				html += "<td><input type='date' name='fechamed[]' value='"+fechamed_edit+"'></td>"
 
 				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
@@ -2838,6 +2838,238 @@
 			$("#procedure_px_edit").removeAttr("required").attr("disabled", "disabled")
 			$("#date_procedure_edit").removeAttr("required").attr("disabled", "disabled")
 		}
+
+	});
+
+
+
+
+
+	$("#btn-preanestesia").click(function (e) {
+		
+			const data = {
+				id_client :  $("#id_edit").val(),
+				pre_fecha: $("#fecha_preanestesia").val(),
+				pre_nombre : $("#nombre_edit").val(),
+				pre_identificacion : $("#identificacion_edit").val(),
+				pre_genero : $("#gener").val(),
+				pre_edad : $("#year_edit").val(),
+				pre_estado : $("#estado_civil_edit").val(),
+				pre_espquirurgica : $("#especialidades_quirurgica").val(),
+				pre_procedimiento : $("#procedure").val(),
+				pre_anestesicos : $("#anestesicos_edit").val(),
+				pre_complicaciones : $("#Complicaciones_edit").val(),
+				pre_alergicos : $("#Alergicos_edit").val(),
+				pre_farmacologicos : $("#Farmacologicos_edit").val(),
+				homorragicos : $("#Hemorragicos_edit").val(),
+				pre_patologicos : $("#Patologicos_edit").val(),
+				pre_quirurgicos: $("#Quirurgicos_edit").val(),
+				pre_toxicos : $("#Toxicos_edit").val(),
+				pre_transfuncionales : $("#Transfuncionales_edit").val(),
+				pre_aleotros : $("#Otros_edit").val(),
+				pre_arterial : $("#Tarterial_edit").val(),
+				pre_cardio : $("#fcardiaca_edit").val(),
+				pre_respiratorio : $("#Frespiratoria_edit").val(),
+				pre_pulso : $("#Pulsometria_edit").val(),
+				pre_temperatura : $("#Temperatura_edit").val(),
+				pre_peso : $("#peso_edit").val(),
+				pre_talla : $("#talla_edit").val(),
+				pre_imc : $("#imc_edit").val(),
+				pre_abdomen : $("#perimetro_edit").val(),
+				pre_interpretacion : $("#interpretacion_edit").val(),
+				pre_dominante : $("#dominante_edit").val(),
+				pre_pulmonar : $("#pulmonar_edit").val(),
+				pre_caracteristicas : $("#soplo_edit").val(),
+				pre_ruidos : $("#rcardiacos_edit").val(),
+				pre_soplos : $("#Soplos_edit").val(),
+				pre_apertura : $("#Apertura_edit").val(),
+				pre_cuello	 : $("#cnormal_edit").val(),
+				pre_dientes : $("#dflojos_edit").val(),
+				pre_lentes : $("#lcontacto_edit").val(),
+				pre_masas : $("#masas_edit").val(),
+				pre_protesis : $("#Protesis_edit").val(),
+				pre_pulsos	:	$("#pulsos_edit").val(),
+				pre_removible : $("#removible_edit").val(),
+				pre_obsabdomen : $("#obsabdomen_edit").val(),
+				pre_obsextremidades : $("#obsextremidades_edit").val(),
+				pre_otroshalla : $("#obsotros_edit").val(),
+				pre_hematocrito : $("#hematocrito_edit").val(),
+				pre_creatina : $("#creatinina_edit").val(),
+				pre_ureico : $("#Nureico_edit").val(),
+				pre_glicemia : $("#glicemia_edit").val(),
+				pre_albumina : $("#albúmina_edit").val(),
+				pre_plaquetas : $("#plaquetas_edit").val(),
+				pre_tp : $("#tp_edit").val(),
+				pre_ptt : $("#ptt_edit").val(),
+				pre_bun : $("#bun_edit").val(),
+				pre_transaminas : $("#transaminasas_edit").val(),
+				pre_pcr : $("#pcr_edit").val(),
+				pre_igg1 : $("#igg1_edit").val(),
+				pre_igg2 : $("#igg2_edit").val(),
+				pre_electro : $("#electrocardiograma_edit").val(),
+				pre_felectro : $("#electro_date").val(),
+				pre_rx : $("#rtorax_edit").val(),
+				pre_frx : $("#torax_date").val(),
+				pre_otrostudios : $("#estudios_date").val(),
+				pre_fotrostudios : $("#otrostudios_edit").val(),
+				pre_asa : $("#asa_edit").val(),
+				pre_recomendaciones : $("#recomendaciones_edit").val()
+			}
+
+			console.log(data)
+
+
+
+			var url = document.getElementById('ruta').value;
+			$.ajax({
+				url: '' + url + '/api/save/preanestesia',
+				type: 'POST',
+				data: data,
+				error: function() {},
+					success: function(data){
+						alert("La solicitud fue procesada correctamente");
+					}
+			});
+
+
+
+		});
+
+	
+	
+	$("#btn-historia").click(function (e) {
+		
+		const data = {
+
+				id_client :  $("#id_edit").val(),
+				his_motivo: $("#motivo_edit").val(),
+				his_enfermedades : $("#enfermedad_edit").val(),
+				his_patologicos : $("#patologicos_edit").val(),
+				his_procedimientos	 : $("#pep_edit").val(),
+				his_quirurgicos : $("#quiruant_edit").val(),
+				his_hospitalarios	 : $("#hospitalarios").val(),
+				his_farmacologicos	 : $("#farmante_edit").val(),
+				his_alergicos : $("#alergicos_edit").val(),
+				his_toxicos : $("#Toxicologicos_edit").val(),
+				his_transfuncionales : $("#Transante_edit").val(),
+				his_habitos : $("#Habitos_edit").val(),
+				his_familiares : $("#Familiares_edit").val(),
+				his_escleroterapia : $("#esclero_edit").val(),
+				his_planificacion: $("#Planificación_edit").val(),
+				his_factores : $("#Factores_edit").val(),
+				his_otros : $("#otrante_edit").val(),
+				his_gestaciones: $("#Gestaciones_edit").val(),
+				his_partos : $("#partos_edit").val(),
+				his_cesareas : $("#cesareas_edit").val(),
+				his_abortos : $("#abortos_edit").val(),
+				his_ectopicos : $("#ectopico_edit").val(),
+				his_fmestruacion : $("#Fechamestruacion_edit").val(),
+				his_ciclos : $("#ciclos_edit").val(),
+				his_metodos : $("#planificacion_edit").val(),
+				his_cardiobasculas : $("#cardio_edit").val(),
+				his_digestivo : $("#digestivo_edit").val(),
+				his_genitourinario : $("#Genitourinario_edit").val(),
+				his_neurologico : $("#Neurologico_edit").val(),
+				his_ocular : $("#Ocular_edit").val(),
+				his_osteomuscular: $("#Osteomuscular_edit").val(),
+				his_respiratorio : $("#Respiratorio_edit").val(),
+				his_abdomen : $("#Abdomen_edit").val(),
+				his_boca : $("#Boca_edit").val(),
+				his_cabeza : $("#cabezacuello_edit").val(),
+				his_cara: $("#cara_edit").val(),
+				his_general : $("#general_edit").val(),
+				his_nariz : $("#nariz_edit").val(),
+				his_exameneurologico: $("#neurologico_edit").val(),
+				his_oidos	 : $("#oidos_edit").val(),
+				his_ojos : $("#ojos_edit").val(),
+				qui_anestesia : $("#piel_edit").val(),
+				his_musculoesqueletico	 : $("#musculoesqueletico_edit").val(),
+				his_periferico : $("#vascular_edit").val(),
+				his_torax	 : $("#torax_edit").val(),
+				his_nombreservi : $("#cient_edit").val(),
+				his_origenser : $("#origenant_edit").val(),
+				his_resultadoser : $("#resultado_edit").val(),
+
+
+				pre_consultas_id : $("#id_edit").val(),
+
+
+				his_medicamento_id : $("#id_edit").val(),
+				
+				his_remision_id: $("#id_edit").val(),
+				
+
+				his_incapacidad_id : $("#id_edit").val(),
+				
+				
+				his_servicios_id : $("#id_edit").val(),
+
+				consultas_data : $("input[name='consultas[]']")
+              					.map(function(){return $(this).val();}).get(),
+
+				valorconsult_data : $("input[name='valorconsult[]']")
+					.map(function(){return $(this).val();}).get(),
+
+				resultadoconsult_data : $("input[name='resultadoconsult[]']")
+					.map(function(){return $(this).val();}).get()
+
+		}
+
+
+		var url = document.getElementById('ruta').value;
+		$.ajax({
+			url: '' + url + '/api/save/historia',
+			type: 'POST',
+			data: data,
+			error: function() {},
+				success: function(data){
+					alert("La solicitud fue procesada correctamente");
+				}
+		});
+
+
+
+	});
+	
+	$("#btn-quirurgica").click(function (e) {
+		
+		const data = {
+			id_client :  $("#id_edit").val(),
+				qui_cie10: $("#cie10_edit").val(),
+				qui_diagnostico : $("#diagnostico_edit").val(),
+				qui_tipo : $("#tipo_edit").val(),
+				qui_anestesia : $("#tanestesia_edit").val(),
+				qui_procedimiento : $("#pqp_edit").val(),
+				qui_cirujano : $("#cirujano1_edit").val(),
+				qui_cirujano2 : $("#cirujano2_edit").val(),
+				qui_anestesiologo : $("#anesteciologo_edit").val(),
+				qui_ayudante : $("#ayudante1_edit").val(),
+				qui_ayudante2 : $("#ayudante2_edit").val(),
+				qui_instrumentador : $("#instrumentador_edit").val(),
+				qui_auxiliares : $("#auxiliares_edit").val(),
+				qui_fecha : $("#fechaini_date").val(),
+				qui_hora: $("#horaini_date").val(),
+				qui_descripcion : $("#descripcion_edit").val(),
+				qui_complicaciones : $("#complicacion_edit").val()
+		
+		}
+
+		console.log(data)
+
+
+
+		var url = document.getElementById('ruta').value;
+		$.ajax({
+			url: '' + url + '/api/save/quirurgica',
+			type: 'POST',
+			data: data,
+			error: function() {},
+				success: function(data){
+					alert("La solicitud fue procesada correctamente");
+				}
+		});
+
+
 
 	});
 

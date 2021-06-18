@@ -649,7 +649,7 @@
                 <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
                     Limpiar
                 </button>
-                <button class="btn btn-primary btn-user">
+                <button class="btn btn-primary btn-user" id="btn-sedacion">
                     Guardar
                 </button>
             </center>

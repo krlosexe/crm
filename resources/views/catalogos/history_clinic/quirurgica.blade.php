@@ -67,7 +67,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for=""><b>Auxiliares de Sala</b></label>
-                            <input type="text" name="asa" class="form-control form-control-user" id="asa_edit">
+                            <input type="text" name="auxiliares" class="form-control form-control-user" id="auxiliares_edit">
                         </div>
                     </div>
 
@@ -85,12 +85,12 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label for=""><b>Fecha de Inicio</b></label>
-                            <input type="date" class="form-control" name="ah_inicio_date" id="ah_inicio_date">
+                            <input type="date" class="form-control" name="fechaini" id="fechaini_date">
                         </div>
                         
                         <div class="form-group col-md-4">
                             <label for=""><b>Hora de Inicio</b></label>
-                            <input type="time" class="form-control" name="ah_inicio_date" id="ah_inicio_date">
+                            <input type="time" class="form-control" name="horaini_date" id="horaini_date">
                         </div>
                     </div>
                         <div class="form-group col-md-6">
@@ -109,7 +109,7 @@
                         <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
                             Limpiar
                         </button>
-                        <button class="btn btn-primary btn-user">
+                        <button  type="button" class="btn btn-primary btn-user" id="btn-quirurgica">
                             Guardar
                         </button>
                     </center>
