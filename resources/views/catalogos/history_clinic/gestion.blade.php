@@ -2992,29 +2992,50 @@
 
 
 				pre_consultas_id : $("#id_edit").val(),
+				consultas_data : $("input[name='consultas[]']")
+              		.map(function(){return $(this).val();}).get(),
+				valorconsult_data : $("input[name='valorconsult[]']")
+					.map(function(){return $(this).val();}).get(),
+				resultadoconsult_data : $("input[name='resultadoconsult[]']")
+					.map(function(){return $(this).val();}).get(),
 
 
 				his_medicamento_id : $("#id_edit").val(),
 				
 				his_remision_id: $("#id_edit").val(),
-				
-
-				his_incapacidad_id : $("#id_edit").val(),
-				
-				
-				his_servicios_id : $("#id_edit").val(),
-
-				consultas_data : $("input[name='consultas[]']")
-              					.map(function(){return $(this).val();}).get(),
-
-				valorconsult_data : $("input[name='valorconsult[]']")
+				remision_data : $("input[name='nomespe[]']")
+              		.map(function(){return $(this).val();}).get(),
+				his_rem_remision : $("input[name='remision[]']")
+              		.map(function(){return $(this).val();}).get(),
+				his_rem_fecha : $("input[name='fechacreacion[]']")
 					.map(function(){return $(this).val();}).get(),
 
-				resultadoconsult_data : $("input[name='resultadoconsult[]']")
+				his_incapacidad_id : $("#id_edit").val(),
+				incapacidad_data : $("input[name='incapacidad[]']")
+              		.map(function(){return $(this).val();}).get(),
+				his_inc_tipo : $("input[name='tipoin[]']")
+              		.map(function(){return $(this).val();}).get(),
+				his_inc_dias : $("input[name='diasin[]']")
+					.map(function(){return $(this).val();}).get(),
+				his_inc_fecha : $("input[name='fechain[]']")
+					.map(function(){return $(this).val();}).get(),
+
+
+				
+				his_servicios_id : $("#id_edit").val(),
+				nombre_data : $("input[name='nomser[]']")
+              		.map(function(){return $(this).val();}).get(),
+				his_ser_observaciones : $("input[name='obser[]']")
+              		.map(function(){return $(this).val();}).get(),
+				his_ser_cantidad : $("input[name='cantidadser[]']")
+					.map(function(){return $(this).val();}).get(),
+				his_ser_fecha : $("input[name='fechaser[]']")
 					.map(function(){return $(this).val();}).get()
+
 
 		}
 
+console.log(data)
 
 		var url = document.getElementById('ruta').value;
 		$.ajax({
