@@ -2656,25 +2656,6 @@
 
 		});
 
-		$("#btn_enfermeria").click(function (e) {
-			count2++
-			var html
-			var descripcion_enfermeria = $("#descripcion_enfermeria").val()
-
-			console.log(descripcion_enfermeria)
-
-			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
-				html += "<td><input type='text' name='enfermeria[]' value='"+descripcion_enfermeria+"'></td>"		
-
-				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
-			html += "</tr>"
-
-			$("#table_enfermeria tbody").append(html);
-
-			$("#descripcion_enfermeria").val("");
-
-		});
-
 		$("#btn-traslado").click(function (e) {
 			count2++
 			var html
@@ -2935,6 +2916,50 @@
 
 		});
 
+
+
+	
+		$("#btn-quirurgica").click(function (e) {
+		
+		const data = {
+			id_client :  $("#id_edit").val(),
+				qui_cie10: $("#cie10_edit").val(),
+				qui_diagnostico : $("#diagnostico_edit").val(),
+				qui_tipo : $("#tipo_edit").val(),
+				qui_anestesia : $("#tanestesia_edit").val(),
+				qui_procedimiento : $("#pqp_edit").val(),
+				qui_cirujano : $("#cirujano1_edit").val(),
+				qui_cirujano2 : $("#cirujano2_edit").val(),
+				qui_anestesiologo : $("#anesteciologo_edit").val(),
+				qui_ayudante : $("#ayudante1_edit").val(),
+				qui_ayudante2 : $("#ayudante2_edit").val(),
+				qui_instrumentador : $("#instrumentador_edit").val(),
+				qui_auxiliares : $("#auxiliares_edit").val(),
+				qui_fecha : $("#fechaini_date").val(),
+				qui_hora: $("#horaini_date").val(),
+				qui_descripcion : $("#descripcion_edit").val(),
+				qui_complicaciones : $("#complicacion_edit").val()
+		
+		}
+
+		console.log(data)
+
+
+
+		var url = document.getElementById('ruta').value;
+		$.ajax({
+			url: '' + url + '/api/save/quirurgica',
+			type: 'POST',
+			data: data,
+			error: function() {},
+				success: function(data){
+					alert("La solicitud fue procesada correctamente");
+				}
+		});
+
+	});
+
+
 	
 	
 	$("#btn-historia").click(function (e) {
@@ -3001,7 +3026,15 @@
 
 
 				his_medicamento_id : $("#id_edit").val(),
-				
+				medicamento_data : $("input[name='nomed[]']")
+              		.map(function(){return $(this).val();}).get(),
+				his_med_posologia : $("input[name='obmed[]']")
+              		.map(function(){return $(this).val();}).get(),
+				his_med_cantidad : $("input[name='cantidadmed[]']")
+					.map(function(){return $(this).val();}).get(),
+				his_med_fecha : $("input[name='fechamed[]']")
+              		.map(function(){return $(this).val();}).get(),
+
 				his_remision_id: $("#id_edit").val(),
 				remision_data : $("input[name='nomespe[]']")
               		.map(function(){return $(this).val();}).get(),
@@ -3035,7 +3068,7 @@
 
 		}
 
-console.log(data)
+		console.log(data)
 
 		var url = document.getElementById('ruta').value;
 		$.ajax({
@@ -3048,30 +3081,14 @@ console.log(data)
 				}
 		});
 
-
-
 	});
-	
-	$("#btn-quirurgica").click(function (e) {
+
+
+	$("#btn-notas").click(function (e) {
 		
 		const data = {
 			id_client :  $("#id_edit").val(),
-				qui_cie10: $("#cie10_edit").val(),
-				qui_diagnostico : $("#diagnostico_edit").val(),
-				qui_tipo : $("#tipo_edit").val(),
-				qui_anestesia : $("#tanestesia_edit").val(),
-				qui_procedimiento : $("#pqp_edit").val(),
-				qui_cirujano : $("#cirujano1_edit").val(),
-				qui_cirujano2 : $("#cirujano2_edit").val(),
-				qui_anestesiologo : $("#anesteciologo_edit").val(),
-				qui_ayudante : $("#ayudante1_edit").val(),
-				qui_ayudante2 : $("#ayudante2_edit").val(),
-				qui_instrumentador : $("#instrumentador_edit").val(),
-				qui_auxiliares : $("#auxiliares_edit").val(),
-				qui_fecha : $("#fechaini_date").val(),
-				qui_hora: $("#horaini_date").val(),
-				qui_descripcion : $("#descripcion_edit").val(),
-				qui_complicaciones : $("#complicacion_edit").val()
+			not_enfermeria: $("#descripcion_enfermeria").val()
 		
 		}
 
@@ -3081,7 +3098,99 @@ console.log(data)
 
 		var url = document.getElementById('ruta').value;
 		$.ajax({
-			url: '' + url + '/api/save/quirurgica',
+			url: '' + url + '/api/save/notas',
+			type: 'POST',
+			data: data,
+			error: function() {},
+				success: function(data){
+					alert("La solicitud fue procesada correctamente");
+				}
+		});
+			
+
+	});
+
+
+
+	$("#btn-anestesia").click(function (e) {
+		
+		const data = {
+
+			id_client :  $("#id_edit").val(),
+				ane_anestesiologo : $("#anestesiologo_principal_edit").val(),
+				ane_anestesiologo2 : $("#anestesiologo_secundario_edit").val(),
+				ane_cirujano	 : $("#cirujano_principal_edit").val(),
+				ane_cirujano2 : $("#segundo_cirujano_edit").val(),
+				ane_instrumentador	 : $("#instrumentador_edit").val(),
+				ane_auxiliar	 : $("#aux_sala_edit").val(),
+				ane_principal : $("#anesteintra_principal_edit").val(),
+				ane_diagnostico : $("#diagnóstico_edit").val(),
+				ane_ayuno : $("#ayuno_edit").val(),
+				ane_deficit : $("#Deficit_edit").val(),
+				ane_mantenimiento : $("#mante_edit").val(),
+				ane_volemia : $("#volemia_edit").val(),
+				ane_pps: $("#pps_edit").val(),
+				ane_anesteciatec : $("#anestesia_edit").val(),
+				ane_aguja : $("#aguja_edit").val(),
+				ane_cateter: $("#cateter_edit").val(),
+				ane_puncion : $("#puncion_edit").val(),
+				ane_antiseptico : $("#antiseptico_edit").val(),
+				ane_bloqueo : $("#bloqueo_edit").val(),
+				ane_metodo : $("#metodo_edit").val(),
+				ane_neumo : $("#neumo_edit").val(),
+				ane_numeroneumo : $("#neumon_edit").val(),
+				ane_tubo : $("#tdl_edit").val(),
+				ane_numerotubo : $("#tdln_edit").val(),
+				ane_fechatoma : $("#fechatoma_edit").val(),
+				ane_ph : $("#ph_edit").val(),
+				ane_pco2 : $("#pco2_edit").val(),
+				ane_pao2 : $("#pao2_edit").val(),
+				ane_hco2: $("#hco2_edit").val(),
+				ane_sat : $("#sat_edit").val(),
+				ane_be	 : $("#be_edit").val(),
+				ane_lact : $("#lact_edit").val(),
+				ane_defict : $("#deficit_edit").val(),
+				ane_perdidas: $("#perdidas_edit").val(),
+				ane_diueresis : $("#diueresis_edit").val(),
+				ane_sangrado : $("#Sangrado_edit").val(),
+				ane_otroseliminados: $("#otros_edit").val(),
+				ane_totaleliminados	 : $("#total_eliminados_edit").val(),
+				ane_ringer : $("#ringer_edit").val(),
+				ane_salina : $("#salinas_edit").val(),
+				ane_coloies	 : $("#coloides_edit").val(),
+				ane_sangre : $("#sangre_edit").val(),
+				ane_rojos	 : $("#rojos_edit").val(),
+				ane_otrosmetodo : $("#Otros_edit").val(),
+				ane_totalmetodo : $("#total_metodo_edit").val(),
+				ane_traslado : $("#descripcion_traslado").val(),
+
+
+				ane_premedicacion_id : $("#id_edit").val(),
+				ane_premedicacion : $("input[name='medicamento[]']")
+              		.map(function(){return $(this).val();}).get(),
+
+
+
+				ane_monitoria_id : $("#id_edit").val(),
+				mon_monitoria : $("input[name='monitoria[]']")
+              		.map(function(){return $(this).val();}).get(),
+
+
+
+				ane_intraoperatorio_id : $("#id_edit").val(),
+				int_numero : $("input[name='nevento[]']")
+              		.map(function(){return $(this).val();}).get(),
+				int_descripcion : $("input[name='desc[]']")
+              		.map(function(){return $(this).val();}).get(),
+
+
+		}
+
+		console.log(data)
+
+		var url = document.getElementById('ruta').value;
+		$.ajax({
+			url: '' + url + '/api/save/anestesia',
 			type: 'POST',
 			data: data,
 			error: function() {},
@@ -3090,9 +3199,160 @@ console.log(data)
 				}
 		});
 
+	});
 
+
+
+	$("#btn-enfermeria").click(function (e) {
+		
+		const data = {
+			id_client :  $("#id_edit").val(),
+			enf_quirofano: $("#quirofano_edit").val(),
+			enf_fechaini: $("#fechainicio_edit").val(),
+			enfe_horaini: $("#horainicio_edit").val(),
+			enf_fechafin: $("#fechafin_principal_edit").val(),
+			enf_horafin: $("#horafin_principal_edit").val(),
+			enf_fecha: $("#fechainicio_edit").val(),
+			enf_hora: $("#horafin_edit").val(),
+			enf_tension: $("#tensionarterial_edit").val(),
+			enf_cardiaca: $("#frecuencia_edit").val(),
+			enf_oxigeno: $("#saturacion_edit").val(),
+			enf_creacion: $("#creacion_edit").val()
+		
+		}
+
+		console.log(data)
+
+
+
+		var url = document.getElementById('ruta').value;
+		$.ajax({
+			url: '' + url + '/api/save/enfermeria',
+			type: 'POST',
+			data: data,
+			error: function() {},
+				success: function(data){
+					alert("La solicitud fue procesada correctamente");
+				}
+		});
+			
 
 	});
+
+	$("#btn-sedacion").click(function (e) {
+		
+		const data = {
+			id_client :  $("#id_edit").val(),
+			sed_solidos: $("#solidos1_edit").val(),
+			sed_solidos2: $("#solidos2_edit").val(),
+			sed_consulta: $("#motivo_consulta_edit").val(),
+			sed_arterial: $("#tension_arteria_edit").val(),
+			sed_cardiaca: $("#frecuencia_cardiaca_edit").val(),
+			sed_peso: $("#peso_inicio_edit").val(),
+			sed_talla: $("#talla_inicio_edit").val(),
+			//sed_imc: $("#imc_edit").val(),
+			sed_asa: $("#clasificacion_asa_edit").val(),
+			sed_4extremidades: $("#extremidades4_edit").val(),
+			sed_4ok: $("#extr4_verify").val(),
+			sed_2extremidades: $("#extremidades2_edit").val(),
+			sed_2ok: $("#extre2_verify").val(),
+			sed_koextremidades: $("#extremidades_edit").val(),
+			sed_ko: $("#extre_verify").val(),
+			sed_respira: $("#libre_edit").val(),
+			sed_respiraok: $("#libre_verify").val(),
+			sed_disnea: $("#limitada_edit").val(),
+			sed_okdisnea: $("#respiracion_verify").val(),
+			sed_apnea: $("#apnea_edit").val(),
+			sed_okapnea: $("#apnea_verify").val(),
+			sed_presedacion: $("#sedacion_edit").val(),
+			sed_okpresedacion: $("#sedacion_verify").val(),
+			sed_mediosedacion: $("#presed_edit").val(),
+			sed_okmediosed: $("#pre_sedacion_edit").val(),
+			sed_sensa: $("#pre_sedacion_verify").val(),
+			sed_despierto: $("#despierto_edit").val(),
+			sed_okdespierto: $("#despierto_verify").val(),
+			sed_responde: $("#responde_edit").val(),
+			sed_okresponde: $("#responde_verify").val(),
+			sed_sinrespuesta: $("#noresponde_edit").val(),
+			sed_oksinrespuesta: $("#noresponde_verify").val(),
+			sed_observaciones: $("#observaciones_edit").val(),
+
+
+			sed_alergicos_id: $("#id_edit").val(),
+			aler_item : $("input[name='alergicos[]']")
+            	.map(function(){return $(this).val();}).get(),
+			aler_observacion : $("input[name='aler[]']")
+            	.map(function(){return $(this).val();}).get(),
+
+
+			sed_familiares_id: $("#id_edit").val(),
+				int_numero : $("input[name='familiares[]']")
+              		.map(function(){return $(this).val();}).get(),
+				int_descripcion : $("input[name='fami[]']")
+              		.map(function(){return $(this).val();}).get(),
+
+
+			sed_patologicos_id: $("#id_edit").val(),
+				pat_item : $("input[name='patologicos[]']")
+              		.map(function(){return $(this).val();}).get(),
+				pat_observacion : $("input[name='patolo[]']")
+              		.map(function(){return $(this).val();}).get(),
+
+
+			sed_quirurgicos_id: $("#id_edit").val(),
+				qui_item : $("input[name='quirurgicos[]']")
+              		.map(function(){return $(this).val();}).get(),
+				qui_observacion : $("input[name='quir[]']")
+              		.map(function(){return $(this).val();}).get(),
+
+
+			sed_toxicologicos_id: $("#id_edit").val(),
+				tox_item : $("input[name='toxicologicos[]']")
+              		.map(function(){return $(this).val();}).get(),
+				tox_observacion : $("input[name='obstoxico[]']")
+              		.map(function(){return $(this).val();}).get(),
+
+
+			sed_monitorizacion_id: $("#id_edit").val(),
+			incapacidad_data : $("input[name='time[]']")
+              		.map(function(){return $(this).val();}).get(),
+				mon_farmaco : $("input[name='Farmaco[]']")
+              		.map(function(){return $(this).val();}).get(),
+				mon_dosis : $("input[name='dosis[]']")
+					.map(function(){return $(this).val();}).get(),
+				mon_ta : $("input[name='ta[]']")
+					.map(function(){return $(this).val();}).get(),
+				mon_fc : $("input[name='Fc[]']")
+					.map(function(){return $(this).val();}).get(),
+				mon_sat : $("input[name='sat02[]']")
+					.map(function(){return $(this).val();}).get(),
+				mon_ramsay : $("input[name='ramsay[]']")
+					.map(function(){return $(this).val();}).get(),
+
+
+					
+
+		}
+
+		console.log(data)
+
+
+
+		var url = document.getElementById('ruta').value;
+		$.ajax({
+			url: '' + url + '/api/save/sedacion',
+			type: 'POST',
+			data: data,
+			error: function() {},
+				success: function(data){
+					alert("La solicitud fue procesada correctamente");
+				}
+		});
+			
+
+	});
+
+
 
 	</script>
 

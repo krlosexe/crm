@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group form-group col-md-6">
                         <label for=""><b>Hora de Fin</b></label>
-                        <input type="time" name="horafin_cirugia" class="form-control form-control-user" id="horafin_edit">
+                        <input type="time" name="horafin_cirugia" class="form-control form-control-user" id="horafin_principal_edit">
                     </div>
                     </div>
 
@@ -41,7 +41,7 @@
                     <div class="form-group col-md-2">
                     <br>
                         <label for=""><b>FECHA </b></label>
-                        <input type="date" name="fecha" class="form-control form-control-user" id="fecha_edit">
+                        <input type="date" name="fecha_edit" class="form-control form-control-user" id="fecha_edit">
                     </div>
                     <div class="form-group col-md-2">
                     <br>
@@ -57,7 +57,7 @@
                     <div class="form-group col-md-2">
                     <br>
                         <label for=""><b>FRECUENCIA CARDIACA</b></label>
-                        <input type="text" name="frecuencia" class="form-control form-control-user" id="frecuencia_edit">
+                       <input type="text" name="frecuencia" class="form-control form-control-user" id="frecuencia_edit">
                     </div>
 
                     <div class="form-group col-md-2">
@@ -76,7 +76,7 @@
                     <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
                         Limpiar
                     </button>
-                    <button class="btn btn-primary btn-user" id="btn-enfermeria">
+                    <button type="button" class="btn btn-primary btn-user" id="btn-enfermeria">
                         Guardar
                     </button>
                 </center>

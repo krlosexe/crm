@@ -69,35 +69,12 @@
                     <br>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group valid-required">
                                 <input type="text" class="form-control form-control-user" name="descripcion_enfermeria" id="descripcion_enfermeria">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                      
-                            <button type="button" id="btn_enfermeria" class="btn btn-primary btn-user">
-                            Agregar <i class="fa fa-pl"></i>
-                            </button>
-                        </div>
 
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table-bordered" id="table_enfermeria" width="100%" cellspacing="0">
-
-                                        <thead>
-                                            <tr>
-                                            <th>Descripción</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                         <center>
@@ -105,7 +82,7 @@
                             <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
                                 Limpiar
                             </button>
-                            <button class="btn btn-primary btn-user" id="btn-notas">
+                            <button type="button" class="btn btn-primary btn-user" id="btn-notas">
                                 Guardar
                             </button>
                         </center>

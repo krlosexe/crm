@@ -567,6 +567,13 @@ Route::post('save/quirurgica', 'HistoriasClinicasController@SaveFormQuirurgica')
 
 Route::post('save/historia', 'HistoriasClinicasController@SaveFormhistoria');
 
+Route::post('save/notas', 'HistoriasClinicasController@SaveFromNotas');
+
+Route::post('save/anestesia', 'HistoriasClinicasController@SaveFromAnestesia');
+
+Route::post('save/enfermeria', 'HistoriasClinicasController@SaveFromEnfermeria');
+
+Route::post('save/sedacion', 'HistoriasClinicasController@SaveFromSedacion');
 
 
 

@@ -337,7 +337,7 @@
                     <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table intraoperatorio" id="table_enfermeria" width="100%" cellspacing="0">
+                                    <table class="table intraoperatorio" id="intraoperatorio" width="100%" cellspacing="0">
 
                                         <thead>
                                             <tr>
@@ -510,7 +510,7 @@
         <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
             Limpiar
         </button>
-        <button class="btn btn-primary btn-user" id="btn-anestesia">
+        <button type="button" class="btn btn-primary btn-user" id="btn-anestesia">
             Guardar
         </button>
 </center>

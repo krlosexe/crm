@@ -7,8 +7,8 @@
                         <label for=""><b>Ayuno de 6-8 horas para Solidos</b></label>
                                         <select name="solidos1" id="solidos1_edit" class="form-control select2">
                                             <option value="">Seleccione</option>
-                                            <option value="general">SI</option>
-                                            <option value="intravenosa">NO</option>
+                                            <option value="SI">SI</option>
+                                            <option value="NO">NO</option>
                                         </select>
                     </div>
 
@@ -16,8 +16,8 @@
                         <label for=""><b>Ayuno de 6-8 horas para Solidos</b></label>
                                         <select name="solidos2" id="solidos2_edit" class="form-control select2">
                                             <option value="">Seleccione</option>
-                                            <option value="general">SI</option>
-                                            <option value="intravenosa">NO</option>
+                                            <option value="SI">SI</option>
+                                            <option value="NO">NO</option>
                                         </select>
                     </div>
 
@@ -35,7 +35,7 @@
                 </div>
 
 
-                <div class="row">
+                <div class="col-md-12">
                     <div class="col-md-12">
                     <br>
                         <h3>ANTECEDENTES ALERGICOS</h3>
@@ -86,7 +86,7 @@
 
 
 
-                <div class="row">
+                <div class="col-md-12">
                     <div class="col-md-12">
                         <br>
                         <h3>ANTECEDENTES FAMILIARES</h3>
@@ -135,24 +135,24 @@
 
                 
 
-                <div class="row">
+                <div class="col-md-12">
                     <div class="col-md-12">
                         <br>
                         <h3>ANTECEDENTES PATOLÓGICOS</h3>
                         <hr>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group valid-required">
                                 <input type="text" class="form-control form-control-user" name="patologicos_edit" id="patologicos_edit">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group valid-required">
                                 <input type="text" class="form-control form-control-user" name="pato_edit" id="pato_edit">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                         
                             <button type="button" id="btn_patologicos" class="btn btn-primary btn-user">
                             Agregar <i class="fa fa-pl"></i>
@@ -180,7 +180,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="col-md-12">
                     <div class="col-md-12">
                         <br>
                         <h3>ANTECEDENTES QUIRÚRGICOS</h3>
@@ -225,7 +225,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="col-md-12">
                     <div class="col-md-12">
                         <br>
                         <h3>ANTECEDENTES TOXICOLÓGICOS</h3>
@@ -312,9 +312,8 @@
                     <div class="form-group col-md-2">
                     <br>
                         <label for=""><b>IMC</b></label>
-                        <input type="text" name="imc" class="form-control form-control-user" id="imc_edit">
+                        <input type="text" name="imc_edit" class="form-control form-control-user" id="imc_edit">
                     </div>
-
                     <div class="form-group col-md-2">
                         <label for=""><b>Clasificación del Riesgo ASA</b></label>
                         <input type="text" name="clasificacion_asa" class="form-control form-control-user" id="clasificacion_asa_edit">
@@ -323,8 +322,8 @@
                 </div>
             </div>
 
-            <div class="col-md-16">
-                    <div class="col-md-16">
+            <div class="col-md-18">
+                    <div class="col-md-18">
                         <br>
                         <hr>
                     </div>
@@ -519,7 +518,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class='container-check'>
-                                    <input type='checkbox' name='respiracion_verify' class='checkitem chk-col-blue' id='respiracion_verify' value='1'>
+                                    <input type='checkbox' name='apnea_verify' class='checkitem chk-col-blue' id='apnea_verify' value='1'>
                                     <span class='checkmark'></span>
                                     <label for=''></label>
                                 </label>
@@ -639,7 +638,7 @@
                     </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <input type="text" name="fechatoma" class="form-control form-control-user" id="fechatoma_edit">
+                        <input type="text" name="observaciones_edit" class="form-control form-control-user" id="observaciones_edit">
                     </div>
                 </div>
             </div>
@@ -649,7 +648,7 @@
                 <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
                     Limpiar
                 </button>
-                <button class="btn btn-primary btn-user" id="btn-sedacion">
+                <button type="button" class="btn btn-primary btn-user" id="btn-sedacion">
                     Guardar
                 </button>
             </center>
