@@ -13,9 +13,17 @@ class RegistrosAnestesicos extends Model
    'ane_coloies','ane_sangre','ane_rojos','ane_otrosmetodo','ane_totalmetodo','ane_traslado','id_client'
 
     ];
-
-
-
     protected $table = 'history_cliente_anestesicos';
 
+    public function pre_medicacion(){
+        return $this->hasMany('App\AnestesiaPremedicacion', 'id_history_cliente_anestesico');
+    }
+    
+    public function monitoria(){
+        return $this->hasMany('App\AnestesiaMonitoria', 'id_history_cliente_anestesico');
+    }
+
+    public function operatorio(){
+        return $this->hasMany('App\AnestesiaIntraOperatorio', 'id_history_cliente_anestesico');
+    }
 }

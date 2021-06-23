@@ -11,8 +11,6 @@ class HistoriaClinicaMedicamentos extends Model
 
     ];
 
-
-
     protected $table = 'his_medicamento_tabla';
 
 }

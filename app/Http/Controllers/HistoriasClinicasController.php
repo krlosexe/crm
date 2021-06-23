@@ -23,9 +23,8 @@ use App\SedacionPatologicos;
 use App\SedacionQuirurgicas;
 use App\SedacionToxicologicas;
 use App\SedacionMonitorizacion;
-
-
-
+use App\HistoriaClinicaPreoperatorio;
+use App\PreoperatorioSistem;
 
 
 
@@ -110,9 +109,9 @@ class HistoriasClinicasController extends Controller
          }
 
 
-         if(isset($request["nombre_data"])){
+         if(isset($request["remision_data"])){
             $servicios_data = [];
-            foreach($request["nombre_data"] as $key => $nombre){
+            foreach($request["remision_data"] as $key => $nombre){
                $servicios_data["his_ser_nombre"] = $nombre;
                $servicios_data["his_ser_observaciones"] = $request["his_ser_observaciones"][$key];
                $servicios_data["his_ser_cantidad"] = $request["his_ser_cantidad"][$key];
@@ -125,9 +124,9 @@ class HistoriasClinicasController extends Controller
             }
          }
         
-         if(isset($request["medicamentos_data"])){
+         if(isset($request["his_med_nombre"])){
             $medicamento_data = [];
-            foreach($request["medicamentos_data"] as $key => $medicamento){
+            foreach($request["his_med_nombre"] as $key => $medicamento){
                $medicamento_data["his_med_nombre"] = $medicamento;
                $medicamento_data["his_med_posologia"] = $request["his_med_posologia"][$key];
                $medicamento_data["his_med_cantidad"] = $request["his_med_cantidad"][$key];
@@ -138,7 +137,10 @@ class HistoriasClinicasController extends Controller
    
             }
          }
+
+
      }
+
 
    public function SaveFromNotas(Request $request){
  
@@ -196,7 +198,7 @@ class HistoriasClinicasController extends Controller
 
    public function SaveFromEnfermeria(Request $request){
  
-      EnfermeriaClient::updateOrCreate(
+      $data_father =  EnfermeriaClient::updateOrCreate(
          ["id_client" => $request["id_client"]],
          $request->all()
      );
@@ -210,22 +212,22 @@ class HistoriasClinicasController extends Controller
             ["id_client" => $request["id_client"]],
             $request->all()
         ); 
-   
-         if(isset($request["aler_item"])){
-            $sedacion_data = [];
-            foreach($request["aler_item"] as $key => $sedacion){
-               $sedacion_data["aler_item"] = $sedacion;
-               $sedacion_data["aler_observacion"] =  $request["aler_observacion"][$key];
-               $sedacion_data["id_history_cliente_sedacion"] = $data_father->id;
-   
-               SedacionAlegicos::insert($sedacion_data);
-   
+
+        if(isset($request["aler_item"])){
+         $sedacion_data = [];
+         foreach($request["aler_item"] as $key => $sedacion){
+            $sedacion_data["aler_item"] = $sedacion;
+            $sedacion_data["aler_observacion"] =  $request["aler_observacion"][$key];
+            $sedacion_data["id_history_cliente_sedacion"] = $data_father->id;
+
+            SedacionAlegicos::insert($sedacion_data);
+
             }
          }
-   
-        if(isset($request["sedacion_familiares"])){
+
+         if(isset($request["fam_item"])){
             $monitoria_familiares = [];
-            foreach($request["sedacion_familiares"] as $key => $monitoria){
+            foreach($request["fam_item"] as $key => $monitoria){
                $monitoria_familiares["fam_item"] = $monitoria;
                $monitoria_familiares["fam_observacion"] =  $request["fam_observacion"][$key];
                $monitoria_familiares["id_history_cliente_sedacion"] = $data_father->id;
@@ -235,41 +237,44 @@ class HistoriasClinicasController extends Controller
             }
          }
 
-         if(isset($request["sedacion_patologicos"])){
+
+         if(isset($request["pat_item"])){
             $patologicos_data = [];
-            foreach($request["sedacion_patologicos"] as $key => $patologico){
+            foreach($request["pat_item"] as $key => $patologico){
                $patologicos_data["pat_item"] = $patologico;
                $patologicos_data["pat_observacion"] =  $request["pat_observacion"][$key];
-               $patologicos_data["id_history_cliente_anestesico"] = $data_father->id;
+               $patologicos_data["id_history_cliente_sedacion"] = $data_father->id;
    
                SedacionPatologicos::insert($patologicos_data);
    
             }
          }
 
-         if(isset($request["sedacion_quirurgicas"])){
+         if(isset($request["qui_item"])){
             $quirurgica_data = [];
-            foreach($request["sedacion_quirurgicas"] as $key => $quirurgicas){
+            foreach($request["qui_item"] as $key => $quirurgicas){
                $quirurgica_data["qui_item"] = $quirurgicas;
                $quirurgica_data["qui_observacion"] =  $request["qui_observacion"][$key];
-               $quirurgica_data["id_history_cliente_anestesico"] = $data_father->id;
+               $quirurgica_data["id_history_cliente_sedacion"] = $data_father->id;
    
                SedacionQuirurgicas::insert($quirurgica_data);
    
             }
          }
+         
 
-         if(isset($request["sedacion_toxicologico"])){
+         if(isset($request["tox_item"])){
             $toxicologicos_data = [];
-            foreach($request["sedacion_toxicologico"] as $key => $toxicologico){
+            foreach($request["tox_item"] as $key => $toxicologico){
                $toxicologicos_data["tox_item"] = $toxicologico;
                $toxicologicos_data["tox_observacion"] =  $request["tox_observacion"][$key];
-               $toxicologicos_data["id_history_cliente_anestesico"] = $data_father->id;
+               $toxicologicos_data["id_history_cliente_sedacion"] = $data_father->id;
    
                SedacionToxicologicas::insert($toxicologicos_data);
    
             }
          }
+
 
          if(isset($request["incapacidad_data"])){
             $monitorizacion_data = [];
@@ -281,7 +286,7 @@ class HistoriasClinicasController extends Controller
                $monitorizacion_data["mon_fc"] = $request["mon_fc"][$key];
                $monitorizacion_data["mon_sat"] = $request["mon_sat"][$key];
                $monitorizacion_data["mon_ramsay"] =  $request["mon_ramsay"][$key];
-               $monitorizacion_data["id_history_cliente_anestesico"] = $data_father->id;
+               $monitorizacion_data["id_history_cliente_sedacion"] = $data_father->id;
    
                SedacionMonitorizacion::insert($monitorizacion_data);
    
@@ -289,12 +294,88 @@ class HistoriasClinicasController extends Controller
          }
 
 
+      }
+      
+      public function SaveFromPreoperatorio(Request $request){
+ 
+         $data_father = HistoriaClinicaPreoperatorio::updateOrCreate(
+            ["id_client" => $request["id_client"]],
+            $request->all()
+        );
+        
+        if(isset($request["sis_nombre"])){
+         $sistema_data = [];
+         foreach($request["sis_nombre"] as $key => $toxicologico){
+            $sistema_data["sis_nombre"] = $toxicologico;
+            $sistema_data["sis_hallazgo"] =  $request["sis_hallazgo"][$key];
+            $sistema_data["id_history_cliente_preoperatorio"] = $data_father->id;
 
-         
+            PreoperatorioSistem::insert($sistema_data);
+
+            }
+         }
       }
 
 
+public function getFormPreanestesia($id_client){
+   $data = HistoriaClinicaPreanestesia::where("id_client", $id_client)->first();
+   return response()->json($data)->setStatusCode(200);
+}
 
+public function getFormQuirurgica($id_client){
+   $data = HistoriaClinicaQuirurgica::where("id_client", $id_client)->first();
+      return response()->json($data)->setStatusCode(200);
+}
+
+public function getFormhistroia($id_client){
+   $data = HistoriaClinicaHistoria::where("id_client", $id_client)
+                                 ->with("consultas")
+                                 ->with("medicamentos")
+                                 ->with("servicios")
+                                 ->with("Remision")
+                                 ->with("incapacidad")
+                                 ->first();
+      return response()->json($data)->setStatusCode(200);
+}
+
+public function getFormNotas($id_client){
+   $data = NotasEnfermeria::where("id_client", $id_client)
+                                 ->first();
+      return response()->json($data)->setStatusCode(200);
+}
+
+public function getFormRegistros($id_client){
+   $data = RegistrosAnestesicos::where("id_client", $id_client)
+                                 ->with("pre_medicacion")
+                                 ->with("monitoria")
+                                 ->with("operatorio")
+                                 ->first();
+      return response()->json($data)->setStatusCode(200);
+}
+
+public function getFormEnfermeria($id_client){
+   $data = EnfermeriaClient::where("id_client", $id_client)->first();
+   return response()->json($data)->setStatusCode(200);
+}
+
+public function getFormSedacion($id_client){
+   $data = HistoriaClienteSedacion::where("id_client", $id_client)
+                                 ->with("consulta")
+                                 ->with("familiares")
+                                 ->with("patologico")
+                                 ->with("quirurgicos")
+                                 ->with("monitoria")
+                                 ->with("toxicologico")
+                                 ->first();
+   return response()->json($data)->setStatusCode(200);
+}
+
+public function getFormPreoperatorio($id_client){
+   $data = HistoriaClinicaPreoperatorio::where("id_client", $id_client)
+                                 ->with("operatorio")
+                                 ->first();
+   return response()->json($data)->setStatusCode(200);
+}
 
 
 }

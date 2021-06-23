@@ -366,7 +366,7 @@
 
         <div class="form-group col-md-6">
             <label for=""><b>Diagnostico</b></label>
-            <input type="text" class="form-control form-control-user" name="diagnostico" id="diagnostico_edit">
+            <input type="text" class="form-control form-control-user" name="diagnostico_edit" id="cienconclusion_edit">
         </div>
 
         <div class="form-group col-md-6">

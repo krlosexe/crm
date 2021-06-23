@@ -575,9 +575,25 @@ Route::post('save/enfermeria', 'HistoriasClinicasController@SaveFromEnfermeria')
 
 Route::post('save/sedacion', 'HistoriasClinicasController@SaveFromSedacion');
 
+Route::post('save/preoperatorio', 'HistoriasClinicasController@SaveFromPreoperatorio');
 
 
+//
+Route::get('get/preanestesia/{id_client}', 'HistoriasClinicasController@getFormPreanestesia');
 
+Route::get('get/quirurgica/{id_client}', 'HistoriasClinicasController@getFormQuirurgica');
+
+Route::get('get/historia/{id_client}', 'HistoriasClinicasController@getFormhistroia');
+
+Route::get('get/notas/{id_client}', 'HistoriasClinicasController@getFormNotas');
+
+Route::get('get/registros/{id_client}', 'HistoriasClinicasController@getFormRegistros');
+
+Route::get('get/enfermeria/{id_client}', 'HistoriasClinicasController@getFormEnfermeria');
+
+Route::get('get/sedacion/{id_client}', 'HistoriasClinicasController@getFormSedacion');
+
+Route::get('get/preoperatorio/{id_client}', 'HistoriasClinicasController@getFormPreoperatorio');
 
 
 

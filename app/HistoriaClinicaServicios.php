@@ -11,8 +11,6 @@ class HistoriaClinicaServicios extends Model
 
     ];
 
-
-
     protected $table = 'his_servicios_tabla';
 
 }

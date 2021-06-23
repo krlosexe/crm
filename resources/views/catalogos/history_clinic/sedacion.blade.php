@@ -312,7 +312,7 @@
                     <div class="form-group col-md-2">
                     <br>
                         <label for=""><b>IMC</b></label>
-                        <input type="text" name="imc_edit" class="form-control form-control-user" id="imc_edit">
+                        <input type="text" name="imc_edit" class="form-control form-control-user" id="imcdata_edit">
                     </div>
                     <div class="form-group col-md-2">
                         <label for=""><b>Clasificación del Riesgo ASA</b></label>

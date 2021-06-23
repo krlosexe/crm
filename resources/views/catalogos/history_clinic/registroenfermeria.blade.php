@@ -41,12 +41,12 @@
                     <div class="form-group col-md-2">
                     <br>
                         <label for=""><b>FECHA </b></label>
-                        <input type="date" name="fecha_edit" class="form-control form-control-user" id="fecha_edit">
+                        <input type="date" name="fecha_edit" class="form-control form-control-user" id="fechag_edit">
                     </div>
                     <div class="form-group col-md-2">
                     <br>
                         <label for=""><b>HORA</b></label>
-                        <input type="time" name="hora_cirugia" class="form-control form-control-user" id="horafin_edit">
+                        <input type="time" name="hora_cirugia" class="form-control form-control-user" id="hora_edit">
                     </div>
 
                     <div class="form-group col-md-2">

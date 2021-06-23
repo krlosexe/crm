@@ -28,7 +28,7 @@
 
     <div class="form-group col-md-4">
         <label for=""><b>Instrumentador</b></label>
-        <input type="text" name="instrumentador" class="form-control form-control-user" id="instrumentador_edit">
+        <input type="text" name="instrumentador" class="form-control form-control-user" id="instrument_edit">
     </div>
 
     <div class="form-group col-md-4">
@@ -423,7 +423,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for=""><b>Deficit</b></label>
-                        <input type="text" name="deficit" class="form-control form-control-user" id="deficit_edit">
+                        <input type="text" name="deficit" class="form-control form-control-user" id="deficiteli_edit">
                     </div>                    
                     <div class="col-md-4">
                         <label for=""><b>Pérdidas</b></label>
@@ -439,7 +439,7 @@
                     </div>                    
                     <div class="col-md-4">
                         <label for=""><b>Otros</b></label>
-                        <input type="text" name="otros" class="form-control form-control-user" id="otros_edit">
+                        <input type="text" name="otros" class="form-control form-control-user" id="otroseli_edit">
                     </div>                    
                     <div class="col-md-4">
                         <label for=""><b>Total</b></label>
@@ -476,7 +476,7 @@
                     </div>                    
                     <div class="col-md-4">
                         <label for=""><b>Otros</b></label>
-                        <input type="text" name="Otros" class="form-control form-control-user" id="Otros_edit">
+                        <input type="text" name="Otros" class="form-control form-control-user" id="Otrosmed_edit">
                     </div>
                     <div class="col-md-4">
                         <label for=""><b>Total</b></label>

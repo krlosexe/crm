@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class HistoriaClinicaPreanestesia extends Model
 {
    protected $fillable = [
-        'id_client', 'pre_nombre', 'pre_fecha', 'pre_identificacion', 'pre_genero', 'pre_edad','pre_estado','pre_espquirurgica','pre_procedimiento',
+        'id_client', 'pre_fecha', 'pre_genero','pre_estado','pre_espquirurgica','pre_procedimiento','pre_arterial','pre_talla','pre_masas',
         'pre_anestesicos','pre_complicaciones','pre_alergicos','pre_farmacologicos','homorragicos','pre_patologicos','pre_quirurgicos','pre_toxicos',
         'pre_transfuncionales','pre_aleotros','pre_cardio','pre_respiratorio','pre_pulso','pre_temperatura','pre_peso','pre_imc','pre_abdomen',
         'pre_interpretacion','pre_dominante','pre_pulmonar','pre_caracteristicas','pre_ruidos','pre_soplos','pre_apertura','pre_cuello','pre_dientes',
@@ -20,5 +20,7 @@ class HistoriaClinicaPreanestesia extends Model
 
 
     protected $table = 'history_cliente_preanestesia';
+
+
 
 }

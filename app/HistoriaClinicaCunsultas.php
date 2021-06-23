@@ -10,8 +10,7 @@ class HistoriaClinicaCunsultas extends Model
 
     ];
 
-
-
     protected $table = 'his_cons_tabla';
+
 
 }

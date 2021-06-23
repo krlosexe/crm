@@ -12,7 +12,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for=""><b>Quirofano</b></label>
-                        <input type="text" name="quirofano" class="form-control form-control-user" id="quirofano_edit">
+                        <input type="text" name="quiro_edit" class="form-control form-control-user" id="quiro_edit">
                     </div>
                     <div class="form-group col-md-4">
                         <label for=""><b>Fecha del Último Alimento</b></label>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for=""><b>Cirujano Principal</b></label>
-                        <input type="text" name="cirujano" class="form-control form-control-user" id="programada_edit">
+                        <input type="text" name="programadacirujano_edit" class="form-control form-control-user" id="programadacirujano_edit">
                     </div>
                     <div class="form-group col-md-4">
                         <label for=""><b>Anestesiólogo</b></label>
@@ -116,7 +116,7 @@
                             <button type="button" class="btn btn-danger btn-user" onclick="prevClient('#cuadro4')">
                                 Limpiar
                             </button>
-                            <button class="btn btn-primary btn-user" id="btn-preoperatorio">
+                            <button type="button" class="btn btn-primary btn-user" id="btn-preoperatorio">
                                 Guardar
                             </button>
                         </center>
