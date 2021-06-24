@@ -83,6 +83,10 @@ Route::post('clients/forms/prp', 'ClientsController@ClientFormsPrp');
 Route::post('clients/forms/prp/adviser', 'ClientsController@ClientFormsPrpAdviser');
 
 
+//forms credit client
+Route::post('save/formsCreditos', 'formsClientController@formsCreditClient');
+
+
 
 Route::post('clients/forms/prp/adviser/luisa', 'ClientsController@ClientFormsPrpAdviserLuisa');
 

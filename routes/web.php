@@ -165,6 +165,9 @@ Route::get('forms/{id_user}/{id_line}', function ($id_user, $id_line) {
     return view('forms.form', ["id_user" => $id_user, "id_line" => $id_line]);
 });
 
+Route::get('forms_credt/{id_user}/{id_line}', function ($id_user, $id_line) {
+    return view('forms.formscredit', ["id_user" => $id_user, "id_line" => $id_line]);
+});
 
 
 
