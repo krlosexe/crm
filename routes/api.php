@@ -404,12 +404,18 @@ Route::get('clients/plan/payments/{id_client}', 'FinacingController@GetPlanPayme
 
 
 Route::get('get/client/request/{id_client}', 'ClientsController@GetRequestCredit');
+
 Route::get('get/client/request/{id_client}/{id_line}', 'ClientsController@GetRequestCredit');
+
+
+Route::get('v2/get/client/request/{id_client}/{id_line}', 'ClientsController@GetRequestCredit2');
+
+
 Route::get('get/credit/fees/paid/{id}','FinacingController@getCreditFeesPaid');
 Route::post('update/credit/status','FinacingController@updateStatusCredit');
 
 
-
+Route::get('get/data/credit/{id}','FinacingController@getDataCredit');
 
 
 
@@ -442,6 +448,7 @@ Route::post('client/pay/to/study/credit', 'FinacingController@PayStudyCredit');
 
 
 Route::get('client/credit/fee/pending/{id_client}', 'FinacingController@GetFeePending');
+Route::get('client/credit/fee/pending/{id_client}/{id_credit}', 'FinacingController@GetFeePending2');
 
 
 Route::post('client/pay/to/fee', 'FinacingController@PayToFee');
