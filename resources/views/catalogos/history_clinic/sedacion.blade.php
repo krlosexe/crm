@@ -433,7 +433,7 @@
                                 <div class="form-group col-md-4">
                                 <br>
                                 <label class='container-check'>
-                                    <input type='checkbox' name='extre4_verify' class='checkitem chk-col-blue' id='extr4_verify' value='1'>
+                                    <input type='checkbox' name='extremidades_check' class='checkitem chk-col-blue' id='extr4_verify' value='1'>
                                     <span class='checkmark'></span>
                                     <label for=''></label>
                                 </label>
@@ -449,7 +449,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                 <label class='container-check'>
-                                    <input type='checkbox' name='extre2_verify' class='checkitem chk-col-blue' id='extre2_verify' value='1'>
+                                    <input type='checkbox' name='extremidades_check' class='checkitem chk-col-blue' id='extre2_verify' value='1'>
                                     <span class='checkmark'></span>
                                     <label for=''></label>
                                 </label>
@@ -464,7 +464,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                 <label class='container-check'>
-                                    <input type='checkbox' name='extre_verify' class='checkitem chk-col-blue' id='extre_verify' value='1'>
+                                    <input type='checkbox' name='extremidades_check' class='checkitem chk-col-blue' id='extre_verify' value='1'>
                                     <span class='checkmark'></span>
                                     <label for=''></label>
                                 </label>
