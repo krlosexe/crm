@@ -2768,7 +2768,7 @@
 
 				
 				
-				his_med_nombre: $("input[name='nomed[]']")
+				his_med_nombre: $("input[name='nommed[]']")
               		.map(function(){return $(this).val();}).get(),
 				his_med_posologia : $("input[name='obmed[]']")
               		.map(function(){return $(this).val();}).get(),
@@ -2776,7 +2776,7 @@
 					.map(function(){return $(this).val();}).get(),
 				his_med_fecha : $("input[name='fechamed[]']")
               		.map(function(){return $(this).val();}).get(),
-
+			
 				
 				remision_data : $("input[name='nomespe[]']")
               		.map(function(){return $(this).val();}).get(),
@@ -2827,16 +2827,25 @@
 
 
 	$("#btn-notas").click(function (e) {
-		
+		count2++
+			var html
+			var not_enfermeria = $("#descripcion_enfermeria").val()
+
+			console.log(not_enfermeria)
+
+			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+				html += "<td><input type='text' name='nommed[]' value='"+not_enfermeria+"'></td>"
+			html += "</tr>"
+
+			$("#tablenfemeria_edit tbody").append(html);
+
+
 		const data = {
 			id_client :  $("#id_edit").val(),
-			not_enfermeria: $("#descripcion_enfermeria").val()
-		
+			not_enfermeria: $("#descripcion_enfermeria").val()		
 		}
 
 		console.log(data)
-
-
 
 		var url = document.getElementById('ruta').value;
 		$.ajax({
@@ -2849,7 +2858,7 @@
 				}
 		});
 			
-
+			$("#not_enfermeria").val("");
 	});
 
 
@@ -3332,6 +3341,7 @@ function getFormhistroia(){
 			html += "</tr>"
 
 			$("#table_consultas tbody").append(html);
+			html = ""
 		});
 		console.log(data)
 	}
@@ -3342,10 +3352,10 @@ function getFormhistroia(){
 		var html
 		$.map(data, function (item, key) {
 
-			var nommed_edit = item.his_cons_valor
-			var obmed_edit = item.his_cons_valor
-			var cantidadmed_edit = item.his_cons_valor
-			var fechamed_edit = item.his_cons_valor
+			var nommed_edit = item.his_med_nombre
+			var obmed_edit = item.his_med_posologia
+			var cantidadmed_edit = item.his_med_cantidad
+			var fechamed_edit = item.his_med_fecha
 
 			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
 				html += "<td><input type='text' name='nommed[]' value='"+nommed_edit+"'></td>"
@@ -3356,7 +3366,8 @@ function getFormhistroia(){
 				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 
-			$("#tablemed_edit tbody").append(html);		
+			$("#tablemed_edit tbody").append(html);
+			html = ""		
 		});
 		console.log(data)
 	}
@@ -3382,6 +3393,7 @@ function getFormhistroia(){
 			html += "</tr>"
 
 			$("#tableser_edit tbody").append(html);
+			html = ""
 		});
 		console.log(data)
 	}
@@ -3404,12 +3416,15 @@ function getFormhistroia(){
 			html += "</tr>"
 
 			$("#tablesp_edit tbody").append(html);
+			html = ""
 		});
 		console.log(data)
 	}
 
 	function CreateTableInacapacidad(data){
 		var html
+
+		
 		$.map(data,function (item,key){
 			var incapacidad_edit = item.his_inc_motivo
 			var diasin_edit = item.his_inc_dias
@@ -3425,9 +3440,14 @@ function getFormhistroia(){
 				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 			html += "</tr>"
 
+			console.log(item, "SE REPITE")
+			
 			$("#tablin_edit tbody").append(html);
+			html = ""
+
+			html = ""
 		});
-		console.log(data)
+		
 	}
 
 
@@ -3448,16 +3468,11 @@ function getFormNotas(){
 function CreateTableNotas(data){
 	var html
 	$.map(data,function (item,key){
-		var data = item.not_enfermeria
+		var notas_enferme = item.not_enfermeria
 		
 
-			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
-				html += "<td><input type='text' name='notas_enferme[]' value='"+notas_edit+"'></td>"
-
-				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
-			html += "</tr>"
-
 			$("#tablenfemeria_edit tbody").append(html);
+			html = ""
 
 	});
 	console.log(data)
@@ -3472,7 +3487,9 @@ function getFormRegistros(){
 		url: '' + url + '/api/get/registros/'+ $("#id_edit").val() ,
 		type: 'GET',
 		error: function() {},
-		success: function(data){			
+		success: function(data){	
+
+				
 
 				$("#anestesiologo_principal_edit").val(data.ane_anestesiologo),
 				$("#anestesiologo_secundario_edit").val(data.ane_anestesiologo2),
@@ -3523,8 +3540,8 @@ function getFormRegistros(){
 
 
 				CreateTablePremedicacion(data.pre_medicacion)
-				CreateTableMonitoria(data.monitoria)
-				CreateTableOperatorio(data.operatorio)
+				CreateTableMonitoriaregistro(data.monitoria)
+				CreateTableOperatorioregistros(data.operatorio)
 
 		}
 	});
@@ -3542,29 +3559,32 @@ function CreateTablePremedicacion(data){
 			html += "</tr>"
 
 		$("#tablprem_edit tbody").append(html);
+		html = ""
 	});
 	console.log(data)
 }
 
-function CreateTableMonitoria(data){
+function CreateTableMonitoriaregistro(data){
+
 	var html
 	$.map(data,function(item,key){
 
 		var monitoria_edit = item.mon_monitoria
 
-			html += "<tr id='tr_procedure_edit2_"+count2+"'>"
-				html += "<td><input type='text' name='monitoria[]' value='"+monitoria_edit+"'></td>"			
+		html += "<tr id='tr_procedure_edit2_"+count2+"'>"
+			html += "<td><input type='text' name='monitoria[]' value='"+monitoria_edit+"'></td>"			
 
-				html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
-			html += "</tr>"
+			html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit2_'+count2+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+		html += "</tr>"
 
 		$("#tablmonito_edit tbody").append(html);
+		html = ""
 	});
 	console.log(data)
 }
 
 
-function CreateTableOperatorio(data){
+function CreateTableOperatorioregistros(data){
 	var html
 	$.map(data,function(item,key){
 
@@ -3580,6 +3600,7 @@ function CreateTableOperatorio(data){
 			html += "</tr>"
 
 		$("#intraoperatorio tbody").append(html);
+		html = ""
 	});
 	console.log(data)
 }
@@ -3665,6 +3686,7 @@ function getFormSedacion(){
 			html += "</tr>"
 
 			$("#table_alergicos tbody").append(html);
+			html = ""
 
 		});
 		console.log(data)
@@ -3685,6 +3707,7 @@ function getFormSedacion(){
 			html += "</tr>"
 
 			$("#table_familiares tbody").append(html);
+			html = ""
 		});
 
 		console.log(data)
@@ -3705,6 +3728,7 @@ function CreateTablePatologicos(data){
 			html += "</tr>"
 
 		$("#table_patologicos tbody").append(html);
+		html = ""
 
 	});
 	console.log(data)
@@ -3724,6 +3748,7 @@ function createTableQuirurgicos(data){
 			html += "</tr>"
 
 		$("#table_quirurgicos tbody").append(html);
+		html = ""
 
 
 	});
@@ -3748,6 +3773,7 @@ function CreateTableToxicologicos(data){
 			html += "</tr>"
 
 		$("#table_toxicologicos tbody").append(html);
+		html = ""
 
 	});
 	console.log(data)
@@ -3780,6 +3806,7 @@ function CreateTableToxicologicos(data){
 			html += "</tr>"
 
 			$("#table_farmacos tbody").append(html);
+			html = ""
 
 		});
 		console.log(data)
@@ -3826,6 +3853,7 @@ function CreateTableOperatorio(data){
 			html += "</tr>"
 
 		$("#table_sistema tbody").append(html);
+		html = ""
 
 	});
 

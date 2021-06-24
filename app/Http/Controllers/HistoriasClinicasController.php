@@ -67,6 +67,8 @@ class HistoriasClinicasController extends Controller
          ); 
 
          if(isset($request["consultas_data"])){
+
+            HistoriaClinicaCunsultas::where("id_history_cliente_historia", $data_father->id)->delete();
             $consul_data = [];
             foreach($request["consultas_data"] as $key => $consulta){
                $consul_data["his_cons_consulta"]  = $consulta;
@@ -79,6 +81,7 @@ class HistoriasClinicasController extends Controller
          }
         
          if(isset($request["incapacidad_data"])){
+            HistoriaClinicaIncapacidad::where("id_history_cliente_historia", $data_father->id)->delete();
             $incapacidad_data = [];
             foreach($request["incapacidad_data"] as $key => $incapacidad){
                $incapacidad_data["his_inc_motivo"] = $incapacidad;
@@ -95,6 +98,7 @@ class HistoriasClinicasController extends Controller
 
 
          if(isset($request["remision_data"])){
+            HistoriaClinicaRemision::where("id_history_cliente_historia", $data_father->id)->delete();
             $remision_data = [];
             foreach($request["remision_data"] as $key => $remision){
                $remision_data["his_rem_nombre"] = $remision;
@@ -110,6 +114,7 @@ class HistoriasClinicasController extends Controller
 
 
          if(isset($request["remision_data"])){
+            HistoriaClinicaServicios::where("id_history_cliente_historia", $data_father->id)->delete();
             $servicios_data = [];
             foreach($request["remision_data"] as $key => $nombre){
                $servicios_data["his_ser_nombre"] = $nombre;
@@ -125,6 +130,7 @@ class HistoriasClinicasController extends Controller
          }
         
          if(isset($request["his_med_nombre"])){
+            HistoriaClinicaMedicamentos::where("id_history_cliente_historia", $data_father->id)->delete();
             $medicamento_data = [];
             foreach($request["his_med_nombre"] as $key => $medicamento){
                $medicamento_data["his_med_nombre"] = $medicamento;
@@ -161,6 +167,7 @@ class HistoriasClinicasController extends Controller
      ); 
 
       if(isset($request["ane_premedicacion"])){
+         AnestesiaPremedicacion::where("id_history_cliente_historia", $data_father->id)->delete();
          $premed_anestesia = [];
          foreach($request["ane_premedicacion"] as $key => $medicamento){
             $premed_anestesia["ane_premedicacion"] = $medicamento;
@@ -172,6 +179,7 @@ class HistoriasClinicasController extends Controller
       }
 
       if(isset($request["mon_monitoria"])){
+         AnestesiaMonitoria::where("id_history_cliente_historia", $data_father->id)->delete();
          $monitoria_anestesia = [];
          foreach($request["mon_monitoria"] as $key => $monitoria){
             $monitoria_anestesia["mon_monitoria"] = $monitoria;
@@ -183,6 +191,7 @@ class HistoriasClinicasController extends Controller
       }
 
       if(isset($request["int_numero"])){
+         AnestesiaIntraOperatorio::where("id_history_cliente_historia", $data_father->id)->delete();
          $intraoperatotio_data = [];
          foreach($request["int_numero"] as $key => $intraoperatorio){
             $intraoperatotio_data["int_numero"] = $intraoperatorio;
@@ -214,6 +223,7 @@ class HistoriasClinicasController extends Controller
         ); 
 
         if(isset($request["aler_item"])){
+         SedacionAlegicos::where("id_history_cliente_historia", $data_father->id)->delete();
          $sedacion_data = [];
          foreach($request["aler_item"] as $key => $sedacion){
             $sedacion_data["aler_item"] = $sedacion;
@@ -226,6 +236,7 @@ class HistoriasClinicasController extends Controller
          }
 
          if(isset($request["fam_item"])){
+            SedacionFamiliares::where("id_history_cliente_historia", $data_father->id)->delete();
             $monitoria_familiares = [];
             foreach($request["fam_item"] as $key => $monitoria){
                $monitoria_familiares["fam_item"] = $monitoria;
@@ -239,6 +250,7 @@ class HistoriasClinicasController extends Controller
 
 
          if(isset($request["pat_item"])){
+            SedacionPatologicos::where("id_history_cliente_historia", $data_father->id)->delete();
             $patologicos_data = [];
             foreach($request["pat_item"] as $key => $patologico){
                $patologicos_data["pat_item"] = $patologico;
@@ -251,6 +263,7 @@ class HistoriasClinicasController extends Controller
          }
 
          if(isset($request["qui_item"])){
+            SedacionQuirurgicas::where("id_history_cliente_historia", $data_father->id)->delete();
             $quirurgica_data = [];
             foreach($request["qui_item"] as $key => $quirurgicas){
                $quirurgica_data["qui_item"] = $quirurgicas;
@@ -264,6 +277,7 @@ class HistoriasClinicasController extends Controller
          
 
          if(isset($request["tox_item"])){
+            SedacionToxicologicas::where("id_history_cliente_historia", $data_father->id)->delete();
             $toxicologicos_data = [];
             foreach($request["tox_item"] as $key => $toxicologico){
                $toxicologicos_data["tox_item"] = $toxicologico;
@@ -277,6 +291,7 @@ class HistoriasClinicasController extends Controller
 
 
          if(isset($request["incapacidad_data"])){
+            SedacionMonitorizacion::where("id_history_cliente_historia", $data_father->id)->delete();
             $monitorizacion_data = [];
             foreach($request["incapacidad_data"] as $key => $monitoreo){
                $monitorizacion_data["mon_tiempo"] = $monitoreo;
@@ -304,6 +319,7 @@ class HistoriasClinicasController extends Controller
         );
         
         if(isset($request["sis_nombre"])){
+         PreoperatorioSistem::where("id_history_cliente_historia", $data_father->id)->delete();
          $sistema_data = [];
          foreach($request["sis_nombre"] as $key => $toxicologico){
             $sistema_data["sis_nombre"] = $toxicologico;
