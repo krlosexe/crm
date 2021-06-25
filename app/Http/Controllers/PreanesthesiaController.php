@@ -364,7 +364,7 @@ class PreanesthesiaController extends Controller
 
     public function status($id, $status, Request $request)
     {
-        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+
             $auditoria =  Auditoria::where("cod_reg", $id)
                                      ->where("tabla", "preanesthesias")->first();
             $auditoria->status = $status;
@@ -377,9 +377,7 @@ class PreanesthesiaController extends Controller
 
             $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
-        }else{
-            return response()->json("No esta autorizado")->setStatusCode(400);
-        }
+
     }
 
     /**

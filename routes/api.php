@@ -138,7 +138,7 @@ Route::get('clients/history/clinic/{id_client}', 'ClientsController@getHc');
 
 Route::resource('preanesthesia', 'PreanesthesiaController');
 Route::get('preanesthesia/client/{id_client}', 'PreanesthesiaController@Clients');
-Route::post('preanesthesia/status/{id}/{status}', 'PreanesthesiaController@status');
+Route::get('preanesthesia/status/{id}/{status}', 'PreanesthesiaController@status');
 
 Route::resource('surgeries', 'SurgeriesController');
 Route::get('surgeries/client/{id_client}', 'SurgeriesController@Clients');
