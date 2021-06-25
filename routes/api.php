@@ -153,7 +153,9 @@ Route::resource('masajes', 'MasajesController');
 Route::get('masajes/client/{id_client}', 'MasajesController@Clients');
 Route::post('masajes/status/{id}/{status}', 'MasajesController@status');
 
-
+Route::resource('examenes', 'ExamenesController');
+Route::get('examenes/client/{id_client}', 'ExamenesController@Clients');
+Route::post('examenes/status/{id}/{status}', 'ExamenesController@status');
 
 
 
@@ -207,6 +209,10 @@ Route::get('validate/valoration/code/{code}', 'ValuationsController@ValidateCode
 Route::get('logs/sessions', 'LogsController@session');
 Route::get('logs/events/adviser', 'LogsController@EventsAdvisers');
 Route::get('logs/events/clients', 'LogsController@eventsClients');
+
+Route::get('instalacionesapp','InstalationAppController@instalacionapp');
+
+
 
 Route::post('form/credit', 'FormCreditController@store');
 Route::post('form/credit/data/personal', 'FormCreditController@StoreDataPersonal');
