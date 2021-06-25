@@ -83,6 +83,10 @@ Route::post('clients/forms/prp', 'ClientsController@ClientFormsPrp');
 Route::post('clients/forms/prp/adviser', 'ClientsController@ClientFormsPrpAdviser');
 
 
+//forms credit client
+Route::post('save/formsCreditos', 'formsClientController@formsCreditClient');
+
+
 
 Route::post('clients/forms/prp/adviser/luisa', 'ClientsController@ClientFormsPrpAdviserLuisa');
 
@@ -567,6 +571,45 @@ Route::resource('order', 'OrdersController');
 Route::post('client/edit', 'ClientsController@EditProfileApp');
 
 Route::post('client/recovery/account', 'UsuariosController@RecoveryAccount');
+
+
+
+
+//ROUTES FROM HISTORIAS CLINICAS
+
+Route::post('save/preanestesia', 'HistoriasClinicasController@SaveFormPreanestesia');
+
+Route::post('save/quirurgica', 'HistoriasClinicasController@SaveFormQuirurgica');
+
+Route::post('save/historia', 'HistoriasClinicasController@SaveFormhistoria');
+
+Route::post('save/notas', 'HistoriasClinicasController@SaveFromNotas');
+
+Route::post('save/anestesia', 'HistoriasClinicasController@SaveFromAnestesia');
+
+Route::post('save/enfermeria', 'HistoriasClinicasController@SaveFromEnfermeria');
+
+Route::post('save/sedacion', 'HistoriasClinicasController@SaveFromSedacion');
+
+Route::post('save/preoperatorio', 'HistoriasClinicasController@SaveFromPreoperatorio');
+
+
+//
+Route::get('get/preanestesia/{id_client}', 'HistoriasClinicasController@getFormPreanestesia');
+
+Route::get('get/quirurgica/{id_client}', 'HistoriasClinicasController@getFormQuirurgica');
+
+Route::get('get/historia/{id_client}', 'HistoriasClinicasController@getFormhistroia');
+
+Route::get('get/notas/{id_client}', 'HistoriasClinicasController@getFormNotas');
+
+Route::get('get/registros/{id_client}', 'HistoriasClinicasController@getFormRegistros');
+
+Route::get('get/enfermeria/{id_client}', 'HistoriasClinicasController@getFormEnfermeria');
+
+Route::get('get/sedacion/{id_client}', 'HistoriasClinicasController@getFormSedacion');
+
+Route::get('get/preoperatorio/{id_client}', 'HistoriasClinicasController@getFormPreoperatorio');
 
 
 

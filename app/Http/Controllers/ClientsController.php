@@ -2133,11 +2133,6 @@ class ClientsController extends Controller
 
 
 
-
-
-
-
-
     public function RequestCredit(Request $request){
 
         $id_line =  $request["id_line"];
