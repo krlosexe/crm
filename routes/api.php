@@ -615,6 +615,8 @@ Route::get('get/preoperatorio/{id_client}', 'HistoriasClinicasController@getForm
 Route::post('whatsapp/register/client', 'WhatsAppController@StoreClient');
 
 
+Route::get('whatsapp/get/client/{jid}', 'WhatsAppController@GetClient');
+
 
 
 
