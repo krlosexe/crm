@@ -612,6 +612,12 @@ Route::get('get/sedacion/{id_client}', 'HistoriasClinicasController@getFormSedac
 Route::get('get/preoperatorio/{id_client}', 'HistoriasClinicasController@getFormPreoperatorio');
 
 
+Route::post('whatsapp/register/client', 'WhatsAppController@StoreClient');
+
+
+
+
+
 
 
 Route::get('generate/token/chat', function () {
