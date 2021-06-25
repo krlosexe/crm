@@ -111,6 +111,9 @@ Route::get('masajes', function () {
     return view('citas.masajes.gestion');
 });
 
+Route::get('citas-examenes', function () {
+    return view('citas.examenes.gestion');
+});
 
 
 
@@ -126,6 +129,11 @@ Route::get('calendar', function () {
 Route::get('encuesta', function () {
     return view('Reports.question.gestion');
 });
+
+Route::get('reporte-instalacionesapp', function () {
+    return view('Reports.instalacionesapp.gestion');
+});
+
 
 Route::get('category', function () {
     return view('category.gestion');
@@ -206,7 +214,9 @@ Route::get('masajes/client/{id_client}/{option}', function ($id_client, $option)
     return view('catalogos.clientes.masajes.gestion', ["id_client" => $id_client,"option" => $option,]);
 });
 
-
+Route::get('examenes/client/{id_client}/{option}', function ($id_client, $option) {
+    return view('catalogos.clientes.examenes.gestion', ["id_client" => $id_client,"option" => $option,]);
+});
 
 Route::get('surgeries/client/{id_client}/{option}', function ($id_client, $option) {
     return view('catalogos.clientes.surgeries.gestion', ["id_client" => $id_client,"option" => $option,]);
