@@ -420,7 +420,7 @@
 
                     <div class="col-md-12">
                         <br>
-                        <label for="" aline="center"><b>ACTIVIDAD</b></label>
+                        <h3><b>ACTIVIDAD</b></h3>
                         <hr>
                             <div class="row">
                                 <div class="form-group col-md-4">
@@ -476,7 +476,7 @@
 
                     <div class="col-md-12">
                         <br>
-                        <label for="" aline="center"><b>RESPIRACIÓN</b></label>
+                        <h3><b>RESPIRACIÓN</b></h3>
                         <hr>
                         
                             <div class="row">
@@ -528,7 +528,7 @@
 
                     <div class="col-md-12">
                         <br>
-                        <label for="" aline="center"><b>CIRCULACIÓN</b></label>
+                        <h3><b>CIRCULACIÓN</b></h3>
                         <hr>
                             <div class="row">
                                 <div class="form-group col-md-4">

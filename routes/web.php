@@ -206,7 +206,9 @@ Route::get('masajes/client/{id_client}/{option}', function ($id_client, $option)
     return view('catalogos.clientes.masajes.gestion', ["id_client" => $id_client,"option" => $option,]);
 });
 
-
+Route::get('examenes/client/{id_client}/{option}', function ($id_client, $option) {
+    return view('catalogos.clientes.examenes.gestion', ["id_client" => $id_client,"option" => $option,]);
+});
 
 Route::get('surgeries/client/{id_client}/{option}', function ($id_client, $option) {
     return view('catalogos.clientes.surgeries.gestion', ["id_client" => $id_client,"option" => $option,]);

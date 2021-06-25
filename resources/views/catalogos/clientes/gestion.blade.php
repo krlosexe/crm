@@ -2224,7 +2224,7 @@
 //
 			function examenes(tab, iframe, data){
 				$(tab).click(function (e) {
-					var url = document.getElementById('ruta').value+"/masajes/client/"+data.id_cliente+"/1"
+					var url = document.getElementById('ruta').value+"/examenes/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
 
 				});
