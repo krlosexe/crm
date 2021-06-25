@@ -1947,9 +1947,44 @@ class ClientsController extends Controller
 
         $data = array('mensagge' => "Se importaron ".$fila." contactos");
         return response()->json($data)->setStatusCode(200);
-
-
     }
+
+
+
+
+
+
+    public function GetRequestCredit2($id_client, $id_line = 0)
+    {
+        try{
+            $data = DB::table('client_request_credit')
+           // ->join('clientes','clientes.id_cliente', $id_client)
+            ->where('client_request_credit.id_client', $id_client)
+            ->join('clientes','clientes.id_cliente','client_request_credit.id_client')
+            ->select('*')
+            ->get();
+            return response()->json($data)->setStatusCode(200);
+        }
+        catch(\Throwable $th){
+            return $th;
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1986,10 +2021,7 @@ class ClientsController extends Controller
 
         $data->required_amount = number_format($data->required_amount, 2, ',', '.');
         $data->monthly_fee     = number_format($data->monthly_fee, 2, ',', '.');
-
-
         $requeriments = [];
-
         $data->working_letter                 == 1 ? $requeriments[] = "Carta Laboral"                  : '';
         $data->payment_stubs                   == 1 ? $requeriments[] = "Ultimas tres colillas de pago"  : '';
         $data->copy_of_id                      == 1 ? $requeriments[] = "Copia de la cedula"             : '';
@@ -2098,11 +2130,6 @@ class ClientsController extends Controller
         return true;
 
     }
-
-
-
-
-
 
 
 

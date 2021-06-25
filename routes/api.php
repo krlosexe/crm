@@ -83,6 +83,10 @@ Route::post('clients/forms/prp', 'ClientsController@ClientFormsPrp');
 Route::post('clients/forms/prp/adviser', 'ClientsController@ClientFormsPrpAdviser');
 
 
+//forms credit client
+Route::post('save/formsCreditos', 'formsClientController@formsCreditClient');
+
+
 
 Route::post('clients/forms/prp/adviser/luisa', 'ClientsController@ClientFormsPrpAdviserLuisa');
 
@@ -404,12 +408,18 @@ Route::get('clients/plan/payments/{id_client}', 'FinacingController@GetPlanPayme
 
 
 Route::get('get/client/request/{id_client}', 'ClientsController@GetRequestCredit');
+
 Route::get('get/client/request/{id_client}/{id_line}', 'ClientsController@GetRequestCredit');
+
+
+Route::get('v2/get/client/request/{id_client}/{id_line}', 'ClientsController@GetRequestCredit2');
+
+
 Route::get('get/credit/fees/paid/{id}','FinacingController@getCreditFeesPaid');
 Route::post('update/credit/status','FinacingController@updateStatusCredit');
 
 
-
+Route::get('get/data/credit/{id}','FinacingController@getDataCredit');
 
 
 
@@ -442,6 +452,7 @@ Route::post('client/pay/to/study/credit', 'FinacingController@PayStudyCredit');
 
 
 Route::get('client/credit/fee/pending/{id_client}', 'FinacingController@GetFeePending');
+Route::get('client/credit/fee/pending/{id_client}/{id_credit}', 'FinacingController@GetFeePending2');
 
 
 Route::post('client/pay/to/fee', 'FinacingController@PayToFee');
@@ -560,6 +571,51 @@ Route::resource('order', 'OrdersController');
 Route::post('client/edit', 'ClientsController@EditProfileApp');
 
 Route::post('client/recovery/account', 'UsuariosController@RecoveryAccount');
+
+
+
+
+//ROUTES FROM HISTORIAS CLINICAS
+
+Route::post('save/preanestesia', 'HistoriasClinicasController@SaveFormPreanestesia');
+
+Route::post('save/quirurgica', 'HistoriasClinicasController@SaveFormQuirurgica');
+
+Route::post('save/historia', 'HistoriasClinicasController@SaveFormhistoria');
+
+Route::post('save/notas', 'HistoriasClinicasController@SaveFromNotas');
+
+Route::post('save/anestesia', 'HistoriasClinicasController@SaveFromAnestesia');
+
+Route::post('save/enfermeria', 'HistoriasClinicasController@SaveFromEnfermeria');
+
+Route::post('save/sedacion', 'HistoriasClinicasController@SaveFromSedacion');
+
+Route::post('save/preoperatorio', 'HistoriasClinicasController@SaveFromPreoperatorio');
+
+
+//
+Route::get('get/preanestesia/{id_client}', 'HistoriasClinicasController@getFormPreanestesia');
+
+Route::get('get/quirurgica/{id_client}', 'HistoriasClinicasController@getFormQuirurgica');
+
+Route::get('get/historia/{id_client}', 'HistoriasClinicasController@getFormhistroia');
+
+Route::get('get/notas/{id_client}', 'HistoriasClinicasController@getFormNotas');
+
+Route::get('get/registros/{id_client}', 'HistoriasClinicasController@getFormRegistros');
+
+Route::get('get/enfermeria/{id_client}', 'HistoriasClinicasController@getFormEnfermeria');
+
+Route::get('get/sedacion/{id_client}', 'HistoriasClinicasController@getFormSedacion');
+
+Route::get('get/preoperatorio/{id_client}', 'HistoriasClinicasController@getFormPreoperatorio');
+
+
+Route::post('whatsapp/register/client', 'WhatsAppController@StoreClient');
+
+
+
 
 
 

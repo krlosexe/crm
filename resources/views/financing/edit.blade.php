@@ -137,7 +137,8 @@
                                             <option value="Rechazado">Rechazado</option>
                                             <option value="Desembolsado">Desembolsado</option>
                                             <option value="Liquidado">Liquidado</option>
-
+                                            <option value="Liberado">Liberado</option>
+                                            <option value=" Finalizado"> Finalizado</option>
                                         </select>
                                     </div>
                                 </div>
