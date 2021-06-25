@@ -153,7 +153,9 @@ Route::resource('masajes', 'MasajesController');
 Route::get('masajes/client/{id_client}', 'MasajesController@Clients');
 Route::post('masajes/status/{id}/{status}', 'MasajesController@status');
 
-
+Route::resource('examenes', 'ExamenesController');
+Route::get('examenes/client/{id_client}', 'ExamenesController@Clients');
+Route::post('examenes/status/{id}/{status}', 'ExamenesController@status');
 
 
 

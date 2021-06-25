@@ -132,9 +132,9 @@
 			          </div>
 
 
-			          @include('catalogos.clientes.masajes.store')
-					  @include('catalogos.clientes.masajes.view')
-					  @include('catalogos.clientes.masajes.edit')
+			          @include('catalogos.clientes.examenes.store')
+					  @include('catalogos.clientes.examenes.view')
+					  @include('catalogos.clientes.examenes.edit')
 
 
 			        </div>
@@ -257,11 +257,11 @@
 			var  option = {{$option}};
 
 			function update(){
-				enviarFormularioPut("#form-update", 'api/masajes', '#cuadro4', false, "#avatar-edit");
+				enviarFormularioPut("#form-update", 'api/examenes', '#cuadro4', false, "#avatar-edit");
 			}
 
 			function store(){
-				enviarFormulario("#store", 'api/masajes', '#cuadro2');
+				enviarFormulario("#store", 'api/examenes', '#cuadro2');
 			}
 
 
@@ -284,7 +284,7 @@
 					"serverSide":false,
 					"ajax":{
 						"method":"GET",
-						 "url":''+url+'/api/masajes/client/'+{{ $id_client }},
+						 "url":''+url+'/api/examenes/client/'+{{ $id_client }},
 						 "data": {
 							"rol"    : name_rol,
 							"id_user": id_user,
@@ -416,13 +416,13 @@
 					$("#attempt-edit").prop("checked", data.attempt ? true : false)
               
 					$('#summernote_edit').summernote("reset");
-					GetComments("#comments_edit", data.id_masajes, data.observaciones)
+					GetComments("#comments_edit", data.id, data.observaciones)
 
-					SubmitComment(data.id_masajes, "api/comments/masajes", "#comments_edit", "#add-comments", "#summernote_edit")
+					SubmitComment(data.id, "api/comments/examenes", "#comments_edit", "#add-comments", "#summernote_edit")
 
 
 					cuadros('#cuadro1', '#cuadro4');
-					$("#id_edit").val(data.id_masajes)
+					$("#id_edit").val(data.id)
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
@@ -488,7 +488,7 @@
 				$(comment_content).html("Cargando...")
 				var url=document.getElementById('ruta').value;	
 				$.ajax({
-					url:''+url+'/api/comments/masajes/'+id,
+					url:''+url+'/api/comments/examenes/'+id,
 					type:'GET',
 					dataType:'JSON',
 					
@@ -579,7 +579,7 @@
 			function desactivar(tbody, table){
 				$(tbody).on("click", "span.desactivar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/preanesthesia/status/'+data.id_masajes+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
+					statusConfirmacion('api/preanesthesia/status/'+data.id+"/"+2,"¿Esta seguro de desactivar el registro?", 'desactivar');
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
@@ -591,7 +591,7 @@
 			function activar(tbody, table){
 				$(tbody).on("click", "span.activar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/preanesthesia/status/'+data.id_masajes+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
+					statusConfirmacion('api/preanesthesia/status/'+data.id+"/"+1,"¿Esta seguro de desactivar el registro?", 'activar');
 				});
 			}
 		/* ------------------------------------------------------------------------------- */
@@ -601,7 +601,7 @@
 			function eliminar(tbody, table){
 				$(tbody).on("click", "span.eliminar", function(){
 					var data=table.row($(this).parents("tr")).data();
-					statusConfirmacion('api/preanesthesia/status/'+data.id_masajes+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
+					statusConfirmacion('api/preanesthesia/status/'+data.id+"/"+0,"¿Esta seguro de eliminar el registro?", 'Eliminar');
 				});
 			}
 
