@@ -1,6 +1,6 @@
 <div class="card shadow mb-4 hidden" id="cuadro4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Editar examenes</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Editar Examenes</h6>
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="form-update" enctype="multipart/form-data">
@@ -8,9 +8,20 @@
         @csrf
 
         <input type="hidden" name="_method" value="put">
-        <input type="hidden"  name="id_cliente" value="{{$id_client}}">
+        <input type="hidden" name="id_cliente" id="paciente-edit">
+        
         <div class="row">
            <div class="col-md-6">
+                
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <label for=""><b>Paciente</b></label>
+                        <input type="text" id="name_paciente_edit" class="form-control" disabled>
+                    </div>
+                </div>
+              </div>
+
 
               <div class="row">
                 <div class="col-md-12">
@@ -19,24 +30,40 @@
                         <input type="date" name="fecha" id="fecha-edit" class="form-control select2" required >
                     </div>
                 </div>
+
+
+              <div class="col-md-6">
+                  <div class="form-group">
+                        <label for=""><b>Hora desde</b></label>
+                        <input type="time" name="time" id="time-edit" class="form-control select2" required>
+                    </div>
+                </div>
+
+                 <!--  <div class="col-md-6">
+                  <div class="form-group">
+                        <label for=""><b>Hora hasta</b></label>
+                        <input type="time" name="time_end" id="time-end-edit" class="form-control select2" required>
+                    </div>
+                </div> -->
+
+
               </div>
 
-
-              <div class="row">
-              
-               <div class="col-md-6">
-                  <div class="form-group">
-                          <label for=""><b>Hora</b></label>
-                          <input type="time" name="time" id="time-edit" class="form-control select2" required>
-                   
+              <!-- <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                          <label for=""><b>Cirujano</b></label>
+                          <input type="text" name="surgeon" id="surgeon-edit" class="form-control" required >
+                      </div>
                   </div>
-                </div>
-            </div>
 
-
-
-
-
+                  <div class="col-md-6">
+                    <div class="form-group">
+                          <label for=""><b>Quirofano</b></label>
+                          <input type="text" name="operating_room" id="operating_room-edit" class="form-control" required >
+                      </div>
+                  </div>
+              </div> -->
 
 
               <div class="row">
@@ -52,9 +79,6 @@
                 </div>
               </div>
 
-
-
-
               
            </div>
 
@@ -62,19 +86,19 @@
            <div class="col-md-6">
 
               <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                        <label for=""><b>Clinica</b></label>
-                        <select name="clinic" id="clinic-edit" class="form-control select2" required>
-                            <option value="">Seleccione</option>
-                        </select>
-                    </div>
-                </div>
-
+                  <div class="col-md-12">
+                    <div class="form-group">
+                          <label for=""><b>Clinica</b></label>
+                          <select name="clinic" id="clinic-edit" class="form-control" required>
+                              <option value="">Seleccione</option>
+                          </select>
+                      </div>
+                  </div>
               </div>
 
 
-              
+
+
               <br><br>
 
 
@@ -123,6 +147,9 @@
                               </div>
                             
                           </div>
+
+
+
 
            </div>
 

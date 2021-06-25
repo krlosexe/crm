@@ -2121,6 +2121,7 @@
 					tasks("#tab8_edit", "#iframepTracingEdit", data)
 
 					masajes("#tab9_edit", "#iframepMsajesEdit", data)
+					examenes("#tab11_edit", "#iframeexamenesEdit", data)
 
 					reffered("#tab10_edit", "#iframepRefferedsEdit", data)
 
@@ -2215,6 +2216,15 @@
 			function masajes(tab, iframe, data){
 				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/masajes/client/"+data.id_cliente+"/1"
+					$(iframe).attr('src', url);
+
+				});
+			}
+
+//
+			function examenes(tab, iframe, data){
+				$(tab).click(function (e) {
+					var url = document.getElementById('ruta').value+"/examenes/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
 
 				});
