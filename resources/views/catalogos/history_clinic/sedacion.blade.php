@@ -420,7 +420,7 @@
 
                     <div class="col-md-12">
                         <br>
-                        <label for="" aline="center"><b>ACTIVIDAD</b></label>
+                        <h3><b>ACTIVIDAD</b></h3>
                         <hr>
                             <div class="row">
                                 <div class="form-group col-md-4">
@@ -433,7 +433,7 @@
                                 <div class="form-group col-md-4">
                                 <br>
                                 <label class='container-check'>
-                                    <input type='checkbox' name='extre4_verify' class='checkitem chk-col-blue' id='extr4_verify' value='1'>
+                                    <input type='checkbox' name='extremidades_check' class='checkitem chk-col-blue' id='extr4_verify' value='1'>
                                     <span class='checkmark'></span>
                                     <label for=''></label>
                                 </label>
@@ -449,7 +449,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                 <label class='container-check'>
-                                    <input type='checkbox' name='extre2_verify' class='checkitem chk-col-blue' id='extre2_verify' value='1'>
+                                    <input type='checkbox' name='extremidades_check' class='checkitem chk-col-blue' id='extre2_verify' value='1'>
                                     <span class='checkmark'></span>
                                     <label for=''></label>
                                 </label>
@@ -464,7 +464,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                 <label class='container-check'>
-                                    <input type='checkbox' name='extre_verify' class='checkitem chk-col-blue' id='extre_verify' value='1'>
+                                    <input type='checkbox' name='extremidades_check' class='checkitem chk-col-blue' id='extre_verify' value='1'>
                                     <span class='checkmark'></span>
                                     <label for=''></label>
                                 </label>
@@ -476,7 +476,7 @@
 
                     <div class="col-md-12">
                         <br>
-                        <label for="" aline="center"><b>RESPIRACIÓN</b></label>
+                        <h3><b>RESPIRACIÓN</b></h3>
                         <hr>
                         
                             <div class="row">
@@ -528,7 +528,7 @@
 
                     <div class="col-md-12">
                         <br>
-                        <label for="" aline="center"><b>CIRCULACIÓN</b></label>
+                        <h3><b>CIRCULACIÓN</b></h3>
                         <hr>
                             <div class="row">
                                 <div class="form-group col-md-4">
