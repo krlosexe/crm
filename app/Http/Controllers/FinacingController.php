@@ -459,30 +459,21 @@ class FinacingController extends Controller
 
     public function GetFeePending($id_client)
     {
-
         $fee = DB::table("client_request_credit_payment_plan")
-
             ->selectRaw("client_request_credit_payment_plan.*")
             ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
             ->where("client_request_credit.id_client", $id_client)
             ->where("client_request_credit_payment_plan.status", "Pendiente")
             ->Orwhere("client_request_credit_payment_plan.status", "Verificando")
             ->orderBy("client_request_credit_payment_plan.number", "ASC")
-
             ->first();
-
-
         $history = DB::table("client_request_credit_payment_plan")
-
             ->selectRaw("client_request_credit_payment_plan.*")
             ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
             ->where("client_request_credit.id_client", $id_client)
             ->where("client_request_credit_payment_plan.status", "=", "Pagada")
             ->orderBy("client_request_credit_payment_plan.number", "ASC")
-
             ->get();
-
-
         $lock = DB::table("clientes")
                 ->selectRaw("clientes.locked")
                 ->where("id_cliente", $id_client)
@@ -491,10 +482,49 @@ class FinacingController extends Controller
         $data["fee_pending"] = $fee;
         $data["history"]     = $history;
         $data["lock"]        = $lock->locked;
-
-
         return response()->json($data)->setStatusCode(200);
     }
+
+    public function GetFeePending2($id_client,$id_credit)
+    {
+        $fee = DB::table("client_request_credit_payment_plan")
+            ->selectRaw("client_request_credit_payment_plan.*")
+            ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
+            ->where("client_request_credit.id_client", $id_client)
+            ->where("client_request_credit.id", $id_credit)
+            ->where("client_request_credit_payment_plan.status", "Pendiente")
+            ->Orwhere("client_request_credit_payment_plan.status", "Verificando")
+            ->orderBy("client_request_credit_payment_plan.number", "ASC")
+            ->first();
+        $history = DB::table("client_request_credit_payment_plan")
+            ->selectRaw("client_request_credit_payment_plan.*")
+            ->join("client_request_credit", "client_request_credit.id", "=", "client_request_credit_payment_plan.id_request_credit")
+            ->where("client_request_credit.id_client", $id_client)
+            ->where("client_request_credit_payment_plan.status", "=", "Pagada")
+            ->orderBy("client_request_credit_payment_plan.number", "ASC")
+            ->get();
+        $lock = DB::table("clientes")
+                ->selectRaw("clientes.locked")
+                ->where("id_cliente", $id_client)
+                ->first();
+
+
+        $data["saldo"]       = $this->getCreditFeesPaid($id_credit);
+        $data["fee_pending"] = $fee;
+        $data["history"]     = $history;
+        $data["lock"]        = $lock->locked;
+        return response()->json($data)->setStatusCode(200);
+    }
+
+
+
+
+
+
+
+
+
+
 
     public function PayToFee(Request $request)
     {
@@ -889,13 +919,92 @@ public function getCreditFeesPaid($id){
 
 public function updateStatusCredit(Request $request){
     try{
+        if($request['status'] === "Desembolsado"){
+            $request['date_desembolso']=date("Y-m-d");
+        }
+        if($request['status'] === "Liquidado"){
+            $request['date_usado']=date("Y-m-d");
+        }
         $update= DB::table('client_request_credit')
         ->where('id', $request['id'])
-        ->update(["status" => $request['status']]);
+        ->update($request->all()); //["status" => $request['status']]
+
         if($update){ $res = true;} else{ $res = false;}
         return response()->json($res)->setStatusCode(200);
     }
     catch(\Throwable $th){return $th;}
 }
 
+
+
+
+
+public function getDataCredit($id){
+    try{
+        $data = DB::table('client_request_credit')
+            ->select(
+                'clientes.id_cliente',
+                'clientes.nombres',
+                'clientes.apellidos',
+                'clientes.identificacion',
+                // 'clientes.identificacion_verify',
+                // 'clientes.fecha_nacimiento',
+                // 'clientes.city',
+                // 'clientes.clinic',
+                'clientes.telefono',
+                'clientes.email',
+                // 'clientes.id_line',
+                // 'clientes.id_user_asesora',
+                // 'clientes.id_affiliate',
+                // 'clientes.id_asesora_valoracion',
+                // 'clientes.direccion',
+                // 'clientes.facebook',
+                // 'clientes.instagram',
+                // 'clientes.twitter',
+                // 'clientes.youtube',
+                // 'clientes.photos_google',
+                // 'clientes.origen',
+                // 'clientes.forma_pago',
+                // 'clientes.pay_to_study_credit',
+                // 'clientes.state',
+                // 'clientes.locked',
+                // 'clientes.pauta',
+                // 'clientes.code_client',
+                // 'clientes.prp',
+                // 'clientes.created_prp',
+                // 'clientes. to_db',
+                // 'clientes.code_verify',
+                // 'clientes.fcmToken',
+                // 'clientes.country',
+                // 'clientes.password',
+                // 'clientes.auth_app',
+                // 'clientes.send_email',
+                // 'clientes.wallezy',
+                // 'clientes.comission_percentaje',
+                // 'clientes. procedure_px',
+                // 'clientes.date_procedure',
+                // 'clientes.take',
+                'client_request_credit.id as id_credit',
+                //'client_request_credit.id_client',
+                'client_request_credit.required_amount',
+                'client_request_credit.period',
+                'client_request_credit.monthly_fee',
+                'client_request_credit.interest_rate',
+                'client_request_credit.days_limit',
+                'client_request_credit.status',
+                'client_request_credit.date_aproved',
+                'client_request_credit.date_desembolso',
+                'client_request_credit.initial',
+                'client_request_credit.init_credit'
+                //'client_request_credit.id_line'
+                //'client_request_credit.created_at',
+               // 'client_request_credit.updated_at'
+                )
+            ->where('client_request_credit.id', $id)
+            ->join('clientes','clientes.id_cliente','client_request_credit.id_client')
+            ->first();
+        return response()->json($data)->setStatusCode(200);
+    }
+    catch(\Throwable $th){return $th;}
+}
 }

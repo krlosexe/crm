@@ -24,6 +24,32 @@ class PreanesthesiaController extends Controller
         $id_user = $request["id_user"];
 
 
+        $adviser = 0;
+        if(isset($request["adviser"])){
+            $adviser = $request["adviser"];
+        }
+
+
+        $overdue = "all";
+        if(isset($request["overdue"])){
+            $overdue = $request["overdue"];
+        }
+
+
+
+
+        $date_init = 0;
+        if(isset($request["date_init"]) && $request["date_init"] != ""){
+            $date_init = $request["date_init"];
+        }
+
+
+        $date_finish = 0;
+        if(isset($request["date_finish"]) && $request["date_finish"] != ""){
+            $date_finish = $request["date_finish"];
+        }
+
+
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $valuations = Preanesthesia::select("preanesthesias.*","preanesthesias.clinic as id_clinic", "clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
                                 ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic")
@@ -31,12 +57,34 @@ class PreanesthesiaController extends Controller
                                 ->join("clientes", "clientes.id_cliente", "=", "preanesthesias.id_cliente", "left")
                                 ->join("users", "users.id", "=", "auditoria.usr_regins")
 
-                                /*->where(function ($query) use ($rol, $id_user) {
-                                    if($rol == "Asesor"){
-                                        $query->where("clientes.id_user_asesora", $id_user);
+                                ->where(function ($query) use ($adviser) {
+                                    if($adviser != 0){
+                                        $query->whereIn("auditoria.usr_regins", $adviser);
                                     }
-                                })*/
-                                
+                                })
+
+                                ->where(function ($query) use ($overdue) {
+                                    if($overdue == "overdue"){
+                                        $query->where("preanesthesias.fecha", "<" ,date("Y-m-d"));
+                                    }
+                                })
+
+                                ->where(function ($query) use ($date_init) {
+                                    if($date_init != 0){
+                                        $query->where("preanesthesias.fecha", ">=", $date_init);
+                                    }
+                                })
+
+                                ->where(function ($query) use ($date_finish) {
+                                    if($date_finish != 0){
+                                        $query->where("preanesthesias.fecha", "<=", $date_finish);
+                                    }
+                                })
+
+
+
+
+
                                 ->where("auditoria.tabla", "preanesthesias")
                                 ->where("auditoria.status", "!=", "0")
                                 ->orderBy("preanesthesias.id_preanesthesias", "DESC")
@@ -49,7 +97,7 @@ class PreanesthesiaController extends Controller
 
 
     function Clients($id_client){
-        
+
         $valuations = Preanesthesia::select("preanesthesias.*", "preanesthesias.clinic as id_clinic","clinic.nombre as name_clinic", "auditoria.*", "users.email as email_regis", "clientes.*")
                             ->join("clinic", "clinic.id_clinic", "=", "preanesthesias.clinic")
                             ->join("auditoria", "auditoria.cod_reg", "=", "preanesthesias.id_preanesthesias")
@@ -62,7 +110,7 @@ class PreanesthesiaController extends Controller
                             ->orderBy("preanesthesias.id_preanesthesias", "DESC")
                             ->get();
         echo json_encode($valuations);
-        
+
     }
     /**
      * Show the form for creating a new resource.
@@ -88,8 +136,8 @@ class PreanesthesiaController extends Controller
             $hora_end  = strtotime( $request["time_end"] );
 
             // if($hora_init >= $hora_end){
-            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
-            //     return response()->json($data)->setStatusCode(400); 
+            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");
+            //     return response()->json($data)->setStatusCode(400);
             // }
 
 
@@ -99,8 +147,8 @@ class PreanesthesiaController extends Controller
             //                     ->get();
 
             // if(sizeof($valid) > 0){
-            //     $data = array('mensagge' => "Ya existen citas en ese Horario");    
-            //     return response()->json($data)->setStatusCode(400); 
+            //     $data = array('mensagge' => "Ya existen citas en ese Horario");
+            //     return response()->json($data)->setStatusCode(400);
             // }
 
             $request["surgerie_rental"] == 1 ? $request["surgerie_rental"] = 1 : $request["surgerie_rental"] = 0;
@@ -119,10 +167,10 @@ class PreanesthesiaController extends Controller
 
             $request["table"]    = "preanesthesias";
             $request["id_event"] = $store["id_preanesthesias"];
-            
+
             if($request->comment != "<p><br></p>"){
                 Comments::create($request->all());
-            }  
+            }
 
 
 
@@ -133,7 +181,7 @@ class PreanesthesiaController extends Controller
             ]);
 
 
-            
+
 
             $clinic = DB::table("clinic")->where("id_clinic", $request["clinic"])->first();
 
@@ -202,7 +250,7 @@ class PreanesthesiaController extends Controller
 
 
             if ($store) {
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -232,7 +280,7 @@ class PreanesthesiaController extends Controller
      */
     public function edit($preanesthesia)
     {
-        
+
     }
 
     /**
@@ -245,14 +293,14 @@ class PreanesthesiaController extends Controller
     public function update(Request $request, $preanesthesia)
     {
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-            
+
 
             $hora_init = strtotime( $request["time"] );
             $hora_end  = strtotime( $request["time_end"] );
 
             // if($hora_init >= $hora_end){
-            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");    
-            //     return response()->json($data)->setStatusCode(400); 
+            //     $data = array('mensagge' => "La hora desde no puede ser mayor o igual a la hora hasta");
+            //     return response()->json($data)->setStatusCode(400);
             // }
 
 
@@ -263,8 +311,8 @@ class PreanesthesiaController extends Controller
             //                         ->get();
 
             // if(sizeof($valid) > 0){
-            //     $data = array('mensagge' => "Ya existen citas en ese Horario");    
-            //     return response()->json($data)->setStatusCode(400); 
+            //     $data = array('mensagge' => "Ya existen citas en ese Horario");
+            //     return response()->json($data)->setStatusCode(400);
             // }
 
 
@@ -291,8 +339,8 @@ class PreanesthesiaController extends Controller
             }
 
             $cita      = DB::table("preanesthesias")->where("id_preanesthesias", $preanesthesia)->first();
-          
-   
+
+
             $version["id_user"]   = $request["id_user"];
             $version["id_client"] = $cita->id_cliente;
             $version["event"]     = "Actualizo Pre Anestesia para el dia $request[fecha] a las $request[time] en la clinica ".$name_clinic;
@@ -302,7 +350,7 @@ class PreanesthesiaController extends Controller
 
 
             if ($update) {
-                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");    
+                $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
                 return response()->json($data)->setStatusCode(200);
             }else{
                 return response()->json("A ocurrido un error")->setStatusCode(400);
@@ -312,7 +360,7 @@ class PreanesthesiaController extends Controller
             return response()->json("No esta autorizado")->setStatusCode(400);
         }
     }
-    
+
 
     public function status($id, $status, Request $request)
     {
@@ -327,7 +375,7 @@ class PreanesthesiaController extends Controller
             }
             $auditoria->save();
 
-            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");    
+            $data = array('mensagge' => "Los datos fueron actualizados satisfactoriamente");
             return response()->json($data)->setStatusCode(200);
         }else{
             return response()->json("No esta autorizado")->setStatusCode(400);
