@@ -2406,7 +2406,7 @@
 
 						$("#state").val(data.state).trigger("change")
 
-						$("#nombre").val(data.nombres)
+						$("#nombre").val(data.nombres).trigger("change")
 						$("#apellido").val(data.apellidos)
 						$("#telefono").val(data.telefono)
 						$("#email").val(data.email)
