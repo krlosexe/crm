@@ -120,6 +120,7 @@
 								  <th>Nombres</th>
 								  <th>Fecha</th>
 								  <th>Hora</th>
+								  <th>Estado</th>
 								  <th>Clinica</th>
 			                      <th>Fecha de registro</th>
 								  <th>Registrado por</th>
@@ -316,6 +317,24 @@
 						},
 						{"data": "fecha"},
 						{"data": "time"},
+						{"data": "status",
+							render : function(data, type, row){
+								if(data == 1){
+									return "Procesado"
+								}
+
+								if(data == 0){
+									return "Pendiente"
+								}
+
+								if(data == 2){
+									return "Cancelado"
+								}
+
+
+
+							}
+						},
 						{"data": "name_clinic"},
 						{"data": "fec_regins"},
 						{"data": "email_regis"}
