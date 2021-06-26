@@ -236,6 +236,7 @@
 								  <th>Acciones</th>
 								  <th>Nombres</th>
 								  <th>Fecha</th>
+								  <th>Estado</th>
                                   <th>Clinica</th>
                                   <th>Comentarios</th>
 			                      <th>Fecha de registro</th>
@@ -382,6 +383,25 @@
 							}
 						},
 						{"data": "fecha"},
+						//
+						{"data": "status",
+							render : function(data, type, row){
+								if(data == 1){
+									return "Procesado"
+								}
+
+								if(data == 0){
+									return "Pendiente"
+								}
+
+								if(data == 2){
+									return "Cancelado"
+								}
+
+
+
+							}
+						},
 						{"data": "name_clinic"},
                         {"data": "fecha",
                             render: function(data, type, row){
