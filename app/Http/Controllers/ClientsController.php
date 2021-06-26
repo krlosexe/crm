@@ -1031,7 +1031,9 @@ class ClientsController extends Controller
             }
 
 
-            $data = Clients::select("state", "clinic", "id_line", "id_user_asesora", "prp", "id_affiliate", "pay_to_study_credit")->find($id_cliente);
+            $data = Clients::select("facebook", "instagram","twitter" , "youtube" ,  "photos_google",
+                        "email","city","telefono","identificacion","state","nombres", "clinic", "id_line", "origen","forma_pago",
+                        "id_user_asesora", "prp", "id_affiliate", "pay_to_study_credit")->find($id_cliente);
 
             if($data->prp == null || $data->prp == "No"){
                 if($request["prp"] == "Si"){
@@ -1109,6 +1111,153 @@ class ClientsController extends Controller
 
                 LogsClients::create($version);
             }
+///
+
+if($data->nombres != $request["nombres"]){
+$nombre_from = $data->nombres;
+$nombre_to = $request["nombres"];
+
+    $version["id_user"]   = $request["id_user"];
+    $version["id_client"] = $id_cliente;
+    $version["event"]     = "Actualizo el nombre de ".$nombre_from." a ".$nombre_to."";
+
+    LogsClients::create($version);
+}
+
+if($data->identificacion != $request["identificacion"]){
+    $identificacion_from = $data->identificacion;
+    $identificacion_to = $request["identificacion"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo la identificación de ".$identificacion_from." a ".$identificacion_to."";
+    
+        LogsClients::create($version);
+}
+
+if($data->city != $request["city"]){
+    $city_from = $data->city;
+    $city_to = $request["city"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo la ciudad de ".$city_from." a ".$city_to."";
+    
+        LogsClients::create($version);
+}
+
+if($data->telefono!= $request["telefono"]){
+    $telefono_from = $data->telefono;
+    $telefono_to = $request["telefono"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo el telefono de ".$telefono_from." a ".$telefono_to."";
+    
+        LogsClients::create($version);
+}
+
+if($data->email!= $request["email"]){
+    $email_from = $data->email;
+    $email_to = $request["email"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo el email de ".$email_from." a ".$email_to."";
+    
+        LogsClients::create($version);
+}
+
+if($data->origen!= $request["origen"]){
+    $origen_from = $data->origen;
+    $origen_to = $request["origen"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo el origen de ".$origen_from." a ".$origen_to."";
+    
+        LogsClients::create($version);
+}
+
+if($data->forma_pago!= $request["forma_pago"]){
+    $forma_pago_from = $data->forma_pago;
+    $forma_pago_to = $request["forma_pago"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo la forma de pago de ".$forma_pago_from." a ".$forma_pago_to."";
+    
+        LogsClients::create($version);
+}
+
+
+if($data->facebook!= $request["facebook"]){
+    $facebook_from = $data->facebook;
+    $facebook_to = $request["facebook"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo el facebook de ".$facebook_from." a ".$facebook_to."";
+    
+        LogsClients::create($version);
+}
+
+if($data->instagram!= $request["instagram"]){
+    $instagram_from = $data->instagram;
+    $instagram_to = $request["instagram"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo el instagram de ".$instagram_from." a ".$instagram_to."";
+    
+        LogsClients::create($version);
+}
+
+if($data->twitter!= $request["twitter"]){
+    $twitter_from = $data->twitter;
+    $twitter_to = $request["twitter"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo el twitter pago de ".$twitter_from." a ".$twitter_to."";
+    
+        LogsClients::create($version);
+}
+
+if($data->youtube!= $request["youtube"]){
+    $youtube_from = $data->youtube;
+    $youtube_to = $request["youtube"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo youtube de ".$youtube_from." a ".$youtube_to."";
+    
+        LogsClients::create($version);
+}
+
+if($data->forma_pago!= $request["forma_pago"]){
+    $forma_pago_from = $data->forma_pago;
+    $forma_pago_to = $request["forma_pago"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo la formade pago de ".$forma_pago_from." a ".$forma_pago_to."";
+
+        LogsClients::create($version);
+}
+
+if($data->photos_google!= $request["photos_google"]){
+    $photos_google_from = $data->photos_google;
+    $photos_google_to = $request["photos_google"];
+    
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo las fotos de google de ".$photos_google_from." a ".$photos_google_to."";
+    
+        LogsClients::create($version);
+}
+
+
 
             if($data->id_line != $request["id_line"]){
 
