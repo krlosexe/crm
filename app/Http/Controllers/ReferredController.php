@@ -153,6 +153,74 @@ class ReferredController extends Controller
 
 
 
+    public function storeRefererWeb(Request $request){
+
+
+        $affiliate = Clients::where("code_client", $request["code_affiliate"])->first();
+
+        if($affiliate){
+            $request["id_affiliate"]    = $affiliate["id_cliente"];
+            $request["id_user_asesora"] = $affiliate["id_user_asesora"];
+            $request["id_line"]         = $affiliate["id_line"];
+            $request["city"]            = null;
+            $request["origen"]          = $affiliate["code_client"];
+
+            $permitted_chars        = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $code                   = substr(str_shuffle($permitted_chars), 0, 4);
+            $request["code_client"] = strtoupper($code);
+
+            $data = Clients::where("identificacion", $request["identificacion"])->first();
+
+
+
+            if($data){
+                $data = array('mensagge' => "El paciente ya se encuentra en la base de datos");
+                return response()->json($data)->setStatusCode(400);
+            }
+            $cliente = Clients::create($request->all());
+
+            $request["id_client"] = $cliente["id_cliente"];
+
+
+
+            ClientInformationAditionalSurgery::create($request->all());
+            ClientClinicHistory::create($request->all());
+            ClientCreditInformation::create($request->all());
+
+            $auditoria              = new Auditoria;
+            $auditoria->tabla       = "clientes";
+            $auditoria->cod_reg     = $cliente["id_cliente"];
+            $auditoria->status      = 1;
+            $auditoria->fec_regins  = date("Y-m-d H:i:s");
+            $auditoria->fec_update  = date("Y-m-d H:i:s");
+            $auditoria->usr_regins  = $request["id_user_asesora"];
+            $auditoria->save();
+
+
+
+            $user_receive = DB::table("users")->where("id", $affiliate["id_user_asesora"])->first();
+
+            $data["msg"]     = "Ingreso de Referido App, Nombre: ".$cliente["nombres"]." Cedula: ".$cliente["identificacion"];
+            $data["subject"] = "Ingreso de Referido App, Nombre: ".$cliente["nombres"];
+            $data["for"]     = $user_receive->email;
+            $this->SendEmail($data);
+
+
+
+
+            $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+            return response()->json($data)->setStatusCode(200);
+        }else{
+            $data = array('mensagge' => "El codigo es Invalido");
+            return response()->json($data)->setStatusCode(400);
+        }
+
+
+    }
+
+
+
+
     public function get($id, $name = 0, $state = 0){
 
 
