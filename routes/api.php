@@ -551,6 +551,7 @@ Route::post('request/appointment', 'QueriesController@RequestAppointment');
 Route::get('queries/client/{id_client}', 'QueriesController@QueriesByClient');
 
 Route::post('v2/register/referred', 'ReferredController@storeV2');
+Route::post('v2/register/referred/web', 'ReferredController@storeRefererWeb');
 Route::get('v2/prp/refferers/{id}', 'ReferredController@get');
 Route::get('v2/prp/refferers/{id}/{search}', 'ReferredController@get');
 Route::get('v2/prp/refferers/{id}/{search}/{state}', 'ReferredController@get');

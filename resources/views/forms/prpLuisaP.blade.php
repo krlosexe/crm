@@ -78,10 +78,10 @@
         <input type="hidden" name="_method" value="post">
 
         <div class="row">
-			
-			
+
+
            <div class="col-md-12">
-              
+
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -122,7 +122,7 @@
               </div>
 
 
-              
+
 			        <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -175,7 +175,7 @@
                         </div>
 
                         <p>*La cita de revisión sera asignada de acuerdo a disponibilidad en agenda*</p>
-                        
+
                     </div>
                 </div>
               </div>
@@ -205,14 +205,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="radiosPago" id="radiosPago2" value="Transferencia" required> 
+                                  <input class="form-check-input" type="radio" name="radiosPago" id="radiosPago2" value="Transferencia" required>
                                   <label class="form-check-label" for="radiosPago2">
                                   Transferencia Bancaria (Bancolombia)
                                   </label>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
               </div>
@@ -253,8 +253,8 @@
 
 
 
-	
-              
+
+
            </div>
 
         </div>
@@ -278,22 +278,109 @@
            </div>
 
 
-           
+
         </div>
+
+
+
           <center>
-            <button id="btn-submit" class="btn btn-primary btn-user">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Referir un Paciente
+              </button>
+
+
+            <button id="btn-submit" class="btn btn-success btn-user">
                 Enviar
             </button>
+
+
 
           </center>
           <br>
           <br>
       </form>
-      
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Datos del Paciente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+
+                  <form class="user" autocomplete="off" method="post" id="store_referido" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                              <label for=""><b>NOMBRE COMPLETO:*</b></label>
+                              <input type="text" name="nombres" id="nombres_referido" class="form-control" required >
+                          </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                              <label for=""><b>NÚMERO DE CEDULA:</b></label>
+                              <input type="number" name="identificacion" id="identificacion_referido" class="form-control" required>
+                          </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                              <label for=""><b> NÚMERO DE WHATSAPP O CELULAR *</b></label>
+                              <input type="number" name="telefono" id="telefono_referido" class="form-control" required >
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                              <label for=""><b>CORREO ELECTRONICO *</b></label>
+                              <input type="email" name="email" id="email_referido" class="form-control"  >
+                          </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                              <label for=""><b>CODIGO DE PRP *</b></label>
+                              <input type="text" name="code_affiliate" id="code_affiliate_referido" class="form-control" required >
+                          </div>
+                      </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar Referido</button>
+                  </form>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+
     </div>
 
-	
-		  
+
+
 	<input type="hidden" id="ruta" value="<?= url('/') ?>">
 
 
@@ -306,7 +393,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?= url('/') ?>/js/sb-admin-2.min.js"></script>
-  
+
 
 
    <!-- Page level plugins -->
@@ -316,7 +403,7 @@
   <script src="<?= url('/') ?>/js/demo/chart-area-demo.js"></script>
   <script src="<?= url('/') ?>/js/demo/chart-pie-demo.js"></script>
 
-  
+
 
 
  <!-- Page level plugins -->
@@ -326,7 +413,7 @@
     <!-- Page level custom scripts -->
     <script src="<?= url('/') ?>/js/demo/datatables-demo.js"></script>
 
-  
+
 
 
     <script src="<?= url('/') ?>/vendor/bootstrap-fileinput/js/plugins/piexif.js" type="text/javascript"></script>
@@ -348,11 +435,11 @@
 
 
   <script src="<?= url('/') ?>/js/funciones.js"></script>
-  
+
 
   <script>
     //var user_id = localStorage.getItem('user_id');
-	
+
 
 	$(document).ready(function(){
 		store();
@@ -362,7 +449,60 @@
 	function store(){
 		id_user = 69;
 		enviarFormularioForm("#store", 'api/clients/forms/prp/adviser/luisa', '#cuadro2');
+        enviarFormularioForm2("#store_referido", 'api/v2/register/referred/web', '#cuadro2');
+
 	}
+
+
+  function enviarFormularioForm2(form, controlador, cuadro, auth = false){
+        $(form).submit(function(e){
+            e.preventDefault(); //previene el comportamiento por defecto del formulario al darle click al input submit
+            var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable
+            var formData=new FormData($(form)[0]); //obtiene todos los datos de los inputs del formulario pasado por parametros
+            var method = $(this).attr('method'); //obtiene el method del formulario
+            $('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
+            $.ajax({
+                url:''+url+'/'+controlador+'',
+                type:method,
+                dataType:'JSON',
+                data:formData,
+                cache:false,
+                contentType:false,
+                processData:false,
+                beforeSend: function(){
+                    mensajes('info', '<span>Espere por favor... <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>');
+
+                    $('#btn-submit').attr("disabled", "disabled")
+                    $('#btn-submit').text("Espere...")
+
+
+                },
+                error: function (repuesta) {
+                    $('#btn-submit').removeAttr('disabled'); //activa el input submit
+                    $('#btn-submit').text("Enviar")
+                    var errores=repuesta.responseJSON;
+
+
+                    if(errores!=""){
+                    mensajes('danger', errores);
+                    warning(errores.mensagge)
+                            }else{
+                    mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");
+                    warning("Ha ocurrido un error, por favor intentelo de nuevo.")
+                  }
+
+                },
+                 success: function(respuesta){
+                   $('#btn-submit').removeAttr('disabled'); //activa el input submit
+                    $('#btn-submit').text("Enviar")
+                  warning(respuesta.mensagge)
+                  $("#store")[0].reset();
+                 // enviarEmail()
+                }
+
+            });
+        });
+    }
 
 
 
@@ -394,15 +534,15 @@
                     $('#btn-submit').text("Enviar")
                     var errores=repuesta.responseJSON;
 
-              
+
                     if(errores!=""){
                     mensajes('danger', errores);
                     warning(errores.mensagge)
                             }else{
-                    mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
+                    mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");
                     warning("Ha ocurrido un error, por favor intentelo de nuevo.")
                   }
-					   
+
                 },
                  success: function(respuesta){
                    $('#btn-submit').removeAttr('disabled'); //activa el input submit
@@ -410,7 +550,7 @@
                   warning(respuesta.mensagge)
                   $("#store")[0].reset();
                  // enviarEmail()
-                }	
+                }
 
             });
         });
@@ -419,7 +559,7 @@
 
 
     function enviarEmail(){
-        
+
         var url=document.getElementById('ruta').value; //obtiene la ruta del input hidden con la variable
         $('input[type="submit"]').attr('disabled','disabled'); //desactiva el input submit
         $.ajax({
@@ -444,30 +584,30 @@
                     $('#btn-submit').text("Enviar")
                     var errores=repuesta.responseJSON;
 
-              
+
                     if(errores!=""){
                     mensajes('danger', errores);
                     warning(errores.mensagge)
                             }else{
-                    mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");  
+                    mensajes('danger', "<span>Ha ocurrido un error, por favor intentelo de nuevo.</span>");
                     warning("Ha ocurrido un error, por favor intentelo de nuevo.")
                   }
-					   
+
                 },
               success: function(respuesta){
-                
+
                  $("#store")[0].reset();
-            }	
+            }
 
         });
-       
+
     }
 
   </script>
 
-  
 
-  
+
+
 
 </body>
 
