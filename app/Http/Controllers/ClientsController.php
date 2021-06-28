@@ -681,7 +681,7 @@ class ClientsController extends Controller
                 $request["code_client"] = strtoupper($code);
 
 
-                $request["nombres"] = $request["nombres"]." ".$request["apellidos"];
+                $request["nombres"] = rtrim($request["nombres"]." ".$request["apellidos"]);
 
                 $cliente = Clients::create($request->all());
 
@@ -1030,10 +1030,13 @@ class ClientsController extends Controller
                 $this->ProtocolRevision($request["procedure_px"], $request["date_procedure"], $id_cliente);
             }
 
-
+           
             $data = Clients::select("facebook", "instagram","twitter" , "youtube" ,  "photos_google",
                         "email","city","telefono","identificacion","state","nombres", "clinic", "id_line", "origen","forma_pago",
-                        "id_user_asesora", "prp", "id_affiliate", "pay_to_study_credit")->find($id_cliente);
+                        "id_user_asesora", "prp", "id_affiliate", "pay_to_study_credit")
+                        ->with("procedures")
+                        ->find($id_cliente);
+                        
 
             if($data->prp == null || $data->prp == "No"){
                 if($request["prp"] == "Si"){
@@ -1111,18 +1114,19 @@ class ClientsController extends Controller
 
                 LogsClients::create($version);
             }
-///
 
-if($data->nombres != $request["nombres"]){
-$nombre_from = $data->nombres;
-$nombre_to = $request["nombres"];
 
-    $version["id_user"]   = $request["id_user"];
-    $version["id_client"] = $id_cliente;
-    $version["event"]     = "Actualizo el nombre de ".$nombre_from." a ".$nombre_to."";
+        
+            if($data->procedure_px != $request["procedure_px"]){
+          
+                    $version["id_user"]   = $request["id_user"];
+                    $version["id_client"] = $id_cliente;
+                    $version["event"]     = "Actualizo la identificación de la cirugia ";
+                
+                    LogsClients::create($version);
+            }
 
-    LogsClients::create($version);
-}
+
 
 if($data->identificacion != $request["identificacion"]){
     $identificacion_from = $data->identificacion;
@@ -1144,6 +1148,22 @@ if($data->city != $request["city"]){
         $version["event"]     = "Actualizo la ciudad de ".$city_from." a ".$city_to."";
     
         LogsClients::create($version);
+}
+
+
+if(rtrim($data->nombres) != rtrim($request["nombres"])){
+    
+    $nombres_from = $data->nombres;
+    $nombres_to = $request["nombres"];
+    
+
+    if ($nombres_from != $nombres_to){
+        $version["id_user"]   = $request["id_user"];
+        $version["id_client"] = $id_cliente;
+        $version["event"]     = "Actualizo la ciudad de ".$nombres_from." a ".$nombres_to."";
+    
+        LogsClients::create($version);
+    }
 }
 
 if($data->telefono!= $request["telefono"]){
@@ -1306,7 +1326,7 @@ if($data->photos_google!= $request["photos_google"]){
             $request["vehicle"]    == 1 ? $request["vehicle"]    = 1 : $request["vehicle"]    = 0;
 
 
-            $request["nombres"] = $request["nombres"]." ".$request["apellidos"];
+            $request["nombres"] = rtrim($request["nombres"]." ".$request["apellidos"]);
 
 
             $request["pay_to_study_credit"] == 1 ? $request["pay_to_study_credit"] = 1 : $request["pay_to_study_credit"] = 0;
