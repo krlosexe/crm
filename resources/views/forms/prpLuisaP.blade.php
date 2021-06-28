@@ -445,7 +445,6 @@
 		store();
 	});
 
-
 	function store(){
 		id_user = 69;
 		enviarFormularioForm("#store", 'api/clients/forms/prp/adviser/luisa', '#cuadro2');
