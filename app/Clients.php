@@ -12,7 +12,7 @@ class Clients extends Model
         'fecha_nacimiento', 'identificacion_verify', 'city', 'clinic', 'id_line',
         'id_user_asesora', 'id_affiliate', 'id_asesora_valoracion', 'state', 'origen',
         'forma_pago', 'pay_to_study_credit','pauta', 'code_client',  'prp', 'created_prp','to_db', 'auth_app',
-        'fcmToken', 'country', 'password', 'wallezy', 'procedure_px', 'date_procedure'
+        'fcmToken', 'country', 'password', 'wallezy', 'procedure_px', 'date_procedure', 'jid'
     ];
 
 
