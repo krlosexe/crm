@@ -277,7 +277,14 @@
                                                 <option value="Si">Si</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div>                                    
+
+                    <div class="row">
+                        <div class="col md-12">
+                            <label for=""><br><b>Direccion</b></label>
+                            <input type='text' name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion_edit" class="form-control" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
                                 </div>
                             </div>
                         </div>
@@ -362,8 +369,8 @@
                                 </div>
                             </div>
                             <br><br>
-                            <div class="row">
-                                <div class="col-md-12">
+                            <div  class="row"  style="height: 500px; overflow:scroll">
+                                <div class="col-md-12" >
                                     <div id="logs_edit"></div>
                                 </div>
                             </div>
@@ -373,7 +380,23 @@
                                     <h4>Comentarios</h4>
                                 </div>
                             </div>
-                            <br><br>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
+                                        <textarea id="summernote_edit" name="comment"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="button" id="add-comments" class="btn btn-primary">
+                                        Comentar
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
+                            <div  class="row"  style="height: 500px; overflow:scroll">
                             <div class="row" id="comments_edit">
                                 <div class="col-md-12">
                                     <div class="row">
@@ -386,34 +409,12 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
-                                        <textarea id="summernote_edit" name="comment"></textarea>
-                                    </div>
-                                </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <button type="button" id="add-comments" class="btn btn-primary">
-                                        Comentar
-                                    </button>
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
 
-
-                    <div class="row">
-                        <div class="col md-12">
-                            <label for=""><br><b>Direccion</b></label>
-                            <textarea name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion_edit" class="form-control" cols="30" rows="10"></textarea>
-                        </div>
-                    </div>
                 </div>
 
 
