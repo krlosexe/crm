@@ -1035,7 +1035,7 @@ class ClientsController extends Controller
                         ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
                         ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                         ->find($id_cliente);
-            
+
 
             if($data->prp == null || $data->prp == "No"){
                 if($request["prp"] == "Si"){
@@ -1043,7 +1043,7 @@ class ClientsController extends Controller
                 }
 
             }
-            
+
 
 
             $users_affiliate = Clients::selectRaw("auth_users_app.token_notifications")
@@ -1115,15 +1115,15 @@ class ClientsController extends Controller
 
                 LogsClients::create($version);
             }
-//            
+//
             $procediminetos_cambios = $request["procediminetos_cambios"];
-           
+
             if($procediminetos_cambios != null){
-            
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo los procedimientos: ".$procediminetos_cambios;
-    
+
                 LogsClients::create($version);
             }
 
@@ -1131,146 +1131,146 @@ class ClientsController extends Controller
             if($data->dependent_independent != $request["dependent_independent"]){
                 $dependent_independent_from = $data->dependent_independent;
                 $dependent_independent_to = $request["dependent_independent"];
-                
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo el estado de ".$dependent_independent_from." a ".$dependent_independent_to."";
-                
+
                     LogsClients::create($version);
             }
-        
+
             if($data->type_contract != $request["type_contract"]){
                 $type_contract_from = $data->type_contract;
                 $type_contract_to = $request["type_contract"];
-                
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo el tipo de contrato de ".$type_contract_from." a ".$type_contract_to."";
-                
+
                     LogsClients::create($version);
             }
 
             if($data->antiquity != $request["antiquity"]){
                 $antiquity_from = $data->antiquity;
                 $antiquity_to = $request["antiquity"];
-                
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo la atiguedad de ".$antiquity_from." a ".$antiquity_to."";
-                
+
                     LogsClients::create($version);
             }
 
-            
+
             if($data->average_monthly_income != $request["average_monthly_income"]){
                 $average_monthly_income_from = $data->average_monthly_income;
                 $average_monthly_income_to = $request["average_monthly_income"];
-                
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo el promedio de ingresos de ".$average_monthly_income_from." a ".$average_monthly_income_to."";
-                
+
                     LogsClients::create($version);
             }
 
             if($data->previous_credits != $request["previous_credits"]){
                 $previous_credits_from = $data->previous_credits;
                 $previous_credits_to = $request["previous_credits"];
-                
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo los creditos anteriores de ".$previous_credits_from." a ".$previous_credits_to."";
-                
+
                     LogsClients::create($version);
             }
-        
+
             if($data->have_initial != $request["have_initial"]){
                 $have_initial_from = $data->have_initial;
                 $have_initial_to = $request["have_initial"];
-                
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo la inicial de ".$have_initial_from." a ".$have_initial_to."";
-                
+
                     LogsClients::create($version);
             }
 
             if($data->reported != $request["reported"]){
                 $reported_from = $data->reported;
                 $reported_to = $request["reported"];
-                
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo el reporte de ".$reported_from." a ".$reported_to."";
-                
+
                     LogsClients::create($version);
             }
 
-            
+
             if($data->bank_account != $request["bank_account"]){
                 $bank_account_from = $data->bank_account;
                 $bank_account_to = $request["bank_account"];
-                
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo la cuenta bancaria de ".$bank_account_from." a ".$bank_account_to."";
-                
+
                     LogsClients::create($version);
             }
             if($data->properties != $request["properties"]){
                 $properties_from = $data->properties;
                 $properties_to = $request["properties"];
-                
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo las propiedades de ".$properties_from." a ".$properties_to."";
-                
+
                     LogsClients::create($version);
             }
 
-            
+
             if($data->vehicle != $request["vehicle"]){
                 $vehicle_from = $data->vehicle;
                 $vehicle_to = $request["vehicle"];
-                
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo los vehiculos de ".$vehicle_from." a ".$vehicle_to."";
-                
+
                     LogsClients::create($version);
             }
-            
+
 //
 if($data->eps != $request["eps"]){
     $eps_from = $data->eps;
     $eps_to = $request["eps"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo la EPS de ".$eps_from." a ".$eps_to."";
-    
+
         LogsClients::create($version);
 }
 
 if($data->children != $request["children"]){
     $children_from = $data->children;
     $children_to = $request["children"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo el numero de  hijos de ".$children_from." a ".$children_to."";
-    
+
         LogsClients::create($version);
 }
 
 if($data->weight != $request["weight"]){
     $weight_from = $data->weight;
     $weight_to = $request["weight"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo el peso de ".$weight_from." a ".$weight_to."";
-    
+
         LogsClients::create($version);
 }
 
@@ -1278,11 +1278,11 @@ if($data->weight != $request["weight"]){
 if($data->height != $request["height"]){
     $height_from = $data->height;
     $height_to = $request["height"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo el peso de ".$height_from." a ".$height_to."";
-    
+
         LogsClients::create($version);
 }
 
@@ -1290,11 +1290,11 @@ if($data->height != $request["height"]){
 
 
             if($data->procedure_px != $request["procedure_px"]){
-          
+
                     $version["id_user"]   = $request["id_user"];
                     $version["id_client"] = $id_cliente;
                     $version["event"]     = "Actualizo la identificación de la cirugia ";
-                
+
                     LogsClients::create($version);
             }
 
@@ -1303,11 +1303,11 @@ if($data->height != $request["height"]){
 if($data->identificacion != $request["identificacion"]){
     $identificacion_from = $data->identificacion;
     $identificacion_to = $request["identificacion"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo la identificación de ".$identificacion_from." a ".$identificacion_to."";
-    
+
         LogsClients::create($version);
 }
 
@@ -1315,26 +1315,26 @@ if($data->identificacion != $request["identificacion"]){
 if($data->city != $request["city"]){
     $city_from = $data->city;
     $city_to = $request["city"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo la ciudad de ".$city_from." a ".$city_to."";
-    
+
         LogsClients::create($version);
 }
 
 
 if(rtrim($data->nombres) != rtrim($request["nombres"])){
-    
+
     $nombres_from = $data->nombres;
     $nombres_to = $request["nombres"];
-    
+
 
     if ($nombres_from != $nombres_to){
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo la ciudad de ".$nombres_from." a ".$nombres_to."";
-    
+
         LogsClients::create($version);
     }
 }
@@ -1342,44 +1342,44 @@ if(rtrim($data->nombres) != rtrim($request["nombres"])){
 if($data->telefono!= $request["telefono"]){
     $telefono_from = $data->telefono;
     $telefono_to = $request["telefono"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo el telefono de ".$telefono_from." a ".$telefono_to."";
-    
+
         LogsClients::create($version);
 }
 
 if($data->email!= $request["email"]){
     $email_from = $data->email;
     $email_to = $request["email"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo el email de ".$email_from." a ".$email_to."";
-    
+
         LogsClients::create($version);
 }
 
 if($data->origen!= $request["origen"]){
     $origen_from = $data->origen;
     $origen_to = $request["origen"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo el origen de ".$origen_from." a ".$origen_to."";
-    
+
         LogsClients::create($version);
 }
 
 if($data->forma_pago!= $request["forma_pago"]){
     $forma_pago_from = $data->forma_pago;
     $forma_pago_to = $request["forma_pago"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo la forma de pago de ".$forma_pago_from." a ".$forma_pago_to."";
-    
+
         LogsClients::create($version);
 }
 
@@ -1387,51 +1387,51 @@ if($data->forma_pago!= $request["forma_pago"]){
 if($data->facebook!= $request["facebook"]){
     $facebook_from = $data->facebook;
     $facebook_to = $request["facebook"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo el facebook de ".$facebook_from." a ".$facebook_to."";
-    
+
         LogsClients::create($version);
 }
 
 if($data->instagram!= $request["instagram"]){
     $instagram_from = $data->instagram;
     $instagram_to = $request["instagram"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo el instagram de ".$instagram_from." a ".$instagram_to."";
-    
+
         LogsClients::create($version);
 }
 
 if($data->twitter!= $request["twitter"]){
     $twitter_from = $data->twitter;
     $twitter_to = $request["twitter"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo el twitter pago de ".$twitter_from." a ".$twitter_to."";
-    
+
         LogsClients::create($version);
 }
 
 if($data->youtube!= $request["youtube"]){
     $youtube_from = $data->youtube;
     $youtube_to = $request["youtube"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo youtube de ".$youtube_from." a ".$youtube_to."";
-    
+
         LogsClients::create($version);
 }
 
 if($data->forma_pago!= $request["forma_pago"]){
     $forma_pago_from = $data->forma_pago;
     $forma_pago_to = $request["forma_pago"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo la formade pago de ".$forma_pago_from." a ".$forma_pago_to."";
@@ -1442,11 +1442,11 @@ if($data->forma_pago!= $request["forma_pago"]){
 if($data->photos_google!= $request["photos_google"]){
     $photos_google_from = $data->photos_google;
     $photos_google_to = $request["photos_google"];
-    
+
         $version["id_user"]   = $request["id_user"];
         $version["id_client"] = $id_cliente;
         $version["event"]     = "Actualizo las fotos de google de ".$photos_google_from." a ".$photos_google_to."";
-    
+
         LogsClients::create($version);
 }
 
@@ -1507,7 +1507,7 @@ if($data->photos_google!= $request["photos_google"]){
 
                 DB::table("clients_pay_to_study_credit")->where("id_client", $id_cliente)->delete();
 
-            
+
                 /*if($request["pay_to_study_credit"] == 1){
                     DB::table("clients_pay_to_study_credit")->insert([
                                                                         "id_client" => $id_cliente,
@@ -2087,7 +2087,6 @@ if($data->photos_google!= $request["photos_google"]){
 
 
 
-
             ini_set('memory_limit', '-1');
 
             $tasks = ClientsTasks::select("clients_tasks.*", "responsable.email as email_responsable", "datos_personales.nombres as name_responsable",
@@ -2101,7 +2100,7 @@ if($data->photos_google!= $request["photos_google"]){
 
                                     ->join("users as responsable", "responsable.id", "=", "clients_tasks.responsable")
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
-
+                                    ->join("clients_tasks_followers", "clients_tasks_followers.id_task", "=", "clients_tasks.id_clients_tasks")
                                     ->with("followers")
                                     //->with("comments")
 
@@ -2129,6 +2128,7 @@ if($data->photos_google!= $request["photos_google"]){
                                     ->where(function ($query) use ($adviser) {
                                         if($adviser != 0){
                                             $query->whereIn("clients_tasks.responsable", $adviser);
+                                            $query->orWhere("clients_tasks_followers.id_follower", $adviser);
                                         }
                                     })
 
