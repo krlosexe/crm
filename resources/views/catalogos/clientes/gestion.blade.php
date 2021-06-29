@@ -1901,10 +1901,11 @@
 						count++
 						html += "<tr id='tr_procedure_edit_"+count+"'>"
 							html += "<td>"+item.name+"<input type='hidden' name='sub_category[]' value='"+item.id_sub_category+"'></td>"
-							html += "<td><span onclick='eliminarTr(\""+'#tr_procedure_edit_'+count+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
+							html += "<td><span onclick='eliminarOp(\""+'#tr_procedure_edit_'+count+"\", \""+item.name+"\")' class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></td>"
 						html += "</tr>"
 
 						$("#tablecx_edit tbody").html(html);
+
 					});
 
 
@@ -1915,7 +1916,7 @@
 
 					$("#state_edit").val(data.state).trigger("change")
 
-					$("#nombre_edit").val(data.nombres)
+					$("#nombre_edit").val(data.nombres).trigger("change")
 					$("#apellido_edit").val("")
 					$("#identificacion_edit").val(data.identificacion)
 					$("#telefono_edit").val(data.telefono)
@@ -1988,11 +1989,8 @@
 					$("#reported_edit").val(data.reported)
 					$("#bank_account_edit").val(data.bank_account)
 					$("#have_initial_edit").val(data.have_initial)
-
 					$("#properties_edit").prop("checked", data.properties ? true : false)
 					$("#vehicle_edit").prop("checked", data.vehicle ? true : false)
-
-
 					$("#pay_to_study_credit").prop("checked", data.pay_to_study_credit ? true : false)
                     $("#method_pay_study_credit_edit").val(data.payment_method)
 
@@ -2135,6 +2133,18 @@
 					getTasksAdvisers(data.id_cliente)
 				});
 			}
+
+
+
+			function eliminarOp(tr, name_cx){
+				$(tr).remove(); 
+				var procedimientos=[]
+				procedimientos.push($("#procediminetos_cambios").val())
+				procedimientos.push("Se elimino un procedimiento " + name_cx)
+				$("#procediminetos_cambios").val(procedimientos)
+			}
+
+
 
 
 
@@ -2656,7 +2666,7 @@
 			$("#tablecx tbody").append(html);
 
 		});
-
+//
 
 		var count2 = 0
 		$("#btn-add-surgerie-edit").click(function (e) {
@@ -2668,8 +2678,18 @@
 			html += "</tr>"
 
 			$("#tablecx_edit tbody").append(html);
+			
+			var procedimientos=[]
+		    procedimientos.push($("#procediminetos_cambios").val())
+			procedimientos.push("Se Agrego "+ $("#sub_category_edit option:selected").text())
 
+			
+		    
+
+			$("#procediminetos_cambios").val(procedimientos)
 		});
+
+
 
 
 		$("#pay_consultation").change(function (e) {
@@ -2684,11 +2704,11 @@
 				$("#way_to_pay-store").attr("required", "required")
 			}
 
-			});
+		});
 
 
 
-			$("#way_to_pay-store").change(function (e) {
+		$("#way_to_pay-store").change(function (e) {
 
 			if($(this).val() == "Transferencia"){
 				$("#content_acquittance").css("display", "block")
@@ -2699,6 +2719,8 @@
 			}
 
 		});
+
+
 		$("#process_status").click(function(e) {
 		    ProcesStatus()
 	     });
@@ -2752,6 +2774,10 @@
 		} catch (e) {
 			console.log(e)
 		}
+
+
+
+
 	}
 
 
