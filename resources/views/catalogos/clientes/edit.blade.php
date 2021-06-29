@@ -470,6 +470,7 @@
 
                                         </tbody>
                                     </table>
+                                    <input type="hidden" id="procediminetos_cambios" name="procediminetos_cambios">
                                 </div>
 
                             </div>
@@ -748,7 +749,7 @@
 
                         <div class="col-md-2">
                             <label for="average_monthly_income"><b>Fecha de Pago</b></label>
-                            <input type="datetime" name="date_pay_study_credit" class="form-control form-control-user" id="date_pay_study_credit_edit">
+                            <input type="date" name="date_pay_study_credit" class="form-control form-control-user" id="date_pay_study_credit_edit">
                         </div>
 
                     </div>
