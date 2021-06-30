@@ -111,13 +111,6 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="form-group">
-                                        <label for=""><b>Numero de identificacion</b></label>
-                                        <input type="text" name="identificacion" class="form-control form-control-user" id="identificacion_edit" placeholder="PJ. 23559081154">
-                                    </div>
-                                </div>
-
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="identificacion_verify"><b>Cédula Verificada?</b></label>
@@ -128,6 +121,12 @@
                                         </label>
                                     </div>
                                 </div>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label for=""><b>Numero de identificacion</b></label>
+                                        <input type="text" name="identificacion" class="form-control form-control-user" id="identificacion_edit" placeholder="PJ. 23559081154">
+                                    </div>
+                                </div>                                
                             </div>
 
 
@@ -277,8 +276,31 @@
                                                 <option value="Si">Si</option>
                                             </select>
                                         </div>
+                                    </div>                                    
+
+                    <div class="row">
+                        <div class="col md-12">
+                            <label for=""><br><b>Direccion</b></label>
+                            <input type='text' name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion_edit" class="form-control" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+
+                    <br><br>
+                        <div class="row">
+                            
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
+                                        <textarea id="summernote_edit" name="comment"></textarea>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <button type="button" id="add-comments" class="btn btn-primary">
+                                        Comentar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -329,7 +351,7 @@
                             <br><br>
                             <div class="row">
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="before_and_after"><b>Fotos Antes y Despues</b></label>
                                     <label class='container-check'>
                                         <input type='checkbox' name='before_and_after' class='checkitem chk-col-blue' id='before_and_after' value='1'>
@@ -337,17 +359,19 @@
                                         <label for=''></label>
                                     </label>
                                 </div>
-                                <div class="col-md-4">
+                                <br><br>
+                                <div class="col-md-8">
                                     <label for="before_and_after_date"><b>Fecha</b></label>
                                     <input type="date" class="form-control" name="before_and_after_date" id="before_and_after_date">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2">
+                            <br><br>
 
-                                </div>
-                                <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-4">
                                     <label for="survey"><b>Encuesta Asesora</b></label>
+                                </div>
+                                <div class="col-md-4">
                                     <label class='container-check'>
                                         <input type='checkbox' name='survey' class='checkitem chk-col-blue' id='survey' value='1' disabled>
                                         <span class='checkmark'></span>
@@ -362,8 +386,8 @@
                                 </div>
                             </div>
                             <br><br>
-                            <div class="row">
-                                <div class="col-md-12">
+                            <div  class="row"  style="height: 500px; overflow:scroll">
+                                <div class="col-md-12" >
                                     <div id="logs_edit"></div>
                                 </div>
                             </div>
@@ -373,7 +397,10 @@
                                     <h4>Comentarios</h4>
                                 </div>
                             </div>
-                            <br><br>
+                            <br>
+                            
+                            <br>
+                            <div  class="row"  style="height: 500px; overflow:scroll">
                             <div class="row" id="comments_edit">
                                 <div class="col-md-12">
                                     <div class="row">
@@ -386,34 +413,12 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
-                                        <textarea id="summernote_edit" name="comment"></textarea>
-                                    </div>
-                                </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <button type="button" id="add-comments" class="btn btn-primary">
-                                        Comentar
-                                    </button>
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
 
-
-                    <div class="row">
-                        <div class="col md-12">
-                            <label for=""><br><b>Direccion</b></label>
-                            <textarea name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion_edit" class="form-control" cols="30" rows="10"></textarea>
-                        </div>
-                    </div>
                 </div>
 
 
