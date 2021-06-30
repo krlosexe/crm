@@ -112,9 +112,12 @@ Route::get('masajes', function () {
 });
 
 Route::get('citas-examenes', function () {
-    return view('citas.examenes.gestion');
+    return view('catalogos.examenes.gestion');
 });
 
+Route::get('pacientes-referidos', function () {
+    return view('catalogos.referidos.gestion');
+});
 
 
 Route::get('tasks', function () {
