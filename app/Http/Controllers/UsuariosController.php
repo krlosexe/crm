@@ -102,7 +102,7 @@ class UsuariosController extends Controller
                     ->where("identificacion", $request["id"])
                     ->update(["password" => md5(123456789)]);
 
-            $mensaje = "Bienvenido, tus datos de acceso son: ".$data->email." clave: 123456789";
+            $mensaje = "Bienvenido, tus datos de acceso son: ".$data->email." clave: ".$data->code_client;
 
 
             $info_email = [
