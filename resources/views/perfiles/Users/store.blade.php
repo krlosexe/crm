@@ -67,12 +67,19 @@
 								</select>
 			              </div>
 
-
+						  <br>
 						</div>
-						<label for=""><b>Codigo Usuario</b></label>
-						<div class="form-group valid-required">
-			              <input type="text" name="code_user" class="form-control form-control-user col-6" maxlength="4" id="code" placeholder="Codigo" required>
-			            </div>
+						<div class="row">
+							<div class="col-sm-6 mb-3 mb-sm-0 valid-required">
+								<label for=""><b>Codigo Usuario</b></label>
+			              		<input type="text" name="code_user" class="form-control form-control-user" id="code_edit" placeholder="Codigo" required>
+			            	</div>
+
+							<!--<div class="col-sm-6 mb-3 mb-sm-0 valid-required" >
+								<label for=""><b>N° de Identificacion</b></label>
+			              		<input type="text" name="identificacion" class="form-control form-control-user" id="identificacion_edit" placeholder="N° de Identificacion" required>
+			            	</div>-->
+						</div>   
 				  	</div>
 				</div>
 
@@ -81,7 +88,7 @@
 			  </div>
 
 
-
+<br><br>
 			  <div class="tab-pane fade tab_content1" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
 			  		<div class="row">
@@ -129,7 +136,7 @@
 			  		<div class="row">
 			  			<div class="col-sm-12 text-center valid-required">
 				        	<label for=""><br></label>
-				            <textarea name="direccion" placeholder="Direccion" id="direccion" class="form-control" cols="30" rows="10"></textarea>
+				            <input type="text" name="direccion" placeholder="Direccion" id="direccion" class="form-control" cols="30" rows="10"></textarea>
 				        </div>
 			  		</div>
 					

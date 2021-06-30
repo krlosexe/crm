@@ -480,6 +480,7 @@
 					$("#telefono-edit").val(data.telefono)
 					$("#direccion-edit").val(data.direccion)
 					$("#code_edit").val(data.code_user)
+					//$("#identificacion_edit").val(data.identificacion_edit)
 					$("#id_edit").val(data.id)
 
 					var lines = []

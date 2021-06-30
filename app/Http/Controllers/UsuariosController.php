@@ -203,7 +203,11 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+         //dd($request->all());//dd($id_client->id_cliente);
+            $id_clients = DB::table("clientes")->where("identificacion", $request["n_cedula"])->first();
+
+            //$request["id_client"] = $id_clients->id_cliente;
+
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $messages = [
@@ -226,6 +230,8 @@ class UsuariosController extends Controller
                 return response()->json("Las contrasenas no coinciden")->setStatusCode(400);
             }
 
+
+
             if ($validator->fails()) {
                 return response()->json($validator->errors())->setStatusCode(400);
 
@@ -246,6 +252,9 @@ class UsuariosController extends Controller
                     $User->password    = md5($request["password"]);
                     $User->img_profile = $file->getClientOriginalName();
                     $User->id_rol      = $request["rol"];
+                    if ($User->id_rol == '22'){
+                        $User->id_client      = $id_clients->id_cliente;
+                    }
                    // $auditoria->fec_regins  = date("Y-m-d H:i:s");
                     $User->id_line     = $request["id_line"];
                     $User->code_user = $request->code_user;

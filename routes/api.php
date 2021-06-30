@@ -34,6 +34,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('verify-token', 'Login@VerifyToken');
 
 Route::resource('user', 'UsuariosController');
+
+
 Route::post('status-user/{id}/{status}', 'UsuariosController@statusUser');
 Route::get('get-asesoras', 'UsuariosController@GetAsesoras');
 Route::get('get-asesoras-business-line/{id}', 'UsuariosController@GetAsesorasByBusinessLine');
