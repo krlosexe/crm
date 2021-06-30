@@ -2021,24 +2021,29 @@
 
 					var url=document.getElementById('ruta').value;
 					var html = "";
-					$.map(data.logs, function (item, key) {
+					
+
+				
+				$.map(data.logs, function (item, key) {
+				
+					html += '<div class="col-md-10" style="padding: 2%;border-radius: 17px;">'
 						html += '<div class="col-md-12" style="margin-bottom: 15px">'
 							html += '<div class="row">'
 								html += '<div class="col-md-2">'
 									html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-
 								html += '</div>'
-								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;overflow: scroll">'
+								html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;overflow: visible">'
 									html += '<div>'+item.event+'</div>'
-
 									html += '<div><b>'+item.name_user+" "+item.last_name_user+'</b> <span style="float: right">'+item.create_at+'</span></div>'
-
-
 								html += '</div>'
 							html += '</div>'
 						html += '</div>'
+					html += '</div>'
+				
+				});
+				
 
-					});
+					
 
 					$("#logs_edit").html(html)
 

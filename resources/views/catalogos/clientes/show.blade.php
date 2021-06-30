@@ -459,8 +459,9 @@
 						html += '</div>'
 						
 					});
-
+					
 					$("#logs_edit").html(html)
+					
 
 
 
