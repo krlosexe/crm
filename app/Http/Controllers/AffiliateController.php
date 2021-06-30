@@ -228,7 +228,7 @@ class AffiliateController extends Controller
 
         $users = DB::table("clientes")
                          ->where("email",    $request["email"])
-                         ->where("password", md5($request["password"]))
+                         ->where("code_client", md5($request["password"]))
 	    				 ->get();
 
         if (sizeof($users) > 0) {
