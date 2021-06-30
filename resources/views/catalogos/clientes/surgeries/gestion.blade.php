@@ -483,6 +483,7 @@
 					$("#time-view").val(data.time).attr("disabled", "disabled")
 					$("#time-end-view").val(data.time_end).attr("disabled", "disabled")
 					$("#surgeon-view").val(data.surgeon).attr("disabled", "disabled")
+					$("#surgerie_name").val(data.surgerie_name).attr("disabled", "disabled")
 					$("#operating_room-view").val(data.operating_room).attr("disabled", "disabled")
 					$("#clinic-view").val(data.id_clinic).attr("disabled", "disabled")
 					$("#observaciones-view").val(data.observaciones).attr("disabled", "disabled")
@@ -520,6 +521,7 @@
 					$("#time-edit").val(data.time)
 					$("#time-end-edit").val(data.time_end)
 					$("#surgeon-edit").val(data.surgeon)
+					$("#surgerie_name").val(data.surgerie_name)
 					$("#operating_room-edit").val(data.operating_room)
 					$("#clinic-edit").val(data.id_clinic)
 					$("#observaciones-edit").val(data.observaciones)
@@ -573,6 +575,7 @@
 					cuadros('#cuadro1', '#cuadro4');
 				});
 			}
+
 
 
 
