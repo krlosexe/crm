@@ -286,20 +286,7 @@
                     </div>
 
                     <br><br>
-                        <div class="row">
-                            
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
-                                        <textarea id="summernote_edit" name="comment"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <button type="button" id="add-comments" class="btn btn-primary">
-                                        Comentar
-                                    </button>
-                                </div>
-                            </div>
+                        
                         </div>
                             </div>
                         </div>
@@ -398,6 +385,18 @@
                                 </div>
                             </div>
                             <br>
+                            
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <!-- <textarea name="observaciones" id="observaciones-store" class="form-control" cols="30" rows="5"></textarea> -->
+                                        <textarea id="summernote_edit" name="comment"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="button" id="add-comments" class="btn btn-primary">
+                                        Comentar
+                                    </button>
+                                </div>
                             
                             <br>
                             <div  class="row"  style="height: 500px; overflow:scroll">
