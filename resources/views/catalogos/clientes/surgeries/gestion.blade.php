@@ -521,7 +521,7 @@
 					$("#time-edit").val(data.time)
 					$("#time-end-edit").val(data.time_end)
 					$("#surgeon-edit").val(data.surgeon)
-					$("#surgerie_name").val(data.surgerie_name)
+					$("#surgerie_name_edit").val(data.surgerie_name)
 					$("#operating_room-edit").val(data.operating_room)
 					$("#clinic-edit").val(data.id_clinic)
 					$("#observaciones-edit").val(data.observaciones)
