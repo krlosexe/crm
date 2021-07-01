@@ -61,6 +61,7 @@ Route::get('verify-permiso', 'Login@VerifyPermiso');
 Route::resource('roles', 'RolesController');
 Route::post('status-rol/{id}/{status}', 'RolesController@status');
 
+Route::get('referents','AffiliateController@index');
 
 Route::resource('clients', 'ClientsController');
 
