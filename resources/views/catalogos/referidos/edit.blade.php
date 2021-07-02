@@ -64,7 +64,7 @@
             <div class="tab-content" id="myTabContent">
 
                 <div class="tab-pane fade show active tab_content0" id="init_edit" role="tabpanel" aria-labelledby="patient_record_edit">
-                @include('catalogos.referidos.info_referidos')
+                @include('catalogos.referidos.Info_referidos')
                 </div>
 
                 <div class="tab-pane fade tab_content1" id="info-add-edit" role="tabpanel" aria-labelledby="patient_record">
