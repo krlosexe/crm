@@ -142,7 +142,18 @@
 			function update(){
 				enviarFormularioPut("#form-update", 'api/user', '#cuadro4', false, "#avatar-edit");
 			}
+/*
+			function complete(){
+				$id_clients = DB::table("clientes")->where("identificacion", $request["n_cedula"])->first();
 
+			
+			$nombres            = $id_clients->nombres;
+            $apellidos_p        = $id_clients->apellidos;
+            $apellido_m         = $id_clients->apellidos;
+            $fecha_nacimiento   = $id_clients->fecha_nacimiento;
+            $telefono           = $id_clients->id_cliente;
+            $direccion          = $id_clients->direccion;
+			}*/
 
 			function list(cuadro) {
 
