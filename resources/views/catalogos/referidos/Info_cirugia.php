@@ -28,7 +28,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for=""><b>Observaciones adicionales</b></label>
-                                        <textarea class="form-control" name="observations" id="observations_edit"></textarea>
+                                        <input type="text" class="form-control" name="observations" id="observations_edit"></input>
                                     </div>
                                 </div>
                             </div>

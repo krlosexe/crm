@@ -1,6 +1,6 @@
 <div class="card shadow mb-4 hidden" id="cuadro3">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Consulta de pacientes</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Consulta de Referidos</h6>
   </div>
   <div class="card-body">
       <form class="user" autocomplete="off" method="post" id="form-view" enctype="multipart/form-data">
@@ -22,7 +22,7 @@
                 <a id="tab3" class="nav-link" id="info_credit_patient_view" data-toggle="tab" href="#info-credit-patient-view" role="tab" aria-controls="info-add" aria-selected="false">Info Crediticia</a>
             </li>
 
-
+<!--
             <li  class="nav-item" id="tab4_view">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-valuations-view" role="tab" aria-controls="info-add" aria-selected="false">Valoraciones</a>
             </li>
@@ -44,7 +44,7 @@
             <li  class="nav-item" id="tab8_view">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-view" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
             </li>
-
+-->
 
         </ul>
         <br><br>
@@ -349,7 +349,7 @@
                 <div class="row">
                     <div class="col md-12">
                         <label for=""><br><b>Direccion</b></label>
-                        <textarea name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion_view" class="form-control" cols="30" rows="10"></textarea>
+                        <input type="text" name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion_view" class="form-control" cols="30" rows="10"></input>
                     </div>
                 </div>
             </div>

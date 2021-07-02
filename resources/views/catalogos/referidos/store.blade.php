@@ -24,7 +24,7 @@
             </li>
 
 
-
+<!--
             <li  class="nav-item tabs-remove" style="display: none">
                 <a id="tab4" class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-valuations-store" role="tab" aria-controls="info-add" aria-selected="false">Valoraciones</a>
             </li>
@@ -42,7 +42,7 @@
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-revision-store" role="tab" aria-controls="info-add" aria-selected="false">Revisiones</a>
             </li>
 
-            <!-- <li  class="nav-item tabs-remove" style="display: none">
+             <li  class="nav-item tabs-remove" style="display: none">
                 <a id="tab4" class="nav-link"  data-toggle="tab" href="#info-tracing-edit" role="tab" aria-controls="info-add" aria-selected="false">Seguimientos</a>
             </li> -->
 
@@ -422,10 +422,6 @@
                                     </div>
                                 </div>
 
-
-
-
-
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -441,9 +437,6 @@
                             </div>
 
                         </div>
-
-
-
 
                         <br>
                         <div class="row" id="content_create_valoration" style="display:none">
@@ -476,10 +469,7 @@
                                             <input type="time" name="time_end" id="time-end-store" class="form-control select2">
                                         </div>
                                     </div>
-
                                 </div>
-
-
 
                                 <div class="row">
 
@@ -502,9 +492,6 @@
                                         </div>
                                     </div>
 
-
-
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for=""><b>Seguidores</b></label>
@@ -523,8 +510,6 @@
                                         </div>
                                     </div>
 
-
-
                                 </div>
 
 
@@ -539,8 +524,6 @@
 
                                 <br><br>
 
-
-
                                 <div class="col-md-12">
                                     <div class="row">
 
@@ -554,9 +537,6 @@
                                             </div>
                                         </div>
 
-
-
-
                                         <div class="col-md-4">
                                             <div class="form-group">
                                             <label for=""><b>Código PRP de quien remite</b></label>
@@ -565,11 +545,6 @@
                                     </div>
 
                                 </div>
-
-
-
-
-
 
                                     <div class="row">
                                             <div class="col-md-12">
@@ -604,19 +579,11 @@
                                         </div>
                                     </div>
 
-                                    </div>
-
-
-
+                                </div>
 
                             </div>
 
                         </div>
-
-
-
-
-
 
                     </div>
 
@@ -626,7 +593,7 @@
                 <div class="row">
                     <div class="col md-12">
                         <label for=""><br><b>Direccion</b></label>
-                        <textarea name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion" class="form-control disabled" cols="30" rows="10"></textarea>
+                        <input type="text" name="direccion" placeholder="PJ. Calle 47A #6AB-30" id="direccion" class="form-control disabled" cols="30" rows="10"></input>
                     </div>
                 </div>
               </div>
@@ -715,25 +682,16 @@
                             </div>
                         </div>
 
-
-
-
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""><b>Vol Implante</b></label>
                                 <input type="text" name="implant_volumem" class="form-control form-control-user" id="implant_volumem" placeholder="PJ. 11">
                             </div>
                         </div>
-
                     </div>
               </div>
 
-
-
-
-
-
-              <div class="tab-pane fade tab_content1" id="init-history" role="tabpanel" aria-labelledby="patient_record">
+                 <div class="tab-pane fade tab_content1" id="init-history" role="tabpanel" aria-labelledby="patient_record">
 
                     <div class="row">
 
@@ -886,26 +844,11 @@
                                         <label for="allergic_medication"><b>A que medicamentos o Suturas es Alergic@?</b></label>
                                     <input type="text" name="allergic_medication" class="form-control form-control-user" readonly id="allergic_medication" placeholder="PJ. Acetaminofen" >
                                 </div>
-
-
                             </div>
                         </div>
-
                     </div>
-
                     <br><br>
-
-
               </div>
-
-
-
-
-
-
-
-
-
 
               <div class="tab-pane fade tab_content1-0" id="info-credit-patient" role="tabpanel" aria-labelledby="patient_record">
 
@@ -1033,18 +976,6 @@
                 </div>
                 <br><br>
               </div>
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
 
 

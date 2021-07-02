@@ -21,7 +21,7 @@
                 <li class="nav-item">
                     <a id="tab3" class="nav-link"  data-toggle="tab" href="#info-credit-patient-edit" role="tab" aria-controls="info-add" aria-selected="false">Info Crediticia</a>
                 </li>
-
+<!--
                 <li class="nav-item" id="tab4_edit">
                     <a class="nav-link" id="info_credit_patient_edit" data-toggle="tab" href="#info-valuations-edit" role="tab" aria-controls="info-add" aria-selected="false">Valoraciones</a>
                 </li>
@@ -55,7 +55,7 @@
 
                 <li class="nav-item" id="tab10_edit">
                     <a id="tab5" class="nav-link" data-toggle="tab" href="#info-refferees-edit" role="tab" aria-controls="info-add" aria-selected="false">Referidos PRP</a>
-                </li>
+                </li>-->
 
 
             </ul>

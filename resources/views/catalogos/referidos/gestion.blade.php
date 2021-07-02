@@ -309,9 +309,9 @@
 			          </div>
 
 
-			          @include('catalogos.clientes.store')
-					  @include('catalogos.clientes.view')
-					  @include('catalogos.clientes.edit')
+			          @include('catalogos.referidos.store')
+					  @include('catalogos.referidos.view')
+					  @include('catalogos.referidos.edit')
 
 
 			        </div>

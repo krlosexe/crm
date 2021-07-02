@@ -203,11 +203,17 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-         //dd($request->all());//dd($id_client->id_cliente);
-            $id_clients = DB::table("clientes")->where("identificacion", $request["n_cedula"])->first();
+         //
+            
+            $id_rol = $request["rol"];
 
-            //$request["id_client"] = $id_clients->id_cliente;
+    if ($id_rol == '22'){
+        $id_clients = DB::table("clientes")->where("identificacion", $request["n_cedula"])->first();
 
+        if ($id_clients != NULL){
+       /*    $ext_mail = DB::table("clientes")->where("email", $request["email"])->first();
+
+        if ($ext_mail!= NULL) {*/
 
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
             $messages = [
@@ -218,14 +224,14 @@ class UsuariosController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'img-profile'     => 'required',
-                'email'           => 'required|unique:users',
+                'email'           => 'required',
                 'password'        => 'required',
                 'repeat-password' => 'required',
                 'rol'             => 'required'
 
             ], $messages);
 
-
+             
             if ($request["password"] != $request["repeat-password"]) {
                 return response()->json("Las contrasenas no coinciden")->setStatusCode(400);
             }
@@ -236,6 +242,8 @@ class UsuariosController extends Controller
                 return response()->json($validator->errors())->setStatusCode(400);
 
             }else{
+
+                
 
                 $file = $request->file('img-profile');
 
@@ -255,6 +263,8 @@ class UsuariosController extends Controller
                     if ($User->id_rol == '22'){
                         $User->id_client      = $id_clients->id_cliente;
                     }
+                   
+                    
                    // $auditoria->fec_regins  = date("Y-m-d H:i:s");
                     $User->id_line     = $request["id_line"];
                     $User->code_user = $request->code_user;
@@ -299,7 +309,110 @@ class UsuariosController extends Controller
         }
 
 
+
+
+        }else{
+            return response()->json("El cliente no se encuentra registrado")->setStatusCode(400);
+        }
+
+    }else{
+
+       
+        if ($this->VerifyLogin($request["id_user"],$request["token"])){
+            $messages = [
+                'required' => 'El Campo :attribute es requirdo.',
+                'unique'   => 'El Campo :attribute ya se encuentra en uso.'
+            ];
+
+
+            $validator = Validator::make($request->all(), [
+                'img-profile'     => 'required',
+                'email'           => 'required|unique:users',
+                'password'        => 'required',
+                'repeat-password' => 'required',
+                'rol'             => 'required'
+
+            ], $messages);
+
+             
+            if ($request["password"] != $request["repeat-password"]) {
+                return response()->json("Las contrasenas no coinciden")->setStatusCode(400);
+            }
+
+
+
+            if ($validator->fails()) {
+                return response()->json($validator->errors())->setStatusCode(400);
+
+            }else{
+
+                
+
+                $file = $request->file('img-profile');
+
+                $destinationPath = 'img/usuarios/profile';
+                $file->move($destinationPath,$file->getClientOriginalName());
+                $request["img_profile"] = " asdasdasd asdas"; //add request
+
+                $datos = User::where('code_user',$request->code_user)->exists();
+
+                if($datos){
+                    return ['mensaje'=>'el codigo que intenta ingresar ya esxiste'];
+                }else{
+                    $User              = new User;
+                    $User->email       = $request["email"];
+                    $User->password    = md5($request["password"]);
+                    $User->img_profile = $file->getClientOriginalName();
+                    $User->id_rol      = $request["rol"];
+                    if ($User->id_rol == '22'){
+                        $User->id_client      = $id_clients->id_cliente;
+                    }
+                   
+                    
+                   // $auditoria->fec_regins  = date("Y-m-d H:i:s");
+                    $User->id_line     = $request["id_line"];
+                    $User->code_user = $request->code_user;
+                    $User->save();
+                }
+
+                $datos_personales                   = new datosPersonaesModel;
+                $datos_personales->nombres          = $request["nombres"];
+                $datos_personales->apellido_p       = $request["apellido_p"];
+                $datos_personales->apellido_m       = $request["apellido_m"];
+                $datos_personales->n_cedula         = $request["n_cedula"];
+                $datos_personales->fecha_nacimiento = $request["fecha_nacimiento"];
+                $datos_personales->telefono         = $request["telefono"];
+                $datos_personales->direccion        = $request["direccion"];
+                $datos_personales->id_usuario       = $User->id;
+                $datos_personales->save();
+
+
+                $auditoria              = new Auditoria;
+                $auditoria->tabla       = "users";
+                $auditoria->cod_reg     = $User->id;
+                $auditoria->status      = 1;
+                $auditoria->usr_regins  = $request["id_user"];
+                $auditoria->save();
+
+
+                foreach($request["id_lines"] as $key => $value){
+                    $request["id_line"] = $value;
+                    $request["id_user"] = $User->id;
+                    UsersLine::create($request->all());
+                }
+
+                if ($User) {
+                    $data = array('mensagge' => "Los datos fueron registrados satisfactoriamente");
+                    return response()->json($data)->setStatusCode(200);
+                }else{
+                    return response()->json("A ocurrido un error")->setStatusCode(400);
+                }
+            }
+        }else{
+            return response()->json("No esta autorizado")->setStatusCode(400);
+        }
     }
+}
 
     /**
      * Display the specified resource.
@@ -384,7 +497,7 @@ class UsuariosController extends Controller
                    }
 
                    $User->code_user = $request->code_user;
-                   $User->save();
+                   $User->update();
                }
 
 

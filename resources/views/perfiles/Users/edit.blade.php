@@ -76,7 +76,7 @@
 						<div class="row">
 							<div class="form-group valid-required">
 								<label for=""><b>Codigo Usuario</b></label>
-			              		<input type="text" name="code_user" class="form-control form-control-user col-6" maxlength="4" id="code_edit" placeholder="Codigo" required>
+			              		<input type="number" name="code_user" class="form-control form-control-user col-6" maxlength="4" id="code_edit" placeholder="Codigo" required>
 			            	</div>
 
 							<!--<div class="col-sm-6 mb-3 mb-sm-0 valid-required" >

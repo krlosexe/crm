@@ -175,9 +175,6 @@ class AffiliateController extends Controller
                                 if($rol_refe =="22"){
                                 $query->where("clientes.id_affiliate", $id_referido);
                                 }
-                                else{
-                                
-                                }
                             })
 
                         ->where(function ($query) use ($have_inital) {
@@ -247,22 +244,22 @@ class AffiliateController extends Controller
                             })
 
 
-->with("logs")
-->with("phones")
-->with("emails")
-->with("procedures")
+                        ->with("logs")
+                        ->with("phones")
+                        ->with("emails")
+                        ->with("procedures")
 
-->where("auditoria.tabla", "clientes")
-->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
+                        ->where("auditoria.tabla", "clientes")
+                        ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
 
-->where("auditoria.status", "!=", "0")
+                        ->where("auditoria.status", "!=", "0")
 
 
-//  ->orderBy("clientes.id_cliente", "DESC")
-//->orderBy("auditoria.fec_regins", "DESC")
-->orderBy("auditoria.fec_update", "DESC")
+// ->orderBy("clientes.id_cliente", "DESC")
+// ->orderBy("auditoria.fec_regins", "DESC")
+                        ->orderBy("auditoria.fec_update", "DESC")
 
-->paginate(10);
+                        ->paginate(10);
 
 
 
