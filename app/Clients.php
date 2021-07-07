@@ -8,8 +8,8 @@ class Clients extends Model
 {
 
     protected $fillable = [
-        'nombres', 'apellidos', 'identificacion', 'telefono', 'email', 'direccion','facebook','instagram','twitter','youtube', 'photos_google',
-        'fecha_nacimiento', 'identificacion_verify', 'city', 'clinic', 'id_line',
+        'nombres', 'apellidos', 'identificacion', 'telefono', 'email', 'id_cliente','direccion','facebook','instagram','twitter','youtube',
+        'photos_google', 'fecha_nacimiento', 'identificacion_verify', 'city', 'clinic', 'id_line',
         'id_user_asesora', 'id_affiliate', 'id_asesora_valoracion', 'state', 'origen',
         'forma_pago', 'pay_to_study_credit','pauta', 'code_client',  'prp', 'created_prp','to_db', 'auth_app',
         'fcmToken', 'country', 'password', 'wallezy', 'procedure_px', 'date_procedure', 'jid'
