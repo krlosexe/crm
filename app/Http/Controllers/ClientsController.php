@@ -669,6 +669,13 @@ class ClientsController extends Controller
                 'nombres'         => 'required'
             ], $messages);
 
+//
+
+            // $id_usersere    = User::where("id", $request["id_user"])->first();
+            // $request["id_affiliate"]   = $id_usersere->id_client;
+            // $id_asesoras    = Clients::where("id_cliente",$request["id_user"])->first();
+            // $request["id_user_asesora"]= $id_asesoras->id_user_asesora;
+
 
             if ($validator->fails()) {
                 return response()->json($validator->errors())->setStatusCode(400);

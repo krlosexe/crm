@@ -224,28 +224,31 @@ class ReferredController extends Controller
     public function get($id, $name = 0, $state = 0){
 
 
-        $afiliada = Clients::where("id_affiliate", $id)
+        $client = Clients::where("id_cliente", $id)->first();
+
+
+        $afiliada = Clients::where("origen", $client->code_client)
                         ->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
                         }) ->where("clientes.state", "Afiliada")->get();
 
-        $Agendada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $Agendada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
                         })->where("clientes.state", "Agendada")->get();
 
 
-        $Aprobada_Descartada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $Aprobada_Descartada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
                         })->where("clientes.state", "Aprobada / Descartada")->get();
 
 
-        $Asesorada_No_Agendada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $Asesorada_No_Agendada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
@@ -254,7 +257,7 @@ class ReferredController extends Controller
 
 
 
-        $Demandada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $Demandada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
@@ -262,7 +265,7 @@ class ReferredController extends Controller
 
 
 
-        $Descartada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $Descartada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
@@ -270,7 +273,7 @@ class ReferredController extends Controller
 
 
 
-        $Llamadano_Asesorada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $Llamadano_Asesorada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
@@ -278,21 +281,21 @@ class ReferredController extends Controller
 
 
 
-        $No_Asistio = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $No_Asistio = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
                         })->where("clientes.state", "No Asistio")->get();
 
 
-        $No_Contactada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $No_Contactada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
                         })->where("clientes.state", "No Contactada")->get();
 
 
-        $No_Contesta = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $No_Contesta = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
@@ -300,48 +303,48 @@ class ReferredController extends Controller
 
 
 
-         $Operada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+         $Operada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
                         })->where("clientes.state", "Operada")->get();
 
 
-        $Procedimiento = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $Procedimiento = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
                         })->where("clientes.state", "Procedimiento")->get();
 
 
-        $Programada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $Programada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
                         })->where("clientes.state", "Programada")->get();
 
 
-        $Re_Agendada_Valoracion = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $Re_Agendada_Valoracion = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
                         })->where("clientes.state", "Re Agendada a Valoracion")->get();
 
 
-        $Valorada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $Valorada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
                         })->where("clientes.state", "Valorada")->get();
 
 
-        $Valorada_Descartada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+        $Valorada_Descartada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
                         })->where("clientes.state", "Valorada / Descartada")->get();
 
-    $Aprobada = Clients::where("id_affiliate", $id)->where(function ($query) use ($name) {
+    $Aprobada = Clients::where("origen", $client->code_client)->where(function ($query) use ($name) {
                             if($name != "0"){
                                 $query->where("clients.name", 'like', '%'.$name.'%');
                             }
