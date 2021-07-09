@@ -579,7 +579,7 @@
 
 
 			function store(){
-				enviarFormulario("#store", 'api/clients', '#cuadro2');
+				enviarFormulario("#store", 'api/referidos', '#cuadro2');
             }
 
 

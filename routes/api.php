@@ -63,6 +63,9 @@ Route::post('status-rol/{id}/{status}', 'RolesController@status');
 
 Route::get('referents','AffiliateController@index');
 
+//ruta referidos
+Route::resource('referidos', 'ReferidosController');
+
 Route::resource('clients', 'ClientsController');
 
 Route::put('update/clients/encuesta/{id_client}', 'ClientsController@updateEncuesta');
