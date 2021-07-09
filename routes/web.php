@@ -132,6 +132,12 @@ Route::get('calendar', function () {
 Route::get('encuesta', function () {
     return view('Reports.question.gestion');
 });
+//
+
+Route::get('Encuestas-Valoracion', function () {
+    return view('Reports.Valoration.gestion');
+});
+
 
 Route::get('reporte-instalacionesapp', function () {
     return view('Reports.instalacionesapp.gestion');
