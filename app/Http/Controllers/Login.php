@@ -64,6 +64,7 @@ class Login extends Controller
 
 	    		$data = array('user_id'  => $users[0]->id,
                               'email'    => $users[0]->email,
+                              'rol'      => $users[0]->id_rol,
                               'nombres'  => $users[0]->nombres." ".$users[0]->apellido_p,
 	    					  'token'    => $token,
 	    					  'mensagge' => "Ha iniciado sesion exitosamente"
