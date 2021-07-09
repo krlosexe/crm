@@ -68,7 +68,7 @@ class Login extends Controller
 	    					  'token'    => $token,
 	    					  'mensagge' => "Ha iniciado sesion exitosamente"
 	    		);
-                
+
 	    		return response()->json($data)->setStatusCode(200);
 	    	}else{
 	    		return response()->json("Usuario o contrasena invalida")->setStatusCode(400);
