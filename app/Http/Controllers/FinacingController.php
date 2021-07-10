@@ -711,7 +711,7 @@ class FinacingController extends Controller
             $data = DB::table('client_request_credit')
             ->select('client_request_credit_payment_plan.*')
             ->leftJoin('client_request_credit_payment_plan','client_request_credit.id','client_request_credit_payment_plan.id_request_credit')
-            ->where("client_request_credit.id_client", $id)->get();
+            ->where("client_request_credit.id", $id)->get();
 
             return response()->json($data)->setStatusCode(200);
 

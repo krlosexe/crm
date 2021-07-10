@@ -621,6 +621,9 @@
             $("#period").trigger("change");
 
 			$("#id_cliente").val(data.id_client)
+            $("#id_request").val(data.id)
+
+
 
 			var url_imagen = 'img/valuations/cotizaciones/'
 			var url = document.getElementById('ruta').value;
@@ -1471,7 +1474,7 @@
 				"serverSide": false,
 				"ajax": {
 					"method": "GET",
-					"url": '' + url + '/api/clients/request/financing/get/quotas/' + $("#id_cliente").val(),
+					"url": '' + url + '/api/clients/request/financing/get/quotas/' + $("#id_request").val(),
 					"dataSrc": ""
 				},
 				"columns": [{
