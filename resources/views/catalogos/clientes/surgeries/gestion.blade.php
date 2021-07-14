@@ -554,21 +554,25 @@
 					$("#amount-edit").val(data.amount)
 					var html = ""
                     conut2 = 0
+
+                    let tota_aditional = 0
 					$.map(data.aditionals, function (item, key) {
                         conut2++
 						html += `<div class="row" id="tr_additional_2_${conut2}">`
                             html += "<div class='col-md-2'></div>"
                             html += "<div class='col-md-4'><input type='text' value='"+item.description+"' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-                            html += "<div class='col-md-4'><input type='text' value='"+item.price_aditional+"'  class='form-control monto_formato_decimales' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+                            html += "<div class='col-md-4'><input type='text' value='"+item.price_aditional+"'  class='form-control monto_formato_decimales price_aditional_edit' name='price_aditional[]' placeholder='Precio del adicional'></div>"
                             html += `<div class='col-md-2'><span onclick="eliminarTr('#tr_additional_2_${conut2}')" class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></div>`
                             html += "<br><br>"
                         html += "</div>"
+
+                        tota_aditional = tota_aditional + item.price_aditional
 					});
 
 
 					$("#additional_edit").html(html)
 
-
+                    $("#total-edit").val(parseFloat(tota_aditional) + parseFloat(data.amount))
 
 					cuadros('#cuadro1', '#cuadro4');
 					$("#id_edit").val(data.id_surgeries)
@@ -775,7 +779,7 @@
 				var html = ""
                 html += `<div id="tr_additional_${count}" class="row">`
                     html += "<div class='col-md-4'><input type='text' class='form-control' name='aditional[]' placeholder='Descripcion del adicional'></div>"
-                    html += "<div class='col-md-4'><input type='number' class='form-control' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
+                    html += "<div class='col-md-4'><input type='number' class='form-control price_aditional' onkeydown='noPuntoComa( event )' name='price_aditional[]' placeholder='Precio del adicional'></div>"
                     html += `<div class='col-md-3'><span onclick="eliminarTr('#tr_additional_${count}')" class='eliminar btn btn-sm btn-danger waves-effect' data-toggle='tooltip' title='Eliminar'><i class='fas fa-trash-alt' style='margin-bottom:5px'></i></span></div>`
                     html += "<br><br>"
                 html += "</div>"
@@ -798,10 +802,22 @@
                     var e = event || window.event;
                     var key = e.keyCode || e.which;
                     console.log(key, "HOLA")
-                    if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229) {
-                        e.preventDefault();
+                        if ( key === 110 || key === 190 || key === 188 || key === 222 || key === 229) {
+                            e.preventDefault();
+                        }
                     }
-                    }
+
+
+                    $(".price_aditional").keyup(function (e) {
+                        const monto_cx        = $("#amount-store").val()
+                        let prices_aditionals = 0
+                        $("#additional .row").each(function() {
+                            const price_aditional = $(this).find(".price_aditional").val()
+                            prices_aditionals = parseFloat(prices_aditionals) + parseFloat(price_aditional)
+                        });
+
+                        $("#total-store").val(parseFloat(monto_cx) + prices_aditionals)
+                    });
 
 
 
@@ -849,9 +865,35 @@
                 }
 
 
+                $(".price_aditional_edit").keyup(function (e) {
+                        const monto_cx        = $("#amount-edit").val()
+                        console.log(monto_cx)
+                        let prices_aditionals = 0
+                        $("#additional_edit .row").each(function() {
+                            const price_aditional = $(this).find(".price_aditional_edit").val()
+                            prices_aditionals = parseFloat(prices_aditionals) + parseFloat(price_aditional)
+                        });
+
+                        $("#total-edit").val(parseFloat(monto_cx) + prices_aditionals)
+                    });
+
+
+
+
 
 			});
 
+            $(".price_aditional_edit").keyup(function (e) {
+                        const monto_cx        = $("#amount-edit").val()
+                        console.log(monto_cx)
+                        let prices_aditionals = 0
+                        $("#additional_edit .row").each(function() {
+                            const price_aditional = $(this).find(".price_aditional_edit").val()
+                            prices_aditionals = parseFloat(prices_aditionals) + parseFloat(price_aditional)
+                        });
+
+                        $("#total-edit").val(parseFloat(monto_cx) + prices_aditionals)
+                    });
 
 
 
@@ -904,6 +946,28 @@
             }
 
 
+
+
+            $("#amount-store").keyup(function (e) {
+                const monto_cx       = $(this).val()
+                let prices_aditionals = 0
+                $("#additional .row").each(function() {
+                    const price_aditional = $(this).find(".price_aditional").val()
+                    prices_aditionals = parseFloat(prices_aditionals) + parseFloat(price_aditional)
+				});
+                $("#total-store").val(parseFloat(monto_cx) + prices_aditionals)
+            });
+
+
+            $("#amount-edit").keyup(function (e) {
+                const monto_cx       = $(this).val()
+                let prices_aditionals = 0
+                $("#additional_edit .row").each(function() {
+                    const price_aditional = $(this).find(".price_aditional_edit").val()
+                    prices_aditionals = parseFloat(prices_aditionals) + parseFloat(price_aditional)
+				});
+                $("#total-edit").val(parseFloat(monto_cx) + prices_aditionals)
+            });
 
 
 		</script>

@@ -186,10 +186,7 @@ class CalendarController extends Controller
                                         ->join("clients_tasks_followers", "clients_tasks_followers.id_task", "=", "clients_tasks.id_clients_tasks", "left")
 
                                         ->with("followers")
-
                                        // ->with("comments")
-
-
                                         ->where(function ($query) use ($today) {
                                             if($today != false){
                                                 $query->where("clients_tasks.fecha", $today);

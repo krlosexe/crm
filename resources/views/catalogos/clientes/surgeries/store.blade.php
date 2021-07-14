@@ -202,9 +202,24 @@
 
               </div>
 
+
+
               <div class="row" id="additional">
 
               </div>
+
+
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                        <label for=""><b>Total</b></label>
+                        <input type="number" name="amount" id="total-store" class="form-control" disabled>
+                    </div>
+                    </div>
+                </div>
+              </div>
+
 
            </div>
 
