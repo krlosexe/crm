@@ -163,6 +163,9 @@ class CalendarController extends Controller
 
                                 ->where("clients_tasks.status_task", "=", "Abierta")
 
+                                ->groupBy("clients_tasks.id_clients_tasks")
+
+
 
                                 ->where("auditoria.status", "!=", 0)
 
@@ -202,7 +205,7 @@ class CalendarController extends Controller
 
                                         ->where("clients_tasks.status_task", "=", "Abierta")
 
-
+                                        ->groupBy("clients_tasks.id_clients_tasks")
 
                                         ->get();
 

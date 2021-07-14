@@ -2162,6 +2162,7 @@ if($data->photos_google!= $request["photos_google"]){
                                     ->orderBy("clients_tasks.fecha", "ASC")
                                     ->where("clients_tasks.status_task", "Abierta")
                                     ->whereOr("clients_tasks.status_task", "En progreso")
+                                    ->groupBy("clients_tasks.id_clients_tasks")
                                     ->get();
 
 
