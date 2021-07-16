@@ -1,5 +1,5 @@
 @extends('layouts.app')
-	
+
 
 	@section('CustomCss')
 
@@ -34,7 +34,7 @@
 				left: 0;
 				z-index: 3000;
 				display: none;
-				
+
 				/* background-color: rgba(0,0,0,.4); */
 				transform: translateZ(0);
 				-webkit-transform: translateZ(0);
@@ -82,7 +82,7 @@
 				-ms-transition: 3s;
 				-o-transition: 3s;
 				transition: 3s;
-				
+
 			}
 
 
@@ -95,7 +95,7 @@
 				display: block;
 				width: calc(100% - 300px);
 				background: #fff;
-				
+
 				transform: translateX(100%);
 				 -webkit-transition: 3s;
 					-moz-transition: 3s;
@@ -113,7 +113,7 @@
 				-ms-transform: translateX(0%);
 				-o-transform: translateX(0%);
 				transform: translateX(0%);
-			
+
 			}
 
 
@@ -201,8 +201,8 @@
 		      <!-- Main Content -->
 		      <div id="content">
 
-				@include('layouts.topBar') 
-		       
+				@include('layouts.topBar')
+
 
 		        <!-- Begin Page Content -->
 			        <div class="container-fluid">
@@ -227,7 +227,7 @@
 		                  </button>
 			            </div>
 			            <div class="card-body">
-								
+
 							<div class="row">
 
 								<!-- <div class="col-md-3">
@@ -297,7 +297,7 @@
 
 
 			  <div id="slide">
-					
+
 					<div class="side-panel-container">
 
 						<div id="content">
@@ -356,7 +356,7 @@
 			});
 
 
-			$("#date_init, #date_finish").change(function (e) { 
+			$("#date_init, #date_finish").change(function (e) {
 				list();
 			});
 
@@ -369,7 +369,7 @@
 				enviarFormulario("#store", 'api/subcategory/create', '#cuadro2');
 			}
 
-			$("#id_asesora_valoracion-filter, #overdue-filter").change(function (e) { 
+			$("#id_asesora_valoracion-filter, #overdue-filter").change(function (e) {
 				list();
 			});
 
@@ -388,7 +388,7 @@
 
 				$("#div-input-edit").css("display", "none")
 				$('#table tbody').off('click');
-				var url=document.getElementById('ruta').value; 
+				var url=document.getElementById('ruta').value;
 				cuadros(cuadro, "#cuadro1");
 
 				var table=$("#table").DataTable({
@@ -423,16 +423,17 @@
 							}
 						},
 						{
-							"data":"id_category", 
+							"data":"id_category",
 							render : function(data, type, row) {
+                                console.log(row)
 								return row.category.name;
-								
+
 							}
 						},
 						{"data": "name"},
-				
-				
-						
+
+
+
 					],
 					"language": idioma_espanol,
 					"dom": 'Bfrtip',
@@ -464,7 +465,7 @@
 
 				$("#paciente-store option").remove();
 
-				
+
 				$("#avatar-1").fileinput({
 					theme: "fas",
 					overwriteInitial: true,
@@ -535,7 +536,7 @@
 			}
 
 			function getCategory(select, select_default = false){
-			
+
 			$.ajax({
 				url: ''+document.getElementById('ruta').value+'/api/category',
 				type:'GET',
@@ -546,7 +547,7 @@
 				dataType:'JSON',
 				async: false,
 				error: function() {
-					
+
 				},
 				success: function(data){
 					$(select+" option").remove();
@@ -555,42 +556,42 @@
 						value: "",
 						text : "Seleccione"
 					}));
-				
+
 					$.each(data, function(i, item){
-						
-						
+
+
 						$(select).append($('<option>',
 						{
 							value: item.id,
 							text : item.name,
 							selected : select_default == item.id ? true : false
-							
+
 						}));
 
-						
+
 					});
 
 				}
-			
+
 			});
 		}
 
 			function GetComments(comment_content, id_client){
 				$(comment_content).html("Cargando...")
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/tasks/comments/'+id_client,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 					},
 					error: function (data) {
 					},
 					success: function(result){
-						
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 						$.map(result, function (item, key) {
@@ -598,7 +599,7 @@
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.comments+'</div>'
@@ -609,10 +610,10 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
-						
+
 						$(comment_content).html(html)
 					}
 				});
@@ -622,7 +623,7 @@
 
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
 			function ver(tbody, table){
@@ -632,12 +633,12 @@
 
 					GetUsers("#responsable-view", data.responsable)
 					GetUsers("#followers-view")
-					
+
 
 					//getPacientes("#paciente-view", data.id_client)
 
 					$("#name_client-view").val(data.name_client).attr("disabled", "disabled")
-					
+
 					$("#responsable-view").val(data.responsable).attr("disabled", "disabled")
 					$("#issue-view").val(data.issue).attr("disabled", "disabled")
 					$("#paciente-view").val(data.id_client).attr("disabled", "disabled")
@@ -647,7 +648,7 @@
 					$("#status_task-view").val(data.status_task).attr("disabled", "disabled")
 
 					var followers = []
-					$.each(data.followers, function (key, item) { 
+					$.each(data.followers, function (key, item) {
 						followers.push(item.id_follower)
 					});
 
@@ -664,28 +665,28 @@
 
 
 			/* ------------------------------------------------------------------------------- */
-			/* 
+			/*
 				Funcion que muestra el cuadro3 para la consulta del banco.
 			*/
-			
+
 			function edit(tbody, table){
 				$(tbody).on("click", "span.editar", function(){
 					$("#alertas").css("display", "none");
 					var data = table.row( $(this).parents("tr") ).data();
-					var url=document.getElementById('ruta').value; 
+					var url=document.getElementById('ruta').value;
 
 					$("#form-update")[0].reset()
 
 
 					getCategory("#category-edit")
-	
+
 					$("#cat-name-edit").val(data.name)
 					$("#cat-ingles-edit").val(data.name_ingles)
 					$("#category-edit").val(data.id_category)
 
 					var stt = data.state ? true : false
 					$('#use_app_edit').prop('checked',stt);
-								
+
 					$('#summernote_edit').summernote("reset");
 					$('#summernote_edit').summernote('code',data.description);
 
@@ -698,7 +699,7 @@
 					if(data.foto != ""){
 						img = '<img src="'+url_imagen+data.foto+'" class="file-preview-image kv-preview-data">'
 					}else{img = ""}
-					
+
 					$("#avatar-edit").fileinput({
 						theme: "fas",
 						overwriteInitial: true,
@@ -716,13 +717,13 @@
 						defaultPreviewContent: '<img src="img/default-user.png" width="150" alt="Your Avatar">',
 						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 						allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
-						initialPreview: [ 
+						initialPreview: [
 							img
 						],
 						initialPreviewConfig: [
-								
+
 							{caption: data.foto , downloadUrl: url_imagen+data.foto  ,url: url+"uploads/delete", key: data.foto}
-					
+
 						],
 
 					});
@@ -749,13 +750,13 @@
 						defaultPreviewContent: '<img src="img/default-user.png" width="150" alt="Your Avatar">',
 						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 						allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
-						initialPreview: [ 
+						initialPreview: [
 							img
 						],
 						initialPreviewConfig: [
-								
+
 							{caption: data.foto_before , downloadUrl: url_imagen+data.foto_before  ,url: url+"uploads/delete", key: data.foto_before}
-					
+
 						],
 
 					});
@@ -782,13 +783,13 @@
 						defaultPreviewContent: '<img src="img/default-user.png" width="150" alt="Your Avatar">',
 						layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 						allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
-						initialPreview: [ 
+						initialPreview: [
 							img
 						],
 						initialPreviewConfig: [
-								
+
 							{caption: data.foto_after , downloadUrl: url_imagen+data.foto_after  ,url: url+"uploads/delete", key: data.foto_after}
-					
+
 						],
 
 					});
@@ -802,7 +803,7 @@
 
 			function SubmitComment(id, api, table, btn, summer){
 
-				$(btn).unbind().click(function (e) { 
+				$(btn).unbind().click(function (e) {
 
 					var html = ""
 
@@ -832,7 +833,7 @@
 							"token"   : tokens,
 							"id"      : id,
 							"comment" : $(summer).val(),
-							
+
 						},
 						dataType:'JSON',
 						beforeSend: function(){
@@ -849,11 +850,11 @@
 
 
 
-					
+
 				});
 
 			}
-		
+
 		/* ------------------------------------------------------------------------------- */
 			/*
 				Funcion que capta y envia los datos a desactivar
@@ -893,9 +894,9 @@
 
 
 
-			
+
 			function ViewClient(id_paciente){
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/clients/'+id_paciente,
 					type:'GET',
@@ -904,7 +905,7 @@
 						"id_user": id_user,
 						"token"  : tokens,
 					},
-					
+
 					beforeSend: function(){
 
 					},
@@ -932,7 +933,7 @@
 						GetAsesorasValoracion("#id_asesora_valoracion-edit")
 
 
-				
+
 
 						$("#id_asesora_valoracion-edit").val(data.id_asesora_valoracion)
 						$("#code-edit").text(data.code_client)
@@ -946,7 +947,7 @@
 						$("#email_edit").val(data.email)
 						$("#direccion_edit").val(data.direccion)
 						$("#fecha_nacimiento_edit").val(data.fecha_nacimiento)
-						
+
 						$("#origen_edit").val(data.origen)
 						$("#forma_pago_edit").val(data.forma_pago)
 
@@ -1006,11 +1007,11 @@
 						$("#previous_credits_edit").val(data.previous_credits)
 						$("#reported_edit").val(data.reported)
 						$("#bank_account_edit").val(data.bank_account)
-					
+
 						$("#properties_edit").prop("checked", data.properties ? true : false)
 						$("#vehicle_edit").prop("checked", data.vehicle ? true : false)
-						
-						
+
+
 						$("#linea-negocio-edit").val(data.id_line)
 						$("#linea-negocio-edit").trigger("change");
 
@@ -1020,15 +1021,15 @@
 						$("#id_edit").val(data.id_cliente)
 
 
-				
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 						$.map(data.logs, function (item, key) {
 							html += '<div class="col-md-12" style="margin-bottom: 15px">'
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.event+'</div>'
@@ -1039,7 +1040,7 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
 						$("#logs_edit").html(html)
@@ -1057,18 +1058,18 @@
 								html += '</div>'
 							html += '</div>'
 
-							
+
 							html += '<div class="col-md-2 phone_add_edit_'+count_phone+'"">'
 							html += '<br>'
 								html += '<button type="button" id="add_phone" onclick="deletePhoneEdit('+count_phone+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 							html += '</div>'
 
-					
+
 						});
 
 						$("#phone_add_content_edit").html(html)
 
-					
+
 
 
 						var html = ""
@@ -1082,13 +1083,13 @@
 								html += '</div>'
 							html += '</div>'
 
-							
+
 							html += '<div class="col-md-2 email_add_edit_'+count_email+'"">'
 							html += '<br>'
 								html += '<button type="button" id="add_email" onclick="deleteemailEdit('+count_email+')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
 							html += '</div>'
 
-					
+
 						});
 
 						$("#email_add_content_edit").html(html)
@@ -1096,19 +1097,19 @@
 
 
 
-			
+
 						$('#summernote_edit').summernote('reset');
 						$('#summernote_edit').summernote({
 							'height' : 200
 						});
-						var url=document.getElementById('ruta').value; 
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 
-					
+
 
 					//	GetComments("#comments_edit", data.id_cliente)
-				
+
 						GetCommentsClients("#comments_edit_client", data.id_cliente)
 
 						valuations("#btrx_tab4_edit", "#iframeValuationsEdit", data)
@@ -1121,13 +1122,13 @@
 			}
 
 			function GetClinic(city, select){
-				$(city).unbind().change(function (e) { 
+				$(city).unbind().change(function (e) {
 					GetClinicByCity(select, $(this).val())
 				});
 			}
 
 			function Children(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1139,7 +1140,7 @@
 
 
 			function Surgery(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1151,7 +1152,7 @@
 
 
 			function Disease(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1162,7 +1163,7 @@
 
 
 			function Medication(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1172,7 +1173,7 @@
 			}
 
 			function Allergic(checkbox, input){
-				$(checkbox).change(function (e) { 
+				$(checkbox).change(function (e) {
 					if ($(checkbox).is(':checked')){
 						$(input).removeAttr("readonly").focus();
 					}else{
@@ -1181,52 +1182,52 @@
 				});
 			}
 
-			
+
 
 
 
 			function tasks(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/clients/tasks/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 
 			function revisiones(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/revision-appointment/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function surgeries(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/surgeries/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function valuations(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/valuations/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
 
 			function preanestesias(tab, iframe, data){
-				$(tab).click(function (e) { 
+				$(tab).click(function (e) {
 					var url = document.getElementById('ruta').value+"/preanesthesia/client/"+data.id_cliente+"/1"
 					$(iframe).attr('src', url);
-					
+
 				});
 			}
 
@@ -1234,20 +1235,20 @@
 
 
 			function GetCommentsClients(comment_content, id_client){
-				var url=document.getElementById('ruta').value;	
+				var url=document.getElementById('ruta').value;
 				$.ajax({
 					url:''+url+'/api/clients/comments/'+id_client,
 					type:'GET',
 					dataType:'JSON',
-					
+
 					beforeSend: function(){
 
 					},
 					error: function (data) {
 					},
 					success: function(result){
-						
-						var url=document.getElementById('ruta').value; 
+
+						var url=document.getElementById('ruta').value;
 						var html = "";
 
 						$.map(result, function (item, key) {
@@ -1255,7 +1256,7 @@
 								html += '<div class="row">'
 									html += '<div class="col-md-2">'
 										html += "<img class='rounded' src='"+url+"/img/usuarios/profile/"+item.img_profile+"' style='height: 4rem;width: 4rem; margin: 1%; border-radius: 50%!important;' title='"+item.name_follower+" "+item.last_name_follower+"'>"
-										
+
 									html += '</div>'
 									html += '<div class="col-md-10" style="background: #eee;padding: 2%;border-radius: 17px;">'
 										html += '<div>'+item.comment+'</div>'
@@ -1266,14 +1267,14 @@
 									html += '</div>'
 								html += '</div>'
 							html += '</div>'
-							
+
 						});
 
-						
+
 						$(comment_content).html(html)
 					}
 				});
-			}	
+			}
 
 
 
@@ -1286,7 +1287,7 @@
 
 
 		</script>
-		
+
 
 
 
