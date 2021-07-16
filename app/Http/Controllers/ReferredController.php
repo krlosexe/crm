@@ -109,7 +109,7 @@ class ReferredController extends Controller
 
 
 
-        if($data){
+        if($data && $request["identificacion"] != ""){
             $data = array('mensagge' => "El paciente ya se encuentra en la base de datos");
             return response()->json($data)->setStatusCode(400);
         }
@@ -220,7 +220,10 @@ class ReferredController extends Controller
 
 
 
+
     public function get($id, $name, $state = 0){
+
+
         $client = Clients::where("id_cliente", $id)->first();
         $afiliada = Clients::where("origen", $client->code_client)
                         ->where(function ($query) use ($name) {
