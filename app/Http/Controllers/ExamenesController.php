@@ -57,7 +57,7 @@ class ExamenesController extends Controller
                             ->join("clientes", "clientes.id_cliente", "=", "examenes.id_cliente")
                             ->join("users", "users.id", "=", "auditoria.usr_regins")
 
-                             ->where("examenes.id_cliente", $id_client)
+                            ->where("examenes.id_cliente", $id_client)
                             ->where("auditoria.tabla", "examenes")
                             ->where("auditoria.status", "!=", "0")
                             ->orderBy("examenes.id", "DESC")

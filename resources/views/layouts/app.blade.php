@@ -41,6 +41,7 @@
       $(document).ready(function(){
 
         var url = $(location).attr('href').split("/").splice(-1);
+        
         validAuth(false, url[0]);
 
         GetNotifications();
