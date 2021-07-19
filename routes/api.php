@@ -71,8 +71,14 @@ Route::resource('clients', 'ClientsController');
 Route::put('update/clients/encuesta/{id_client}', 'ClientsController@updateEncuesta');
 Route::post('client/tasks', 'ClientsController@Tasks');
 Route::get('client/tasks', 'ClientsController@GetTasks');
+
 Route::put('client/tasks/{id}', 'ClientsController@TasksUpdate');
 Route::get('client/tasks/{id_client}', 'ClientsController@GetTasksByClient');
+
+
+Route::get('client/comment/{id_clients_tasks}', 'ClientsController@ClientsComment');
+
+
 Route::get('client/task/status/{id}/{status}', 'ClientsController@TasksStatus');
 
 Route::post('clients/forms', 'ClientsController@ClientForms');

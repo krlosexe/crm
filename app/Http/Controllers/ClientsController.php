@@ -153,7 +153,6 @@ class ClientsController extends Controller
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
                                 ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line", "left")
-
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
                                 ->join("clients_procedures", "clients_procedures.id_client", "=", "clientes.id_cliente", "left")
@@ -161,19 +160,10 @@ class ClientsController extends Controller
 
                                // ->join("clients_tasks_adsviser", "clients_tasks_adsviser.id_client", "=", "clientes.id_cliente", "left")
 
-
-
-
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
-
                                 ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'auditoria.usr_update', "left")
                                 ->join('citys', 'citys.id_city', '=', 'clientes.city', "left")
-
-
                                 ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
-
-
-
 
 
                                 ->where(function ($query) use ($search) {
@@ -202,29 +192,12 @@ class ClientsController extends Controller
                                 })
 
 
-
-
-
-
-
-
-
-
                                 ->where(function ($query) use ($have_inital) {
                                     if($have_inital == 1){
                                         $query->whereNotNull("clientc_credit_information.have_initial");
                                         $query->whereRaw('clientc_credit_information.have_initial LIKE "%si%"');
                                     }
                                 })
-
-
-
-
-
-
-
-
-
 
 
                                 ->where(function ($query) use ($procedure) {
@@ -241,13 +214,11 @@ class ClientsController extends Controller
                                 })
 
 
-
                                 ->where(function ($query) use ($adviser) {
                                     if($adviser != 0){
                                         $query->whereIn("clientes.id_user_asesora", $adviser);
                                     }
                                 })
-
 
 
                                 ->where(function ($query) use ($origen) {
@@ -278,8 +249,6 @@ class ClientsController extends Controller
                                 })
 
 
-
-
                                 ->where(function ($query) use ($date_finish) {
                                     if($date_finish != 0){
                                         $query->where("auditoria.fec_update", "<=", $date_finish." 23:59:59");
@@ -291,20 +260,14 @@ class ClientsController extends Controller
                                 ->with("phones")
                                 ->with("emails")
                                 ->with("procedures")
-
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
                                 ->where("auditoria.status", "!=", "0")
-
-
                               //  ->orderBy("clientes.id_cliente", "DESC")
                                 //->orderBy("auditoria.fec_regins", "DESC")
                                 ->orderBy("auditoria.fec_update", "DESC")
 
                                 ->paginate(10);
-
-
-
 
 
             }else{
@@ -321,7 +284,6 @@ class ClientsController extends Controller
                                 ->join("auditoria", "auditoria.cod_reg", "=", "clientes.id_cliente")
                                 ->join("client_information_aditional_surgery", "client_information_aditional_surgery.id_client", "=", "clientes.id_cliente")
                                 ->join("lines_business", "lines_business.id_line", "=", "clientes.id_line", "left")
-
                                 ->join("client_clinic_history", "client_clinic_history.id_client", "=", "clientes.id_cliente")
                                 ->join("clientc_credit_information", "clientc_credit_information.id_client", "=", "clientes.id_cliente")
                                 //->join("clients_tasks_adsviser", "clients_tasks_adsviser.id_client", "=", "clientes.id_cliente", "left")
@@ -329,13 +291,8 @@ class ClientsController extends Controller
 
                                 ->join("valuations", "valuations.id_cliente", "=", "clientes.id_cliente", "left")
                                 ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clientes.id_user_asesora')
-
                                 ->join('datos_personales as dp2', 'dp2.id_usuario', '=', 'auditoria.usr_update', "left")
                                 ->join('citys', 'citys.id_city', '=', 'clientes.city', "left")
-
-
-
-
                                 ->join("clientes as cl2", "cl2.id_cliente", "=", "clientes.id_affiliate", "left")
 
                                 ->withCount('CountSactficationSuvarvy')
@@ -347,15 +304,11 @@ class ClientsController extends Controller
                                     }
                                 })
 
-
-
                                 ->where(function ($query) use ($cumple) {
                                     if($cumple != 0){
                                         $query->whereRaw("MONTH(clientes.fecha_nacimiento) = $cumple");
                                     }
                                 })
-
-
 
                                 ->where(function ($query) use ($search) {
                                     if($search != "0"){
@@ -369,21 +322,17 @@ class ClientsController extends Controller
 
                                 })
 
-
                                 ->where(function ($query) use ($state) {
                                     if($state != "0"){
                                         $query->where("clientes.state", $state);
                                     }
                                 })
 
-
                                 ->where(function ($query) use ($city) {
                                     if($city != 0){
                                         $query->where("clientes.city", $city);
                                     }
                                 })
-
-
 
                                 ->where(function ($query) use ($have_inital) {
                                     if($have_inital == 1){
@@ -392,15 +341,11 @@ class ClientsController extends Controller
                                     }
                                 })
 
-
-
-
                                 ->where(function ($query) use ($to_prp) {
                                     if($to_prp == 1){
                                         $query->where("clientes.prp", "Si");
                                     }
                                 })
-
 
                                 ->where(function ($query) use ($use_app) {
                                     if($use_app == 1){
@@ -408,16 +353,11 @@ class ClientsController extends Controller
                                     }
                                 })
 
-
-
-
                                 ->where(function ($query) use ($business_line) {
                                     if($business_line != 0){
                                         $query->whereIn("clientes.id_line", $business_line);
                                     }
                                 })
-
-
 
                                 ->where(function ($query) use ($adviser) {
                                     if($adviser != 0){
@@ -426,8 +366,6 @@ class ClientsController extends Controller
                                         $query->Orwhere("valuations.id_asesora_valoracion", $adviser);
                                     }
                                 })
-
-
 
                                 ->where(function ($query) use ($origen) {
 
@@ -460,9 +398,6 @@ class ClientsController extends Controller
                                     }
                                 })
 
-
-
-
                                 ->where(function ($query) use ($date_finish, $to_prp) {
                                     if($date_finish != 0 && $to_prp == 0){
                                         $query->where("auditoria.fec_update", "<=", $date_finish." 23:59:59");
@@ -480,7 +415,6 @@ class ClientsController extends Controller
                                 ->with("phones")
                                 ->with("emails")
                                 ->with("procedures")
-
                                 ->where("auditoria.tabla", "clientes")
                                 ->join("users as user_registro", "user_registro.id", "=", "auditoria.usr_regins")
 
@@ -753,7 +687,7 @@ class ClientsController extends Controller
                 $request["table"]    = "clients";
                 $request["id_event"] = $cliente["id_cliente"];
 
-                if(isset($request["comment"]) && $request["comment"] != "<p><br></p>"){
+              if(isset($request["comment"]) && $request["comment"] != "<p><br></p>"){
                     Comments::create($request->all());
                 }
 
@@ -772,7 +706,7 @@ class ClientsController extends Controller
 
 
 
-                if(isset($request["create_task_client"]) && ($request["create_task_client"] == 1)){
+               if(isset($request["create_task_client"]) && ($request["create_task_client"] == 1)){
 
                     $request["id_client"] = $cliente["id_cliente"];
                     $store_task = ClientsTasks::create($request->all());
@@ -2018,9 +1952,6 @@ if($data->photos_google!= $request["photos_google"]){
 
     public function GetTasksByClient(Request $request, $id_client){
         if ($this->VerifyLogin($request["id_user"],$request["token"])){
-
-
-
             ini_set('memory_limit', '-1');
 
 
@@ -2038,7 +1969,7 @@ if($data->photos_google!= $request["photos_google"]){
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id","left")
 
                                     ->with("followers")
-                                    ->with("comments")
+                                   // ->with("comments")
 
                                     ->where("clients_tasks.id_client", $id_client)
 
@@ -2055,6 +1986,17 @@ if($data->photos_google!= $request["photos_google"]){
     }
 
 
+
+    public function ClientsComment(Request $request,$id_clients_tasks){
+       
+        $comments= DB::table("clients_tasks_comments")
+                                ->SELECT ("clients_tasks_comments.*","users.img_profile","datos_personales.nombres as name_user","datos_personales.apellido_p as last_name_user")
+                                ->join("users","users.id","=","clients_tasks_comments.id_user")
+                                ->join('datos_personales', 'datos_personales.id_usuario', '=', 'clients_tasks_comments.id_user') 
+                                ->where("clients_tasks_comments.id_task", $id_clients_tasks)
+                                ->get();
+                                echo json_encode($comments);
+    }
 
 
     public function GetTasks(Request $request){
@@ -2109,7 +2051,7 @@ if($data->photos_google!= $request["photos_google"]){
                                     ->join("datos_personales", "datos_personales.id_usuario", "=", "responsable.id")
                                     ->join("clients_tasks_followers", "clients_tasks_followers.id_task", "=", "clients_tasks.id_clients_tasks")
                                     ->with("followers")
-                                    //->with("comments")
+                                    ->with("comments")
 
 
                                     ->where(function ($query) use ($rol, $id_user) {
